@@ -1,9 +1,7 @@
 package io.github.fasset.fasset.kernel;
 
-import io.github.fasset.fasset.Depreciation;
-import io.github.fasset.fasset.FixedAsset;
-import io.github.fasset.fasset.FixedAssetCategory;
-import io.github.fasset.fasset.Service.FixedAssetCategoryService;
+import io.github.fasset.fasset.*;
+import io.github.fasset.fasset.Service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +27,17 @@ public class DepreciationCalculation {
     @Qualifier("fixedAssetCategoryService")
     private FixedAssetCategoryService fixedAssetCategoryService;
 
+    @Autowired
+    @Qualifier("depreciationService")
+    private DepreciationService depreciationService;
+
+    @Autowired
+    @Qualifier("netBookValueService")
+    private NetBookValueService netBookValueService;
+
+    @Autowired
+    @Qualifier("accruedDepreciationService")
+    private AccruedDepreciationService accruedDepreciationService;
 
 
     /**
@@ -60,12 +69,12 @@ public class DepreciationCalculation {
             deprecant = asset.getNetBookValue();
         }
 
-        Depreciation retVal = new Depreciation();
+        Depreciation depreciation = new Depreciation();
 
         log.debug("Using deprecant : {}, and depreciation rate : {} for calculating depreciation",deprecant,depreciationRate);
         double depreciationAmount = calculate(deprecant,depreciationRate);
 
-        retVal.setDepreciationPeriod(month)
+        depreciation.setDepreciationPeriod(month)
                 .setFixedAssetId(asset.getId())
                 .setCategory(asset.getCategory())
                 .setSolId(asset.getSolId())
@@ -73,8 +82,26 @@ public class DepreciationCalculation {
 
         asset.setNetBookValue(asset.getNetBookValue()-depreciationAmount);
 
+        NetBookValue netBookValue = new NetBookValue();
 
-        return retVal;
+        netBookValue.setFixedAssetId(asset.getId())
+                .setMonth(month)
+                .setSolId(asset.getSolId())
+                .setNetBookValue(asset.getNetBookValue());
+
+        AccruedDepreciation accruedDepreciation = new AccruedDepreciation();
+        accruedDepreciation.setCategory(asset.getCategory())
+                .setFixedAssetId(asset.getId())
+                .setCategory(asset.getCategory())
+                .setSolId(asset.getSolId())
+                .setAccruedDepreciation(accruedDepreciationService.getAccruedDepreciationForAsset(asset,month) + depreciationAmount);
+
+        depreciationService.saveDepreciation(depreciation);
+        netBookValueService.saveNetBookValue(netBookValue);
+        accruedDepreciationService.saveAccruedDepreciation(accruedDepreciation);
+
+
+        return depreciation;
 
     }
 

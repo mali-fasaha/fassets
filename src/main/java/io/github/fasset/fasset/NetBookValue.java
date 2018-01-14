@@ -1,5 +1,8 @@
 package io.github.fasset.fasset;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.YearMonth;
@@ -12,6 +15,8 @@ import java.util.Objects;
  */
 @Entity
 public class NetBookValue extends DomainModel{
+
+    private static final Logger log = LoggerFactory.getLogger(NetBookValue.class);
 
     @Column(name="fixed_asset_id")
     private int fixedAssetId;
@@ -33,6 +38,7 @@ public class NetBookValue extends DomainModel{
     }
 
     public NetBookValue setFixedAssetId(int fixedAssetId) {
+        log.debug("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
         this.fixedAssetId = fixedAssetId;
         return this;
     }
@@ -42,6 +48,7 @@ public class NetBookValue extends DomainModel{
     }
 
     public NetBookValue setMonth(YearMonth month) {
+        log.debug("Setting month for NetBookValueId : {}, as = {}",getId(),month);
         this.month = month;
         return this;
     }
@@ -51,6 +58,8 @@ public class NetBookValue extends DomainModel{
     }
 
     public NetBookValue setNetBookValue(double netBookValue) {
+
+        log.debug("Setting NetBookValue for NetBookValueId : {} as = {}",getId(),netBookValue);
         this.netBookValue = netBookValue;
         return this;
     }
@@ -60,6 +69,8 @@ public class NetBookValue extends DomainModel{
     }
 
     public NetBookValue setSolId(String solId) {
+
+        log.debug("Setting SolId for NetBookValueId : {} as = {}",getId(),solId);
         this.solId = solId;
         return this;
     }
