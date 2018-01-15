@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.Service;
 
-import io.github.fasset.fasset.Depreciation;
+import io.github.fasset.fasset.model.Depreciation;
 
 /**
  * This objects extracts and saves data into the {@link io.github.fasset.fasset.repository.DepreciationRepository}

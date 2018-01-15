@@ -1,4 +1,6 @@
-package io.github.fasset.fasset;
+package io.github.fasset.fasset.model;
+
+import io.github.fasset.fasset.DomainModel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import java.util.Objects;
  * @author edwin.njeru
  */
 @Entity
-public class DepreciationRate extends DomainModel{
+public class DepreciationRate extends DomainModel {
 
     @Column(name="category")
     private String category;

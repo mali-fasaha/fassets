@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.Service;
 
-import io.github.fasset.fasset.NetBookValue;
+import io.github.fasset.fasset.model.NetBookValue;
 
 public interface NetBookValueService {
 

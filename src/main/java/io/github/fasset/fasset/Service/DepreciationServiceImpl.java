@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.Service;
 
-import io.github.fasset.fasset.Depreciation;
+import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.repository.DepreciationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

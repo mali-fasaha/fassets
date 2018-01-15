@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.Service;
 
-import io.github.fasset.fasset.AccruedDepreciation;
-import io.github.fasset.fasset.FixedAsset;
+import io.github.fasset.fasset.model.AccruedDepreciation;
+import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
 

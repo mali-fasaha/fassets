@@ -1,5 +1,6 @@
-package io.github.fasset.fasset;
+package io.github.fasset.fasset.model;
 
+import io.github.fasset.fasset.DomainModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,7 @@ import java.util.Objects;
  * @author edwin.njeru
  */
 @Entity
-public class NetBookValue extends DomainModel{
+public class NetBookValue extends DomainModel {
 
     private static final Logger log = LoggerFactory.getLogger(NetBookValue.class);
 

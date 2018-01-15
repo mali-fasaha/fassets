@@ -1,4 +1,6 @@
-package io.github.fasset.fasset;
+package io.github.fasset.fasset.model;
+
+import io.github.fasset.fasset.DomainModel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

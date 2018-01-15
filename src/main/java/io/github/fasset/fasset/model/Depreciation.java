@@ -1,5 +1,6 @@
-package io.github.fasset.fasset;
+package io.github.fasset.fasset.model;
 
+import io.github.fasset.fasset.DomainModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-public class Depreciation extends DomainModel{
+public class Depreciation extends DomainModel {
 
     private static final Logger log = LoggerFactory.getLogger(Depreciation.class);
 

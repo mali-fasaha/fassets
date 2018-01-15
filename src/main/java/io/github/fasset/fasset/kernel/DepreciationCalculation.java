@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.kernel;
 
-import io.github.fasset.fasset.*;
 import io.github.fasset.fasset.Service.*;
+import io.github.fasset.fasset.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

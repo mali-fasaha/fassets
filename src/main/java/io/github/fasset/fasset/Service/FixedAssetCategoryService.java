@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.Service;
 
-import io.github.fasset.fasset.FixedAssetCategory;
+import io.github.fasset.fasset.model.FixedAssetCategory;
 
 public interface FixedAssetCategoryService {
 

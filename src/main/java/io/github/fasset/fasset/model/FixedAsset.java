@@ -1,11 +1,14 @@
-package io.github.fasset.fasset;
+package io.github.fasset.fasset.model;
 
+import io.github.fasset.fasset.DomainModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -14,7 +17,7 @@ import java.util.Objects;
  * @author edwin.njeru
  */
 @Entity
-public class FixedAsset extends DomainModel{
+public class FixedAsset extends DomainModel implements Serializable,Comparable<FixedAsset> {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAsset.class);
 
@@ -138,5 +141,16 @@ public class FixedAsset extends DomainModel{
                 ", purchaseCost=" + purchaseCost +
                 ", netBookValue=" + netBookValue +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(FixedAsset o) {
+
+        return Comparator.comparing(FixedAsset::getSolId)
+                .thenComparing(FixedAsset::getCategory)
+                .thenComparing(FixedAsset::getPurchaseDate)
+                .thenComparing(FixedAsset::getPurchaseCost)
+                .compare(this,o);
     }
 }
