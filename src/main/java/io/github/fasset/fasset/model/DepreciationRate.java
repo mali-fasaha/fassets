@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-@Entity
+@Entity(name="DepreciationRate")
 public class DepreciationRate extends DomainModel {
 
     @Column(name="category")

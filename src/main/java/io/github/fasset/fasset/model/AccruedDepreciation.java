@@ -15,7 +15,7 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-@Entity
+@Entity(name="AccruedDepreciation")
 public class AccruedDepreciation extends DomainModel {
 
     private static final Logger log = LoggerFactory.getLogger("AccruedDepreciation");

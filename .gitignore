@@ -75,6 +75,7 @@ CVS
 
 # Directory files #
 upload-dir/
+temp-uploads/
 
 # XCode 5 #
 ###########

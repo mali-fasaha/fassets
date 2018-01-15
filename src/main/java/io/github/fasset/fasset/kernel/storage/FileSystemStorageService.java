@@ -1,15 +1,13 @@
 package io.github.fasset.fasset.kernel.storage;
 
-import io.github.fasset.fasset.kernel.messaging.MessageService;
+import io.github.fasset.fasset.kernel.messaging.UploadNotificationService;
+import io.github.fasset.fasset.kernel.messaging.model.FileUploadNotification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
@@ -21,10 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 @Service
@@ -36,8 +31,8 @@ public class FileSystemStorageService implements StorageService {
     private final Path rootLocation;
 
     @Autowired
-    @Qualifier("messageService")
-    private MessageService messageService;
+    @Qualifier("notificationService")
+    private UploadNotificationService notificationService;
 
     @Autowired
     public FileSystemStorageService(StorageProperties storageProperties){
@@ -70,22 +65,17 @@ public class FileSystemStorageService implements StorageService {
             throw new StorageException("Failed to store file " + fileName, e);
         }
 
-        messageService.sendMessage(configureUploadMessage(fileName));
+        notificationService.sendNotification(configureNotification(fileName,"Dec 2017"));
 
     }
 
-    private org.springframework.messaging.Message<Object> configureUploadMessage(String fileName) {
+    private FileUploadNotification configureNotification(String fileName,String month) {
 
-        Map<String, Object> messageHeaders = new LinkedHashMap<>();
-        messageHeaders.put("job","ExcelUploadJob");
-        messageHeaders.put("fileName",this.rootLocation.resolve(fileName).toString());
-        messageHeaders.put("month", LocalDate.of(2017,12,1));
+        log.info("Getting ready to notify server of the file uploaded : {}",fileName);
 
-        Message<Object> message = MessageBuilder.createMessage(null,
-                new MessageHeaders(messageHeaders));
-
-        return message;
+        return new FileUploadNotification(fileName,month, LocalDateTime.now());
     }
+
 
     /**
      * Loads all files into storage

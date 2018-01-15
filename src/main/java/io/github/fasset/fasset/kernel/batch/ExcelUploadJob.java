@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch;
 
+import io.github.fasset.fasset.kernel.messaging.model.FileUploadNotification;
 import org.slf4j.Logger;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
@@ -7,10 +8,10 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
-import javax.jms.Message;
 import java.time.LocalDateTime;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -67,19 +68,11 @@ public class ExcelUploadJob {
      * @param message
      * @throws JMSException
      */
-    public void listenForMessages(Message message) throws JMSException{
+    @JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
+    public void listenForMessages(FileUploadNotification message){
 
-        log.debug("Processing new message : {} received on the server side from front-end",message.getJMSMessageID());
-
-        String fileName = null;
-        String month = null;
-        try {
-            fileName = message.getStringProperty("fileName");
-            month = message.getStringProperty("month");
-        } catch (JMSException e) {
-            log.error("Exception encountered while uploading excel file from message : {}",message.getJMSMessageID());
-            e.printStackTrace();
-        }
+        String fileName = message.getFileName();
+        String month = message.getMonth();
 
         log.debug("File : {} has been received on the server side and is about to be actioned",fileName);
 

@@ -13,7 +13,7 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-@Entity
+@Entity(name="DepreciationLogic")
 public class DepreciationLogic extends DomainModel {
 
     /**

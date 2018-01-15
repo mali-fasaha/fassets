@@ -16,7 +16,7 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-@Entity
+@Entity(name="FixedAsset")
 public class FixedAsset extends DomainModel implements Serializable,Comparable<FixedAsset> {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAsset.class);

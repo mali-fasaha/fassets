@@ -122,6 +122,12 @@
 			<artifactId>poiji</artifactId>
 			<version>1.8</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.interceptor/javax.interceptor-api -->
+		<dependency>
+			<groupId>javax.interceptor</groupId>
+			<artifactId>javax.interceptor-api</artifactId>
+			<version>1.2.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

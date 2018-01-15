@@ -14,7 +14,7 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-@Entity
+@Entity(name="NetBookValue")
 public class NetBookValue extends DomainModel {
 
     private static final Logger log = LoggerFactory.getLogger(NetBookValue.class);

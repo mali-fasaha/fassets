@@ -11,7 +11,7 @@ import java.util.Objects;
  * This is a representative model of the fixed asset's category for purposes of depreciation, that is its
  * name, its depreciation rate and its depreciation logic
  */
-@Entity
+@Entity(name="FixedAssetCategory")
 public class FixedAssetCategory extends DomainModel {
 
     @Column(name="category")
