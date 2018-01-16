@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.kernel.batch;
 
 import io.github.fasset.fasset.kernel.messaging.model.FileUploadNotification;
+import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import org.slf4j.Logger;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;

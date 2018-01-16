@@ -23,11 +23,11 @@ public class ExcelDataProvider<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExcelDataProvider.class);
 
-    private ExcelMapper<T> excelMapper;
+    private ExcelMapper excelMapper;
 
 
     @Autowired
-    public ExcelDataProvider(@Qualifier("excelMapper") ExcelMapper<T> excelMapper) {
+    public ExcelDataProvider(@Qualifier("excelMapper") ExcelMapper excelMapper) {
         this.excelMapper = excelMapper;
     }
 

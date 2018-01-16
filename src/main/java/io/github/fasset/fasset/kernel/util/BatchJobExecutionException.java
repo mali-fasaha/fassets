@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel.batch;
+package io.github.fasset.fasset.kernel.util;
 
 import org.springframework.batch.core.JobExecutionException;
 

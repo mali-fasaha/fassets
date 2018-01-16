@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel;
+package io.github.fasset.fasset.kernel.util;
 
 /**
  * {@link RuntimeException} thrown while converting type from one to another

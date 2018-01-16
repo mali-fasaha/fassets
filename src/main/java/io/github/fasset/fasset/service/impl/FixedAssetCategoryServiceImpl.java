@@ -1,5 +1,6 @@
-package io.github.fasset.fasset.Service;
+package io.github.fasset.fasset.service.impl;
 
+import io.github.fasset.fasset.service.FixedAssetCategoryService;
 import io.github.fasset.fasset.model.FixedAssetCategory;
 import io.github.fasset.fasset.repository.FixedAssetCategoryRepository;
 import org.slf4j.Logger;

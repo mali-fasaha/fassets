@@ -9,15 +9,18 @@ public class FileUploadNotification implements Serializable{
     private static final long serialVersionUID = 2657188181025701641L;
 
     /* the name and location of file*/
-    private final String fileName;
+    private String fileName;
 
     /* month to which the file relates*/
-    private final String month;
+    private String month;
 
     /* time of upload */
-    private final LocalDateTime timeUploaded;
+    private String timeUploaded;
 
-    public FileUploadNotification(String fileName, String month, LocalDateTime timeUploaded) {
+    public FileUploadNotification() {
+    }
+
+    public FileUploadNotification(String fileName, String month, String timeUploaded) {
         this.fileName = fileName;
         this.month = month;
         this.timeUploaded = timeUploaded;
@@ -31,7 +34,7 @@ public class FileUploadNotification implements Serializable{
         return month;
     }
 
-    public LocalDateTime getTimeUploaded() {
+    public String getTimeUploaded() {
         return timeUploaded;
     }
 

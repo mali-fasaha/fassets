@@ -48,7 +48,7 @@ public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
     }
 
     @PostConstruct
-    private void init(){
+    public void init(){
         resetNextItem();
         fixedAssetDTOS = excelMapperService.fetchExcelData(fileName);
     }

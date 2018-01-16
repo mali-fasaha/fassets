@@ -3,6 +3,8 @@ package io.github.fasset.fasset.kernel;
 import java.time.Instant;
 import java.time.YearMonth;
 import java.util.Date;
+
+import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 

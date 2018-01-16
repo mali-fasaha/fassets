@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,8 @@ import java.util.Objects;
  * name, its depreciation rate and its depreciation logic
  */
 @Entity(name="FixedAssetCategory")
-public class FixedAssetCategory extends DomainModel {
+@Audited
+public class FixedAssetCategory extends DomainModel<String> {
 
     @Column(name="category")
     private String category;

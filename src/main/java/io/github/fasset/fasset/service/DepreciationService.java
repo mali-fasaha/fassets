@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.Service;
+package io.github.fasset.fasset.service;
 
 import io.github.fasset.fasset.model.Depreciation;
 

@@ -2,6 +2,8 @@ package io.github.fasset.fasset.kernel.storage;
 
 import io.github.fasset.fasset.kernel.messaging.UploadNotificationService;
 import io.github.fasset.fasset.kernel.messaging.model.FileUploadNotification;
+import io.github.fasset.fasset.kernel.util.StorageException;
+import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +67,7 @@ public class FileSystemStorageService implements StorageService {
             throw new StorageException("Failed to store file " + fileName, e);
         }
 
-        notificationService.sendNotification(configureNotification(fileName,"Dec 2017"));
+        notificationService.sendNotification(configureNotification(this.rootLocation.resolve(fileName).toString(),"Dec 2017"));
 
     }
 
@@ -73,7 +75,7 @@ public class FileSystemStorageService implements StorageService {
 
         log.info("Getting ready to notify server of the file uploaded : {}",fileName);
 
-        return new FileUploadNotification(fileName,month, LocalDateTime.now());
+        return new FileUploadNotification(fileName,month, LocalDateTime.now().toString());
     }
 
 

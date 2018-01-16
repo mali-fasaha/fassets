@@ -1,5 +1,6 @@
-package io.github.fasset.fasset.Service;
+package io.github.fasset.fasset.service.impl;
 
+import io.github.fasset.fasset.service.AccruedDepreciationService;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.repository.AccruedDepreciationRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.YearMonth;
+import java.util.List;
 
 @Service("accruedDepreciationService")
 @Transactional
@@ -52,5 +54,19 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
         log.debug("Saving AccruedDepreciationId : {} into the AccruedDepreciationRepository",accruedDepreciation);
 
         accruedDepreciationRepository.save(accruedDepreciation);
+    }
+
+
+    /**
+     * Saves a {@link List} collection of {@link AccruedDepreciation} items
+     *
+     * @param items
+     */
+    @Override
+    public void saveAllAccruedDepreciationRecords(List<? extends AccruedDepreciation> items) {
+
+        log.info("Saving a collection of : {} accruedDepreciation items", items.size());
+
+        accruedDepreciationRepository.saveAll(items);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author - Edwin Njeru
  */
-public interface ExcelMapper<T> {
+public interface ExcelMapper {
 
     /**
      * This return a list of all items as they are read from the library
@@ -15,7 +15,7 @@ public interface ExcelMapper<T> {
      * @param path path of the excel file
      * @return list of mapped objects
      */
-    List<T> mappedList(Class<?> c, String path);
+    List mappedList(Class<?> c, String path);
 
     /**
      *

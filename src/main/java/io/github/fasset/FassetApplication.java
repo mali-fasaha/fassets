@@ -18,10 +18,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJms
 @EnableJpaRepositories
 @EnableTransactionManagement
-@EnableJpaAuditing
 @EnableBatchProcessing
 @EnableCaching
 @SpringBootApplication
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EntityScan("io.github.fasset.fasset.model")
 @EnableConfigurationProperties(StorageProperties.class)
 public class FassetApplication {

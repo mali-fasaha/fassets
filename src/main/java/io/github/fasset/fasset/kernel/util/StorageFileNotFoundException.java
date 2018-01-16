@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel.storage;
+package io.github.fasset.fasset.kernel.util;
 
 public class StorageFileNotFoundException extends RuntimeException {
 

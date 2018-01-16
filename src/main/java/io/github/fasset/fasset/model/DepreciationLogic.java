@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,8 @@ import java.util.Objects;
  * @author edwin.njeru
  */
 @Entity(name="DepreciationLogic")
-public class DepreciationLogic extends DomainModel {
+@Audited
+public class DepreciationLogic extends DomainModel<String> {
 
     /**
      * The name of the depreciation logic

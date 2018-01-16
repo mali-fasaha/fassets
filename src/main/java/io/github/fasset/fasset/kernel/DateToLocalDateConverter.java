@@ -1,4 +1,5 @@
 package io.github.fasset.fasset.kernel;
+import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;

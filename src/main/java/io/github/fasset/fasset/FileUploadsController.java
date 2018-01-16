@@ -1,10 +1,8 @@
 package io.github.fasset.fasset;
 
-import io.github.fasset.fasset.kernel.storage.StorageFileNotFoundException;
+import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.storage.StorageService;
-import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

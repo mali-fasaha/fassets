@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,8 @@ import java.util.Objects;
  * @author edwin.njeru
  */
 @Entity(name="Depreciation")
-public class Depreciation extends DomainModel {
+@Audited
+public class Depreciation extends DomainModel<String> {
 
     private static final Logger log = LoggerFactory.getLogger(Depreciation.class);
 

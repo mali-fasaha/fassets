@@ -1,9 +1,10 @@
-package io.github.fasset.fasset.Service;
+package io.github.fasset.fasset.service;
 
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
+import java.util.List;
 
 public interface AccruedDepreciationService {
 
@@ -19,4 +20,10 @@ public interface AccruedDepreciationService {
      * @param accruedDepreciation
      */
     void saveAccruedDepreciation(AccruedDepreciation accruedDepreciation);
+
+    /**
+     * Saves a {@link List} collection of {@link AccruedDepreciation} items
+     * @param items
+     */
+    void saveAllAccruedDepreciationRecords(List<? extends AccruedDepreciation> items);
 }

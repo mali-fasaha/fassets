@@ -2,7 +2,7 @@ package io.github.fasset.fasset.kernel.batch.upload;
 
 import io.github.fasset.fasset.kernel.DateToLocalDateConverter;
 import io.github.fasset.fasset.kernel.DateToYearMonthConverter;
-import io.github.fasset.fasset.kernel.batch.BatchJobExecutionException;
+import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.FixedAssetDTO;
 import org.slf4j.Logger;

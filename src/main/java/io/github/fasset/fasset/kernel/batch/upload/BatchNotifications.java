@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.upload;
 
-import io.github.fasset.fasset.Service.FixedAssetService;
+import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.springframework.batch.core.JobExecution;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -39,6 +39,7 @@ public class BatchNotifications implements JobExecutionListener{
 
         // this will reset the nextItem to Zero
         excelItemReader.resetNextItem();
+        //excelItemReader.init();
 
     }
 
@@ -56,7 +57,6 @@ public class BatchNotifications implements JobExecutionListener{
 
         fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
 
-        //collectiveAccountService.getAllMostRecentMonthAccounts().forEach(System.out::println);
     }
 
 }

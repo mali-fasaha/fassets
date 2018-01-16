@@ -1,8 +1,9 @@
-package io.github.fasset.fasset.Service;
+package io.github.fasset.fasset.service.impl;
 
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.repository.FixedAssetRepository;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
+import io.github.fasset.fasset.service.FixedAssetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

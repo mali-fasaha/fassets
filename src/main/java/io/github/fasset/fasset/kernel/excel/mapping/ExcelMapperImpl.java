@@ -2,7 +2,6 @@ package io.github.fasset.fasset.kernel.excel.mapping;
 
 import com.poiji.bind.Poiji;
 import java.io.File;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,12 +17,11 @@ import org.springframework.stereotype.Component;
  * Thread-safe implementation of the {@link ExcelMapper} 
  * The client must specify the parameter type
  * 
- * @param <M> Type of class we are mapping
- * 
+ *
  * @author edwin.njeru
  */
 @Component("excelMapper")
-public class ExcelMapperImpl<M> implements ExcelMapper<M> {
+public class ExcelMapperImpl implements ExcelMapper {
 
     private final static Logger LOGGER = getLogger(ExcelMapperImpl.class);
 
@@ -50,16 +48,16 @@ public class ExcelMapperImpl<M> implements ExcelMapper<M> {
      */
     @SuppressWarnings("unchecked")
 	@Override
-    public List<M> mappedList(Class<?> clazz, String path) {
+    public List mappedList(Class<?> clazz, String path) {
 
         LOGGER.info("Creating a mapped list for class : {}, using file from the path : {}",
                 clazz,path);
 
-        List<M> mappedlist = new LinkedList<>();
+        List mappedlist = new LinkedList<>();
 
         try {
 
-            mappedlist.addAll((Collection<? extends M>) Poiji.fromExcel(new File(path), clazz, mapperOptions.getPoijiOptions()));
+            mappedlist.addAll(Poiji.fromExcel(new File(path), clazz, mapperOptions.getPoijiOptions()));
 
         } catch (Throwable e) {
 
