@@ -2,6 +2,7 @@ package io.github.fasset.fasset.kernel.batch.upload;
 
 import io.github.fasset.fasset.kernel.DateToLocalDateConverter;
 import io.github.fasset.fasset.kernel.DateToYearMonthConverter;
+import io.github.fasset.fasset.kernel.StringToDoubleConverter;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.FixedAssetDTO;
@@ -29,8 +30,8 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsse
     private DateToLocalDateConverter dateToLocalDateConverter;
 
     @Autowired
-    @Qualifier("dateToYearMonthConverter")
-    private DateToYearMonthConverter dateToYearMonthConverter;
+    @Qualifier("stringToDoubleConverter")
+    private StringToDoubleConverter stringToDoubleConverter;
 
 
     @Override
@@ -44,8 +45,8 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsse
             fixedAsset.setAssetDescription(fixedAssetDTO.getAssetDescription())
                     .setBarcode(fixedAssetDTO.getBarcode())
                     .setCategory(fixedAssetDTO.getCategory())
-                    .setNetBookValue(fixedAssetDTO.getNetBookValue())
-                    .setPurchaseCost(fixedAssetDTO.getPurchaseCost())
+                    .setNetBookValue(stringToDoubleConverter.convert(fixedAssetDTO.getNetBookValue()))
+                    .setPurchaseCost(stringToDoubleConverter.convert(fixedAssetDTO.getPurchaseCost()))
                     .setSolId(fixedAssetDTO.getSolId())
                     .setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
 

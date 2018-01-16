@@ -1,4 +1,6 @@
-package io.github.fasset.fasset.kernel.util;
+package io.github.fasset.fasset.kernel;
+
+import io.github.fasset.fasset.kernel.util.ConverterException;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

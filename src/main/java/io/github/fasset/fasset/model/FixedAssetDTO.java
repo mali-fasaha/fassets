@@ -29,10 +29,10 @@ public class FixedAssetDTO {
     private String category;
 
     @ExcelCell(6)
-    private double purchaseCost;
+    private String purchaseCost;
 
     @ExcelCell(7)
-    private double netBookValue;
+    private String netBookValue;
 
     public FixedAssetDTO() {
     }
@@ -62,12 +62,12 @@ public class FixedAssetDTO {
         return category;
     }
 
-    public double getPurchaseCost() {
+    public String getPurchaseCost() {
         log.debug("Retval : {}", purchaseCost);
         return purchaseCost;
     }
 
-    public double getNetBookValue() {
+    public String getNetBookValue() {
         log.debug("Retval : {}", netBookValue);
         return netBookValue;
     }
@@ -97,12 +97,12 @@ public class FixedAssetDTO {
         return this;
     }
 
-    public FixedAssetDTO setPurchaseCost(double purchaseCost) {
+    public FixedAssetDTO setPurchaseCost(String purchaseCost) {
         this.purchaseCost = purchaseCost;
         return this;
     }
 
-    public FixedAssetDTO setNetBookValue(double netBookValue) {
+    public FixedAssetDTO setNetBookValue(String netBookValue) {
         this.netBookValue = netBookValue;
         return this;
     }
@@ -112,13 +112,13 @@ public class FixedAssetDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FixedAssetDTO that = (FixedAssetDTO) o;
-        return Double.compare(that.purchaseCost, purchaseCost) == 0 &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
-                Objects.equals(solId, that.solId) &&
+        return Objects.equals(solId, that.solId) &&
                 Objects.equals(barcode, that.barcode) &&
                 Objects.equals(assetDescription, that.assetDescription) &&
                 Objects.equals(purchaseDate, that.purchaseDate) &&
-                Objects.equals(category, that.category);
+                Objects.equals(category, that.category) &&
+                Objects.equals(purchaseCost, that.purchaseCost) &&
+                Objects.equals(netBookValue, that.netBookValue);
     }
 
     @Override
@@ -134,8 +134,8 @@ public class FixedAssetDTO {
         sb.append(", assetDescription='").append(assetDescription).append('\'');
         sb.append(", purchaseDate=").append(purchaseDate);
         sb.append(", category='").append(category).append('\'');
-        sb.append(", purchaseCost=").append(purchaseCost);
-        sb.append(", netBookValue=").append(netBookValue);
+        sb.append(", purchaseCost='").append(purchaseCost).append('\'');
+        sb.append(", netBookValue='").append(netBookValue).append('\'');
         sb.append('}');
         return sb.toString();
     }
