@@ -38,11 +38,9 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsse
 
         log.debug("Processing {}",fixedAssetDTO);
 
-        FixedAsset fixedAsset;
+        FixedAsset fixedAsset = new FixedAsset();
 
         try {
-            fixedAsset = new FixedAsset();
-
             fixedAsset.setAssetDescription(fixedAssetDTO.getAssetDescription())
                     .setBarcode(fixedAssetDTO.getBarcode())
                     .setCategory(fixedAssetDTO.getCategory())

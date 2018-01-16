@@ -12,7 +12,7 @@ import java.util.Date;
  * JPA 2.1's {@link javax.persistence.AttributeConverter<java.time.YearMonth,java.sql.Date>}
  * interface.
  * It is applied automatically to any {@link YearMonth} variable that is being persisted to the
- * database, just before the persistence engines flushes it to the engine.
+ * database, just before the persistence engines flushes it to the database.
  * Again just before the model is rehydrated with database values, the data is converted back from
  * {@link Date} to {@link YearMonth} object maintaining user accessibility in both the database and
  * the application.
