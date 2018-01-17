@@ -12,9 +12,10 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/categories")
-    public String categories(){
+    @GetMapping("/additions")
+    public String showAddAssetForm(){
 
-        return "forms/category";
+        return "forms/addAsset";
     }
+
 }
