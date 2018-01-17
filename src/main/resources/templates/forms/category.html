@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header :: header-css"/>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<br>
+<div class="container">
+
+    <div class="heading">
+        <h3>Categories</h3>
+    </div>
+
+    <br>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add a New Category</h3>
+        </div>
+        <div class="panel-body">
+            This is to add new category
+        </div>
+    </div>
+
+    <br>
+
+    <div class="panel panel-primary">
+
+        <div class="table-wrapper-2">
+            <!-- Table -->
+            <table class="table table-hover table-responsive">
+                <thead class="blue-grey lighten-4">
+                <tr>
+                    <th>Category</th>
+                    <th>Depreciation</th>
+                    <th>Rate</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Motor Vehicles</td>
+                    <td>Straight Line</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>Electronic Equipment</td>
+                    <td>Reducing Balance</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>Furniture & Fittings</td>
+                    <td>Reducing Balance</td>
+                    <td>12.5</td>
+                </tr>
+                <tr>
+                    <td>Computers</td>
+                    <td>Reducing Balance</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>Computer Software</td>
+                    <td>Straight</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>Land and Buildings</td>
+                    <td>Straight</td>
+                    <td>2</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

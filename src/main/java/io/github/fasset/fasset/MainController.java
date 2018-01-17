@@ -11,4 +11,10 @@ public class MainController {
 
         return "index";
     }
+
+    @GetMapping("/categories")
+    public String categories(){
+
+        return "forms/category";
+    }
 }
