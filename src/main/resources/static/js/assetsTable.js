@@ -28,7 +28,7 @@ $(document).ready(function () {
         /* really, really hope this works man! */
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
         ]
     })
 
