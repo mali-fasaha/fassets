@@ -17,4 +17,12 @@ public interface FixedAssetService {
      * @return
      */
     List<FixedAsset> fetchAllExistingAssets();
+
+    /**
+     * Extracts the fixed asset when the id is known
+     *
+     * @param id
+     * @return
+     */
+    FixedAsset fetchAssetGivenId(int id);
 }

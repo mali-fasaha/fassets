@@ -2,8 +2,13 @@
 <head th:fragment="header-css">
     <!-- this is header-css -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}">
   	<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
   	<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/js/DataTables/datatables.css}">
+    <script th:src="@{/js/DataTables/datatables.min.js}"></script>
+    <script th:src="@{/js/assetsTable.js}"></script>
 
     <!--<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />-->
 </head>
@@ -21,6 +26,7 @@
                     <li class="nav-item"><a th:href="@{/files}">Files</a></li>
                     <li class="nav-item"><a th:href="@{/categories}">Categories</a></li>
                     <li class="nav-item"><a th:href="@{/additions}">Additions</a></li>
+                    <li class="nav-item"><a th:href="@{/assetList}">Asset Listing</a></li>
                 </ul>
             </div>
         </div>
