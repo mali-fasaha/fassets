@@ -1,8 +1,67 @@
 package io.github.fasset.fasset.service.impl;
 
+import io.github.fasset.fasset.kernel.util.DataRetrievalFromControllerException;
+import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
+import io.github.fasset.fasset.repository.ServiceOutletBriefRepository;
 import io.github.fasset.fasset.service.ServiceOutletBriefService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("serviceOutletBriefService")
 public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
+
+    private static final Logger log = LoggerFactory.getLogger(ServiceOutletBriefServiceImpl.class);
+
+
+    @Qualifier("serviceOutletBriefRepository")
+    @Autowired
+    private ServiceOutletBriefRepository serviceOutletBriefRepository;
+
+    /**
+     * @return {@link List < ServiceOutletBrief >} of service outlets from repository
+     */
+    @Override
+    public List<ServiceOutletBrief> fetchAllServiceOutletBriefs() {
+
+        log.info("Fetching a list of ServiceOutletBriefs... ");
+
+        List<ServiceOutletBrief> serviceOutletBriefs;
+
+        try {
+            serviceOutletBriefs = serviceOutletBriefRepository.findAll();
+        } catch (Exception e) {
+            String message = "Exception encountered while retrieving serviceOutletBriefs from repository";
+            throw new DataRetrievalFromControllerException(message,e);
+        }
+
+        log.info("Returning : {} serviceOutletBriefs",serviceOutletBriefs.size());
+
+        return serviceOutletBriefs;
+    }
+
+    /**
+     * @param id of the serviceOutletBrief
+     * @return {@link ServiceOutletBrief} of the id given as parameter
+     */
+    @Override
+    public ServiceOutletBrief fetchServiceOutletBriefGivenId(int id) {
+
+        ServiceOutletBrief serviceOutletBrief = null;
+
+        try {
+            serviceOutletBrief = serviceOutletBriefRepository.findById(id).get();
+        } catch (Throwable e) {
+            String message = "Exception encountered while extracting data from the serviceOutletBriefRepository";
+            throw new DataRetrievalFromControllerException(message,e);
+        }
+
+        log.debug("Returning serviceOutletBrief : {}",serviceOutletBrief);
+
+        return serviceOutletBrief;
+    }
 }
