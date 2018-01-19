@@ -26,11 +26,19 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     /* total NBVs of all items in this category*/
     private double netBookValue;
 
-    /* Total accumulated depreciaton for items in this category*/
+    /* Total accumulated depreciation for items in this category*/
     private double accruedDepreciation;
 
     /* total no. of items in this category*/
     private int poll;
+
+    public CategoryBrief(String designation, double purchaseCost, double netBookValue, double accruedDepreciation, int poll) {
+        this.designation = designation;
+        this.purchaseCost = purchaseCost;
+        this.netBookValue = netBookValue;
+        this.accruedDepreciation = accruedDepreciation;
+        this.poll = poll;
+    }
 
     public CategoryBrief() {
     }

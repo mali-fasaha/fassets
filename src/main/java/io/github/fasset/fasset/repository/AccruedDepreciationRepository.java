@@ -16,4 +16,5 @@ public interface AccruedDepreciationRepository extends JpaRepository<AccruedDepr
      * @return
      */
     AccruedDepreciation findByFixedAssetIdAndMonthBefore(int fixedAssetId, YearMonth month);
+
 }
