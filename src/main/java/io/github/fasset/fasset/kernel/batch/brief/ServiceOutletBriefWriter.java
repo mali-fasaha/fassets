@@ -8,10 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("serviceOutletBriefWriter")
 public class ServiceOutletBriefWriter implements ItemWriter<ServiceOutletBrief> {
 
     private final static Logger log = LoggerFactory.getLogger(ServiceOutletBriefWriter.class);
