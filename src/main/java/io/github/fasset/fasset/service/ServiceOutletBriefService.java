@@ -18,4 +18,10 @@ public interface ServiceOutletBriefService {
      * @return {@link ServiceOutletBrief} of the id given as parameter
      */
     ServiceOutletBrief fetchServiceOutletBriefGivenId(int id);
+
+    /**
+     * Save all ServiceOutletBrief items in the collection
+     * @param serviceOutletBriefs
+     */
+    void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs);
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("serviceOutletBriefService")
@@ -63,5 +64,16 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
         log.debug("Returning serviceOutletBrief : {}",serviceOutletBrief);
 
         return serviceOutletBrief;
+    }
+
+    /**
+     * Save all ServiceOutletBrief items in the collection
+     *
+     * @param serviceOutletBriefs
+     */
+    @Override
+    public void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs) {
+
+        serviceOutletBriefRepository.saveAll(serviceOutletBriefs);
     }
 }

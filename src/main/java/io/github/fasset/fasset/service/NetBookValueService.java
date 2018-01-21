@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.service;
 
 import io.github.fasset.fasset.model.NetBookValue;
+import io.github.fasset.fasset.model.brief.CategoryBrief;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface NetBookValueService {
      * @param netBookValues
      */
     void saveAllNetBookValueItems(List<? extends NetBookValue> netBookValues);
+
+
 }

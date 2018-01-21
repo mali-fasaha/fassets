@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.upload;
 
+import io.github.fasset.fasset.kernel.batch.BriefUpdateJob;
+import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.springframework.batch.core.JobExecution;
@@ -19,10 +21,16 @@ public class BatchNotifications implements JobExecutionListener{
 
     private final FixedAssetService fixedAssetService;
 
+
+    private BriefUpdateJob briefUploadJob;
+
     @Autowired
-    public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService) {
+    public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader,
+                              @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
+                              @Qualifier("briefUpdateJob") BriefUpdateJob briefUploadJob) {
         this.excelItemReader = excelItemReader;
         this.fixedAssetService = fixedAssetService;
+        this.briefUploadJob = briefUploadJob;
     }
 
 
@@ -56,6 +64,12 @@ public class BatchNotifications implements JobExecutionListener{
         LOGGER.debug("Step 1 completed : following items have been persisted...");
 
         fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
+
+        try {
+            briefUploadJob.updateBriefs();
+        } catch (BatchJobExecutionException e) {
+            e.printStackTrace();
+        }
 
     }
 

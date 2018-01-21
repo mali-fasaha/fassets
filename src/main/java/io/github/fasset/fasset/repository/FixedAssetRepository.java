@@ -21,10 +21,14 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset,Integer>{
     @Query("Select "+
             "SUM(e.purchaseCost) " +
             "FROM FixedAsset e " +
-            "WHERE e.category = :category " +
-            "GROUP BY e.category " +
-            "ORDER BY e.category desc")
+            "WHERE e.category = :category ")
     double getTotalCategoryPurchaseCost(String category);
+
+    @Query("SELECT " +
+            "SUM(e.purchaseCost) " +
+            "FROM FixedAsset e " +
+            "WHERE e.solId = :solId ")
+    double getTotalSolPurchaseCost(String solId);
 
     /**
      * Return total net book value for a given category
@@ -35,10 +39,14 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset,Integer>{
     @Query("Select "+
             "SUM(e.netBookValue) " +
             "FROM FixedAsset e " +
-            "WHERE e.category = :category " +
-            "GROUP BY e.category " +
-            "ORDER BY e.category desc")
+            "WHERE e.category = :category ")
     double getTotalCategoryNetBookValue(String category);
+
+    @Query("SELECT " +
+            "SUM(e.netBookValue) " +
+            "FROM FixedAsset e " +
+            "WHERE e.solId = :solId ")
+    double getTotalSolNetBookValue(String solId);
 
     /**
      * Return total no. of items for a given category
@@ -49,10 +57,14 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset,Integer>{
     @Query("Select "+
             "COUNT(e.category) " +
             "FROM FixedAsset e " +
-            "WHERE e.category = :category " +
-            "GROUP BY e.category " +
-            "ORDER BY e.category desc")
-    double getTotalCategoryCount(String category);
+            "WHERE e.category = :category ")
+    int getTotalCategoryCount(String category);
+
+    @Query("SELECT " +
+            "COUNT(e.solId) " +
+            "FROM FixedAsset e " +
+            "WHERE e.solId = :solId ")
+    int getTotalSolCount(String solId);
 
 
 }
