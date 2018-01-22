@@ -5,7 +5,6 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import java.util.Objects;
 
 /**
@@ -17,42 +16,57 @@ import java.util.Objects;
 public class FixedAssetCategory extends DomainModel<String> {
 
     @Column(name="category")
-    private String category;
+    private String designation;
 
-    @OneToOne
-    private DepreciationLogic depreciationLogic;
+    /**
+     * The name of the depreciation logic
+     */
+    @Column(name="depreciation_logic")
+    private String depreciationLogic;
 
-    @OneToOne
-    private DepreciationRate depreciationRate;
+    /**
+     * This is the item on which the depreciation rate is applied, as in either the cost
+     * or the net book value
+     */
+    @Column(name="deprecant")
+    private String deprecant;
+
+    @Column(name="depreciation_rate")
+    private double depreciationRate;
 
     public FixedAssetCategory() {
     }
 
-    public String getCategory() {
-        return category;
+    public String getDesignation() {
+        return designation;
     }
 
-    public FixedAssetCategory setCategory(String category) {
-        this.category = category;
-        return this;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
-    public DepreciationLogic getDepreciationLogic() {
+    public String getDepreciationLogic() {
         return depreciationLogic;
     }
 
-    public FixedAssetCategory setDepreciationLogic(DepreciationLogic depreciationLogic) {
+    public void setDepreciationLogic(String depreciationLogic) {
         this.depreciationLogic = depreciationLogic;
-        return this;
     }
 
-    public DepreciationRate getDepreciationRate() {
+    public String getDeprecant() {
+        return deprecant;
+    }
+
+    public void setDeprecant(String deprecant) {
+        this.deprecant = deprecant;
+    }
+
+    public double getDepreciationRate() {
         return depreciationRate;
     }
 
-    public FixedAssetCategory setDepreciationRate(DepreciationRate depreciationRate) {
+    public void setDepreciationRate(double depreciationRate) {
         this.depreciationRate = depreciationRate;
-        return this;
     }
 
     @Override
@@ -61,22 +75,25 @@ public class FixedAssetCategory extends DomainModel<String> {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         FixedAssetCategory that = (FixedAssetCategory) o;
-        return Objects.equals(category, that.category) &&
+        return Double.compare(that.depreciationRate, depreciationRate) == 0 &&
+                Objects.equals(designation, that.designation) &&
                 Objects.equals(depreciationLogic, that.depreciationLogic) &&
-                Objects.equals(depreciationRate, that.depreciationRate);
+                Objects.equals(deprecant, that.deprecant);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), category, depreciationLogic, depreciationRate);
+        return Objects.hash(super.hashCode(), designation, depreciationLogic, deprecant, depreciationRate);
     }
 
     @Override
     public String toString() {
-        return "FixedAssetCategory{" +
-                "category='" + category + '\'' +
-                ", depreciationLogic=" + depreciationLogic +
-                ", depreciationRate=" + depreciationRate +
-                '}';
+        final StringBuilder sb = new StringBuilder("FixedAssetCategory{");
+        sb.append("designation='").append(designation).append('\'');
+        sb.append(", depreciationLogic='").append(depreciationLogic).append('\'');
+        sb.append(", deprecant='").append(deprecant).append('\'');
+        sb.append(", depreciationRate=").append(depreciationRate);
+        sb.append('}');
+        return sb.toString();
     }
 }

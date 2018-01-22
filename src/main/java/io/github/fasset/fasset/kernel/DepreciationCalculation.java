@@ -56,15 +56,15 @@ public class DepreciationCalculation {
         String categoryName = asset.getCategory();
 
         log.debug("Fetching fixedAssetCategory from the fixedAssetCategoryServiceService using param : {}",categoryName);
-        FixedAssetCategory fixedAssetCategory = fixedAssetCategoryService.getFixedAssetCategory(categoryName);
+        //TODO FIX this!!! FixedAssetCategory fixedAssetCategory = fixedAssetCategoryService.getFixedAssetCategory(categoryName);
 
-        double deprecant = 0.00;
-        double depreciationRate = fixedAssetCategory.getDepreciationRate().getDepreciationRate();
+        /*double deprecant = 0.00;
+        double depreciationRate = fixedAssetCategory.getDepreciationRate();
 
-        if(fixedAssetCategory.getDepreciationLogic().getDeprecant().equalsIgnoreCase("purchaseCost")){
+        if(fixedAssetCategory.getDeprecant().equalsIgnoreCase("purchaseCost")){
 
             deprecant = asset.getPurchaseCost();
-        } else if(fixedAssetCategory.getDepreciationLogic().getDeprecant().equalsIgnoreCase("netBookValue")){
+        } else if(fixedAssetCategory.getDeprecant().equalsIgnoreCase("netBookValue")){
 
             deprecant = asset.getNetBookValue();
         }
@@ -98,10 +98,11 @@ public class DepreciationCalculation {
 
         depreciationService.saveDepreciation(depreciation);
         netBookValueService.saveNetBookValue(netBookValue);
-        accruedDepreciationService.saveAccruedDepreciation(accruedDepreciation);
+        accruedDepreciationService.saveAccruedDepreciation(accruedDepreciation);*/
 
 
-        return depreciation;
+        //return depreciation;
+        return new Depreciation();
 
     }
 

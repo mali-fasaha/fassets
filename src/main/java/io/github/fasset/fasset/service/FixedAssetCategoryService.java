@@ -2,12 +2,21 @@ package io.github.fasset.fasset.service;
 
 import io.github.fasset.fasset.model.FixedAssetCategory;
 
+import java.util.Collection;
+
 public interface FixedAssetCategoryService {
 
+
+
     /**
-     * Returns the fixed asset category given the string name of the category
-     * @param category
-     * @return FixedAssetCategory from database
+     *
+     * @return Return all fixed assets categories
      */
-    FixedAssetCategory getFixedAssetCategory(String category);
+    Collection<?> getAllFixedAssetCategories();
+
+    /**
+     *
+     * @param fixedAssetCategory to be saved to fixedAssetCategory repository
+     */
+    void saveFixedAssetCategory(FixedAssetCategory fixedAssetCategory);
 }

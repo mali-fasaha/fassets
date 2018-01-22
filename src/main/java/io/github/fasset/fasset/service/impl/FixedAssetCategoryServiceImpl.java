@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service("fixedAssetCategoryService")
 public class FixedAssetCategoryServiceImpl implements FixedAssetCategoryService {
 
@@ -23,18 +25,23 @@ public class FixedAssetCategoryServiceImpl implements FixedAssetCategoryService 
         this.fixedAssetCategoryRepository = fixedAssetCategoryRepository;
     }
 
+
+
     /**
-     * Returns the fixed asset category given the string name of the category
-     *
-     * @param category
-     * @return FixedAssetCategory from database
+     * @return Return all fixed assets categories
      */
     @Override
-    @Cacheable
-    public FixedAssetCategory getFixedAssetCategory(String category) {
+    public Collection<?> getAllFixedAssetCategories() {
 
-        log.debug("Fetching the assetCategory for the name : {}",category);
+        return fixedAssetCategoryRepository.findAll();
+    }
 
-        return fixedAssetCategoryRepository.findByCategory(category);
+    /**
+     * @param fixedAssetCategory to be saved to fixedAssetCategory repository
+     */
+    @Override
+    public void saveFixedAssetCategory(FixedAssetCategory fixedAssetCategory) {
+
+        fixedAssetCategoryRepository.save(fixedAssetCategory);
     }
 }

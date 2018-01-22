@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository("fixedAssetCategoryRepository")
 public interface FixedAssetCategoryRepository extends JpaRepository<FixedAssetCategory, Integer>{
 
-    FixedAssetCategory findByCategory(String category);
 }
