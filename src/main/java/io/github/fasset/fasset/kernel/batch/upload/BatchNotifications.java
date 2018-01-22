@@ -1,10 +1,12 @@
 package io.github.fasset.fasset.kernel.batch.upload;
 
 import io.github.fasset.fasset.kernel.batch.BriefUpdateJob;
+import io.github.fasset.fasset.kernel.batch.BriefingService;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.springframework.batch.core.JobExecution;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.springframework.batch.core.JobExecutionListener;
@@ -13,7 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BatchNotifications implements JobExecutionListener{
+public class BatchNotifications implements JobExecutionListener {
 
     private final static Logger LOGGER = getLogger(BatchNotifications.class);
 
@@ -22,15 +24,15 @@ public class BatchNotifications implements JobExecutionListener{
     private final FixedAssetService fixedAssetService;
 
 
-    private BriefUpdateJob briefUploadJob;
+    private BriefingService briefingService;
 
     @Autowired
     public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader,
                               @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
-                              @Qualifier("briefUpdateJob") BriefUpdateJob briefUploadJob) {
+                              @Qualifier("briefingService") BriefingService briefingService) {
         this.excelItemReader = excelItemReader;
         this.fixedAssetService = fixedAssetService;
-        this.briefUploadJob = briefUploadJob;
+        this.briefingService = briefingService;
     }
 
 
@@ -43,7 +45,7 @@ public class BatchNotifications implements JobExecutionListener{
     public void beforeJob(JobExecution jobExecution) {
 
         // Trying to log the FILE_PATH here
-        LOGGER.info("reading file from FILE_PATH : {} ",jobExecution.getJobParameters().getString("fileName"));
+        LOGGER.info("reading file from FILE_PATH : {} ", jobExecution.getJobParameters().getString("fileName"));
 
         // this will reset the nextItem to Zero
         excelItemReader.resetNextItem();
@@ -65,11 +67,10 @@ public class BatchNotifications implements JobExecutionListener{
 
         fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
 
-        try {
-            briefUploadJob.updateBriefs();
-        } catch (BatchJobExecutionException e) {
-            e.printStackTrace();
-        }
+        briefingService.updateCategoryBriefs();
+
+        briefingService.updateServiceOutletBriefs();
+
 
     }
 

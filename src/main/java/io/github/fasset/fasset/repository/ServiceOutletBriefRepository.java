@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository("serviceOutletBriefRepository")
 public interface ServiceOutletBriefRepository extends JpaRepository<ServiceOutletBrief, Integer> {
+
+    ServiceOutletBrief findDistinctByDesignation(String designation);
 }

@@ -11,7 +11,7 @@ $(document).ready(function () {
      */
     var table = $('#serviceOutletBriefs').DataTable({
 
-        "sAjaxSource":"/listing/assets/data",
+        "sAjaxSource":"/briefs/serviceOutlets/data",
         "sAjaxDataProp":"",
         "order":[[0,"asc"]],
         "aoColumns":[

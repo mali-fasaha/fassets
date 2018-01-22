@@ -67,13 +67,34 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
     }
 
     /**
-     * Save all ServiceOutletBrief items in the collection
+     * Save all ServiceOutletBrief items in the collection. All existing items are updated while new ones
+     * are newly added, to the ends that the designation remains unique
      *
      * @param serviceOutletBriefs
      */
     @Override
     public void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs) {
 
-        serviceOutletBriefRepository.saveAll(serviceOutletBriefs);
+        List<ServiceOutletBrief> unsavedItems = new ArrayList<>();
+
+        for(ServiceOutletBrief brief : serviceOutletBriefs){
+
+            ServiceOutletBrief persistedBrief = serviceOutletBriefRepository
+                    .findDistinctByDesignation(brief.getDesignation());
+
+            if(persistedBrief != null){
+
+                persistedBrief.setDesignation(brief.getDesignation());
+                persistedBrief.setPurchaseCost(brief.getPurchaseCost());
+                persistedBrief.setNetBookValue(brief.getNetBookValue());
+                persistedBrief.setAccruedDepreciation(brief.getAccruedDepreciation());
+                persistedBrief.setPoll(brief.getPoll());
+            } else {
+
+                unsavedItems.add(brief);
+            }
+        }
+
+        serviceOutletBriefRepository.saveAll(unsavedItems);
     }
 }

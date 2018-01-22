@@ -43,4 +43,16 @@ public interface FixedAssetService {
      * @return {@link CategoryBrief}
      */
     ServiceOutletBrief getServiceOutletBrief(String solId);
+
+    /**
+     *
+     * @return A unique list of all solIds in the database
+     */
+    List<String> getAllSolIds();
+
+    /**
+     *
+     * @return A unique list of all categories in the database
+     */
+    List<String> getAllCategories();
 }

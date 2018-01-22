@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.stream.Collectors;
 
 @Service("categoryBriefService")
 public class CategoryBriefServiceImpl implements CategoryBriefService {
@@ -70,20 +72,33 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
     }
 
     /**
+     * All existing items are updated while new ones are newly added to the repository...
+     * To the ends that the designation remains unique
+     *
      * @param categoryBriefs items to be saved to repository
      */
     @Override
     @Transactional
     public void saveAllCategoryBriefItems(List<? extends CategoryBrief> categoryBriefs) {
 
-        Collection<CategoryBrief> briefs = categoryBriefRepository.findAll();
+        List<CategoryBrief> unsavedItems = new ArrayList<>();
 
-        Set<CategoryBrief> briefSet = new ConcurrentSkipListSet<>();
+        for(CategoryBrief brief : categoryBriefs){
 
-        briefSet.addAll(briefs);
+            CategoryBrief persisted = categoryBriefRepository
+                    .findDistinctByDesignation(brief.getDesignation());
 
-        categoryBriefRepository.deleteAll();
+            if(persisted != null) {
+                persisted.setDesignation(brief.getDesignation());
+                persisted.setPoll(brief.getPoll());
+                persisted.setPurchaseCost(brief.getPurchaseCost());
+                persisted.setNetBookValue(brief.getNetBookValue());
+                persisted.setAccruedDepreciation(brief.getAccruedDepreciation());
+            } else {
+                unsavedItems.add(brief);
+            }
+        }
 
-        categoryBriefRepository.saveAll(briefSet);
+        categoryBriefRepository.saveAll(unsavedItems);
     }
 }

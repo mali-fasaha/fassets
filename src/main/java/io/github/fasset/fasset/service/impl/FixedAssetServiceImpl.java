@@ -78,12 +78,25 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
         log.info("Preparing a brief for category : {}",category);
 
+        brief.setDesignation(category);
+
+        double cost = fixedAssetRepository.getTotalCategoryPurchaseCost(category);
+        log.info("Setting purchase cost as : {}",cost);
+        brief.setPurchaseCost(cost);
+
+        double nbv = fixedAssetRepository.getTotalCategoryNetBookValue(category);
+        brief.setNetBookValue(nbv);
+
+        int count = fixedAssetRepository.getTotalCategoryCount(category);
+        log.info("Setting poll as : {}",count);
+        brief.setPoll(count);
+
+        double acc = brief.getPurchaseCost() - brief.getNetBookValue();
+        log.info("Setting accrued depreciation as : {}",acc);
+        brief.setAccruedDepreciation(acc);
+
         try {
-            brief.setDesignation(category);
-            brief.setPurchaseCost(fixedAssetRepository.getTotalCategoryPurchaseCost(category));
-            brief.setNetBookValue(fixedAssetRepository.getTotalCategoryNetBookValue(category));
-            brief.setPoll(fixedAssetRepository.getTotalCategoryCount(category));
-            brief.setAccruedDepreciation(brief.getPurchaseCost() - brief.getNetBookValue());
+            //TODO include the methods here
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating a categoryBrief for category : %s",category);
             throw new DataRetrievalFromServiceException(message,e);
@@ -121,5 +134,23 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         log.debug("Brief for service outlet returned : {}",brief);
 
         return brief;
+    }
+
+    /**
+     * @return A unique list of all solIds in the database
+     */
+    @Override
+    public List<String> getAllSolIds() {
+
+        return fixedAssetRepository.getDistinctSolIds();
+    }
+
+    /**
+     * @return A unique list of all categories in the database
+     */
+    @Override
+    public List<String> getAllCategories() {
+
+        return fixedAssetRepository.getDistinctCategories();
     }
 }
