@@ -11,11 +11,4 @@ public class MainController {
 
         return "index";
     }
-
-    @GetMapping("/additions")
-    public String showAddAssetForm(){
-
-        return "forms/addAsset";
-    }
-
 }

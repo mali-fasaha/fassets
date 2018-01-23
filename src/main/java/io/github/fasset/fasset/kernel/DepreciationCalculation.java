@@ -25,7 +25,7 @@ public class DepreciationCalculation {
 
     @Autowired
     @Qualifier("fixedAssetCategoryService")
-    private FixedAssetCategoryService fixedAssetCategoryService;
+    private CategoryConfigurationService fixedAssetCategoryService;
 
     @Autowired
     @Qualifier("depreciationService")

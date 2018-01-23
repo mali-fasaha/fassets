@@ -153,4 +153,13 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
         return fixedAssetRepository.getDistinctCategories();
     }
+
+    /**
+     * @param fixedAsset to be saved to fixedAssetRepository
+     */
+    @Override
+    public void saveFixedAsset(FixedAsset fixedAsset) {
+
+        fixedAssetRepository.save(fixedAsset);
+    }
 }

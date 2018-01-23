@@ -55,4 +55,10 @@ public interface FixedAssetService {
      * @return A unique list of all categories in the database
      */
     List<String> getAllCategories();
+
+    /**
+     *
+     * @param fixedAsset to be saved to fixedAssetRepository
+     */
+    void saveFixedAsset(FixedAsset fixedAsset);
 }
