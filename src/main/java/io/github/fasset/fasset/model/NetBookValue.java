@@ -33,7 +33,20 @@ public class NetBookValue extends DomainModel<String> {
     @Column(name="sol_id")
     private String solId;
 
+    @Column(name="category")
+    private String category;
+
     public NetBookValue() {
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public NetBookValue setCategory(String category) {
+        log.debug("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
+        this.category = category;
+        return this;
     }
 
     public int getFixedAssetId() {
@@ -79,16 +92,6 @@ public class NetBookValue extends DomainModel<String> {
     }
 
     @Override
-    public String toString() {
-        return "NetBookValue{" +
-                "fixedAssetId=" + fixedAssetId +
-                ", month=" + month +
-                ", netBookValue=" + netBookValue +
-                ", solId='" + solId + '\'' +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -97,11 +100,24 @@ public class NetBookValue extends DomainModel<String> {
         return fixedAssetId == that.fixedAssetId &&
                 Double.compare(that.netBookValue, netBookValue) == 0 &&
                 Objects.equals(month, that.month) &&
-                Objects.equals(solId, that.solId);
+                Objects.equals(solId, that.solId) &&
+                Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), fixedAssetId, month, netBookValue, solId);
+        return Objects.hash(super.hashCode(), fixedAssetId, month, netBookValue, solId, category);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("NetBookValue{");
+        sb.append("fixedAssetId=").append(fixedAssetId);
+        sb.append(", month=").append(month);
+        sb.append(", netBookValue=").append(netBookValue);
+        sb.append(", solId='").append(solId).append('\'');
+        sb.append(", category='").append(category).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -22,4 +22,8 @@ public interface CategoryConfigurationService {
     void saveCategoryConfiguration(CategoryConfiguration fixedAssetCategory);
 
     CategoryConfiguration getCategoryConfigurationById(int id);
+
+    CategoryConfiguration getCategoryByName(String categoryName);
+
+    double getDepreciationRateByCategoryName(String categoryName);
 }

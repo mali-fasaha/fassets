@@ -1,5 +1,6 @@
 package io.github.fasset;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties;
 import io.github.fasset.fasset.kernel.storage.StorageProperties;
 import io.github.fasset.fasset.kernel.storage.StorageService;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -23,7 +24,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EntityScan("io.github.fasset.fasset.model")
-@EnableConfigurationProperties(StorageProperties.class)
+@EnableConfigurationProperties(
+		value = {StorageProperties.class, DepreciationProperties.class})
 public class FassetApplication {
 
 	public static void main(String[] args) {

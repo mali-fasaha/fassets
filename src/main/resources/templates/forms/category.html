@@ -50,8 +50,8 @@
                         <!--/*@thymesVar id="editCategory" type="io.github.fasset.fasset.model.CategoryConfiguration"*/-->
                         <!--/*@thymesVar id="category" type="io.github.fasset.fasset.model.CategoryConfiguration"*/-->
                         <select type="text" th:field="*{depreciationLogic}" class="form-control" name="depreciationLogic" id="depreciationLogic">
-                            <option value="straightLine">Straight Line</option>
-                            <option value="decliningBalance">Declining Balance</option>
+                            <option value="straightLine">STRAIGHT LINE</option>
+                            <option value="decliningBalance">DECLINING BALANCE</option>
                         </select>
                         <span th:if="${#fields.hasErrors('depreciationLogic')}" class="help-block" th:errors="*{depreciationLogic}"></span>
                     </div>

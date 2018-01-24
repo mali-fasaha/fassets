@@ -82,8 +82,6 @@ public class FileUploadBatchConfig {
     @Bean
     public ItemReader<FixedAsset> fixedAssetItemReader() throws Exception {
 
-        JpaQueryProviderImpl<FixedAsset> fixedAssetJpaQueryProvider = new JpaQueryProviderImpl<>();
-
         JpaPagingItemReader<FixedAsset> dataBaseReader = new JpaPagingItemReader<>();
         dataBaseReader.setEntityManagerFactory(entityManagerFactory);
 

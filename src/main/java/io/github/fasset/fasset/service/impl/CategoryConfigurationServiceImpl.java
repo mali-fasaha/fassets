@@ -17,11 +17,11 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     private static final Logger log = LoggerFactory.getLogger(CategoryConfigurationServiceImpl.class);
 
 
-    private final CategoryConfigurationRepository fixedAssetCategoryRepository;
+    private final CategoryConfigurationRepository categoryConfigurationRepository;
 
     @Autowired
     public CategoryConfigurationServiceImpl(@Qualifier("categoryConfigurationRepository") CategoryConfigurationRepository fixedAssetCategoryRepository) {
-        this.fixedAssetCategoryRepository = fixedAssetCategoryRepository;
+        this.categoryConfigurationRepository = fixedAssetCategoryRepository;
     }
 
 
@@ -32,7 +32,7 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     @Override
     public List<CategoryConfiguration> getAllCategoryConfigurations() {
 
-        return fixedAssetCategoryRepository.findAll();
+        return categoryConfigurationRepository.findAll();
     }
 
     /**
@@ -41,12 +41,24 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     @Override
     public void saveCategoryConfiguration(CategoryConfiguration fixedAssetCategory) {
 
-        fixedAssetCategoryRepository.save(fixedAssetCategory);
+        categoryConfigurationRepository.save(fixedAssetCategory);
     }
 
     @Override
     public CategoryConfiguration getCategoryConfigurationById(int id) {
 
-        return fixedAssetCategoryRepository.findById(id).get();
+        return categoryConfigurationRepository.findById(id).get();
+    }
+
+    @Override
+    public CategoryConfiguration getCategoryByName(String categoryName) {
+
+        return categoryConfigurationRepository.findFirstByDesignation(categoryName);
+    }
+
+    @Override
+    public double getDepreciationRateByCategoryName(String categoryName) {
+
+        return getCategoryByName(categoryName).getDepreciationRate();
     }
 }
