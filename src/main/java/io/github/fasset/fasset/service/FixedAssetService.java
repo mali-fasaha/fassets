@@ -61,4 +61,10 @@ public interface FixedAssetService {
      * @param fixedAsset to be saved to fixedAssetRepository
      */
     void saveFixedAsset(FixedAsset fixedAsset);
+
+    /**
+     *
+     * @return # of assets
+     */
+    int getPoll();
 }

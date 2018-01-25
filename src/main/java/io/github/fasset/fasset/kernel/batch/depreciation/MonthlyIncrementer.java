@@ -10,7 +10,7 @@ import java.time.YearMonth;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component("MonthlyIncrement")
+@Component("MonthlyIncrementer")
 public class MonthlyIncrementer {
 
     private final DepreciationJobInstanceRepository depreciationJobInstanceRepository;
@@ -52,9 +52,9 @@ public class MonthlyIncrementer {
 
     public YearMonth getNext(YearMonth month){
 
-        if(depreciationJobInstanceRepository.findAllByMonthBefore(month)==null){
+        /*if(depreciationJobInstanceRepository.findAllByMonthBefore(month)==null){
             //TODO implement month when months are empty
-        }
+        }*/
 
         depreciationJobInstanceRepository.save(new DepreciationJobInstance(month));
 

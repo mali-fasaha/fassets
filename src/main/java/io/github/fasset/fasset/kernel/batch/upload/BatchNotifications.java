@@ -1,6 +1,8 @@
 package io.github.fasset.fasset.kernel.batch.upload;
 
 import io.github.fasset.fasset.kernel.batch.BriefingService;
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobProxy;
+import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.springframework.batch.core.JobExecution;
@@ -21,16 +23,20 @@ public class BatchNotifications implements JobExecutionListener {
 
     private final FixedAssetService fixedAssetService;
 
+    private DepreciationJobProxy depreciationJobProxy;
+
 
     private BriefingService briefingService;
 
     @Autowired
     public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader,
                               @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
-                              @Qualifier("briefingService") BriefingService briefingService) {
+                              @Qualifier("briefingService") BriefingService briefingService,
+                              @Qualifier("depreciationJobProxy") DepreciationJobProxy depreciationJobProxy) {
         this.excelItemReader = excelItemReader;
         this.fixedAssetService = fixedAssetService;
         this.briefingService = briefingService;
+        this.depreciationJobProxy = depreciationJobProxy;
     }
 
 
@@ -69,6 +75,12 @@ public class BatchNotifications implements JobExecutionListener {
 
         briefingService.updateServiceOutletBriefs();
 
+        //TODO trigger depreciation with message
+        try {
+            depreciationJobProxy.initializeDepreciationRun();
+        } catch (BatchJobExecutionException e) {
+            e.printStackTrace();
+        }
 
     }
 

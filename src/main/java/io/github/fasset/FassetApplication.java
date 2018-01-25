@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-@EntityScan("io.github.fasset.fasset.model")
+@EntityScan("io.github.fasset.fasset")
 @EnableConfigurationProperties(
 		value = {StorageProperties.class, DepreciationProperties.class})
 public class FassetApplication {

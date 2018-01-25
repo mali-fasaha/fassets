@@ -162,4 +162,13 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
         fixedAssetRepository.save(fixedAsset);
     }
+
+    /**
+     * @return # of assets
+     */
+    @Override
+    public int getPoll() {
+
+        return Math.toIntExact(fixedAssetRepository.count());
+    }
 }

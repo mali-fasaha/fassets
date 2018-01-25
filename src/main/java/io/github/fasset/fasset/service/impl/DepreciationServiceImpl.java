@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("depreciationService")
 public class DepreciationServiceImpl implements DepreciationService {
 
@@ -30,5 +32,18 @@ public class DepreciationServiceImpl implements DepreciationService {
         log.debug("Saving depreciation : {} into the depreciationRepository",depreciation);
 
         depreciationRepository.save(depreciation);
+    }
+
+    /**
+     * Saves all items in the list
+     *
+     * @param depreciationList
+     */
+    @Override
+    public void saveAllDepreciationItems(List<Depreciation> depreciationList) {
+
+        log.debug("Saving {} depreciation items to repository",depreciationList.size());
+
+        depreciationRepository.saveAll(depreciationList);
     }
 }
