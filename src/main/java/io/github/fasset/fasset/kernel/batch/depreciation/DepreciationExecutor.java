@@ -135,6 +135,6 @@ public class DepreciationExecutor {
 
         log.debug("Calculating depreciation amount using deprecant of : {}, and depreciation rate of : {}", deprecant,depreciationRate);
 
-        return deprecant * depreciationRate;
+        return deprecant * depreciationRate/100;
     }
 }

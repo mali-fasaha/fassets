@@ -51,7 +51,7 @@ public class FileUploadsController {
         return "redirect:/files";
     }
 
-    @GetMapping("files/{fileName:.+")
+    @GetMapping("files/{fileName:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String fileName){
 
