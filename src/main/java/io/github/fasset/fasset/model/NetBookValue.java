@@ -44,7 +44,7 @@ public class NetBookValue extends DomainModel<String> {
     }
 
     public NetBookValue setCategory(String category) {
-        log.debug("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
+        log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
         this.category = category;
         return this;
     }
@@ -54,7 +54,7 @@ public class NetBookValue extends DomainModel<String> {
     }
 
     public NetBookValue setFixedAssetId(int fixedAssetId) {
-        log.debug("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
+        log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
         this.fixedAssetId = fixedAssetId;
         return this;
     }
@@ -64,7 +64,7 @@ public class NetBookValue extends DomainModel<String> {
     }
 
     public NetBookValue setMonth(YearMonth month) {
-        log.debug("Setting month for NetBookValueId : {}, as = {}",getId(),month);
+        log.trace("Setting month for NetBookValueId : {}, as = {}",getId(),month);
         this.month = month;
         return this;
     }
@@ -75,7 +75,7 @@ public class NetBookValue extends DomainModel<String> {
 
     public NetBookValue setNetBookValue(double netBookValue) {
 
-        log.debug("Setting NetBookValue for NetBookValueId : {} as = {}",getId(),netBookValue);
+        log.trace("Setting NetBookValue for NetBookValueId : {} as = {}",getId(),netBookValue);
         this.netBookValue = netBookValue;
         return this;
     }
@@ -86,7 +86,7 @@ public class NetBookValue extends DomainModel<String> {
 
     public NetBookValue setSolId(String solId) {
 
-        log.debug("Setting SolId for NetBookValueId : {} as = {}",getId(),solId);
+        log.trace("Setting SolId for NetBookValueId : {} as = {}",getId(),solId);
         this.solId = solId;
         return this;
     }

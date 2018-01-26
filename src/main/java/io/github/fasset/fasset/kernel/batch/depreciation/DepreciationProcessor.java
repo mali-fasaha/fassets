@@ -9,7 +9,6 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.time.YearMonth;
 import java.util.LinkedList;
 import java.util.List;
 

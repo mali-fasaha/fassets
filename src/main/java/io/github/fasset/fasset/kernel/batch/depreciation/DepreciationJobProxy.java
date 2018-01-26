@@ -36,11 +36,6 @@ public class DepreciationJobProxy {
 
     public void initializeDepreciationRun() throws BatchJobExecutionException {
 
-        Map<String, Object> parameterMap = new HashedMap<>();
-        parameterMap.put("no_of_assets", fixedAssetService.getPoll());
-        parameterMap.put("starting_time", LocalDateTime.now());
-        parameterMap.put("status", "Work in progress");
-
         int no_of_assets = fixedAssetService.getPoll();
         LocalDateTime starting_time = LocalDateTime.now();
 

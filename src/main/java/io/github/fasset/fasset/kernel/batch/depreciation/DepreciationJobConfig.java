@@ -1,11 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
-import io.github.fasset.fasset.kernel.batch.upload.BatchNotifications;
-import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
-import io.github.fasset.fasset.model.FixedAssetDTO;
-import io.github.fasset.fasset.model.NetBookValue;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -31,11 +27,11 @@ public class DepreciationJobConfig {
     private ItemReader<FixedAsset> fixedAssetItemReader;
 
     @Bean("depreciationJob")
-    public Job importExcelJob(DepreciationJobListener depreciationJobListener) {
+    public Job depreciationJob(DepreciationJobListener depreciationJobListener) {
         return jobBuilderFactory.get("depreciationJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(depreciationJobListener)
-                .flow(step1())
+                .flow(depreciationStep1())
                 .end()
                 .build();
     }
@@ -53,8 +49,8 @@ public class DepreciationJobConfig {
     }
 
     @Bean
-    public Step step1() {
-        return stepBuilderFactory.get("step1")
+    public Step depreciationStep1() {
+        return stepBuilderFactory.get("depreciationStep1")
                 .<FixedAsset, List<Depreciation>> chunk(100)
                 .reader(fixedAssetItemReader)
                 .processor(depreciationProcessor())

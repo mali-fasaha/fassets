@@ -50,7 +50,7 @@ public class DepreciationExecutor {
      * @param month the month for which we are calculating depreciation
      * @return {@link Depreciation} object
      */
-    @Cacheable
+    //@Cacheable
     public Depreciation getDepreciation(FixedAsset asset, YearMonth month){
 
         log.debug("Calculating depreciation for fixedAsset {}",asset);

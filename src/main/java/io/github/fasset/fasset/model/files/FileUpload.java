@@ -1,10 +1,15 @@
-package io.github.fasset.fasset.kernel.messaging.model;
+package io.github.fasset.fasset.model.files;
 
+import io.github.fasset.fasset.DomainModel;
+import org.hibernate.envers.Audited;
+
+import javax.persistence.Entity;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class FileUploadNotification implements Serializable{
+@Entity(name="FileUpload")
+@Audited
+public class FileUpload extends DomainModel<String> implements Serializable{
 
     private static final long serialVersionUID = 2657188181025701641L;
 
@@ -17,10 +22,10 @@ public class FileUploadNotification implements Serializable{
     /* time of upload */
     private String timeUploaded;
 
-    public FileUploadNotification() {
+    public FileUpload() {
     }
 
-    public FileUploadNotification(String fileName, String month, String timeUploaded) {
+    public FileUpload(String fileName, String month, String timeUploaded) {
         this.fileName = fileName;
         this.month = month;
         this.timeUploaded = timeUploaded;
@@ -42,7 +47,7 @@ public class FileUploadNotification implements Serializable{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FileUploadNotification that = (FileUploadNotification) o;
+        FileUpload that = (FileUpload) o;
         return Objects.equals(fileName, that.fileName) &&
                 Objects.equals(month, that.month) &&
                 Objects.equals(timeUploaded, that.timeUploaded);

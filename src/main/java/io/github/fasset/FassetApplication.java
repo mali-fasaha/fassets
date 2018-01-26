@@ -16,11 +16,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableCaching
 @EnableJms
 @EnableJpaRepositories
 @EnableTransactionManagement
 @EnableBatchProcessing
-@EnableCaching
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EntityScan("io.github.fasset.fasset")

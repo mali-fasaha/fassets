@@ -22,9 +22,12 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
     private static final Logger log = LoggerFactory.getLogger(AccruedDepreciationServiceImpl.class);
 
 
-    @Qualifier("accruedDepreciationRepository")
+    private final AccruedDepreciationRepository accruedDepreciationRepository;
+
     @Autowired
-    private AccruedDepreciationRepository accruedDepreciationRepository;
+    public AccruedDepreciationServiceImpl(@Qualifier("accruedDepreciationRepository") AccruedDepreciationRepository accruedDepreciationRepository) {
+        this.accruedDepreciationRepository = accruedDepreciationRepository;
+    }
 
     /**
      * Returns the accruedDepreciationAmount for a fixed asset  and month given as param.
@@ -34,12 +37,13 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
      * @param month the previous of which the depreciation has accrued up to
      * @return amount of accrued depreciation in double precision
      */
+    //@Cacheable
     @Override
-    @Cacheable
     public double getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month) {
 
         log.debug("Fetching the AccruedDepreciation for assetId : {}, for the month : {}",asset.getId(),month);
 
+        //FIXME this query is returning non-unique results
         return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(),month).getAccruedDepreciation();
     }
 

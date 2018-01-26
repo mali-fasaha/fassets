@@ -69,7 +69,7 @@ public class BatchNotifications implements JobExecutionListener {
 
         LOGGER.debug("Step 1 completed : following items have been persisted...");
 
-        fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
+        //fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
 
         briefingService.updateCategoryBriefs();
 

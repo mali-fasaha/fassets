@@ -1,6 +1,8 @@
 package io.github.fasset.fasset.kernel;
 
 import io.github.fasset.fasset.kernel.util.ConverterException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -24,6 +26,8 @@ import java.util.Date;
 @Converter(autoApply = true)
 public class YearMonthAttributeConverter implements AttributeConverter<YearMonth,Date> {
 
+    private static final Logger log = LoggerFactory.getLogger(YearMonthAttributeConverter.class);
+
     /**
      * Converts the value stored in the entity attribute into the
      * data representation to be stored in the database.
@@ -33,17 +37,23 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
      */
     @Override
     public Date convertToDatabaseColumn(YearMonth attribute) {
+
         Date dbDate = null;
 
-        try {
-            dbDate = Date.from(
-                    attribute.atDay(1)
-                            .atStartOfDay(ZoneId.systemDefault())
-                            .toInstant()
-            );
-        } catch(Throwable e) {
-            String message = String.format("Exception thrown while converting %s to java.sql.Date", attribute);
-            throw new ConverterException(message, e);
+        if(attribute != null) {
+            log.trace("Converting attribute : {} to database column",attribute);
+            try {
+                dbDate = Date.from(
+                        attribute.atDay(1)
+                                .atStartOfDay(ZoneId.systemDefault())
+                                .toInstant()
+                );
+            } catch (Throwable e) {
+                String message = String.format("Exception thrown while converting %s to java.sql.Date", attribute);
+                throw new ConverterException(message, e);
+            }
+        } else {
+            log.error("The attribute passed for conversion to database column is null");
         }
         return dbDate;
     }
@@ -61,6 +71,8 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
      */
     @Override
     public YearMonth convertToEntityAttribute(Date dbData) {
+
+        log.trace("Converting database data : {} to entity YearMonth attribute",dbData);
 
         YearMonth retval = null;
 
