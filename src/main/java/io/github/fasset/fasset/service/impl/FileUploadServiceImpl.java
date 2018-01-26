@@ -3,6 +3,7 @@ package io.github.fasset.fasset.service.impl;
 import io.github.fasset.fasset.kernel.messaging.UploadNotificationService;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.repository.FileUploadRepository;
+import io.github.fasset.fasset.service.FileUploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service("fileUploadService")
-public class FileUploadServiceImpl implements io.github.fasset.fasset.service.FileUploadService {
+public class FileUploadServiceImpl implements FileUploadService {
 
     private static final Logger log  = LoggerFactory.getLogger(FileUploadServiceImpl.class);
 

@@ -17,13 +17,9 @@ public class ActiveMqUploadNotificationService implements UploadNotificationServ
 
     private JmsTemplate jmsTemplate;
 
-    private final FileUploadService fileUploadService;
-
-
     @Autowired
-    public ActiveMqUploadNotificationService(JmsTemplate jmsTemplate, @Qualifier("fileUploadService") FileUploadService fileUploadService) {
+    public ActiveMqUploadNotificationService(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;
-        this.fileUploadService = fileUploadService;
     }
 
     /**
@@ -34,9 +30,6 @@ public class ActiveMqUploadNotificationService implements UploadNotificationServ
     @Override
     public void sendNotification(FileUpload notification) {
 
-        if (!fileUploadService.theFileIsAlreadyUploaded(notification))
             jmsTemplate.convertAndSend("fileUploads", notification);
-        else
-            log.info("The file : {} is already uploaded and will not be uploaded again", notification.getFileName());
     }
 }
