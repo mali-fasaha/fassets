@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
+import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.service.*;
 import io.github.fasset.fasset.model.*;
 import org.slf4j.Logger;
@@ -34,7 +35,10 @@ public class DepreciationExecutor {
     private final AccruedDepreciationService accruedDepreciationService;
 
     @Autowired
-    public DepreciationExecutor(@Qualifier("categoryConfigurationService") CategoryConfigurationService categoryConfigurationService, @Qualifier("depreciationService") DepreciationService depreciationService, @Qualifier("netBookValueService") NetBookValueService netBookValueService, @Qualifier("accruedDepreciationService") AccruedDepreciationService accruedDepreciationService) {
+    public DepreciationExecutor(@Qualifier("categoryConfigurationService") CategoryConfigurationService categoryConfigurationService,
+                                @Qualifier("depreciationService") DepreciationService depreciationService,
+                                @Qualifier("netBookValueService") NetBookValueService netBookValueService,
+                                @Qualifier("accruedDepreciationService") AccruedDepreciationService accruedDepreciationService) {
         this.categoryConfigurationService = categoryConfigurationService;
         this.depreciationService = depreciationService;
         this.netBookValueService = netBookValueService;
@@ -57,22 +61,20 @@ public class DepreciationExecutor {
 
         String categoryName = asset.getCategory();
 
+        log.debug("Fetching categoryConfiguration instance from repository for designation : {}",categoryName);
+
         CategoryConfiguration configuration = categoryConfigurationService.getCategoryByName(categoryName);
+
+        log.debug("Using categoryConfiguration instance : {}",configuration);
 
         double depreciationRate = configuration.getDepreciationRate();
 
         double deprecant = getDeprecant(asset, configuration);
 
-        Depreciation depreciation = new Depreciation();
-
         log.debug("Using deprecant : {}, and depreciation rate : {} for calculating depreciation",deprecant,depreciationRate);
         double depreciationAmount = calculate(deprecant,depreciationRate);
 
-        depreciation.setDepreciationPeriod(month)
-                .setFixedAssetId(asset.getId())
-                .setCategory(asset.getCategory())
-                .setSolId(asset.getSolId())
-                .setDepreciation(depreciationAmount);
+        Depreciation depreciation = getDepreciation(asset, month, depreciationAmount);
 
         asset.setNetBookValue(asset.getNetBookValue()-depreciationAmount);
 
@@ -89,52 +91,136 @@ public class DepreciationExecutor {
         return depreciation;
     }
 
+    /**
+     * Creates a {@link Depreciation} instance relative to the parameters provided
+     * @param asset
+     * @param month
+     * @param depreciationAmount
+     * @return
+     * @throws DepreciationExecutionException
+     */
+    private Depreciation getDepreciation(FixedAsset asset, YearMonth month, double depreciationAmount) throws DepreciationExecutionException {
+
+        log.debug("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}",asset,month);
+        Depreciation depreciation = new Depreciation();
+        try {
+            depreciation.setDepreciationPeriod(month)
+                    .setFixedAssetId(asset.getId())
+                    .setCategory(asset.getCategory())
+                    .setSolId(asset.getSolId())
+                    .setDepreciation(depreciationAmount);
+        } catch (Throwable e) {
+            String message = String.format("Exception encountered while creating depreciation instance relative to" +
+                    " asset : %s, for the period : %s",asset,month);
+            throw new DepreciationExecutionException(message,e);
+        }
+
+        log.debug("Returning depreciation instance : {}",depreciation);
+        return depreciation;
+    }
+
+    /**
+     * Creates {@link AccruedDepreciation} instance relative to the parameter items and fixedAsset item given
+     * @param asset
+     * @param month
+     * @param depreciationAmount
+     * @return
+     */
     private AccruedDepreciation getAccruedDepreciation(FixedAsset asset, YearMonth month, double depreciationAmount) {
         AccruedDepreciation accruedDepreciation = new AccruedDepreciation();
-        accruedDepreciation.setCategory(asset.getCategory())
-                .setFixedAssetId(asset.getId())
-                .setCategory(asset.getCategory())
-                .setSolId(asset.getSolId())
-                .setAccruedDepreciation(accruedDepreciationService.getAccruedDepreciationForAsset(asset,month) + depreciationAmount);
+
+        log.debug("Creating accruedDepreciation instance relative to the asset : {}, for the month : {}",asset,month);
+
+        try {
+            accruedDepreciation.setCategory(asset.getCategory())
+                    .setFixedAssetId(asset.getId())
+                    .setCategory(asset.getCategory())
+                    .setSolId(asset.getSolId())
+                    .setAccruedDepreciation(accruedDepreciationService.getAccruedDepreciationForAsset(asset,month) + depreciationAmount);
+        } catch (Throwable e) {
+            String message = String.format("Exception encountered while creating accruedDepreciation instance relative" +
+                    "to the asset : %s for the month : %s",asset,month);
+            throw new DepreciationExecutionException(message,e);
+        }
+
+        log.debug("AccruedDepreciation instance created : {}",accruedDepreciation);
+
         return accruedDepreciation;
     }
 
     private NetBookValue getNetBookValue(FixedAsset asset, YearMonth month) {
         NetBookValue netBookValue = new NetBookValue();
 
-        netBookValue.setFixedAssetId(asset.getId())
-                .setMonth(month)
-                .setSolId(asset.getSolId())
-                .setNetBookValue(asset.getNetBookValue());
+        log.debug("Creating netBookValue instance relative to the asset : {} for the month : {}",asset,month);
+
+        try {
+            netBookValue.setFixedAssetId(asset.getId())
+                    .setMonth(month)
+                    .setSolId(asset.getSolId())
+                    .setNetBookValue(asset.getNetBookValue());
+        } catch (Throwable e) {
+            String message = String.format("Exception encountered while creating netBookValue instance relative" +
+                    "to the asset : %s for the month : %s",asset,month);
+            throw new DepreciationExecutionException(message,e);
+        }
+
+        log.debug("NetBookValue item created : {}",netBookValue);
+
         return netBookValue;
     }
 
     private double getDeprecant(FixedAsset asset, CategoryConfiguration configuration) {
 
+        log.debug("Determining the deprecant for Asset : {}, with category configuration : {}",
+                asset,configuration);
+
         double deprecant = 0.00;
 
-        if(configuration.getDeprecant().equalsIgnoreCase("purchaseCost")){
+        try {
+            if(configuration.getDeprecant().equalsIgnoreCase("purchaseCost")){
 
-            deprecant = asset.getPurchaseCost();
-        } else if(configuration.getDeprecant().equalsIgnoreCase("netBookValue")){
+                deprecant = asset.getPurchaseCost();
 
-            deprecant = asset.getNetBookValue();
+                log.debug("Using purchase cost as deprecant : {}",deprecant);
+
+            } else if(configuration.getDeprecant().equalsIgnoreCase("netBookValue")){
+
+                deprecant = asset.getNetBookValue();
+
+                log.debug("Using the netBookValue as deprecant : {}",deprecant);
+            }
+        } catch (Throwable e) {
+            String message = String.format("Exception encountered while determining the deprecant applicable for the " +
+                    "asset : %s, pursuant to the categoryConfiguration : %s",asset,configuration);
+            throw new DepreciationExecutionException(message,e);
         }
         return deprecant;
     }
 
     /**
-     * This calculates the depreciation amount
+     * This calculates the depreciation amount per month
      *
      * @param deprecant the amount of the asset (cost or NBV) on which depreciation is calculated
      * @param depreciationRate the depreciation rate to use
      * @return amount of depreciation
      */
-    @Cacheable
+    //@Cacheable
     public double calculate(double deprecant, double depreciationRate){
 
-        log.debug("Calculating depreciation amount using deprecant of : {}, and depreciation rate of : {}", deprecant,depreciationRate);
+        double depreciation = 0.00;
 
-        return deprecant * depreciationRate/100;
+        try {
+            log.debug("Calculating depreciation amount using deprecant of : {}, and depreciation rate of : {}", deprecant,depreciationRate);
+
+            depreciation = deprecant * depreciationRate/100 * 1/12;
+
+            log.debug("Depreciation for deprecant : {} and depreciationRate : {} calculated as : {}",deprecant,depreciationRate,depreciation);
+        } catch (Throwable e) {
+            String message = String.format("Exception encountered while calculating depreciation amount for " +
+                    "deprecant amount of : %s and depreciation rate of :%s",deprecant,depreciationRate);
+            throw new DepreciationExecutionException(message,e);
+        }
+
+        return depreciation;
     }
 }

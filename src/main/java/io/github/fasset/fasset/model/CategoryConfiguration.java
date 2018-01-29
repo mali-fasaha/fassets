@@ -5,6 +5,8 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -13,11 +15,17 @@ import java.util.Objects;
  * name, its depreciation rate and its depreciation logic
  */
 @Entity(name="CategoryConfiguration")
+@Table(name = "category_configuration",
+        uniqueConstraints ={
+        @UniqueConstraint(columnNames = {
+                "designation","depreciation_logic","depreciation_logic",
+                "deprecant","depreciation_rate","category_ledger_id"
+        })})
 @Audited
 public class CategoryConfiguration extends DomainModel<String> {
 
     @NotNull(message ="Please provide a valid designation for category")
-    @Column(name="category")
+    @Column(name="designation")
     private String designation;
 
     /**

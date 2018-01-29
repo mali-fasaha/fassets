@@ -41,7 +41,7 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
         Date dbDate = null;
 
         if(attribute != null) {
-            log.trace("Converting attribute : {} to database column",attribute);
+            log.debug("Converting attribute : {} to database column",attribute);
             try {
                 dbDate = Date.from(
                         attribute.atDay(1)
@@ -55,6 +55,9 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
         } else {
             log.error("The attribute passed for conversion to database column is null");
         }
+
+        log.debug("Returning month as : {}",dbDate);
+
         return dbDate;
     }
 
@@ -72,7 +75,7 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
     @Override
     public YearMonth convertToEntityAttribute(Date dbData) {
 
-        log.trace("Converting database data : {} to entity YearMonth attribute",dbData);
+        log.debug("Converting database data : {} to entity YearMonth attribute",dbData);
 
         YearMonth retval = null;
 
@@ -84,6 +87,8 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
             String message = String.format("Exception thrown while converting date: %s to yearMonth",dbData);
             throw new ConverterException(message,e);
         }
+
+        log.debug("Returning month as : {}",retval);
 
         return retval;
     }
