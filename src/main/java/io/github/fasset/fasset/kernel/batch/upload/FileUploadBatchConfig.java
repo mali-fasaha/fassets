@@ -1,6 +1,5 @@
 package io.github.fasset.fasset.kernel.batch.upload;
 
-import io.github.fasset.fasset.kernel.batch.JpaQueryProviderImpl;
 import io.github.fasset.fasset.kernel.excel.ExcelMapperService;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
@@ -8,7 +7,6 @@ import io.github.fasset.fasset.model.FixedAssetDTO;
 import io.github.fasset.fasset.model.NetBookValue;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JpaPagingItemReader;
-import org.springframework.batch.item.database.orm.JpaQueryProvider;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -20,12 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
 public class FileUploadBatchConfig {

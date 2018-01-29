@@ -38,7 +38,7 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
             retVal.setCategory(fixedAsset.getCategory())
                     .setFixedAssetId(fixedAsset.getId())
                     .setSolId(fixedAsset.getSolId())
-                    .setMonth(YearMonth.of(2017,12))
+                    .setMonth(YearMonth.of(2017,12))//TODO configure to do this from controller
                     .setAccruedDepreciation(acc);
         } catch (Throwable e) {
             String message = String.format("Exception encountered while deriving accruedDepreciation from" +

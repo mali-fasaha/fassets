@@ -1,4 +1,4 @@
-package io.github.fasset.fasset;
+package io.github.fasset.fasset.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

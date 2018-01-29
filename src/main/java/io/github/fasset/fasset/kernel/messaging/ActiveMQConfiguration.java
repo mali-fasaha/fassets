@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.messaging;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,10 +28,14 @@ public class ActiveMQConfiguration {
 
     @Bean
     public MessageConverter jacksonJmsMessageConverter(){
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
 
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("_type");
+
+        /*ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setObjectMapper(mapper);*/
 
         return converter;
     }

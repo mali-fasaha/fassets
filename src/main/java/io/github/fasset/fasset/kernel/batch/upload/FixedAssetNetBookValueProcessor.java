@@ -35,7 +35,7 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
         try {
             retVal.setFixedAssetId(fixedAsset.getId())
                     .setSolId(fixedAsset.getSolId())
-                    .setMonth(YearMonth.of(2017,12))
+                    .setMonth(YearMonth.of(2017,12))//TODO configure to do this from controller
                     .setNetBookValue(fixedAsset.getNetBookValue());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while processing fixedAsset item : %s",fixedAsset);

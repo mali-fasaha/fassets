@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch;
 
+import io.github.fasset.fasset.kernel.messaging.FileUploadNotification;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import org.slf4j.Logger;
@@ -70,7 +71,7 @@ public class ExcelUploadJob {
      * @throws JMSException
      */
     @JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
-    public void listenForMessages(FileUpload message){
+    public void listenForMessages(FileUploadNotification message){
 
         String fileName = message.getFileName();
         String month = message.getMonth();

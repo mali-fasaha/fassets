@@ -11,6 +11,6 @@ public interface UploadNotificationService {
      * Sends the message
      * @param notification
      */
-    void sendNotification(FileUpload notification);
+    void sendNotification(FileUploadNotification notification);
 
 }

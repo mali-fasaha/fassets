@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -18,6 +20,11 @@ import java.util.Objects;
  * @author edwin.njeru
  */
 @Entity(name="FixedAsset")
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "sol_id","barcode","asset_description","purchase_date","category","purchase_cost"
+        })
+})
 @Audited
 public class FixedAsset extends DomainModel<String> implements Serializable,Comparable<FixedAsset> {
 

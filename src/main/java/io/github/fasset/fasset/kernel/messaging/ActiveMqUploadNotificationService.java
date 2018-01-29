@@ -28,7 +28,7 @@ public class ActiveMqUploadNotificationService implements UploadNotificationServ
      * @param notification
      */
     @Override
-    public void sendNotification(FileUpload notification) {
+    public void sendNotification(FileUploadNotification notification) {
 
             jmsTemplate.convertAndSend("fileUploads", notification);
     }

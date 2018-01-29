@@ -9,7 +9,7 @@ import java.util.List;
 public interface FixedAssetService {
 
     /**
-     * Saves all {@link FixedAsset} items passed in a list
+     * Saves all {@link FixedAsset} items passed in a list, avoiding duplicate items
      * @param fixedAssets
      */
     void saveAllFixedAssets(List<? extends FixedAsset> fixedAssets);

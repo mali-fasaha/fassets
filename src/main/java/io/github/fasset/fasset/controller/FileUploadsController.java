@@ -1,4 +1,4 @@
-package io.github.fasset.fasset;
+package io.github.fasset.fasset.controller;
 
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.storage.StorageService;

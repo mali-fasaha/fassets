@@ -28,7 +28,8 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     private FixedAssetRepository fixedAssetRepository;
 
     /**
-     * Saves all {@link FixedAsset} items passed in a list
+     * Saves all {@link FixedAsset} items passed in a list, saving unique items only.
+     * Quietly fails if the asset is already in the database
      *
      * @param fixedAssets
      */

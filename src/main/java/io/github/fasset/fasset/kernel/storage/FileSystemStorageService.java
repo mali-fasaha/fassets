@@ -1,11 +1,9 @@
 package io.github.fasset.fasset.kernel.storage;
 
-import io.github.fasset.fasset.kernel.messaging.UploadNotificationService;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.service.FileUploadService;
-import io.github.fasset.fasset.service.impl.FileUploadServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.stream.Stream;
 
 @Service
@@ -60,7 +59,7 @@ public class FileSystemStorageService implements StorageService {
 
         } else {
 
-            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(),"Dec 2017");
+            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017,12));
 
             if(fileUploadService.theFileIsAlreadyUploaded(fileUpload)){
 
@@ -87,11 +86,14 @@ public class FileSystemStorageService implements StorageService {
 
     }
 
-    private FileUpload configureFileUploadAttributes(String fileName, String month) {
+    private FileUpload configureFileUploadAttributes(String fileName, YearMonth month) {
 
-        log.info("Getting ready to notify server of the file uploaded : {}",fileName);
+        LocalDateTime uploadTime = LocalDateTime.now();
 
-        return new FileUpload(fileName,month, LocalDateTime.now().toString());
+        log.info("Configuring notification to server of the file uploaded : {} for the month : {} at time :{}" +
+                "",fileName,month,uploadTime);
+
+        return new FileUpload(fileName,month, uploadTime);
     }
 
 
@@ -103,7 +105,7 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Stream<Path> loadAll() {
 
-        log.info("Loading all files from storage");
+        log.info("Checking for files in the directory...");
 
         Stream<Path> filePathStream = null;
 
@@ -127,6 +129,8 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Path load(String fileName) {
 
+        log.info("Loading file : {} from storage",fileName);
+
         return rootLocation.resolve(fileName);
     }
 
@@ -138,6 +142,8 @@ public class FileSystemStorageService implements StorageService {
      */
     @Override
     public Resource loadAsResource(String fileName) {
+
+        log.debug("Loading fileName : {} as resource",fileName);
 
         Resource resource = null;
 
@@ -168,6 +174,8 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public void deleteAll() {
 
+        log.info("Deleting all files from the file system storage");
+
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
@@ -176,6 +184,8 @@ public class FileSystemStorageService implements StorageService {
      */
     @Override
     public void init() {
+
+        log.info("Initializing file storage system...");
 
         try {
             Files.createDirectories(rootLocation);
