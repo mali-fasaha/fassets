@@ -99,10 +99,10 @@ ALTER TABLE ONLY category_configuration
 
 
 INSERT INTO category_configuration (id, created_at, created_by, last_modified_by, modified_at, version, category_ledger_id, deprecant, depreciation_logic, depreciation_rate, designation) VALUES
-  (1,'2018-01-29 12:54:09.382905',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 12:54:09.382905',	0,	'0000152001',	'PURCHASECOST',	'DECLININGBALANCE',	30,	'COMPUTERS'),
+  (1,'2018-01-29 12:54:09.382905',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 12:54:09.382905',	0,	'0000152001',	'NETBOOKVALUE',	'DECLININGBALANCE',	30,	'COMPUTERS'),
   (2,'2018-01-29 13:12:52.127169',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:12:52.127169',	0,	'0000155001',	'PURCHASECOST',	'STRAIGHTLINE',	10,	'COMPUTER SOFTWARE'),
-  (3,'2018-01-29 13:13:21.96915',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:13:21.96915',	0,	'0000156001',	'PURCHASECOST',	'DECLININGBALANCE',	30,	'ELECTRONIC EQUIPMENT'),
-  (4,'2018-01-29 13:13:48.199773',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:13:48.199773',	0,	'0000153001',	'PURCHASECOST',	'DECLININGBALANCE',	12.5,	'FURNITURE & FITTINGS'),
+  (3,'2018-01-29 13:13:21.96915',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:13:21.96915',	0,	'0000156001',	'NETBOOKVALUE',	'DECLININGBALANCE',	30,	'ELECTRONIC EQUIPMENT'),
+  (4,'2018-01-29 13:13:48.199773',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:13:48.199773',	0,	'0000153001',	'NETBOOKVALUE',	'DECLININGBALANCE',	12.5,	'FURNITURE & FITTINGS'),
   (5,'2018-01-29 13:14:15.588512',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:14:15.588512',	0,	'0000151001',	'PURCHASECOST',	'STRAIGHTLINE',	20,	'MOTOR VEHICLES'),
   (6,'2018-01-29 13:14:50.686021',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:14:50.686021',	0,	'0000154001',	'PURCHASECOST',	'STRAIGHTLINE',	12.5,	'OFFICE RENOVATION'),
   (7,'2018-01-29 13:16:48.18677',	'edwin.njeru',	'edwin.njeru',	'2018-01-29 13:16:48.18677',	0,	'0000149001',	'PURCHASECOST',	'STRAIGHTLINE',	2,	'OFFICE SUITE NO. 1 (GROUND FLR)'),

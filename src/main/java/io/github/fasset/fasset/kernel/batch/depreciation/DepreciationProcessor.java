@@ -37,7 +37,7 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<Depr
     @Override
     public List<Depreciation> process(FixedAsset fixedAsset) throws Exception {
 
-        List<Depreciation> depreciations = new LinkedList<>();
+        List<Depreciation> depreciationList = new LinkedList<>();
 
         depreciationRelay.getMonthlyDepreciationSequence()
                 .forEach(
@@ -45,10 +45,10 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<Depr
 
                             log.debug("Calculating depreciation in the month of :{} for asset {}",i,fixedAsset);
 
-                            depreciations.add(depreciationExecutor.getDepreciation(fixedAsset,i));
+                            depreciationList.add(depreciationExecutor.getDepreciation(fixedAsset,i));
                         }
                 );
 
-        return depreciations;
+        return depreciationList;
     }
 }

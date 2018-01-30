@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,10 +37,11 @@ public class DepreciationRelay {
 
         monthlySequence.add(from);
 
-        //FIXME int no_of_months = to.compareTo(from);
-        int no_of_months = 60;
+        long no_of_months = from.until(to, ChronoUnit.MONTHS)+1;
 
-        for(int i = 0; i < no_of_months; i++) {
+        log.debug("Creating a monthly depreciation sequence for : {}",no_of_months);
+
+        for(long i = 0; i < no_of_months; i++) {
 
             YearMonth monthSeq = monthlyIncrementer.getNext(from.plusMonths(i));
 

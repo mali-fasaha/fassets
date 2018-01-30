@@ -3,6 +3,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.service.*;
 import io.github.fasset.fasset.model.*;
+import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +29,23 @@ public class DepreciationExecutor {
 
     private final CategoryConfigurationService categoryConfigurationService;
 
-    private final DepreciationService depreciationService;
+    //private final DepreciationService depreciationService;
 
     private final NetBookValueService netBookValueService;
 
     private final AccruedDepreciationService accruedDepreciationService;
 
+    private final DepreciationPreprocessor preprocessor;
+
     @Autowired
     public DepreciationExecutor(@Qualifier("categoryConfigurationService") CategoryConfigurationService categoryConfigurationService,
-                                @Qualifier("depreciationService") DepreciationService depreciationService,
                                 @Qualifier("netBookValueService") NetBookValueService netBookValueService,
-                                @Qualifier("accruedDepreciationService") AccruedDepreciationService accruedDepreciationService) {
+                                @Qualifier("accruedDepreciationService") AccruedDepreciationService accruedDepreciationService,
+                                @Qualifier("depreciationPreprocessor") DepreciationPreprocessor preprocessor) {
         this.categoryConfigurationService = categoryConfigurationService;
-        this.depreciationService = depreciationService;
         this.netBookValueService = netBookValueService;
         this.accruedDepreciationService = accruedDepreciationService;
+        this.preprocessor = preprocessor;
     }
 
 
@@ -74,16 +77,19 @@ public class DepreciationExecutor {
         log.debug("Using deprecant : {}, and depreciation rate : {} for calculating depreciation",deprecant,depreciationRate);
         double depreciationAmount = calculate(deprecant,depreciationRate);
 
-        Depreciation depreciation = getDepreciation(asset, month, depreciationAmount);
+        //TODO Add preprocessor here
+        //Depreciation depreciation = getDepreciation(asset, month, depreciationAmount);
+        Depreciation depreciation = getDepreciation(preprocessor.setAsset(asset).setMonth(month).setDepreciationAmount(depreciationAmount).setProperties());
 
-        asset.setNetBookValue(asset.getNetBookValue()-depreciationAmount);
+        //asset.setNetBookValue(asset.getNetBookValue()-depreciationAmount);
+        asset.setNetBookValue(asset.getNetBookValue()-depreciation.getDepreciation());
 
         NetBookValue netBookValue = getNetBookValue(asset, month);
 
-        AccruedDepreciation accruedDepreciation = getAccruedDepreciation(asset, month, depreciationAmount);
+        AccruedDepreciation accruedDepreciation = getAccruedDepreciation(asset, month, depreciation.getDepreciation());
 
         //TODO write comprehensive message services and batch
-        depreciationService.saveDepreciation(depreciation);
+        //depreciationService.saveDepreciation(depreciation); //Written by depreciation writer
         netBookValueService.saveNetBookValue(netBookValue);
         accruedDepreciationService.saveAccruedDepreciation(accruedDepreciation);
 
@@ -99,7 +105,7 @@ public class DepreciationExecutor {
      * @return
      * @throws DepreciationExecutionException
      */
-    private Depreciation getDepreciation(FixedAsset asset, YearMonth month, double depreciationAmount) throws DepreciationExecutionException {
+    /*private Depreciation getDepreciation(FixedAsset asset, YearMonth month, double depreciationAmount) throws DepreciationExecutionException {
 
         log.debug("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}",asset,month);
         Depreciation depreciation = new Depreciation();
@@ -112,6 +118,27 @@ public class DepreciationExecutor {
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating depreciation instance relative to" +
                     " asset : %s, for the period : %s",asset,month);
+            throw new DepreciationExecutionException(message,e);
+        }
+
+        log.debug("Returning depreciation instance : {}",depreciation);
+        return depreciation;
+    }*/
+
+    //TODO implement missing callbacks
+    private Depreciation getDepreciation(DepreciationPreprocessor preprocessor){
+
+        log.debug("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}",preprocessor.getAsset(),preprocessor.getMonth());
+        Depreciation depreciation = new Depreciation();
+        try {
+            depreciation.setDepreciationPeriod(preprocessor.getMonth())
+                    .setFixedAssetId(preprocessor.getAsset().getId())
+                    .setCategory(preprocessor.getAsset().getCategory())
+                    .setSolId(preprocessor.getAsset().getSolId())
+                    .setDepreciation(preprocessor.getDepreciationAmount());
+        } catch (Throwable e) {
+            String message = String.format("Exception encountered while creating depreciation instance relative to" +
+                    " asset : %s, for the period : %s",preprocessor.getAsset(),preprocessor.getMonth());
             throw new DepreciationExecutionException(message,e);
         }
 

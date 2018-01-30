@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.Objects;
 
@@ -15,6 +17,11 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "fixed_asset_id","month","net_book_value","sol_id","category"
+        })
+})
 @Entity(name="NetBookValue")
 @Audited
 public class NetBookValue extends DomainModel<String> {

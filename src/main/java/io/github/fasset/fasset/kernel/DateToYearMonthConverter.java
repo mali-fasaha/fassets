@@ -23,11 +23,19 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
 
     private final static Logger log = getLogger(DateToYearMonthConverter.class);
 
-    @Autowired
-    @Qualifier("dateToLocalDateConverter")
     private DateToLocalDateConverter dateToLocalDateConverter;
 
+    private LocalDateToYearMonthConverter localDateToYearMonthConverter;
+
+
     public DateToYearMonthConverter(DateToLocalDateConverter dateToLocalDateConverter) {
+        this.dateToLocalDateConverter = dateToLocalDateConverter;
+    }
+
+    @Autowired
+    public DateToYearMonthConverter(@Qualifier("localDateToYearMonthConverter") LocalDateToYearMonthConverter localDateToYearMonthConverter,
+                                    @Qualifier("dateToLocalDateConverter") DateToLocalDateConverter dateToLocalDateConverter) {
+        this.localDateToYearMonthConverter = localDateToYearMonthConverter;
         this.dateToLocalDateConverter = dateToLocalDateConverter;
     }
 
@@ -62,7 +70,7 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
 
         try {
 
-            convertedMonth = YearMonth.from(dateToLocalDateConverter.convert(convertFrom));
+            convertedMonth = localDateToYearMonthConverter.convert(dateToLocalDateConverter.convert(convertFrom));
 
         } catch (Throwable e) {
             if(dateToLocalDateConverter == null) {
