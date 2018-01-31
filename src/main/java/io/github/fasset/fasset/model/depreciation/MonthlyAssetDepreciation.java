@@ -1,11 +1,21 @@
 package io.github.fasset.fasset.model.depreciation;
 
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.Objects;
 
+
+/*@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "assetId","year"
+        })
+})*/
 @Entity
+@Audited
 public class MonthlyAssetDepreciation extends DomainModel<String>{
 
     private int assetId;

@@ -2,6 +2,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.report;
 
 import io.github.fasset.fasset.kernel.batch.upload.BatchNotifications;
 import io.github.fasset.fasset.model.Depreciation;
+import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
 import org.springframework.batch.core.Job;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 @Configuration
 public class MonthlyAssetDepreciationJobConfiguration {
@@ -35,11 +37,14 @@ public class MonthlyAssetDepreciationJobConfiguration {
     MonthlyAssetDepreciationService monthlyAssetDepreciationService;
 
     @Autowired
+    private ItemReader<FixedAsset> fixedAssetItemReader;
+
+    @Autowired
     public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
         this.jobBuilderFactory = jobBuilderFactory;
     }
 
-    @Bean
+    /*@Bean
     public ItemReader<Depreciation> depreciationItemReader() throws Exception {
         JpaPagingItemReader<Depreciation> dataBaseReader = new JpaPagingItemReader<>();
         dataBaseReader.setEntityManagerFactory(entityManagerFactory);
@@ -53,7 +58,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
 
         return dataBaseReader;
 
-    }
+    }*/
 
     @Bean("monthlyAssetDepreciationJobListener")
     public MonthlyAssetDepreciationJobListener monthlyAssetDepreciationJobListener(){
@@ -85,6 +90,29 @@ public class MonthlyAssetDepreciationJobConfiguration {
     }
 
     @Bean
+    public QueryMonthlyDepreciationProcessor queryMonthlyDepreciationProcessor(){
+
+        return new QueryMonthlyDepreciationProcessor();
+    }
+
+    @Bean
+    public Step updateMonthlyAssetDepreciation() {
+        Step updateMonthlyAssetDepreciation = null;
+        try {
+            updateMonthlyAssetDepreciation =  stepBuilderFactory.get("updateMonthlyAssetDepreciation")
+                    .<FixedAsset, List<MonthlyAssetDepreciation>> chunk(100)
+                    .reader(fixedAssetItemReader)
+                    .processor(queryMonthlyDepreciationProcessor())
+                    .writer(monthlyAssetDepreciationWriter())
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return updateMonthlyAssetDepreciation;
+    }
+
+    /*@Bean
     public Step updateMonthlyAssetDepreciation() {
         Step updateMonthlyAssetDepreciation = null;
         try {
@@ -99,5 +127,5 @@ public class MonthlyAssetDepreciationJobConfiguration {
         }
 
         return updateMonthlyAssetDepreciation;
-    }
+    }*/
 }

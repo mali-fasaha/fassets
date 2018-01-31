@@ -25,13 +25,13 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyAssetDepreciationExecutorImpl.class);
 
-    @Autowired
-    @Qualifier("monthlyAssetDepreciationService")
-    private MonthlyAssetDepreciationService monthlyAssetDepreciationService;
+    private final MonthlyAssetDepreciationService monthlyAssetDepreciationService;
+
 
     @Autowired
-    @Qualifier("depreciationService")
-    private DepreciationService depreciationService;
+    public MonthlyAssetDepreciationExecutorImpl(@Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService) {
+        this.monthlyAssetDepreciationService = monthlyAssetDepreciationService;
+    }
 
     /**
      * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation
@@ -125,6 +125,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
             monthlyAssetDepreciation.setAssetId(depreciation.getFixedAssetId())
                     .setYear(getYear(depreciation));
         }else{
+
             log.debug("The repository already contains fixedAssetId : {} embodied in depreciation " +
                     "model : {}",depreciation.getFixedAssetId(),monthlyAssetDepreciation);
         }

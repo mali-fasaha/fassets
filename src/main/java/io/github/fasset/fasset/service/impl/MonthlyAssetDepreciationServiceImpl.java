@@ -59,24 +59,24 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
     @Override
     public void saveAllMonthlyDepreciationItems(List<? extends MonthlyAssetDepreciation> items) {
 
-        Set<MonthlyAssetDepreciation> filter = new UnifiedSet<>();
+        /*Set<MonthlyAssetDepreciation> filter = new UnifiedSet<>();
 
         filter.addAll(monthlyAssetDepreciationRepository.findAll());
 
-        List<MonthlyAssetDepreciation> savedItems = new FastList<>();
+        List<MonthlyAssetDepreciation> savedItems = new FastList<>();*/
 
         /*items
                 .stream()
                 .filter(i -> !monthlyAssetDepreciationRepository.existsById(i.getId()))
                 .forEach(unsavedItems::add);*/
-        items
+        /*items
                 .stream()
                 .filter(filter::contains)
                 .forEach(savedItems::add);
 
         //items.removeAll(savedItems);
 
-        savedItems.forEach(i -> monthlyAssetDepreciationRepository.deleteById(i.getId()));
+        savedItems.forEach(i -> monthlyAssetDepreciationRepository.deleteById(i.getId()));*/
 
         monthlyAssetDepreciationRepository.saveAll(items);
     }
