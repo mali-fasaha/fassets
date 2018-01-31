@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
+import io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.apache.commons.collections4.map.HashedMap;
@@ -22,41 +23,26 @@ public class DepreciationJobProxy {
 
     private final static Logger log = LoggerFactory.getLogger(DepreciationJobProxy.class);
 
-    @Autowired
-    private JobLauncher jobLauncher;
+    private final JobLauncher jobLauncher;
+
+    private final FixedAssetService fixedAssetService;
+
+    private final Job depreciationRun;
+
+    private final FixedAssetsJobsActivator fixedAssetsJobsActivator;
 
     @Autowired
-    @Qualifier("fixedAssetService")
-    private FixedAssetService fixedAssetService;
-
-    @Autowired
-    @Qualifier("depreciationJob")
-    private Job depreciationRun;
+    public DepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("depreciationJob") Job depreciationRun, FixedAssetsJobsActivator fixedAssetsJobsActivator) {
+        this.jobLauncher = jobLauncher;
+        this.fixedAssetService = fixedAssetService;
+        this.depreciationRun = depreciationRun;
+        this.fixedAssetsJobsActivator = fixedAssetsJobsActivator;
+    }
 
 
     public void initializeDepreciationRun() throws BatchJobExecutionException {
 
-        int no_of_assets = fixedAssetService.getPoll();
-        LocalDateTime starting_time = LocalDateTime.now();
-
-        log.info("Depreciation has begun with {} items at time: {}", no_of_assets, starting_time);
-
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("no_of_assets", String.valueOf(no_of_assets))
-                .addString("starting_time", LocalDateTime.now().toString())
-                .toJobParameters();
-
-        try {
-            jobLauncher.run(depreciationRun, jobParameters);
-        } catch (Throwable e) {
-
-            String message = String.format("Exception encountered %s caused by %s,while launching job" +
-                            "id %s at time %s",
-                    e.getMessage(), e.getCause(), depreciationRun.getName(), jobParameters.getString("starting_time"));
-
-            throw new BatchJobExecutionException(message, e);
-
-        }
+        fixedAssetsJobsActivator.bootstrap(jobLauncher, depreciationRun,fixedAssetService);
     }
 
         /**

@@ -3,6 +3,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.service.*;
 import io.github.fasset.fasset.model.*;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.YearMonth;
+import java.util.Map;
 
 /**
  * This class represents the main method which is to be abstracted by other layers that would
@@ -22,7 +26,8 @@ import java.time.YearMonth;
  *
  * @author edwin.njeru
  */
-@Component("depreciationExecutor")
+@Service("depreciationExecutor")
+@Transactional
 public class DepreciationExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationExecutor.class);
@@ -36,6 +41,8 @@ public class DepreciationExecutor {
     private final AccruedDepreciationService accruedDepreciationService;
 
     private final DepreciationPreprocessor preprocessor;
+
+    private Map<String,CategoryConfiguration> configurationMap = new UnifiedMap<>();
 
     @Autowired
     public DepreciationExecutor(@Qualifier("categoryConfigurationService") CategoryConfigurationService categoryConfigurationService,
@@ -60,13 +67,15 @@ public class DepreciationExecutor {
     //@Cacheable
     public Depreciation getDepreciation(FixedAsset asset, YearMonth month){
 
+        updateConfigurationMap();
+
         log.debug("Calculating depreciation for fixedAsset {}",asset);
 
         String categoryName = asset.getCategory();
 
         log.debug("Fetching categoryConfiguration instance from repository for designation : {}",categoryName);
 
-        CategoryConfiguration configuration = categoryConfigurationService.getCategoryByName(categoryName);
+        CategoryConfiguration configuration = configurationMap.get(categoryName);
 
         log.debug("Using categoryConfiguration instance : {}",configuration);
 
@@ -77,7 +86,6 @@ public class DepreciationExecutor {
         log.debug("Using deprecant : {}, and depreciation rate : {} for calculating depreciation",deprecant,depreciationRate);
         double depreciationAmount = calculate(deprecant,depreciationRate);
 
-        //TODO Add preprocessor here
         //Depreciation depreciation = getDepreciation(asset, month, depreciationAmount);
         Depreciation depreciation = getDepreciation(preprocessor.setAsset(asset).setMonth(month).setDepreciationAmount(depreciationAmount).setProperties());
 
@@ -95,6 +103,23 @@ public class DepreciationExecutor {
 
 
         return depreciation;
+    }
+
+    private void updateConfigurationMap() {
+
+        if(configurationMap.isEmpty()) {
+
+            log.debug("Refreshing the category configuration mapping...");
+
+            categoryConfigurationService
+                    .getAllCategoryConfigurations()
+                    .stream()
+                    .map(CategoryConfiguration::getDesignation)
+                    .forEach(categoryName -> {
+                        configurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
+                    });
+        }
+
     }
 
     /**

@@ -1,11 +1,17 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.report.MonthlyAssetDepreciationJobProxy;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("depreciationJobListener")
 public class DepreciationJobListener implements JobExecutionListener {
+
+
+    @Autowired
+    private MonthlyAssetDepreciationJobProxy monthlyAssetDepreciationJobProxy;
 
     /**
      * Callback before a job executes.
@@ -29,5 +35,12 @@ public class DepreciationJobListener implements JobExecutionListener {
     public void afterJob(JobExecution jobExecution) {
 
         //TODO poll paramters and update the status of the depreciationJobExecutionRepository
+
+        monthlyAssetDepreciationJobProxy.initializeMonthlyAssetDepreciationReporting();
+    }
+
+    public DepreciationJobListener setMonthlyAssetDepreciationJobProxy(MonthlyAssetDepreciationJobProxy monthlyAssetDepreciationJobProxy) {
+        this.monthlyAssetDepreciationJobProxy = monthlyAssetDepreciationJobProxy;
+        return this;
     }
 }
