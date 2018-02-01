@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.report;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
@@ -45,6 +46,20 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
     @Override
     public MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset,Integer year) {
 
-        return depreciationRepository.getMonthlyAssetDepreciation(fixedAsset.getId(),year);
+        MonthlyAssetDepreciationDTO dto = depreciationRepository.getMonthlyAssetDepreciation(fixedAsset.getId(),year);
+
+        return new MonthlyAssetDepreciation(dto.getAssetId(),dto.getYear(),
+                dto.getJan(),
+                dto.getFeb(),
+                dto.getMar(),
+                dto.getApr(),
+                dto.getMay(),
+                dto.getJun(),
+                dto.getJul(),
+                dto.getAug(),
+                dto.getSep(),
+                dto.getOct(),
+                dto.getNov(),
+                dto.getDec());
     }
 }

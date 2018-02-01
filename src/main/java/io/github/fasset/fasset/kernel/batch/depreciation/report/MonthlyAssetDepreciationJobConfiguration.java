@@ -42,7 +42,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
     private ItemReader<FixedAsset> fixedAssetItemReader;
 
     @Value("#{jobParameters['year']}")
-    public static final String year = null;
+    public static final String YEAR = null;
 
     @Autowired
     @Qualifier("monthlyAssetDepreciationExecutor")
@@ -88,7 +88,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
 
     @Bean
     @JobScope
-    public MonthlyAssetDepreciationProcessor monthlyAssetDepreciationProcessor(){
+    public MonthlyAssetDepreciationProcessor monthlyAssetDepreciationProcessor(@Value("#{jobParameters['year']}") String year){
 
         return new MonthlyAssetDepreciationProcessor(monthlyAssetDepreciationExecutor,year);
     }
@@ -112,7 +112,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
             updateMonthlyAssetDepreciation =  stepBuilderFactory.get("updateMonthlyAssetDepreciation")
                     .<FixedAsset, MonthlyAssetDepreciation> chunk(100)
                     .reader(fixedAssetItemReader)
-                    .processor(monthlyAssetDepreciationProcessor())
+                    .processor(monthlyAssetDepreciationProcessor(YEAR))
                     .writer(monthlyAssetDepreciationWriter())
                     .build();
         } catch (Exception e) {
