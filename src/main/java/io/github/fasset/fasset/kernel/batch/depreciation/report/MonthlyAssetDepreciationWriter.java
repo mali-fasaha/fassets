@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
-public class MonthlyAssetDepreciationWriter implements ItemWriter<List<MonthlyAssetDepreciation>> {
+public class MonthlyAssetDepreciationWriter implements ItemWriter<MonthlyAssetDepreciation> {
 
 
     private final MonthlyAssetDepreciationService monthlyAssetDepreciationService;
@@ -27,8 +27,8 @@ public class MonthlyAssetDepreciationWriter implements ItemWriter<List<MonthlyAs
      *                   exception and convert or rethrow it as appropriate.
      */
     @Override
-    public void write(List<? extends List<MonthlyAssetDepreciation>> items) throws Exception {
+    public void write(List<? extends MonthlyAssetDepreciation> items) throws Exception {
 
-        items.forEach(monthlyAssetDepreciationService::saveAllMonthlyDepreciationItems);
+        monthlyAssetDepreciationService.saveAllMonthlyDepreciationItems(items);
     }
 }

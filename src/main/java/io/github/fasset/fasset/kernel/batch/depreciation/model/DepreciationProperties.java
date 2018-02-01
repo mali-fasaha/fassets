@@ -8,7 +8,7 @@ import java.time.YearMonth;
 public class DepreciationProperties {
 
     private YearMonth startMonth = YearMonth.of(2018,1);
-    private YearMonth stopMonth = YearMonth.of(2023,3);
+    private YearMonth stopMonth = YearMonth.of(2018,3);
 
     public YearMonth getStartMonth() {
         return startMonth;

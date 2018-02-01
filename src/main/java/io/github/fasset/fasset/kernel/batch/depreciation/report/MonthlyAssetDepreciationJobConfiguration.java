@@ -8,12 +8,14 @@ import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -38,6 +40,13 @@ public class MonthlyAssetDepreciationJobConfiguration {
 
     @Autowired
     private ItemReader<FixedAsset> fixedAssetItemReader;
+
+    @Value("#{jobParameters['year']}")
+    public static final String year = null;
+
+    @Autowired
+    @Qualifier("monthlyAssetDepreciationExecutor")
+    private MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
 
     @Autowired
     public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
@@ -78,9 +87,10 @@ public class MonthlyAssetDepreciationJobConfiguration {
     }
 
     @Bean
+    @JobScope
     public MonthlyAssetDepreciationProcessor monthlyAssetDepreciationProcessor(){
 
-        return new MonthlyAssetDepreciationProcessor();
+        return new MonthlyAssetDepreciationProcessor(monthlyAssetDepreciationExecutor,year);
     }
 
     @Bean
@@ -100,9 +110,9 @@ public class MonthlyAssetDepreciationJobConfiguration {
         Step updateMonthlyAssetDepreciation = null;
         try {
             updateMonthlyAssetDepreciation =  stepBuilderFactory.get("updateMonthlyAssetDepreciation")
-                    .<FixedAsset, List<MonthlyAssetDepreciation>> chunk(100)
+                    .<FixedAsset, MonthlyAssetDepreciation> chunk(100)
                     .reader(fixedAssetItemReader)
-                    .processor(queryMonthlyDepreciationProcessor())
+                    .processor(monthlyAssetDepreciationProcessor())
                     .writer(monthlyAssetDepreciationWriter())
                     .build();
         } catch (Exception e) {

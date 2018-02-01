@@ -33,6 +33,23 @@ public class MonthlyAssetDepreciation extends DomainModel<String>{
     private double nov;
     private double dec;
 
+    public MonthlyAssetDepreciation(int assetId, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct, double nov, double dec) {
+        this.assetId = assetId;
+        this.year = year;
+        this.jan = jan;
+        this.feb = feb;
+        this.mar = mar;
+        this.apr = apr;
+        this.may = may;
+        this.jun = jun;
+        this.jul = jul;
+        this.aug = aug;
+        this.sep = sep;
+        this.oct = oct;
+        this.nov = nov;
+        this.dec = dec;
+    }
+
     public MonthlyAssetDepreciation() {
     }
 

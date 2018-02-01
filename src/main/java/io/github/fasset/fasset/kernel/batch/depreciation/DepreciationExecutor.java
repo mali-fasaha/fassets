@@ -123,34 +123,11 @@ public class DepreciationExecutor {
     }
 
     /**
-     * Creates a {@link Depreciation} instance relative to the parameters provided
-     * @param asset
-     * @param month
-     * @param depreciationAmount
+     * Creates a depreciation item using data from the preprocessor
+     *
+     * @param preprocessor
      * @return
-     * @throws DepreciationExecutionException
      */
-    /*private Depreciation getDepreciation(FixedAsset asset, YearMonth month, double depreciationAmount) throws DepreciationExecutionException {
-
-        log.debug("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}",asset,month);
-        Depreciation depreciation = new Depreciation();
-        try {
-            depreciation.setDepreciationPeriod(month)
-                    .setFixedAssetId(asset.getId())
-                    .setCategory(asset.getCategory())
-                    .setSolId(asset.getSolId())
-                    .setDepreciation(depreciationAmount);
-        } catch (Throwable e) {
-            String message = String.format("Exception encountered while creating depreciation instance relative to" +
-                    " asset : %s, for the period : %s",asset,month);
-            throw new DepreciationExecutionException(message,e);
-        }
-
-        log.debug("Returning depreciation instance : {}",depreciation);
-        return depreciation;
-    }*/
-
-    //TODO implement missing callbacks
     private Depreciation getDepreciation(DepreciationPreprocessor preprocessor){
 
         log.debug("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}",preprocessor.getAsset(),preprocessor.getMonth());
@@ -160,6 +137,8 @@ public class DepreciationExecutor {
                     .setFixedAssetId(preprocessor.getAsset().getId())
                     .setCategory(preprocessor.getAsset().getCategory())
                     .setSolId(preprocessor.getAsset().getSolId())
+                    .setYear(preprocessor.getMonth().getYear())
+                    .setMonth(preprocessor.getMonth().getMonthValue())
                     .setDepreciation(preprocessor.getDepreciationAmount());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating depreciation instance relative to" +

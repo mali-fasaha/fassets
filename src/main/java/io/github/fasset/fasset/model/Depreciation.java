@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.time.Year;
 import java.time.YearMonth;
 import java.util.Objects;
 
@@ -20,6 +21,12 @@ import java.util.Objects;
 public class Depreciation extends DomainModel<String> {
 
     private static final Logger log = LoggerFactory.getLogger(Depreciation.class);
+
+    @Column(name="year")
+    private int year;
+
+    @Column(name="month")
+    private int month;
 
     @Column(name="depreciation_period")
     private YearMonth depreciationPeriod;
@@ -37,6 +44,26 @@ public class Depreciation extends DomainModel<String> {
     private double depreciation;
 
     public Depreciation() {
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public Depreciation setMonth(int month) {
+        log.debug("Setting month for depreciationId : {}, as = {}",getId(),month);
+        this.month = month;
+        return this;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public Depreciation setYear(int year) {
+        log.debug("Setting year for depreciationId : {}, as = {}",getId(),depreciationPeriod);
+        this.year = year;
+        return this;
     }
 
     public YearMonth getDepreciationPeriod() {
