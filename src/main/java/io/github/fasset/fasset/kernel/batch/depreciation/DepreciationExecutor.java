@@ -170,7 +170,7 @@ public class DepreciationExecutor {
                     .setAccruedDepreciation(accruedDepreciationService.getAccruedDepreciationForAsset(asset,month) + depreciationAmount);
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating accruedDepreciation instance relative" +
-                    "to the asset : %s for the month : %s",asset,month);
+                    " to the asset : %s for the month : %s",asset,month);
             throw new DepreciationExecutionException(message,e);
         }
 

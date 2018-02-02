@@ -28,7 +28,7 @@ import java.util.Objects;
 @EntityListeners(AuditingEntityListener.class)
 public class DomainModel<U> {
 
-    @Id
+
     @GenericGenerator(
             name = "sequenceGenerator",
             strategy = "enhanced-sequence",
@@ -51,6 +51,7 @@ public class DomainModel<U> {
             strategy = GenerationType.SEQUENCE,
             generator = "sequenceGenerator"
     )
+    @Id
     @Column(name = "id", updatable = false, nullable = false)
     private int id;
 

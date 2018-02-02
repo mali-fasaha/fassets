@@ -1,26 +1,34 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.YearMonth;
 import java.util.Objects;
 
 public class MonthlyAssetDepreciationDTO {
 
-    private int assetId;
-    private int year;
-    private double jan;
-    private double feb;
-    private double mar;
-    private double apr;
-    private double may;
-    private double jun;
-    private double jul;
-    private double aug;
-    private double sep;
-    private double oct;
-    private double nov;
-    private double dec;
+    private static final Logger log = LoggerFactory.getLogger(MonthlyAssetDepreciationDTO.class);
 
-    public MonthlyAssetDepreciationDTO(int assetId, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct, double nov, double dec) {
+    private Integer assetId;
+    private Integer year;
+    private Double jan;
+    private Double feb;
+    private Double mar;
+    private Double apr;
+    private Double may;
+    private Double jun;
+    private Double jul;
+    private Double aug;
+    private Double sep;
+    private Double oct;
+    private Double nov;
+    private Double dec;
+
+    public MonthlyAssetDepreciationDTO() {
+    }
+
+    public MonthlyAssetDepreciationDTO(Integer assetId, Integer year, Double jan, Double feb, Double mar, Double apr, Double may, Double jun, Double jul, Double aug, Double sep, Double oct, Double nov, Double dec) {
         this.assetId = assetId;
         this.year = year;
         this.jan = jan;
@@ -37,128 +45,144 @@ public class MonthlyAssetDepreciationDTO {
         this.dec = dec;
     }
 
-    public int getAssetId() {
+    public Integer getAssetId() {
         return assetId;
     }
 
-    public MonthlyAssetDepreciationDTO setAssetId(int assetId) {
+    public MonthlyAssetDepreciationDTO setAssetId(Integer assetId) {
         this.assetId = assetId;
         return this;
     }
 
-    public int getYear() {
-        return year;
+    public Integer getYear() {
+
+        log.debug("Returning year : {}",year);
+        return year==null ? 0 : year;
     }
 
-    public MonthlyAssetDepreciationDTO setYear(int year) {
+    public MonthlyAssetDepreciationDTO setYear(Integer year) {
         this.year = year;
         return this;
     }
 
-    public double getJan() {
-        return jan;
+    public Double getJan() {
+        log.debug("Returning jan : {}",jan);
+        return jan == null ? 0 : jan;
     }
 
-    public MonthlyAssetDepreciationDTO setJan(double jan) {
+    public MonthlyAssetDepreciationDTO setJan(Double jan) {
         this.jan = jan;
         return this;
     }
 
-    public double getFeb() {
-        return feb;
+    public Double getFeb() {
+        log.debug("Returning feb : {}",feb);
+        return feb == null ? 0 : feb;
     }
 
-    public MonthlyAssetDepreciationDTO setFeb(double feb) {
+    public MonthlyAssetDepreciationDTO setFeb(Double feb) {
         this.feb = feb;
         return this;
     }
 
-    public double getMar() {
-        return mar;
+    public Double getMar() {
+        log.debug("Returning mar : {}",mar);
+        return mar == null ? 0 : mar;
     }
 
-    public MonthlyAssetDepreciationDTO setMar(double mar) {
+    public MonthlyAssetDepreciationDTO setMar(Double mar) {
         this.mar = mar;
         return this;
     }
 
-    public double getApr() {
-        return apr;
+    public Double getApr() {
+        log.debug("Returning apr : {}",apr);
+        return apr == null ? 0 : apr;
     }
 
-    public MonthlyAssetDepreciationDTO setApr(double apr) {
+    public MonthlyAssetDepreciationDTO setApr(Double apr) {
         this.apr = apr;
         return this;
     }
 
-    public double getMay() {
-        return may;
+    public Double getMay() {
+        log.debug("Returning may : {}",may);
+        return may == null ? 0 : may;
     }
 
-    public MonthlyAssetDepreciationDTO setMay(double may) {
+    public MonthlyAssetDepreciationDTO setMay(Double may) {
         this.may = may;
         return this;
     }
 
-    public double getJun() {
-        return jun;
+    public Double getJun() {
+
+        log.debug("Returning jun : {}",jun);
+        return jun == null ? 0 : jun;
     }
 
-    public MonthlyAssetDepreciationDTO setJun(double jun) {
+    public MonthlyAssetDepreciationDTO setJun(Double jun) {
         this.jun = jun;
         return this;
     }
 
-    public double getJul() {
-        return jul;
+    public Double getJul() {
+        log.debug("Returning jul : {}",jul);
+        return jul == null ? 0 : jul;
     }
 
-    public MonthlyAssetDepreciationDTO setJul(double jul) {
+    public MonthlyAssetDepreciationDTO setJul(Double jul) {
         this.jul = jul;
         return this;
     }
 
-    public double getAug() {
-        return aug;
+    public Double getAug() {
+        log.debug("Returning aug : {}",aug);
+        return aug == null ? 0 : aug;
     }
 
-    public MonthlyAssetDepreciationDTO setAug(double aug) {
+    public MonthlyAssetDepreciationDTO setAug(Double aug) {
         this.aug = aug;
         return this;
     }
 
-    public double getSep() {
-        return sep;
+    public Double getSep() {
+        log.debug("Returning sep : {}",sep);
+        return sep == null ? 0 : sep;
     }
 
-    public MonthlyAssetDepreciationDTO setSep(double sep) {
+    public MonthlyAssetDepreciationDTO setSep(Double sep) {
         this.sep = sep;
         return this;
     }
 
-    public double getOct() {
-        return oct;
+    public Double getOct() {
+
+        log.debug("Returning oct : {}",oct);
+        return oct == null ? 0 : oct;
     }
 
-    public MonthlyAssetDepreciationDTO setOct(double oct) {
+    public MonthlyAssetDepreciationDTO setOct(Double oct) {
         this.oct = oct;
         return this;
     }
 
-    public double getNov() {
-        return nov;
+    public Double getNov() {
+        log.debug("Returning nov : {}",nov);
+        return nov == null ? 0 : nov;
     }
 
-    public MonthlyAssetDepreciationDTO setNov(double nov) {
+    public MonthlyAssetDepreciationDTO setNov(Double nov) {
         this.nov = nov;
         return this;
     }
 
-    public double getDec() {
-        return dec;
+    public Double getDec() {
+        log.debug("Returning dec : {}",dec);
+        return dec == null ? 0 : dec;
     }
 
-    public MonthlyAssetDepreciationDTO setDec(double dec) {
+    public MonthlyAssetDepreciationDTO setDec(Double dec) {
         this.dec = dec;
         return this;
     }

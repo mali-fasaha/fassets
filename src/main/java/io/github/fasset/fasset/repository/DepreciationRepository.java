@@ -39,5 +39,5 @@ public interface DepreciationRepository extends JpaRepository<Depreciation,Integ
             ") " +
             "FROM Depreciation e " +
             "WHERE e.fixedAssetId = :assetId AND e.year = :year")
-    MonthlyAssetDepreciationDTO getMonthlyAssetDepreciation(@Param("assetId") int assetId, @Param("year") int year);
+    List<MonthlyAssetDepreciationDTO> getMonthlyAssetDepreciation(@Param("assetId") Integer assetId, @Param("year") Integer year);
 }

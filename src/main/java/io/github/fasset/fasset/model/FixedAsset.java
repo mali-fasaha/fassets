@@ -143,15 +143,17 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
 
     @Override
     public String toString() {
-        return "FixedAsset{" +
-                "id='"+getId()+
-                ", barcode='" + barcode + '\'' +
-                ", assetDescription='" + assetDescription + '\'' +
-                ", purchaseCost=" + purchaseCost +
-                ", netBookValue=" + netBookValue +
-                '}';
+        final StringBuilder sb = new StringBuilder("FixedAsset{");
+        sb.append("solId='").append(solId).append('\'');
+        sb.append(", barcode='").append(barcode).append('\'');
+        sb.append(", assetDescription='").append(assetDescription).append('\'');
+        sb.append(", purchaseDate=").append(purchaseDate);
+        sb.append(", category='").append(category).append('\'');
+        sb.append(", purchaseCost=").append(purchaseCost);
+        sb.append(", netBookValue=").append(netBookValue);
+        sb.append('}');
+        return sb.toString();
     }
-
 
     @Override
     public int compareTo(FixedAsset o) {

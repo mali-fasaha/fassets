@@ -43,7 +43,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
 
         log.debug("Fetching the AccruedDepreciation for assetId : {}, for the month : {}",asset.getId(),month);
 
-        //FIXME this query is returning non-unique results
+        //FIXME this query is returning nulls
         return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(),month).getAccruedDepreciation();
     }
 

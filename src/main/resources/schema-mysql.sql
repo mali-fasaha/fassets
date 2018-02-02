@@ -99,3 +99,37 @@ CREATE TABLE BATCH_JOB_SEQ (
 ) ENGINE=InnoDB;
 
 INSERT INTO BATCH_JOB_SEQ (ID, UNIQUE_KEY) select * from (select 0 as ID, '0' as UNIQUE_KEY) as tmp where not exists(select * from BATCH_JOB_SEQ);
+
+CREATE TABLE `category_configuration` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `last_modified_by` varchar(255) DEFAULT NULL,
+  `modified_at` datetime DEFAULT NULL,
+  `version` int(11) NOT NULL,
+  `category_ledger_id` varchar(255) NOT NULL,
+  `deprecant` varchar(255) NOT NULL,
+  `depreciation_logic` varchar(255) NOT NULL,
+  `depreciation_rate` double NOT NULL,
+  `designation` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category_configuration`
+--
+
+INSERT INTO `category_configuration` (`id`, `created_at`, `created_by`, `last_modified_by`, `modified_at`, `version`, `category_ledger_id`, `deprecant`, `depreciation_logic`, `depreciation_rate`, `designation`) VALUES
+(1, '2018-01-29 12:54:09', 'edwin.njeru', 'edwin.njeru', '2018-01-29 12:54:09', 0, '0000152001', 'NETBOOKVALUE', 'DECLININGBALANCE', 30, 'COMPUTERS'),
+(2, '2018-01-29 13:12:52', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:12:52', 0, '0000155001', 'PURCHASECOST', 'STRAIGHTLINE', 10, 'COMPUTER SOFTWARE'),
+(3, '2018-01-29 13:13:21', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:13:21', 0, '0000156001', 'NETBOOKVALUE', 'DECLININGBALANCE', 30, 'ELECTRONIC EQUIPMENT'),
+(4, '2018-01-29 13:13:48', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:13:48', 0, '0000153001', 'NETBOOKVALUE', 'DECLININGBALANCE', 12.5, 'FURNITURE & FITTINGS'),
+(5, '2018-01-29 13:14:15', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:14:15', 0, '0000151001', 'PURCHASECOST', 'STRAIGHTLINE', 20, 'MOTOR VEHICLES'),
+(6, '2018-01-29 13:14:50', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:14:50', 0, '0000154001', 'PURCHASECOST', 'STRAIGHTLINE', 12.5, 'OFFICE RENOVATION'),
+(7, '2018-01-29 13:16:48', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:16:48', 0, '0000149001', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 1 (GROUND FLR)'),
+(8, '2018-01-29 13:17:00', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:17:00', 0, '0000149002', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 2 (MEZZANINE FLR)'),
+(9, '2018-01-29 13:17:12', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:17:12', 0, '0000149003', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 5 (3RD FLOOR)'),
+(10, '2018-01-29 13:17:25', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:17:25', 0, '0000149004', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 6 (4TH FLOOR)'),
+(11, '2018-01-29 13:17:43', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:17:43', 0, '0000149005', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 7 (5TH FLLOR)'),
+(12, '2018-01-29 13:17:54', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:17:54', 0, '0000149007', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 8 (6TH FLLOR)'),
+(13, '2018-01-29 13:18:05', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:18:05', 0, '0000149006', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 4 (2ND FLLOR)'),
+(14, '2018-01-29 13:18:17', 'edwin.njeru', 'edwin.njeru', '2018-01-29 13:18:17', 0, '0000149008', 'PURCHASECOST', 'STRAIGHTLINE', 2, 'OFFICE SUITE NO. 3 (1ST FLLOR)');
