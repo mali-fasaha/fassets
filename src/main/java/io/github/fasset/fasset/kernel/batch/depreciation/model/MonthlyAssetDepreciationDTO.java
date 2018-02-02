@@ -67,7 +67,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getJan() {
         log.debug("Returning jan : {}",jan);
-        return jan == null ? 0 : jan;
+        return jan == null ? 0.00 : jan;
     }
 
     public MonthlyAssetDepreciationDTO setJan(Double jan) {
@@ -77,7 +77,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getFeb() {
         log.debug("Returning feb : {}",feb);
-        return feb == null ? 0 : feb;
+        return feb == null ? 0.00 : feb;
     }
 
     public MonthlyAssetDepreciationDTO setFeb(Double feb) {
@@ -87,7 +87,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getMar() {
         log.debug("Returning mar : {}",mar);
-        return mar == null ? 0 : mar;
+        return mar == null ? 0.00 : mar;
     }
 
     public MonthlyAssetDepreciationDTO setMar(Double mar) {
@@ -97,7 +97,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getApr() {
         log.debug("Returning apr : {}",apr);
-        return apr == null ? 0 : apr;
+        return apr == null ? 0.00 : apr;
     }
 
     public MonthlyAssetDepreciationDTO setApr(Double apr) {
@@ -107,7 +107,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getMay() {
         log.debug("Returning may : {}",may);
-        return may == null ? 0 : may;
+        return may == null ? 0.00 : may;
     }
 
     public MonthlyAssetDepreciationDTO setMay(Double may) {
@@ -118,7 +118,7 @@ public class MonthlyAssetDepreciationDTO {
     public Double getJun() {
 
         log.debug("Returning jun : {}",jun);
-        return jun == null ? 0 : jun;
+        return jun == null ? 0.00 : jun;
     }
 
     public MonthlyAssetDepreciationDTO setJun(Double jun) {
@@ -128,7 +128,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getJul() {
         log.debug("Returning jul : {}",jul);
-        return jul == null ? 0 : jul;
+        return jul == null ? 0.00 : jul;
     }
 
     public MonthlyAssetDepreciationDTO setJul(Double jul) {
@@ -138,7 +138,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getAug() {
         log.debug("Returning aug : {}",aug);
-        return aug == null ? 0 : aug;
+        return aug == null ? 0.00 : aug;
     }
 
     public MonthlyAssetDepreciationDTO setAug(Double aug) {
@@ -148,7 +148,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getSep() {
         log.debug("Returning sep : {}",sep);
-        return sep == null ? 0 : sep;
+        return sep == null ? 0.00 : sep;
     }
 
     public MonthlyAssetDepreciationDTO setSep(Double sep) {
@@ -159,7 +159,7 @@ public class MonthlyAssetDepreciationDTO {
     public Double getOct() {
 
         log.debug("Returning oct : {}",oct);
-        return oct == null ? 0 : oct;
+        return oct == null ? 0.00 : oct;
     }
 
     public MonthlyAssetDepreciationDTO setOct(Double oct) {
@@ -169,7 +169,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getNov() {
         log.debug("Returning nov : {}",nov);
-        return nov == null ? 0 : nov;
+        return nov == null ? 0.00 : nov;
     }
 
     public MonthlyAssetDepreciationDTO setNov(Double nov) {
@@ -179,7 +179,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getDec() {
         log.debug("Returning dec : {}",dec);
-        return dec == null ? 0 : dec;
+        return dec == null ? 0.00 : dec;
     }
 
     public MonthlyAssetDepreciationDTO setDec(Double dec) {

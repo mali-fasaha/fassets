@@ -50,16 +50,13 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
 
         try {
             List<MonthlyAssetDepreciationDTO> tempList = depreciationRepository.getMonthlyAssetDepreciation(fixedAsset.getId(),year);
-            int lastItem = 0;
             MonthlyAssetDepreciationDTO temp=null;
 
             if (!tempList.isEmpty()) {
-                //lastItem = tempList.size();
                 temp = tempList.get(0);
             } else {
                 // do nothing
             }
-
 
             dto = temp;
         } catch (Exception e) {
