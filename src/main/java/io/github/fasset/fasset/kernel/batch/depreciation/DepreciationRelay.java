@@ -25,8 +25,12 @@ public class DepreciationRelay {
     @Autowired
     private DepreciationProperties depreciationProperties;
 
-
     public List<YearMonth> getMonthlyDepreciationSequence(){
+
+        return generateMonthlyDepreciationSequence();
+    }
+
+    private List<YearMonth> generateMonthlyDepreciationSequence(){
 
         YearMonth from = depreciationProperties.getStartMonth();
         YearMonth to = depreciationProperties.getStopMonth();

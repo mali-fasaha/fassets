@@ -1,12 +1,10 @@
-package io.github.fasset.fasset.kernel.batch.depreciation.report;
+package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationRelay;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import io.github.fasset.fasset.repository.DepreciationRepository;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.YearMonth;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 

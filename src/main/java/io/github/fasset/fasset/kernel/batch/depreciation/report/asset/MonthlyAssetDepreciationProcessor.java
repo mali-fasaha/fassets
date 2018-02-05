@@ -1,16 +1,11 @@
-package io.github.fasset.fasset.kernel.batch.depreciation.report;
+package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
-import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 
 
 public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAsset,MonthlyAssetDepreciation>{

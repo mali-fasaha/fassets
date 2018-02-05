@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel.batch.depreciation.report;
+package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;

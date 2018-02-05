@@ -1,26 +1,16 @@
-package io.github.fasset.fasset.kernel.batch.depreciation.report;
+package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO;
-import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import io.github.fasset.fasset.repository.DepreciationRepository;
-import io.github.fasset.fasset.service.DepreciationService;
-import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
-import io.github.fasset.fasset.service.impl.MonthlyAssetDepreciationServiceImpl;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.junit.runners.Parameterized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.time.YearMonth;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service("monthlyAssetDepreciationExecutor")
@@ -63,6 +53,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
             e.printStackTrace();
         }
 
+        assert dto != null;
         return new MonthlyAssetDepreciation(dto.getAssetId(),dto.getYear(),
                 dto.getJan(),
                 dto.getFeb(),

@@ -22,4 +22,10 @@ public interface DepreciationService {
      * @param depreciationList
      */
     void saveAllDepreciationItems(List<Depreciation> depreciationList);
+
+    /**
+     *
+     * @return Return the number of distinct sols
+     */
+    int getDistinctSolIds();
 }

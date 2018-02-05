@@ -1,10 +1,15 @@
-package io.github.fasset.fasset.kernel.batch.depreciation.report;
+package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
-import io.github.fasset.fasset.kernel.batch.upload.BatchNotifications;
-import io.github.fasset.fasset.model.Depreciation;
+import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor;
+import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutorImpl;
+import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationProcessor;
+import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationWriter;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
+import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
+import io.github.fasset.fasset.service.MonthlySolDepreciationService;
+import io.github.fasset.fasset.service.impl.MonthlySolDepreciationServiceImpl;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -20,16 +25,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.List;
 
 @Configuration
 public class MonthlyAssetDepreciationJobConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+
 
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
@@ -47,6 +51,14 @@ public class MonthlyAssetDepreciationJobConfiguration {
     @Autowired
     @Qualifier("monthlyAssetDepreciationExecutor")
     private MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
+
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
+
+    @Autowired
+    private MonthlySolDepreciationService monthlySolDepreciationService;
+    @Autowired
+    private MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
 
     @Autowired
     public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
@@ -81,8 +93,8 @@ public class MonthlyAssetDepreciationJobConfiguration {
         return jobBuilderFactory.get("monthlyAssetDepreciation")
                 .incrementer(new RunIdIncrementer())
                 .listener(monthlyAssetDepreciationJobListener())
-                .flow(updateMonthlyAssetDepreciation())
-                .end()
+                .start(updateMonthlyAssetDepreciation())
+                .next(createMonthlySolDepreciationItems())
                 .build();
     }
 
@@ -120,6 +132,60 @@ public class MonthlyAssetDepreciationJobConfiguration {
         }
 
         return updateMonthlyAssetDepreciation;
+    }
+
+    @Bean
+    public MonthlySolDepreciationWriter monthlySolDepreciationWriter(){
+
+        return new MonthlySolDepreciationWriter(monthlySolDepreciationService);
+    }
+
+    @Bean
+    @JobScope
+    public MonthlySolDepreciationProcessor monthlySolDepreciationProcessor(@Value("#{jobParameters['year']}") String year){
+
+        return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor,year);
+    }
+
+    @Bean
+    public ItemReader<String> monthlySolDepreciationReader(){
+
+        JpaPagingItemReader<String> solIdsReader = new JpaPagingItemReader<>();
+
+        solIdsReader.setEntityManagerFactory(entityManagerFactory);
+
+        solIdsReader.setQueryString("SELECT DISTINCT e.solId From Depreciation e");
+
+        solIdsReader.setTransacted(true);
+        solIdsReader.setPageSize(5);
+        solIdsReader.setSaveState(true);
+        try {
+            solIdsReader.afterPropertiesSet();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return solIdsReader;
+    }
+
+    @Bean("createMonthlySolDepreciationItems")
+    public Step createMonthlySolDepreciationItems() {
+
+        Step createMonthlySolDepreciationItems = null;
+
+        try {
+            createMonthlySolDepreciationItems = stepBuilderFactory
+                    .get("createMonthlySolDepreciationItems")
+                    .<String,MonthlySolDepreciation>chunk(5)
+                    .reader(monthlySolDepreciationReader())
+                    .writer(monthlySolDepreciationWriter())
+                    .processor(monthlySolDepreciationProcessor(YEAR))
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return createMonthlySolDepreciationItems;
     }
 
     /*@Bean

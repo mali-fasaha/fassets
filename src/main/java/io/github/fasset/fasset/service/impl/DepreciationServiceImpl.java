@@ -46,4 +46,13 @@ public class DepreciationServiceImpl implements DepreciationService {
 
         depreciationRepository.saveAll(depreciationList);
     }
+
+    /**
+     * @return Return the number of distinct sols
+     */
+    @Override
+    public int getDistinctSolIds() {
+
+        return depreciationRepository.countDistinctSolIds();
+    }
 }
