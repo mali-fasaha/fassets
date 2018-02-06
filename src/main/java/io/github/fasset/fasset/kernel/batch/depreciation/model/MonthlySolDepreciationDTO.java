@@ -1,8 +1,13 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 public class MonthlySolDepreciationDTO {
+
+    private static final Logger log = LoggerFactory.getLogger(MonthlySolDepreciationDTO.class);
 
     private String solId;
     private Integer year;
@@ -40,127 +45,158 @@ public class MonthlySolDepreciationDTO {
     }
 
     public String getSolId() {
-        return solId;
+
+        log.debug("Returning solId : {}",solId);
+        return solId == null ? "" : solId;
     }
 
     public MonthlySolDepreciationDTO setSolId(String solId) {
+
+        log.debug("Setting solId: {}",solId);
         this.solId = solId;
         return this;
     }
 
     public Integer getYear() {
-        return year;
+
+        log.debug("Returning year : {}",year);
+        return year == null ? 0 : year;
     }
 
     public MonthlySolDepreciationDTO setYear(Integer year) {
+        log.debug("Setting year : {}",year);
         this.year = year;
         return this;
     }
 
     public Double getJan() {
-        return jan;
+        log.debug("Returning jan : {}",jan);
+        return jan == null ? 0 : jan;
     }
 
     public MonthlySolDepreciationDTO setJan(Double jan) {
+        log.debug("Setting jan : {}",jan);
         this.jan = jan;
         return this;
     }
 
     public Double getFeb() {
-        return feb;
+        log.debug("Returning feb : {}",feb);
+        return feb == null ? 0 : feb;
     }
 
     public MonthlySolDepreciationDTO setFeb(Double feb) {
+        log.debug("Setting feb : {}",feb);
         this.feb = feb;
         return this;
     }
 
     public Double getMar() {
-        return mar;
+        log.debug("Returning mar : {}",mar);
+        return mar == null ? 0 : mar;
     }
 
     public MonthlySolDepreciationDTO setMar(Double mar) {
+        log.debug("Setting mar : {}",mar);
         this.mar = mar;
         return this;
     }
 
     public Double getApr() {
-        return apr;
+        log.debug("Returning apr : {}",apr);
+        return apr == null ? 0 : apr;
     }
 
     public MonthlySolDepreciationDTO setApr(Double apr) {
+        log.debug("Setting apr : {}",apr);
         this.apr = apr;
         return this;
     }
 
     public Double getMay() {
+        log.debug("Returning may : {}",may);
         return may;
     }
 
     public MonthlySolDepreciationDTO setMay(Double may) {
+        log.debug("Setting may : {}",may);
         this.may = may;
         return this;
     }
 
     public Double getJun() {
-        return jun;
+        log.debug("Returning jun : {}",jun);
+        return jun == null ? 0 : jun;
     }
 
     public MonthlySolDepreciationDTO setJun(Double jun) {
+        log.debug("Setting jun : {}",jun);
         this.jun = jun;
         return this;
     }
 
     public Double getJul() {
-        return jul;
+        log.debug("Returning jul : {}",jul);
+        return jul == null ? 0 : jul;
     }
 
     public MonthlySolDepreciationDTO setJul(Double jul) {
+        log.debug("Setting jul : {}",jul);
         this.jul = jul;
         return this;
     }
 
     public Double getAug() {
-        return aug;
+        log.debug("Returning aug : {}",aug);
+        return aug == null ? 0 : aug;
     }
 
     public MonthlySolDepreciationDTO setAug(Double aug) {
+        log.debug("Setting aug : {}",aug);
         this.aug = aug;
         return this;
     }
 
     public Double getSep() {
-        return sep;
+        log.debug("Returning sep : {}",sep);
+        return sep == null ? 0 : sep;
     }
 
     public MonthlySolDepreciationDTO setSep(Double sep) {
+        log.debug("Setting sep : {}",sep);
         this.sep = sep;
         return this;
     }
 
     public Double getOct() {
-        return oct;
+        log.debug("Returning oct : {}",oct);
+        return oct == null ? 0 : oct;
     }
 
     public MonthlySolDepreciationDTO setOct(Double oct) {
+        log.debug("Setting oct : {}",oct);
         this.oct = oct;
         return this;
     }
 
     public Double getNov() {
-        return nov;
+        log.debug("Returning nov : {}",nov);
+        return nov == null ? 0 : nov;
     }
 
     public MonthlySolDepreciationDTO setNov(Double nov) {
+        log.debug("Setting nov : {}",nov);
         this.nov = nov;
         return this;
     }
 
     public Double getDec() {
-        return dec;
+        log.debug("Returning dec : {}",dec);
+        return dec == null ? 0 : dec;
     }
 
     public MonthlySolDepreciationDTO setDec(Double dec) {
+        log.debug("Setting dec : {}",dec);
         this.dec = dec;
         return this;
     }

@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
+import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.service.DepreciationService;
 import org.slf4j.Logger;
@@ -31,7 +32,16 @@ public class DepreciationWriter implements ItemWriter<List<Depreciation>> {
 
         log.info("Writing : {} DepreciationLists to the depreciationRepository",depreciationLists.size());
 
-        depreciationLists.forEach(depreciationService::saveAllDepreciationItems);
+        try {
+            depreciationLists.forEach( list ->{
+                log.info("Saving to repository : {} depreciation items",list.size());
+                    depreciationService.saveAllDepreciationItems(list);
+            });
+        } catch (Throwable e) {
+            String message = String.format("Exception encountered while persisting depreciation items" +
+                    "passed in the list to the depreciation writer. These are the items : %s",depreciationLists);
+            throw new DepreciationExecutionException(message,e);
+        }
 
     }
 }

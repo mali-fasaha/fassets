@@ -65,7 +65,7 @@ public class MonthlyDepreciationJobProxy {
         return ImmutableSet.copyOf(annualList).asList();
     }
 
-    public void initializeMonthlySolDepreciationReporting(){
+    /*public void initializeMonthlySolDepreciationReporting(){
 
         int no_of_sols = depreciationService.getDistinctSolIds();
         LocalDateTime starting_time = LocalDateTime.now();
@@ -79,7 +79,7 @@ public class MonthlyDepreciationJobProxy {
         log.info("executing MonthlySolDepreciation job...");
 
         executeMonthlyJob(jobParametersBuilder,monthlySolDepreciationJob);
-    }
+    }*/
 
 
 

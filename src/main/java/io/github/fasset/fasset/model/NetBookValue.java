@@ -1,15 +1,22 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.GenericMessage;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.messaging.support.MessageHeaderAccessor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -24,7 +31,7 @@ import java.util.Objects;
 })
 @Entity(name="NetBookValue")
 @Audited
-public class NetBookValue extends DomainModel<String> {
+public class NetBookValue extends DomainModel<String>{
 
     private static final Logger log = LoggerFactory.getLogger(NetBookValue.class);
 

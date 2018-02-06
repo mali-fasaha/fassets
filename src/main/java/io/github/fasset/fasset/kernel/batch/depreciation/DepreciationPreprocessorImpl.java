@@ -13,6 +13,15 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 import java.time.ZoneId;
 
+/**
+ * This component acts as middleware between calculated depreciation and actual application of calculated
+ * depreciation which is supposed to check certain business rules are maintained, for instance the netBookValue
+ * is never to go below zero, and also that no asset is to be depreciated prior to its purchase date. In the
+ * later the depreciation is simply set to zero while in the former the depreciation is set to be equivalent
+ * to the fixedAsset's netBookValue as at the period of depreciation
+ *
+ * @author edwin.njeru
+ */
 @Component("depreciationPreprocessor")
 public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
 
@@ -35,6 +44,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      */
     @Override
     public YearMonth getMonth() {
+        log.debug("Returning month : {}",month);
         return month;
     }
 
@@ -43,6 +53,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      */
     @Override
     public FixedAsset getAsset() {
+        log.debug("Returning fixedAsset : {}",asset);
         return asset;
     }
 
@@ -51,6 +62,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      */
     @Override
     public double getDepreciationAmount() {
+        log.debug("Returning depreciation amount : {}",depreciationAmount);
         return depreciationAmount;
     }
 
@@ -62,6 +74,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      */
     @Override
     public DepreciationPreprocessor setAsset(FixedAsset asset) {
+        log.debug("Setting asset as : {}",asset);
         this.asset = asset;
         return this;
     }
@@ -74,6 +87,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      */
     @Override
     public DepreciationPreprocessor setMonth(YearMonth month) {
+        log.debug("Setting month as : {}",month);
         this.month = month;
         return this;
     }
@@ -86,6 +100,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      */
     @Override
     public DepreciationPreprocessor setDepreciationAmount(double depreciationAmount) {
+        log.debug("Setting depreciation amount as : {}",depreciationAmount);
         this.depreciationAmount = depreciationAmount;
         return this;
     }
@@ -97,13 +112,13 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      */
     @Override
     public DepreciationPreprocessor setProperties() {
+        log.debug("Setting depreciation preprocessor properties...");
 
         if(asset == null || month == null){
             String message = String.format("Exception encountered : Either the FixedAsset" +
                     "instance or the month instance is null");
             throw new DepreciationExecutionException(message,new NullPointerException());
         }else{
-            //TODO set properties by business rules
             depreciationAmountRealignment(asset,month);
         }
 
@@ -111,6 +126,8 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
     }
 
     private void depreciationAmountRealignment(FixedAsset asset, YearMonth month) {
+
+        log.debug("Calling the depreciation alignment algorithm....");
 
         depreciationTimingCheck(asset, month);
 
@@ -133,6 +150,8 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
                     // No further processing required
                     this.depreciationAmount = 0.00;
 
+                    log.debug("The depreciation amount is now zero : {}",depreciationAmount);
+
                 } else {
 
                     log.debug("Resetting depreciation amount to the remaining value of the netBookValue");
@@ -144,7 +163,10 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
 
         } else{
 
-            //TODO Review actions for when the purchase cost is less than zero in the case of adjustments
+            log.warn("The asset has a negative purchase cost, meaning the " +
+                    " asset is actually an adjustment, ideally we are to leave it alone...but a " +
+                    "quick review of your books wouldn't hurt...");
+            //If the purchase cost is less than zero we do nothing
         }
     }
 
@@ -156,6 +178,8 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
                     "therefore we are resetting the depreciation formally calculated as : {} " +
                     "amount to zero",asset,month,depreciationAmount);
             this.depreciationAmount = 0.00;
+            log.debug("Depreciation amount has been reset to zero : {}",depreciationAmount);
         }
+        log.debug("The depreciation has passed the timing test and will be retained at : {}",depreciationAmount);
     }
 }

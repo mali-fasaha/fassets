@@ -4,6 +4,8 @@ import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +28,7 @@ import java.util.Objects;
 })*/
 @Entity(name="FixedAsset")
 @Audited
-public class FixedAsset extends DomainModel<String> implements Serializable,Comparable<FixedAsset> {
+public class FixedAsset extends DomainModel<String> implements Serializable,Comparable<FixedAsset>{
 
     private static final Logger log = LoggerFactory.getLogger(FixedAsset.class);
 
@@ -164,4 +166,5 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
                 .thenComparing(FixedAsset::getPurchaseCost)
                 .compare(this,o);
     }
+
 }

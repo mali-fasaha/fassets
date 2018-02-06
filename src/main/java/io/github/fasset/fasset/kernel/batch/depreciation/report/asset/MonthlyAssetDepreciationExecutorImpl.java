@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO;
+import io.github.fasset.fasset.kernel.batch.depreciation.model.NilMonthlyAssetDepreciationDTO;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import io.github.fasset.fasset.repository.DepreciationRepository;
@@ -40,12 +41,13 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
 
         try {
             List<MonthlyAssetDepreciationDTO> tempList = depreciationRepository.getMonthlyAssetDepreciation(fixedAsset.getId(),year);
-            MonthlyAssetDepreciationDTO temp=null;
+            MonthlyAssetDepreciationDTO temp;
 
             if (!tempList.isEmpty()) {
                 temp = tempList.get(0);
             } else {
-                // do nothing
+                log.debug("Returning nilMonthlyDepreciationDTO as there was no result from the depreciationRepository");
+                temp = new NilMonthlyAssetDepreciationDTO();
             }
 
             dto = temp;

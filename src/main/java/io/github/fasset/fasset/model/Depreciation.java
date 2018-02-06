@@ -16,8 +16,8 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
+//@Audited Too expensive
 @Entity(name="Depreciation")
-@Audited
 public class Depreciation extends DomainModel<String> {
 
     private static final Logger log = LoggerFactory.getLogger(Depreciation.class);

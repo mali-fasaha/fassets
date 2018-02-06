@@ -4,6 +4,8 @@ import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +27,7 @@ import java.util.Objects;
 })
 @Entity(name="AccruedDepreciation")
 @Audited
-public class AccruedDepreciation extends DomainModel<String> {
+public class AccruedDepreciation extends DomainModel<String>{
 
     private static final Logger log = LoggerFactory.getLogger("AccruedDepreciation");
 
@@ -133,4 +135,5 @@ public class AccruedDepreciation extends DomainModel<String> {
                 ", accruedDepreciation=" + accruedDepreciation +
                 '}';
     }
+
 }
