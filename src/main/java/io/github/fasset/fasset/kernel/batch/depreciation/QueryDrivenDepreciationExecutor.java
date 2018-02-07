@@ -5,7 +5,7 @@ import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
 
-public interface DepreciationExecutor {
+public class QueryDrivenDepreciationExecutor implements DepreciationExecutor {
 
     /**
      * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new
@@ -15,5 +15,8 @@ public interface DepreciationExecutor {
      * @param month the month for which we are calculating depreciation
      * @return {@link Depreciation} object
      */
-    Depreciation getDepreciation(FixedAsset asset, YearMonth month);
+    @Override
+    public Depreciation getDepreciation(FixedAsset asset, YearMonth month) {
+        return null;
+    }
 }

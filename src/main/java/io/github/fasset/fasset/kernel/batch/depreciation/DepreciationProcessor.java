@@ -4,7 +4,6 @@ import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.step.item.ChunkProcessor;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,7 +21,7 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<Depr
 
     @Autowired
     @Qualifier("depreciationExecutor")
-    private DepreciationExecutor depreciationExecutor;
+    private DepreciationExecutorImpl depreciationExecutor;
 
     /**
      * Process the provided item, returning a potentially modified or new item for continued
