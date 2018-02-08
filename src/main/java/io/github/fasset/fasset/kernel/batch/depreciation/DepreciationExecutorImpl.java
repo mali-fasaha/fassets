@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -145,9 +146,11 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
         return new Depreciation()
                 .setMonth(depreciationPeriod.getMonthValue())
                 .setYear(depreciationPeriod.getYear())
+                .setDepreciationPeriod(depreciationPeriod)
                 .setCategory(asset.getCategory())
                 .setSolId(asset.getSolId())
-                .setFixedAssetId(asset.getId());
+                .setFixedAssetId(asset.getId())
+                .setDepreciation(0.00);
     }
 
     private class DepreciationAgent {

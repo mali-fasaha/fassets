@@ -1,14 +1,14 @@
 package io.github.fasset.fasset.kernel.messaging;
 
-import io.github.fasset.fasset.model.AccruedDepreciation;
-import io.github.fasset.fasset.model.FixedAsset;
-import io.github.fasset.fasset.model.NetBookValue;
+import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
+import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
+import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 @Component("depreciationUpdateDispatcher")
@@ -33,7 +33,7 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
      * @param netBookValueMessage
      */
     @Override
-    public void sendNetBookValue(Message<NetBookValue> netBookValueMessage) {
+    public void sendNetBookValue(NetBookValueDto netBookValueMessage) {
 
         log.debug("Sending netBookValue : {} to the netBookValueQueue",netBookValueMessage);
 
@@ -46,7 +46,7 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
      * @param accruedDepreciationMessage
      */
     @Override
-    public void sendAccruedDepreciation(Message<AccruedDepreciation> accruedDepreciationMessage) {
+    public void sendAccruedDepreciation(AccruedDepreciationDto accruedDepreciationMessage) {
 
         log.debug("Sending accruedDepreciation : {} to the accruedDepreciationQueue",accruedDepreciationMessage);
 
@@ -59,7 +59,7 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
      * @param fixedAsset
      */
     @Override
-    public void sendFixedAssetItem(Message<FixedAsset> fixedAsset) {
+    public void sendFixedAssetItem(FixedAssetDto fixedAsset) {
 
         log.debug("Sending fixedAsset item : {} to the fixedAssetItemsQueue",fixedAsset);
 

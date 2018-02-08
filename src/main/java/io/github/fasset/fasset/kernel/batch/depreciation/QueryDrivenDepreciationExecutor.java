@@ -5,6 +5,12 @@ import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
 
+/**
+ * Implements the {@link DepreciationExecutor} interface by direct query running in the
+ * {@link io.github.fasset.fasset.repository.FixedAssetRepository}
+ *
+ * @author edwin.njeru
+ */
 public class QueryDrivenDepreciationExecutor implements DepreciationExecutor {
 
     /**

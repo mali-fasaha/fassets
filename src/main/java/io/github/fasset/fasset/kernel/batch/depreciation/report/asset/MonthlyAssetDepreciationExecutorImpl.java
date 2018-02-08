@@ -47,7 +47,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
                 temp = tempList.get(0);
             } else {
                 log.debug("Returning nilMonthlyDepreciationDTO as there was no result from the depreciationRepository");
-                temp = new NilMonthlyAssetDepreciationDTO();
+                temp = new NilMonthlyAssetDepreciationDTO(fixedAsset.getId(),year);
             }
 
             dto = temp;

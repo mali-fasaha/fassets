@@ -1,9 +1,8 @@
 package io.github.fasset.fasset.kernel.messaging;
 
-import io.github.fasset.fasset.model.AccruedDepreciation;
-import io.github.fasset.fasset.model.FixedAsset;
-import io.github.fasset.fasset.model.NetBookValue;
-import org.springframework.messaging.Message;
+import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
+import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
+import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 
 /**
  * Sends the proceeds of depreciation update for further processing in other batches
@@ -16,17 +15,17 @@ public interface DepreciationUpdateDispatcher {
      * Send netBookValue to messaging service
      * @param netBookValueMessage
      */
-    void sendNetBookValue(Message<NetBookValue> netBookValueMessage);
+    void sendNetBookValue(NetBookValueDto netBookValueMessage);
 
     /**
      * Send accruedDepreciation to messaging service
      * @param accruedDepreciationMessage
      */
-    void sendAccruedDepreciation(Message<AccruedDepreciation> accruedDepreciationMessage);
+    void sendAccruedDepreciation(AccruedDepreciationDto accruedDepreciationMessage);
 
     /**
      * Send fixedAsset item for further processing
      * @param fixedAsset
      */
-    void sendFixedAssetItem(Message<FixedAsset> fixedAsset);
+    void sendFixedAssetItem(FixedAssetDto fixedAsset);
 }

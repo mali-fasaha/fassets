@@ -4,12 +4,34 @@ import io.github.fasset.fasset.model.AccruedDepreciation;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 
-public class AccruedDepreciationDto implements Message<AccruedDepreciation> {
+import javax.persistence.Column;
+import java.time.YearMonth;
+import java.util.Objects;
 
-    private AccruedDepreciation accruedDepreciation;
+public class AccruedDepreciationDto implements Message<AccruedDepreciation>{
+
+    private Integer month;
+
+    private Integer year;
+
+    private String solId;
+
+    private String category;
+
+    private Integer fixedAssetId;
+
+    private Double accruedDepreciation;
+
+    public AccruedDepreciationDto() {
+    }
 
     public AccruedDepreciationDto(AccruedDepreciation accruedDepreciation) {
-        this.accruedDepreciation = accruedDepreciation;
+        this.month=accruedDepreciation.getMonth().getMonthValue();
+        this.year=accruedDepreciation.getMonth().getYear();
+        this.solId=accruedDepreciation.getSolId();
+        this.category=accruedDepreciation.getCategory();
+        this.fixedAssetId=accruedDepreciation.getFixedAssetId();
+        this.accruedDepreciation=accruedDepreciation.getAccruedDepreciation();
     }
 
     /**
@@ -17,7 +39,7 @@ public class AccruedDepreciationDto implements Message<AccruedDepreciation> {
      */
     @Override
     public AccruedDepreciation getPayload() {
-        return accruedDepreciation;
+        return new AccruedDepreciation(YearMonth.of(year,month),solId,category,fixedAssetId,accruedDepreciation);
     }
 
     /**
@@ -26,5 +48,36 @@ public class AccruedDepreciationDto implements Message<AccruedDepreciation> {
     @Override
     public MessageHeaders getHeaders() {
         return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccruedDepreciationDto that = (AccruedDepreciationDto) o;
+        return Objects.equals(month, that.month) &&
+                Objects.equals(year, that.year) &&
+                Objects.equals(solId, that.solId) &&
+                Objects.equals(category, that.category) &&
+                Objects.equals(fixedAssetId, that.fixedAssetId) &&
+                Objects.equals(accruedDepreciation, that.accruedDepreciation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(month, year, solId, category, fixedAssetId, accruedDepreciation);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("AccruedDepreciationDto{");
+        sb.append("month=").append(month);
+        sb.append(", year=").append(year);
+        sb.append(", solId='").append(solId).append('\'');
+        sb.append(", category='").append(category).append('\'');
+        sb.append(", fixedAssetId=").append(fixedAssetId);
+        sb.append(", accruedDepreciation=").append(accruedDepreciation);
+        sb.append('}');
+        return sb.toString();
     }
 }

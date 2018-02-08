@@ -52,6 +52,14 @@ public class AccruedDepreciation extends DomainModel<String>{
     public AccruedDepreciation() {
     }
 
+    public AccruedDepreciation(YearMonth month, String solId, String category, int fixedAssetId, double accruedDepreciation) {
+        this.month = month;
+        this.solId = solId;
+        this.category = category;
+        this.fixedAssetId = fixedAssetId;
+        this.accruedDepreciation = accruedDepreciation;
+    }
+
     public double getAccruedDepreciation() {
         return accruedDepreciation;
     }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 @Component("notificationService")
@@ -16,6 +17,9 @@ public class ActiveMqUploadNotificationService implements UploadNotificationServ
     private static final Logger log = LoggerFactory.getLogger(ActiveMqUploadNotificationService.class);
 
     private JmsTemplate jmsTemplate;
+
+    private MessageConverter jacksonJmsMessageConverter;
+
 
     @Autowired
     public ActiveMqUploadNotificationService(JmsTemplate jmsTemplate) {

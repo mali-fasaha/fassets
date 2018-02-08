@@ -53,6 +53,14 @@ public class NetBookValue extends DomainModel<String>{
     public NetBookValue() {
     }
 
+    public NetBookValue(int fixedAssetId, YearMonth month, double netBookValue, String solId, String category) {
+        this.fixedAssetId = fixedAssetId;
+        this.month = month;
+        this.netBookValue = netBookValue;
+        this.solId = solId;
+        this.category = category;
+    }
+
     public String getCategory() {
         return category;
     }
