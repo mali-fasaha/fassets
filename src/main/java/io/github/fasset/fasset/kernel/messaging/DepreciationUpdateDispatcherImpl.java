@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.kernel.messaging;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
 import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
@@ -11,58 +13,34 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component("depreciationUpdateDispatcher")
 public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispatcher{
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationUpdateDispatcherImpl.class);
 
+    private List<Colleague> colleagues = new ArrayList<>();
 
-    private final JmsTemplate jmsTemplate;
+    @Override
+    public void send(Update updateMessage, Colleague originator) {
 
-    private MessageConverter messageConverter;
+        for (Colleague colleague : colleagues){
 
-    @Autowired
-    public DepreciationUpdateDispatcherImpl(JmsTemplate jmsTemplate,MessageConverter messageConverter) {
-        this.jmsTemplate = jmsTemplate;
-        this.jmsTemplate.setMessageConverter(messageConverter);
+            // don't send to self
+            if(colleague != originator){
+
+                log.debug("Sending update to colleague : {}",colleague);
+
+                colleague.receive(updateMessage);
+            }
+        }
     }
 
-    /**
-     * Send netBookValue to messaging service
-     *
-     * @param netBookValueMessage
-     */
     @Override
-    public void sendNetBookValue(NetBookValueDto netBookValueMessage) {
+    public void addColleague(Colleague colleague) {
 
-        log.debug("Sending netBookValue : {} to the netBookValueQueue",netBookValueMessage);
-
-        jmsTemplate.convertAndSend("netBookValueQueue",netBookValueMessage);
-    }
-
-    /**
-     * Send accruedDepreciation to messaging service
-     *
-     * @param accruedDepreciationMessage
-     */
-    @Override
-    public void sendAccruedDepreciation(AccruedDepreciationDto accruedDepreciationMessage) {
-
-        log.debug("Sending accruedDepreciation : {} to the accruedDepreciationQueue",accruedDepreciationMessage);
-
-        jmsTemplate.convertAndSend("accruedDepreciationQueue",accruedDepreciationMessage);
-    }
-
-    /**
-     * Send fixedAsset item for further processing
-     *
-     * @param fixedAsset
-     */
-    @Override
-    public void sendFixedAssetItem(FixedAssetDto fixedAsset) {
-
-        log.debug("Sending fixedAsset item : {} to the fixedAssetItemsQueue",fixedAsset);
-
-        jmsTemplate.convertAndSend("fixedAssetItemsQueue",fixedAsset);
+        colleagues.add(colleague);
     }
 }

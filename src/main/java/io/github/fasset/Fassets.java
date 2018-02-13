@@ -26,10 +26,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan("io.github.fasset.fasset")
 @EnableConfigurationProperties(
 		value = {StorageProperties.class, DepreciationProperties.class})
-public class FassetApplication {
+public class Fassets {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FassetApplication.class, args);
+		SpringApplication.run(Fassets.class, args);
 	}
 
 	@Bean

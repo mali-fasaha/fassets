@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.kernel.messaging;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
 import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
@@ -11,21 +13,7 @@ import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
  */
 public interface DepreciationUpdateDispatcher {
 
-    /**
-     * Send netBookValue to messaging service
-     * @param netBookValueMessage
-     */
-    void sendNetBookValue(NetBookValueDto netBookValueMessage);
+    void send(Update updateMessage, Colleague originator);
 
-    /**
-     * Send accruedDepreciation to messaging service
-     * @param accruedDepreciationMessage
-     */
-    void sendAccruedDepreciation(AccruedDepreciationDto accruedDepreciationMessage);
-
-    /**
-     * Send fixedAsset item for further processing
-     * @param fixedAsset
-     */
-    void sendFixedAssetItem(FixedAssetDto fixedAsset);
+    void addColleague(Colleague colleague);
 }

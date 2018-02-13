@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.messaging;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,19 +11,14 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 
 import javax.jms.ConnectionFactory;
+import javax.jms.Message;
 
-/**
- * This configuration settings configure an additional factory to handle traffic comming from the
- * depreciation algorithm
- *
- * @author edwin.njeru
- */
 @Configuration
-public class DepreciationJMSFactory {
+public class FileUploadNotificationServiceConfiguration {
 
     @Bean
-    public JmsListenerContainerFactory<?> depreciationMessageFactory(ConnectionFactory connectionFactory,
-                                                         DefaultJmsListenerContainerFactoryConfigurer configurer){
+    public JmsListenerContainerFactory<?> messageFactory(ConnectionFactory connectionFactory,
+                                                          DefaultJmsListenerContainerFactoryConfigurer configurer){
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 
         configurer.configure(factory,connectionFactory);
@@ -31,7 +27,7 @@ public class DepreciationJMSFactory {
     }
 
     @Bean
-    public MessageConverter depreciationMessageConverter(){
+    public MessageConverter jacksonJmsMessageConverter(){
 
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);

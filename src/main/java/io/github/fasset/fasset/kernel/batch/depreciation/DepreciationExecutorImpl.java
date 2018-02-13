@@ -1,6 +1,9 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
+import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
@@ -13,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,40 +33,40 @@ import java.util.Map;
  */
 @Service("depreciationExecutor")
 @Transactional
-public class DepreciationExecutorImpl implements DepreciationExecutor {
+public class DepreciationExecutorImpl extends Colleague implements DepreciationExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationExecutorImpl.class);
 
     private final CategoryConfigurationService categoryConfigurationService;
 
-    private final NetBookValueService netBookValueService;
-
     private final AccruedDepreciationService accruedDepreciationService;
 
     private final DepreciationPreprocessor preprocessor;
 
-    @Autowired
-    @Qualifier("depreciationUpdateDispatcher")
-    private DepreciationUpdateDispatcher depreciationUpdateDispatcher;
-
-
+    private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
 
     private Map<String,CategoryConfiguration> configurationRegistry = new UnifiedMap<>();
 
-    private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
-
     @Autowired
-    public DepreciationExecutorImpl(@Qualifier("categoryConfigurationService") CategoryConfigurationService categoryConfigurationService,
-                                    @Qualifier("netBookValueService") NetBookValueService netBookValueService,
-                                    @Qualifier("accruedDepreciationService") AccruedDepreciationService accruedDepreciationService,
-                                    @Qualifier("depreciationPreprocessor") DepreciationPreprocessor preprocessor, LocalDateToYearMonthConverter localDateToYearMonthConverter) {
+    public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher, @Qualifier("categoryConfigurationService") CategoryConfigurationService categoryConfigurationService, @Qualifier("accruedDepreciationService") AccruedDepreciationService accruedDepreciationService, @Qualifier("depreciationPreprocessor") DepreciationPreprocessor preprocessor, LocalDateToYearMonthConverter localDateToYearMonthConverter) {
+        super(depreciationUpdateDispatcher);
         this.categoryConfigurationService = categoryConfigurationService;
-        this.netBookValueService = netBookValueService;
         this.accruedDepreciationService = accruedDepreciationService;
         this.preprocessor = preprocessor;
         this.localDateToYearMonthConverter = localDateToYearMonthConverter;
     }
 
+    /**
+     * This method listens for message sent to a queue
+     * containing the Object of type U and formulates appropriate
+     * response
+     *
+     * @param updateMessage
+     */
+    @Override
+    public void receive(Update updateMessage) {
+        // To maintain listing of successfully processed items
+    }
 
     /**
      * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new
@@ -106,8 +108,8 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
             AccruedDepreciation accruedDepreciation = depreciationAgent.getAccruedDepreciation();
             depreciation = depreciationAgent.getDepreciation();
 
-            depreciationUpdateDispatcher.sendNetBookValue(new NetBookValueDto(netBookValue));
-            depreciationUpdateDispatcher.sendAccruedDepreciation(new AccruedDepreciationDto(accruedDepreciation));
+            send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload());
+            send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload());
         }
 
         return depreciation;
@@ -203,7 +205,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
             double nbv = asset.getNetBookValue() - depreciation.getDepreciation();
 
             //send changes to queue for flushing through entityManager
-            depreciationUpdateDispatcher.sendFixedAssetItem(new FixedAssetDto(asset.setNetBookValue(nbv)));
+            send(new DepreciationUpdate(new DepreciationUpdate.from(new FixedAssetDto(asset.setNetBookValue(nbv)).getPayload()));
 
 
             netBookValue = createNetBookValue(asset, month);

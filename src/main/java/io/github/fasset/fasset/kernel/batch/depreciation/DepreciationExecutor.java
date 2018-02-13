@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 
