@@ -9,8 +9,13 @@ import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
 import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
-import io.github.fasset.fasset.service.*;
-import io.github.fasset.fasset.model.*;
+import io.github.fasset.fasset.model.AccruedDepreciation;
+import io.github.fasset.fasset.model.CategoryConfiguration;
+import io.github.fasset.fasset.model.Depreciation;
+import io.github.fasset.fasset.model.FixedAsset;
+import io.github.fasset.fasset.model.NetBookValue;
+import io.github.fasset.fasset.service.AccruedDepreciationService;
+import io.github.fasset.fasset.service.CategoryConfigurationService;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,8 +113,9 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
             AccruedDepreciation accruedDepreciation = depreciationAgent.getAccruedDepreciation();
             depreciation = depreciationAgent.getDepreciation();
 
-            send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload());
-            send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload());
+            // send updates to depreciationUpdateDispatcher
+            send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
+            send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
         }
 
         return depreciation;
@@ -155,7 +161,7 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
                 .setDepreciation(0.00);
     }
 
-    private class DepreciationAgent {
+    private class DepreciationAgent{
 
         private final Logger log = LoggerFactory.getLogger(DepreciationAgent.class);
         private FixedAsset asset;
@@ -205,7 +211,7 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
             double nbv = asset.getNetBookValue() - depreciation.getDepreciation();
 
             //send changes to queue for flushing through entityManager
-            send(new DepreciationUpdate(new DepreciationUpdate.from(new FixedAssetDto(asset.setNetBookValue(nbv)).getPayload()));
+            send(new DepreciationUpdate.from(asset.setNetBookValue(nbv)).setDestination(asset.getClass()));
 
 
             netBookValue = createNetBookValue(asset, month);

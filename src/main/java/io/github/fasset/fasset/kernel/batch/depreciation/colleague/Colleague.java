@@ -37,7 +37,7 @@ public abstract class Colleague<T> {
 
         log.debug("Sending update message : {}",updateMessage);
 
-        depreciationUpdateDispatcher.send(updateMessage,this);
+        depreciationUpdateDispatcher.send(updateMessage.setSentBy(this),this);
     }
 
     public DepreciationUpdateDispatcher getDepreciationUpdateDispatcher() {

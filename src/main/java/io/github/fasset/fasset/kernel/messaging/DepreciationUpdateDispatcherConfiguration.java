@@ -46,10 +46,19 @@ public class DepreciationUpdateDispatcherConfiguration {
 
         log.info("Registering colleagues...");
 
+        log.debug("Registering item : {}",accruedDepreciationColleague);
         depreciationUpdateDispatcher.addColleague(accruedDepreciationColleague);
+
+        log.debug("Registering item : {}",fixedAssetsColleague);
         depreciationUpdateDispatcher.addColleague(fixedAssetsColleague);
+
+        log.debug("Registering item : {}",netBookValueColleague);
         depreciationUpdateDispatcher.addColleague(netBookValueColleague);
+
+        log.debug("Registering item : {}",depreciationExecutor);
         depreciationUpdateDispatcher.addColleague(depreciationExecutor);
+
+        log.info("{} colleagues have been registered...",depreciationUpdateDispatcher.getColleagues().size());
     }
 
 }

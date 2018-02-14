@@ -22,6 +22,15 @@ public class AccruedDepreciationDto implements Message<AccruedDepreciation>{
 
     private Double accruedDepreciation;
 
+    public AccruedDepreciationDto(Integer month, Integer year, String solId, String category, Integer fixedAssetId, Double accruedDepreciation) {
+        this.month = month;
+        this.year = year;
+        this.solId = solId;
+        this.category = category;
+        this.fixedAssetId = fixedAssetId;
+        this.accruedDepreciation = accruedDepreciation;
+    }
+
     public AccruedDepreciationDto() {
     }
 

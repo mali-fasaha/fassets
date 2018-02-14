@@ -2,6 +2,7 @@ package io.github.fasset.fasset.kernel.messaging;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
+import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
 import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
@@ -21,19 +22,19 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationUpdateDispatcherImpl.class);
 
-    private List<Colleague> colleagues = new ArrayList<>();
+    private List<Colleague<DepreciationUpdate>> colleagues = new ArrayList<>();
 
     @Override
     public void send(Update updateMessage, Colleague originator) {
 
-        for (Colleague colleague : colleagues){
+        for (Colleague<DepreciationUpdate> colleague : colleagues){
 
             // don't send to self
             if(colleague != originator){
 
                 log.debug("Sending update to colleague : {}",colleague);
 
-                colleague.receive(updateMessage);
+                colleague.receive(updateMessage.setSentBy(originator).setReceivedBy(colleague));
             }
         }
     }
@@ -42,5 +43,10 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
     public void addColleague(Colleague colleague) {
 
         colleagues.add(colleague);
+    }
+
+    @Override
+    public List<Colleague<DepreciationUpdate>> getColleagues() {
+        return colleagues;
     }
 }

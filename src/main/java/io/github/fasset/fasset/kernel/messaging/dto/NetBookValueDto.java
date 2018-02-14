@@ -23,6 +23,15 @@ public class NetBookValueDto implements Message<NetBookValue> {
     public NetBookValueDto() {
     }
 
+    public NetBookValueDto(Integer fixedAssetId, Integer month, Integer year, Double netBookValue, String solId, String category) {
+        this.fixedAssetId = fixedAssetId;
+        this.month = month;
+        this.year = year;
+        this.netBookValue = netBookValue;
+        this.solId = solId;
+        this.category = category;
+    }
+
     public NetBookValueDto(NetBookValue netBookValue) {
         this.category = netBookValue.getCategory();
         this.fixedAssetId = netBookValue.getFixedAssetId();
