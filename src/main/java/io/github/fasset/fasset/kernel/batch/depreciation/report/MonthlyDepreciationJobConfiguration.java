@@ -187,7 +187,7 @@ public class MonthlyDepreciationJobConfiguration {
     public Step updateMonthlyAssetDepreciation() {
         Step updateMonthlyAssetDepreciation = null;
         try {
-            updateMonthlyAssetDepreciation =  stepBuilderFactory.get("updateMonthlyAssetDepreciation")
+            updateMonthlyAssetDepreciation =  stepBuilderFactory.getCategoryConfiguration("updateMonthlyAssetDepreciation")
                     .<Depreciation, MonthlyAssetDepreciation> chunk(100)
                     .reader(depreciationItemReader())
                     .processor(monthlyAssetDepreciationProcessor())
