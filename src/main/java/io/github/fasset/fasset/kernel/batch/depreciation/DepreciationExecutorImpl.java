@@ -1,23 +1,20 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.AccruedDepreciationAgent;
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.DepreciationAgent;
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.NetBookValueAgent;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.NilDepreciation;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
-import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
 import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
-import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.AccruedDepreciation;
-import io.github.fasset.fasset.model.CategoryConfiguration;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.NetBookValue;
-import io.github.fasset.fasset.service.AccruedDepreciationService;
-import io.github.fasset.fasset.service.CategoryConfigurationService;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.YearMonth;
-import java.util.Map;
 
 /**
  * This class represents the main method which is to be abstracted by other layers that would
@@ -44,10 +40,9 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
     private static final Logger log = LoggerFactory.getLogger(DepreciationExecutorImpl.class);
 
     private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
-
-    private Map<String,CategoryConfiguration> configurationRegistry = new UnifiedMap<>();
-
     private final DepreciationAgent depreciationAgent;
+    private AccruedDepreciationAgent accruedDepreciationAgent;
+    private NetBookValueAgent netBookValueAgent;
 
     @Autowired
     public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher,LocalDateToYearMonthConverter localDateToYearMonthConverter, DepreciationAgent depreciationAgent) {
@@ -101,15 +96,18 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
             log.trace("The asset : {} has passed the frontal Business rules filter, initiating configuration" +
                     "registry for category : {}",asset,asset.getCategory());
 
-            depreciationAgent.invoke(asset, month);
+            //TODO insert pipes and filters here
+            depreciation = depreciationAgent.invoke(asset, month);
 
-            /*NetBookValue netBookValue = depreciationAgent.getNetBookValue();
-            AccruedDepreciation accruedDepreciation = depreciationAgent.getAccruedDepreciation();
-            depreciation = depreciationAgent.getDepreciation();*/
+            //TODO ref to implementations in depreciationAgent for nbvAgent and accruedDepreciationAgent
+            NetBookValue netBookValue = netBookValueAgent.invoke(asset,month);
+            AccruedDepreciation accruedDepreciation = accruedDepreciationAgent.invoke(asset,month);
+            //TODO insert queues for accrued depreciation here
 
+            //TODO: implement NilAccruedDepreciation, and UnmodifiedNetBookValue
             // send updates to depreciationUpdateDispatcher
-            /*send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
-            send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));*/
+            send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
+            send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
         }
 
         return depreciation;

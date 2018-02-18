@@ -1,5 +1,7 @@
-package io.github.fasset.fasset.kernel.batch.depreciation;
+package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.CategoryConfigurationRegistry;
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationPreprocessor;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
@@ -25,14 +27,11 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
     private final Logger log = LoggerFactory.getLogger(DepreciationAgentImpl.class);
 
     // variable storage
-    private Depreciation depreciation;
     private NetBookValue netBookValue;
     private AccruedDepreciation accruedDepreciation;
 
     private final CategoryConfigurationRegistry categoryConfigurationRegistry;
-
     private final AccruedDepreciationService accruedDepreciationService;
-
     private final DepreciationPreprocessor preprocessor;
 
     @Autowired
@@ -45,10 +44,6 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
 
 
     // Getters and setters for the fields
-    public Depreciation getDepreciation() {
-        return depreciation;
-    }
-
     public NetBookValue getNetBookValue() {
         return netBookValue;
     }
@@ -58,7 +53,9 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
     }
 
     @Override
-    public void invoke(FixedAsset asset, YearMonth month) {
+    public Depreciation invoke(FixedAsset asset, YearMonth month) {
+
+        Depreciation depreciation;
 
         log.trace("Calculating depreciation for fixedAsset {}", asset);
 
@@ -88,6 +85,8 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
         netBookValue = createNetBookValue(asset, month);
 
         accruedDepreciation = createAccruedDepreciation(asset, month, depreciation.getDepreciation());
+
+        return depreciation;
 
     }
 
@@ -214,10 +213,10 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
 
     /**
      * Creates {@link AccruedDepreciation} instance relative to the parameter items and fixedAsset item given
-     * @param asset
-     * @param month
-     * @param depreciationAmount
-     * @return
+     * @param asset FixedAsset item whose accruedDepreciation we are to derive
+     * @param month YearMonth in which the accruedDepreciation is relevant
+     * @param depreciationAmount The actual amount of depreciation as double-precision
+     * @return AccruedDepreciation item to be returned to the caller for further processing and persistence
      */
     private AccruedDepreciation createAccruedDepreciation(FixedAsset asset, YearMonth month, double depreciationAmount) {
         AccruedDepreciation accruedDepreciation = new AccruedDepreciation();
@@ -249,10 +248,10 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
      * containing the Object of type U and formulates appropriate
      * response
      *
-     * @param updateMessage
+     * @param updateMessage Update item  to be received and processed by the Colleague
      */
     @Override
     public void receive(Update updateMessage) {
-        // future developments
+        // crickets
     }
 }

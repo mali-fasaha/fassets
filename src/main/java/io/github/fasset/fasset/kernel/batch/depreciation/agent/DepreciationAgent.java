@@ -1,5 +1,7 @@
-package io.github.fasset.fasset.kernel.batch.depreciation;
+package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.Agent;
+import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
@@ -9,7 +11,7 @@ import java.time.YearMonth;
  *
  * @author edwin.njeru
  */
-public interface DepreciationAgent {
+public interface DepreciationAgent extends Agent<Depreciation> {
 
     /**
      * This method calculates depreciation and updates internal variables from
@@ -18,5 +20,5 @@ public interface DepreciationAgent {
      * @param asset
      * @param month
      */
-    void invoke(FixedAsset asset, YearMonth month);
+    Depreciation invoke(FixedAsset asset, YearMonth month);
 }

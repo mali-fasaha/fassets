@@ -51,6 +51,14 @@ public class CategoryConfiguration extends DomainModel<String> {
     @Column(name="category_ledger_id")
     private String categoryLedgerId;
 
+    public CategoryConfiguration(@NotNull(message = "Please provide a valid designation for category") String designation, @NotNull(message = "Please provide a valid designation for depreciation logic") String depreciationLogic, @NotNull(message = "Please provide a valid designation for depreciation deprecant") String deprecant, @NotNull(message = "Please provide depreciation per annum") double depreciationRate, @NotNull(message = "Kindly supply the ledgerId for thiis category") String categoryLedgerId) {
+        this.designation = designation.toUpperCase();
+        this.depreciationLogic = depreciationLogic.toUpperCase();
+        this.deprecant = deprecant.toUpperCase();
+        this.depreciationRate = depreciationRate;
+        this.categoryLedgerId = categoryLedgerId;
+    }
+
     public CategoryConfiguration() {
     }
 

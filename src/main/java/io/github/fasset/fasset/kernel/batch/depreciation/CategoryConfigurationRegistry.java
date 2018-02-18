@@ -1,10 +1,9 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
+import io.github.fasset.fasset.model.nil.NilCategoryConfiguration;
 import io.github.fasset.fasset.model.CategoryConfiguration;
 import io.github.fasset.fasset.service.CategoryConfigurationService;
-import io.github.fasset.fasset.service.impl.CategoryConfigurationServiceImpl;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,22 @@ public class CategoryConfigurationRegistry {
     }
 
 
-    CategoryConfiguration getCategoryConfiguration(String categoryName) {
-        return categoryConfigurationMap.get(categoryName);
+    public CategoryConfiguration getCategoryConfiguration(String categoryName) {
+
+        CategoryConfiguration categoryConfiguration;
+
+        if(categoryConfigurationRegistryDoesNotContain(categoryName))
+            updateConfigurationRegistry();
+
+        if(categoryConfigurationRegistryDoesNotContain(categoryName)){
+            log.error("The category Named : {} has not been configured in the category configuration repo. Please " +
+                    "check your category configurations listing...",categoryName);
+            categoryConfiguration = new NilCategoryConfiguration().getCategoryConfiguration();
+        }
+
+        categoryConfiguration = categoryConfigurationMap.get(categoryName);
+
+        return categoryConfiguration;
     }
 
     void addCategoryConfiguration(String categoryName,CategoryConfiguration categoryConfiguration){
