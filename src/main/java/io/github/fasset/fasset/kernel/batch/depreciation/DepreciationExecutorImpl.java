@@ -28,7 +28,7 @@ import java.time.YearMonth;
  * This class represents the main method which is to be abstracted by other layers that would
  * allow for flexibility in application of business rules, the main method is the
  * {@link DepreciationExecutorImpl#getDepreciation(FixedAsset, YearMonth)} which able to extract a
- * {@link Depreciation} as long as you have a {@link FixedAsset} and the {@YearMonth} for which the
+ * {@link Depreciation} as long as you have a {@link FixedAsset} and the {@link YearMonth} month for which the
  * depreciation is to be calculated
  *
  * @author edwin.njeru
@@ -41,14 +41,16 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
 
     private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
     private final DepreciationAgent depreciationAgent;
-    private AccruedDepreciationAgent accruedDepreciationAgent;
-    private NetBookValueAgent netBookValueAgent;
+    private final AccruedDepreciationAgent accruedDepreciationAgent;
+    private final NetBookValueAgent netBookValueAgent;
 
     @Autowired
-    public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher,LocalDateToYearMonthConverter localDateToYearMonthConverter, DepreciationAgent depreciationAgent) {
+    public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher, LocalDateToYearMonthConverter localDateToYearMonthConverter, DepreciationAgent depreciationAgent, @Qualifier("netBookValueAgent") NetBookValueAgent netBookValueAgent, @Qualifier("accruedDepreciationAgent") AccruedDepreciationAgent accruedDepreciationAgent) {
         super(depreciationUpdateDispatcher);
         this.localDateToYearMonthConverter = localDateToYearMonthConverter;
         this.depreciationAgent = depreciationAgent;
+        this.netBookValueAgent = netBookValueAgent;
+        this.accruedDepreciationAgent = accruedDepreciationAgent;
     }
 
     /**
@@ -56,11 +58,11 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
      * containing the Object of type U and formulates appropriate
      * response
      *
-     * @param updateMessage
+     * @param updateMessage Update message to be received from the DepreciationUpdateDispatcher
      */
     @Override
     public void receive(Update updateMessage) {
-        // To maintain listing of successfully processed items
+        // Crickets
     }
 
     /**
@@ -98,11 +100,8 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
 
             //TODO insert pipes and filters here
             depreciation = depreciationAgent.invoke(asset, month);
-
-            //TODO ref to implementations in depreciationAgent for nbvAgent and accruedDepreciationAgent
             NetBookValue netBookValue = netBookValueAgent.invoke(asset,month);
             AccruedDepreciation accruedDepreciation = accruedDepreciationAgent.invoke(asset,month);
-            //TODO insert queues for accrued depreciation here
 
             //TODO: implement NilAccruedDepreciation, and UnmodifiedNetBookValue
             // send updates to depreciationUpdateDispatcher
@@ -117,9 +116,9 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
      * Creates a depreciation object whose depreciation is Zero relative to the
      * fixedAsset item given and the depreciation period
      *
-     * @param asset
-     * @param depreciationPeriod
-     * @return
+     * @param asset FixedAsset with no depreciation for the period
+     * @param depreciationPeriod Depreciation period for which depreciation is nil
+     * @return NilDepreciation
      */
     private Depreciation getNilDepreciation(FixedAsset asset,YearMonth depreciationPeriod){
 
