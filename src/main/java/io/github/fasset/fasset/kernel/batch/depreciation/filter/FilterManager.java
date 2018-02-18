@@ -1,8 +1,13 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.filter;
 
+import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import java.time.YearMonth;
+
+@Component("filterManager")
 public class FilterManager {
 
     private final FilterChain filterChain;
@@ -17,8 +22,8 @@ public class FilterManager {
         filterChain.addFilter(filter);
     }
 
-    public void filterRequest(Object... request){
+    public void filterRequest(FixedAsset asset, YearMonth month){
 
-        filterChain.execute(request);
+        filterChain.execute(asset,month);
     }
 }
