@@ -34,6 +34,7 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
 
         try {
             retVal.setFixedAssetId(fixedAsset.getId())
+                    .setCategory(fixedAsset.getCategory())
                     .setSolId(fixedAsset.getSolId())
                     .setMonth(YearMonth.of(2017,12))//TODO configure to do this from controller
                     .setNetBookValue(fixedAsset.getNetBookValue());

@@ -38,37 +38,37 @@ public class FixedAssetDTO {
     }
 
     public String getSolId() {
-        log.debug("Retval : {}", solId);
+        log.trace("Retval : {}", solId);
         return solId;
     }
 
     public String getBarcode() {
-        log.debug("Retval : {}", barcode);
+        log.trace("Retval : {}", barcode);
         return barcode;
     }
 
     public String getAssetDescription() {
-        log.debug("Retval : {}", assetDescription);
+        log.trace("Retval : {}", assetDescription);
         return assetDescription;
     }
 
     public Date getPurchaseDate() {
-        log.debug("Retval : {}", purchaseDate);
+        log.trace("Retval : {}", purchaseDate);
         return purchaseDate;
     }
 
     public String getCategory() {
-        log.debug("Retval : {}", category);
+        log.trace("Retval : {}", category);
         return category;
     }
 
     public String getPurchaseCost() {
-        log.debug("Retval : {}", purchaseCost);
+        log.trace("Retval : {}", purchaseCost);
         return purchaseCost;
     }
 
     public String getNetBookValue() {
-        log.debug("Retval : {}", netBookValue);
+        log.trace("Retval : {}", netBookValue);
         return netBookValue;
     }
 

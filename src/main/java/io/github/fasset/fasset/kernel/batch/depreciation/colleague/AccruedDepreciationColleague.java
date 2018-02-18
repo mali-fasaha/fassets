@@ -52,7 +52,7 @@ public class AccruedDepreciationColleague extends Colleague<DepreciationUpdate>{
     }
 
     @Override
-    public void send(Update updateMessage) {
-
+    protected void send(Update<DepreciationUpdate> updateMessage) {
+        super.send(updateMessage);
     }
 }

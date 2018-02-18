@@ -35,13 +35,13 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
 
     @Override
     public DepreciationUpdate getPayload() {
-        log.debug("Returning Depreciation update : {}",this);
+        log.trace("Returning Depreciation update : {}",this);
         return this;
     }
 
     @Override
     public void load(DepreciationUpdate payload) {
-        log.debug("Loading update with data : {}",payload);
+        log.trace("Loading update with data : {}",payload);
         this.period=payload.getPeriod();
         this.category=payload.getCategory();
         this.solId=payload.getSolId();
@@ -54,144 +54,144 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
         this.nbvProcessed =payload.isNbvProcessed();
         this.accruedDepreciationProcessed=payload.isAccruedDepreciationProcessed();
         this.fixedAssetProcessed = payload.isFixedAssetProcessed();
-        log.debug("Data loaded : {}",this);
+        log.trace("Data loaded : {}",this);
     }
 
     public YearMonth getPeriod() {
-        log.debug("Returning period : {}",period);
+        log.trace("Returning period : {}",period);
         return period == null ? YearMonth.now() : period;
     }
 
     public String getCategory() {
-        log.debug("Returning category : {}",category);
+        log.trace("Returning category : {}",category);
         return category == null ? "" : category;
     }
 
     public String getSolId() {
-        log.debug("Returing solId : {}",solId);
+        log.trace("Returing solId : {}",solId);
         return solId == null ? "998" : solId;
     }
 
     public int getFixedAssetId() {
-        log.debug("Returning fixedAssetId : {}",fixedAsset);
+        log.trace("Returning fixedAssetId : {}",fixedAsset);
         return fixedAssetId;
     }
 
     public double getAccruedDepreciation() {
-        log.debug("Returning accruedDepreciation : {}",accruedDepreciation);
+        log.trace("Returning accruedDepreciation : {}",accruedDepreciation);
         return accruedDepreciation;
     }
 
     public double getNetBookValue() {
-        log.debug("Returning the netBookValue : {}",netBookValue);
+        log.trace("Returning the netBookValue : {}",netBookValue);
         return netBookValue;
     }
 
     public FixedAsset getFixedAsset() {
-        log.debug("Returning fixedAsset item : {}",fixedAsset);
+        log.trace("Returning fixedAsset item : {}",fixedAsset);
         return fixedAsset == null ? new NilFixedAsset() : fixedAsset;
     }
 
     public Colleague getSentBy() {
-        log.debug("Returning sentBy : {}",sentBy);
+        log.trace("Returning sentBy : {}",sentBy);
         return sentBy;
     }
 
     public Colleague getReceivedBy() {
-        log.debug("Returning receivedBy : {}",receivedBy);
+        log.trace("Returning receivedBy : {}",receivedBy);
         return receivedBy;
     }
 
     public boolean isNbvProcessed() {
-        log.debug("Returning isNbvProcessed : {}",nbvProcessed);
+        log.trace("Returning isNbvProcessed : {}",nbvProcessed);
         return nbvProcessed;
     }
 
     public boolean isAccruedDepreciationProcessed() {
-        log.debug("Returning isAccruedDepreciationProcessed : {}",accruedDepreciation);
+        log.trace("Returning isAccruedDepreciationProcessed : {}",accruedDepreciation);
         return accruedDepreciationProcessed;
     }
 
     public boolean isFixedAssetProcessed() {
-        log.debug("Returning is fixedAssetProcessed : {}", fixedAssetProcessed);
+        log.trace("Returning is fixedAssetProcessed : {}", fixedAssetProcessed);
         return fixedAssetProcessed;
     }
 
     public DepreciationUpdate setPeriod(YearMonth period) {
-        log.debug("Setting the period as: {}",period);
+        log.trace("Setting the period as: {}",period);
         this.period = period;
         return this;
     }
 
     public DepreciationUpdate setCategory(String category) {
-        log.debug("Setting the category as : {}",category);
+        log.trace("Setting the category as : {}",category);
         this.category = category;
         return this;
     }
 
     public DepreciationUpdate setSolId(String solId) {
-        log.debug("Setting the solId as : {}",solId);
+        log.trace("Setting the solId as : {}",solId);
         this.solId = solId;
         return this;
     }
 
     public DepreciationUpdate setFixedAssetId(int fixedAssetId) {
-        log.debug("Setting the fixedAssetId as : {}",fixedAssetId);
+        log.trace("Setting the fixedAssetId as : {}",fixedAssetId);
         this.fixedAssetId = fixedAssetId;
         return this;
     }
 
     public DepreciationUpdate setAccruedDepreciation(double accruedDepreciation) {
-        log.debug("Setting the accruedDepreciation as : {}",accruedDepreciation);
+        log.trace("Setting the accruedDepreciation as : {}",accruedDepreciation);
         this.accruedDepreciation = accruedDepreciation;
         return this;
     }
 
     public DepreciationUpdate setNetBookValue(double netBookValue) {
-        log.debug("Setting the netBookValue as : {}",netBookValue);
+        log.trace("Setting the netBookValue as : {}",netBookValue);
         this.netBookValue = netBookValue;
         return this;
     }
 
     public DepreciationUpdate setFixedAsset(FixedAsset fixedAsset) {
-        log.debug("Setting the fixedAsset item : {}",fixedAsset);
+        log.trace("Setting the fixedAsset item : {}",fixedAsset);
         this.fixedAsset = fixedAsset;
         return this;
     }
 
     public DepreciationUpdate setSentBy(Colleague sentBy) {
-        log.debug("Setting sentBy as : {}",sentBy);
+        log.trace("Setting sentBy as : {}",sentBy);
         this.sentBy = sentBy;
         return this;
     }
 
     public DepreciationUpdate setReceivedBy(Colleague receivedBy) {
-        log.debug("Setting receivedBy as : {}",receivedBy);
+        log.trace("Setting receivedBy as : {}",receivedBy);
         this.receivedBy = receivedBy;
         return this;
     }
 
     public DepreciationUpdate setNbvProcessed(boolean nbvProcessed) {
-        log.debug("Setting isNbvProcessed as : {}",nbvProcessed);
+        log.trace("Setting isNbvProcessed as : {}",nbvProcessed);
         this.nbvProcessed = nbvProcessed;
         return this;
     }
 
     public DepreciationUpdate setAccruedDepreciationProcessed(boolean accruedDepreciationProcessed) {
-        log.debug("Setting isAccruedDepreciationProcessed as : {}",accruedDepreciationProcessed);
+        log.trace("Setting isAccruedDepreciationProcessed as : {}",accruedDepreciationProcessed);
         this.accruedDepreciationProcessed = accruedDepreciationProcessed;
         return this;
     }
 
     public DepreciationUpdate setFixedAssetProcessed(boolean fixedAssetProcessed) {
-        log.debug("Setting isFixedAssetProcessed as : {}",fixedAssetProcessed);
+        log.trace("Setting isFixedAssetProcessed as : {}",fixedAssetProcessed);
         this.fixedAssetProcessed = fixedAssetProcessed;
         return this;
     }
 
     public AccruedDepreciationDto getAccruedDepreciationItem() {
 
-        log.debug("Deriving accruedDepreciationItem from : {}",this);
+        log.trace("Deriving accruedDepreciationItem from : {}",this);
 
         AccruedDepreciationDto accruedDepreciationDto = null;
 
@@ -202,14 +202,14 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
             throw new DepreciationUpdatesException(errorMessage,e);
         }
 
-        log.debug("Returning accruedDepreciationDto : {}",accruedDepreciationDto);
+        log.trace("Returning accruedDepreciationDto : {}",accruedDepreciationDto);
 
         return accruedDepreciationDto;
     }
 
     public FixedAssetDto getFixedAssetItem() {
 
-        log.debug("Deriving fixedAssetDto from : {}",this);
+        log.trace("Deriving fixedAssetDto from : {}",this);
         FixedAssetDto fixedAssetDto = null;
 
         try {
@@ -218,14 +218,14 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
             String errorMessage = String.format("Exception encountered while deriving fixedAssetDto item from %s",this);
             throw new DepreciationUpdatesException(errorMessage,e);
         }
-        log.debug("Returning fixedAssetDto : {}",fixedAssetDto);
+        log.trace("Returning fixedAssetDto : {}",fixedAssetDto);
 
         return fixedAssetDto;
     }
 
     public NetBookValueDto getNetBookValueItem() {
 
-        log.debug("Deriving netBookValue item from : {}",this);
+        log.trace("Deriving netBookValue item from : {}",this);
         NetBookValueDto netBookValueDto = null;
 
         try {
@@ -235,7 +235,7 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
            throw new DepreciationUpdatesException(errorMessage,e);
         }
 
-        log.debug("Returning netBookValueDto : {}",netBookValueDto);
+        log.trace("Returning netBookValueDto : {}",netBookValueDto);
 
         return netBookValueDto;
     }

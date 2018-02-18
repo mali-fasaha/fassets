@@ -15,8 +15,6 @@ public class FixedAssetsColleague extends Colleague<DepreciationUpdate> {
     private static final Logger log = LoggerFactory.getLogger(FixedAssetsColleague.class);
 
     @Autowired
-    private DepreciationUpdateDispatcher updateDispatcher;
-
     public FixedAssetsColleague(DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
         super(depreciationUpdateDispatcher);
     }
@@ -26,7 +24,7 @@ public class FixedAssetsColleague extends Colleague<DepreciationUpdate> {
      * containing the Object of type U and formulates appropriate
      * response
      *
-     * @param updateMessage
+     * @param updateMessage sent by the depreciationUpdateDispatcher
      */
     @Override
     public void receive(Update<DepreciationUpdate> updateMessage) {
@@ -46,7 +44,7 @@ public class FixedAssetsColleague extends Colleague<DepreciationUpdate> {
     }
 
     @Override
-    public void send(Update updateMessage) {
-
+    protected void send(Update<DepreciationUpdate> updateMessage) {
+        super.send(updateMessage);
     }
 }

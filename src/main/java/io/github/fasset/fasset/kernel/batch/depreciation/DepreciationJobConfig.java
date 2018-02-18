@@ -17,14 +17,18 @@ import java.util.List;
 @Configuration
 public class DepreciationJobConfig {
 
-    @Autowired
-    private JobBuilderFactory jobBuilderFactory;
+    private final JobBuilderFactory jobBuilderFactory;
+
+    private final StepBuilderFactory stepBuilderFactory;
+
+    private final ItemReader<FixedAsset> fixedAssetItemReader;
 
     @Autowired
-    private StepBuilderFactory stepBuilderFactory;
-
-    @Autowired
-    private ItemReader<FixedAsset> fixedAssetItemReader;
+    public DepreciationJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, ItemReader<FixedAsset> fixedAssetItemReader) {
+        this.jobBuilderFactory = jobBuilderFactory;
+        this.stepBuilderFactory = stepBuilderFactory;
+        this.fixedAssetItemReader = fixedAssetItemReader;
+    }
 
     @Bean("depreciationJob")
     public Job depreciationJob(DepreciationJobListener depreciationJobListener) {

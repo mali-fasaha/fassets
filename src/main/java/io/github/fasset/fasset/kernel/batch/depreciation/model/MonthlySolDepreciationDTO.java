@@ -46,157 +46,157 @@ public class MonthlySolDepreciationDTO {
 
     public String getSolId() {
 
-        log.debug("Returning solId : {}",solId);
+        log.trace("Returning solId : {}",solId);
         return solId == null ? "" : solId;
     }
 
     public MonthlySolDepreciationDTO setSolId(String solId) {
 
-        log.debug("Setting solId: {}",solId);
+        log.trace("Setting solId: {}",solId);
         this.solId = solId;
         return this;
     }
 
     public Integer getYear() {
 
-        log.debug("Returning year : {}",year);
+        log.trace("Returning year : {}",year);
         return year == null ? 0 : year;
     }
 
     public MonthlySolDepreciationDTO setYear(Integer year) {
-        log.debug("Setting year : {}",year);
+        log.trace("Setting year : {}",year);
         this.year = year;
         return this;
     }
 
     public Double getJan() {
-        log.debug("Returning jan : {}",jan);
+        log.trace("Returning jan : {}",jan);
         return jan == null ? 0 : jan;
     }
 
     public MonthlySolDepreciationDTO setJan(Double jan) {
-        log.debug("Setting jan : {}",jan);
+        log.trace("Setting jan : {}",jan);
         this.jan = jan;
         return this;
     }
 
     public Double getFeb() {
-        log.debug("Returning feb : {}",feb);
+        log.trace("Returning feb : {}",feb);
         return feb == null ? 0 : feb;
     }
 
     public MonthlySolDepreciationDTO setFeb(Double feb) {
-        log.debug("Setting feb : {}",feb);
+        log.trace("Setting feb : {}",feb);
         this.feb = feb;
         return this;
     }
 
     public Double getMar() {
-        log.debug("Returning mar : {}",mar);
+        log.trace("Returning mar : {}",mar);
         return mar == null ? 0 : mar;
     }
 
     public MonthlySolDepreciationDTO setMar(Double mar) {
-        log.debug("Setting mar : {}",mar);
+        log.trace("Setting mar : {}",mar);
         this.mar = mar;
         return this;
     }
 
     public Double getApr() {
-        log.debug("Returning apr : {}",apr);
+        log.trace("Returning apr : {}",apr);
         return apr == null ? 0 : apr;
     }
 
     public MonthlySolDepreciationDTO setApr(Double apr) {
-        log.debug("Setting apr : {}",apr);
+        log.trace("Setting apr : {}",apr);
         this.apr = apr;
         return this;
     }
 
     public Double getMay() {
-        log.debug("Returning may : {}",may);
+        log.trace("Returning may : {}",may);
         return may;
     }
 
     public MonthlySolDepreciationDTO setMay(Double may) {
-        log.debug("Setting may : {}",may);
+        log.trace("Setting may : {}",may);
         this.may = may;
         return this;
     }
 
     public Double getJun() {
-        log.debug("Returning jun : {}",jun);
+        log.trace("Returning jun : {}",jun);
         return jun == null ? 0 : jun;
     }
 
     public MonthlySolDepreciationDTO setJun(Double jun) {
-        log.debug("Setting jun : {}",jun);
+        log.trace("Setting jun : {}",jun);
         this.jun = jun;
         return this;
     }
 
     public Double getJul() {
-        log.debug("Returning jul : {}",jul);
+        log.trace("Returning jul : {}",jul);
         return jul == null ? 0 : jul;
     }
 
     public MonthlySolDepreciationDTO setJul(Double jul) {
-        log.debug("Setting jul : {}",jul);
+        log.trace("Setting jul : {}",jul);
         this.jul = jul;
         return this;
     }
 
     public Double getAug() {
-        log.debug("Returning aug : {}",aug);
+        log.trace("Returning aug : {}",aug);
         return aug == null ? 0 : aug;
     }
 
     public MonthlySolDepreciationDTO setAug(Double aug) {
-        log.debug("Setting aug : {}",aug);
+        log.trace("Setting aug : {}",aug);
         this.aug = aug;
         return this;
     }
 
     public Double getSep() {
-        log.debug("Returning sep : {}",sep);
+        log.trace("Returning sep : {}",sep);
         return sep == null ? 0 : sep;
     }
 
     public MonthlySolDepreciationDTO setSep(Double sep) {
-        log.debug("Setting sep : {}",sep);
+        log.trace("Setting sep : {}",sep);
         this.sep = sep;
         return this;
     }
 
     public Double getOct() {
-        log.debug("Returning oct : {}",oct);
+        log.trace("Returning oct : {}",oct);
         return oct == null ? 0 : oct;
     }
 
     public MonthlySolDepreciationDTO setOct(Double oct) {
-        log.debug("Setting oct : {}",oct);
+        log.trace("Setting oct : {}",oct);
         this.oct = oct;
         return this;
     }
 
     public Double getNov() {
-        log.debug("Returning nov : {}",nov);
+        log.trace("Returning nov : {}",nov);
         return nov == null ? 0 : nov;
     }
 
     public MonthlySolDepreciationDTO setNov(Double nov) {
-        log.debug("Setting nov : {}",nov);
+        log.trace("Setting nov : {}",nov);
         this.nov = nov;
         return this;
     }
 
     public Double getDec() {
-        log.debug("Returning dec : {}",dec);
+        log.trace("Returning dec : {}",dec);
         return dec == null ? 0 : dec;
     }
 
     public MonthlySolDepreciationDTO setDec(Double dec) {
-        log.debug("Setting dec : {}",dec);
+        log.trace("Setting dec : {}",dec);
         this.dec = dec;
         return this;
     }

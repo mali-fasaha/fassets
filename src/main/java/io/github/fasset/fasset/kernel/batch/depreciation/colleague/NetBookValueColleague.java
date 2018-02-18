@@ -47,5 +47,6 @@ public class NetBookValueColleague extends Colleague<DepreciationUpdate> {
     @Override
     public void send(Update updateMessage) {
 
+        super.send(updateMessage);
     }
 }

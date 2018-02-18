@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
@@ -18,18 +19,24 @@ public class DepreciationRelay {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationRelay.class);
 
-    @Autowired
-    @Qualifier("MonthlyIncrementer")
-    private MonthlyIncrementer monthlyIncrementer;
+    private final MonthlyIncrementer monthlyIncrementer;
+
+    private final DepreciationProperties depreciationProperties;
+
+    private List<YearMonth> monthlySequence = new LinkedList<>();
 
     @Autowired
-    private DepreciationProperties depreciationProperties;
+    public DepreciationRelay(@Qualifier("MonthlyIncrementer") MonthlyIncrementer monthlyIncrementer, DepreciationProperties depreciationProperties) {
+        this.monthlyIncrementer = monthlyIncrementer;
+        this.depreciationProperties = depreciationProperties;
+    }
 
     public List<YearMonth> getMonthlyDepreciationSequence(){
 
-        return generateMonthlyDepreciationSequence();
+        return monthlySequence;
     }
 
+    @PostConstruct
     private List<YearMonth> generateMonthlyDepreciationSequence(){
 
         YearMonth from = depreciationProperties.getStartMonth();
@@ -37,11 +44,9 @@ public class DepreciationRelay {
 
         log.debug("Producing depreciation relay...between : {} and : {}",from,to);
 
-        List<YearMonth> monthlySequence = new LinkedList<>();
-
         monthlySequence.add(from);
 
-        long no_of_months = from.until(to, ChronoUnit.MONTHS)+1;
+        long no_of_months = from.until(to, ChronoUnit.MONTHS);
 
         log.debug("Creating a monthly depreciation sequence for : {}",no_of_months);
 
