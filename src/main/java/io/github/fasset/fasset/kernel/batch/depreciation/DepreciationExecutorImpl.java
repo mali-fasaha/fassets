@@ -43,6 +43,7 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
     private final DepreciationAgent depreciationAgent;
     private final AccruedDepreciationAgent accruedDepreciationAgent;
     private final NetBookValueAgent netBookValueAgent;
+    private DepreciationAgentsHandler depreciationAgentsHandler;
 
     @Autowired
     public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher, LocalDateToYearMonthConverter localDateToYearMonthConverter, DepreciationAgent depreciationAgent, @Qualifier("netBookValueAgent") NetBookValueAgent netBookValueAgent, @Qualifier("accruedDepreciationAgent") AccruedDepreciationAgent accruedDepreciationAgent) {
@@ -99,14 +100,19 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
                     "registry for category : {}",asset,asset.getCategory());
 
             //TODO insert pipes and filters here
-            depreciation = depreciationAgent.invoke(asset, month);
-            NetBookValue netBookValue = netBookValueAgent.invoke(asset,month);
-            AccruedDepreciation accruedDepreciation = accruedDepreciationAgent.invoke(asset,month);
+            //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
+            depreciation = depreciationAgentsHandler.sendRequest(asset, month);
 
+
+            //depreciation = depreciationAgent.invoke(asset, month);
+            //NetBookValue netBookValue = netBookValueAgent.invoke(asset,month);
+            //AccruedDepreciation accruedDepreciation = accruedDepreciationAgent.invoke(asset,month);
+
+            //TODO AGENTS TO SEND OWN MESSAGES!!!!!!!11!!!!!!!!!!!!!!!!!!!!!!!!!!!
             //TODO: implement NilAccruedDepreciation, and UnmodifiedNetBookValue
             // send updates to depreciationUpdateDispatcher
-            send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
-            send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
+            //send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
+            //send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
         }
 
         return depreciation;

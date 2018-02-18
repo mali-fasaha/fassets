@@ -1,18 +1,30 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
+import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
+import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
+import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.NetBookValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 
 @Component("netBookValueAgent")
-public class NetBookValueAgentImpl implements NetBookValueAgent {
+public class NetBookValueAgentImpl extends Colleague<NetBookValue> implements NetBookValueAgent {
 
     private static final Logger log = LoggerFactory.getLogger(NetBookValueAgentImpl.class);
+
+    @Autowired
+    public NetBookValueAgentImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
+        super(depreciationUpdateDispatcher);
+    }
 
     /**
      * Upon invocation the implementation will return the netBoookValue item for the relevant month
@@ -24,7 +36,12 @@ public class NetBookValueAgentImpl implements NetBookValueAgent {
      */
     @Override
     public NetBookValue invoke(FixedAsset asset, YearMonth month) {
-        return createNetBookValue(asset,month);
+
+        NetBookValue netBookValue = createNetBookValue(asset,month);
+
+        send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
+
+        return netBookValue;
     }
 
     /**
@@ -54,5 +71,17 @@ public class NetBookValueAgentImpl implements NetBookValueAgent {
         log.trace("NetBookValue item created : {}",netBookValue);
 
         return netBookValue;
+    }
+
+    /**
+     * This method listens for message sent to a queue
+     * containing the Object of type U and formulates appropriate
+     * response
+     *
+     * @param updateMessage
+     */
+    @Override
+    public void receive(Update<NetBookValue> updateMessage) {
+        //crickets
     }
 }

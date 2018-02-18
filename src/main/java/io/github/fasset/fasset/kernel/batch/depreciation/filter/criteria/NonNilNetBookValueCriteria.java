@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component("nonNillNetBookValueCriteria")
-public class NonNilNetBookValueCriteria implements Criteria<FixedAsset> {
+public class NonNilNetBookValueCriteria implements Criteria {
 
     private static final Logger log = LoggerFactory.getLogger(NonNilNetBookValueCriteria.class);
 
@@ -17,15 +17,10 @@ public class NonNilNetBookValueCriteria implements Criteria<FixedAsset> {
      * @return Object successfully meeting criteria
      */
     @Override
-    public FixedAsset meetsCriteria(Object object) {
+    public boolean meetsCriteria(Object object) {
 
-        FixedAsset fixedAsset = (FixedAsset)object;
+        // crickets
 
-        if(fixedAsset.getNetBookValue()==0.00){
-
-            return null;
-        }
-
-        return fixedAsset;
+        return false;
     }
 }

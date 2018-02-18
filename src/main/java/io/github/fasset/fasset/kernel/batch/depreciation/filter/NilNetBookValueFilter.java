@@ -16,12 +16,12 @@ public class NilNetBookValueFilter implements Filter<FixedAsset> {
     }
 
     @Override
-    public List<Criteria<FixedAsset>> getCriteria() {
+    public List<Criteria> getCriteria() {
         return null;
     }
 
     @Override
-    public boolean meetsCriteria(FixedAsset asset, YearMonth month, List<Criteria<FixedAsset>> criteria) {
+    public boolean meetsCriteria(FixedAsset asset, YearMonth month, List<Criteria> criteria) {
         return false;
     }
 }

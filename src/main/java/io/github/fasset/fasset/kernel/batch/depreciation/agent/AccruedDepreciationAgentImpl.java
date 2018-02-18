@@ -1,18 +1,30 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
+import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
+import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
+import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 
 @Component("accruedDepreciationAgent")
-public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
+public class AccruedDepreciationAgentImpl extends Colleague<AccruedDepreciation> implements AccruedDepreciationAgent {
 
     private static final Logger log = LoggerFactory.getLogger(AccruedDepreciationAgentImpl.class);
+
+    @Autowired
+    public AccruedDepreciationAgentImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
+        super(depreciationUpdateDispatcher);
+    }
 
     @Override
     public AccruedDepreciation invoke(FixedAsset asset, YearMonth month) {
@@ -20,7 +32,11 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
         // with fingers crossed : Hope by the time you are here, the fixedAsser netBookValue will have changed
         double depreciationAcc = asset.getPurchaseCost() - asset.getNetBookValue();
 
-        return createAccruedDepreciation(asset,month,depreciationAcc);
+        AccruedDepreciation accruedDepreciation = createAccruedDepreciation(asset,month,depreciationAcc);
+
+        send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
+
+        return accruedDepreciation;
     }
 
     /**
@@ -53,5 +69,17 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
         log.trace("AccruedDepreciation instance created : {}",accruedDepreciation);
 
         return accruedDepreciation;
+    }
+
+    /**
+     * This method listens for message sent to a queue
+     * containing the Object of type U and formulates appropriate
+     * response
+     *
+     * @param updateMessage
+     */
+    @Override
+    public void receive(Update<AccruedDepreciation> updateMessage) {
+        // crickets
     }
 }
