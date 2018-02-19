@@ -20,6 +20,11 @@ public abstract class Colleague<T> {
 
     private DepreciationUpdateDispatcher depreciationUpdateDispatcher;
 
+    public Colleague setDepreciationUpdateDispatcher(DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
+        this.depreciationUpdateDispatcher = depreciationUpdateDispatcher;
+        return this;
+    }
+
     public Colleague(DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
         this.depreciationUpdateDispatcher = depreciationUpdateDispatcher;
     }

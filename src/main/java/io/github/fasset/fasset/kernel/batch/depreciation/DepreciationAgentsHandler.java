@@ -8,7 +8,6 @@ import java.time.YearMonth; /**
  */
 public interface DepreciationAgentsHandler {
 
+    void sendRequest(FixedAsset asset, YearMonth month,DepreciationListener listener);
 
-
-    Depreciation sendRequest(FixedAsset asset, YearMonth month);
 }

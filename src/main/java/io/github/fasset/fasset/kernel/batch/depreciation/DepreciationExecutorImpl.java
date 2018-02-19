@@ -1,20 +1,12 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
-import io.github.fasset.fasset.kernel.batch.depreciation.agent.AccruedDepreciationAgent;
-import io.github.fasset.fasset.kernel.batch.depreciation.agent.DepreciationAgent;
-import io.github.fasset.fasset.kernel.batch.depreciation.agent.NetBookValueAgent;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
-import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.NilDepreciation;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
-import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
-import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
-import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
-import io.github.fasset.fasset.model.NetBookValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,23 +27,29 @@ import java.time.YearMonth;
  */
 @Service("depreciationExecutor")
 @Transactional
-public class DepreciationExecutorImpl extends Colleague implements DepreciationExecutor {
+public class DepreciationExecutorImpl extends Colleague implements DepreciationExecutor{
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationExecutorImpl.class);
 
-    private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
-    private final DepreciationAgent depreciationAgent;
-    private final AccruedDepreciationAgent accruedDepreciationAgent;
-    private final NetBookValueAgent netBookValueAgent;
+    private LocalDateToYearMonthConverter localDateToYearMonthConverter;
     private DepreciationAgentsHandler depreciationAgentsHandler;
+    private Depreciation depreciation;
 
     @Autowired
-    public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher, LocalDateToYearMonthConverter localDateToYearMonthConverter, DepreciationAgent depreciationAgent, @Qualifier("netBookValueAgent") NetBookValueAgent netBookValueAgent, @Qualifier("accruedDepreciationAgent") AccruedDepreciationAgent accruedDepreciationAgent) {
-        super(depreciationUpdateDispatcher);
+    public DepreciationExecutorImpl setLocalDateToYearMonthConverter(LocalDateToYearMonthConverter localDateToYearMonthConverter) {
         this.localDateToYearMonthConverter = localDateToYearMonthConverter;
-        this.depreciationAgent = depreciationAgent;
-        this.netBookValueAgent = netBookValueAgent;
-        this.accruedDepreciationAgent = accruedDepreciationAgent;
+        return this;
+    }
+
+    @Autowired
+    public DepreciationExecutorImpl setDepreciationAgentsHandler(DepreciationAgentsHandler depreciationAgentsHandler) {
+        this.depreciationAgentsHandler = depreciationAgentsHandler;
+        return this;
+    }
+
+    @Autowired
+    public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
+        super(depreciationUpdateDispatcher);
     }
 
     /**
@@ -78,8 +76,6 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
     @Override
     public Depreciation getDepreciation(FixedAsset asset, YearMonth month){
 
-        Depreciation depreciation;
-
         if(asset.getNetBookValue() == 0.00) {
 
             log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " +
@@ -99,20 +95,10 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
             log.trace("The asset : {} has passed the frontal Business rules filter, initiating configuration" +
                     "registry for category : {}",asset,asset.getCategory());
 
-            //TODO insert pipes and filters here
-            //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
-            depreciation = depreciationAgentsHandler.sendRequest(asset, month);
-
-
-            //depreciation = depreciationAgent.invoke(asset, month);
-            //NetBookValue netBookValue = netBookValueAgent.invoke(asset,month);
-            //AccruedDepreciation accruedDepreciation = accruedDepreciationAgent.invoke(asset,month);
-
-            //TODO AGENTS TO SEND OWN MESSAGES!!!!!!!11!!!!!!!!!!!!!!!!!!!!!!!!!!!
             //TODO: implement NilAccruedDepreciation, and UnmodifiedNetBookValue
-            // send updates to depreciationUpdateDispatcher
-            //send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
-            //send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
+            //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
+            depreciationAgentsHandler.sendRequest(asset, month, this::setDepreciation); //for now
+
         }
 
         return depreciation;
@@ -131,4 +117,11 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
         return new NilDepreciation(asset,depreciationPeriod).getNilDepreciation();
     }
 
+    public void setDepreciation(Depreciation depreciation) {
+        this.depreciation = depreciation;
+    }
+
+    public Depreciation getDepreciation() {
+        return depreciation;
+    }
 }

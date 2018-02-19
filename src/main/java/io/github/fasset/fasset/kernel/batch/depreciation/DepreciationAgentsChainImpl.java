@@ -15,14 +15,14 @@ import java.time.YearMonth;
 import java.util.List;
 
 @Component("depreciationAgentsChain")
-public class DepreciationAgentsChain {
+public class DepreciationAgentsChainImpl {
 
     private final DepreciationAgent depreciationAgent;
     private final AccruedDepreciationAgent accruedDepreciationAgent;
     private final NetBookValueAgent netBookValueAgent;
 
     @Autowired
-    public DepreciationAgentsChain(DepreciationAgent depreciationAgent, AccruedDepreciationAgent accruedDepreciationAgent, NetBookValueAgent netBookValueAgent) {
+    public DepreciationAgentsChainImpl(DepreciationAgent depreciationAgent, AccruedDepreciationAgent accruedDepreciationAgent, NetBookValueAgent netBookValueAgent) {
         this.depreciationAgent = depreciationAgent;
         this.accruedDepreciationAgent = accruedDepreciationAgent;
         this.netBookValueAgent = netBookValueAgent;
@@ -39,23 +39,17 @@ public class DepreciationAgentsChain {
     private final List<Agent> agents = new FastList<>();
 
 
-    public void addAgent(Agent agent) {
+    void addAgent(Agent agent) {
         agents.add(agent);
     }
 
-    public Depreciation execute(FixedAsset asset, YearMonth month) {
-
-        Depreciation depreciation = null;
+    public void execute(FixedAsset asset, YearMonth month,DepreciationListener listener) {
 
         // invoke all agents
         for(Agent agent : agents){
 
-            Object t = agent.invoke(asset,month);
+            agent.invoke(asset,month,listener);
 
-            if(t instanceof Depreciation)
-                depreciation = (Depreciation) t;
         }
-
-        return depreciation;
     }
 }

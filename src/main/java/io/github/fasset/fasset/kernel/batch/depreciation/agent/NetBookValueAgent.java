@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.agent.Agent;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.NetBookValue;
@@ -16,5 +17,5 @@ public interface NetBookValueAgent extends Agent<NetBookValue> {
      * @param month YearMonth in which depreciation has occured
      * @return The relevant NetBookValue item
      */
-    NetBookValue invoke(FixedAsset asset, YearMonth month);
+    NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationListener listener);
 }

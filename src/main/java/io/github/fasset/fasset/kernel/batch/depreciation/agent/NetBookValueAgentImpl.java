@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
@@ -35,10 +36,13 @@ public class NetBookValueAgentImpl extends Colleague<NetBookValue> implements Ne
      * @return The relevant NetBookValue item
      */
     @Override
-    public NetBookValue invoke(FixedAsset asset, YearMonth month) {
+    public NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationListener listener) {
+
+        log.debug("Processing NetBookValue item for the asset : {} in the period : {}",asset,month);
 
         NetBookValue netBookValue = createNetBookValue(asset,month);
 
+        log.debug("Sending netBookValueItem created : {}",netBookValue);
         send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
 
         return netBookValue;

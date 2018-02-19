@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableSet;
 import io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationRelay;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
-import io.github.fasset.fasset.service.DepreciationService;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,24 +30,18 @@ public class MonthlyDepreciationJobProxy {
 
     private final FixedAssetService fixedAssetService;
 
-    private final DepreciationService depreciationService;
-
     private final FixedAssetsJobsActivator fixedAssetsJobsActivator;
 
     private final DepreciationRelay depreciationRelay;
 
-    private final Job monthlySolDepreciationJob;
-
 
     @Autowired
-    public MonthlyDepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("monthlyAssetDepreciation") Job monthlyAssetDepreciation, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService, DepreciationService depreciationService, FixedAssetsJobsActivator fixedAssetsJobsActivator, DepreciationRelay depreciationRelay, @Qualifier("monthlySolDepreciationJob") Job monthlySolDepreciationJob) {
+    public MonthlyDepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("monthlyAssetDepreciation") Job monthlyAssetDepreciation, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService, FixedAssetsJobsActivator fixedAssetsJobsActivator, DepreciationRelay depreciationRelay) {
         this.jobLauncher = jobLauncher;
         this.monthlyAssetDepreciation = monthlyAssetDepreciation;
         this.fixedAssetService = fixedAssetService;
-        this.depreciationService = depreciationService;
         this.fixedAssetsJobsActivator = fixedAssetsJobsActivator;
         this.depreciationRelay = depreciationRelay;
-        this.monthlySolDepreciationJob = monthlySolDepreciationJob;
     }
 
     private List<Integer> annualRelay(){
@@ -64,24 +57,6 @@ public class MonthlyDepreciationJobProxy {
         //Just to ensure only unique items are returned
         return ImmutableSet.copyOf(annualList).asList();
     }
-
-    /*public void initializeMonthlySolDepreciationReporting(){
-
-        int no_of_sols = depreciationService.getDistinctSolIds();
-        LocalDateTime starting_time = LocalDateTime.now();
-        log.info("MonthlySolDepreciation job has been triggered with the paramters... {} items at time : {}",
-                no_of_sols,starting_time);
-
-        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder()
-                .addString("no_of_assets", String.valueOf(no_of_sols))
-                .addString("starting_time", starting_time.toString());
-
-        log.info("executing MonthlySolDepreciation job...");
-
-        executeMonthlyJob(jobParametersBuilder,monthlySolDepreciationJob);
-    }*/
-
-
 
     public void initializeMonthlyAssetDepreciationReporting(){
 
@@ -103,7 +78,7 @@ public class MonthlyDepreciationJobProxy {
     private void executeMonthlyJob(JobParametersBuilder jobParametersBuilder,Job job) {
         annualRelay().forEach(year ->{
 
-            log.info("Running {} job for the year : {}",year,job);
+            log.info("Running {} job for the year : {}",job,year);
             jobParametersBuilder.addString("year", year.toString()).toJobParameters();
             try {
                 fixedAssetsJobsActivator.bootstrap(jobParametersBuilder.addLong("year", Long.valueOf(year)).toJobParameters(),jobLauncher, job,fixedAssetService);

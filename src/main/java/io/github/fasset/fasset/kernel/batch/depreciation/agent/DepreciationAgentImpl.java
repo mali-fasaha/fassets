@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.CategoryConfigurationRegistry;
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationPreprocessor;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
@@ -14,28 +15,39 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 
+@DependsOn("depreciationExecutor")
 @Component("depreciationAgent")
-public class DepreciationAgentImpl extends Colleague implements DepreciationAgent {
+public class DepreciationAgentImpl extends Colleague implements DepreciationAgent{
 
     private final Logger log = LoggerFactory.getLogger(DepreciationAgentImpl.class);
 
-    private final CategoryConfigurationRegistry categoryConfigurationRegistry;
-    private final DepreciationPreprocessor preprocessor;
+    private CategoryConfigurationRegistry categoryConfigurationRegistry;
+    private DepreciationPreprocessor preprocessor;
 
     @Autowired
-    public DepreciationAgentImpl(@Qualifier("depreciationUpdateDispatcher")DepreciationUpdateDispatcher depreciationUpdateDispatcher, CategoryConfigurationRegistry categoryConfigurationRegistry, DepreciationPreprocessor preprocessor) {
-        super(depreciationUpdateDispatcher);
+    public DepreciationAgentImpl setCategoryConfigurationRegistry(CategoryConfigurationRegistry categoryConfigurationRegistry) {
         this.categoryConfigurationRegistry = categoryConfigurationRegistry;
-        this.preprocessor = preprocessor;
+        return this;
     }
 
+    @Autowired
+    public DepreciationAgentImpl setPreprocessor(DepreciationPreprocessor preprocessor) {
+        this.preprocessor = preprocessor;
+        return this;
+    }
+
+    @Autowired
+    public DepreciationAgentImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
+        super(depreciationUpdateDispatcher);
+    }
 
     @Override
-    public Depreciation invoke(FixedAsset asset, YearMonth month) {
+    public Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationListener listener) {
 
         Depreciation depreciation;
 
@@ -63,8 +75,9 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
         //send changes to queue for flushing through entityManager
         send(new DepreciationUpdate.from(asset.setNetBookValue(nbv)).setDestination(asset.getClass()));
 
-        return depreciation;
+        listener.receiveProcessUpdate(depreciation);
 
+        return depreciation;
     }
 
     /**

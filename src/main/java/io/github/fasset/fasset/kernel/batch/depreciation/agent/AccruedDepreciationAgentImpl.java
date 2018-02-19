@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
@@ -27,12 +28,18 @@ public class AccruedDepreciationAgentImpl extends Colleague<AccruedDepreciation>
     }
 
     @Override
-    public AccruedDepreciation invoke(FixedAsset asset, YearMonth month) {
+    public AccruedDepreciation invoke(FixedAsset asset, YearMonth month, DepreciationListener listener) {
+
+        log.debug("Processing accruedDepreciation for asset: {} in the period : {}",asset,month);
 
         // with fingers crossed : Hope by the time you are here, the fixedAsser netBookValue will have changed
         double depreciationAcc = asset.getPurchaseCost() - asset.getNetBookValue();
 
+        log.debug("Reporting accruedDepreciation as : {}",depreciationAcc);
+
         AccruedDepreciation accruedDepreciation = createAccruedDepreciation(asset,month,depreciationAcc);
+
+        log.debug("Sending AccruedDepreciation item created : {}",accruedDepreciation);
 
         send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
 
