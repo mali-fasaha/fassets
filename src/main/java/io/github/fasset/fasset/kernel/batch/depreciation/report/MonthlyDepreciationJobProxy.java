@@ -26,22 +26,32 @@ public class MonthlyDepreciationJobProxy {
 
     private final JobLauncher jobLauncher;
 
-    private final Job monthlyAssetDepreciation;
+    private final Job monthlyAssetDepreciationJob;
+    private final Job monthlySolDepreciationJob;
+    private final Job monthlyCategoryDepreciationJob;
 
     private final FixedAssetService fixedAssetService;
-
     private final FixedAssetsJobsActivator fixedAssetsJobsActivator;
-
     private final DepreciationRelay depreciationRelay;
 
 
+
+
     @Autowired
-    public MonthlyDepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("monthlyAssetDepreciation") Job monthlyAssetDepreciation, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService, FixedAssetsJobsActivator fixedAssetsJobsActivator, DepreciationRelay depreciationRelay) {
+    public MonthlyDepreciationJobProxy(JobLauncher jobLauncher,
+                                       @Qualifier("monthlyAssetDepreciationJob") Job monthlyAssetDepreciationJob,
+                                       @Qualifier("monthlyCategoryDepreciationJob") Job monthlyCategoryDepreciationJob,
+                                       @Qualifier("monthlySolDepreciationJob") Job monthlySolDepreciationJob,
+                                       @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
+                                       FixedAssetsJobsActivator fixedAssetsJobsActivator,
+                                       DepreciationRelay depreciationRelay) {
         this.jobLauncher = jobLauncher;
-        this.monthlyAssetDepreciation = monthlyAssetDepreciation;
+        this.monthlyAssetDepreciationJob = monthlyAssetDepreciationJob;
         this.fixedAssetService = fixedAssetService;
         this.fixedAssetsJobsActivator = fixedAssetsJobsActivator;
         this.depreciationRelay = depreciationRelay;
+        this.monthlyCategoryDepreciationJob = monthlyCategoryDepreciationJob;
+        this.monthlySolDepreciationJob = monthlySolDepreciationJob;
     }
 
     private List<Integer> annualRelay(){
@@ -58,7 +68,7 @@ public class MonthlyDepreciationJobProxy {
         return ImmutableSet.copyOf(annualList).asList();
     }
 
-    public void initializeMonthlyAssetDepreciationReporting(){
+    public void initializeMonthlyDepreciationReporting(){
 
         int no_of_assets = fixedAssetService.getPoll();
         LocalDateTime starting_time = LocalDateTime.now();
@@ -69,9 +79,14 @@ public class MonthlyDepreciationJobProxy {
                 .addString("no_of_assets", String.valueOf(no_of_assets))
                 .addString("starting_time", starting_time.toString());
 
-        log.info("executing MonthlyAssetDepreciation job...");
+        log.info("executing MonthlyAssetDepreciation job : {}", monthlyAssetDepreciationJob);
+        executeMonthlyJob(jobParametersBuilder, monthlyAssetDepreciationJob);
 
-        executeMonthlyJob(jobParametersBuilder,monthlyAssetDepreciation);
+        log.info("executing MonthlySolDepreciation job : {}", monthlySolDepreciationJob);
+        executeMonthlyJob(jobParametersBuilder,monthlySolDepreciationJob);
+
+        log.info("executing MonthlyCategoryDepreciation job : {}", monthlyCategoryDepreciationJob);
+        executeMonthlyJob(jobParametersBuilder,monthlyCategoryDepreciationJob);
 
     }
 

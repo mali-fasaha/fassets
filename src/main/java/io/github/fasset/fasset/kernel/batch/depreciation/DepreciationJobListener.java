@@ -36,7 +36,7 @@ public class DepreciationJobListener implements JobExecutionListener {
 
         //TODO poll paramters and update the status of the depreciationJobExecutionRepository
 
-        monthlyDepreciationJobProxy.initializeMonthlyAssetDepreciationReporting();
+        monthlyDepreciationJobProxy.initializeMonthlyDepreciationReporting();
     }
 
     public DepreciationJobListener setMonthlyDepreciationJobProxy(MonthlyDepreciationJobProxy monthlyDepreciationJobProxy) {

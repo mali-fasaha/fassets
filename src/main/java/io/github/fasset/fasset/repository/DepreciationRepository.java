@@ -1,10 +1,9 @@
 package io.github.fasset.fasset.repository;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO;
+import io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyCategoryDepreciationDTO;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlySolDepreciationDTO;
 import io.github.fasset.fasset.model.Depreciation;
-import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
-import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -61,6 +60,26 @@ public interface DepreciationRepository extends JpaRepository<Depreciation,Integ
             "FROM Depreciation e " +
             "WHERE e.solId = :solId AND e.year = :year")
     List<MonthlySolDepreciationDTO> getMonthlySolDepreciation(@Param("solId") String solId, @Param("year") Integer year);
+
+
+    @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyCategoryDepreciationDTO(" +
+            "e.category,e.year," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 1)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 2)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 3)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 4)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 5)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 6)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 7)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 8)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 9)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 10)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 11)," +
+            "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 12) " +
+            ")" +
+            "FROM Depreciation e " +
+            "WHERE e.category = :categoryName AND e.year = :year")
+    List<MonthlyCategoryDepreciationDTO> getMonthlyCategoryDepreciation(@Param("categoryName") String categoryName, @Param("year") Integer year);
 
     /**
      *

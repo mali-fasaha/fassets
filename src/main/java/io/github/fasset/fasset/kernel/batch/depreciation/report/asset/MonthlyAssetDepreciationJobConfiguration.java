@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel.batch.depreciation.report;
+package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationExecutor;
 import io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationJobListener;
@@ -30,7 +30,7 @@ import org.springframework.context.annotation.DependsOn;
 import javax.persistence.EntityManagerFactory;
 
 @Configuration
-public class MonthlyDepreciationJobConfiguration {
+public class MonthlyAssetDepreciationJobConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
 
@@ -62,25 +62,13 @@ public class MonthlyDepreciationJobConfiguration {
     private MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
 
     @Autowired
-    public MonthlyDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
+    private ItemReader monthlySolDepreciationReader;
+
+    @Autowired
+    public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
         this.jobBuilderFactory = jobBuilderFactory;
     }
 
-    /*@Bean
-    public ItemReader<Depreciation> depreciationItemReader() throws Exception {
-        JpaPagingItemReader<Depreciation> dataBaseReader = new JpaPagingItemReader<>();
-        dataBaseReader.setEntityManagerFactory(entityManagerFactory);
-
-        dataBaseReader.setQueryString("SELECT a FROM Depreciation a");
-
-        dataBaseReader.setTransacted(true);
-        dataBaseReader.setPageSize(100);
-        dataBaseReader.setSaveState(true);
-        dataBaseReader.afterPropertiesSet();
-
-        return dataBaseReader;
-
-    }*/
 
     @Bean("monthlyAssetDepreciationJobListener")
     public MonthlyAssetDepreciationJobListener monthlyAssetDepreciationJobListener(){
@@ -88,14 +76,27 @@ public class MonthlyDepreciationJobConfiguration {
         return new MonthlyAssetDepreciationJobListener();
     }
 
-    @Bean("monthlyAssetDepreciation")
+    /*@Bean("monthlyAssetDepreciationJob")
     @DependsOn("monthlyAssetDepreciationJobListener")
-    public Job monthlyAssetDepreciation() {
-        return jobBuilderFactory.get("monthlyAssetDepreciation")
+    public Job monthlyAssetDepreciationJob() {
+        return jobBuilderFactory.get("monthlyAssetDepreciationJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(monthlyAssetDepreciationJobListener())
                 .start(updateMonthlyAssetDepreciation())
                 .next(createMonthlySolDepreciationItems())
+                .next(createMonthlyCategoryDepreciationItems())
+                .build();
+    }*/
+
+    @Bean("monthlyAssetDepreciationJob")
+    @DependsOn("monthlyAssetDepreciationJobListener")
+    public Job monthlyAssetDepreciationJob() {
+        return jobBuilderFactory.get("monthlyAssetDepreciationJob")
+                .incrementer(new RunIdIncrementer())
+                .listener(monthlyAssetDepreciationJobListener())
+                .preventRestart()
+                .flow(updateMonthlyAssetDepreciation())
+                .end()
                 .build();
     }
 
@@ -142,28 +143,8 @@ public class MonthlyDepreciationJobConfiguration {
         return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor,year);
     }
 
-    @Bean
-    public ItemReader<String> monthlySolDepreciationReader(){
 
-        JpaPagingItemReader<String> solIdsReader = new JpaPagingItemReader<>();
-
-        solIdsReader.setEntityManagerFactory(entityManagerFactory);
-
-        solIdsReader.setQueryString("SELECT DISTINCT e.solId From Depreciation e");
-
-        solIdsReader.setTransacted(true);
-        solIdsReader.setPageSize(5);
-        solIdsReader.setSaveState(true);
-        try {
-            solIdsReader.afterPropertiesSet();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return solIdsReader;
-    }
-
-    @Bean("createMonthlySolDepreciationItems")
+    /*@Bean("createMonthlySolDepreciationItems")
     public Step createMonthlySolDepreciationItems() {
 
         Step createMonthlySolDepreciationItems = null;
@@ -172,7 +153,7 @@ public class MonthlyDepreciationJobConfiguration {
             createMonthlySolDepreciationItems = stepBuilderFactory
                     .get("createMonthlySolDepreciationItems")
                     .<String,MonthlySolDepreciation>chunk(5)
-                    .reader(monthlySolDepreciationReader())
+                    .reader(monthlySolDepreciationReader)
                     .writer(monthlySolDepreciationWriter())
                     .processor(monthlySolDepreciationProcessor(YEAR))
                     .build();
@@ -181,7 +162,7 @@ public class MonthlyDepreciationJobConfiguration {
         }
 
         return createMonthlySolDepreciationItems;
-    }
+    }*/
 
     /*@Bean
     public Step updateMonthlyAssetDepreciation() {

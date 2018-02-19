@@ -23,8 +23,6 @@ public class MonthlySolDepreciationJobConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
 
-
-
     @Value("#{jobParameters['year']}")
     private static String YEAR;
 
