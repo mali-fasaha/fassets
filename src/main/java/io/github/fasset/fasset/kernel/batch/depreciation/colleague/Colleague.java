@@ -20,11 +20,6 @@ public abstract class Colleague<T> {
 
     private DepreciationUpdateDispatcher depreciationUpdateDispatcher;
 
-    public Colleague setDepreciationUpdateDispatcher(DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
-        this.depreciationUpdateDispatcher = depreciationUpdateDispatcher;
-        return this;
-    }
-
     public Colleague(DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
         this.depreciationUpdateDispatcher = depreciationUpdateDispatcher;
     }
@@ -43,9 +38,5 @@ public abstract class Colleague<T> {
         log.debug("Sending update message : {}",updateMessage);
 
         depreciationUpdateDispatcher.send(updateMessage.setSentBy(this),this);
-    }
-
-    public DepreciationUpdateDispatcher getDepreciationUpdateDispatcher() {
-        return depreciationUpdateDispatcher;
     }
 }

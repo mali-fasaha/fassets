@@ -79,11 +79,6 @@ public class FileUploadBatchConfig {
         JpaPagingItemReader<FixedAsset> dataBaseReader = new JpaPagingItemReader<>();
         dataBaseReader.setEntityManagerFactory(entityManagerFactory);
 
-        /*fixedAssetJpaQueryProvider
-                .setQuery("SELECT a FROM FixedAsset a")
-                .setEntityClass(FixedAsset.class);
-        dataBaseReader.setQueryProvider(fixedAssetJpaQueryProvider);*/
-
         dataBaseReader.setQueryString("SELECT a FROM FixedAsset a");
 
         dataBaseReader.setTransacted(true);
@@ -99,16 +94,16 @@ public class FileUploadBatchConfig {
         return jobBuilderFactory.get("importExcelJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-                .flow(step1()).on("COMPLETED")
-                .to(step2()).on("COMPLETED")
-                .to(step3())
+                .flow(readExcelFileStep()).on("COMPLETED")
+                .to(accrueDepreciationStep()).on("COMPLETED")
+                .to(netBookValueUpdateStep())
                 .end()
                 .build();
     }
 
     @Bean
-    public Step step1() {
-        return stepBuilderFactory.get("step1")
+    public Step readExcelFileStep() {
+        return stepBuilderFactory.get("readExcelFileStep")
                 .<FixedAssetDTO, FixedAsset> chunk(100)
                 .reader(excelItemReader(FILE_PATH))
                 .processor(excelItemProcessor)
@@ -117,12 +112,12 @@ public class FileUploadBatchConfig {
     }
 
     @Bean
-    public Step step2() {
+    public Step accrueDepreciationStep() {
 
         Step step2 = null;
 
         try {
-            step2 = stepBuilderFactory.get("step2")
+            step2 = stepBuilderFactory.get("accrueDepreciationStep")
                     .<FixedAsset,AccruedDepreciation> chunk(100)
                     .reader(fixedAssetItemReader())
                     .processor(fixedAssetAccruedDepreciationProcessor)
@@ -136,12 +131,12 @@ public class FileUploadBatchConfig {
     }
 
     @Bean
-    public Step step3() {
+    public Step netBookValueUpdateStep() {
 
         Step step3 = null;
 
         try {
-            step3 = stepBuilderFactory.get("step3")
+            step3 = stepBuilderFactory.get("netBookValueUpdateStep")
                     .<FixedAsset, NetBookValue> chunk(100)
                     .reader(fixedAssetItemReader())
                     .processor(fixedAssetNetBookValueProcessor)

@@ -95,11 +95,7 @@ public class MonthlyDepreciationJobProxy {
 
             log.info("Running {} job for the year : {}",job,year);
             jobParametersBuilder.addString("year", year.toString()).toJobParameters();
-            try {
                 fixedAssetsJobsActivator.bootstrap(jobParametersBuilder.addLong("year", Long.valueOf(year)).toJobParameters(),jobLauncher, job,fixedAssetService);
-            } catch (BatchJobExecutionException e) {
-                e.printStackTrace();
-            }
         });
     }
 

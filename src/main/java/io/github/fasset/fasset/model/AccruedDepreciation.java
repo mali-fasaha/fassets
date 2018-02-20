@@ -66,7 +66,7 @@ public class AccruedDepreciation extends DomainModel<String>{
 
     public AccruedDepreciation setAccruedDepreciation(double accruedDepreciation) {
 
-        log.debug("Seeting accruedDepreciation for AccruedDepreciationId : {} as = {}",getId(),accruedDepreciation);
+        log.debug("Setting accruedDepreciation for AccruedDepreciationId : {} as = {}",getId(),accruedDepreciation);
         this.accruedDepreciation = accruedDepreciation;
         return this;
     }
