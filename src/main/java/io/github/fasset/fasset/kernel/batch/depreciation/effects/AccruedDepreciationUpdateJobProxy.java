@@ -59,8 +59,8 @@ public class AccruedDepreciationUpdateJobProxy {
 
         log.info("Running {} job for a list of : {} items", job, itemsList.size());
 
-        Map<String,JobParameter> parameterMap = jobParametersBuilder.toJobParameters().getParameters();
-        parameterMap.put("itemsList", new ListJobParameter<>("", itemsList));
+        Map parameterMap = jobParametersBuilder.toJobParameters().getParameters();
+        parameterMap.put("itemsList", itemsList);
 
         try {
             fixedAssetsJobsActivator.bootstrap(new JobParameters(parameterMap),jobLauncher, job, fixedAssetService,progressListener);

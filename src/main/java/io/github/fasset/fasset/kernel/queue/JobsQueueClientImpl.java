@@ -30,9 +30,11 @@ public class JobsQueueClientImpl<T> implements JobsQueueClient<T> {
 
         if(workInProgress){
             //
+            if(job!=null)
             workInProgressQueue.add(job);
 
         } else {
+            if(job!=null)
             jobsQueueService.addJob(new Job<>(job));
         }
 
