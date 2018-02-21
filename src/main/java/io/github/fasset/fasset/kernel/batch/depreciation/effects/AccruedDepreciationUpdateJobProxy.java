@@ -63,6 +63,7 @@ public class AccruedDepreciationUpdateJobProxy {
         parameterMap.put("itemsList", itemsList);
 
         try {
+            log.debug("Bootstrapping job : {}",job);
             fixedAssetsJobsActivator.bootstrap(new JobParameters(parameterMap),jobLauncher, job, fixedAssetService,progressListener);
         } catch (BatchJobExecutionException e) {
             e.printStackTrace();

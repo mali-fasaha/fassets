@@ -1,9 +1,11 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.colleague;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
 import io.github.fasset.fasset.kernel.util.DepreciationUpdatesException;
+import io.github.fasset.fasset.model.AccruedDepreciation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,24 +29,17 @@ public class FixedAssetsColleague extends Colleague<DepreciationUpdate> {
      * @param updateMessage sent by the depreciationUpdateDispatcher
      */
     @Override
-    public void receive(Update<DepreciationUpdate> updateMessage) {
+    public void receive(UpdateProvider updateMessage) {
 
         FixedAssetDto fixedAssetDto = null;
-
         try {
-            if(updateMessage.getDestination() instanceof FixedAssetsColleague) {
-                fixedAssetDto = updateMessage.getPayload().getFixedAssetItem();
-            }
+                fixedAssetDto = (FixedAssetDto) updateMessage.get();
+
         } catch (Throwable e) {
            String errorMessage = String.format("Exception encountered while creating fixedAssetDto at destination : %s",this);
            throw new DepreciationUpdatesException(errorMessage,e);
         }
 
-        log.debug("FixedAssetDto received by the fixedAssetsColleague : {}",fixedAssetDto);
     }
 
-    @Override
-    protected void send(Update<DepreciationUpdate> updateMessage) {
-        super.send(updateMessage);
-    }
 }

@@ -1,20 +1,28 @@
 package io.github.fasset.fasset.kernel.queue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 public class Job<T> {
+
+    private static final Logger log = LoggerFactory.getLogger(Job.class);
 
     private T payLoad;
 
     public Job(T payLoad) {
         this.payLoad = payLoad;
+        log.debug("Setting payload as : {}",payLoad);
     }
 
     public T getPayLoad() {
+        log.debug("Returning payload as : {}",payLoad);
         return payLoad;
     }
 
     public Job setPayLoad(T payLoad) {
+        log.debug("Setting payload as : {}",payLoad);
         this.payLoad = payLoad;
         return this;
     }

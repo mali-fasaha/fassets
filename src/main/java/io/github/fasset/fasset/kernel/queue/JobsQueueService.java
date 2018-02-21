@@ -40,4 +40,6 @@ public interface JobsQueueService<T> {
      * @return Ordered List containing all the jobs in the Queue
      */
     List<T> getAllJobsFromQueue();
+
+    int getNumberOfItems();
 }

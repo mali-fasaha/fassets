@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.kernel.messaging.dto;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
@@ -8,7 +9,7 @@ import javax.persistence.Column;
 import java.time.YearMonth;
 import java.util.Objects;
 
-public class AccruedDepreciationDto implements Message<AccruedDepreciation>{
+public class AccruedDepreciationDto implements Message<AccruedDepreciation>,Update<AccruedDepreciation> {
 
     private Integer month;
 
@@ -88,5 +89,10 @@ public class AccruedDepreciationDto implements Message<AccruedDepreciation>{
         sb.append(", accruedDepreciation=").append(accruedDepreciation);
         sb.append('}');
         return sb.toString();
+    }
+
+    public static AccruedDepreciationDto from(AccruedDepreciation acc) {
+
+        return new AccruedDepreciationDto(acc.getMonth().getMonthValue(),acc.getMonth().getYear(),acc.getSolId(),acc.getCategory(),acc.getFixedAssetId(),acc.getAccruedDepreciation());
     }
 }

@@ -1,17 +1,10 @@
 package io.github.fasset.fasset.kernel.messaging;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
-import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
-import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
-import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,7 +18,7 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
     private List<Colleague<DepreciationUpdate>> colleagues = new ArrayList<>();
 
     @Override
-    public void send(Update updateMessage, Colleague originator) {
+    public void send(UpdateProvider updateMessage, Colleague originator) {
 
         for (Colleague<DepreciationUpdate> colleague : colleagues){
 
@@ -34,7 +27,7 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
 
                 log.debug("Sending update to colleague : {}",colleague);
 
-                colleague.receive(updateMessage.setSentBy(originator).setReceivedBy(colleague));
+                colleague.receive(updateMessage);
             }
         }
     }

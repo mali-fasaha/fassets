@@ -1,5 +1,8 @@
 package io.github.fasset.fasset.kernel.queue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -8,12 +11,16 @@ public class JobsQueueImpl<T> implements JobsQueue<T> {
 
     private Queue<Job<T>> queue = new ConcurrentLinkedQueue<>();
 
+    private static final Logger log = LoggerFactory.getLogger(JobsQueueImpl.class);
+
 
     /**
      * @param job Added to the end of the queue
      */
     @Override
     public void addJob(Job<T> job) {
+
+        log.debug("Adding job : {} to the jobsQueue",job);
 
         queue.add(job);
     }
@@ -37,6 +44,12 @@ public class JobsQueueImpl<T> implements JobsQueue<T> {
 
         queue.forEach(item -> retVal.add(item.getPayLoad()));
 
+        log.debug("Returning the queue of : {} items",retVal.size());
+
+        queue.clear();
+
+        log.debug("Queue has been reset to : {} items",queue.size());
+
         return retVal;
     }
 
@@ -46,6 +59,8 @@ public class JobsQueueImpl<T> implements JobsQueue<T> {
      */
     @Override
     public void enqueueAtTheHead(Queue<T> workInProgressQueue) {
+
+        log.debug("Enqueueing the workInProgressQueue of : {} items at the head of the jobsQueue",workInProgressQueue.size());
 
         // temporary store for existing items
         Queue<Job<T>> temp = new ConcurrentLinkedQueue<>();

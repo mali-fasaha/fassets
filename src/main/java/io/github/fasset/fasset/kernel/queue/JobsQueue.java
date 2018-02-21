@@ -19,7 +19,7 @@ public interface JobsQueue<T> {
 
     /**
      *
-     * @return The entire queue of items
+     * @return The entire queue of items. And empty the queue
      */
     Queue<T> getQueue();
 

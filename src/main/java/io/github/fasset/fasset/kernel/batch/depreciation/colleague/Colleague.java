@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.colleague;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +31,12 @@ public abstract class Colleague<T> {
      *
      * @param updateMessage
      */
-    public abstract void receive(Update<T> updateMessage);
+    public abstract void receive(UpdateProvider updateMessage);
 
-    protected void send(Update<DepreciationUpdate> updateMessage){
+    protected void send(UpdateProvider<T> updateMessage){
 
         log.debug("Sending update message : {}",updateMessage);
 
-        depreciationUpdateDispatcher.send(updateMessage.setSentBy(this),this);
+        depreciationUpdateDispatcher.send(updateMessage,this);
     }
 }

@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.effects.accrued;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component("accruedDepreciationJobListener")
 public class AccruedDepreciationJobListener implements JobExecutionListener{
 
+    private static final Logger log = LoggerFactory.getLogger(AccruedDepreciationJobListener.class);
 
     /**
      * Callback before a job executes.
@@ -16,6 +19,7 @@ public class AccruedDepreciationJobListener implements JobExecutionListener{
     @Override
     public void beforeJob(JobExecution jobExecution) {
 
+        log.info("Job : {} has been initiated...",jobExecution.getJobParameters());
     }
 
     /**
@@ -28,5 +32,6 @@ public class AccruedDepreciationJobListener implements JobExecutionListener{
     @Override
     public void afterJob(JobExecution jobExecution) {
 
+        log.info("Job : {} has been executed...",jobExecution.getJobParameters());
     }
 }

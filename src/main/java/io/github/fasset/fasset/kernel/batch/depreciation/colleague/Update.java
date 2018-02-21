@@ -1,9 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.colleague;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
-import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
-import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
-import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 
 /**
  * Generic interface for wrapping items to be sent through the DepreciationUpdatesDispatcher which
@@ -15,11 +12,4 @@ public interface Update<U> {
 
     U getPayload();
 
-    void load(U payload);
-
-    Update setSentBy(Colleague originator);
-
-    Update<DepreciationUpdate> setReceivedBy(Colleague<DepreciationUpdate> colleague);
-
-    Object getDestination();
 }

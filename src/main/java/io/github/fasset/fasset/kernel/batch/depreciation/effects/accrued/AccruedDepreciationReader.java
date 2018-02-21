@@ -20,6 +20,7 @@ public class AccruedDepreciationReader extends ListItemReader<AccruedDepreciatio
         if(list==null)
             log.error("The list of accruedDepreciationDtos passed is NULL!");
 
+        log.debug("A list of : {} has been read and is scheduled for processing by the : {}",list.size(),this);
 
     }
 }

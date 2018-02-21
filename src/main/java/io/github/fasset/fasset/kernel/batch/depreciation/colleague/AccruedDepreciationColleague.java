@@ -1,30 +1,26 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.colleague;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
 import io.github.fasset.fasset.kernel.batch.depreciation.effects.AccruedDepreciationUpdateJobExecutor;
 import io.github.fasset.fasset.kernel.batch.depreciation.effects.DepreciationUpdateProperties;
-import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.queue.JobsQueueClient;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.queue.JobsQueueClientImpl;
 import io.github.fasset.fasset.kernel.util.DepreciationUpdatesException;
+import io.github.fasset.fasset.model.AccruedDepreciation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 @Component("accruedDepreciationColleague")
-public class  AccruedDepreciationColleague extends Colleague<DepreciationUpdate> implements JobsQueueClient<AccruedDepreciationDto> {
+public class  AccruedDepreciationColleague extends Colleague<AccruedDepreciation> implements JobsQueueClient<AccruedDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(AccruedDepreciationColleague.class);
 
     private final JobsQueueClient<AccruedDepreciationDto> jobsQueueClient;
-
-
-
 
     @Autowired
     public AccruedDepreciationColleague(DepreciationUpdateDispatcher depreciationUpdateDispatcher,@Qualifier("accruedDepreciationUpdateJobExecutor") AccruedDepreciationUpdateJobExecutor accruedDepreciationUpdateJobExecutor,DepreciationUpdateProperties depreciationUpdateProperties) {
@@ -40,18 +36,19 @@ public class  AccruedDepreciationColleague extends Colleague<DepreciationUpdate>
      * @param updateMessage
      */
     @Override
-    public void receive(Update<DepreciationUpdate> updateMessage) {
+    public void receive(UpdateProvider updateMessage) {
 
-        AccruedDepreciationDto accruedDepreciationDto = null;
+        log.debug("Receiving update message {} from the mediator",updateMessage);
 
-        DepreciationUpdate update = updateMessage.getPayload();
-
-        log.debug("DepreciationUpdate received : {}",update);
+        AccruedDepreciation accruedDepreciation = null;
 
         try {
-            if(updateMessage.getDestination() instanceof AccruedDepreciationColleague){
-                accruedDepreciationDto = new AccruedDepreciationDto(update.getPeriod().getMonthValue(),
-                        update.getPeriod().getYear(), update.getSolId(), update.getCategory(), update.getFixedAssetId(), update.getAccruedDepreciation());
+            if(updateMessage instanceof AccruedDepreciationColleague){
+                log.debug("DepreciationUpdate is an instance of AccruedDepreciationColleague creating accruedDepreciationDto");
+                /*accruedDepreciationDto = new AccruedDepreciationDto(update.getPeriod().getMonthValue(),
+                        update.getPeriod().getYear(), update.getSolId(), update.getCategory(), update.getFixedAssetId(), update.getAccruedDepreciation());*/
+                accruedDepreciation = (AccruedDepreciation) updateMessage.get();
+                log.debug("AccruedDepreciationDto : {} has been created...",accruedDepreciation);
             }
         } catch (Throwable e) {
             String errorMessage = String.format("Exception encountered while receiving depreciation update : %s " +
@@ -59,18 +56,14 @@ public class  AccruedDepreciationColleague extends Colleague<DepreciationUpdate>
             throw new DepreciationUpdatesException(errorMessage,e);
         }
 
-        log.debug("AccruedDepreciation received and enqueued by the accruedDepreciationColleague : {}",accruedDepreciationDto);
+        log.debug("AccruedDepreciation : {} received and enqueued by the jobsQueueClient : {}",accruedDepreciation,jobsQueueClient);
 
-        jobsQueueClient.addJob(accruedDepreciationDto);
+        jobsQueueClient.addJob(AccruedDepreciationDto.from(accruedDepreciation));
     }
 
-    @Override
-    protected void send(Update<DepreciationUpdate> updateMessage) {
-        super.send(updateMessage);
-    }
+    public void addJob(AccruedDepreciation accruedDepreciation){
 
-    public void addJob(AccruedDepreciationDto accruedDepreciationDto){
-
-        jobsQueueClient.addJob(accruedDepreciationDto);
+        log.debug("Adding the Dto : {} to the queue...",accruedDepreciation);
+        jobsQueueClient.addJob(AccruedDepreciationDto.from(accruedDepreciation));
     }
 }

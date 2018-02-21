@@ -35,11 +35,10 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
 
     @Override
     public DepreciationUpdate getPayload() {
-        log.trace("Returning Depreciation update : {}",this);
+        log.debug("Returning Depreciation update : {}",this);
         return this;
     }
 
-    @Override
     public void load(DepreciationUpdate payload) {
         log.trace("Loading update with data : {}",payload);
         this.period=payload.getPeriod();
@@ -240,7 +239,6 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
         return netBookValueDto;
     }
 
-    @Override
     public Object getDestination() {
         return destination;
     }
@@ -308,6 +306,10 @@ public class DepreciationUpdate implements Update<DepreciationUpdate> {
         this.fixedAssetProcessed = false;
 
         return this;
+    }
+
+    public static DepreciationUpdate from(AccruedDepreciationDto from) {
+        return null;
     }
 
     public static class from extends DepreciationUpdate implements Update<DepreciationUpdate> {

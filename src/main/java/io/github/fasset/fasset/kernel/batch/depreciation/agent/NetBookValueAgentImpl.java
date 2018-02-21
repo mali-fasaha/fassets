@@ -2,10 +2,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
-import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
-import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.NetBookValue;
@@ -43,7 +40,8 @@ public class NetBookValueAgentImpl extends Colleague<NetBookValue> implements Ne
         NetBookValue netBookValue = createNetBookValue(asset,month);
 
         log.debug("Sending netBookValueItem created : {}",netBookValue);
-        send(new DepreciationUpdate.from(new NetBookValueDto(netBookValue)).getPayload().setDestination(netBookValue.getClass()).setSentBy(this));
+
+        send(()->netBookValue);
 
         return netBookValue;
     }
@@ -85,7 +83,7 @@ public class NetBookValueAgentImpl extends Colleague<NetBookValue> implements Ne
      * @param updateMessage
      */
     @Override
-    public void receive(Update<NetBookValue> updateMessage) {
+    public void receive(UpdateProvider updateMessage) {
         //crickets
     }
 }

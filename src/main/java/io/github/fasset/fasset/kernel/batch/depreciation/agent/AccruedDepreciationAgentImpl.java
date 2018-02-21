@@ -2,10 +2,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
-import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
-import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
@@ -41,7 +38,7 @@ public class AccruedDepreciationAgentImpl extends Colleague<AccruedDepreciation>
 
         log.debug("Sending AccruedDepreciation item created : {}",accruedDepreciation);
 
-        send(new DepreciationUpdate.from(new AccruedDepreciationDto(accruedDepreciation)).getPayload().setDestination(accruedDepreciation.getClass()).setSentBy(this));
+        send(()-> accruedDepreciation);
 
         return accruedDepreciation;
     }
@@ -86,7 +83,7 @@ public class AccruedDepreciationAgentImpl extends Colleague<AccruedDepreciation>
      * @param updateMessage
      */
     @Override
-    public void receive(Update<AccruedDepreciation> updateMessage) {
+    public void receive(UpdateProvider updateMessage) {
         // crickets
     }
 }

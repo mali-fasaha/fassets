@@ -182,7 +182,13 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.9.4</version>
         </dependency>
-    </dependencies>
+		<!-- https://mvnrepository.com/artifact/org.joda/joda-money -->
+		<dependency>
+			<groupId>org.joda</groupId>
+			<artifactId>joda-money</artifactId>
+			<version>0.12</version>
+		</dependency>
+	</dependencies>
 
     <build>
         <plugins>

@@ -4,8 +4,6 @@ import io.github.fasset.fasset.kernel.batch.depreciation.CategoryConfigurationRe
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationPreprocessor;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
-import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.CategoryConfiguration;
@@ -22,7 +20,7 @@ import java.time.YearMonth;
 
 @DependsOn("depreciationExecutor")
 @Component("depreciationAgent")
-public class DepreciationAgentImpl extends Colleague implements DepreciationAgent{
+public class DepreciationAgentImpl extends Colleague<Depreciation> implements DepreciationAgent{
 
     private final Logger log = LoggerFactory.getLogger(DepreciationAgentImpl.class);
 
@@ -73,7 +71,7 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
         double nbv = asset.getNetBookValue() - depreciation.getDepreciation();
 
         //send changes to queue for flushing through entityManager
-        send(new DepreciationUpdate.from(asset.setNetBookValue(nbv)).setDestination(asset.getClass()));
+        send(() -> depreciation);
 
         listener.receiveProcessUpdate(depreciation);
 
@@ -181,7 +179,7 @@ public class DepreciationAgentImpl extends Colleague implements DepreciationAgen
      * @param updateMessage Update item  to be received and processed by the Colleague
      */
     @Override
-    public void receive(Update updateMessage) {
+    public void receive(UpdateProvider updateMessage) {
         // crickets
     }
 }

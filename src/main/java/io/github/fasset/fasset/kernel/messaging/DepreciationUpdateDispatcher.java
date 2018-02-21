@@ -1,11 +1,8 @@
 package io.github.fasset.fasset.kernel.messaging;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
-import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
-import io.github.fasset.fasset.kernel.messaging.dto.FixedAssetDto;
-import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 
 import java.util.List;
 
@@ -14,9 +11,9 @@ import java.util.List;
  *
  * @author edwin.njeru
  */
-public interface DepreciationUpdateDispatcher {
+public interface DepreciationUpdateDispatcher<T> {
 
-    void send(Update updateMessage, Colleague originator);
+    void send(UpdateProvider<T> updateMessage, Colleague originator);
 
     void addColleague(Colleague colleague);
 

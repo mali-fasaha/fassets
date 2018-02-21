@@ -1,8 +1,8 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
 import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Update;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.NilDepreciation;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.model.Depreciation;
@@ -60,7 +60,7 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
      * @param updateMessage Update message to be received from the DepreciationUpdateDispatcher
      */
     @Override
-    public void receive(Update updateMessage) {
+    public void receive(UpdateProvider updateMessage) {
         // Crickets
     }
 

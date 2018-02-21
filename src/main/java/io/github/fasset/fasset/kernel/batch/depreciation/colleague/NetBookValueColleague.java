@@ -1,9 +1,11 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.colleague;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationUpdate;
 import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.kernel.messaging.dto.NetBookValueDto;
 import io.github.fasset.fasset.kernel.util.DepreciationUpdatesException;
+import io.github.fasset.fasset.model.AccruedDepreciation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,24 +31,17 @@ public class NetBookValueColleague extends Colleague<DepreciationUpdate> {
      * @param updateMessage
      */
     @Override
-    public void receive(Update<DepreciationUpdate> updateMessage) {
+    public void receive(UpdateProvider updateMessage) {
 
         NetBookValueDto netBookValueDto = null;
 
         try {
-            if (updateMessage.getDestination() instanceof NetBookValueColleague)
-                netBookValueDto = updateMessage.getPayload().getNetBookValueItem();
+                netBookValueDto = (NetBookValueDto) updateMessage.get();
         } catch (Throwable e) {
             String errorMessage = String.format("Exception encountered while deriving netBookValueDto at destianation : %s",this);
             throw new DepreciationUpdatesException(errorMessage,e);
         }
 
         log.debug("NetBookValueDto received by the NetBookValueColleague : {}", netBookValueDto);
-    }
-
-    @Override
-    public void send(Update updateMessage) {
-
-        super.send(updateMessage);
     }
 }
