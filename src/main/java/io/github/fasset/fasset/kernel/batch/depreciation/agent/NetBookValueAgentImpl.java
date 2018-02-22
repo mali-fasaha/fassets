@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 @Component("netBookValueAgent")
-public class NetBookValueAgentImpl extends Colleague<NetBookValue> implements NetBookValueAgent {
+public class NetBookValueAgentImpl extends Colleague implements NetBookValueAgent {
 
     private static final Logger log = LoggerFactory.getLogger(NetBookValueAgentImpl.class);
 

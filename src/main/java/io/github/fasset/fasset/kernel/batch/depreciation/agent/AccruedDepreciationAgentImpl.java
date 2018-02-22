@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 @Component("accruedDepreciationAgent")
-public class AccruedDepreciationAgentImpl extends Colleague<AccruedDepreciation> implements AccruedDepreciationAgent {
+public class AccruedDepreciationAgentImpl extends Colleague implements AccruedDepreciationAgent {
 
     private static final Logger log = LoggerFactory.getLogger(AccruedDepreciationAgentImpl.class);
 
@@ -80,10 +80,11 @@ public class AccruedDepreciationAgentImpl extends Colleague<AccruedDepreciation>
      * containing the Object of type U and formulates appropriate
      * response
      *
-     * @param updateMessage
+     * @param provider
      */
     @Override
-    public void receive(UpdateProvider updateMessage) {
+    public void receive(UpdateProvider provider) {
         // crickets
+        log.debug("Receing update provider...{}",provider);
     }
 }

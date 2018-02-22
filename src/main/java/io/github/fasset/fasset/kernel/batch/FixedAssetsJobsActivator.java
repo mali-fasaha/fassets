@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.kernel.batch;
 
-import io.github.fasset.fasset.kernel.queue.WorkInProgressListener;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
+import io.github.fasset.fasset.kernel.util.WorkInProgressListener;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Component
+@Configuration
 public class DepreciationUpdateDispatcherConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationUpdateDispatcherConfiguration.class);
@@ -59,6 +59,9 @@ public class DepreciationUpdateDispatcherConfiguration {
         depreciationUpdateDispatcher.addColleague(depreciationExecutor);
 
         log.info("{} colleagues have been registered...",depreciationUpdateDispatcher.getColleagues().size());
+
+        depreciationUpdateDispatcher.getColleagues()
+                .forEach(colleague -> log.debug(" Colleague => {}",colleague));
     }
 
 }

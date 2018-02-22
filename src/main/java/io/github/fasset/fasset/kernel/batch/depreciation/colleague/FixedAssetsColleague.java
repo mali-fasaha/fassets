@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("fixedAssetsColleague")
-public class FixedAssetsColleague extends Colleague<DepreciationUpdate> {
+public class FixedAssetsColleague extends Colleague{
 
     private static final Logger log = LoggerFactory.getLogger(FixedAssetsColleague.class);
 

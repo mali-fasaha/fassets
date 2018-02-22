@@ -2,8 +2,8 @@ package io.github.fasset.fasset.kernel.batch.depreciation.effects;
 
 import io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator;
 import io.github.fasset.fasset.kernel.messaging.dto.AccruedDepreciationDto;
-import io.github.fasset.fasset.kernel.queue.WorkInProgressListener;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
+import io.github.fasset.fasset.kernel.util.WorkInProgressListener;
 import io.github.fasset.fasset.service.FixedAssetService;
 import io.github.fasset.fasset.service.impl.FixedAssetServiceImpl;
 import org.slf4j.Logger;

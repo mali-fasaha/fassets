@@ -15,19 +15,19 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationUpdateDispatcherImpl.class);
 
-    private List<Colleague<DepreciationUpdate>> colleagues = new ArrayList<>();
+    private List<Colleague> colleagues = new ArrayList<>();
 
     @Override
-    public void send(UpdateProvider updateMessage, Colleague originator) {
+    public void send(UpdateProvider updateProvider, Colleague originator) {
 
-        for (Colleague<DepreciationUpdate> colleague : colleagues){
+        for (Colleague colleague : colleagues){
 
             // don't send to self
             if(colleague != originator){
 
-                log.debug("Sending update to colleague : {}",colleague);
+                log.debug("Sending provider to colleague : {}",colleague);
 
-                colleague.receive(updateMessage);
+                colleague.receive(updateProvider);
             }
         }
     }
@@ -39,7 +39,7 @@ public class DepreciationUpdateDispatcherImpl implements DepreciationUpdateDispa
     }
 
     @Override
-    public List<Colleague<DepreciationUpdate>> getColleagues() {
+    public List<Colleague> getColleagues() {
         return colleagues;
     }
 }

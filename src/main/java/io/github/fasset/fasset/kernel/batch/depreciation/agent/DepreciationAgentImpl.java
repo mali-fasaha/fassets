@@ -20,7 +20,7 @@ import java.time.YearMonth;
 
 @DependsOn("depreciationExecutor")
 @Component("depreciationAgent")
-public class DepreciationAgentImpl extends Colleague<Depreciation> implements DepreciationAgent{
+public class DepreciationAgentImpl extends Colleague implements DepreciationAgent{
 
     private final Logger log = LoggerFactory.getLogger(DepreciationAgentImpl.class);
 

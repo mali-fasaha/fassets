@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("netBookValueColleague")
-public class NetBookValueColleague extends Colleague<DepreciationUpdate> {
+public class NetBookValueColleague extends Colleague{
 
     @Autowired
     private DepreciationUpdateDispatcher updateDispatcher;

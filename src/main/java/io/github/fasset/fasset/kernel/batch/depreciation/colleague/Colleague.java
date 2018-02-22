@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  *
  * @param <T> Type of update to receive as dictated by the name of the implementation
  */
-public abstract class Colleague<T> {
+public abstract class Colleague {
 
     private static final Logger log = LoggerFactory.getLogger(Colleague.class);
 
@@ -29,14 +29,14 @@ public abstract class Colleague<T> {
      * containing the Object of type U and formulates appropriate
      * response
      *
-     * @param updateMessage
+     * @param updateProvider containing the item for processing
      */
-    public abstract void receive(UpdateProvider updateMessage);
+    public abstract void receive(UpdateProvider updateProvider);
 
-    protected void send(UpdateProvider<T> updateMessage){
+    protected void send(UpdateProvider updateProvider){
 
-        log.debug("Sending update message : {}",updateMessage);
+        log.debug("Sending update message : {}",updateProvider);
 
-        depreciationUpdateDispatcher.send(updateMessage,this);
+        depreciationUpdateDispatcher.send(updateProvider,this);
     }
 }
