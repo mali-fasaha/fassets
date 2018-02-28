@@ -1,7 +1,6 @@
-package io.github.fasset.fasset.kernel.batch.depreciation;
+package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties;
-import io.github.fasset.fasset.model.Depreciation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

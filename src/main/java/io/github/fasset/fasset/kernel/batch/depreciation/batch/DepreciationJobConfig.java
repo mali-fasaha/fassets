@@ -1,5 +1,6 @@
-package io.github.fasset.fasset.kernel.batch.depreciation;
+package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobListener;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.batch.core.Job;
