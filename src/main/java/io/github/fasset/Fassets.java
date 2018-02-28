@@ -1,6 +1,5 @@
 package io.github.fasset;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.effects.DepreciationUpdateProperties;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties;
 import io.github.fasset.fasset.kernel.storage.StorageProperties;
 import io.github.fasset.fasset.kernel.storage.StorageService;
@@ -27,8 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan("io.github.fasset.fasset")
 @EnableConfigurationProperties(
 		value = {StorageProperties.class,
-				DepreciationProperties.class,
-				DepreciationUpdateProperties.class})
+				DepreciationProperties.class})
 public class Fassets {
 
 	public static void main(String[] args) {

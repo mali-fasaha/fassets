@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
@@ -13,5 +14,5 @@ import java.time.YearMonth;
  */
 public interface Agent<T> {
 
-    T invoke(FixedAsset asset, YearMonth month, DepreciationListener listener);
+    T invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

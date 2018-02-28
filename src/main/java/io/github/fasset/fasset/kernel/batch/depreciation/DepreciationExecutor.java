@@ -15,7 +15,7 @@ public interface DepreciationExecutor {
      * @param month the month for which we are calculating depreciation
      * @return {@link Depreciation} object
      */
-    Depreciation getDepreciation(FixedAsset asset, YearMonth month);
+    DepreciationProceeds getDepreciation(FixedAsset asset, YearMonth month);
 
     void setDepreciation(Depreciation depreciation);
 }

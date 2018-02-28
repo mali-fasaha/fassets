@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
-import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.service.DepreciationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
-public class DepreciationWriter implements ItemWriter<List<Depreciation>> {
+public class DepreciationWriter implements ItemWriter<List<DepreciationProceeds>> {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationWriter.class);
 
@@ -23,23 +23,23 @@ public class DepreciationWriter implements ItemWriter<List<Depreciation>> {
      * Process the supplied data element. Will not be called with any null items
      * in normal operation.
      *
-     * @param depreciationLists items to be written
+     * @param depreciationProceedsLists items to be written
      * @throws Exception if there are errors. The framework will catch the
      *                   exception and convert or rethrow it as appropriate.
      */
     @Override
-    public void write(List<? extends List<Depreciation>> depreciationLists) throws Exception {
+    public void write(List<? extends List<DepreciationProceeds>> depreciationProceedsLists) throws Exception {
 
-        log.info("Writing : {} DepreciationLists to the depreciationRepository",depreciationLists.size());
+        log.info("Writing : {} DepreciationLists to the depreciationRepository",depreciationProceedsLists.size());
 
         try {
-            depreciationLists.forEach( list ->{
+            depreciationProceedsLists.forEach( list ->{
                 log.info("Saving to repository : {} depreciation items",list.size());
-                    depreciationService.saveAllDepreciationItems(list);
+                    depreciationService.saveAllDepreciationProceeds(list);
             });
         } catch (Throwable e) {
             String message = String.format("Exception encountered while persisting depreciation items" +
-                    "passed in the list to the depreciation writer. These are the items : %s",depreciationLists);
+                    "passed in the list to the depreciation writer. These are the items : %s",depreciationProceedsLists);
             throw new DepreciationExecutionException(message,e);
         }
 

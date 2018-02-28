@@ -1,5 +1,6 @@
 package io.github.fasset.fasset.service;
 
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.model.Depreciation;
 
 import java.util.List;
@@ -28,4 +29,12 @@ public interface DepreciationService {
      * @return Return the number of distinct sols
      */
     int getDistinctSolIds();
+
+    /**
+     * Saves multiple items using multiple repositories for items encapsulated in the
+     * DepreciationProceeds object
+     *
+     * @param list of depreciationProceeds
+     */
+    void saveAllDepreciationProceeds(List<DepreciationProceeds> list);
 }

@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobListener;
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.batch.core.Job;
@@ -56,7 +57,7 @@ public class DepreciationJobConfig {
     @Bean
     public Step depreciationStep1() {
         return stepBuilderFactory.get("depreciationStep1")
-                .<FixedAsset, List<Depreciation>> chunk(100)
+                .<FixedAsset, List<DepreciationProceeds>> chunk(100)
                 .reader(fixedAssetItemReader)
                 .processor(depreciationProcessor())
                 .writer(depreciationWriter())

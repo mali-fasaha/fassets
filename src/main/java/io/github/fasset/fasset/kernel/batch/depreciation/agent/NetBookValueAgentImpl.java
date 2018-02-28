@@ -1,8 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
-import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.NetBookValue;
@@ -15,14 +14,9 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 @Component("netBookValueAgent")
-public class NetBookValueAgentImpl extends Colleague implements NetBookValueAgent {
+public class NetBookValueAgentImpl implements NetBookValueAgent {
 
     private static final Logger log = LoggerFactory.getLogger(NetBookValueAgentImpl.class);
-
-    @Autowired
-    public NetBookValueAgentImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
-        super(depreciationUpdateDispatcher);
-    }
 
     /**
      * Upon invocation the implementation will return the netBoookValue item for the relevant month
@@ -33,7 +27,7 @@ public class NetBookValueAgentImpl extends Colleague implements NetBookValueAgen
      * @return The relevant NetBookValue item
      */
     @Override
-    public NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationListener listener) {
+    public NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {
 
         log.debug("Processing NetBookValue item for the asset : {} in the period : {}",asset,month);
 
@@ -41,7 +35,9 @@ public class NetBookValueAgentImpl extends Colleague implements NetBookValueAgen
 
         log.debug("Sending netBookValueItem created : {}",netBookValue);
 
-        send(()->netBookValue);
+        //send(()->netBookValue);
+
+        proceeds.setNetBookValue(netBookValue);
 
         return netBookValue;
     }
@@ -75,15 +71,4 @@ public class NetBookValueAgentImpl extends Colleague implements NetBookValueAgen
         return netBookValue;
     }
 
-    /**
-     * This method listens for message sent to a queue
-     * containing the Object of type U and formulates appropriate
-     * response
-     *
-     * @param updateMessage
-     */
-    @Override
-    public void receive(UpdateProvider updateMessage) {
-        //crickets
-    }
 }
