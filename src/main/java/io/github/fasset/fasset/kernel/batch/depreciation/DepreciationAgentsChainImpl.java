@@ -43,17 +43,14 @@ public class DepreciationAgentsChainImpl {
         agents.add(agent);
     }
 
-    public void execute(FixedAsset asset, YearMonth month,DepreciationListener listener) {
-
-        DepreciationProceeds proceeds = new DepreciationProceeds();
+    public void execute(FixedAsset asset, YearMonth month,DepreciationProceeds depreciationProceeds) {
 
         // invoke all agents
         for(Agent agent : agents){
 
-            agent.invoke(asset,month,proceeds);
+            agent.invoke(asset,month,depreciationProceeds);
 
         }
 
-        listener.receiveProcessUpdate(proceeds);
     }
 }

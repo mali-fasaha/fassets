@@ -37,6 +37,7 @@ public class DepreciationWriter implements ItemWriter<List<DepreciationProceeds>
                 log.info("Saving to repository : {} depreciation items",list.size());
                     depreciationService.saveAllDepreciationProceeds(list);
             });
+
         } catch (Throwable e) {
             String message = String.format("Exception encountered while persisting depreciation items" +
                     "passed in the list to the depreciation writer. These are the items : %s",depreciationProceedsLists);

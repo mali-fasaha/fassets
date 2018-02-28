@@ -2,6 +2,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutorImpl;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
+import io.github.fasset.fasset.kernel.batch.depreciation.ProceedsList;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.eclipse.collections.impl.list.mutable.FastList;
@@ -41,17 +42,7 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<Depr
 
         //List<Depreciation> depreciationList = new LinkedList<>();
         //DepreciationProceeds proceeds = new DepreciationProceeds();
-        List<DepreciationProceeds> depreciationProceeds = new FastList<>();
-
-        /*depreciationRelay.getMonthlyDepreciationSequence()
-                .forEach(
-                        i -> {
-
-                            log.debug("Calculating depreciation in the month of :{} for asset {}",i,fixedAsset);
-
-                            depreciationList.add(depreciationExecutor.getDepreciation(fixedAsset,i));
-                        }
-                );*/
+        List<DepreciationProceeds> depreciationProceeds = new ProceedsList<>();
 
         depreciationRelay.getMonthlyDepreciationSequence()
                 .forEach(

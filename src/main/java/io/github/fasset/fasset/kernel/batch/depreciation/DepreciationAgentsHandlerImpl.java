@@ -21,8 +21,8 @@ public class DepreciationAgentsHandlerImpl implements DepreciationAgentsHandler 
     }
 
     @Override
-    public void sendRequest(FixedAsset asset, YearMonth month,DepreciationListener listener) {
+    public void sendRequest(FixedAsset asset, YearMonth month,DepreciationProceeds depreciationProceeds) {
 
-        depreciationAgentsChain.execute(asset,month,listener);
+        depreciationAgentsChain.execute(asset,month,depreciationProceeds);
     }
 }

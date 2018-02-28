@@ -90,7 +90,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor{
                     "registry for category : {}",asset,asset.getCategory());
 
             //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
-            depreciationAgentsHandler.sendRequest(asset, month, this::setDepreciationProceeds); //for now
+            depreciationAgentsHandler.sendRequest(asset, month, depreciationProceeds); //for now
 
         }
 
