@@ -16,5 +16,6 @@ public interface MonthlyAssetDepreciationRepository extends JpaRepository<Monthl
     MonthlyAssetDepreciation findFirstByAssetIdAndYearEquals(int assetId, int year);
 
     @Override
-    boolean existsById(Integer modelId);
+    boolean exists(Integer modelId);
+
 }

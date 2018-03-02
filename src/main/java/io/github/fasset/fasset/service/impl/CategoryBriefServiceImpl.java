@@ -60,7 +60,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
         CategoryBrief categoryBrief = null;
 
         try {
-            categoryBrief = categoryBriefRepository.findById(id).get();
+            categoryBrief = categoryBriefRepository.findOne(id);
         } catch (Throwable e) {
             String message = "Error fetching categoryBriefs from repository";
             throw new DataRetrievalFromControllerException(message,e);
@@ -99,6 +99,6 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
             }
         }
 
-        categoryBriefRepository.saveAll(unsavedItems);
+        categoryBriefRepository.save(unsavedItems);
     }
 }

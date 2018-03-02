@@ -43,6 +43,6 @@ public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciation
     @Override
     public void saveAllMonthlyDepreciationItems(List<? extends MonthlySolDepreciation> items) {
 
-        monthlySolDepreciationRepository.saveAll(items);
+        monthlySolDepreciationRepository.save(items);
     }
 }

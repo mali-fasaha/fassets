@@ -10,12 +10,12 @@ import java.util.Optional;
 public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
-    public Optional<String> getCurrentAuditor() {
+    public String getCurrentAuditor() {
 
         //return Optional.of(profileService.getMyUsername());
 
         //TODO use Spring Security to return currently logged in user
         // return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()
-        return Optional.of("edwin.njeru");
+        return "edwin.njeru";
     }
 }

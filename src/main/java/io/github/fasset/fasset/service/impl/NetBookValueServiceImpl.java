@@ -48,7 +48,8 @@ public class NetBookValueServiceImpl implements NetBookValueService {
     @Override
     public void saveAllNetBookValueItems(List<? extends NetBookValue> netBookValues) {
 
-        netBookValueRepository.saveAll(netBookValues);
+        netBookValueRepository.save(netBookValues);
+
     }
 
 }

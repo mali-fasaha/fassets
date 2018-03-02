@@ -2,17 +2,14 @@ package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutorImpl;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
-import io.github.fasset.fasset.kernel.batch.depreciation.ProceedsList;
-import io.github.fasset.fasset.model.Depreciation;
+import io.github.fasset.fasset.kernel.util.ProceedsList;
 import io.github.fasset.fasset.model.FixedAsset;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<DepreciationProceeds>> {
