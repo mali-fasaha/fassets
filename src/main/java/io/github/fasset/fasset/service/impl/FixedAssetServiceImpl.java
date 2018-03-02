@@ -36,7 +36,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     @Override
     public void saveAllFixedAssets(List<? extends FixedAsset> fixedAssets) {
 
-        fixedAssetRepository.save(fixedAssets);
+        fixedAssetRepository.saveAll(fixedAssets);
     }
 
     /**
@@ -63,7 +63,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     @Cacheable
     public FixedAsset fetchAssetGivenId(int id) {
 
-        return fixedAssetRepository.findOne(id);
+        return fixedAssetRepository.findById(id).get();
     }
 
     /**

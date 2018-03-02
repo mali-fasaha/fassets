@@ -57,7 +57,7 @@ public class DepreciationServiceImpl implements DepreciationService {
 
         log.debug("Saving {} depreciation items to repository", depreciationList.size());
 
-        depreciationRepository.save(depreciationList);
+        depreciationRepository.saveAll(depreciationList);
     }
 
     /**
@@ -78,7 +78,7 @@ public class DepreciationServiceImpl implements DepreciationService {
     @Override
     public void saveAllDepreciationProceeds(List<DepreciationProceeds> list) {
 
-        depreciationRepository.save(
+        depreciationRepository.saveAll(
                 list.stream()
                         .map(DepreciationProceeds::getDepreciation)
                         .collect(ImmutableListCollector.toImmutableList())

@@ -47,7 +47,7 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     @Override
     public CategoryConfiguration getCategoryConfigurationById(int id) {
 
-        return categoryConfigurationRepository.findOne(id);
+        return categoryConfigurationRepository.findById(id).get();
     }
 
     @Override

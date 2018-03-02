@@ -78,6 +78,6 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
 
         savedItems.forEach(i -> monthlyAssetDepreciationRepository.deleteById(i.getId()));*/
 
-        monthlyAssetDepreciationRepository.save(items);
+        monthlyAssetDepreciationRepository.saveAll(items);
     }
 }

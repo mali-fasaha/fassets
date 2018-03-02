@@ -71,6 +71,6 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
 
         log.info("Saving a collection of : {} accruedDepreciation items", items.size());
 
-        accruedDepreciationRepository.save(items);
+        accruedDepreciationRepository.saveAll(items);
     }
 }

@@ -47,6 +47,6 @@ public class MonthlyCategoryDepreciationServiceImpl implements MonthlyCategoryDe
     @Override
     public void saveAllMonthlyCategoryDepreciations(List<? extends MonthlyCategoryDepreciation> items) {
 
-        depreciationReposiory.save(items);
+        depreciationReposiory.saveAll(items);
     }
 }

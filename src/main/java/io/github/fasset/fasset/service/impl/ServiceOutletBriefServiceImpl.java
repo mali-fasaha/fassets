@@ -55,7 +55,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
         ServiceOutletBrief serviceOutletBrief = null;
 
         try {
-            serviceOutletBrief = serviceOutletBriefRepository.findOne(id);
+            serviceOutletBrief = serviceOutletBriefRepository.findById(id).get();
         } catch (Throwable e) {
             String message = "Exception encountered while extracting data from the serviceOutletBriefRepository";
             throw new DataRetrievalFromControllerException(message,e);
@@ -95,6 +95,6 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
             }
         }
 
-        serviceOutletBriefRepository.save(unsavedItems);
+        serviceOutletBriefRepository.saveAll(unsavedItems);
     }
 }
