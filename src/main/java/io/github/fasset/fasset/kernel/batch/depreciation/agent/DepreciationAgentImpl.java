@@ -65,6 +65,9 @@ public class DepreciationAgentImpl implements DepreciationAgent{
         //send changes to queue for flushing through entityManager
         //send(() -> depreciation);
 
+        // set new nbv in the fixedAsset item
+        asset.setNetBookValue(nbv);
+
         proceeds.setDepreciation(depreciation);
 
         return depreciation;
