@@ -16,14 +16,22 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     private static final Logger log  = LoggerFactory.getLogger(FileUploadServiceImpl.class);
 
-    private final FileUploadRepository fileUploadRepository;
+    private FileUploadRepository fileUploadRepository;
 
-    private final UploadNotificationService notificationService;
+    private UploadNotificationService notificationService;
 
     @Autowired
-    public FileUploadServiceImpl(@Qualifier("fileUploadRepository") FileUploadRepository fileUploadRepository, @Qualifier("notificationService") UploadNotificationService notificationService) {
+    @Qualifier("fileUploadRepository")
+    public FileUploadServiceImpl setFileUploadRepository(FileUploadRepository fileUploadRepository) {
         this.fileUploadRepository = fileUploadRepository;
+        return this;
+    }
+
+    @Autowired
+    @Qualifier("notificationService")
+    public FileUploadServiceImpl setNotificationService(UploadNotificationService notificationService) {
         this.notificationService = notificationService;
+        return this;
     }
 
     @Override
