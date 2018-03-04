@@ -2,6 +2,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
+import io.github.fasset.fasset.kernel.util.ProcessingList;
 import io.github.fasset.fasset.service.DepreciationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
-public class DepreciationWriter implements ItemWriter<List<DepreciationProceeds>> {
+public class DepreciationWriter implements ItemWriter<ProcessingList<DepreciationProceeds>> {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationWriter.class);
 
@@ -28,7 +29,7 @@ public class DepreciationWriter implements ItemWriter<List<DepreciationProceeds>
      *                   exception and convert or rethrow it as appropriate.
      */
     @Override
-    public void write(List<? extends List<DepreciationProceeds>> depreciationProceedsLists) throws Exception {
+    public void write(List<? extends ProcessingList<DepreciationProceeds>> depreciationProceedsLists) throws Exception {
 
         log.info("Writing : {} DepreciationLists to the depreciationRepository",depreciationProceedsLists.size());
 

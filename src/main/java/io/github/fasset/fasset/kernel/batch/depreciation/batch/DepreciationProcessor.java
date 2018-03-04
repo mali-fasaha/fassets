@@ -1,8 +1,8 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutorImpl;
+import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutor;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
-import io.github.fasset.fasset.kernel.util.ProceedsList;
+import io.github.fasset.fasset.kernel.util.ProcessingList;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,19 +10,22 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.List;
 
-public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<DepreciationProceeds>> {
+public class DepreciationProcessor implements ItemProcessor<FixedAsset,ProcessingList<DepreciationProceeds>> {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationProcessor.class);
 
-    @Autowired
-    @Qualifier("depreciationRelay")
+
     private DepreciationRelay depreciationRelay;
 
-    @Autowired
-    @Qualifier("depreciationExecutor")
-    private DepreciationExecutorImpl depreciationExecutor;
+
+    private DepreciationExecutor depreciationExecutor;
+
+    private ProcessingList<DepreciationProceeds> processingList;
+
+    public DepreciationProcessor(ProcessingList<DepreciationProceeds> processingList) {
+        this.processingList = processingList;
+    }
 
     /**
      * Process the provided item, returning a potentially modified or new item for continued
@@ -35,11 +38,9 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<Depr
      * @throws Exception thrown if exception occurs during processing.
      */
     @Override
-    public List<DepreciationProceeds> process(FixedAsset fixedAsset) throws Exception {
+    public ProcessingList<DepreciationProceeds> process(FixedAsset fixedAsset) throws Exception {
 
-        //List<Depreciation> depreciationList = new LinkedList<>();
-        //DepreciationProceeds proceeds = new DepreciationProceeds();
-        List<DepreciationProceeds> depreciationProceeds = new ProceedsList<>();
+        //ProcessingList<DepreciationProceeds> depreciationProceeds = new ProcessingListImpl<>();
 
         depreciationRelay.getMonthlyDepreciationSequence()
                 .forEach(
@@ -47,11 +48,26 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset,List<Depr
 
                             log.debug("Calculating depreciation in the month of :{} for asset {}",i,fixedAsset);
 
-                            depreciationProceeds.add(depreciationExecutor.getDepreciation(fixedAsset,i));
+                            processingList.add(depreciationExecutor.getDepreciation(fixedAsset,i));
                         }
                 );
 
 
-        return depreciationProceeds;
+        return processingList;
+    }
+
+
+    @Autowired
+    @Qualifier("depreciationRelay")
+    public DepreciationProcessor setDepreciationRelay(DepreciationRelay depreciationRelay) {
+        this.depreciationRelay = depreciationRelay;
+        return this;
+    }
+
+    @Autowired
+    @Qualifier("depreciationExecutor")
+    public DepreciationProcessor setDepreciationExecutor(DepreciationExecutor depreciationExecutor) {
+        this.depreciationExecutor = depreciationExecutor;
+        return this;
     }
 }
