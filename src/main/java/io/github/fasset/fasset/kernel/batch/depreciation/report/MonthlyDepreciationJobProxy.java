@@ -2,8 +2,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.report;
 
 import com.google.common.collect.ImmutableSet;
 import io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator;
-import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationRelay;
-import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
+import io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationRelay;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

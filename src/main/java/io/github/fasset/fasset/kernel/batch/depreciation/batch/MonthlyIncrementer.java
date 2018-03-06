@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel.batch.depreciation;
+package io.github.fasset.fasset.kernel.batch.depreciation.batch;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationJobInstance;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationJobInstanceRepository;

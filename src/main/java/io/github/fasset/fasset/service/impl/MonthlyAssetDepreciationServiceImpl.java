@@ -67,7 +67,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
 
         /*items
                 .stream()
-                .filter(i -> !monthlyAssetDepreciationRepository.existsById(i.getId()))
+                .filter(i -> !monthlyAssetDepreciationRepository.exists(i.getId()))
                 .forEach(unsavedItems::add);*/
         /*items
                 .stream()

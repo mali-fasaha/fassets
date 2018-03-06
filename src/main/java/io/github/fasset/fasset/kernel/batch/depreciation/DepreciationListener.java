@@ -5,5 +5,5 @@ import io.github.fasset.fasset.model.Depreciation;
 @FunctionalInterface
 public interface DepreciationListener{
 
-    void receiveProcessUpdate(Depreciation depreciation);
+    void receiveProcessUpdate(DepreciationProceeds depreciationProceeds);
 }

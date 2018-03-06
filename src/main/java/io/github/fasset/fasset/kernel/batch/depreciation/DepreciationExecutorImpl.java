@@ -2,9 +2,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
 import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
-import io.github.fasset.fasset.kernel.batch.depreciation.colleague.Colleague;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.NilDepreciation;
-import io.github.fasset.fasset.kernel.messaging.DepreciationUpdateDispatcher;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
@@ -27,13 +25,14 @@ import java.time.YearMonth;
  */
 @Service("depreciationExecutor")
 @Transactional
-public class DepreciationExecutorImpl extends Colleague implements DepreciationExecutor{
+public class DepreciationExecutorImpl implements DepreciationExecutor{
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationExecutorImpl.class);
 
     private LocalDateToYearMonthConverter localDateToYearMonthConverter;
     private DepreciationAgentsHandler depreciationAgentsHandler;
     private Depreciation depreciation;
+    private DepreciationProceeds depreciationProceeds;
 
     @Autowired
     public DepreciationExecutorImpl setLocalDateToYearMonthConverter(LocalDateToYearMonthConverter localDateToYearMonthConverter) {
@@ -47,34 +46,19 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
         return this;
     }
 
-    @Autowired
-    public DepreciationExecutorImpl(@Qualifier("depreciationUpdateDispatcher") DepreciationUpdateDispatcher depreciationUpdateDispatcher) {
-        super(depreciationUpdateDispatcher);
-    }
-
-    /**
-     * This method listens for message sent to a queue
-     * containing the Object of type U and formulates appropriate
-     * response
-     *
-     * @param updateMessage Update message to be received from the DepreciationUpdateDispatcher
-     */
-    @Override
-    public void receive(UpdateProvider updateMessage) {
-        // Crickets
-    }
-
     /**
      * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new
      * net book value and the month of depreciation
      *
      * @param asset {@link FixedAsset} to be depreciated
      * @param month the month for which we are calculating depreciation
-     * @return {@link Depreciation} object
+     * @return {@link DepreciationProceeds} object
      */
     //@Cacheable
     @Override
-    public Depreciation getDepreciation(FixedAsset asset, YearMonth month){
+    public DepreciationProceeds getDepreciation(FixedAsset asset, YearMonth month){
+
+        DepreciationProceeds depreciationProceeds = new DepreciationProceeds();
 
         if(asset.getNetBookValue() == 0.00) {
 
@@ -83,6 +67,11 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
 
            depreciation = getNilDepreciation(asset,month);
 
+           depreciationProceeds
+                   .setDepreciation(depreciation)
+                   .setNetBookValue(new UnModifiedNetBookValue(asset,month).getNetBookValue())
+                   .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset,month).getAccruedDepreciation());
+
         } else if(localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)){
 
             log.trace("The depreciation period : {} is sooner that the assets purchase date {} " +
@@ -90,18 +79,22 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
 
             depreciation = getNilDepreciation(asset,month);
 
+            depreciationProceeds
+                    .setDepreciation(depreciation)
+                    .setNetBookValue(new UnModifiedNetBookValue(asset,month).getNetBookValue())
+                    .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset,month).getAccruedDepreciation());
+
         }else {
 
             log.trace("The asset : {} has passed the frontal Business rules filter, initiating configuration" +
                     "registry for category : {}",asset,asset.getCategory());
 
-            //TODO: implement NilAccruedDepreciation, and UnmodifiedNetBookValue
             //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
-            depreciationAgentsHandler.sendRequest(asset, month, this::setDepreciation); //for now
+            depreciationAgentsHandler.sendRequest(asset, month, depreciationProceeds); //for now
 
         }
 
-        return depreciation;
+        return depreciationProceeds;
     }
 
     /**
@@ -123,5 +116,14 @@ public class DepreciationExecutorImpl extends Colleague implements DepreciationE
 
     public Depreciation getDepreciation() {
         return depreciation;
+    }
+
+    public DepreciationProceeds getDepreciationProceeds() {
+        return depreciationProceeds;
+    }
+
+    public DepreciationExecutorImpl setDepreciationProceeds(DepreciationProceeds depreciationProceeds) {
+        this.depreciationProceeds = depreciationProceeds;
+        return this;
     }
 }

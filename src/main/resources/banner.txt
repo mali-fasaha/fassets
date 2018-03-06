@@ -7,5 +7,5 @@ MM88MMM  ,adPPYYba,  ,adPPYba,  ,adPPYba,   ,adPPYba,  MM88MMM  ,adPPYba,
   88     88,    ,88  aa    ]8I  aa    ]8I  "8b,   ,aa    88,    aa    ]8I
   88     `"8bbdP"Y8  `"YbbdP"'  `"YbbdP"'   `"Ybbd8"'    "Y888  `"YbbdP"'
 
-::::::::::::::::::::::::::::::::::::::::0.0.1.SNAPSHOT by Edwin Njeru
+:::::::::::::::::::::::::::::::::::0.0.1 by Edwin Njeru
 
