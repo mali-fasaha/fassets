@@ -1,7 +1,6 @@
 package io.github.fasset.fasset.kernel.batch;
 
-import io.github.fasset.fasset.kernel.messaging.FileUploadNotification;
-import io.github.fasset.fasset.model.files.FileUpload;
+import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import org.slf4j.Logger;
 import org.springframework.batch.core.Job;
@@ -10,7 +9,6 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
@@ -70,7 +68,8 @@ public class ExcelUploadJob {
      * @param message
      * @throws JMSException
      */
-    @JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
+    //@JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
+    //FIXME : To notify by observer pattern
     public void listenForMessages(FileUploadNotification message){
 
         String fileName = message.getFileName();

@@ -2,10 +2,6 @@ package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,26 +10,18 @@ import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.Objects;
 
-/**
- * This objects records the accrued depreciation for a given fixed asset at a given point in time being the end of a
- * given {@link java.time.YearMonth}
- *
- * @author edwin.njeru
- */
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "month","sol_id","category","fixed_asset_id","accrued_depreciation"
+                "fixed_asset_id","month","accrued_depreciation","sol_id","category"
         })
 })
-@Entity(name="AccruedDepreciation")
 @Audited
-public class AccruedDepreciation extends DomainModel<String>{
+@Entity(name="AccruedDepreciation")
+public class AccruedDepreciation extends DomainModel<String> {
 
-    private static final Logger log = LoggerFactory.getLogger("AccruedDepreciation");
+    @Column(name="fixed_asset_id")
+    private int fixedAssetId;
 
-    /**
-     * The period the end of which we are recording this accrued depreciation
-     */
     @Column(name="month")
     private YearMonth month;
 
@@ -43,31 +31,15 @@ public class AccruedDepreciation extends DomainModel<String>{
     @Column(name="category")
     private String category;
 
-    @Column(name="fixed_asset_id")
-    private int fixedAssetId;
-
     @Column(name="accrued_depreciation")
     private double accruedDepreciation;
 
-    public AccruedDepreciation() {
+    public int getFixedAssetId() {
+        return fixedAssetId;
     }
 
-    public AccruedDepreciation(YearMonth month, String solId, String category, int fixedAssetId, double accruedDepreciation) {
-        this.month = month;
-        this.solId = solId;
-        this.category = category;
+    public AccruedDepreciation setFixedAssetId(int fixedAssetId) {
         this.fixedAssetId = fixedAssetId;
-        this.accruedDepreciation = accruedDepreciation;
-    }
-
-    public double getAccruedDepreciation() {
-        return accruedDepreciation;
-    }
-
-    public AccruedDepreciation setAccruedDepreciation(double accruedDepreciation) {
-
-        log.debug("Setting accruedDepreciation for AccruedDepreciationId : {} as = {}",getId(),accruedDepreciation);
-        this.accruedDepreciation = accruedDepreciation;
         return this;
     }
 
@@ -76,8 +48,6 @@ public class AccruedDepreciation extends DomainModel<String>{
     }
 
     public AccruedDepreciation setMonth(YearMonth month) {
-
-        log.debug("Setting month for AccruedDepreciationId : {} as = {}",getId(),month);
         this.month = month;
         return this;
     }
@@ -87,8 +57,6 @@ public class AccruedDepreciation extends DomainModel<String>{
     }
 
     public AccruedDepreciation setSolId(String solId) {
-
-        log.debug("Setting solId for AccruedDepreciationId : {} as = {}",getId(),solId);
         this.solId = solId;
         return this;
     }
@@ -98,20 +66,16 @@ public class AccruedDepreciation extends DomainModel<String>{
     }
 
     public AccruedDepreciation setCategory(String category) {
-
-        log.debug("Setting category for AccruedDepreciationId : {} as = {}",getId(),category);
         this.category = category;
         return this;
     }
 
-    public int getFixedAssetId() {
-        return fixedAssetId;
+    public double getAccruedDepreciation() {
+        return accruedDepreciation;
     }
 
-    public AccruedDepreciation setFixedAssetId(int fixedAssetId) {
-
-        log.debug("Setting fixedAssetId for AccruedDepreciationId : {} as = {}",getId(),fixedAssetId);
-        this.fixedAssetId = fixedAssetId;
+    public AccruedDepreciation setAccruedDepreciation(double accruedDepreciation) {
+        this.accruedDepreciation = accruedDepreciation;
         return this;
     }
 
@@ -130,18 +94,18 @@ public class AccruedDepreciation extends DomainModel<String>{
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), month, solId, category, fixedAssetId, accruedDepreciation);
+        return Objects.hash(super.hashCode(), fixedAssetId, month, solId, category, accruedDepreciation);
     }
 
     @Override
     public String toString() {
-        return "AccruedDepreciation{" +
-                "month=" + month +
-                ", solId='" + solId + '\'' +
-                ", category='" + category + '\'' +
-                ", fixedAssetId=" + fixedAssetId +
-                ", accruedDepreciation=" + accruedDepreciation +
-                '}';
+        final StringBuffer sb = new StringBuffer("AccruedDepreciation{");
+        sb.append("fixedAssetId=").append(fixedAssetId);
+        sb.append(", month=").append(month);
+        sb.append(", solId='").append(solId).append('\'');
+        sb.append(", category='").append(category).append('\'');
+        sb.append(", accruedDepreciation=").append(accruedDepreciation);
+        sb.append('}');
+        return sb.toString();
     }
-
 }

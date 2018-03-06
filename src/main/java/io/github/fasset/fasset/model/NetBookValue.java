@@ -5,11 +5,6 @@ import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.support.GenericMessage;
-import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.messaging.support.MessageHeaderAccessor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

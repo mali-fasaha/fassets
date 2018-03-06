@@ -1,7 +1,6 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
-import io.github.fasset.fasset.kernel.DateToYearMonthConverter;
-import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
+import io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
-import java.time.ZoneId;
 
 /**
  * This component acts as middleware between calculated depreciation and actual application of calculated

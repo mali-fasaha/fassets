@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.service.impl;
 
-import io.github.fasset.fasset.kernel.messaging.FileUploadNotification;
-import io.github.fasset.fasset.kernel.messaging.UploadNotificationService;
+import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
+import io.github.fasset.fasset.kernel.notifications.UploadNotificationService;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.repository.FileUploadRepository;
 import io.github.fasset.fasset.service.FileUploadService;
@@ -54,7 +54,8 @@ public class FileUploadServiceImpl implements FileUploadService {
             String fileName= fileUpload.getFileName();
             String month=fileUpload.getMonth().toString();
             String timeUploaded=fileUpload.getTimeUploaded().toString();
-            notificationService.sendNotification(new FileUploadNotification(fileName,month,timeUploaded));
+            //FIXME : To implement observer pattern here
+            //notificationService.sendNotification(new FileUploadNotification(fileName,month,timeUploaded));
         } else {
 
             log.info("The file : {} is already uploaded and will not be duplicated",fileUpload.getFileName());

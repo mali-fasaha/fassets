@@ -1,7 +1,5 @@
-package io.github.fasset.fasset.kernel.messaging;
+package io.github.fasset.fasset.kernel.notifications;
 
-import java.time.LocalDateTime;
-import java.time.YearMonth;
 import java.util.Objects;
 
 
@@ -15,6 +13,7 @@ public class FileUploadNotification {
 
     /* time of upload */
     private String timeUploaded;
+
 
     public FileUploadNotification(String fileName, String month, String timeUploaded) {
         this.fileName = fileName;

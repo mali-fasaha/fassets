@@ -4,8 +4,6 @@ import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

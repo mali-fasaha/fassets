@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel;
+package io.github.fasset.fasset.kernel.util.convert;
 
 import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.slf4j.Logger;
