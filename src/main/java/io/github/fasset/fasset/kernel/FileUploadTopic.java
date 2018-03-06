@@ -91,7 +91,7 @@ public class FileUploadTopic implements Subject{
 
         log.debug("File : {} has been uploaded to the fileUpload topic",fileName);
 
-        this.fileNamesQueue.add(fileName);
+        this.fileNamesQueue.offer(fileName);
         this.uploaded = true;
 
         notifyObservers();
