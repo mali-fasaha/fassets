@@ -1,11 +1,12 @@
 package io.github.fasset.fasset.kernel;
 
+import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.time.LocalDateTime;
 
 /**
- * We are not asserting anything. We are just checking how our patterns will behave
+ * We are not asserting anything. We are just checking how the observer pattern will behave
  */
 public class FileUploadTopicTest {
 
@@ -13,35 +14,54 @@ public class FileUploadTopicTest {
     public void fileUploadTopicWorks() throws Exception {
 
         // creating the subject
-        FileUploadTopic topic = new FileUploadTopic();
+        SimpleSubscription topic = new SimpleSubscription();
 
         // create observers
-        Observer obj1 = new FileUploadTopicSubscriber("obj1");
-        Observer obj2 = new FileUploadTopicSubscriber("obj2");
-        Observer obj3 = new FileUploadTopicSubscriber("obj3");
+        Subscriber obj1 = new FileUploadsListener("FileUploadListener 1");
+        Subscriber obj2 = new FileUploadsListener("FileUploadListener 2");
+        Subscriber obj3 = new FileUploadsListener("FileUploadListener 3");
 
-        // register observers to the subject
-        topic.register(obj1);
-        topic.register(obj2);
-        topic.register(obj3);
+        // registerSubscriber observers to the subject
+        topic.registerSubscriber(obj1);
+        topic.registerSubscriber(obj2);
+        topic.registerSubscriber(obj3);
 
         // attach observer to subject
-        obj1.setSubject(topic);
-        obj2.setSubject(topic);
-        obj3.setSubject(topic);
+        obj1.addSubscription(topic);
+        obj2.addSubscription(topic);
+        obj3.addSubscription(topic);
 
         // check if any update is available
         obj1.update();
 
         // now send the file to the topic
-        topic.postFile("Data listing 15646");
+        //topic.postUpdate("Data listing 15646");
+        topic.postUpdate(() -> "Data listing 15646");
 
         // now send a new file to the topic. Expecting observers to not read the former topic
         // only the current one
-        topic.postFile("New Data listing 15647");
+        //topic.postUpdate("New Data listing 15647");
+        topic.postUpdate(() -> "New Data listing 15647");
 
         // now send a new file to the topic. Expecting observers to not read the former topic
         // only the current one
-        topic.postFile("Even Newer Data listing 15648");
+        //topic.postUpdate("Even Newer Data listing 15648");
+        topic.postUpdate(() -> "Even Newer Data listing 15648");
+
+    }
+
+    @Test
+    public void subscriptionForFileUploadsShouldWork() throws Exception {
+
+        Subscription fileUploadsSubscritionService = new SimpleSubscription();
+
+        Subscriber fileUploadsSubscriber = new CompositeFileUploadsSubscriber("FileUploadsSubscriber1");
+
+        fileUploadsSubscritionService.registerSubscriber(fileUploadsSubscriber);
+
+        fileUploadsSubscriber.addSubscription(fileUploadsSubscritionService);
+
+
+        fileUploadsSubscritionService.postUpdate(() -> new FileUploadNotification("Data listing 15482","Jan 2018", LocalDateTime.now().toString()));
     }
 }
