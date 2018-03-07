@@ -7,11 +7,11 @@ import io.github.fasset.fasset.kernel.subscriptions.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CompositeFileUploadsSubscriber extends AbstractSubscriber implements Subscriber {
+public class FileStorageSubscriber extends AbstractSubscriber implements Subscriber {
 
-    private static final Logger log = LoggerFactory.getLogger(CompositeFileUploadsSubscriber.class);
+    private static final Logger log = LoggerFactory.getLogger(FileStorageSubscriber.class);
 
-    public CompositeFileUploadsSubscriber(String name) {
+    public FileStorageSubscriber(String name) {
         super(name);
     }
 
@@ -20,6 +20,6 @@ public class CompositeFileUploadsSubscriber extends AbstractSubscriber implement
 
         FileUploadNotification notification = (FileUploadNotification) update.getPayload();
 
-        log.info("FileUploadNotification : {} has been received for processing",notification);
+        log.info("{} has received the file : {} for processing",this,notification);
     }
 }

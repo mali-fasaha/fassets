@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import io.github.fasset.fasset.config.MapperOptions;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 

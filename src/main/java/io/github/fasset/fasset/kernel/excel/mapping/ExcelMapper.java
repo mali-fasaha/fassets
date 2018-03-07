@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.kernel.excel.mapping;
 
+import io.github.fasset.fasset.config.MapperOptions;
+
 import java.util.List;
 
 /**

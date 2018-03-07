@@ -1,6 +1,9 @@
 package io.github.fasset.fasset.kernel;
 
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
+import io.github.fasset.fasset.kernel.subscriptions.SimpleSubscription;
+import io.github.fasset.fasset.kernel.subscriptions.Subscriber;
+import io.github.fasset.fasset.kernel.subscriptions.SubscriptionService;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -53,15 +56,30 @@ public class FileUploadTopicTest {
     @Test
     public void subscriptionForFileUploadsShouldWork() throws Exception {
 
-        Subscription fileUploadsSubscritionService = new SimpleSubscription();
+        SubscriptionService fileUploadsSubscriptionService = new SimpleSubscription();
 
         Subscriber fileUploadsSubscriber = new CompositeFileUploadsSubscriber("FileUploadsSubscriber1");
+        Subscriber fileUploadsRecorder = new CompositeFileUploadsSubscriber("FileUploadsRecorder 1");
 
-        fileUploadsSubscritionService.registerSubscriber(fileUploadsSubscriber);
+        fileUploadsSubscriptionService.registerSubscriber(fileUploadsSubscriber);
+        fileUploadsSubscriptionService.registerSubscriber(fileUploadsRecorder);
 
-        fileUploadsSubscriber.addSubscription(fileUploadsSubscritionService);
+        fileUploadsSubscriber.addSubscription(fileUploadsSubscriptionService);
+        fileUploadsRecorder.addSubscription(fileUploadsSubscriptionService);
 
 
-        fileUploadsSubscritionService.postUpdate(() -> new FileUploadNotification("Data listing 15482","Jan 2018", LocalDateTime.now().toString()));
+        fileUploadsSubscriptionService.postUpdate(() -> new FileUploadNotification("Data listing 15482","Jan 2018", LocalDateTime.now().toString()));
+
+        fileUploadsSubscriber.unSubscribe(fileUploadsSubscriptionService);
+
+        fileUploadsSubscriptionService.postUpdate(() -> new FileUploadNotification("Data listing 10001","Mar 2018", LocalDateTime.now().toString()));
+    }
+
+    @Test
+    public void fileSystemStorageAsSubscriptionServiceCouldWork() throws Exception {
+
+        FileSystemStorageService storageService = new FileSystemStorageService();
+
+        storageService.store("File Containing Assets");
     }
 }

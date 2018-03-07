@@ -18,7 +18,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     private FileUploadRepository fileUploadRepository;
 
-    private UploadNotificationService notificationService;
+    /*private UploadNotificationService notificationService;*/
 
     @Autowired
     @Qualifier("fileUploadRepository")
@@ -27,12 +27,12 @@ public class FileUploadServiceImpl implements FileUploadService {
         return this;
     }
 
-    @Autowired
+    /*@Autowired
     @Qualifier("notificationService")
     public FileUploadServiceImpl setNotificationService(UploadNotificationService notificationService) {
         this.notificationService = notificationService;
         return this;
-    }
+    }*/
 
     @Override
     public boolean theFileIsAlreadyUploaded(FileUpload fileUpload){

@@ -1,13 +1,19 @@
-package io.github.fasset.fasset.kernel;
+package io.github.fasset.fasset.kernel.subscriptions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
+/**
+ * Provides the {@link AbstractSubscriber#consumeUpdate(Update)} method used by the runtime client
+ * to consume updates dynamically.
+ * As much as possible but without guarantee care has been taken to make this implementation as thread-safe
+ * as possible.
+ *
+ * @author edwin.njeru
+ */
 public abstract class AbstractSubscriber implements Subscriber {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractSubscriber.class);
@@ -17,10 +23,10 @@ public abstract class AbstractSubscriber implements Subscriber {
     // name of subscriber
     private String name;
 
-    private List<Subscription> subscriptions = new LinkedList<>();
+    private List<SubscriptionService> subscriptions = new LinkedList<>();
 
 
-    AbstractSubscriber(String name) {
+    protected AbstractSubscriber(String name) {
         this.name = name;
     }
 
@@ -36,14 +42,14 @@ public abstract class AbstractSubscriber implements Subscriber {
 
 
     @Override
-    public void addSubscription(Subscription subscription) {
+    public void addSubscription(SubscriptionService subscription) {
 
         synchronized (MUTEX) {
             this.subscriptions.add(subscription);
         }
     }
 
-    private void checkSubscriptions(Subscription subscription) {
+    private void checkSubscriptions(SubscriptionService subscription) {
 
         Update update = subscription.getUpdate(this);
 
@@ -59,7 +65,7 @@ public abstract class AbstractSubscriber implements Subscriber {
     }
 
     @Override
-    public void unSubscribe(Subscription subscription) {
+    public void unSubscribe(SubscriptionService subscription) {
 
         synchronized (MUTEX) {
             this.subscriptions.remove(subscription);
