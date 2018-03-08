@@ -1,14 +1,14 @@
 package io.github.fasset.fasset.repository;
 
 import io.github.fasset.fasset.model.FixedAsset;
-import io.github.fasset.fasset.model.brief.CategoryBrief;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Tuple;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Repository("fixedAssetRepository")
 public interface FixedAssetRepository extends JpaRepository<FixedAsset,Integer>{
@@ -39,7 +39,7 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset,Integer>{
             "SUM(e.purchaseCost) " +
             "FROM FixedAsset e " +
             "WHERE e.solId = :solId ")
-    double getTotalSolPurchaseCost(@Param("solId") String solId);
+    Double getTotalSolPurchaseCost(@Param("solId") String solId);
 
     /**
      * Return total net book value for a given category

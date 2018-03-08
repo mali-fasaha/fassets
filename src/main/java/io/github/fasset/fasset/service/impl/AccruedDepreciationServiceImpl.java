@@ -37,7 +37,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
      * @param month the previous of which the depreciation has accrued up to
      * @return amount of accrued depreciation in double precision
      */
-    //@Cacheable
+    @Cacheable("accruedDepreciationForAssets")
     @Override
     public double getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month) {
 

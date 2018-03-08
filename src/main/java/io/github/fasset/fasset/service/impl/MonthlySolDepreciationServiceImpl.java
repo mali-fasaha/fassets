@@ -19,9 +19,12 @@ import java.util.stream.Collectors;
 public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciationService {
 
 
-    @Qualifier("monthlySolDepreciationRepository")
+    private final MonthlySolDepreciationRepository monthlySolDepreciationRepository;
+
     @Autowired
-    private MonthlySolDepreciationRepository monthlySolDepreciationRepository;
+    public MonthlySolDepreciationServiceImpl(@Qualifier("monthlySolDepreciationRepository") MonthlySolDepreciationRepository monthlySolDepreciationRepository) {
+        this.monthlySolDepreciationRepository = monthlySolDepreciationRepository;
+    }
 
     /**
      * @return A list of all items in the MonthlySolDepreciationRepository

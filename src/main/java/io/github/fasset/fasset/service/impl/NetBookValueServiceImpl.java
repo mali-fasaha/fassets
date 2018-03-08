@@ -24,9 +24,12 @@ import java.util.List;
 public class NetBookValueServiceImpl implements NetBookValueService {
 
 
-    @Qualifier("netBookValueRepository")
+    private final NetBookValueRepository netBookValueRepository;
+
     @Autowired
-    private NetBookValueRepository netBookValueRepository;
+    public NetBookValueServiceImpl(@Qualifier("netBookValueRepository") NetBookValueRepository netBookValueRepository) {
+        this.netBookValueRepository = netBookValueRepository;
+    }
 
     /**
      * Saves the {@link NetBookValue} object in the param

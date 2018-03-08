@@ -13,25 +13,30 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Service("depreciationService")
 public class DepreciationServiceImpl implements DepreciationService {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationServiceImpl.class);
 
 
-    @Qualifier("depreciationRepository")
-    @Autowired
-    private DepreciationRepository depreciationRepository;
+    private final DepreciationRepository depreciationRepository;
+
+    private final AccruedDepreciationService accruedDepreciationService;
+
+    private final NetBookValueService netBookValueService;
 
     @Autowired
-    private AccruedDepreciationService accruedDepreciationService;
-
-    @Autowired
-    private NetBookValueService netBookValueService;
+    public DepreciationServiceImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository, AccruedDepreciationService accruedDepreciationService, NetBookValueService netBookValueService) {
+        this.depreciationRepository = depreciationRepository;
+        this.accruedDepreciationService = accruedDepreciationService;
+        this.netBookValueService = netBookValueService;
+    }
 
 
     /**
@@ -50,7 +55,7 @@ public class DepreciationServiceImpl implements DepreciationService {
     /**
      * Saves all items in the list
      *
-     * @param depreciationList
+     * @param depreciationList to be persisted to the depreciationRepository
      */
     @Override
     public void saveAllDepreciationItems(List<Depreciation> depreciationList) {

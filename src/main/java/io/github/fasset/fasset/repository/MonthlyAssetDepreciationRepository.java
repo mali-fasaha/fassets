@@ -2,7 +2,10 @@ package io.github.fasset.fasset.repository;
 
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
+
+import java.util.concurrent.CompletableFuture;
 
 @Repository("monthlyAssetDepreciationRepository")
 public interface MonthlyAssetDepreciationRepository extends JpaRepository<MonthlyAssetDepreciation,Integer>{
@@ -15,7 +18,5 @@ public interface MonthlyAssetDepreciationRepository extends JpaRepository<Monthl
      */
     MonthlyAssetDepreciation findFirstByAssetIdAndYearEquals(int assetId, int year);
 
-    @Override
-    boolean existsById(Integer modelId);
 
 }

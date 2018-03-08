@@ -23,9 +23,12 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAssetServiceImpl.class);
 
+    private final FixedAssetRepository fixedAssetRepository;
+
     @Autowired
-    @Qualifier("fixedAssetRepository")
-    private FixedAssetRepository fixedAssetRepository;
+    public FixedAssetServiceImpl(@Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository) {
+        this.fixedAssetRepository = fixedAssetRepository;
+    }
 
     /**
      * Saves all {@link FixedAsset} items passed in a list, saving unique items only.
@@ -60,7 +63,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * @return
      */
     @Override
-    @Cacheable
+    @Cacheable("fixedAssetsFetchedByIds")
     public FixedAsset fetchAssetGivenId(int id) {
 
         return fixedAssetRepository.findById(id).get();
@@ -74,6 +77,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * @return {@link CategoryBrief}
      */
     @Override
+    @Cacheable("categoryBriefsFetchedByCategoryNames")
     public CategoryBrief getCategoryBrief(String category) {
         CategoryBrief brief = new CategoryBrief();
 
@@ -116,6 +120,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * @return {@link CategoryBrief}
      */
     @Override
+    @Cacheable("serviceOutletBriefsFetchedBySolIds")
     public ServiceOutletBrief getServiceOutletBrief(String solId) {
         ServiceOutletBrief brief = new ServiceOutletBrief();
 

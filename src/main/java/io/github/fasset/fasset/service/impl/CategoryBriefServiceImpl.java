@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,9 +25,12 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
     private static final Logger log = LoggerFactory.getLogger(CategoryBriefServiceImpl.class);
 
 
-    @Qualifier("categoryBriefRepository")
+    private final CategoryBriefRepository categoryBriefRepository;
+
     @Autowired
-    private CategoryBriefRepository categoryBriefRepository;
+    public CategoryBriefServiceImpl(@Qualifier("categoryBriefRepository") CategoryBriefRepository categoryBriefRepository) {
+        this.categoryBriefRepository = categoryBriefRepository;
+    }
 
     /**
      * @return {@link List < CategoryBrief >} fetched from the repository
@@ -54,6 +58,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
      * @param id of the CategoryBrief
      * @return {@link CategoryBrief} of the id given as param
      */
+    @Cacheable("categoryBriefsFromIds")
     @Override
     public CategoryBrief fetchCategoryBriefGivenId(int id) {
 

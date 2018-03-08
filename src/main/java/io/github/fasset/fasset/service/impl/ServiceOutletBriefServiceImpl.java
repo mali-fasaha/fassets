@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,9 +20,12 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
     private static final Logger log = LoggerFactory.getLogger(ServiceOutletBriefServiceImpl.class);
 
 
-    @Qualifier("serviceOutletBriefRepository")
+    private final ServiceOutletBriefRepository serviceOutletBriefRepository;
+
     @Autowired
-    private ServiceOutletBriefRepository serviceOutletBriefRepository;
+    public ServiceOutletBriefServiceImpl(@Qualifier("serviceOutletBriefRepository") ServiceOutletBriefRepository serviceOutletBriefRepository) {
+        this.serviceOutletBriefRepository = serviceOutletBriefRepository;
+    }
 
     /**
      * @return {@link List < ServiceOutletBrief >} of service outlets from repository
@@ -50,6 +54,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
      * @return {@link ServiceOutletBrief} of the id given as parameter
      */
     @Override
+    @Cacheable("serviceOutletBriefsByIds")
     public ServiceOutletBrief fetchServiceOutletBriefGivenId(int id) {
 
         ServiceOutletBrief serviceOutletBrief = null;
@@ -70,7 +75,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
      * Save all ServiceOutletBrief items in the collection. All existing items are updated while new ones
      * are newly added, to the ends that the designation remains unique
      *
-     * @param serviceOutletBriefs
+     * @param serviceOutletBriefs to be persisted to the serviceOutletBriefsRepository
      */
     @Override
     public void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs) {
