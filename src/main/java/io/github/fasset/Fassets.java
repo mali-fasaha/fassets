@@ -7,9 +7,11 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -60,4 +62,10 @@ public class Fassets {
 		executor.initialize();
 		return executor;
 	}
+
+	@Bean
+	public CacheManagerCustomizer<CaffeineCacheManager> cacheManagerCustomizer(){
+
+	    return cacheManager -> cacheManager.setAllowNullValues(false);
+    }
 }

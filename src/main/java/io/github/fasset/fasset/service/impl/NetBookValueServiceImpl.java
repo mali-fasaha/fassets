@@ -1,13 +1,10 @@
 package io.github.fasset.fasset.service.impl;
 
-import io.github.fasset.fasset.model.brief.CategoryBrief;
-import io.github.fasset.fasset.repository.FixedAssetRepository;
 import io.github.fasset.fasset.service.NetBookValueService;
 import io.github.fasset.fasset.model.NetBookValue;
 import io.github.fasset.fasset.repository.NetBookValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

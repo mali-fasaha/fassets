@@ -4,6 +4,7 @@ import io.github.fasset.fasset.kernel.util.DataRetrievalFromControllerException;
 import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.repository.ServiceOutletBriefRepository;
 import io.github.fasset.fasset.service.ServiceOutletBriefService;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("serviceOutletBriefService")
@@ -80,7 +80,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
     @Override
     public void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs) {
 
-        List<ServiceOutletBrief> unsavedItems = new ArrayList<>();
+        List<ServiceOutletBrief> unsavedItems = FastList.newList();
 
         for(ServiceOutletBrief brief : serviceOutletBriefs){
 
