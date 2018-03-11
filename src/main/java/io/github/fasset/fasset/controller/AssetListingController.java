@@ -1,6 +1,8 @@
 package io.github.fasset.fasset.controller;
 
+import io.github.fasset.fasset.dto.FixedAssetResponseDto;
 import io.github.fasset.fasset.kernel.util.DataRetrievalFromControllerException;
+import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.service.FixedAssetService;
 import io.github.fasset.fasset.service.impl.FixedAssetServiceImpl;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AssetListingController {
@@ -36,7 +39,7 @@ public class AssetListingController {
 
     @GetMapping("/listing/assets/data")
     @ResponseBody
-    public List<FixedAsset> fetchAllAssets(){
+    public List<FixedAssetResponseDto> fetchAllAssets(){
 
         List<FixedAsset> fixedAssets;
 
@@ -50,12 +53,15 @@ public class AssetListingController {
 
         log.info("Returning a list of : {} assets",fixedAssets.size());
 
-        return fixedAssets;
+        return fixedAssets
+                .parallelStream()
+                .map(FixedAssetResponseDto::new)
+                .collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/listing/assets/data/{id}")
     @ResponseBody
-    public FixedAsset getMonthGivenId(@PathVariable("id") int id){
+    public FixedAssetResponseDto getMonthGivenId(@PathVariable("id") int id){
 
         FixedAsset asset = null;
 
@@ -69,6 +75,6 @@ public class AssetListingController {
 
         log.debug("Returning : {}",asset);
 
-        return asset;
+        return new FixedAssetResponseDto(asset);
     }
 }

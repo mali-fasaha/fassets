@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.controller;
 
+import io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto;
+import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.brief.CategoryBrief;
 import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.service.CategoryBriefService;
@@ -46,9 +48,13 @@ public class BriefController {
 
     @GetMapping("/briefs/serviceOutlets/data")
     @ResponseBody
-    public List<ServiceOutletBrief> getServiceOutletBriefs(Model model){
+    public List<ServiceOutletBriefResponseDto> getServiceOutletBriefs(Model model){
 
-        return serviceOutletBriefService.fetchAllServiceOutletBriefs();
+        //TODO update other brief controllers
+        return serviceOutletBriefService.fetchAllServiceOutletBriefs()
+                .parallelStream()
+                .map(ServiceOutletBriefResponseDto::new)
+                .collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/briefs/serviceOutlets/data/{id}")
