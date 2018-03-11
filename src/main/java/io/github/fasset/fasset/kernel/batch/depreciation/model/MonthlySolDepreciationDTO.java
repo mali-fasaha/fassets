@@ -6,6 +6,8 @@ import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.money.MonetaryAmount;
+
 public class MonthlySolDepreciationDTO {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlySolDepreciationDTO.class);
@@ -28,7 +30,7 @@ public class MonthlySolDepreciationDTO {
     public MonthlySolDepreciationDTO() {
     }
 
-    public MonthlySolDepreciationDTO(String solId, Integer year, Money jan, Money feb, Money mar, Money apr, Money may, Money jun, Money jul, Money aug, Money sep, Money oct, Money nov, Money dec) {
+    public MonthlySolDepreciationDTO(String solId, Integer year, MonetaryAmount jan,  MonetaryAmount feb,  MonetaryAmount mar,  MonetaryAmount apr,  MonetaryAmount may,  MonetaryAmount jun,  MonetaryAmount jul,  MonetaryAmount aug,  MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.solId = solId;
         this.year = year;
         this.jan = jan.getNumber().doubleValue();

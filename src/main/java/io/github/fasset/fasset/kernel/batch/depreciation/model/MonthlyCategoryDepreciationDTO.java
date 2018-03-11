@@ -1,9 +1,10 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
 import com.google.common.base.MoreObjects;
-import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.money.MonetaryAmount;
 
 public class MonthlyCategoryDepreciationDTO {
 
@@ -24,7 +25,7 @@ public class MonthlyCategoryDepreciationDTO {
     private Double nov;
     private Double dec;
 
-    public MonthlyCategoryDepreciationDTO(String categoryName, Integer year, Money jan, Money feb,Money mar,Money apr, Money may, Money jun, Money jul,Money aug,Money sep,Money oct,Money nov,Money dec) {
+    public MonthlyCategoryDepreciationDTO(String categoryName, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun, MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.categoryName = categoryName;
         this.year = year;
         this.jan = jan.getNumber().doubleValue();
