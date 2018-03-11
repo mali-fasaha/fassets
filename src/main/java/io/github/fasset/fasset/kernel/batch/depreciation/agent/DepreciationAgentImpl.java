@@ -7,9 +7,11 @@ import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.CategoryConfiguration;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +38,7 @@ public class DepreciationAgentImpl implements DepreciationAgent{
         return this;
     }
 
+    @Cacheable("depreciationCalculation")
     @Override
     public Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {
 
@@ -53,14 +56,14 @@ public class DepreciationAgentImpl implements DepreciationAgent{
 
         double depreciationRate = configuration.getDepreciationRate();
 
-        double deprecant = getDeprecant(asset, configuration);
+        Money deprecant = getDeprecant(asset, configuration);
 
         log.trace("Using deprecant : {}, and depreciation rate : {} for calculating depreciation", deprecant, depreciationRate);
-        double depreciationAmount = calculate(deprecant, depreciationRate);
+        Money depreciationAmount = calculate(deprecant, depreciationRate);
 
         depreciation = getDepreciation(preprocessor.setAsset(asset).setMonth(month).setDepreciationAmount(depreciationAmount).setProperties());
 
-        double nbv = asset.getNetBookValue() - depreciation.getDepreciation();
+        Money nbv = asset.getNetBookValue().subtract(depreciation.getDepreciation());
 
         //send changes to queue for flushing through entityManager
         //send(() -> depreciation);
@@ -81,12 +84,12 @@ public class DepreciationAgentImpl implements DepreciationAgent{
      * @param configuration CategoryConfiguration relevant to the asset being depreciated
      * @return amount of the deprecant
      */
-    private double getDeprecant(FixedAsset asset, CategoryConfiguration configuration) {
+    private Money getDeprecant(FixedAsset asset, CategoryConfiguration configuration) {
 
         log.trace("Determining the deprecant for Asset : {}, with category configuration : {}",
                 asset,configuration);
 
-        double deprecant = 0.00;
+        Money deprecant = null;
 
         try {
             if(configuration.getDeprecant().equalsIgnoreCase("purchaseCost")){
@@ -116,15 +119,15 @@ public class DepreciationAgentImpl implements DepreciationAgent{
      * @param depreciationRate the depreciation rate to use
      * @return amount of depreciation
      */
-    //@Cacheable
-    private double calculate(double deprecant, double depreciationRate){
+    private Money calculate(Money deprecant, double depreciationRate){
 
-        double depreciation;
+        Money depreciation;
 
         try {
             log.trace("Calculating depreciation amount using deprecant of : {}, and depreciation rate of : {}", deprecant,depreciationRate);
 
-            depreciation = deprecant * depreciationRate/100 * 1/12;
+            //depreciation = deprecant * depreciationRate;
+            depreciation = deprecant.multiply(depreciationRate/100 * 1/12);
 
             log.trace("Depreciation for deprecant : {} and depreciationRate : {} calculated as : {}",deprecant,depreciationRate,depreciation);
         } catch (Throwable e) {

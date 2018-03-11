@@ -12,14 +12,26 @@ import javax.annotation.PostConstruct;
 @Configuration
 public class FileUploadsSubscriptionsConfig {
 
+
+    private StorageService fileSystemStorageService;
+
+
+    private ExcelUploadJob excelUploadJob;
+
+
     @Qualifier("fileSystemStorageService")
     @Autowired
-    private StorageService fileSystemStorageService;
+    public FileUploadsSubscriptionsConfig setFileSystemStorageService(StorageService fileSystemStorageService) {
+        this.fileSystemStorageService = fileSystemStorageService;
+        return this;
+    }
 
     @Qualifier("excelUploadJob")
     @Autowired
-    private ExcelUploadJob excelUploadJob;
-
+    public FileUploadsSubscriptionsConfig setExcelUploadJob(ExcelUploadJob excelUploadJob) {
+        this.excelUploadJob = excelUploadJob;
+        return this;
+    }
 
     @PostConstruct
     private void registerSubscribers(){

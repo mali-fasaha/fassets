@@ -1,7 +1,9 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
+import org.javamoney.moneta.Money;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +14,7 @@ import java.util.Objects;
 
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "fixed_asset_id","month","accrued_depreciation","sol_id","category"
+                "fixed_asset_id","month","sol_id","category"
         })
 })
 @Audited
@@ -31,8 +33,10 @@ public class AccruedDepreciation extends DomainModel<String> {
     @Column(name="category")
     private String category;
 
-    @Column(name="accrued_depreciation")
-    private double accruedDepreciation;
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    private Money accruedDepreciation;
 
     public int getFixedAssetId() {
         return fixedAssetId;
@@ -70,11 +74,11 @@ public class AccruedDepreciation extends DomainModel<String> {
         return this;
     }
 
-    public double getAccruedDepreciation() {
+    public Money getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
-    public AccruedDepreciation setAccruedDepreciation(double accruedDepreciation) {
+    public AccruedDepreciation setAccruedDepreciation(Money accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
         return this;
     }
@@ -86,7 +90,7 @@ public class AccruedDepreciation extends DomainModel<String> {
         if (!super.equals(o)) return false;
         AccruedDepreciation that = (AccruedDepreciation) o;
         return fixedAssetId == that.fixedAssetId &&
-                Double.compare(that.accruedDepreciation, accruedDepreciation) == 0 &&
+                Objects.equals(that.accruedDepreciation, accruedDepreciation) &&
                 Objects.equals(month, that.month) &&
                 Objects.equals(solId, that.solId) &&
                 Objects.equals(category, that.category);

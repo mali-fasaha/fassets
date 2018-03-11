@@ -1,9 +1,9 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
+import com.google.common.base.MoreObjects;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Objects;
 
 public class MonthlyCategoryDepreciationDTO {
 
@@ -24,21 +24,21 @@ public class MonthlyCategoryDepreciationDTO {
     private Double nov;
     private Double dec;
 
-    public MonthlyCategoryDepreciationDTO(String categoryName, Integer year, Double jan, Double feb, Double mar, Double apr, Double may, Double jun, Double jul, Double aug, Double sep, Double oct, Double nov, Double dec) {
+    public MonthlyCategoryDepreciationDTO(String categoryName, Integer year, Money jan, Money feb,Money mar,Money apr, Money may, Money jun, Money jul,Money aug,Money sep,Money oct,Money nov,Money dec) {
         this.categoryName = categoryName;
         this.year = year;
-        this.jan = jan;
-        this.feb = feb;
-        this.mar = mar;
-        this.apr = apr;
-        this.may = may;
-        this.jun = jun;
-        this.jul = jul;
-        this.aug = aug;
-        this.sep = sep;
-        this.oct = oct;
-        this.nov = nov;
-        this.dec = dec;
+        this.jan = jan.getNumber().doubleValue();
+        this.feb = feb.getNumber().doubleValue();
+        this.mar = mar.getNumber().doubleValue();
+        this.apr = apr.getNumber().doubleValue();
+        this.may = may.getNumber().doubleValue();
+        this.jun = jun.getNumber().doubleValue();
+        this.jul = jul.getNumber().doubleValue();
+        this.aug = aug.getNumber().doubleValue();
+        this.sep = sep.getNumber().doubleValue();
+        this.oct = oct.getNumber().doubleValue();
+        this.nov = nov.getNumber().doubleValue();
+        this.dec = dec.getNumber().doubleValue();
     }
 
     public String getCategoryName() {
@@ -196,4 +196,49 @@ public class MonthlyCategoryDepreciationDTO {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MonthlyCategoryDepreciationDTO that = (MonthlyCategoryDepreciationDTO) o;
+        return com.google.common.base.Objects.equal(categoryName, that.categoryName) &&
+                com.google.common.base.Objects.equal(year, that.year) &&
+                com.google.common.base.Objects.equal(jan, that.jan) &&
+                com.google.common.base.Objects.equal(feb, that.feb) &&
+                com.google.common.base.Objects.equal(mar, that.mar) &&
+                com.google.common.base.Objects.equal(apr, that.apr) &&
+                com.google.common.base.Objects.equal(may, that.may) &&
+                com.google.common.base.Objects.equal(jun, that.jun) &&
+                com.google.common.base.Objects.equal(jul, that.jul) &&
+                com.google.common.base.Objects.equal(aug, that.aug) &&
+                com.google.common.base.Objects.equal(sep, that.sep) &&
+                com.google.common.base.Objects.equal(oct, that.oct) &&
+                com.google.common.base.Objects.equal(nov, that.nov) &&
+                com.google.common.base.Objects.equal(dec, that.dec);
+    }
+
+    @Override
+    public int hashCode() {
+        return com.google.common.base.Objects.hashCode(categoryName, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("categoryName", categoryName)
+                .add("year", year)
+                .add("jan", jan)
+                .add("feb", feb)
+                .add("mar", mar)
+                .add("apr", apr)
+                .add("may", may)
+                .add("jun", jun)
+                .add("jul", jul)
+                .add("aug", aug)
+                .add("sep", sep)
+                .add("oct", oct)
+                .add("nov", nov)
+                .add("dec", dec)
+                .toString();
+    }
 }

@@ -4,6 +4,7 @@ import io.github.fasset.fasset.service.AccruedDepreciationService;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.repository.AccruedDepreciationRepository;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
      */
     @Cacheable("accruedDepreciationForAssets")
     @Override
-    public double getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month) {
+    public Money getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month) {
 
         log.debug("Fetching the AccruedDepreciation for assetId : {}, for the month : {}",asset.getId(),month);
 

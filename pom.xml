@@ -30,6 +30,7 @@
         <guava.version>23.6-jre</guava.version>
         <eclipse.collections.version>9.1.0</eclipse.collections.version>
         <moneta.version>1.1</moneta.version>
+        <jadira.userType.version>6.0.1.GA</jadira.userType.version>
         <spring.data.envers.version>2.0.2.RELEASE</spring.data.envers.version>
         <jquery.version>3.1.1</jquery.version>
         <bootstrap.version>3.3.7</bootstrap.version>
@@ -249,6 +250,13 @@
             <version>1.1</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jadira.usertype/usertype.core -->
+        <dependency>
+            <groupId>org.jadira.usertype</groupId>
+            <artifactId>usertype.core</artifactId>
+            <version>${jadira.userType.version}</version>
+        </dependency>
+
     </dependencies>
 
     <!--<dependencyManagement>

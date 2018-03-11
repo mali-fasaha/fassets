@@ -1,7 +1,9 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,8 +42,10 @@ public class Depreciation extends DomainModel<String> {
     @Column(name="sol_id")
     private String solId;
 
-    @Column(name="depreciation")
-    private double depreciation;
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    private Money depreciation;
 
     public Depreciation() {
     }
@@ -110,11 +114,11 @@ public class Depreciation extends DomainModel<String> {
         return this;
     }
 
-    public double getDepreciation() {
+    public Money getDepreciation() {
         return depreciation;
     }
 
-    public Depreciation setDepreciation(double depreciation) {
+    public Depreciation setDepreciation(Money depreciation) {
 
         log.debug("Setting the depreciation for depreciationId : {}, as = {}",getId(),depreciation);
         this.depreciation = depreciation;
@@ -128,7 +132,7 @@ public class Depreciation extends DomainModel<String> {
         if (!super.equals(o)) return false;
         Depreciation that = (Depreciation) o;
         return fixedAssetId == that.fixedAssetId &&
-                Double.compare(that.depreciation, depreciation) == 0 &&
+                Objects.equals(that.depreciation, depreciation) &&
                 Objects.equals(depreciationPeriod, that.depreciationPeriod) &&
                 Objects.equals(category, that.category) &&
                 Objects.equals(solId, that.solId);

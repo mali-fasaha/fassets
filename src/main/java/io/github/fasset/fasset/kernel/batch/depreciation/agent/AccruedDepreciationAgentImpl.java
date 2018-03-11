@@ -5,6 +5,7 @@ import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
         log.debug("Processing accruedDepreciation for asset: {} in the period : {}",asset,month);
 
         // with fingers crossed : Hope by the time you are here, the fixedAsser netBookValue will have changed
-        double depreciationAcc = asset.getPurchaseCost() - asset.getNetBookValue();
+        Money depreciationAcc = asset.getPurchaseCost().subtract(asset.getNetBookValue());
 
         log.debug("Reporting accruedDepreciation as : {}",depreciationAcc);
 
@@ -47,7 +48,7 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
      * @param accrual The actual amount of depreciation as double-precision
      * @return AccruedDepreciation item to be returned to the caller for further processing and persistence
      */
-    private AccruedDepreciation createAccruedDepreciation(FixedAsset asset, YearMonth month, double accrual) {
+    private AccruedDepreciation createAccruedDepreciation(FixedAsset asset, YearMonth month, Money accrual) {
         AccruedDepreciation accruedDepreciation = new AccruedDepreciation();
 
         log.trace("Creating accruedDepreciation instance relative to the asset : {}, for the month : {}",asset,month);

@@ -13,7 +13,7 @@ public class UnModifiedAccruedDepreciation {
     public UnModifiedAccruedDepreciation(FixedAsset asset, YearMonth month) {
 
         accruedDepreciation = new AccruedDepreciation()
-                .setAccruedDepreciation(asset.getPurchaseCost()-asset.getNetBookValue())
+                .setAccruedDepreciation(asset.getPurchaseCost().subtract(asset.getNetBookValue()))
                 .setCategory(asset.getCategory())
                 .setFixedAssetId(asset.getId())
                 .setMonth(month)

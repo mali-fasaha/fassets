@@ -20,21 +20,21 @@ public class BriefingServiceImpl implements BriefingService {
 
     private static final Logger log = LoggerFactory.getLogger(BriefingServiceImpl.class);
 
-    @Autowired
-    @Qualifier("fixedAssetService")
-    private FixedAssetService fixedAssetService;
+    private final FixedAssetService fixedAssetService;
+
+    private final FixedAssetRepository fixedAssetRepository;
+
+    private final ServiceOutletBriefService serviceOutletBriefService;
+
+    private final CategoryBriefService categoryBriefService;
 
     @Autowired
-    @Qualifier("fixedAssetRepository")
-    private FixedAssetRepository fixedAssetRepository;
-
-    @Autowired
-    @Qualifier("serviceOutletBriefService")
-    private ServiceOutletBriefService serviceOutletBriefService;
-
-    @Autowired
-    @Qualifier("categoryBriefService")
-    private CategoryBriefService categoryBriefService;
+    public BriefingServiceImpl(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository, @Qualifier("serviceOutletBriefService") ServiceOutletBriefService serviceOutletBriefService, @Qualifier("categoryBriefService") CategoryBriefService categoryBriefService) {
+        this.fixedAssetService = fixedAssetService;
+        this.fixedAssetRepository = fixedAssetRepository;
+        this.serviceOutletBriefService = serviceOutletBriefService;
+        this.categoryBriefService = categoryBriefService;
+    }
 
 
     private List<String> getAllCategoriesInRepo(){

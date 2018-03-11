@@ -1,7 +1,9 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
+import io.github.fasset.fasset.config.MoneyProperties;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +33,10 @@ public class NilDepreciation {
 
     private double depreciation;
 
-    public NilDepreciation(FixedAsset asset, YearMonth depreciationPeriod) {
+    private MoneyProperties moneyProperties;
+
+    public NilDepreciation(MoneyProperties moneyProperties,FixedAsset asset, YearMonth depreciationPeriod) {
+        this.moneyProperties = moneyProperties;
         this.month=depreciationPeriod.getMonthValue();
         this.year=depreciationPeriod.getYear();
         this.depreciationPeriod=depreciationPeriod;
@@ -58,7 +63,7 @@ public class NilDepreciation {
                 .setCategory(category)
                 .setSolId(solId)
                 .setFixedAssetId(fixedAssetId)
-                .setDepreciation(0.00);
+                .setDepreciation(Money.of(0.00,moneyProperties.getDefaultCurrency()));
     }
 
     public NilDepreciation() {

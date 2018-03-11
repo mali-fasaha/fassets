@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 
 import java.time.YearMonth;
 
@@ -30,7 +31,7 @@ public interface DepreciationPreprocessor {
      *
      * @return amount of depreciation
      */
-    double getDepreciationAmount();
+    Money getDepreciationAmount();
 
     /**
      * Sets the asset to be reviewed for depreciation
@@ -53,7 +54,7 @@ public interface DepreciationPreprocessor {
      * @param depreciationAmount
      * @return
      */
-    DepreciationPreprocessor setDepreciationAmount(double depreciationAmount);
+    DepreciationPreprocessor setDepreciationAmount(Money depreciationAmount);
 
     /**
      * This method ensures all properties are set and evaluated
