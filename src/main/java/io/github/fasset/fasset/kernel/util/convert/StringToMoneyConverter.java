@@ -6,6 +6,7 @@ import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -17,9 +18,13 @@ public class StringToMoneyConverter implements Converter<String,Money> {
 
     private final MoneyProperties monetaryProperties;
 
+    private final StringToDoubleConverter stringToDoubleConverter;
+
+
     @Autowired
-    public StringToMoneyConverter(MoneyProperties monetaryProperties) {
+    public StringToMoneyConverter(MoneyProperties monetaryProperties, @Qualifier("stringToDoubleConverter") StringToDoubleConverter stringToDoubleConverter) {
         this.monetaryProperties = monetaryProperties;
+        this.stringToDoubleConverter = stringToDoubleConverter;
     }
 
     @Nullable
@@ -28,20 +33,22 @@ public class StringToMoneyConverter implements Converter<String,Money> {
 
         log.debug("Converting the amount : {} from string to {} money amount",stringMoney,monetaryProperties.getDefaultCurrency());
 
-        //Money converted;
+        Money converted;
 
         try {
             double moneyAmount = 0;
             if (stringMoney != null) {
-                moneyAmount = Double.parseDouble(stringMoney);
+                moneyAmount = stringToDoubleConverter.convert(stringMoney);
             } else {
                 log.error("The string money amount passed is null");
             }
-            return Money.of(moneyAmount,monetaryProperties.getDefaultCurrency());
+            converted =  Money.of(moneyAmount,monetaryProperties.getDefaultCurrency());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while converting amount %stringMoney to Money amount",stringMoney);
             throw new ConverterException(message,e);
         }
+
+        return converted;
 
     }
 }

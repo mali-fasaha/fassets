@@ -7,6 +7,7 @@ import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.repository.FixedAssetRepository;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.service.FixedAssetService;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,11 +86,11 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
         brief.setDesignation(category);
 
-        double cost = fixedAssetRepository.getTotalCategoryPurchaseCost(category);
+        Money cost = fixedAssetRepository.getTotalCategoryPurchaseCost(category);
         log.info("Setting purchase cost as : {}",cost);
         brief.setPurchaseCost(cost);
 
-        double nbv = fixedAssetRepository.getTotalCategoryNetBookValue(category);
+        Money nbv = fixedAssetRepository.getTotalCategoryNetBookValue(category);
         brief.setNetBookValue(nbv);
 
         int count = fixedAssetRepository.getTotalCategoryCount(category);

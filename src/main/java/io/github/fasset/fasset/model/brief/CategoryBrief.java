@@ -2,6 +2,7 @@ package io.github.fasset.fasset.model.brief;
 
 import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
+import org.javamoney.moneta.Money;
 
 import javax.persistence.Entity;
 import java.util.Comparator;
@@ -21,10 +22,10 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     private String designation;
 
     /* total costs of all items in this category*/
-    private double purchaseCost;
+    private Money purchaseCost;
 
     /* total NBVs of all items in this category*/
-    private double netBookValue;
+    private Money netBookValue;
 
     /* Total accumulated depreciation for items in this category*/
     private double accruedDepreciation;
@@ -32,7 +33,7 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     /* total no. of items in this category*/
     private int poll;
 
-    public CategoryBrief(String designation, double purchaseCost, double netBookValue, double accruedDepreciation, int poll) {
+    public CategoryBrief(String designation, Money purchaseCost, Money netBookValue, double accruedDepreciation, int poll) {
         this.designation = designation;
         this.purchaseCost = purchaseCost;
         this.netBookValue = netBookValue;
@@ -57,7 +58,7 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     }
 
     @Override
-    public double getPurchaseCost() {
+    public Money getPurchaseCost() {
         return purchaseCost;
     }
 
@@ -82,7 +83,7 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     }
 
     @Override
-    public void setPurchaseCost(double purchaseCost) {
+    public void setPurchaseCost(Money purchaseCost) {
         this.purchaseCost = purchaseCost;
     }
 
