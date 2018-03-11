@@ -1,6 +1,8 @@
 package io.github.fasset.fasset.repository;
 
+import io.github.fasset.fasset.config.MoneyProperties;
 import io.github.fasset.fasset.model.brief.CategoryBrief;
+import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,17 +21,19 @@ public class CategoryBriefRepositoryTest {
     @Qualifier("categoryBriefRepository")
     @Autowired
     private CategoryBriefRepository categoryBriefRepository;
+    @Autowired
+    private MoneyProperties moneyProperties;
 
 
     @Before
     public void setUp() throws Exception {
 
         categoryBrief = new CategoryBrief();
-        categoryBrief.setAccruedDepreciation(560);
+        categoryBrief.setAccruedDepreciation(Money.of(560,moneyProperties.getDefaultCurrency()));
         categoryBrief.setDesignation("COMPUTERS");
         categoryBrief.setPoll(5);
-        categoryBrief.setPurchaseCost(1000);
-        categoryBrief.setNetBookValue(440);
+        categoryBrief.setPurchaseCost(Money.of(1000,moneyProperties.getDefaultCurrency()));
+        categoryBrief.setNetBookValue(Money.of(440,moneyProperties.getDefaultCurrency()));
     }
 
     @Test

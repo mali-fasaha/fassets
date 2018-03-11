@@ -38,7 +38,7 @@ public interface Brief {
      * @return Total AccruedDepreciation of items in the
      * brief
      */
-    double getAccruedDepreciation();
+    Money getAccruedDepreciation();
 
     /**
      *
@@ -56,19 +56,19 @@ public interface Brief {
      *
      * @param purchaseCost of all items in the brief
      */
-    void setPurchaseCost(double purchaseCost);
+    void setPurchaseCost(Money purchaseCost);
 
     /**
      *
      * @param netBookValue of all items in the brief
      */
-    void setNetBookValue(double netBookValue);
+    void setNetBookValue(Money netBookValue);
 
     /**
      *
      * @param accruedDepreciation of items in the brief
      */
-    void setAccruedDepreciation(double accruedDepreciation);
+    void setAccruedDepreciation(Money accruedDepreciation);
 
     /**
      *

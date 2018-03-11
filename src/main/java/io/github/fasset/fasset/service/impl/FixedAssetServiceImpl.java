@@ -97,7 +97,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         log.info("Setting poll as : {}",count);
         brief.setPoll(count);
 
-        double acc = brief.getPurchaseCost() - brief.getNetBookValue();
+        Money acc = brief.getPurchaseCost().subtract(brief.getNetBookValue());
         log.info("Setting accrued depreciation as : {}",acc);
         brief.setAccruedDepreciation(acc);
 
@@ -131,7 +131,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
             brief.setDesignation(solId);
             brief.setPurchaseCost(fixedAssetRepository.getTotalSolPurchaseCost(solId));
             brief.setNetBookValue(fixedAssetRepository.getTotalSolNetBookValue(solId));
-            brief.setAccruedDepreciation(brief.getPurchaseCost() - brief.getNetBookValue());
+            brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
             brief.setPoll(fixedAssetRepository.getTotalSolCount(solId));
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating a serviceOutletBrief for solId : %s",solId);
