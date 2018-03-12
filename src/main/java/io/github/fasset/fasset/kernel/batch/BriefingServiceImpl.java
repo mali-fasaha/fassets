@@ -20,21 +20,24 @@ public class BriefingServiceImpl implements BriefingService {
 
     private static final Logger log = LoggerFactory.getLogger(BriefingServiceImpl.class);
 
-    @Autowired
-    @Qualifier("fixedAssetService")
-    private FixedAssetService fixedAssetService;
+    private final FixedAssetService fixedAssetService;
+
+    private final FixedAssetRepository fixedAssetRepository;
+
+    private final ServiceOutletBriefService serviceOutletBriefService;
+
+    private final CategoryBriefService categoryBriefService;
+
+    private final MoneyToDoubleConverter moneyToDoubleConverter;
 
     @Autowired
-    @Qualifier("fixedAssetRepository")
-    private FixedAssetRepository fixedAssetRepository;
-
-    @Autowired
-    @Qualifier("serviceOutletBriefService")
-    private ServiceOutletBriefService serviceOutletBriefService;
-
-    @Autowired
-    @Qualifier("categoryBriefService")
-    private CategoryBriefService categoryBriefService;
+    public BriefingServiceImpl(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository, @Qualifier("serviceOutletBriefService") ServiceOutletBriefService serviceOutletBriefService, @Qualifier("categoryBriefService") CategoryBriefService categoryBriefService, @Qualifier("moneyToDoubleConverter")MoneyToDoubleConverter moneyToDoubleConverter) {
+        this.fixedAssetService = fixedAssetService;
+        this.fixedAssetRepository = fixedAssetRepository;
+        this.serviceOutletBriefService = serviceOutletBriefService;
+        this.categoryBriefService = categoryBriefService;
+        this.moneyToDoubleConverter=moneyToDoubleConverter;
+    }
 
 
     private List<String> getAllCategoriesInRepo(){
@@ -53,7 +56,7 @@ public class BriefingServiceImpl implements BriefingService {
         brief.setDesignation(serviceOutlet);
         brief.setPurchaseCost(fixedAssetRepository.getTotalSolPurchaseCost(serviceOutlet));
         brief.setNetBookValue(fixedAssetRepository.getTotalSolNetBookValue(serviceOutlet));
-        brief.setAccruedDepreciation(brief.getPurchaseCost() - brief.getNetBookValue());
+        brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
         brief.setPoll(fixedAssetRepository.getTotalSolCount(serviceOutlet));
 
         return brief;
@@ -64,7 +67,7 @@ public class BriefingServiceImpl implements BriefingService {
         brief.setDesignation(category);
         brief.setPurchaseCost(fixedAssetRepository.getTotalCategoryPurchaseCost(category));
         brief.setNetBookValue(fixedAssetRepository.getTotalCategoryNetBookValue(category));
-        brief.setAccruedDepreciation(brief.getPurchaseCost() - brief.getNetBookValue());
+        brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
         brief.setPoll(fixedAssetRepository.getTotalCategoryCount(category));
 
         return brief;

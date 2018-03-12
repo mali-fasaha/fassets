@@ -9,6 +9,7 @@ import org.eclipse.collections.impl.list.mutable.FastList;
 import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -20,9 +21,12 @@ import java.util.stream.Collectors;
 public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDepreciationService{
 
 
-    @Qualifier("monthlyAssetDepreciationRepository")
+    private final MonthlyAssetDepreciationRepository monthlyAssetDepreciationRepository;
+
     @Autowired
-    private MonthlyAssetDepreciationRepository monthlyAssetDepreciationRepository;
+    public MonthlyAssetDepreciationServiceImpl(@Qualifier("monthlyAssetDepreciationRepository") MonthlyAssetDepreciationRepository monthlyAssetDepreciationRepository) {
+        this.monthlyAssetDepreciationRepository = monthlyAssetDepreciationRepository;
+    }
 
     /**
      * Return an ordered list of all monthly depreciation from the
@@ -46,6 +50,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
      * @return
      */
     @Override
+    @Cacheable("monthlyAssetDepreciationByIdAnYears")
     public MonthlyAssetDepreciation getMonthlyAssetDepreciationByAssetIdAndYear(int fixedAssetId, int year) {
 
         return monthlyAssetDepreciationRepository.findFirstByAssetIdAndYearEquals(fixedAssetId,year);

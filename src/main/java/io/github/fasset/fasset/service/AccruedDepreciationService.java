@@ -2,6 +2,7 @@ package io.github.fasset.fasset.service;
 
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 
 import java.time.YearMonth;
 import java.util.List;
@@ -13,7 +14,7 @@ public interface AccruedDepreciationService {
      * @param asset
      * @return
      */
-    double getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month);
+    Money getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month);
 
     /**
      * Saves the {@link AccruedDepreciation} object given in the parameter

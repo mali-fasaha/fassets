@@ -2,14 +2,11 @@ package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.support.GenericMessage;
-import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.messaging.support.MessageHeaderAccessor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +23,7 @@ import java.util.Objects;
  */
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "fixed_asset_id","month","net_book_value","sol_id","category"
+                "fixed_asset_id","month","sol_id","category"
         })
 })
 @Entity(name="NetBookValue")
@@ -41,8 +38,10 @@ public class NetBookValue extends DomainModel<String>{
     @Column(name="month")
     private YearMonth month;
 
-    @Column(name="net_book_value")
-    private double netBookValue;
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    private Money netBookValue;
 
     @Column(name="sol_id")
     private String solId;
@@ -53,7 +52,7 @@ public class NetBookValue extends DomainModel<String>{
     public NetBookValue() {
     }
 
-    public NetBookValue(int fixedAssetId, YearMonth month, double netBookValue, String solId, String category) {
+    public NetBookValue(int fixedAssetId, YearMonth month, Money netBookValue, String solId, String category) {
         this.fixedAssetId = fixedAssetId;
         this.month = month;
         this.netBookValue = netBookValue;
@@ -91,11 +90,11 @@ public class NetBookValue extends DomainModel<String>{
         return this;
     }
 
-    public double getNetBookValue() {
+    public Money getNetBookValue() {
         return netBookValue;
     }
 
-    public NetBookValue setNetBookValue(double netBookValue) {
+    public NetBookValue setNetBookValue(Money netBookValue) {
 
         log.trace("Setting NetBookValue for NetBookValueId : {} as = {}",getId(),netBookValue);
         this.netBookValue = netBookValue;
@@ -120,7 +119,7 @@ public class NetBookValue extends DomainModel<String>{
         if (!super.equals(o)) return false;
         NetBookValue that = (NetBookValue) o;
         return fixedAssetId == that.fixedAssetId &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
+                Objects.equals(that.netBookValue, netBookValue) &&
                 Objects.equals(month, that.month) &&
                 Objects.equals(solId, that.solId) &&
                 Objects.equals(category, that.category);

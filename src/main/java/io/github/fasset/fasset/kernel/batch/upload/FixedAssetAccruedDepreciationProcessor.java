@@ -3,6 +3,7 @@ package io.github.fasset.fasset.kernel.batch.upload;
 import io.github.fasset.fasset.kernel.util.ConverterException;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
@@ -32,7 +33,7 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
 
         AccruedDepreciation retVal = new AccruedDepreciation();
 
-        double acc = fixedAsset.getPurchaseCost() - fixedAsset.getNetBookValue();
+        Money acc = fixedAsset.getPurchaseCost().subtract(fixedAsset.getNetBookValue());
 
         try {
             retVal.setCategory(fixedAsset.getCategory())

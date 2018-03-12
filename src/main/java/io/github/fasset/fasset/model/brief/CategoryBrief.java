@@ -1,11 +1,13 @@
 package io.github.fasset.fasset.model.brief;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
+import org.javamoney.moneta.Money;
 
 import javax.persistence.Entity;
 import java.util.Comparator;
-import java.util.Objects;
 
 /**
  * Back-end representation of a record of a category and its summary in terms of total
@@ -21,18 +23,18 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     private String designation;
 
     /* total costs of all items in this category*/
-    private double purchaseCost;
+    private Money purchaseCost;
 
     /* total NBVs of all items in this category*/
-    private double netBookValue;
+    private Money netBookValue;
 
     /* Total accumulated depreciation for items in this category*/
-    private double accruedDepreciation;
+    private Money accruedDepreciation;
 
     /* total no. of items in this category*/
     private int poll;
 
-    public CategoryBrief(String designation, double purchaseCost, double netBookValue, double accruedDepreciation, int poll) {
+    public CategoryBrief(String designation, Money purchaseCost, Money netBookValue, Money accruedDepreciation, int poll) {
         this.designation = designation;
         this.purchaseCost = purchaseCost;
         this.netBookValue = netBookValue;
@@ -57,17 +59,17 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     }
 
     @Override
-    public double getPurchaseCost() {
+    public Money getPurchaseCost() {
         return purchaseCost;
     }
 
     @Override
-    public double getNetBookValue() {
+    public Money getNetBookValue() {
         return netBookValue;
     }
 
     @Override
-    public double getAccruedDepreciation() {
+    public Money getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
@@ -82,17 +84,17 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     }
 
     @Override
-    public void setPurchaseCost(double purchaseCost) {
+    public void setPurchaseCost(Money purchaseCost) {
         this.purchaseCost = purchaseCost;
     }
 
     @Override
-    public void setNetBookValue(double netBookValue) {
+    public void setNetBookValue(Money netBookValue) {
         this.netBookValue = netBookValue;
     }
 
     @Override
-    public void setAccruedDepreciation(double accruedDepreciation) {
+    public void setAccruedDepreciation(Money accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
     }
 
@@ -107,30 +109,28 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         CategoryBrief that = (CategoryBrief) o;
-        return Double.compare(that.purchaseCost, purchaseCost) == 0 &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
-                Double.compare(that.accruedDepreciation, accruedDepreciation) == 0 &&
-                poll == that.poll &&
-                Objects.equals(designation, that.designation);
+        return poll == that.poll &&
+                Objects.equal(designation, that.designation) &&
+                Objects.equal(purchaseCost, that.purchaseCost) &&
+                Objects.equal(netBookValue, that.netBookValue) &&
+                Objects.equal(accruedDepreciation, that.accruedDepreciation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), designation, purchaseCost, netBookValue, accruedDepreciation, poll);
+        return Objects.hashCode(super.hashCode(), designation, purchaseCost, netBookValue, accruedDepreciation, poll);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CategoryBrief{");
-        sb.append("designation='").append(designation).append('\'');
-        sb.append(", purchaseCost=").append(purchaseCost);
-        sb.append(", netBookValue=").append(netBookValue);
-        sb.append(", accruedDepreciation=").append(accruedDepreciation);
-        sb.append(", poll=").append(poll);
-        sb.append('}');
-        return sb.toString();
+        return MoreObjects.toStringHelper(this)
+                .add("designation", designation)
+                .add("purchaseCost", purchaseCost)
+                .add("netBookValue", netBookValue)
+                .add("accruedDepreciation", accruedDepreciation)
+                .add("poll", poll)
+                .toString();
     }
-
 
     @Override
     public int compareTo(CategoryBrief o) {

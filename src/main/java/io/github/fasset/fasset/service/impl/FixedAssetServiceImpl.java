@@ -7,6 +7,7 @@ import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.repository.FixedAssetRepository;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.service.FixedAssetService;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAssetServiceImpl.class);
 
+    private final FixedAssetRepository fixedAssetRepository;
+
     @Autowired
-    @Qualifier("fixedAssetRepository")
-    private FixedAssetRepository fixedAssetRepository;
+    public FixedAssetServiceImpl(@Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository) {
+        this.fixedAssetRepository = fixedAssetRepository;
+    }
 
     /**
      * Saves all {@link FixedAsset} items passed in a list, saving unique items only.
@@ -60,7 +64,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * @return
      */
     @Override
-    @Cacheable
+    @Cacheable("fixedAssetsFetchedByIds")
     public FixedAsset fetchAssetGivenId(int id) {
 
         return fixedAssetRepository.findById(id).get();
@@ -74,6 +78,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * @return {@link CategoryBrief}
      */
     @Override
+    @Cacheable("categoryBriefsFetchedByCategoryNames")
     public CategoryBrief getCategoryBrief(String category) {
         CategoryBrief brief = new CategoryBrief();
 
@@ -81,18 +86,18 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
         brief.setDesignation(category);
 
-        double cost = fixedAssetRepository.getTotalCategoryPurchaseCost(category);
+        Money cost = fixedAssetRepository.getTotalCategoryPurchaseCost(category);
         log.info("Setting purchase cost as : {}",cost);
         brief.setPurchaseCost(cost);
 
-        double nbv = fixedAssetRepository.getTotalCategoryNetBookValue(category);
+        Money nbv = fixedAssetRepository.getTotalCategoryNetBookValue(category);
         brief.setNetBookValue(nbv);
 
         int count = fixedAssetRepository.getTotalCategoryCount(category);
         log.info("Setting poll as : {}",count);
         brief.setPoll(count);
 
-        double acc = brief.getPurchaseCost() - brief.getNetBookValue();
+        Money acc = brief.getPurchaseCost().subtract(brief.getNetBookValue());
         log.info("Setting accrued depreciation as : {}",acc);
         brief.setAccruedDepreciation(acc);
 
@@ -116,6 +121,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * @return {@link CategoryBrief}
      */
     @Override
+    @Cacheable("serviceOutletBriefsFetchedBySolIds")
     public ServiceOutletBrief getServiceOutletBrief(String solId) {
         ServiceOutletBrief brief = new ServiceOutletBrief();
 
@@ -125,7 +131,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
             brief.setDesignation(solId);
             brief.setPurchaseCost(fixedAssetRepository.getTotalSolPurchaseCost(solId));
             brief.setNetBookValue(fixedAssetRepository.getTotalSolNetBookValue(solId));
-            brief.setAccruedDepreciation(brief.getPurchaseCost() - brief.getNetBookValue());
+            brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
             brief.setPoll(fixedAssetRepository.getTotalSolCount(solId));
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating a serviceOutletBrief for solId : %s",solId);

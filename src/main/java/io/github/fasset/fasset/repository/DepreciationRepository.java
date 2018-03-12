@@ -7,11 +7,12 @@ import io.github.fasset.fasset.model.Depreciation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Tuple;
 import java.time.YearMonth;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Repository("depreciationRepository")
 public interface DepreciationRepository extends JpaRepository<Depreciation,Integer> {
@@ -21,7 +22,7 @@ public interface DepreciationRepository extends JpaRepository<Depreciation,Integ
             "FROM Depreciation e")
     List<YearMonth> getDistinctDepreciationPeriods();
 
-    Depreciation getDepreciationByDepreciationPeriodAndFixedAssetId(YearMonth depreciationPeriod,int fixedAssetId);
+    Depreciation getDepreciationByDepreciationPeriodAndFixedAssetId(YearMonth depreciationPeriod, int fixedAssetId);
 
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO(" +
             "e.fixedAssetId,e.year," +
@@ -60,7 +61,6 @@ public interface DepreciationRepository extends JpaRepository<Depreciation,Integ
             "FROM Depreciation e " +
             "WHERE e.solId = :solId AND e.year = :year")
     List<MonthlySolDepreciationDTO> getMonthlySolDepreciation(@Param("solId") String solId, @Param("year") Integer year);
-
 
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyCategoryDepreciationDTO(" +
             "e.category,e.year," +

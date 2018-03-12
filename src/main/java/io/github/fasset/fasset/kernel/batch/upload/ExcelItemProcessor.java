@@ -1,9 +1,10 @@
 package io.github.fasset.fasset.kernel.batch.upload;
 
-import io.github.fasset.fasset.kernel.DateToLocalDateConverter;
-import io.github.fasset.fasset.kernel.DateToYearMonthConverter;
-import io.github.fasset.fasset.kernel.StringToDoubleConverter;
+import io.github.fasset.fasset.config.MoneyProperties;
+import io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter;
+import io.github.fasset.fasset.kernel.util.convert.StringToDoubleConverter;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
+import io.github.fasset.fasset.kernel.util.convert.StringToMoneyConverter;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.FixedAssetDTO;
 import org.slf4j.Logger;
@@ -25,13 +26,16 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsse
     private static final Logger log  = LoggerFactory.getLogger(ExcelItemProcessor.class);
 
 
-    @Autowired
-    @Qualifier("dateToLocalDateConverter")
-    private DateToLocalDateConverter dateToLocalDateConverter;
+
+    private final DateToLocalDateConverter dateToLocalDateConverter;
+
+    private final StringToMoneyConverter stringToMoneyConverter;
 
     @Autowired
-    @Qualifier("stringToDoubleConverter")
-    private StringToDoubleConverter stringToDoubleConverter;
+    public ExcelItemProcessor(@Qualifier("dateToLocalDateConverter") DateToLocalDateConverter dateToLocalDateConverter, @Qualifier("stringToMoneyConverter") StringToMoneyConverter stringToMoneyConverter) {
+        this.dateToLocalDateConverter = dateToLocalDateConverter;
+        this.stringToMoneyConverter = stringToMoneyConverter;
+    }
 
 
     @Override
@@ -45,8 +49,8 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsse
             fixedAsset.setAssetDescription(fixedAssetDTO.getAssetDescription())
                     .setBarcode(fixedAssetDTO.getBarcode())
                     .setCategory(fixedAssetDTO.getCategory())
-                    .setNetBookValue(stringToDoubleConverter.convert(fixedAssetDTO.getNetBookValue()))
-                    .setPurchaseCost(stringToDoubleConverter.convert(fixedAssetDTO.getPurchaseCost()))
+                    .setNetBookValue(stringToMoneyConverter.convert(fixedAssetDTO.getNetBookValue()))
+                    .setPurchaseCost(stringToMoneyConverter.convert(fixedAssetDTO.getPurchaseCost()))
                     .setSolId(fixedAssetDTO.getSolId())
                     .setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
 

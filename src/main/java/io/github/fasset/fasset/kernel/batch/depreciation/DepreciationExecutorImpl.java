@@ -1,14 +1,15 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
-import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
-import io.github.fasset.fasset.kernel.batch.depreciation.agent.UpdateProvider;
+import io.github.fasset.fasset.config.MoneyProperties;
+import io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.NilDepreciation;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,13 @@ public class DepreciationExecutorImpl implements DepreciationExecutor{
     private DepreciationAgentsHandler depreciationAgentsHandler;
     private Depreciation depreciation;
     private DepreciationProceeds depreciationProceeds;
+    private MoneyProperties moneyProperties;
+
+    @Autowired
+    public DepreciationExecutorImpl setMoneyProperties(MoneyProperties moneyProperties) {
+        this.moneyProperties = moneyProperties;
+        return this;
+    }
 
     @Autowired
     public DepreciationExecutorImpl setLocalDateToYearMonthConverter(LocalDateToYearMonthConverter localDateToYearMonthConverter) {
@@ -54,13 +62,13 @@ public class DepreciationExecutorImpl implements DepreciationExecutor{
      * @param month the month for which we are calculating depreciation
      * @return {@link DepreciationProceeds} object
      */
-    //@Cacheable
+    @Cacheable("depreciationProceeds")
     @Override
     public DepreciationProceeds getDepreciation(FixedAsset asset, YearMonth month){
 
         DepreciationProceeds depreciationProceeds = new DepreciationProceeds();
 
-        if(asset.getNetBookValue() == 0.00) {
+        if(asset.getNetBookValue().isEqualTo(Money.of(0.00,moneyProperties.getDefaultCurrency()))) {
 
             log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " +
                     "depreciation",asset);
@@ -107,7 +115,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor{
      */
     private Depreciation getNilDepreciation(FixedAsset asset,YearMonth depreciationPeriod){
 
-        return new NilDepreciation(asset,depreciationPeriod).getNilDepreciation();
+        return new NilDepreciation(moneyProperties,asset,depreciationPeriod).getNilDepreciation();
     }
 
     public void setDepreciation(Depreciation depreciation) {

@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.model.nil;
 
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,13 +38,13 @@ public class NilFixedAsset extends FixedAsset {
     }
 
     @Override
-    public double getPurchaseCost() {
-        return 0.00;
+    public Money getPurchaseCost() {
+        return Money.of(0.00,"KES");
     }
 
     @Override
-    public double getNetBookValue() {
-        return 0.00;
+    public Money getNetBookValue() {
+        return Money.of(0.00,"KES");
     }
 
     @Override

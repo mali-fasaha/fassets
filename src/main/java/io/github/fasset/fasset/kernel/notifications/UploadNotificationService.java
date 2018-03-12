@@ -1,6 +1,4 @@
-package io.github.fasset.fasset.kernel.messaging;
-
-import io.github.fasset.fasset.model.files.FileUpload;
+package io.github.fasset.fasset.kernel.notifications;
 
 /**
  * Notifies that a file has been uploaded, giving both the month and the file path

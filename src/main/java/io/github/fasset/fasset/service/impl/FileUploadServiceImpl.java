@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.service.impl;
 
-import io.github.fasset.fasset.kernel.messaging.FileUploadNotification;
-import io.github.fasset.fasset.kernel.messaging.UploadNotificationService;
+import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
+import io.github.fasset.fasset.kernel.notifications.UploadNotificationService;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.repository.FileUploadRepository;
 import io.github.fasset.fasset.service.FileUploadService;
@@ -9,8 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service("fileUploadService")
 public class FileUploadServiceImpl implements FileUploadService {
 
@@ -18,7 +21,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     private FileUploadRepository fileUploadRepository;
 
-    private UploadNotificationService notificationService;
+    /*private UploadNotificationService notificationService;*/
 
     @Autowired
     @Qualifier("fileUploadRepository")
@@ -27,13 +30,14 @@ public class FileUploadServiceImpl implements FileUploadService {
         return this;
     }
 
-    @Autowired
+    /*@Autowired
     @Qualifier("notificationService")
     public FileUploadServiceImpl setNotificationService(UploadNotificationService notificationService) {
         this.notificationService = notificationService;
         return this;
-    }
+    }*/
 
+    @Cacheable("hasFileBeenUploaded")
     @Override
     public boolean theFileIsAlreadyUploaded(FileUpload fileUpload){
 
@@ -54,7 +58,8 @@ public class FileUploadServiceImpl implements FileUploadService {
             String fileName= fileUpload.getFileName();
             String month=fileUpload.getMonth().toString();
             String timeUploaded=fileUpload.getTimeUploaded().toString();
-            notificationService.sendNotification(new FileUploadNotification(fileName,month,timeUploaded));
+            //FIXME : To implement observer pattern here
+            //notificationService.sendNotification(new FileUploadNotification(fileName,month,timeUploaded));
         } else {
 
             log.info("The file : {} is already uploaded and will not be duplicated",fileUpload.getFileName());

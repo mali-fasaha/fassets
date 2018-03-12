@@ -1,9 +1,10 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
-import io.github.fasset.fasset.kernel.DateToYearMonthConverter;
-import io.github.fasset.fasset.kernel.LocalDateToYearMonthConverter;
+import io.github.fasset.fasset.config.MoneyProperties;
+import io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter;
 import io.github.fasset.fasset.kernel.util.DepreciationExecutionException;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
-import java.time.ZoneId;
 
 /**
  * This component acts as middleware between calculated depreciation and actual application of calculated
@@ -29,13 +29,16 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
 
     private YearMonth month;
     private FixedAsset asset;
-    private double depreciationAmount;
+    private Money depreciationAmount;
 
     private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
+    private final MoneyProperties moneyProperties;
+
 
     @Autowired
-    public DepreciationPreprocessorImpl(@Qualifier("localDateToYearMonthConverter") LocalDateToYearMonthConverter localDateToYearMonthConverter) {
+    public DepreciationPreprocessorImpl(@Qualifier("localDateToYearMonthConverter") LocalDateToYearMonthConverter localDateToYearMonthConverter, MoneyProperties moneyProperties) {
         this.localDateToYearMonthConverter = localDateToYearMonthConverter;
+        this.moneyProperties = moneyProperties;
     }
 
 
@@ -61,7 +64,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
      * @return amount of depreciation
      */
     @Override
-    public double getDepreciationAmount() {
+    public Money getDepreciationAmount() {
         log.debug("Returning depreciation amount : {}",depreciationAmount);
         return depreciationAmount;
     }
@@ -69,8 +72,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
     /**
      * Sets the asset to be reviewed for depreciation
      *
-     * @param asset
-     * @return
+     * @param asset which is being depreciated
      */
     @Override
     public DepreciationPreprocessor setAsset(FixedAsset asset) {
@@ -82,8 +84,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
     /**
      * Sets depreciation period in months
      *
-     * @param month
-     * @return
+     * @param month in which depreciation occurs
      */
     @Override
     public DepreciationPreprocessor setMonth(YearMonth month) {
@@ -95,11 +96,10 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
     /**
      * Sets the amount of depreciation for review
      *
-     * @param depreciationAmount
-     * @return
+     * @param depreciationAmount => amount by which we are to depreciate the asset
      */
     @Override
-    public DepreciationPreprocessor setDepreciationAmount(double depreciationAmount) {
+    public DepreciationPreprocessor setDepreciationAmount(Money depreciationAmount) {
         log.debug("Setting depreciation amount as : {}",depreciationAmount);
         this.depreciationAmount = depreciationAmount;
         return this;
@@ -108,15 +108,14 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
     /**
      * This method ensures all properties are set and evaluated
      *
-     * @return
      */
     @Override
     public DepreciationPreprocessor setProperties() {
         log.debug("Setting depreciation preprocessor properties...");
 
         if(asset == null || month == null){
-            String message = String.format("Exception encountered : Either the FixedAsset" +
-                    "instance or the month instance is null");
+            String message = String.format("Exception encountered : Either the FixedAsset " +
+                    "instance %s or the month %s instance is null",asset,month);
             throw new DepreciationExecutionException(message,new NullPointerException());
         }else{
             depreciationAmountRealignment(asset,month);
@@ -138,17 +137,17 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
 
         log.debug("Performing re-evaluation of the depreciation amount...");
 
-        if(asset.getPurchaseCost() > 0) {
+        if(asset.getPurchaseCost().isGreaterThan(Money.of(0.00,moneyProperties.getDefaultCurrency()))) {
 
-            if (asset.getNetBookValue() < depreciationAmount) {
+            if (asset.getNetBookValue().isLessThan(depreciationAmount)) {
 
                 log.debug("The netBookValue of asset : {} is less that the depreciation amount", asset);
 
-                if (asset.getNetBookValue() == 0) {
+                if (asset.getNetBookValue().isEqualTo(Money.of(0.00,moneyProperties.getDefaultCurrency()))) {
 
                     log.debug("The NetBookValue is zero, setting depreciation to zero....");
                     // No further processing required
-                    this.depreciationAmount = 0.00;
+                    this.depreciationAmount = Money.of(0.00,moneyProperties.getDefaultCurrency());
 
                     log.debug("The depreciation amount is now zero : {}",depreciationAmount);
 
@@ -170,6 +169,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
         }
     }
 
+    @SuppressWarnings("all")
     private void depreciationTimingCheck(FixedAsset asset, YearMonth month) {
         log.debug("Reviewing the depreciation timing for asset : {}, relative to the " +
                 "month: {}",asset,month);
@@ -177,7 +177,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor{
             log.debug("The month of purchase of asset: {} comes later than the depreciation period : {}" +
                     "therefore we are resetting the depreciation formally calculated as : {} " +
                     "amount to zero",asset,month,depreciationAmount);
-            this.depreciationAmount = 0.00;
+            this.depreciationAmount = Money.of(0.00,moneyProperties.getDefaultCurrency());
             log.debug("Depreciation amount has been reset to zero : {}",depreciationAmount);
         }
         log.debug("The depreciation has passed the timing test and will be retained at : {}",depreciationAmount);

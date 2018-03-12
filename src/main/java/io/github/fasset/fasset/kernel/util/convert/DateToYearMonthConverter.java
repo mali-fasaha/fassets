@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel;
+package io.github.fasset.fasset.kernel.util.convert;
 
 import java.time.Instant;
 import java.time.YearMonth;

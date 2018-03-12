@@ -1,10 +1,11 @@
 package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.YearMonth;
-import java.util.Objects;
+import javax.money.MonetaryAmount;
 
 public class MonthlyAssetDepreciationDTO {
 
@@ -28,21 +29,21 @@ public class MonthlyAssetDepreciationDTO {
     public MonthlyAssetDepreciationDTO() {
     }
 
-    public MonthlyAssetDepreciationDTO(Integer assetId, Integer year, Double jan, Double feb, Double mar, Double apr, Double may, Double jun, Double jul, Double aug, Double sep, Double oct, Double nov, Double dec) {
+    public MonthlyAssetDepreciationDTO(Integer assetId, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun, MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.assetId = assetId;
         this.year = year;
-        this.jan = jan;
-        this.feb = feb;
-        this.mar = mar;
-        this.apr = apr;
-        this.may = may;
-        this.jun = jun;
-        this.jul = jul;
-        this.aug = aug;
-        this.sep = sep;
-        this.oct = oct;
-        this.nov = nov;
-        this.dec = dec;
+        this.jan = jan.getNumber().doubleValue();
+        this.feb = feb.getNumber().doubleValue();
+        this.mar = mar.getNumber().doubleValue();
+        this.apr = apr.getNumber().doubleValue();
+        this.may = may.getNumber().doubleValue();
+        this.jun = jun.getNumber().doubleValue();
+        this.jul = jul.getNumber().doubleValue();
+        this.aug = aug.getNumber().doubleValue();
+        this.sep = sep.getNumber().doubleValue();
+        this.oct = oct.getNumber().doubleValue();
+        this.nov = nov.getNumber().doubleValue();
+        this.dec = dec.getNumber().doubleValue();
     }
 
     public Integer getAssetId() {
@@ -192,45 +193,44 @@ public class MonthlyAssetDepreciationDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MonthlyAssetDepreciationDTO that = (MonthlyAssetDepreciationDTO) o;
-        return assetId == that.assetId &&
-                year == that.year &&
-                Double.compare(that.jan, jan) == 0 &&
-                Double.compare(that.feb, feb) == 0 &&
-                Double.compare(that.mar, mar) == 0 &&
-                Double.compare(that.apr, apr) == 0 &&
-                Double.compare(that.may, may) == 0 &&
-                Double.compare(that.jun, jun) == 0 &&
-                Double.compare(that.jul, jul) == 0 &&
-                Double.compare(that.aug, aug) == 0 &&
-                Double.compare(that.sep, sep) == 0 &&
-                Double.compare(that.oct, oct) == 0 &&
-                Double.compare(that.nov, nov) == 0 &&
-                Double.compare(that.dec, dec) == 0;
+        return Objects.equal(assetId, that.assetId) &&
+                Objects.equal(year, that.year) &&
+                Objects.equal(jan, that.jan) &&
+                Objects.equal(feb, that.feb) &&
+                Objects.equal(mar, that.mar) &&
+                Objects.equal(apr, that.apr) &&
+                Objects.equal(may, that.may) &&
+                Objects.equal(jun, that.jun) &&
+                Objects.equal(jul, that.jul) &&
+                Objects.equal(aug, that.aug) &&
+                Objects.equal(sep, that.sep) &&
+                Objects.equal(oct, that.oct) &&
+                Objects.equal(nov, that.nov) &&
+                Objects.equal(dec, that.dec);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(assetId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
+        return Objects.hashCode(assetId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MonthlyAssetDepreciationDTO{");
-        sb.append("assetId=").append(assetId);
-        sb.append(", year=").append(year);
-        sb.append(", jan=").append(jan);
-        sb.append(", feb=").append(feb);
-        sb.append(", mar=").append(mar);
-        sb.append(", apr=").append(apr);
-        sb.append(", may=").append(may);
-        sb.append(", jun=").append(jun);
-        sb.append(", jul=").append(jul);
-        sb.append(", aug=").append(aug);
-        sb.append(", sep=").append(sep);
-        sb.append(", oct=").append(oct);
-        sb.append(", nov=").append(nov);
-        sb.append(", dec=").append(dec);
-        sb.append('}');
-        return sb.toString();
+        return MoreObjects.toStringHelper(this)
+                .add("assetId", assetId)
+                .add("year", year)
+                .add("jan", jan)
+                .add("feb", feb)
+                .add("mar", mar)
+                .add("apr", apr)
+                .add("may", may)
+                .add("jun", jun)
+                .add("jul", jul)
+                .add("aug", aug)
+                .add("sep", sep)
+                .add("oct", oct)
+                .add("nov", nov)
+                .add("dec", dec)
+                .toString();
     }
 }

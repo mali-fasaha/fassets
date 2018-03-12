@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.model.brief;
 
+import org.javamoney.moneta.Money;
+
 /**
  * Represents common functionality in objects that summarise the fixed assets in the
  * data frame
@@ -23,20 +25,20 @@ public interface Brief {
      *
      * @return total purchase cost
      */
-    double getPurchaseCost();
+    Money getPurchaseCost();
 
     /**
      *
      * @return total net book value of items
      */
-    double getNetBookValue();
+    Money getNetBookValue();
 
     /**
      *
      * @return Total AccruedDepreciation of items in the
      * brief
      */
-    double getAccruedDepreciation();
+    Money getAccruedDepreciation();
 
     /**
      *
@@ -54,19 +56,19 @@ public interface Brief {
      *
      * @param purchaseCost of all items in the brief
      */
-    void setPurchaseCost(double purchaseCost);
+    void setPurchaseCost(Money purchaseCost);
 
     /**
      *
      * @param netBookValue of all items in the brief
      */
-    void setNetBookValue(double netBookValue);
+    void setNetBookValue(Money netBookValue);
 
     /**
      *
      * @param accruedDepreciation of items in the brief
      */
-    void setAccruedDepreciation(double accruedDepreciation);
+    void setAccruedDepreciation(Money accruedDepreciation);
 
     /**
      *

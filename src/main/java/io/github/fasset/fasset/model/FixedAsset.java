@@ -1,11 +1,11 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,11 +47,15 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
     @Column(name="category")
     private String category;
 
-    @Column(name="purchase_cost")
-    private double purchaseCost;
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    private Money purchaseCost;
 
-    @Column(name="net_book_value")
-    private double netBookValue;
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    private Money netBookValue;
 
     public FixedAsset() {
     }
@@ -101,22 +105,22 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
         return this;
     }
 
-    public double getPurchaseCost() {
+    public Money getPurchaseCost() {
         return purchaseCost;
     }
 
-    public FixedAsset setPurchaseCost(double purchaseCost) {
+    public FixedAsset setPurchaseCost(Money purchaseCost) {
 
         log.debug("Setting the purchaseCost for fixedAssetId : {} ,as = {}",getId(),purchaseCost);
         this.purchaseCost = purchaseCost;
         return this;
     }
 
-    public double getNetBookValue() {
+    public Money getNetBookValue() {
         return netBookValue;
     }
 
-    public FixedAsset setNetBookValue(double netBookValue) {
+    public FixedAsset setNetBookValue(Money netBookValue) {
 
         log.debug("Setting NBV for assetId : {}, as = {}",getId(),netBookValue);
         this.netBookValue = netBookValue;
@@ -129,13 +133,13 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         FixedAsset that = (FixedAsset) o;
-        return Double.compare(that.purchaseCost, purchaseCost) == 0 &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
-                Objects.equals(solId, that.solId) &&
+        return Objects.equals(solId, that.solId) &&
                 Objects.equals(barcode, that.barcode) &&
                 Objects.equals(assetDescription, that.assetDescription) &&
                 Objects.equals(purchaseDate, that.purchaseDate) &&
-                Objects.equals(category, that.category);
+                Objects.equals(category, that.category) &&
+                Objects.equals(purchaseCost, that.purchaseCost) &&
+                Objects.equals(netBookValue, that.netBookValue);
     }
 
     @Override

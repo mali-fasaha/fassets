@@ -1,13 +1,10 @@
 package io.github.fasset.fasset.service.impl;
 
-import io.github.fasset.fasset.model.brief.CategoryBrief;
-import io.github.fasset.fasset.repository.FixedAssetRepository;
 import io.github.fasset.fasset.service.NetBookValueService;
 import io.github.fasset.fasset.model.NetBookValue;
 import io.github.fasset.fasset.repository.NetBookValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,9 +21,12 @@ import java.util.List;
 public class NetBookValueServiceImpl implements NetBookValueService {
 
 
-    @Qualifier("netBookValueRepository")
+    private final NetBookValueRepository netBookValueRepository;
+
     @Autowired
-    private NetBookValueRepository netBookValueRepository;
+    public NetBookValueServiceImpl(@Qualifier("netBookValueRepository") NetBookValueRepository netBookValueRepository) {
+        this.netBookValueRepository = netBookValueRepository;
+    }
 
     /**
      * Saves the {@link NetBookValue} object in the param

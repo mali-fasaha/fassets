@@ -1,5 +1,9 @@
 package io.github.fasset.fasset.kernel.storage;
 
+import io.github.fasset.fasset.config.StorageProperties;
+import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
+import io.github.fasset.fasset.kernel.subscriptions.SimpleSubscription;
+import io.github.fasset.fasset.kernel.subscriptions.SubscriptionService;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
@@ -25,8 +29,8 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.stream.Stream;
 
-@Service
-public class FileSystemStorageService implements StorageService {
+@Service("fileSystemStorageService")
+public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService,StorageService {
 
     private static final Logger log = LoggerFactory.getLogger(FileSystemStorageService.class);
 
@@ -79,7 +83,10 @@ public class FileSystemStorageService implements StorageService {
                         throw new StorageException("Failed to store file " + fileName, e);
                     }
 
+                    // Replace with subscriber for database and another for the batch
                     fileUploadService.recordFileUpload(fileUpload);
+
+                    postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(),fileUpload.getMonth().toString(),fileUpload.getTimeUploaded().toString()));
                 }
             }
         }
