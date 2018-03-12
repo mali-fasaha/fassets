@@ -89,8 +89,6 @@ public class MonthlyDepreciationControllerTest {
 
         MonthlyAssetDepreciation persisted1 = monthlyAssetDepreciationRepository.save(assetDepreciation1);
 
-        int id = persisted1.getId();
-
         MonthlyAssetDepreciation assetDepreciation2 = new MonthlyAssetDepreciation();
         assetDepreciation1.setAssetId(21)
                 .setYear(2018)
@@ -109,12 +107,9 @@ public class MonthlyDepreciationControllerTest {
 
         MonthlyAssetDepreciation persisted2 = monthlyAssetDepreciationRepository.save(assetDepreciation2);
 
-        int id2 = persisted2.getId();
-
         this.mockMvc.perform(get("/reports/depreciations/assets/data"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$",hasSize(2)))
-                .andExpect(jsonPath("$[0].id", is(id)))
                 .andExpect(jsonPath("$[0].assetId", is(assetDepreciation1.getAssetId())))
                 .andExpect(jsonPath("$[0].year", is(assetDepreciation1.getYear())))
                 .andExpect(jsonPath("$[0].jan", is(assetDepreciation1.getJan())))
@@ -129,7 +124,6 @@ public class MonthlyDepreciationControllerTest {
                 .andExpect(jsonPath("$[0].oct", is(assetDepreciation1.getOct())))
                 .andExpect(jsonPath("$[0].nov", is(assetDepreciation1.getNov())))
                 .andExpect(jsonPath("$[0].dec", is(assetDepreciation1.getDec())))
-                .andExpect(jsonPath("$[1].id", is(id2)))
                 .andExpect(jsonPath("$[0].assetId", is(assetDepreciation2.getAssetId())))
                 .andExpect(jsonPath("$[0].year", is(assetDepreciation2.getYear())))
                 .andExpect(jsonPath("$[0].jan", is(assetDepreciation2.getJan())))
