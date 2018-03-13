@@ -34,6 +34,7 @@ public class FixedAssetsController {
     @PostMapping("/add/asset")
     public String saveFixedAssetFromForm(@ModelAttribute FixedAsset fixedAsset, RedirectAttributes redirectAttributes) {
 
+        // TODO replace with FixedAssetResponseDto
         if (fixedAsset != null)
             fixedAssetService.saveFixedAsset(fixedAsset);
         else
