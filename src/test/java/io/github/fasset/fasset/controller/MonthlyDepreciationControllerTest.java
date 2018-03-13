@@ -88,9 +88,10 @@ public class MonthlyDepreciationControllerTest {
                 .setDec(112.12);
 
         MonthlyAssetDepreciation persisted1 = monthlyAssetDepreciationRepository.save(assetDepreciation1);
+        int id = persisted1.getId();
 
         MonthlyAssetDepreciation assetDepreciation2 = new MonthlyAssetDepreciation();
-        assetDepreciation1.setAssetId(21)
+        assetDepreciation2.setAssetId(21)
                 .setYear(2018)
                 .setJan(201.0)
                 .setFeb(202.1)
@@ -106,10 +107,12 @@ public class MonthlyDepreciationControllerTest {
                 .setDec(212.12);
 
         MonthlyAssetDepreciation persisted2 = monthlyAssetDepreciationRepository.save(assetDepreciation2);
+        int id2 = persisted2.getId();
 
         this.mockMvc.perform(get("/reports/depreciations/assets/data"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$",hasSize(2)))
+                .andExpect(jsonPath("$[0].id",is(id)))
                 .andExpect(jsonPath("$[0].assetId", is(assetDepreciation1.getAssetId())))
                 .andExpect(jsonPath("$[0].year", is(assetDepreciation1.getYear())))
                 .andExpect(jsonPath("$[0].jan", is(assetDepreciation1.getJan())))
@@ -124,20 +127,21 @@ public class MonthlyDepreciationControllerTest {
                 .andExpect(jsonPath("$[0].oct", is(assetDepreciation1.getOct())))
                 .andExpect(jsonPath("$[0].nov", is(assetDepreciation1.getNov())))
                 .andExpect(jsonPath("$[0].dec", is(assetDepreciation1.getDec())))
-                .andExpect(jsonPath("$[0].assetId", is(assetDepreciation2.getAssetId())))
-                .andExpect(jsonPath("$[0].year", is(assetDepreciation2.getYear())))
-                .andExpect(jsonPath("$[0].jan", is(assetDepreciation2.getJan())))
-                .andExpect(jsonPath("$[0].feb", is(assetDepreciation2.getFeb())))
-                .andExpect(jsonPath("$[0].mar", is(assetDepreciation2.getMar())))
-                .andExpect(jsonPath("$[0].apr", is(assetDepreciation2.getApr())))
-                .andExpect(jsonPath("$[0].may", is(assetDepreciation2.getMay())))
-                .andExpect(jsonPath("$[0].jun", is(assetDepreciation2.getJun())))
-                .andExpect(jsonPath("$[0].jul", is(assetDepreciation2.getJul())))
-                .andExpect(jsonPath("$[0].aug", is(assetDepreciation2.getAug())))
-                .andExpect(jsonPath("$[0].sep", is(assetDepreciation2.getSep())))
-                .andExpect(jsonPath("$[0].oct", is(assetDepreciation2.getOct())))
-                .andExpect(jsonPath("$[0].nov", is(assetDepreciation2.getNov())))
-                .andExpect(jsonPath("$[0].dec", is(assetDepreciation2.getDec())))
+                .andExpect(jsonPath("$[1].id",is(id2)))
+                .andExpect(jsonPath("$[1].assetId", is(assetDepreciation2.getAssetId())))
+                .andExpect(jsonPath("$[1].year", is(assetDepreciation2.getYear())))
+                .andExpect(jsonPath("$[1].jan", is(assetDepreciation2.getJan())))
+                .andExpect(jsonPath("$[1].feb", is(assetDepreciation2.getFeb())))
+                .andExpect(jsonPath("$[1].mar", is(assetDepreciation2.getMar())))
+                .andExpect(jsonPath("$[1].apr", is(assetDepreciation2.getApr())))
+                .andExpect(jsonPath("$[1].may", is(assetDepreciation2.getMay())))
+                .andExpect(jsonPath("$[1].jun", is(assetDepreciation2.getJun())))
+                .andExpect(jsonPath("$[1].jul", is(assetDepreciation2.getJul())))
+                .andExpect(jsonPath("$[1].aug", is(assetDepreciation2.getAug())))
+                .andExpect(jsonPath("$[1].sep", is(assetDepreciation2.getSep())))
+                .andExpect(jsonPath("$[1].oct", is(assetDepreciation2.getOct())))
+                .andExpect(jsonPath("$[1].nov", is(assetDepreciation2.getNov())))
+                .andExpect(jsonPath("$[1].dec", is(assetDepreciation2.getDec())))
                 .andDo(print());
     }
 }
