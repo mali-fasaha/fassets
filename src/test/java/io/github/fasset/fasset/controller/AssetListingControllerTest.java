@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.controller;
 
-import io.github.fasset.TestUtil;
+import io.github.fasset.fasset.TestUtil;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.repository.FixedAssetRepository;
 import org.javamoney.moneta.Money;

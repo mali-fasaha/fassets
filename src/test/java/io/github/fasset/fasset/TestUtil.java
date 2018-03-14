@@ -1,4 +1,4 @@
-package io.github.fasset;
+package io.github.fasset.fasset;
 
 import org.springframework.http.MediaType;
 

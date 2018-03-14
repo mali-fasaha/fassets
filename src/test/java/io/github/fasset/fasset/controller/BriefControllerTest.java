@@ -1,6 +1,6 @@
 package io.github.fasset.fasset.controller;
 
-import io.github.fasset.TestUtil;
+import io.github.fasset.fasset.TestUtil;
 import io.github.fasset.fasset.model.brief.CategoryBrief;
 import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.repository.CategoryBriefRepository;
