@@ -49,7 +49,7 @@ public class FileUploadTests {
     @Test
     public void shouldListAllFiles() throws Exception {
         /*given(fileSystemStorageService.loadAll())
-                .willReturn(Stream.of(Paths.get("Data1.xlsx"),Paths.get("Data2.xlxs")));*/
+                .willReturn(Stream.of(Paths.get("Data1.xlsx"),Paths.get("Data2.xlsx")));*/
 
         MockMultipartFile multipartFile1 = new MockMultipartFile("file", "Data1.xlsx",
                 "text/plain", "Spring Framework".getBytes());
@@ -58,13 +58,13 @@ public class FileUploadTests {
         this.fileSystemStorageService.store(multipartFile1);
         this.fileSystemStorageService.store(multipartFile2);
 
-        Stream files = fileSystemStorageService.loadAll();
+        //Stream files = fileSystemStorageService.loadAll();
 
         this.mockMvc.perform(get("/files")).andExpect(status().isOk())
                 .andExpect(model().attribute("files",
-                        /*Matchers.contains("http://localhost/files/Data1.xlsx",
-                                "http://localhost/files/Data2.xlxs")));*/
-        Matchers.contains(new String[]{"http://localhost/files/Data1.xlxs"})));
+                        Matchers.contains("http://localhost/files/Data1.xlsx",
+                                "http://localhost/files/Data2.xlsx")));
+        /*Matchers.contains("http://localhost/files/Data1.xlxs")));*/
     }
 
     @Test
