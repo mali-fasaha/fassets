@@ -6,5 +6,6 @@ script:
 - mvn clean package
 - mvn clean test
 - mvn clean verify
+- mvn pdf:pdf
 jdk:
   - oraclejdk8
