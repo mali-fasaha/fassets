@@ -4,8 +4,8 @@
           outputName="maven-pdf-plugin">
 
     <meta>
-        <title>Maven PDF Plugin</title>
-        <author>The Apache Maven Project</author>
+        <title>Fassets</title>
+        <author>Edwin Njeru</author>
     </meta>
 
     <toc name="Table of Contents">
