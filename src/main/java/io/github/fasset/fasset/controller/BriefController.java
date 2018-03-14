@@ -1,13 +1,10 @@
 package io.github.fasset.fasset.controller;
 
+import io.github.fasset.fasset.dto.CategoryBriefResponseDto;
 import io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
-import io.github.fasset.fasset.model.brief.CategoryBrief;
-import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.service.CategoryBriefService;
 import io.github.fasset.fasset.service.ServiceOutletBriefService;
-import io.github.fasset.fasset.service.impl.CategoryBriefServiceImpl;
-import io.github.fasset.fasset.service.impl.ServiceOutletBriefServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -59,22 +56,25 @@ public class BriefController {
 
     @GetMapping("/briefs/serviceOutlets/data/{id}")
     @ResponseBody
-    public ServiceOutletBrief getServiceOutletBriefGivenId(@PathVariable("id") int id){
+    public ServiceOutletBriefResponseDto getServiceOutletBriefGivenId(@PathVariable("id") int id){
 
-        return serviceOutletBriefService.fetchServiceOutletBriefGivenId(id);
+        return new ServiceOutletBriefResponseDto(serviceOutletBriefService.fetchServiceOutletBriefGivenId(id));
     }
 
     @GetMapping("/briefs/categories/data")
     @ResponseBody
-    public List<CategoryBrief> getCategoryBriefs(Model model){
+    public List<CategoryBriefResponseDto> getCategoryBriefs(Model model){
 
-        return categoryBriefService.fetchAllCategoryBriefs();
+        return categoryBriefService.fetchAllCategoryBriefs()
+                .parallelStream()
+                .map(CategoryBriefResponseDto::new)
+                .collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/briefs/categories/data/{id}")
     @ResponseBody
-    public CategoryBrief getCategoryGivenId(@PathVariable("id") int id){
+    public CategoryBriefResponseDto getCategoryGivenId(@PathVariable("id") int id){
 
-        return categoryBriefService.fetchCategoryBriefGivenId(id);
+        return new CategoryBriefResponseDto(categoryBriefService.fetchCategoryBriefGivenId(id));
     }
 }

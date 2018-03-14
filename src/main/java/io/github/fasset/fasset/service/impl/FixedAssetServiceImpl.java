@@ -165,9 +165,9 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * @param fixedAsset to be saved to fixedAssetRepository
      */
     @Override
-    public void saveFixedAsset(FixedAsset fixedAsset) {
+    public FixedAsset saveFixedAsset(FixedAsset fixedAsset) {
 
-        fixedAssetRepository.save(fixedAsset);
+        return fixedAssetRepository.save(fixedAsset);
     }
 
     /**

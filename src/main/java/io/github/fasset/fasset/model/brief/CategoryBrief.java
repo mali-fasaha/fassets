@@ -3,9 +3,11 @@ package io.github.fasset.fasset.model.brief;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import io.github.fasset.fasset.DomainModel;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.javamoney.moneta.Money;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Comparator;
 
@@ -23,12 +25,21 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     private String designation;
 
     /* total costs of all items in this category*/
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money purchaseCost;
 
     /* total NBVs of all items in this category*/
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money netBookValue;
 
     /* Total accumulated depreciation for items in this category*/
+    @Column
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
+            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money accruedDepreciation;
 
     /* total no. of items in this category*/

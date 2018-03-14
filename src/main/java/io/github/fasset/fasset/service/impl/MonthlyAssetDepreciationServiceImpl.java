@@ -37,7 +37,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
     @Override
     public List<MonthlyAssetDepreciation> fetchAllMonthlyDepreciations() {
         return monthlyAssetDepreciationRepository.findAll()
-                .stream()
+                .parallelStream()
                 .sorted(Comparator.comparing(MonthlyAssetDepreciation::getYear))
                 .collect(Collectors.toList());
     }
