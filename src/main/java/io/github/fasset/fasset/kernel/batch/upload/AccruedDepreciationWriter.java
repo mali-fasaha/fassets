@@ -20,7 +20,6 @@ package io.github.fasset.fasset.kernel.batch.upload;
 
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.service.AccruedDepreciationService;
-import io.github.fasset.fasset.service.impl.AccruedDepreciationServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;
@@ -54,7 +53,7 @@ public class AccruedDepreciationWriter implements ItemWriter<AccruedDepreciation
     @Override
     public void write(List<? extends AccruedDepreciation> items) throws Exception {
 
-        log.info("Wring a chunk of {} items to repository",items.size());
+        log.info("Wring a chunk of {} items to repository", items.size());
 
         accruedDepreciationService.saveAllAccruedDepreciationRecords(items);
     }

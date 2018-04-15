@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class AssetListingController {
@@ -49,14 +48,14 @@ public class AssetListingController {
     }
 
     @GetMapping("/assetList")
-    public String showAssetListTemplate(Model model){
+    public String showAssetListTemplate(Model model) {
 
         return "reports/allAssets";
     }
 
     @GetMapping("/listing/assets/data")
     @ResponseBody
-    public List<FixedAssetResponseDto> fetchAllAssets(){
+    public List<FixedAssetResponseDto> fetchAllAssets() {
 
         List<FixedAsset> fixedAssets;
 
@@ -65,10 +64,10 @@ public class AssetListingController {
         } catch (Throwable e) {
             String message = "Exception encountered: Could not extract assets from repo" +
                     "for the path \"/assetList\"";
-            throw new DataRetrievalFromControllerException(message,e);
+            throw new DataRetrievalFromControllerException(message, e);
         }
 
-        log.info("Returning a list of : {} assets",fixedAssets.size());
+        log.info("Returning a list of : {} assets", fixedAssets.size());
 
         return fixedAssets
                 .parallelStream()
@@ -78,19 +77,19 @@ public class AssetListingController {
 
     @GetMapping("/listing/assets/data/{id}")
     @ResponseBody
-    public FixedAssetResponseDto getMonthGivenId(@PathVariable("id") int id){
+    public FixedAssetResponseDto getMonthGivenId(@PathVariable("id") int id) {
 
         FixedAsset asset = null;
 
         try {
             asset = fixedAssetService.fetchAssetGivenId(id);
         } catch (Throwable e) {
-            String message = String.format("Exception encountered when extracting asset with id# : %s",id);
+            String message = String.format("Exception encountered when extracting asset with id# : %s", id);
 
-            throw new DataRetrievalFromControllerException(message,e);
+            throw new DataRetrievalFromControllerException(message, e);
         }
 
-        log.debug("Returning : {}",asset);
+        log.debug("Returning : {}", asset);
 
         return new FixedAssetResponseDto(asset);
     }

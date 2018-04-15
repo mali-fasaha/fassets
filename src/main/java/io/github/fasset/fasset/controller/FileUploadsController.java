@@ -18,8 +18,8 @@
 
 package io.github.fasset.fasset.controller;
 
-import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.storage.StorageService;
+import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -45,45 +45,45 @@ public class FileUploadsController {
     }
 
     @GetMapping("/files")
-    public String listUploadedFiles(Model model) throws IOException{
+    public String listUploadedFiles(Model model) throws IOException {
 
         model.addAttribute("files", storageService.loadAll()
                 .map(
                         path -> MvcUriComponentsBuilder
-                        .fromMethodName(FileUploadsController.class,"serveFile",
-                                path.getFileName().toString())
-                        .build()
-                        .toString()
+                                .fromMethodName(FileUploadsController.class, "serveFile",
+                                        path.getFileName().toString())
+                                .build()
+                                .toString()
                 )
                 .collect(Collectors.toList()));
         return "uploads/uploadForm";
     }
 
     @PostMapping("/files")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes){
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
         storageService.store(file);
 
-        redirectAttributes.addFlashAttribute("message","You have successfully uploaded "+file.getOriginalFilename()+"!");
+        redirectAttributes.addFlashAttribute("message", "You have successfully uploaded " + file.getOriginalFilename() + "!");
 
         return "redirect:/files";
     }
 
     @GetMapping("files/{fileName:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String fileName){
+    public ResponseEntity<Resource> serveFile(@PathVariable String fileName) {
 
         Resource file = storageService.loadAsResource(fileName);
 
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; fileName=\""+file.getFilename()+"\"")
+                        "attachment; fileName=\"" + file.getFilename() + "\"")
                 .body(file);
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
-    public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc){
+    public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 
         return ResponseEntity.notFound().build();
     }

@@ -33,14 +33,14 @@ public class DepreciationAgentsHandlerImpl implements DepreciationAgentsHandler 
         this.depreciationAgentsChain = depreciationAgentsChain;
     }
 
-    public void setDepreciationAgent(Agent agent){
+    public void setDepreciationAgent(Agent agent) {
 
         depreciationAgentsChain.addAgent(agent);
     }
 
     @Override
-    public void sendRequest(FixedAsset asset, YearMonth month,DepreciationProceeds depreciationProceeds) {
+    public void sendRequest(FixedAsset asset, YearMonth month, DepreciationProceeds depreciationProceeds) {
 
-        depreciationAgentsChain.execute(asset,month,depreciationProceeds);
+        depreciationAgentsChain.execute(asset, month, depreciationProceeds);
     }
 }

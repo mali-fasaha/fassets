@@ -39,17 +39,18 @@ public class FixedAssetsJobsActivator {
 
     /**
      * Will start any job that draws poll data fom the fixedAssetService
+     *
      * @throws BatchJobExecutionException
      */
     public void bootstrap(JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener) throws BatchJobExecutionException {
 
-            bootstrap(jobLauncher, job, fixedAssetService);
+        bootstrap(jobLauncher, job, fixedAssetService);
     }
-
 
 
     /**
      * Will start any job that draws poll data fom the fixedAssetService
+     *
      * @param jobLauncher
      * @param job
      * @param fixedAssetService
@@ -62,17 +63,18 @@ public class FixedAssetsJobsActivator {
         bootstrap(new JobParametersBuilder()
                 .addString("no_of_assets", String.valueOf(no_of_assets))
                 .addString("starting_time", LocalDateTime.now().toString())
-                .toJobParameters(), jobLauncher, job, fixedAssetService,null);
+                .toJobParameters(), jobLauncher, job, fixedAssetService, null);
     }
 
     /**
      * Will start any job that draws poll data fom the fixedAssetService
+     *
      * @param jobLauncher
      * @param job
      * @param fixedAssetService
      * @throws BatchJobExecutionException
      */
-    public void bootstrap(JobParameters jobParameters,JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService,WorkInProgressListener progressListener) throws BatchJobExecutionException {
+    public void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener) throws BatchJobExecutionException {
 
         int no_of_assets = fixedAssetService.getPoll();
         LocalDateTime starting_time = LocalDateTime.now();
@@ -93,7 +95,7 @@ public class FixedAssetsJobsActivator {
 
         }
 
-        if(progressListener!= null) {
+        if (progressListener != null) {
             log.debug("Checking is job execution is running...");
             if (!jobExecution.getStatus().isRunning()) {
                 progressListener.isWorkStillInProgress(false);
@@ -105,7 +107,7 @@ public class FixedAssetsJobsActivator {
 
     public void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService) {
         try {
-            bootstrap(jobParameters,jobLauncher,job,fixedAssetService,null);
+            bootstrap(jobParameters, jobLauncher, job, fixedAssetService, null);
         } catch (BatchJobExecutionException e) {
             e.printStackTrace();
         }

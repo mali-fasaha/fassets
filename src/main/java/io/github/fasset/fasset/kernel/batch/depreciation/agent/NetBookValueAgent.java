@@ -18,9 +18,7 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
-import io.github.fasset.fasset.kernel.batch.depreciation.agent.Agent;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.NetBookValue;
 

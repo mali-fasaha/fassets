@@ -25,8 +25,8 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Objects;
 
-@Entity(name="DepreciationJobExecution")
-public class DepreciationJobExecution extends DomainModel<String>{
+@Entity(name = "DepreciationJobExecution")
+public class DepreciationJobExecution extends DomainModel<String> {
 
     private LocalDateTime startTime;
     private LocalDateTime finishTime;
@@ -88,9 +88,15 @@ public class DepreciationJobExecution extends DomainModel<String>{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         DepreciationJobExecution that = (DepreciationJobExecution) o;
         return noOfItems == that.noOfItems &&
                 Objects.equals(startTime, that.startTime) &&

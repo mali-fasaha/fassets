@@ -19,11 +19,11 @@
 package io.github.fasset.fasset.service.impl;
 
 import io.github.fasset.fasset.kernel.util.DataRetrievalFromServiceException;
+import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.brief.CategoryBrief;
 import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.repository.FixedAssetRepository;
-import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
@@ -100,33 +100,33 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     public CategoryBrief getCategoryBrief(String category) {
         CategoryBrief brief = new CategoryBrief();
 
-        log.info("Preparing a brief for category : {}",category);
+        log.info("Preparing a brief for category : {}", category);
 
         brief.setDesignation(category);
 
         Money cost = fixedAssetRepository.getTotalCategoryPurchaseCost(category);
-        log.info("Setting purchase cost as : {}",cost);
+        log.info("Setting purchase cost as : {}", cost);
         brief.setPurchaseCost(cost);
 
         Money nbv = fixedAssetRepository.getTotalCategoryNetBookValue(category);
         brief.setNetBookValue(nbv);
 
         int count = fixedAssetRepository.getTotalCategoryCount(category);
-        log.info("Setting poll as : {}",count);
+        log.info("Setting poll as : {}", count);
         brief.setPoll(count);
 
         Money acc = brief.getPurchaseCost().subtract(brief.getNetBookValue());
-        log.info("Setting accrued depreciation as : {}",acc);
+        log.info("Setting accrued depreciation as : {}", acc);
         brief.setAccruedDepreciation(acc);
 
         try {
             //TODO include the methods here
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while creating a categoryBrief for category : %s",category);
-            throw new DataRetrievalFromServiceException(message,e);
+            String message = String.format("Exception encountered while creating a categoryBrief for category : %s", category);
+            throw new DataRetrievalFromServiceException(message, e);
         }
 
-        log.debug("Brief for category returned : {}",brief);
+        log.debug("Brief for category returned : {}", brief);
 
         return brief;
     }
@@ -143,7 +143,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     public ServiceOutletBrief getServiceOutletBrief(String solId) {
         ServiceOutletBrief brief = new ServiceOutletBrief();
 
-        log.info("Preparing a brief for solId : {}",solId);
+        log.info("Preparing a brief for solId : {}", solId);
 
         try {
             brief.setDesignation(solId);
@@ -152,11 +152,11 @@ public class FixedAssetServiceImpl implements FixedAssetService {
             brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
             brief.setPoll(fixedAssetRepository.getTotalSolCount(solId));
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while creating a serviceOutletBrief for solId : %s",solId);
-            throw new DataRetrievalFromServiceException(message,e);
+            String message = String.format("Exception encountered while creating a serviceOutletBrief for solId : %s", solId);
+            throw new DataRetrievalFromServiceException(message, e);
         }
 
-        log.debug("Brief for service outlet returned : {}",brief);
+        log.debug("Brief for service outlet returned : {}", brief);
 
         return brief;
     }

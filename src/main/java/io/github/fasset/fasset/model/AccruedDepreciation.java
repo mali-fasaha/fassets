@@ -32,23 +32,23 @@ import java.util.Objects;
 
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "fixed_asset_id","month","sol_id","category"
+                "fixed_asset_id", "month", "sol_id", "category"
         })
 })
 @Audited
-@Entity(name="AccruedDepreciation")
+@Entity(name = "AccruedDepreciation")
 public class AccruedDepreciation extends DomainModel<String> {
 
-    @Column(name="fixed_asset_id")
+    @Column(name = "fixed_asset_id")
     private int fixedAssetId;
 
-    @Column(name="month")
+    @Column(name = "month")
     private YearMonth month;
 
-    @Column(name="sol_id")
+    @Column(name = "sol_id")
     private String solId;
 
-    @Column(name="category")
+    @Column(name = "category")
     private String category;
 
     @Column
@@ -103,9 +103,15 @@ public class AccruedDepreciation extends DomainModel<String> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         AccruedDepreciation that = (AccruedDepreciation) o;
         return fixedAssetId == that.fixedAssetId &&
                 Objects.equals(that.accruedDepreciation, accruedDepreciation) &&

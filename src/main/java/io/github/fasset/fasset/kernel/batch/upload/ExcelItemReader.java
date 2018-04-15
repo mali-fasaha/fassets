@@ -59,14 +59,14 @@ public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
     }
 
     // To be called before and after job
-    public void resetNextItem(){
+    public void resetNextItem() {
         log.debug("The nextItem index = {}, is being reset to 0", nextItem);
 
         nextItem = 0;
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         resetNextItem();
         fixedAssetDTOS = excelMapperService.fetchExcelData(fileName);
     }
@@ -74,11 +74,11 @@ public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
     @Override
     public FixedAssetDTO read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 
-        if(!fixedAssetDTOS.isEmpty()){
+        if (!fixedAssetDTOS.isEmpty()) {
 
-            while (nextItem < fixedAssetDTOS.size()){
+            while (nextItem < fixedAssetDTOS.size()) {
 
-                log.debug("Fetching items # {}",nextItem);
+                log.debug("Fetching items # {}", nextItem);
 
                 return fixedAssetDTOS.get(nextItem++);
             }

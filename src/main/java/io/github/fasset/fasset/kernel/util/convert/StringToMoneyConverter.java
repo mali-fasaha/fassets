@@ -30,7 +30,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component("stringToMoneyConverter")
-public class StringToMoneyConverter implements Converter<String,Money> {
+public class StringToMoneyConverter implements Converter<String, Money> {
 
     private static final Logger log = LoggerFactory.getLogger(StringToMoneyConverter.class);
 
@@ -49,7 +49,7 @@ public class StringToMoneyConverter implements Converter<String,Money> {
     @Override
     public Money convert(@Nullable final String stringMoney) {
 
-        log.debug("Converting the amount : {} from string to {} money amount",stringMoney,monetaryProperties.getDefaultCurrency());
+        log.debug("Converting the amount : {} from string to {} money amount", stringMoney, monetaryProperties.getDefaultCurrency());
 
         Money converted;
 
@@ -60,10 +60,10 @@ public class StringToMoneyConverter implements Converter<String,Money> {
             } else {
                 log.error("The string money amount passed is null");
             }
-            converted =  Money.of(moneyAmount,monetaryProperties.getDefaultCurrency());
+            converted = Money.of(moneyAmount, monetaryProperties.getDefaultCurrency());
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while converting amount %stringMoney to Money amount",stringMoney);
-            throw new ConverterException(message,e);
+            String message = String.format("Exception encountered while converting amount %stringMoney to Money amount", stringMoney);
+            throw new ConverterException(message, e);
         }
 
         return converted;

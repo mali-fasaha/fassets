@@ -41,7 +41,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * This object bootstraps an excel upload job after the file has been uploaded to the server
  */
 @Component("excelUploadJob")
-public class ExcelUploadJob extends AbstractSubscriber implements Subscriber{
+public class ExcelUploadJob extends AbstractSubscriber implements Subscriber {
 
     private final static Logger log = getLogger(ExcelUploadJob.class);
 
@@ -61,25 +61,25 @@ public class ExcelUploadJob extends AbstractSubscriber implements Subscriber{
      *
      * @param filePath from which we are reading the business domain connect
      */
-    public void uploadExcelFile(String filePath,String month) throws BatchJobExecutionException {
+    public void uploadExcelFile(String filePath, String month) throws BatchJobExecutionException {
 
         log.info("Uploading excel file on the path : {}", filePath);
 
         JobParameters jobParameters = new JobParametersBuilder()
-                .addString("fileName",filePath)
-                .addString("month",month)
+                .addString("fileName", filePath)
+                .addString("month", month)
                 .addString("time", LocalDateTime.now().toString())
                 .toJobParameters();
 
         try {
-            jobLauncher.run(importExcelJob,jobParameters);
+            jobLauncher.run(importExcelJob, jobParameters);
         } catch (Throwable e) {
 
             String message = String.format("Exception encountered %s caused by %s,while launching job" +
                             "id %s, reading from excel file : %s at time %s",
-                    e.getMessage(),e.getCause(),importExcelJob.getName(),jobParameters.getString("fileName"),jobParameters.getString("time"));
+                    e.getMessage(), e.getCause(), importExcelJob.getName(), jobParameters.getString("fileName"), jobParameters.getString("time"));
 
-            throw new BatchJobExecutionException(message,e);
+            throw new BatchJobExecutionException(message, e);
 
         }
 
@@ -87,21 +87,22 @@ public class ExcelUploadJob extends AbstractSubscriber implements Subscriber{
 
     /**
      * Listens for messages from the queue
+     *
      * @param message
      * @throws JMSException
      */
     //@JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
-    public void listenForMessages(FileUploadNotification message){
+    public void listenForMessages(FileUploadNotification message) {
 
         String fileName = message.getFileName();
         String month = message.getMonth();
 
-        log.debug("File : {} has been received on the server side and is about to be actioned",fileName);
+        log.debug("File : {} has been received on the server side and is about to be actioned", fileName);
 
         try {
-            uploadExcelFile(fileName,month);
+            uploadExcelFile(fileName, month);
         } catch (BatchJobExecutionException e) {
-            log.error("Exception encountered while uploading excel file from : {}",fileName);
+            log.error("Exception encountered while uploading excel file from : {}", fileName);
         }
     }
 
@@ -110,7 +111,7 @@ public class ExcelUploadJob extends AbstractSubscriber implements Subscriber{
 
         FileUploadNotification message = (FileUploadNotification) update.getPayload();
 
-        log.debug("File upload : {} has been received by the excelUploadJob for processing",message);
+        log.debug("File upload : {} has been received by the excelUploadJob for processing", message);
 
         listenForMessages(message);
     }

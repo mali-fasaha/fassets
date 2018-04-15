@@ -28,7 +28,6 @@ import java.util.List;
 public interface ExcelMapperService {
 
     /**
-     *
      * @param fileName where the excel file is located
      * @return {@link List<FixedAssetDTO>} from the fileName
      */

@@ -68,7 +68,7 @@ public class MonthlySolDepreciationJobConfiguration {
     }
 
     @Bean("monthlySolDepreciationJob")
-    public Job monthlySolDepreciationJob(){
+    public Job monthlySolDepreciationJob() {
         return jobBuilderFactory.get("monthlySolDepreciationJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(monthlySolDepreciationJobListener)
@@ -79,20 +79,20 @@ public class MonthlySolDepreciationJobConfiguration {
     }
 
     @Bean
-    public MonthlySolDepreciationWriter monthlySolDepreciationWriter(){
+    public MonthlySolDepreciationWriter monthlySolDepreciationWriter() {
 
         return new MonthlySolDepreciationWriter(monthlySolDepreciationService);
     }
 
     @Bean
     @JobScope
-    public MonthlySolDepreciationProcessor monthlySolDepreciationProcessor(@Value("#{jobParameters['year']}") String year){
+    public MonthlySolDepreciationProcessor monthlySolDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
 
-        return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor,year);
+        return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor, year);
     }
 
     @Bean
-    public ItemReader<String> monthlySolDepreciationReader(){
+    public ItemReader<String> monthlySolDepreciationReader() {
 
         JpaPagingItemReader<String> solIdsReader = new JpaPagingItemReader<>();
 
@@ -120,7 +120,7 @@ public class MonthlySolDepreciationJobConfiguration {
         try {
             createMonthlySolDepreciationItems = stepBuilderFactory
                     .get("createMonthlySolDepreciationItems")
-                    .<String,MonthlySolDepreciation>chunk(5)
+                    .<String, MonthlySolDepreciation>chunk(5)
                     .reader(monthlySolDepreciationReader())
                     .writer(monthlySolDepreciationWriter())
                     .processor(monthlySolDepreciationProcessor(YEAR))

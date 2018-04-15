@@ -18,16 +18,11 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationExecutor;
-import io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationJobListener;
-import io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationProcessor;
-import io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationWriter;
 import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor;
 import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationProcessor;
 import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationWriter;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
-import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
 import io.github.fasset.fasset.service.MonthlySolDepreciationService;
 import org.springframework.batch.core.Job;
@@ -37,7 +32,6 @@ import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +45,6 @@ import javax.persistence.EntityManagerFactory;
 public class MonthlyAssetDepreciationJobConfiguration {
 
     private final JobBuilderFactory jobBuilderFactory;
-
 
 
     @Autowired
@@ -89,7 +82,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
 
 
     @Bean("monthlyAssetDepreciationJobListener")
-    public MonthlyAssetDepreciationJobListener monthlyAssetDepreciationJobListener(){
+    public MonthlyAssetDepreciationJobListener monthlyAssetDepreciationJobListener() {
 
         return new MonthlyAssetDepreciationJobListener();
     }
@@ -120,13 +113,13 @@ public class MonthlyAssetDepreciationJobConfiguration {
 
     @Bean
     @JobScope
-    public MonthlyAssetDepreciationProcessor monthlyAssetDepreciationProcessor(@Value("#{jobParameters['year']}") String year){
+    public MonthlyAssetDepreciationProcessor monthlyAssetDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
 
-        return new MonthlyAssetDepreciationProcessor(monthlyAssetDepreciationExecutor,year);
+        return new MonthlyAssetDepreciationProcessor(monthlyAssetDepreciationExecutor, year);
     }
 
     @Bean
-    public MonthlyAssetDepreciationWriter monthlyAssetDepreciationWriter(){
+    public MonthlyAssetDepreciationWriter monthlyAssetDepreciationWriter() {
 
         return new MonthlyAssetDepreciationWriter(monthlyAssetDepreciationService);
     }
@@ -135,8 +128,8 @@ public class MonthlyAssetDepreciationJobConfiguration {
     public Step updateMonthlyAssetDepreciation() {
         Step updateMonthlyAssetDepreciation = null;
         try {
-            updateMonthlyAssetDepreciation =  stepBuilderFactory.get("updateMonthlyAssetDepreciation")
-                    .<FixedAsset, MonthlyAssetDepreciation> chunk(100)
+            updateMonthlyAssetDepreciation = stepBuilderFactory.get("updateMonthlyAssetDepreciation")
+                    .<FixedAsset, MonthlyAssetDepreciation>chunk(100)
                     .reader(fixedAssetItemReader)
                     .processor(monthlyAssetDepreciationProcessor(YEAR))
                     .writer(monthlyAssetDepreciationWriter())
@@ -149,16 +142,16 @@ public class MonthlyAssetDepreciationJobConfiguration {
     }
 
     @Bean
-    public MonthlySolDepreciationWriter monthlySolDepreciationWriter(){
+    public MonthlySolDepreciationWriter monthlySolDepreciationWriter() {
 
         return new MonthlySolDepreciationWriter(monthlySolDepreciationService);
     }
 
     @Bean
     @JobScope
-    public MonthlySolDepreciationProcessor monthlySolDepreciationProcessor(@Value("#{jobParameters['year']}") String year){
+    public MonthlySolDepreciationProcessor monthlySolDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
 
-        return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor,year);
+        return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor, year);
     }
 
 

@@ -53,19 +53,19 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
      * @return
      */
     @Override
-    public MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset,Integer year) {
+    public MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset, Integer year) {
 
         MonthlyAssetDepreciationDTO dto = null;
 
         try {
-            List<MonthlyAssetDepreciationDTO> tempList = depreciationRepository.getMonthlyAssetDepreciation(fixedAsset.getId(),year);
+            List<MonthlyAssetDepreciationDTO> tempList = depreciationRepository.getMonthlyAssetDepreciation(fixedAsset.getId(), year);
             MonthlyAssetDepreciationDTO temp;
 
             if (!tempList.isEmpty()) {
                 temp = tempList.get(0);
             } else {
                 log.debug("Returning nilMonthlyDepreciationDTO as there was no result from the depreciationRepository");
-                temp = new NilMonthlyAssetDepreciationDTO(fixedAsset.getId(),year);
+                temp = new NilMonthlyAssetDepreciationDTO(fixedAsset.getId(), year);
             }
 
             dto = temp;
@@ -74,7 +74,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
         }
 
         assert dto != null;
-        return new MonthlyAssetDepreciation(dto.getAssetId(),dto.getYear(),
+        return new MonthlyAssetDepreciation(dto.getAssetId(), dto.getYear(),
                 dto.getJan(),
                 dto.getFeb(),
                 dto.getMar(),

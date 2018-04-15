@@ -25,15 +25,13 @@ import io.github.fasset.fasset.model.Depreciation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
 import java.time.YearMonth;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @Repository("depreciationRepository")
-public interface DepreciationRepository extends JpaRepository<Depreciation,Integer> {
+public interface DepreciationRepository extends JpaRepository<Depreciation, Integer> {
 
     @Query("SELECT " +
             "DISTINCT e.depreciationPeriod " +
@@ -100,7 +98,6 @@ public interface DepreciationRepository extends JpaRepository<Depreciation,Integ
     List<MonthlyCategoryDepreciationDTO> getMonthlyCategoryDepreciation(@Param("categoryName") String categoryName, @Param("year") Integer year);
 
     /**
-     *
      * @return The number of distinct solIds
      */
     @Query("SELECT  COUNT(DISTINCT e.solId) " +

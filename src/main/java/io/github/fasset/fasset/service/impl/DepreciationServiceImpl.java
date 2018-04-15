@@ -20,11 +20,10 @@ package io.github.fasset.fasset.service.impl;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
-import io.github.fasset.fasset.repository.NetBookValueRepository;
-import io.github.fasset.fasset.service.AccruedDepreciationService;
-import io.github.fasset.fasset.service.DepreciationService;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.repository.DepreciationRepository;
+import io.github.fasset.fasset.service.AccruedDepreciationService;
+import io.github.fasset.fasset.service.DepreciationService;
 import io.github.fasset.fasset.service.NetBookValueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +33,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Transactional
 @Service("depreciationService")
@@ -108,17 +106,16 @@ public class DepreciationServiceImpl implements DepreciationService {
         );
 
 
-
         accruedDepreciationService.saveAllAccruedDepreciationRecords(
                 list.stream()
-                .map(DepreciationProceeds::getAccruedDepreciation)
-                .collect(ImmutableListCollector.toImmutableList())
+                        .map(DepreciationProceeds::getAccruedDepreciation)
+                        .collect(ImmutableListCollector.toImmutableList())
         );
 
         netBookValueService.saveAllNetBookValueItems(
                 list.stream()
-                .map(DepreciationProceeds::getNetBookValue)
-                .collect(ImmutableListCollector.toImmutableList())
+                        .map(DepreciationProceeds::getNetBookValue)
+                        .collect(ImmutableListCollector.toImmutableList())
         );
 
     }

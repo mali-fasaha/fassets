@@ -25,7 +25,7 @@ import java.util.Objects;
 @ConfigurationProperties("money")
 public class MoneyProperties {
 
-    private String defaultCurrency="KES";
+    private String defaultCurrency = "KES";
 
     public MoneyProperties() {
     }
@@ -41,8 +41,12 @@ public class MoneyProperties {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MoneyProperties that = (MoneyProperties) o;
         return Objects.equals(defaultCurrency, that.defaultCurrency);
     }

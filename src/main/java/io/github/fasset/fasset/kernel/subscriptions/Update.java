@@ -34,7 +34,6 @@ package io.github.fasset.fasset.kernel.subscriptions;
 public interface Update {
 
     /**
-     *
      * @return Object wrapped in this update
      */
     Object getPayload();

@@ -19,8 +19,8 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.config.MoneyProperties;
-import io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.NilDepreciation;
+import io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
@@ -44,7 +44,7 @@ import java.time.YearMonth;
  */
 @Service("depreciationExecutor")
 @Transactional
-public class DepreciationExecutorImpl implements DepreciationExecutor{
+public class DepreciationExecutorImpl implements DepreciationExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationExecutorImpl.class);
 
@@ -82,38 +82,38 @@ public class DepreciationExecutorImpl implements DepreciationExecutor{
      */
     @Cacheable("depreciationProceeds")
     @Override
-    public DepreciationProceeds getDepreciation(FixedAsset asset, YearMonth month){
+    public DepreciationProceeds getDepreciation(FixedAsset asset, YearMonth month) {
 
         DepreciationProceeds depreciationProceeds = new DepreciationProceeds();
 
-        if(asset.getNetBookValue().isEqualTo(Money.of(0.00,moneyProperties.getDefaultCurrency()))) {
+        if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
             log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " +
-                    "depreciation",asset);
+                    "depreciation", asset);
 
-           depreciation = getNilDepreciation(asset,month);
-
-           depreciationProceeds
-                   .setDepreciation(depreciation)
-                   .setNetBookValue(new UnModifiedNetBookValue(asset,month).getNetBookValue())
-                   .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset,month).getAccruedDepreciation());
-
-        } else if(localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)){
-
-            log.trace("The depreciation period : {} is sooner that the assets purchase date {} " +
-                            "resorting to nil depreciation",month,asset.getPurchaseDate());
-
-            depreciation = getNilDepreciation(asset,month);
+            depreciation = getNilDepreciation(asset, month);
 
             depreciationProceeds
                     .setDepreciation(depreciation)
-                    .setNetBookValue(new UnModifiedNetBookValue(asset,month).getNetBookValue())
-                    .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset,month).getAccruedDepreciation());
+                    .setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
+                    .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
 
-        }else {
+        } else if (localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)) {
+
+            log.trace("The depreciation period : {} is sooner that the assets purchase date {} " +
+                    "resorting to nil depreciation", month, asset.getPurchaseDate());
+
+            depreciation = getNilDepreciation(asset, month);
+
+            depreciationProceeds
+                    .setDepreciation(depreciation)
+                    .setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
+                    .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
+
+        } else {
 
             log.trace("The asset : {} has passed the frontal Business rules filter, initiating configuration" +
-                    "registry for category : {}",asset,asset.getCategory());
+                    "registry for category : {}", asset, asset.getCategory());
 
             //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
             depreciationAgentsHandler.sendRequest(asset, month, depreciationProceeds); //for now
@@ -127,13 +127,13 @@ public class DepreciationExecutorImpl implements DepreciationExecutor{
      * Creates a depreciation object whose depreciation is Zero relative to the
      * fixedAsset item given and the depreciation period
      *
-     * @param asset FixedAsset with no depreciation for the period
+     * @param asset              FixedAsset with no depreciation for the period
      * @param depreciationPeriod Depreciation period for which depreciation is nil
      * @return NilDepreciation
      */
-    private Depreciation getNilDepreciation(FixedAsset asset,YearMonth depreciationPeriod){
+    private Depreciation getNilDepreciation(FixedAsset asset, YearMonth depreciationPeriod) {
 
-        return new NilDepreciation(moneyProperties,asset,depreciationPeriod).getNilDepreciation();
+        return new NilDepreciation(moneyProperties, asset, depreciationPeriod).getNilDepreciation();
     }
 
     public void setDepreciation(Depreciation depreciation) {

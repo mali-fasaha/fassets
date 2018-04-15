@@ -1,7 +1,47 @@
-Changelog for ghacupha fassets.
+Changelog for fassets implementation by ghacupha
 
 ## Unreleased
 ### No issue
+
+**amendment to build configuration to automate deployment**
+
+
+[b64a986b4e710c7](https://github.com/ghacupha/fassets/commit/b64a986b4e710c7) ghacupha *2018-04-15 10:56:15*
+
+**amendment to build configuration to automate deployment**
+
+
+[d2ad6f79e360803](https://github.com/ghacupha/fassets/commit/d2ad6f79e360803) ghacupha *2018-04-15 10:45:57*
+
+**Create LICENSE**
+
+
+[035d85518c96872](https://github.com/ghacupha/fassets/commit/035d85518c96872) Edwin Njeru *2018-04-15 10:05:08*
+
+**Delete LICENSE**
+
+
+[66871652c247aec](https://github.com/ghacupha/fassets/commit/66871652c247aec) Edwin Njeru *2018-04-15 09:48:00*
+
+**amendment to build configuration to automate deployment**
+
+
+[7014e332df11315](https://github.com/ghacupha/fassets/commit/7014e332df11315) ghacupha *2018-04-15 09:44:15*
+
+**amendment to build configuration to automate deployment**
+
+
+[c8b1d578958ef58](https://github.com/ghacupha/fassets/commit/c8b1d578958ef58) ghacupha *2018-04-15 09:42:55*
+
+**Create LICENSE**
+
+
+[0a43cee8e51720c](https://github.com/ghacupha/fassets/commit/0a43cee8e51720c) Edwin Njeru *2018-04-15 09:41:19*
+
+**Delete LICENSE**
+
+
+[452f8fa51196ec6](https://github.com/ghacupha/fassets/commit/452f8fa51196ec6) Edwin Njeru *2018-04-15 09:39:12*
 
 **replaced fixedAsset with FixedAssetFormDto to handle data from the request,which is later converted into FixedAsset at persistence**
 

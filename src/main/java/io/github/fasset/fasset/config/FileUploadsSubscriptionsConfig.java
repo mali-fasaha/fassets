@@ -19,7 +19,6 @@
 package io.github.fasset.fasset.config;
 
 import io.github.fasset.fasset.kernel.batch.ExcelUploadJob;
-import io.github.fasset.fasset.kernel.storage.FileSystemStorageService;
 import io.github.fasset.fasset.kernel.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,7 +51,7 @@ public class FileUploadsSubscriptionsConfig {
     }
 
     @PostConstruct
-    private void registerSubscribers(){
+    private void registerSubscribers() {
 
         excelUploadJob.addSubscription(fileSystemStorageService);
         fileSystemStorageService.registerSubscriber(excelUploadJob);

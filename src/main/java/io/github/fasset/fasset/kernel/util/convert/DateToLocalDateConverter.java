@@ -17,6 +17,7 @@
  */
 
 package io.github.fasset.fasset.kernel.util.convert;
+
 import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,29 +40,29 @@ public class DateToLocalDateConverter implements Converter<Date, LocalDate> {
 
         Date toConvert = nullDateReassignment(date);
 
-        log.debug("Converting : {} to LocalDate",date);
+        log.debug("Converting : {} to LocalDate", date);
 
         try {
 
-            converted = new java.sql.Date( toConvert.getTime() ).toLocalDate();
+            converted = new java.sql.Date(toConvert.getTime()).toLocalDate();
 
         } catch (Throwable e) {
 
             throw new ConverterException(String.format("Exception thrown while converting %s to localDate", date), e);
         }
 
-        log.debug("{} successfully converted to {}",date, converted);
+        log.debug("{} successfully converted to {}", date, converted);
 
         return converted;
     }
 
-    private Date nullDateReassignment(Date date){
+    private Date nullDateReassignment(Date date) {
 
-        if(date == null){
+        if (date == null) {
 
             Date nullDate = Date.from(Instant.now());
 
-            log.warn("The date given is null reassigning to : {}",nullDate);
+            log.warn("The date given is null reassigning to : {}", nullDate);
 
             return nullDate;
 

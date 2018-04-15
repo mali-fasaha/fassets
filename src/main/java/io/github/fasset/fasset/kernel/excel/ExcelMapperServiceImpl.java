@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component("excelMapperService")
-public class ExcelMapperServiceImpl implements ExcelMapperService{
+public class ExcelMapperServiceImpl implements ExcelMapperService {
 
 
     @Autowired
@@ -39,6 +39,6 @@ public class ExcelMapperServiceImpl implements ExcelMapperService{
     @Override
     public List<FixedAssetDTO> fetchExcelData(String fileName) {
 
-        return excelDataProvider.generateMappedList(fileName,FixedAssetDTO.class);
+        return excelDataProvider.generateMappedList(fileName, FixedAssetDTO.class);
     }
 }

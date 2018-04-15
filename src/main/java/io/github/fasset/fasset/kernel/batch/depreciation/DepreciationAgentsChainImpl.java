@@ -22,7 +22,6 @@ import io.github.fasset.fasset.kernel.batch.depreciation.agent.AccruedDepreciati
 import io.github.fasset.fasset.kernel.batch.depreciation.agent.Agent;
 import io.github.fasset.fasset.kernel.batch.depreciation.agent.DepreciationAgent;
 import io.github.fasset.fasset.kernel.batch.depreciation.agent.NetBookValueAgent;
-import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class DepreciationAgentsChainImpl {
     }
 
     @PostConstruct
-    private void updateAgents(){
+    private void updateAgents() {
 
         agents.add(depreciationAgent);
         agents.add(accruedDepreciationAgent);
@@ -61,12 +60,12 @@ public class DepreciationAgentsChainImpl {
         agents.add(agent);
     }
 
-    public void execute(FixedAsset asset, YearMonth month,DepreciationProceeds depreciationProceeds) {
+    public void execute(FixedAsset asset, YearMonth month, DepreciationProceeds depreciationProceeds) {
 
         // invoke all agents
-        for(Agent agent : agents){
+        for (Agent agent : agents) {
 
-            agent.invoke(asset,month,depreciationProceeds);
+            agent.invoke(asset, month, depreciationProceeds);
 
         }
 

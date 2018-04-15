@@ -59,10 +59,11 @@ public class FixedAssetsAdditionsController {
 
         FixedAsset persistedAsset = null;
         // TODO replace with FixedAssetResponseDto
-        if (fixedAssetDto != null)
+        if (fixedAssetDto != null) {
             persistedAsset = fixedAssetService.saveFixedAsset(fixedAssetDto.getFixedAsset());
-        else
+        } else {
             log.error("The framework has passed a null object to the controller, it could not be save");
+        }
 
         String message = String.format("You have successfully added asset # %s", persistedAsset);
 

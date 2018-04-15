@@ -20,10 +20,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
-import io.github.fasset.fasset.service.impl.MonthlyAssetDepreciationServiceImpl;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 

@@ -18,7 +18,6 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
-import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 
@@ -29,7 +28,6 @@ import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
  * using the depreciation data passed to the object
  *
  * @author edwin.njeru
- *
  */
 public interface MonthlyAssetDepreciationExecutor {
 
@@ -40,5 +38,5 @@ public interface MonthlyAssetDepreciationExecutor {
      * @param fixedAsset
      * @return
      */
-    MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset,Integer year);
+    MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset, Integer year);
 }

@@ -29,6 +29,7 @@ public interface AccruedDepreciationService {
 
     /**
      * Returns the accruedDepreciationAmount for a fixed asset and month given as param
+     *
      * @param asset
      * @return
      */
@@ -36,12 +37,14 @@ public interface AccruedDepreciationService {
 
     /**
      * Saves the {@link AccruedDepreciation} object given in the parameter
+     *
      * @param accruedDepreciation
      */
     void saveAccruedDepreciation(AccruedDepreciation accruedDepreciation);
 
     /**
      * Saves a {@link List} collection of {@link AccruedDepreciation} items
+     *
      * @param items
      */
     void saveAllAccruedDepreciationRecords(List<? extends AccruedDepreciation> items);

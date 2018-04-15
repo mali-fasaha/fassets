@@ -49,26 +49,26 @@ public class BriefingServiceImpl implements BriefingService {
     private final MoneyToDoubleConverter moneyToDoubleConverter;
 
     @Autowired
-    public BriefingServiceImpl(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository, @Qualifier("serviceOutletBriefService") ServiceOutletBriefService serviceOutletBriefService, @Qualifier("categoryBriefService") CategoryBriefService categoryBriefService, @Qualifier("moneyToDoubleConverter")MoneyToDoubleConverter moneyToDoubleConverter) {
+    public BriefingServiceImpl(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository, @Qualifier("serviceOutletBriefService") ServiceOutletBriefService serviceOutletBriefService, @Qualifier("categoryBriefService") CategoryBriefService categoryBriefService, @Qualifier("moneyToDoubleConverter") MoneyToDoubleConverter moneyToDoubleConverter) {
         this.fixedAssetService = fixedAssetService;
         this.fixedAssetRepository = fixedAssetRepository;
         this.serviceOutletBriefService = serviceOutletBriefService;
         this.categoryBriefService = categoryBriefService;
-        this.moneyToDoubleConverter=moneyToDoubleConverter;
+        this.moneyToDoubleConverter = moneyToDoubleConverter;
     }
 
 
-    private List<String> getAllCategoriesInRepo(){
+    private List<String> getAllCategoriesInRepo() {
 
         return fixedAssetService.getAllCategories();
     }
 
-    private List<String> getAllSolIds(){
+    private List<String> getAllSolIds() {
 
         return fixedAssetService.getAllSolIds();
     }
 
-    private ServiceOutletBrief createServiceOutletBrief(String serviceOutlet){
+    private ServiceOutletBrief createServiceOutletBrief(String serviceOutlet) {
 
         ServiceOutletBrief brief = new ServiceOutletBrief();
         brief.setDesignation(serviceOutlet);
@@ -80,7 +80,7 @@ public class BriefingServiceImpl implements BriefingService {
         return brief;
     }
 
-    private CategoryBrief createCategoryBrief(String category){
+    private CategoryBrief createCategoryBrief(String category) {
         CategoryBrief brief = new CategoryBrief();
         brief.setDesignation(category);
         brief.setPurchaseCost(fixedAssetRepository.getTotalCategoryPurchaseCost(category));
@@ -94,10 +94,9 @@ public class BriefingServiceImpl implements BriefingService {
     /**
      * Updates the summary for ServiceOutlets using data queried from the fixed assets
      * repository
-     *
      */
     @Override
-    public void updateServiceOutletBriefs(){
+    public void updateServiceOutletBriefs() {
 
         List<ServiceOutletBrief> briefs = new ArrayList<>();
 
@@ -106,14 +105,14 @@ public class BriefingServiceImpl implements BriefingService {
                 .map(this::createServiceOutletBrief)
                 .forEach(briefs::add);
 
-        log.info("Adding a list of : {} serviceOutletBrief items into repo",briefs.size());
+        log.info("Adding a list of : {} serviceOutletBrief items into repo", briefs.size());
 
         serviceOutletBriefService.saveAllServiceOutletBriefItems(briefs);
 
     }
 
     @Override
-    public void updateCategoryBriefs(){
+    public void updateCategoryBriefs() {
         List<CategoryBrief> briefs = new ArrayList<>();
 
         getAllCategoriesInRepo()
@@ -121,7 +120,7 @@ public class BriefingServiceImpl implements BriefingService {
                 .map(this::createCategoryBrief)
                 .forEach(briefs::add);
 
-        log.info("Adding a list of : {} categoryBrief items into repo",briefs.size());
+        log.info("Adding a list of : {} categoryBrief items into repo", briefs.size());
 
         categoryBriefService.saveAllCategoryBriefItems(briefs);
     }

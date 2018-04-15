@@ -192,9 +192,15 @@ public class MonthlySolDepreciation extends DomainModel<String> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         MonthlySolDepreciation that = (MonthlySolDepreciation) o;
         return solId == that.solId &&
                 year == that.year &&

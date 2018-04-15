@@ -18,10 +18,10 @@
 
 package io.github.fasset.fasset.service.impl;
 
-import io.github.fasset.fasset.service.AccruedDepreciationService;
 import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.repository.AccruedDepreciationRepository;
+import io.github.fasset.fasset.service.AccruedDepreciationService;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,10 +60,10 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
     @Override
     public Money getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month) {
 
-        log.debug("Fetching the AccruedDepreciation for assetId : {}, for the month : {}",asset.getId(),month);
+        log.debug("Fetching the AccruedDepreciation for assetId : {}, for the month : {}", asset.getId(), month);
 
         //FIXME this query is returning nulls
-        return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(),month).getAccruedDepreciation();
+        return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(), month).getAccruedDepreciation();
     }
 
     /**
@@ -74,7 +74,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
     @Override
     public void saveAccruedDepreciation(AccruedDepreciation accruedDepreciation) {
 
-        log.debug("Saving AccruedDepreciationId : {} into the AccruedDepreciationRepository",accruedDepreciation);
+        log.debug("Saving AccruedDepreciationId : {} into the AccruedDepreciationRepository", accruedDepreciation);
 
         accruedDepreciationRepository.save(accruedDepreciation);
     }

@@ -56,8 +56,12 @@ public class FileUploadNotification {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FileUploadNotification that = (FileUploadNotification) o;
         return Objects.equals(fileName, that.fileName) &&
                 Objects.equals(month, that.month) &&

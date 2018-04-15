@@ -31,11 +31,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.stream.Collectors;
 
 @Service("categoryBriefService")
 public class CategoryBriefServiceImpl implements CategoryBriefService {
@@ -64,10 +60,10 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
             categoryBriefs = categoryBriefRepository.findAll();
         } catch (Throwable e) {
             String message = "Error fetching categoryBriefs from repository";
-            throw new DataRetrievalFromControllerException(message,e);
+            throw new DataRetrievalFromControllerException(message, e);
         }
 
-        log.info("Returning a list of : {} from the repository",categoryBriefs.size());
+        log.info("Returning a list of : {} from the repository", categoryBriefs.size());
 
         return categoryBriefs;
     }
@@ -86,10 +82,10 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
             categoryBrief = categoryBriefRepository.findById(id).get();
         } catch (Throwable e) {
             String message = "Error fetching categoryBriefs from repository";
-            throw new DataRetrievalFromControllerException(message,e);
+            throw new DataRetrievalFromControllerException(message, e);
         }
 
-        log.debug("Returning category : {} from repository",categoryBrief);
+        log.debug("Returning category : {} from repository", categoryBrief);
 
         return categoryBrief;
     }
@@ -106,12 +102,12 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
 
         List<CategoryBrief> unsavedItems = new ArrayList<>();
 
-        for(CategoryBrief brief : categoryBriefs){
+        for (CategoryBrief brief : categoryBriefs) {
 
             CategoryBrief persisted = categoryBriefRepository
                     .findDistinctByDesignation(brief.getDesignation());
 
-            if(persisted != null) {
+            if (persisted != null) {
                 persisted.setDesignation(brief.getDesignation());
                 persisted.setPoll(brief.getPoll());
                 persisted.setPurchaseCost(brief.getPurchaseCost());

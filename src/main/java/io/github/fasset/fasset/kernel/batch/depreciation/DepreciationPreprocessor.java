@@ -34,19 +34,16 @@ import java.time.YearMonth;
 public interface DepreciationPreprocessor {
 
     /**
-     *
      * @return Depreciation period as month
      */
     YearMonth getMonth();
 
     /**
-     *
      * @return FixedAsset item being depreciated
      */
     FixedAsset getAsset();
 
     /**
-     *
      * @return amount of depreciation
      */
     Money getDepreciationAmount();
@@ -61,6 +58,7 @@ public interface DepreciationPreprocessor {
 
     /**
      * Sets depreciation period in months
+     *
      * @param month
      * @return
      */
@@ -76,6 +74,7 @@ public interface DepreciationPreprocessor {
 
     /**
      * This method ensures all properties are set and evaluated
+     *
      * @return
      */
     DepreciationPreprocessor setProperties();

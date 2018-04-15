@@ -25,7 +25,6 @@ import java.util.List;
 public interface MonthlySolDepreciationService {
 
     /**
-     *
      * @return A list of all items in the MonthlySolDepreciationRepository
      */
     List<MonthlySolDepreciation> fetchAllMonthlySolDepreciations();

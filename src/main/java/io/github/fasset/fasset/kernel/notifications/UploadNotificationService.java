@@ -25,6 +25,7 @@ public interface UploadNotificationService {
 
     /**
      * Sends the message
+     *
      * @param notification
      */
     void sendNotification(FileUploadNotification notification);

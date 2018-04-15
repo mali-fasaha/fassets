@@ -19,7 +19,6 @@
 package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.javamoney.moneta.Money;
@@ -31,7 +30,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -41,19 +39,19 @@ import java.util.Objects;
  */
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "fixed_asset_id","month","sol_id","category"
+                "fixed_asset_id", "month", "sol_id", "category"
         })
 })
-@Entity(name="NetBookValue")
+@Entity(name = "NetBookValue")
 @Audited
-public class NetBookValue extends DomainModel<String>{
+public class NetBookValue extends DomainModel<String> {
 
     private static final Logger log = LoggerFactory.getLogger(NetBookValue.class);
 
-    @Column(name="fixed_asset_id")
+    @Column(name = "fixed_asset_id")
     private int fixedAssetId;
 
-    @Column(name="month")
+    @Column(name = "month")
     private YearMonth month;
 
     @Column
@@ -61,10 +59,10 @@ public class NetBookValue extends DomainModel<String>{
             parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money netBookValue;
 
-    @Column(name="sol_id")
+    @Column(name = "sol_id")
     private String solId;
 
-    @Column(name="category")
+    @Column(name = "category")
     private String category;
 
     public NetBookValue() {
@@ -83,7 +81,7 @@ public class NetBookValue extends DomainModel<String>{
     }
 
     public NetBookValue setCategory(String category) {
-        log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
+        log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}", getId(), fixedAssetId);
         this.category = category;
         return this;
     }
@@ -93,7 +91,7 @@ public class NetBookValue extends DomainModel<String>{
     }
 
     public NetBookValue setFixedAssetId(int fixedAssetId) {
-        log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}",getId(),fixedAssetId);
+        log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}", getId(), fixedAssetId);
         this.fixedAssetId = fixedAssetId;
         return this;
     }
@@ -103,7 +101,7 @@ public class NetBookValue extends DomainModel<String>{
     }
 
     public NetBookValue setMonth(YearMonth month) {
-        log.trace("Setting month for NetBookValueId : {}, as = {}",getId(),month);
+        log.trace("Setting month for NetBookValueId : {}, as = {}", getId(), month);
         this.month = month;
         return this;
     }
@@ -114,7 +112,7 @@ public class NetBookValue extends DomainModel<String>{
 
     public NetBookValue setNetBookValue(Money netBookValue) {
 
-        log.trace("Setting NetBookValue for NetBookValueId : {} as = {}",getId(),netBookValue);
+        log.trace("Setting NetBookValue for NetBookValueId : {} as = {}", getId(), netBookValue);
         this.netBookValue = netBookValue;
         return this;
     }
@@ -125,16 +123,22 @@ public class NetBookValue extends DomainModel<String>{
 
     public NetBookValue setSolId(String solId) {
 
-        log.trace("Setting SolId for NetBookValueId : {} as = {}",getId(),solId);
+        log.trace("Setting SolId for NetBookValueId : {} as = {}", getId(), solId);
         this.solId = solId;
         return this;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         NetBookValue that = (NetBookValue) o;
         return fixedAssetId == that.fixedAssetId &&
                 Objects.equals(that.netBookValue, netBookValue) &&

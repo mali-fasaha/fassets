@@ -18,7 +18,6 @@
 
 package io.github.fasset.fasset.model.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 

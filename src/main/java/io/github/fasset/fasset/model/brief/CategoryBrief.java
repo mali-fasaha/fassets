@@ -35,9 +35,9 @@ import java.util.Comparator;
  *
  * @author edwin.njeru
  */
-@Entity(name="CategoryBrief")
+@Entity(name = "CategoryBrief")
 @Audited
-public class CategoryBrief extends DomainModel<String> implements Comparable<CategoryBrief>, Brief{
+public class CategoryBrief extends DomainModel<String> implements Comparable<CategoryBrief>, Brief {
 
     /* name of the category*/
     private String designation;
@@ -134,9 +134,15 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         CategoryBrief that = (CategoryBrief) o;
         return poll == that.poll &&
                 Objects.equal(designation, that.designation) &&
@@ -165,6 +171,6 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     public int compareTo(CategoryBrief o) {
 
         return Comparator.comparing(CategoryBrief::getDesignation)
-                .compare(this,o);
+                .compare(this, o);
     }
 }

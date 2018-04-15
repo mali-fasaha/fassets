@@ -48,30 +48,30 @@ public class DepreciationRelay {
         this.depreciationProperties = depreciationProperties;
     }
 
-    public List<YearMonth> getMonthlyDepreciationSequence(){
+    public List<YearMonth> getMonthlyDepreciationSequence() {
 
         return monthlySequence;
     }
 
     @PostConstruct
-    private List<YearMonth> generateMonthlyDepreciationSequence(){
+    private List<YearMonth> generateMonthlyDepreciationSequence() {
 
         YearMonth from = depreciationProperties.getStartMonth();
         YearMonth to = depreciationProperties.getStopMonth();
 
-        log.debug("Producing depreciation relay...between : {} and : {}",from,to);
+        log.debug("Producing depreciation relay...between : {} and : {}", from, to);
 
         monthlySequence.add(from);
 
         long no_of_months = from.until(to, ChronoUnit.MONTHS);
 
-        log.debug("Creating a monthly depreciation sequence for : {}",no_of_months);
+        log.debug("Creating a monthly depreciation sequence for : {}", no_of_months);
 
-        for(long i = 0; i < no_of_months; i++) {
+        for (long i = 0; i < no_of_months; i++) {
 
             YearMonth monthSeq = monthlyIncrementer.getNext(from.plusMonths(i));
 
-            log.debug("Adding the month : {} to the sequence",monthSeq);
+            log.debug("Adding the month : {} to the sequence", monthSeq);
 
             monthlySequence.add(monthSeq);
         }

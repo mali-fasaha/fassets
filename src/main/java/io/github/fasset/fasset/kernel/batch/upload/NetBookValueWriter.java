@@ -20,7 +20,6 @@ package io.github.fasset.fasset.kernel.batch.upload;
 
 import io.github.fasset.fasset.model.NetBookValue;
 import io.github.fasset.fasset.service.NetBookValueService;
-import io.github.fasset.fasset.service.impl.NetBookValueServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;
@@ -51,7 +50,7 @@ public class NetBookValueWriter implements ItemWriter<NetBookValue> {
     @Override
     public void write(List<? extends NetBookValue> netBookValues) throws Exception {
 
-        log.info("Writing a list of {} netBookValue items to the repository",netBookValues.size());
+        log.info("Writing a list of {} netBookValue items to the repository", netBookValues.size());
 
         netBookValueService.saveAllNetBookValueItems(netBookValues);
     }

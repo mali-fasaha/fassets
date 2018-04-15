@@ -20,7 +20,7 @@ package io.github.fasset.fasset.kernel.util;
 
 import org.springframework.batch.core.JobExecutionException;
 
-public class BatchJobExecutionException extends JobExecutionException{
+public class BatchJobExecutionException extends JobExecutionException {
 
     public BatchJobExecutionException(String msg) {
         super(msg);

@@ -19,8 +19,8 @@
 package io.github.fasset;
 
 import io.github.fasset.fasset.config.MoneyProperties;
-import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties;
 import io.github.fasset.fasset.config.StorageProperties;
+import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties;
 import io.github.fasset.fasset.kernel.storage.StorageService;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.CommandLineRunner;
@@ -51,41 +51,41 @@ import java.util.concurrent.Executor;
 @EntityScan("io.github.fasset.fasset")
 @ComponentScan("io.github.fasset.fasset")
 @EnableConfigurationProperties(
-		value = {StorageProperties.class,
-				MoneyProperties.class,
-				DepreciationProperties.class})
+        value = {StorageProperties.class,
+                MoneyProperties.class,
+                DepreciationProperties.class})
 public class Fassets {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Fassets.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Fassets.class, args);
+    }
 
-	@Bean
-	CommandLineRunner init(StorageService storageService) {
+    @Bean
+    CommandLineRunner init(StorageService storageService) {
 
-		return (args) -> {
+        return (args) -> {
 
-			storageService.deleteAll();
+            storageService.deleteAll();
 
-			storageService.init();
-		};
-	}
+            storageService.init();
+        };
+    }
 
-	@Bean
-	public Executor asynchExecutor(){
+    @Bean
+    public Executor asynchExecutor() {
 
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(4);
-		executor.setMaxPoolSize(4);
-		executor.setQueueCapacity(500);
-		executor.setThreadNamePrefix("Fassets-");
-		executor.initialize();
-		return executor;
-	}
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(4);
+        executor.setMaxPoolSize(4);
+        executor.setQueueCapacity(500);
+        executor.setThreadNamePrefix("Fassets-");
+        executor.initialize();
+        return executor;
+    }
 
-	@Bean
-	public CacheManagerCustomizer<CaffeineCacheManager> cacheManagerCustomizer(){
+    @Bean
+    public CacheManagerCustomizer<CaffeineCacheManager> cacheManagerCustomizer() {
 
-	    return cacheManager -> cacheManager.setAllowNullValues(false);
+        return cacheManager -> cacheManager.setAllowNullValues(false);
     }
 }

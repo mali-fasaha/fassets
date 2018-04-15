@@ -32,41 +32,41 @@ import java.util.Objects;
  * This is a representative model of the fixed asset's category for purposes of depreciation, that is its
  * name, its depreciation rate and its depreciation logic
  */
-@Entity(name="CategoryConfiguration")
+@Entity(name = "CategoryConfiguration")
 @Table(name = "category_configuration",
-        uniqueConstraints ={
-        @UniqueConstraint(columnNames = {
-                "designation","depreciation_logic","depreciation_logic",
-                "deprecant","depreciation_rate","category_ledger_id"
-        })})
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {
+                        "designation", "depreciation_logic", "depreciation_logic",
+                        "deprecant", "depreciation_rate", "category_ledger_id"
+                })})
 @Audited
 public class CategoryConfiguration extends DomainModel<String> {
 
-    @NotNull(message ="Please provide a valid designation for category")
-    @Column(name="designation")
+    @NotNull(message = "Please provide a valid designation for category")
+    @Column(name = "designation")
     private String designation;
 
     /**
      * The name of the depreciation logic
      */
-    @NotNull(message ="Please provide a valid designation for depreciation logic")
-    @Column(name="depreciation_logic")
+    @NotNull(message = "Please provide a valid designation for depreciation logic")
+    @Column(name = "depreciation_logic")
     private String depreciationLogic;
 
     /**
      * This is the item on which the depreciation rate is applied, as in either the cost
      * or the net book value
      */
-    @NotNull(message ="Please provide a valid designation for depreciation deprecant")
-    @Column(name="deprecant")
+    @NotNull(message = "Please provide a valid designation for depreciation deprecant")
+    @Column(name = "deprecant")
     private String deprecant;
 
     @NotNull(message = "Please provide depreciation per annum")
-    @Column(name="depreciation_rate")
+    @Column(name = "depreciation_rate")
     private double depreciationRate;
 
     @NotNull(message = "Kindly supply the ledgerId for thiis category")
-    @Column(name="category_ledger_id")
+    @Column(name = "category_ledger_id")
     private String categoryLedgerId;
 
     public CategoryConfiguration(@NotNull(message = "Please provide a valid designation for category") String designation, @NotNull(message = "Please provide a valid designation for depreciation logic") String depreciationLogic, @NotNull(message = "Please provide a valid designation for depreciation deprecant") String deprecant, @NotNull(message = "Please provide depreciation per annum") double depreciationRate, @NotNull(message = "Kindly supply the ledgerId for thiis category") String categoryLedgerId) {
@@ -122,9 +122,15 @@ public class CategoryConfiguration extends DomainModel<String> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         CategoryConfiguration that = (CategoryConfiguration) o;
         return Double.compare(that.depreciationRate, depreciationRate) == 0 &&
                 Objects.equals(designation, that.designation) &&

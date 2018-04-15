@@ -47,7 +47,7 @@ public class FixedAssetFormDto {
         this.doubleToMoneyConverter = doubleToMoneyConverter;
     }
 
-    public FixedAsset getFixedAsset(){
+    public FixedAsset getFixedAsset() {
 
         return new FixedAsset()
                 .setSolId(solId)
@@ -125,8 +125,12 @@ public class FixedAssetFormDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FixedAssetFormDto that = (FixedAssetFormDto) o;
         return Double.compare(that.purchaseCost, purchaseCost) == 0 &&
                 Double.compare(that.netBookValue, netBookValue) == 0 &&

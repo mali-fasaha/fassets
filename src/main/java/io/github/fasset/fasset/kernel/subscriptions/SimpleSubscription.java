@@ -35,11 +35,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * it doesn't send false notifications
  * Synchronization is also used to make sure that the notification is only sent to the subscribers
  * registered before the {@link Update} is published to the {@link SubscriptionService}
- *
+ * <p>
  * adapted from https://www.journaldev.com/1739/observer-design-pattern-in-java
  * posted on AUGUST 2, 2016
- * @author Pankaj
  *
+ * @author Pankaj
+ * <p>
  * modified by
  * @author edwin.njeru
  */
@@ -61,11 +62,14 @@ public class SimpleSubscription implements SubscriptionService {
 
     @Override
     public void registerSubscriber(Subscriber subscriber) {
-        if(subscriber ==null) throw new NullPointerException("Null observer");
+        if (subscriber == null) {
+            throw new NullPointerException("Null observer");
+        }
 
-        synchronized (MUTEX){
-            if(!subscribers.contains(subscriber))
+        synchronized (MUTEX) {
+            if (!subscribers.contains(subscriber)) {
                 subscribers.add(subscriber);
+            }
         }
 
     }
@@ -73,7 +77,7 @@ public class SimpleSubscription implements SubscriptionService {
     @Override
     public void deregisterSubscriber(Subscriber observer) {
 
-        synchronized (MUTEX){
+        synchronized (MUTEX) {
             subscribers.remove(observer);
         }
     }
@@ -85,12 +89,13 @@ public class SimpleSubscription implements SubscriptionService {
 
         // this sync block ensures that observer registered after file
         // has been updated are not notified
-        synchronized (MUTEX){
-            if(!updated)
+        synchronized (MUTEX) {
+            if (!updated) {
                 return;
+            }
             observersLocal = ImmutableList.copyOf(subscribers);
 
-            this.updated =false;
+            this.updated = false;
         }
 
         observersLocal.forEach(Subscriber::update);
@@ -107,9 +112,9 @@ public class SimpleSubscription implements SubscriptionService {
 
     // Method to post file to the topic
     @Override
-    public void postUpdate(Update update){
+    public void postUpdate(Update update) {
 
-        log.debug("Update : {} has been updated to the topic {}",update,this);
+        log.debug("Update : {} has been updated to the topic {}", update, this);
 
         this.updateQueue.offer(update);
         this.updated = true;

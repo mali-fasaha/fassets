@@ -53,15 +53,15 @@ public class NilDepreciation {
 
     private MoneyProperties moneyProperties;
 
-    public NilDepreciation(MoneyProperties moneyProperties,FixedAsset asset, YearMonth depreciationPeriod) {
+    public NilDepreciation(MoneyProperties moneyProperties, FixedAsset asset, YearMonth depreciationPeriod) {
         this.moneyProperties = moneyProperties;
-        this.month=depreciationPeriod.getMonthValue();
-        this.year=depreciationPeriod.getYear();
-        this.depreciationPeriod=depreciationPeriod;
-        this.category=asset.getCategory();
-        this.solId=asset.getSolId();
-        this.fixedAssetId=asset.getId();
-        this.depreciation=0.00;
+        this.month = depreciationPeriod.getMonthValue();
+        this.year = depreciationPeriod.getYear();
+        this.depreciationPeriod = depreciationPeriod;
+        this.category = asset.getCategory();
+        this.solId = asset.getSolId();
+        this.fixedAssetId = asset.getId();
+        this.depreciation = 0.00;
     }
 
     /**
@@ -70,10 +70,10 @@ public class NilDepreciation {
      *
      * @return
      */
-    public Depreciation getNilDepreciation(){
+    public Depreciation getNilDepreciation() {
 
         log.trace("Returning nil depreciation item relative to asset : {} for the" +
-                " depreciation period : {}",fixedAssetId,depreciationPeriod);
+                " depreciation period : {}", fixedAssetId, depreciationPeriod);
         return new Depreciation()
                 .setMonth(month)
                 .setYear(year)
@@ -81,7 +81,7 @@ public class NilDepreciation {
                 .setCategory(category)
                 .setSolId(solId)
                 .setFixedAssetId(fixedAssetId)
-                .setDepreciation(Money.of(0.00,moneyProperties.getDefaultCurrency()));
+                .setDepreciation(Money.of(0.00, moneyProperties.getDefaultCurrency()));
     }
 
     public NilDepreciation() {
@@ -145,8 +145,12 @@ public class NilDepreciation {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         NilDepreciation that = (NilDepreciation) o;
         return year == that.year &&
                 month == that.month &&

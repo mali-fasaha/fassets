@@ -25,13 +25,11 @@ import java.util.List;
 public interface ServiceOutletBriefService {
 
     /**
-     *
      * @return {@link List<ServiceOutletBrief>} of service outlets from repository
      */
     List<ServiceOutletBrief> fetchAllServiceOutletBriefs();
 
     /**
-     *
      * @param id of the serviceOutletBrief
      * @return {@link ServiceOutletBrief} of the id given as parameter
      */
@@ -39,6 +37,7 @@ public interface ServiceOutletBriefService {
 
     /**
      * Save all ServiceOutletBrief items in the collection
+     *
      * @param serviceOutletBriefs
      */
     void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs);

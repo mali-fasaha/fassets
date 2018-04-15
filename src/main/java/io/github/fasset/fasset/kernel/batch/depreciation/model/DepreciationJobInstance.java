@@ -26,7 +26,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 @Entity
-public class DepreciationJobInstance extends DomainModel<String> implements Comparable<DepreciationJobInstance>{
+public class DepreciationJobInstance extends DomainModel<String> implements Comparable<DepreciationJobInstance> {
 
     private YearMonth month;
 
@@ -47,9 +47,15 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         DepreciationJobInstance that = (DepreciationJobInstance) o;
         return Objects.equals(month, that.month);
     }
@@ -72,6 +78,6 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
     public int compareTo(DepreciationJobInstance o) {
         return Comparator
                 .comparing(DepreciationJobInstance::getMonth)
-                .compare(this,o);
+                .compare(this, o);
     }
 }

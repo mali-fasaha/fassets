@@ -44,38 +44,38 @@ public class CategoryConfigurationController {
     private CategoryConfigurationService categoryConfigurationService;
 
     @GetMapping("/categories")
-    public String categories(Model model){
+    public String categories(Model model) {
 
         model.addAttribute("categories", categoryConfigurationService.getAllCategoryConfigurations());
 
-        model.addAttribute("category",new CategoryConfiguration());
+        model.addAttribute("category", new CategoryConfiguration());
 
         return "forms/category";
     }
 
-    @PostMapping(value="/categories")
-    public String newCategory(@Valid @ModelAttribute CategoryConfiguration category, BindingResult bindingResult){
+    @PostMapping(value = "/categories")
+    public String newCategory(@Valid @ModelAttribute CategoryConfiguration category, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
 
-            log.error("{} error(s) when saving the user-generated data {}",bindingResult.getErrorCount(),bindingResult.getAllErrors());
+            log.error("{} error(s) when saving the user-generated data {}", bindingResult.getErrorCount(), bindingResult.getAllErrors());
 
             return "forms/category";
-        }else {
+        } else {
             categoryConfigurationService.saveCategoryConfiguration(category);
         }
 
         return "redirect:/categories";
     }
 
-    @GetMapping(value="/categories/{id}/edit")
-    public String handleEditGet(@PathVariable int id,Model model){
+    @GetMapping(value = "/categories/{id}/edit")
+    public String handleEditGet(@PathVariable int id, Model model) {
 
-        log.info("Editing categaory id : {}",id);
+        log.info("Editing categaory id : {}", id);
 
         model.addAttribute("categories", categoryConfigurationService.getAllCategoryConfigurations());
 
-        model.addAttribute("category",categoryConfigurationService.getCategoryConfigurationById(id));
+        model.addAttribute("category", categoryConfigurationService.getCategoryConfigurationById(id));
 
         return "forms/category";
     }

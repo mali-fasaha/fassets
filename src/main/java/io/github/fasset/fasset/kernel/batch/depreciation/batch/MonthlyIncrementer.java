@@ -38,7 +38,7 @@ public class MonthlyIncrementer {
         this.depreciationJobInstanceRepository = depreciationJobInstanceRepository;
     }
 
-    public List<DepreciationJobInstance> getJobInstanceSequence(){
+    public List<DepreciationJobInstance> getJobInstanceSequence() {
 
         return depreciationJobInstanceRepository
                 .findAll()
@@ -47,28 +47,28 @@ public class MonthlyIncrementer {
                 .collect(Collectors.toList());
     }
 
-    public List<YearMonth> getMonthSequence(){
+    public List<YearMonth> getMonthSequence() {
 
-       return getJobInstanceSequence()
+        return getJobInstanceSequence()
                 .stream()
                 .map(DepreciationJobInstance::getMonth)
                 .collect(Collectors.toList());
     }
 
-    public YearMonth getLatest(){
+    public YearMonth getLatest() {
 
         List<DepreciationJobInstance> jobInstanceList = getJobInstanceSequence();
 
         int listSize = jobInstanceList.size();
 
-        if(listSize != 0){
+        if (listSize != 0) {
             return null;
-        } else{
-            return jobInstanceList.get(listSize -1).getMonth();
+        } else {
+            return jobInstanceList.get(listSize - 1).getMonth();
         }
     }
 
-    public YearMonth getNext(YearMonth month){
+    public YearMonth getNext(YearMonth month) {
 
         /*if(depreciationJobInstanceRepository.findAllByMonthBefore(month)==null){
             //TODO implement month when months are empty

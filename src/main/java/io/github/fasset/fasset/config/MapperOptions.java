@@ -48,7 +48,7 @@ public class MapperOptions {
         this.skipRows = skipRows;
     }
 
-    public PoijiOptions getPoijiOptions(){
+    public PoijiOptions getPoijiOptions() {
 
         return PoijiOptionsBuilder.settings()
                 .datePattern(datePattern)
@@ -79,8 +79,12 @@ public class MapperOptions {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MapperOptions options = (MapperOptions) o;
         return Objects.equal(datePattern, options.datePattern) &&
                 Objects.equal(skipRows, options.skipRows);

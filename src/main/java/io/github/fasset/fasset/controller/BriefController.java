@@ -50,20 +50,20 @@ public class BriefController {
     }
 
     @GetMapping("/briefs/categories")
-    public String getCategoryBriefsTemplate(Model model){
+    public String getCategoryBriefsTemplate(Model model) {
 
         return "briefs/categoryBriefs";
     }
 
     @GetMapping("/briefs/serviceOutlets")
-    public String getServiceOutletBriefsTemplate(Model model){
+    public String getServiceOutletBriefsTemplate(Model model) {
 
         return "briefs/serviceOutletBriefs";
     }
 
     @GetMapping("/briefs/serviceOutlets/data")
     @ResponseBody
-    public List<ServiceOutletBriefResponseDto> getServiceOutletBriefs(Model model){
+    public List<ServiceOutletBriefResponseDto> getServiceOutletBriefs(Model model) {
 
         //TODO update other brief controllers
         return serviceOutletBriefService.fetchAllServiceOutletBriefs()
@@ -74,14 +74,14 @@ public class BriefController {
 
     @GetMapping("/briefs/serviceOutlets/data/{id}")
     @ResponseBody
-    public ServiceOutletBriefResponseDto getServiceOutletBriefGivenId(@PathVariable("id") int id){
+    public ServiceOutletBriefResponseDto getServiceOutletBriefGivenId(@PathVariable("id") int id) {
 
         return new ServiceOutletBriefResponseDto(serviceOutletBriefService.fetchServiceOutletBriefGivenId(id));
     }
 
     @GetMapping("/briefs/categories/data")
     @ResponseBody
-    public List<CategoryBriefResponseDto> getCategoryBriefs(Model model){
+    public List<CategoryBriefResponseDto> getCategoryBriefs(Model model) {
 
         return categoryBriefService.fetchAllCategoryBriefs()
                 .parallelStream()
@@ -91,7 +91,7 @@ public class BriefController {
 
     @GetMapping("/briefs/categories/data/{id}")
     @ResponseBody
-    public CategoryBriefResponseDto getCategoryGivenId(@PathVariable("id") int id){
+    public CategoryBriefResponseDto getCategoryGivenId(@PathVariable("id") int id) {
 
         return new CategoryBriefResponseDto(categoryBriefService.fetchCategoryBriefGivenId(id));
     }

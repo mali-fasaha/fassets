@@ -57,12 +57,12 @@ public class NilFixedAsset extends FixedAsset {
 
     @Override
     public Money getPurchaseCost() {
-        return Money.of(0.00,"KES");
+        return Money.of(0.00, "KES");
     }
 
     @Override
     public Money getNetBookValue() {
-        return Money.of(0.00,"KES");
+        return Money.of(0.00, "KES");
     }
 
     @Override

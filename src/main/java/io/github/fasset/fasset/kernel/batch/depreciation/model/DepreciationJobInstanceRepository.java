@@ -25,7 +25,7 @@ import java.time.YearMonth;
 import java.util.List;
 
 @Repository("depreciationJobInstanceRepository")
-public interface DepreciationJobInstanceRepository extends JpaRepository<DepreciationJobInstance,Integer>{
+public interface DepreciationJobInstanceRepository extends JpaRepository<DepreciationJobInstance, Integer> {
 
     List<DepreciationJobInstance> findAllByMonthBefore(YearMonth month);
 }

@@ -18,9 +18,9 @@
 
 package io.github.fasset.fasset.service.impl;
 
-import io.github.fasset.fasset.service.NetBookValueService;
 import io.github.fasset.fasset.model.NetBookValue;
 import io.github.fasset.fasset.repository.NetBookValueRepository;
+import io.github.fasset.fasset.service.NetBookValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

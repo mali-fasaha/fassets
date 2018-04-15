@@ -18,13 +18,9 @@
 
 package io.github.fasset.fasset.service.impl;
 
-import com.google.common.hash.BloomFilter;
-import com.google.common.hash.Funnels;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import io.github.fasset.fasset.repository.MonthlyAssetDepreciationRepository;
 import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
-import org.eclipse.collections.impl.list.mutable.FastList;
-import org.eclipse.collections.impl.set.mutable.UnifiedSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,11 +28,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service("monthlyAssetDepreciationService")
-public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDepreciationService{
+public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDepreciationService {
 
 
     private final MonthlyAssetDepreciationRepository monthlyAssetDepreciationRepository;
@@ -71,7 +66,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
     @Cacheable("monthlyAssetDepreciationByIdAnYears")
     public MonthlyAssetDepreciation getMonthlyAssetDepreciationByAssetIdAndYear(int fixedAssetId, int year) {
 
-        return monthlyAssetDepreciationRepository.findFirstByAssetIdAndYearEquals(fixedAssetId,year);
+        return monthlyAssetDepreciationRepository.findFirstByAssetIdAndYearEquals(fixedAssetId, year);
     }
 
     /**

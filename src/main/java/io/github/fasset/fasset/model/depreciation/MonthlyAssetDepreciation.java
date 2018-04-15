@@ -22,8 +22,6 @@ import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.util.Objects;
 
 
@@ -34,7 +32,7 @@ import java.util.Objects;
 })*/
 @Entity
 @Audited
-public class MonthlyAssetDepreciation extends DomainModel<String>{
+public class MonthlyAssetDepreciation extends DomainModel<String> {
 
     private int assetId;
     private int year;
@@ -199,9 +197,15 @@ public class MonthlyAssetDepreciation extends DomainModel<String>{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         MonthlyAssetDepreciation that = (MonthlyAssetDepreciation) o;
         return assetId == that.assetId &&
                 year == that.year &&

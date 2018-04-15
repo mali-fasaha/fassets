@@ -22,7 +22,6 @@ import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobListener
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.kernel.util.ProcessingList;
 import io.github.fasset.fasset.kernel.util.ProcessingListImpl;
-import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -33,8 +32,6 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 @Configuration
 public class DepreciationJobConfig {
@@ -63,13 +60,13 @@ public class DepreciationJobConfig {
     }
 
     @Bean
-    public DepreciationProcessor depreciationProcessor(){
+    public DepreciationProcessor depreciationProcessor() {
 
         return new DepreciationProcessor(new ProcessingListImpl<>());
     }
 
     @Bean
-    public DepreciationWriter depreciationWriter(){
+    public DepreciationWriter depreciationWriter() {
 
         return new DepreciationWriter();
     }
@@ -77,7 +74,7 @@ public class DepreciationJobConfig {
     @Bean
     public Step depreciationStep1() {
         return stepBuilderFactory.get("depreciationStep1")
-                .<FixedAsset, ProcessingList<DepreciationProceeds>> chunk(100)
+                .<FixedAsset, ProcessingList<DepreciationProceeds>>chunk(100)
                 .reader(fixedAssetItemReader)
                 .processor(depreciationProcessor())
                 .writer(depreciationWriter())

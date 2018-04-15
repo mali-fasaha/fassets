@@ -42,14 +42,13 @@ public class ServiceOutletBriefResponseDto {
     private int poll;
 
 
-
     public ServiceOutletBriefResponseDto(ServiceOutletBrief serviceOutletBrief) {
-        this.id=serviceOutletBrief.getId();
-        this.designation=serviceOutletBrief.getDesignation();
-        this.purchaseCost=serviceOutletBrief.getPurchaseCost().getNumber().doubleValue();
-        this.netBookValue=serviceOutletBrief.getNetBookValue().getNumber().doubleValue();
-        this.accruedDepreciation=serviceOutletBrief.getAccruedDepreciation().getNumber().doubleValue();
-        this.poll=serviceOutletBrief.getPoll();
+        this.id = serviceOutletBrief.getId();
+        this.designation = serviceOutletBrief.getDesignation();
+        this.purchaseCost = serviceOutletBrief.getPurchaseCost().getNumber().doubleValue();
+        this.netBookValue = serviceOutletBrief.getNetBookValue().getNumber().doubleValue();
+        this.accruedDepreciation = serviceOutletBrief.getAccruedDepreciation().getNumber().doubleValue();
+        this.poll = serviceOutletBrief.getPoll();
     }
 
     public int getId() {
@@ -108,8 +107,12 @@ public class ServiceOutletBriefResponseDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ServiceOutletBriefResponseDto that = (ServiceOutletBriefResponseDto) o;
         return id == that.id &&
                 Double.compare(that.purchaseCost, purchaseCost) == 0 &&

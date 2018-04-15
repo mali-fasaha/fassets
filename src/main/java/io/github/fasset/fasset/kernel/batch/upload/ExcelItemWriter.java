@@ -19,8 +19,8 @@
 package io.github.fasset.fasset.kernel.batch.upload;
 
 
-import io.github.fasset.fasset.service.FixedAssetService;
 import io.github.fasset.fasset.model.FixedAsset;
+import io.github.fasset.fasset.service.FixedAssetService;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

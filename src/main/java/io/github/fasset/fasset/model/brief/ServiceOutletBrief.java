@@ -27,9 +27,8 @@ import org.javamoney.moneta.Money;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Comparator;
-import java.util.Objects;
 
-@Entity(name="ServiceOutletBrief")
+@Entity(name = "ServiceOutletBrief")
 @Audited
 public class ServiceOutletBrief extends DomainModel<String> implements Comparable<ServiceOutletBrief>, Brief {
 
@@ -117,9 +116,15 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         ServiceOutletBrief that = (ServiceOutletBrief) o;
         return poll == that.poll &&
                 com.google.common.base.Objects.equal(designation, that.designation) &&
@@ -148,6 +153,6 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
     public int compareTo(ServiceOutletBrief o) {
 
         return Comparator.comparing(ServiceOutletBrief::getDesignation)
-                .compare(this,o);
+                .compare(this, o);
     }
 }

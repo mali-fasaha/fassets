@@ -22,8 +22,6 @@ import com.poiji.annotation.ExcelCell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Column;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -127,8 +125,12 @@ public class FixedAssetDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FixedAssetDTO that = (FixedAssetDTO) o;
         return Objects.equals(solId, that.solId) &&
                 Objects.equals(barcode, that.barcode) &&

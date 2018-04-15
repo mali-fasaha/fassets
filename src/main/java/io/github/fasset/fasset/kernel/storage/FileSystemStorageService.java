@@ -22,9 +22,9 @@ import io.github.fasset.fasset.config.StorageProperties;
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
 import io.github.fasset.fasset.kernel.subscriptions.SimpleSubscription;
 import io.github.fasset.fasset.kernel.subscriptions.SubscriptionService;
-import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
+import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.service.FileUploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ import java.time.YearMonth;
 import java.util.stream.Stream;
 
 @Service("fileSystemStorageService")
-public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService,StorageService {
+public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService, StorageService {
 
     private static final Logger log = LoggerFactory.getLogger(FileSystemStorageService.class);
 
@@ -59,7 +59,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
 
     @Autowired
-    public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadService") FileUploadService fileUploadService){
+    public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadService") FileUploadService fileUploadService) {
         rootLocation = Paths.get(storageProperties.getLocation());
         this.fileUploadService = fileUploadService;
     }
@@ -73,19 +73,19 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     public void store(MultipartFile file) {
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        log.info("Storing file into the directory : {}",fileName);
+        log.info("Storing file into the directory : {}", fileName);
 
-        if(file.isEmpty()){
+        if (file.isEmpty()) {
 
-            throw new StorageException("Failed to store empty file : "+fileName);
+            throw new StorageException("Failed to store empty file : " + fileName);
 
         } else {
 
-            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017,12));
+            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017, 12));
 
-            if(fileUploadService.theFileIsAlreadyUploaded(fileUpload)){
+            if (fileUploadService.theFileIsAlreadyUploaded(fileUpload)) {
 
-                log.info("The file : {} has already been uploaded",fileUpload.getFileName());
+                log.info("The file : {} has already been uploaded", fileUpload.getFileName());
 
             } else {
 
@@ -104,7 +104,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
                     // Replace with subscriber for database and another for the batch
                     fileUploadService.recordFileUpload(fileUpload);
 
-                    postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(),fileUpload.getMonth().toString(),fileUpload.getTimeUploaded().toString()));
+                    postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
                 }
             }
         }
@@ -116,9 +116,9 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
         LocalDateTime uploadTime = LocalDateTime.now();
 
         log.info("Configuring notification to server of the file uploaded : {} for the month : {} at time :{}" +
-                "",fileName,month,uploadTime);
+                "", fileName, month, uploadTime);
 
-        return new FileUpload(fileName,month, uploadTime);
+        return new FileUpload(fileName, month, uploadTime);
     }
 
 
@@ -135,7 +135,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
         Stream<Path> filePathStream = null;
 
         try {
-            filePathStream = Files.walk(this.rootLocation,1)
+            filePathStream = Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
         } catch (IOException e) {
@@ -154,7 +154,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     @Override
     public Path load(String fileName) {
 
-        log.info("Loading file : {} from storage",fileName);
+        log.info("Loading file : {} from storage", fileName);
 
         return rootLocation.resolve(fileName);
     }
@@ -168,7 +168,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     @Override
     public Resource loadAsResource(String fileName) {
 
-        log.debug("Loading fileName : {} as resource",fileName);
+        log.debug("Loading fileName : {} as resource", fileName);
 
         Resource resource = null;
 
@@ -177,10 +177,10 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
         try {
             Resource temp = new UrlResource(file.toUri());
 
-            if( !temp.exists() || !temp.isReadable()){
+            if (!temp.exists() || !temp.isReadable()) {
 
                 throw new StorageFileNotFoundException("Could not read file: " + fileName);
-            } else{
+            } else {
 
                 resource = temp;
             }

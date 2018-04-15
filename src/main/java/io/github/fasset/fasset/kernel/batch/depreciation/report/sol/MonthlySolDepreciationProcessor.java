@@ -25,7 +25,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-public class MonthlySolDepreciationProcessor implements ItemProcessor<String,MonthlySolDepreciation> {
+public class MonthlySolDepreciationProcessor implements ItemProcessor<String, MonthlySolDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlySolDepreciationProcessor.class);
 
@@ -34,8 +34,8 @@ public class MonthlySolDepreciationProcessor implements ItemProcessor<String,Mon
     private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
 
     @Autowired
-    public MonthlySolDepreciationProcessor(@Qualifier("monthylSolDepreciationExecutor") MonthlySolDepreciationExecutor monthlySolDepreciationExecutor,String year) {
-        this.year=year;
+    public MonthlySolDepreciationProcessor(@Qualifier("monthylSolDepreciationExecutor") MonthlySolDepreciationExecutor monthlySolDepreciationExecutor, String year) {
+        this.year = year;
         this.monthlySolDepreciationExecutor = monthlySolDepreciationExecutor;
     }
 
@@ -52,11 +52,11 @@ public class MonthlySolDepreciationProcessor implements ItemProcessor<String,Mon
     @Override
     public MonthlySolDepreciation process(String item) throws Exception {
 
-        if(year==null){
+        if (year == null) {
 
-            log.warn("The year value passed is null : {}",year);
+            log.warn("The year value passed is null : {}", year);
         }
 
-        return monthlySolDepreciationExecutor.getMonthlyDepreciation(item,Integer.parseInt(year));
+        return monthlySolDepreciationExecutor.getMonthlyDepreciation(item, Integer.parseInt(year));
     }
 }

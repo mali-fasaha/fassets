@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("serviceOutletBriefService")
-public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
+public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService {
 
     private static final Logger log = LoggerFactory.getLogger(ServiceOutletBriefServiceImpl.class);
 
@@ -59,10 +59,10 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
             serviceOutletBriefs = serviceOutletBriefRepository.findAll();
         } catch (Exception e) {
             String message = "Exception encountered while retrieving serviceOutletBriefs from repository";
-            throw new DataRetrievalFromControllerException(message,e);
+            throw new DataRetrievalFromControllerException(message, e);
         }
 
-        log.info("Returning : {} serviceOutletBriefs",serviceOutletBriefs.size());
+        log.info("Returning : {} serviceOutletBriefs", serviceOutletBriefs.size());
 
         return serviceOutletBriefs;
     }
@@ -81,10 +81,10 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
             serviceOutletBrief = serviceOutletBriefRepository.findById(id).get();
         } catch (Throwable e) {
             String message = "Exception encountered while extracting data from the serviceOutletBriefRepository";
-            throw new DataRetrievalFromControllerException(message,e);
+            throw new DataRetrievalFromControllerException(message, e);
         }
 
-        log.debug("Returning serviceOutletBrief : {}",serviceOutletBrief);
+        log.debug("Returning serviceOutletBrief : {}", serviceOutletBrief);
 
         return serviceOutletBrief;
     }
@@ -100,12 +100,12 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService{
 
         List<ServiceOutletBrief> unsavedItems = FastList.newList();
 
-        for(ServiceOutletBrief brief : serviceOutletBriefs){
+        for (ServiceOutletBrief brief : serviceOutletBriefs) {
 
             ServiceOutletBrief persistedBrief = serviceOutletBriefRepository
                     .findDistinctByDesignation(brief.getDesignation());
 
-            if(persistedBrief != null){
+            if (persistedBrief != null) {
 
                 persistedBrief.setDesignation(brief.getDesignation());
                 persistedBrief.setPurchaseCost(brief.getPurchaseCost());

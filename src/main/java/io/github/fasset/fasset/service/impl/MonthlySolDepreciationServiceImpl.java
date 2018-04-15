@@ -21,7 +21,6 @@ package io.github.fasset.fasset.service.impl;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 import io.github.fasset.fasset.repository.MonthlySolDepreciationRepository;
-import io.github.fasset.fasset.service.MonthlyAssetDepreciationService;
 import io.github.fasset.fasset.service.MonthlySolDepreciationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("monthlySolDepreciationService")
 @Transactional

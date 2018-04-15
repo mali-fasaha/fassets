@@ -25,8 +25,8 @@ import java.time.YearMonth;
 @ConfigurationProperties("depreciation")
 public class DepreciationProperties {
 
-    private YearMonth startMonth = YearMonth.of(2018,1);
-    private YearMonth stopMonth = YearMonth.of(2020,6);
+    private YearMonth startMonth = YearMonth.of(2018, 1);
+    private YearMonth stopMonth = YearMonth.of(2020, 6);
 
     public YearMonth getStartMonth() {
         return startMonth;

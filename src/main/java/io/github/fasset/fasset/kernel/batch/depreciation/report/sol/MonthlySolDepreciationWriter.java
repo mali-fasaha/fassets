@@ -20,7 +20,6 @@ package io.github.fasset.fasset.kernel.batch.depreciation.report.sol;
 
 import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 import io.github.fasset.fasset.service.MonthlySolDepreciationService;
-import io.github.fasset.fasset.service.impl.MonthlySolDepreciationServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemWriter;
@@ -51,7 +50,7 @@ public class MonthlySolDepreciationWriter implements ItemWriter<MonthlySolDeprec
     @Override
     public void write(List<? extends MonthlySolDepreciation> items) throws Exception {
 
-        log.info("Saving a list of : {} MonthlySolDepreciation items to the Repository",items.size());
+        log.info("Saving a list of : {} MonthlySolDepreciation items to the Repository", items.size());
 
         try {
             monthlySolDepreciationService.saveAllMonthlyDepreciationItems(items);

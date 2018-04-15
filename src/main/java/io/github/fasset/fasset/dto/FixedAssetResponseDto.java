@@ -44,18 +44,18 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
 
     public FixedAssetResponseDto(FixedAsset fixedAsset) {
 
-        this.id=fixedAsset.getId();
-        this.solId=fixedAsset.getSolId();
-        this.barcode=fixedAsset.getBarcode();
-        this.assetDescription=fixedAsset.getAssetDescription();
-        this.purchaseDate=fixedAsset.getPurchaseDate();
-        this.category=fixedAsset.getCategory();
-        this.purchaseCost=fixedAsset.getPurchaseCost().getNumber().doubleValue();
-        this.netBookValue=fixedAsset.getNetBookValue().getNumber().doubleValue();
+        this.id = fixedAsset.getId();
+        this.solId = fixedAsset.getSolId();
+        this.barcode = fixedAsset.getBarcode();
+        this.assetDescription = fixedAsset.getAssetDescription();
+        this.purchaseDate = fixedAsset.getPurchaseDate();
+        this.category = fixedAsset.getCategory();
+        this.purchaseCost = fixedAsset.getPurchaseCost().getNumber().doubleValue();
+        this.netBookValue = fixedAsset.getNetBookValue().getNumber().doubleValue();
     }
 
-    public FixedAssetResponseDto(int id,String solId, String barcode, String assetDescription, LocalDate purchaseDate, String category, double purchaseCost, double netBookValue) {
-        this.id=id;
+    public FixedAssetResponseDto(int id, String solId, String barcode, String assetDescription, LocalDate purchaseDate, String category, double purchaseCost, double netBookValue) {
+        this.id = id;
         this.solId = solId;
         this.barcode = barcode;
         this.assetDescription = assetDescription;
@@ -142,8 +142,12 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FixedAssetResponseDto that = (FixedAssetResponseDto) o;
         return id == that.id &&
                 Double.compare(that.purchaseCost, purchaseCost) == 0 &&
@@ -223,6 +227,6 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
                 .thenComparing(FixedAssetResponseDto::getCategory)
                 .thenComparing(FixedAssetResponseDto::getPurchaseCost)
                 .thenComparing(FixedAssetResponseDto::getNetBookValue)
-                .compare(this,o);
+                .compare(this, o);
     }
 }

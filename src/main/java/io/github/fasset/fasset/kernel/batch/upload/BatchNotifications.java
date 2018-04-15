@@ -24,13 +24,12 @@ import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.springframework.batch.core.JobExecution;
-
-import static org.slf4j.LoggerFactory.getLogger;
-
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 @Component
 public class BatchNotifications implements JobExecutionListener {

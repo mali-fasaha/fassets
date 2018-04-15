@@ -18,9 +18,9 @@
 
 package io.github.fasset.fasset.service.impl;
 
-import io.github.fasset.fasset.service.CategoryConfigurationService;
 import io.github.fasset.fasset.model.CategoryConfiguration;
 import io.github.fasset.fasset.repository.CategoryConfigurationRepository;
+import io.github.fasset.fasset.service.CategoryConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,6 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     public CategoryConfigurationServiceImpl(@Qualifier("categoryConfigurationRepository") CategoryConfigurationRepository fixedAssetCategoryRepository) {
         this.categoryConfigurationRepository = fixedAssetCategoryRepository;
     }
-
 
 
     /**

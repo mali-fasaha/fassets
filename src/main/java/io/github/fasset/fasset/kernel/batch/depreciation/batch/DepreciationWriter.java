@@ -49,18 +49,18 @@ public class DepreciationWriter implements ItemWriter<ProcessingList<Depreciatio
     @Override
     public void write(List<? extends ProcessingList<DepreciationProceeds>> depreciationProceedsLists) throws Exception {
 
-        log.info("Writing : {} DepreciationLists to the depreciationRepository",depreciationProceedsLists.size());
+        log.info("Writing : {} DepreciationLists to the depreciationRepository", depreciationProceedsLists.size());
 
         try {
-            depreciationProceedsLists.forEach( list ->{
-                log.info("Saving to repository : {} depreciation items",list.size());
-                    depreciationService.saveAllDepreciationProceeds(list);
+            depreciationProceedsLists.forEach(list -> {
+                log.info("Saving to repository : {} depreciation items", list.size());
+                depreciationService.saveAllDepreciationProceeds(list);
             });
 
         } catch (Throwable e) {
             String message = String.format("Exception encountered while persisting depreciation items" +
-                    "passed in the list to the depreciation writer. These are the items : %s",depreciationProceedsLists);
-            throw new DepreciationExecutionException(message,e);
+                    "passed in the list to the depreciation writer. These are the items : %s", depreciationProceedsLists);
+            throw new DepreciationExecutionException(message, e);
         }
 
     }

@@ -23,7 +23,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component()
-public class StringToDoubleConverter implements Converter<String,Double>{
+public class StringToDoubleConverter implements Converter<String, Double> {
 
     /**
      * Convert the source object of type {@code S} to target type {@code T}.
@@ -36,6 +36,6 @@ public class StringToDoubleConverter implements Converter<String,Double>{
     @Override
     public Double convert(String source) {
 
-        return (Double)Double.parseDouble(source.replace(",",""));
+        return (Double) Double.parseDouble(source.replace(",", ""));
     }
 }

@@ -75,8 +75,8 @@ public class MonthlyAssetDepreciationDTO {
 
     public Integer getYear() {
 
-        log.trace("Returning year : {}",year);
-        return year==null ? 0 : year;
+        log.trace("Returning year : {}", year);
+        return year == null ? 0 : year;
     }
 
     public MonthlyAssetDepreciationDTO setYear(Integer year) {
@@ -85,7 +85,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getJan() {
-        log.trace("Returning jan : {}",jan);
+        log.trace("Returning jan : {}", jan);
         return jan == null ? 0.00 : jan;
     }
 
@@ -95,7 +95,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getFeb() {
-        log.trace("Returning feb : {}",feb);
+        log.trace("Returning feb : {}", feb);
         return feb == null ? 0.00 : feb;
     }
 
@@ -105,7 +105,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getMar() {
-        log.trace("Returning mar : {}",mar);
+        log.trace("Returning mar : {}", mar);
         return mar == null ? 0.00 : mar;
     }
 
@@ -115,7 +115,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getApr() {
-        log.trace("Returning apr : {}",apr);
+        log.trace("Returning apr : {}", apr);
         return apr == null ? 0.00 : apr;
     }
 
@@ -125,7 +125,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getMay() {
-        log.trace("Returning may : {}",may);
+        log.trace("Returning may : {}", may);
         return may == null ? 0.00 : may;
     }
 
@@ -136,7 +136,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getJun() {
 
-        log.trace("Returning jun : {}",jun);
+        log.trace("Returning jun : {}", jun);
         return jun == null ? 0.00 : jun;
     }
 
@@ -146,7 +146,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getJul() {
-        log.trace("Returning jul : {}",jul);
+        log.trace("Returning jul : {}", jul);
         return jul == null ? 0.00 : jul;
     }
 
@@ -156,7 +156,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getAug() {
-        log.trace("Returning aug : {}",aug);
+        log.trace("Returning aug : {}", aug);
         return aug == null ? 0.00 : aug;
     }
 
@@ -166,7 +166,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getSep() {
-        log.trace("Returning sep : {}",sep);
+        log.trace("Returning sep : {}", sep);
         return sep == null ? 0.00 : sep;
     }
 
@@ -177,7 +177,7 @@ public class MonthlyAssetDepreciationDTO {
 
     public Double getOct() {
 
-        log.trace("Returning oct : {}",oct);
+        log.trace("Returning oct : {}", oct);
         return oct == null ? 0.00 : oct;
     }
 
@@ -187,7 +187,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getNov() {
-        log.trace("Returning nov : {}",nov);
+        log.trace("Returning nov : {}", nov);
         return nov == null ? 0.00 : nov;
     }
 
@@ -197,7 +197,7 @@ public class MonthlyAssetDepreciationDTO {
     }
 
     public Double getDec() {
-        log.trace("Returning dec : {}",dec);
+        log.trace("Returning dec : {}", dec);
         return dec == null ? 0.00 : dec;
     }
 
@@ -208,8 +208,12 @@ public class MonthlyAssetDepreciationDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MonthlyAssetDepreciationDTO that = (MonthlyAssetDepreciationDTO) o;
         return Objects.equal(assetId, that.assetId) &&
                 Objects.equal(year, that.year) &&

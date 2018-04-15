@@ -19,15 +19,15 @@
 package io.github.fasset.fasset.kernel.excel.mapping;
 
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This is a delegate for generating a {@link List} of {@code T}
@@ -54,19 +54,19 @@ public class ExcelDataProvider<T> {
      * the known path which is provided at runtime
      *
      * @param filePath where the excel file is temporarily stored
-     * @param clazz class into which we map the excel row
+     * @param clazz    class into which we map the excel row
      * @return {@link List} of type {@code T}
      */
-    public List<T> generateMappedList(String filePath,Class<T> clazz) {
+    public List<T> generateMappedList(String filePath, Class<T> clazz) {
 
-        LOGGER.info("Generating a List of mapped objects of type : {} from file path :{}",clazz,filePath);
+        LOGGER.info("Generating a List of mapped objects of type : {} from file path :{}", clazz, filePath);
 
         List<T> dtoList = new LinkedList<>();
 
-        if(filePath != null) {
+        if (filePath != null) {
 
             try {
-                dtoList.addAll(excelMapper.mappedList(clazz,filePath));
+                dtoList.addAll(excelMapper.mappedList(clazz, filePath));
             } catch (Throwable e) {
                 String message = String.format("Unable to read from excel file : %s for class : %S",
                         filePath, clazz);

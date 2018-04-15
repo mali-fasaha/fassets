@@ -52,8 +52,6 @@ public class MonthlyDepreciationJobProxy {
     private final DepreciationRelay depreciationRelay;
 
 
-
-
     @Autowired
     public MonthlyDepreciationJobProxy(JobLauncher jobLauncher,
                                        @Qualifier("monthlyAssetDepreciationJob") Job monthlyAssetDepreciationJob,
@@ -71,7 +69,7 @@ public class MonthlyDepreciationJobProxy {
         this.monthlySolDepreciationJob = monthlySolDepreciationJob;
     }
 
-    private List<Integer> annualRelay(){
+    private List<Integer> annualRelay() {
 
         List<Integer> annualList = depreciationRelay
                 .getMonthlyDepreciationSequence()
@@ -85,7 +83,7 @@ public class MonthlyDepreciationJobProxy {
         return ImmutableSet.copyOf(annualList).asList();
     }
 
-    public void initializeMonthlyDepreciationReporting(){
+    public void initializeMonthlyDepreciationReporting() {
 
         int no_of_assets = fixedAssetService.getPoll();
         LocalDateTime starting_time = LocalDateTime.now();
@@ -100,22 +98,21 @@ public class MonthlyDepreciationJobProxy {
         executeMonthlyJob(jobParametersBuilder, monthlyAssetDepreciationJob);
 
         log.info("executing MonthlySolDepreciation job : {}", monthlySolDepreciationJob);
-        executeMonthlyJob(jobParametersBuilder,monthlySolDepreciationJob);
+        executeMonthlyJob(jobParametersBuilder, monthlySolDepreciationJob);
 
         log.info("executing MonthlyCategoryDepreciation job : {}", monthlyCategoryDepreciationJob);
-        executeMonthlyJob(jobParametersBuilder,monthlyCategoryDepreciationJob);
+        executeMonthlyJob(jobParametersBuilder, monthlyCategoryDepreciationJob);
 
     }
 
-    private void executeMonthlyJob(JobParametersBuilder jobParametersBuilder,Job job) {
-        annualRelay().forEach(year ->{
+    private void executeMonthlyJob(JobParametersBuilder jobParametersBuilder, Job job) {
+        annualRelay().forEach(year -> {
 
-            log.info("Running {} job for the year : {}",job,year);
+            log.info("Running {} job for the year : {}", job, year);
             jobParametersBuilder.addString("year", year.toString()).toJobParameters();
-                fixedAssetsJobsActivator.bootstrap(jobParametersBuilder.addLong("year", Long.valueOf(year)).toJobParameters(),jobLauncher, job,fixedAssetService);
+            fixedAssetsJobsActivator.bootstrap(jobParametersBuilder.addLong("year", Long.valueOf(year)).toJobParameters(), jobLauncher, job, fixedAssetService);
         });
     }
-
 
 
 }

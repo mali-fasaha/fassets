@@ -25,7 +25,6 @@ import java.util.List;
 public interface MonthlyCategoryDepreciationService {
 
     /**
-     *
      * @return A List of all monthlyCategoryDepreciation items currently in the
      * repository
      */

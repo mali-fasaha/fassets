@@ -18,18 +18,18 @@
 
 package io.github.fasset.fasset.kernel.util.convert;
 
-import java.time.Instant;
-import java.time.YearMonth;
-import java.util.Date;
-
 import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.slf4j.Logger;
-import static org.slf4j.LoggerFactory.getLogger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+
+import java.time.Instant;
+import java.time.YearMonth;
+import java.util.Date;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Takes {@link Date} converting it to {@link YearMonth}
@@ -82,7 +82,7 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
 
         YearMonth convertedMonth = null;
 
-        log.debug("Converting {} to YearMonth",source.toString());
+        log.debug("Converting {} to YearMonth", source.toString());
 
         Date convertFrom = nullDateReassignment(source);
 
@@ -91,13 +91,13 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
             convertedMonth = localDateToYearMonthConverter.convert(dateToLocalDateConverter.convert(convertFrom));
 
         } catch (Throwable e) {
-            if(dateToLocalDateConverter == null) {
-                throw new ConverterException("The dateToLocalDateConverter is null",e);
-            }else if(source == null) {
-                throw new ConverterException("The date provided is null, kindly review the source data again...",e);
-            } else if(convertFrom == null){
-                throw new ConverterException("The month we are converting evaluates to null",e);
-            }else {
+            if (dateToLocalDateConverter == null) {
+                throw new ConverterException("The dateToLocalDateConverter is null", e);
+            } else if (source == null) {
+                throw new ConverterException("The date provided is null, kindly review the source data again...", e);
+            } else if (convertFrom == null) {
+                throw new ConverterException("The month we are converting evaluates to null", e);
+            } else {
                 throw new ConverterException(String.format("Exception thrown while converting %s to YearMonth", source), e);
             }
         }
@@ -107,11 +107,11 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
 
     private Date nullDateReassignment(Date source) {
 
-        if(source == null){
+        if (source == null) {
 
             Date reassignedDate = Date.from(Instant.now());
 
-            log.error("The source data is null.. reassigning to current time : {}",reassignedDate);
+            log.error("The source data is null.. reassigning to current time : {}", reassignedDate);
 
             return reassignedDate;
         }

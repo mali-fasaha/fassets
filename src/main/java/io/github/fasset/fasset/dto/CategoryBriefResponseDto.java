@@ -21,7 +21,6 @@ package io.github.fasset.fasset.dto;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import io.github.fasset.fasset.model.brief.CategoryBrief;
-import org.javamoney.moneta.Money;
 
 public class CategoryBriefResponseDto {
 
@@ -44,12 +43,12 @@ public class CategoryBriefResponseDto {
 
 
     public CategoryBriefResponseDto(CategoryBrief categoryBrief) {
-        this.id=categoryBrief.getId();
-        this.designation=categoryBrief.getDesignation();
-        this.purchaseCost=categoryBrief.getPurchaseCost().getNumber().doubleValue();
-        this.netBookValue=categoryBrief.getNetBookValue().getNumber().doubleValue();
-        this.accruedDepreciation=categoryBrief.getAccruedDepreciation().getNumber().doubleValue();
-        this.poll=categoryBrief.getPoll();
+        this.id = categoryBrief.getId();
+        this.designation = categoryBrief.getDesignation();
+        this.purchaseCost = categoryBrief.getPurchaseCost().getNumber().doubleValue();
+        this.netBookValue = categoryBrief.getNetBookValue().getNumber().doubleValue();
+        this.accruedDepreciation = categoryBrief.getAccruedDepreciation().getNumber().doubleValue();
+        this.poll = categoryBrief.getPoll();
     }
 
     public int getId() {
@@ -108,8 +107,12 @@ public class CategoryBriefResponseDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CategoryBriefResponseDto that = (CategoryBriefResponseDto) o;
         return id == that.id &&
                 Double.compare(that.purchaseCost, purchaseCost) == 0 &&

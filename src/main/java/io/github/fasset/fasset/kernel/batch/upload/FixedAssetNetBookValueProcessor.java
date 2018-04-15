@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 @Component("fixedAssetNetBookValueProcessor")
-public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset,NetBookValue> {
+public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset, NetBookValue> {
 
     private final static Logger log = LoggerFactory.getLogger(FixedAssetNetBookValueProcessor.class);
 
@@ -46,7 +46,7 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
     @Override
     public NetBookValue process(FixedAsset fixedAsset) throws Exception {
 
-        log.debug("Processing fixedAsset item : {}",fixedAsset);
+        log.debug("Processing fixedAsset item : {}", fixedAsset);
 
         NetBookValue retVal = new NetBookValue();
 
@@ -54,11 +54,11 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
             retVal.setFixedAssetId(fixedAsset.getId())
                     .setCategory(fixedAsset.getCategory())
                     .setSolId(fixedAsset.getSolId())
-                    .setMonth(YearMonth.of(2017,12))//TODO configure to do this from controller
+                    .setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
                     .setNetBookValue(fixedAsset.getNetBookValue());
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while processing fixedAsset item : %s",fixedAsset);
-            throw new ConverterException(message,e);
+            String message = String.format("Exception encountered while processing fixedAsset item : %s", fixedAsset);
+            throw new ConverterException(message, e);
         }
 
         return retVal;

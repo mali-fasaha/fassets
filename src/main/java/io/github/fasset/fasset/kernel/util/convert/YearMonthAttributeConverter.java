@@ -42,7 +42,7 @@ import java.util.Date;
  * @author edwin.njeru
  */
 @Converter(autoApply = true)
-public class YearMonthAttributeConverter implements AttributeConverter<YearMonth,Date> {
+public class YearMonthAttributeConverter implements AttributeConverter<YearMonth, Date> {
 
     private static final Logger log = LoggerFactory.getLogger(YearMonthAttributeConverter.class);
 
@@ -58,8 +58,8 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
 
         Date dbDate = null;
 
-        if(attribute != null) {
-            log.trace("Converting attribute : {} to database column",attribute);
+        if (attribute != null) {
+            log.trace("Converting attribute : {} to database column", attribute);
             try {
                 dbDate = Date.from(
                         attribute.atDay(1)
@@ -74,7 +74,7 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
             log.trace("The attribute passed for conversion to database column is null");
         }
 
-        log.trace("Returning month as : {}",dbDate);
+        log.trace("Returning month as : {}", dbDate);
 
         return dbDate;
     }
@@ -93,7 +93,7 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
     @Override
     public YearMonth convertToEntityAttribute(Date dbData) {
 
-        log.trace("Converting database data : {} to entity YearMonth attribute",dbData);
+        log.trace("Converting database data : {} to entity YearMonth attribute", dbData);
 
         YearMonth retval = null;
 
@@ -101,12 +101,12 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
             retval = YearMonth.from(dbData.toInstant()
                     .atZone(ZoneId.systemDefault())
                     .toLocalDate());
-        } catch (Throwable e){
-            String message = String.format("Exception thrown while converting date: %s to yearMonth",dbData);
-            throw new ConverterException(message,e);
+        } catch (Throwable e) {
+            String message = String.format("Exception thrown while converting date: %s to yearMonth", dbData);
+            throw new ConverterException(message, e);
         }
 
-        log.trace("Returning month as : {}",retval);
+        log.trace("Returning month as : {}", retval);
 
         return retval;
     }

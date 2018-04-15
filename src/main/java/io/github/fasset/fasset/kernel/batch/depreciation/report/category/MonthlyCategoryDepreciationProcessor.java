@@ -35,7 +35,7 @@ public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<Strin
     @Autowired
     public MonthlyCategoryDepreciationProcessor(@Qualifier("monthylDepreciationDepreciationExecutor") MonthlyCategoryDepreciationExecutor executor, String year) {
         this.executor = executor;
-        this.year=year;
+        this.year = year;
     }
 
     /**
@@ -51,11 +51,11 @@ public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<Strin
     @Override
     public MonthlyCategoryDepreciation process(String item) throws Exception {
 
-        if(year==null){
+        if (year == null) {
 
-            log.warn("The year value passed is null : {}",year);
+            log.warn("The year value passed is null : {}", year);
         }
 
-        return executor.getMonthlyDepreciation(item,Integer.parseInt(year));
+        return executor.getMonthlyDepreciation(item, Integer.parseInt(year));
     }
 }

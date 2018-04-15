@@ -27,7 +27,7 @@ public class NilCategoryConfiguration {
     /**
      * The name of the depreciation logic
      */
-    private String depreciationLogic="DECLININGBALANCE";
+    private String depreciationLogic = "DECLININGBALANCE";
 
     /**
      * This is the item on which the depreciation rate is applied, as in either the cost
@@ -40,6 +40,6 @@ public class NilCategoryConfiguration {
     private String categoryLedgerId = "0000000000";
 
     public CategoryConfiguration getCategoryConfiguration() {
-        return new CategoryConfiguration(designation,depreciationLogic,deprecant,depreciationRate,categoryLedgerId);
+        return new CategoryConfiguration(designation, depreciationLogic, deprecant, depreciationRate, categoryLedgerId);
     }
 }

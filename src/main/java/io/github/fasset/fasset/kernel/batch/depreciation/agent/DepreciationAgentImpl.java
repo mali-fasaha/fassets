@@ -37,7 +37,7 @@ import java.time.YearMonth;
 
 @DependsOn("depreciationExecutor")
 @Component("depreciationAgent")
-public class DepreciationAgentImpl implements DepreciationAgent{
+public class DepreciationAgentImpl implements DepreciationAgent {
 
     private final Logger log = LoggerFactory.getLogger(DepreciationAgentImpl.class);
 
@@ -98,34 +98,34 @@ public class DepreciationAgentImpl implements DepreciationAgent{
      * This method determines the amount to be used as deprecant relative to the CategoryConfiguration
      * item passed
      *
-     * @param asset FixedAsset item being depereciated
+     * @param asset         FixedAsset item being depereciated
      * @param configuration CategoryConfiguration relevant to the asset being depreciated
      * @return amount of the deprecant
      */
     private Money getDeprecant(FixedAsset asset, CategoryConfiguration configuration) {
 
         log.trace("Determining the deprecant for Asset : {}, with category configuration : {}",
-                asset,configuration);
+                asset, configuration);
 
         Money deprecant = null;
 
         try {
-            if(configuration.getDeprecant().equalsIgnoreCase("purchaseCost")){
+            if (configuration.getDeprecant().equalsIgnoreCase("purchaseCost")) {
 
                 deprecant = asset.getPurchaseCost();
 
-                log.trace("Using purchase cost as deprecant : {}",deprecant);
+                log.trace("Using purchase cost as deprecant : {}", deprecant);
 
-            } else if(configuration.getDeprecant().equalsIgnoreCase("netBookValue")){
+            } else if (configuration.getDeprecant().equalsIgnoreCase("netBookValue")) {
 
                 deprecant = asset.getNetBookValue();
 
-                log.trace("Using the netBookValue as deprecant : {}",deprecant);
+                log.trace("Using the netBookValue as deprecant : {}", deprecant);
             }
         } catch (Throwable e) {
             String message = String.format("Exception encountered while determining the deprecant applicable for the " +
-                    "asset : %s, pursuant to the categoryConfiguration : %s",asset,configuration);
-            throw new DepreciationExecutionException(message,e);
+                    "asset : %s, pursuant to the categoryConfiguration : %s", asset, configuration);
+            throw new DepreciationExecutionException(message, e);
         }
         return deprecant;
     }
@@ -133,25 +133,25 @@ public class DepreciationAgentImpl implements DepreciationAgent{
     /**
      * This calculates the depreciation amount per month
      *
-     * @param deprecant the amount of the asset (cost or NBV) on which depreciation is calculated
+     * @param deprecant        the amount of the asset (cost or NBV) on which depreciation is calculated
      * @param depreciationRate the depreciation rate to use
      * @return amount of depreciation
      */
-    private Money calculate(Money deprecant, double depreciationRate){
+    private Money calculate(Money deprecant, double depreciationRate) {
 
         Money depreciation;
 
         try {
-            log.trace("Calculating depreciation amount using deprecant of : {}, and depreciation rate of : {}", deprecant,depreciationRate);
+            log.trace("Calculating depreciation amount using deprecant of : {}, and depreciation rate of : {}", deprecant, depreciationRate);
 
             //depreciation = deprecant * depreciationRate;
-            depreciation = deprecant.multiply(depreciationRate/100 * 1/12);
+            depreciation = deprecant.multiply(depreciationRate / 100 * 1 / 12);
 
-            log.trace("Depreciation for deprecant : {} and depreciationRate : {} calculated as : {}",deprecant,depreciationRate,depreciation);
+            log.trace("Depreciation for deprecant : {} and depreciationRate : {} calculated as : {}", deprecant, depreciationRate, depreciation);
         } catch (Throwable e) {
             String message = String.format("Exception encountered while calculating depreciation amount for " +
-                    "deprecant amount of : %s and depreciation rate of :%s",deprecant,depreciationRate);
-            throw new DepreciationExecutionException(message,e);
+                    "deprecant amount of : %s and depreciation rate of :%s", deprecant, depreciationRate);
+            throw new DepreciationExecutionException(message, e);
         }
 
         return depreciation;
@@ -163,9 +163,9 @@ public class DepreciationAgentImpl implements DepreciationAgent{
      * @param preprocessor DepreciationPreprocessor for the depreciation amounts
      * @return Depreciation item in accordance with the preprocessor passed
      */
-    private Depreciation getDepreciation(DepreciationPreprocessor preprocessor){
+    private Depreciation getDepreciation(DepreciationPreprocessor preprocessor) {
 
-        log.trace("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}",preprocessor.getAsset(),preprocessor.getMonth());
+        log.trace("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}", preprocessor.getAsset(), preprocessor.getMonth());
         Depreciation depreciation = new Depreciation();
         try {
             depreciation
@@ -178,11 +178,11 @@ public class DepreciationAgentImpl implements DepreciationAgent{
                     .setDepreciation(preprocessor.getDepreciationAmount());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating depreciation instance relative to" +
-                    " asset : %s, for the period : %s",preprocessor.getAsset(),preprocessor.getMonth());
-            throw new DepreciationExecutionException(message,e);
+                    " asset : %s, for the period : %s", preprocessor.getAsset(), preprocessor.getMonth());
+            throw new DepreciationExecutionException(message, e);
         }
 
-        log.trace("Returning depreciation instance : {}",depreciation);
+        log.trace("Returning depreciation instance : {}", depreciation);
         return depreciation;
     }
 

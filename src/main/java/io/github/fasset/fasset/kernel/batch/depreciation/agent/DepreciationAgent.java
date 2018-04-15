@@ -18,7 +18,6 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation.agent;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationListener;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
@@ -39,5 +38,5 @@ public interface DepreciationAgent extends Agent<Depreciation> {
      * @param asset
      * @param month
      */
-    Depreciation invoke(FixedAsset asset, YearMonth month,DepreciationProceeds proceeds);
+    Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

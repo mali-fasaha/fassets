@@ -29,7 +29,7 @@ public class UnModifiedNetBookValue {
     private NetBookValue netBookValue;
 
 
-    public UnModifiedNetBookValue(FixedAsset asset,YearMonth month) {
+    public UnModifiedNetBookValue(FixedAsset asset, YearMonth month) {
 
         netBookValue = new NetBookValue();
 
@@ -47,8 +47,12 @@ public class UnModifiedNetBookValue {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UnModifiedNetBookValue that = (UnModifiedNetBookValue) o;
         return Objects.equals(netBookValue, that.netBookValue);
     }

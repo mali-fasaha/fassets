@@ -24,7 +24,6 @@ package io.github.fasset.fasset.kernel.util;
 public interface WorkInProgressListener {
 
     /**
-     *
      * @param b Set false if work is done
      */
     void isWorkStillInProgress(boolean b);

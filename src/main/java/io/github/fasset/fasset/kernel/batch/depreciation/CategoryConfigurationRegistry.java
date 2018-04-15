@@ -18,8 +18,8 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
-import io.github.fasset.fasset.model.nil.NilCategoryConfiguration;
 import io.github.fasset.fasset.model.CategoryConfiguration;
+import io.github.fasset.fasset.model.nil.NilCategoryConfiguration;
 import io.github.fasset.fasset.service.CategoryConfigurationService;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.slf4j.Logger;
@@ -43,7 +43,7 @@ public class CategoryConfigurationRegistry {
 
     private static final Logger log = LoggerFactory.getLogger(CategoryConfigurationRegistry.class);
 
-    private Map<String,CategoryConfiguration> categoryConfigurationMap = new ConcurrentHashMap<>();
+    private Map<String, CategoryConfiguration> categoryConfigurationMap = new ConcurrentHashMap<>();
 
     private final CategoryConfigurationService categoryConfigurationService;
 
@@ -57,12 +57,13 @@ public class CategoryConfigurationRegistry {
 
         CategoryConfiguration categoryConfiguration;
 
-        if(categoryConfigurationRegistryDoesNotContain(categoryName))
+        if (categoryConfigurationRegistryDoesNotContain(categoryName)) {
             updateConfigurationRegistry();
+        }
 
-        if(categoryConfigurationRegistryDoesNotContain(categoryName)){
+        if (categoryConfigurationRegistryDoesNotContain(categoryName)) {
             log.error("The category Named : {} has not been configured in the category configuration repo. Please " +
-                    "check your category configurations listing...",categoryName);
+                    "check your category configurations listing...", categoryName);
             categoryConfiguration = new NilCategoryConfiguration().getCategoryConfiguration();
         }
 
@@ -71,22 +72,22 @@ public class CategoryConfigurationRegistry {
         return categoryConfiguration;
     }
 
-    void addCategoryConfiguration(String categoryName,CategoryConfiguration categoryConfiguration){
-        categoryConfigurationMap.put(categoryName,categoryConfiguration);
+    void addCategoryConfiguration(String categoryName, CategoryConfiguration categoryConfiguration) {
+        categoryConfigurationMap.put(categoryName, categoryConfiguration);
     }
 
-    boolean categoryConfigurationRegistryDoesNotContain(String categoryName){
+    boolean categoryConfigurationRegistryDoesNotContain(String categoryName) {
         return !categoryConfigurationMap.containsKey(categoryName);
     }
 
-    boolean categoryConfigurationRegistryIsEmpty(){
+    boolean categoryConfigurationRegistryIsEmpty() {
         return categoryConfigurationMap.isEmpty();
     }
 
     @PostConstruct
     private void updateConfigurationRegistry() {
 
-        if(categoryConfigurationMap.isEmpty()) {
+        if (categoryConfigurationMap.isEmpty()) {
 
             log.trace("Refreshing the category configuration mapping...");
 
@@ -95,7 +96,7 @@ public class CategoryConfigurationRegistry {
                     .stream()
                     .map(CategoryConfiguration::getDesignation)
                     .forEach(categoryName -> {
-                        log.trace("Registering category : {}",categoryName);
+                        log.trace("Registering category : {}", categoryName);
                         categoryConfigurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
                     });
         }

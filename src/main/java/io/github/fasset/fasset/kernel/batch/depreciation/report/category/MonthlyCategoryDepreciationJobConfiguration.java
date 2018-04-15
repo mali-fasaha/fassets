@@ -66,7 +66,7 @@ public class MonthlyCategoryDepreciationJobConfiguration {
     }
 
     @Bean("monthlyCategoryDepreciationJob")
-    public Job monthlyCategoryDepreciationJob(){
+    public Job monthlyCategoryDepreciationJob() {
         return jobBuilderFactory.get("monthlyCategoryDepreciationJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(monthyCategoryDepreciationJobListener)
@@ -84,7 +84,7 @@ public class MonthlyCategoryDepreciationJobConfiguration {
         try {
             createMonthlyCategoryDepreciationItems = stepBuilderFactory
                     .get("createMonthlyCategoryDepreciationItems")
-                    .<String,MonthlyCategoryDepreciation>chunk(5)
+                    .<String, MonthlyCategoryDepreciation>chunk(5)
                     .reader(monthlyCategoryDepreciationReader())
                     .writer(monthlyCategoryDepreciationWriter())
                     .processor(monthlyCategoryDepreciationProcessor(YEAR))
@@ -98,9 +98,9 @@ public class MonthlyCategoryDepreciationJobConfiguration {
 
     @Bean
     @JobScope
-    public ItemProcessor<String,MonthlyCategoryDepreciation> monthlyCategoryDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
+    public ItemProcessor<String, MonthlyCategoryDepreciation> monthlyCategoryDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
 
-        return new MonthlyCategoryDepreciationProcessor(monthlyCategoryDepreciationExecutor,year);
+        return new MonthlyCategoryDepreciationProcessor(monthlyCategoryDepreciationExecutor, year);
     }
 
     @Bean

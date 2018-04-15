@@ -34,18 +34,21 @@ public interface StorageService extends SubscriptionService {
 
     /**
      * To store the file into storage
+     *
      * @param file
      */
     void store(MultipartFile file);
 
     /**
      * Loads all files into storage
+     *
      * @return
      */
     Stream<Path> loadAll();
 
     /**
      * Load the fileName given into storage
+     *
      * @param fileName
      * @return
      */
@@ -53,6 +56,7 @@ public interface StorageService extends SubscriptionService {
 
     /**
      * Loads the file given as a {@link Resource} object
+     *
      * @param fileName
      * @return
      */

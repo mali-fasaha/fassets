@@ -26,7 +26,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component("doubleToMoneyConverter")
-public class DoubleToMoneyConverter implements Converter<Double,Money>{
+public class DoubleToMoneyConverter implements Converter<Double, Money> {
 
 
     private final MoneyProperties moneyProperties;
@@ -40,6 +40,6 @@ public class DoubleToMoneyConverter implements Converter<Double,Money>{
     @Override
     public Money convert(Double aDouble) {
 
-        return Money.of(aDouble,moneyProperties.getDefaultCurrency());
+        return Money.of(aDouble, moneyProperties.getDefaultCurrency());
     }
 }

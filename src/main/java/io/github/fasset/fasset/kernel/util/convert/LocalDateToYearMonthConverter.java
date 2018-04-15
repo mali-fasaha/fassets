@@ -29,7 +29,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 
 @Component("localDateToYearMonthConverter")
-public class LocalDateToYearMonthConverter implements Converter<LocalDate,YearMonth> {
+public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearMonth> {
 
     private static final Logger log = LoggerFactory.getLogger(LocalDateToYearMonthConverter.class);
 
@@ -46,16 +46,16 @@ public class LocalDateToYearMonthConverter implements Converter<LocalDate,YearMo
 
         YearMonth convertedMonth = null;
 
-        log.debug("Converting {} to YearMonth",source.toString());
+        log.debug("Converting {} to YearMonth", source.toString());
 
         try {
 
             convertedMonth = YearMonth.from(source);
 
         } catch (Throwable e) {
-            if(source == null) {
+            if (source == null) {
                 throw new ConverterException("The date provided is null, kindly review the source data again...", e);
-            }else {
+            } else {
                 throw new ConverterException(String.format("Exception thrown while converting %s to YearMonth", source), e);
             }
         }

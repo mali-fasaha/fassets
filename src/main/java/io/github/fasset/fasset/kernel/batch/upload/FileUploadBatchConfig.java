@@ -23,19 +23,19 @@ import io.github.fasset.fasset.model.AccruedDepreciation;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.FixedAssetDTO;
 import io.github.fasset.fasset.model.NetBookValue;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.database.JpaPagingItemReader;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -86,9 +86,9 @@ public class FileUploadBatchConfig {
 
     @Bean
     @JobScope
-    public ExcelItemReader excelItemReader(@Value("#{jobParameters['fileName']}")String filePath){
+    public ExcelItemReader excelItemReader(@Value("#{jobParameters['fileName']}") String filePath) {
 
-        return new ExcelItemReader(filePath,excelMapperService);
+        return new ExcelItemReader(filePath, excelMapperService);
     }
 
     @Bean
@@ -122,7 +122,7 @@ public class FileUploadBatchConfig {
     @Bean
     public Step readExcelFileStep() {
         return stepBuilderFactory.get("readExcelFileStep")
-                .<FixedAssetDTO, FixedAsset> chunk(100)
+                .<FixedAssetDTO, FixedAsset>chunk(100)
                 .reader(excelItemReader(FILE_PATH))
                 .processor(excelItemProcessor)
                 .writer(excelItemWriter)
@@ -136,7 +136,7 @@ public class FileUploadBatchConfig {
 
         try {
             step2 = stepBuilderFactory.get("accrueDepreciationStep")
-                    .<FixedAsset,AccruedDepreciation> chunk(100)
+                    .<FixedAsset, AccruedDepreciation>chunk(100)
                     .reader(fixedAssetItemReader())
                     .processor(fixedAssetAccruedDepreciationProcessor)
                     .writer(accruedDepreciationWriter)
@@ -155,7 +155,7 @@ public class FileUploadBatchConfig {
 
         try {
             step3 = stepBuilderFactory.get("netBookValueUpdateStep")
-                    .<FixedAsset, NetBookValue> chunk(100)
+                    .<FixedAsset, NetBookValue>chunk(100)
                     .reader(fixedAssetItemReader())
                     .processor(fixedAssetNetBookValueProcessor)
                     .writer(netBookValueWriter)

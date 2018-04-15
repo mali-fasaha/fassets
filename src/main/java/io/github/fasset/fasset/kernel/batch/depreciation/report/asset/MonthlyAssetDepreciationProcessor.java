@@ -26,7 +26,7 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 
-public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAsset,MonthlyAssetDepreciation>{
+public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAsset, MonthlyAssetDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyAssetDepreciationProcessor.class);
 
@@ -34,9 +34,9 @@ public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAss
 
     private MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
 
-    public MonthlyAssetDepreciationProcessor(@Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor,String year) {
-        this.year=year;
-        this.monthlyAssetDepreciationExecutor=monthlyAssetDepreciationExecutor;
+    public MonthlyAssetDepreciationProcessor(@Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor, String year) {
+        this.year = year;
+        this.monthlyAssetDepreciationExecutor = monthlyAssetDepreciationExecutor;
     }
 
     /**
@@ -52,11 +52,11 @@ public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAss
     @Override
     public MonthlyAssetDepreciation process(FixedAsset fixedAsset) throws Exception {
 
-        if(year==null){
+        if (year == null) {
 
-            log.warn("The year value passed is null : {}",year);
+            log.warn("The year value passed is null : {}", year);
         }
 
-        return monthlyAssetDepreciationExecutor.getMonthlyDepreciation(fixedAsset,Integer.parseInt(year));
+        return monthlyAssetDepreciationExecutor.getMonthlyDepreciation(fixedAsset, Integer.parseInt(year));
     }
 }

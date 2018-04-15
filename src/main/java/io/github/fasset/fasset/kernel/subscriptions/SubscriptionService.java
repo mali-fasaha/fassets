@@ -31,6 +31,7 @@ public interface SubscriptionService {
 
     // methods to registerSubscriber and deregisterSubscriber observers
     void registerSubscriber(Subscriber subscriber);
+
     void deregisterSubscriber(Subscriber observer);
 
     // method to notify observers of change

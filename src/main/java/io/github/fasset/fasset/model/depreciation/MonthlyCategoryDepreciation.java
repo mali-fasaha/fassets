@@ -64,7 +64,7 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
     }
 
     public String getCategoryName() {
-        return categoryName == null? "Category" : categoryName;
+        return categoryName == null ? "Category" : categoryName;
     }
 
     public MonthlyCategoryDepreciation setCategoryName(String categoryName) {
@@ -191,8 +191,12 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         MonthlyCategoryDepreciation that = (MonthlyCategoryDepreciation) o;
         return year == that.year &&
                 Double.compare(that.jan, jan) == 0 &&

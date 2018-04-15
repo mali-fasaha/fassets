@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 
-public class DepreciationProcessor implements ItemProcessor<FixedAsset,ProcessingList<DepreciationProceeds>> {
+public class DepreciationProcessor implements ItemProcessor<FixedAsset, ProcessingList<DepreciationProceeds>> {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationProcessor.class);
 
@@ -64,9 +64,9 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset,Processin
                 .forEach(
                         i -> {
 
-                            log.debug("Calculating depreciation in the month of :{} for asset {}",i,fixedAsset);
+                            log.debug("Calculating depreciation in the month of :{} for asset {}", i, fixedAsset);
 
-                            processingList.add(depreciationExecutor.getDepreciation(fixedAsset,i));
+                            processingList.add(depreciationExecutor.getDepreciation(fixedAsset, i));
                         }
                 );
 

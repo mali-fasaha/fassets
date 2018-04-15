@@ -18,10 +18,8 @@
 
 package io.github.fasset.fasset.kernel.batch.upload;
 
-import io.github.fasset.fasset.config.MoneyProperties;
-import io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter;
-import io.github.fasset.fasset.kernel.util.convert.StringToDoubleConverter;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
+import io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter;
 import io.github.fasset.fasset.kernel.util.convert.StringToMoneyConverter;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.FixedAssetDTO;
@@ -39,10 +37,9 @@ import org.springframework.stereotype.Component;
  * @author edwin.njeru
  */
 @Component("excelItemProcessor")
-public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsset>{
+public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAsset> {
 
-    private static final Logger log  = LoggerFactory.getLogger(ExcelItemProcessor.class);
-
+    private static final Logger log = LoggerFactory.getLogger(ExcelItemProcessor.class);
 
 
     private final DateToLocalDateConverter dateToLocalDateConverter;
@@ -59,7 +56,7 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsse
     @Override
     public FixedAsset process(FixedAssetDTO fixedAssetDTO) throws Exception {
 
-        log.debug("Processing {}",fixedAssetDTO);
+        log.debug("Processing {}", fixedAssetDTO);
 
         FixedAsset fixedAsset = new FixedAsset();
 
@@ -73,8 +70,8 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO,FixedAsse
                     .setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
 
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while processing : {}",fixedAssetDTO);
-            throw new BatchJobExecutionException(message,e);
+            String message = String.format("Exception encountered while processing : {}", fixedAssetDTO);
+            throw new BatchJobExecutionException(message, e);
         }
 
         return fixedAsset;

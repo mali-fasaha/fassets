@@ -27,8 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -44,25 +42,25 @@ import java.util.Objects;
                 "sol_id","barcode","asset_description","purchase_date","category","purchase_cost"
         })
 })*/
-@Entity(name="FixedAsset")
+@Entity(name = "FixedAsset")
 @Audited
-public class FixedAsset extends DomainModel<String> implements Serializable,Comparable<FixedAsset>{
+public class FixedAsset extends DomainModel<String> implements Serializable, Comparable<FixedAsset> {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAsset.class);
 
-    @Column(name="sol_id")
+    @Column(name = "sol_id")
     private String solId;
 
-    @Column(name="barcode")
+    @Column(name = "barcode")
     private String barcode;
 
-    @Column(name="asset_description")
+    @Column(name = "asset_description")
     private String assetDescription;
 
-    @Column(name="purchase_date")
+    @Column(name = "purchase_date")
     private LocalDate purchaseDate;
 
-    @Column(name="category")
+    @Column(name = "category")
     private String category;
 
     @Column
@@ -129,7 +127,7 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
 
     public FixedAsset setPurchaseCost(Money purchaseCost) {
 
-        log.debug("Setting the purchaseCost for fixedAssetId : {} ,as = {}",getId(),purchaseCost);
+        log.debug("Setting the purchaseCost for fixedAssetId : {} ,as = {}", getId(), purchaseCost);
         this.purchaseCost = purchaseCost;
         return this;
     }
@@ -140,16 +138,22 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
 
     public FixedAsset setNetBookValue(Money netBookValue) {
 
-        log.debug("Setting NBV for assetId : {}, as = {}",getId(),netBookValue);
+        log.debug("Setting NBV for assetId : {}, as = {}", getId(), netBookValue);
         this.netBookValue = netBookValue;
         return this;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         FixedAsset that = (FixedAsset) o;
         return Objects.equals(solId, that.solId) &&
                 Objects.equals(barcode, that.barcode) &&
@@ -186,7 +190,7 @@ public class FixedAsset extends DomainModel<String> implements Serializable,Comp
                 .thenComparing(FixedAsset::getCategory)
                 .thenComparing(FixedAsset::getPurchaseDate)
                 .thenComparing(FixedAsset::getPurchaseCost)
-                .compare(this,o);
+                .compare(this, o);
     }
 
 }

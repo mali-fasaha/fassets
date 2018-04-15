@@ -25,12 +25,11 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
-import java.time.ZonedDateTime;
 import java.util.Objects;
 
-@Entity(name="FileUpload")
+@Entity(name = "FileUpload")
 @Audited
-public class FileUpload extends DomainModel<String> implements Serializable{
+public class FileUpload extends DomainModel<String> implements Serializable {
 
     private static final long serialVersionUID = 2657188181025701641L;
 
@@ -81,8 +80,12 @@ public class FileUpload extends DomainModel<String> implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FileUpload that = (FileUpload) o;
         return Objects.equals(fileName, that.fileName) &&
                 Objects.equals(month, that.month) &&

@@ -49,40 +49,40 @@ public class MonthlyDepreciationController {
 
 
     @GetMapping("/reports/depreciations/assets")
-    public String goToAssetMonthlyDepreciation(){
+    public String goToAssetMonthlyDepreciation() {
 
         return "reports/monthlyAsset";
     }
 
     @GetMapping("/reports/depreciations/sols")
-    public String goToSolMonthlyDepreciation(){
+    public String goToSolMonthlyDepreciation() {
 
         return "reports/monthlySol";
     }
 
     @GetMapping("/reports/depreciations/categories")
-    public String goToCategoryMonthlyDepreciation(){
+    public String goToCategoryMonthlyDepreciation() {
 
         return "reports/monthlyCategory";
     }
 
     @GetMapping("/reports/depreciations/assets/data")
     @ResponseBody
-    public List<MonthlyAssetDepreciation> monthlyAssetDepreciationData(){
+    public List<MonthlyAssetDepreciation> monthlyAssetDepreciationData() {
 
         return monthlyAssetDepreciationService.fetchAllMonthlyDepreciations();
     }
 
     @GetMapping("/reports/depreciations/sols/data")
     @ResponseBody
-    public List<MonthlySolDepreciation> monthlySolDepreciationData(){
+    public List<MonthlySolDepreciation> monthlySolDepreciationData() {
 
         return monthlySolDepreciationService.fetchAllMonthlySolDepreciations();
     }
 
     @GetMapping("/reports/depreciations/category/data")
     @ResponseBody
-    public List<MonthlyCategoryDepreciation> monthylCategoryDepreciationData(){
+    public List<MonthlyCategoryDepreciation> monthylCategoryDepreciationData() {
 
         return monthlyCategoryDepreciationService.fetchAllMonthlyCategoryDepreciations();
     }

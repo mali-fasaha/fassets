@@ -34,6 +34,7 @@ public interface MonthlyAssetDepreciationService {
 
     /**
      * Returns the MonthlyAssetDepreciation for a given assetId and Year
+     *
      * @param fixedAssetId
      * @param year
      * @return

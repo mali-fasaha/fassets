@@ -31,14 +31,14 @@ public interface ExcelMapper {
 
     /**
      * This return a list of all items as they are read from the library
-     * @param c class defining the mapped object
+     *
+     * @param c    class defining the mapped object
      * @param path path of the excel file
      * @return list of mapped objects
      */
     List mappedList(Class<?> c, String path);
 
     /**
-     *
      * @param mapperOptions for excel poiji reader
      */
     void setMapperOptions(MapperOptions mapperOptions);

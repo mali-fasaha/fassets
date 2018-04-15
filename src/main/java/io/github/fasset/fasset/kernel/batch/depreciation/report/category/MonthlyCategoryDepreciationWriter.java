@@ -47,7 +47,7 @@ public class MonthlyCategoryDepreciationWriter implements ItemWriter<MonthlyCate
     @Override
     public void write(List<? extends MonthlyCategoryDepreciation> items) throws Exception {
 
-        log.info("Saving a  list of  : {} items to the monthlyCategoryDepreciationRepository...",items.size());
+        log.info("Saving a  list of  : {} items to the monthlyCategoryDepreciationRepository...", items.size());
 
         try {
             monthlyCategoryDepreciationService.saveAllMonthlyCategoryDepreciations(items);
@@ -55,6 +55,6 @@ public class MonthlyCategoryDepreciationWriter implements ItemWriter<MonthlyCate
             e.printStackTrace();
         }
 
-        log.info("{} items persisted successfully",items.size());
+        log.info("{} items persisted successfully", items.size());
     }
 }

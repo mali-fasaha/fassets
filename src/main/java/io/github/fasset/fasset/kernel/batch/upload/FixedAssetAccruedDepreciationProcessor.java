@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 @Component("fixedAssetAccruedDepreciationProcessor")
-public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<FixedAsset,AccruedDepreciation> {
+public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<FixedAsset, AccruedDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAssetAccruedDepreciationProcessor.class);
 
@@ -47,7 +47,7 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
     @Override
     public AccruedDepreciation process(FixedAsset fixedAsset) throws Exception {
 
-        log.debug("Processing fixedAsset item : {}",fixedAsset);
+        log.debug("Processing fixedAsset item : {}", fixedAsset);
 
         AccruedDepreciation retVal = new AccruedDepreciation();
 
@@ -57,13 +57,13 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
             retVal.setCategory(fixedAsset.getCategory())
                     .setFixedAssetId(fixedAsset.getId())
                     .setSolId(fixedAsset.getSolId())
-                    .setMonth(YearMonth.of(2017,12))//TODO configure to do this from controller
+                    .setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
                     .setAccruedDepreciation(acc);
         } catch (Throwable e) {
             String message = String.format("Exception encountered while deriving accruedDepreciation from" +
-                    "%S",fixedAsset);
+                    "%S", fixedAsset);
 
-            throw new ConverterException(message,e);
+            throw new ConverterException(message, e);
         }
 
         return retVal;

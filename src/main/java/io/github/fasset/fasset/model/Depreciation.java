@@ -20,14 +20,12 @@ package io.github.fasset.fasset.model;
 
 import io.github.fasset.fasset.DomainModel;
 import org.hibernate.annotations.Type;
-import org.hibernate.envers.Audited;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.time.Year;
 import java.time.YearMonth;
 import java.util.Objects;
 
@@ -37,27 +35,27 @@ import java.util.Objects;
  * @author edwin.njeru
  */
 //@Audited Too expensive
-@Entity(name="Depreciation")
+@Entity(name = "Depreciation")
 public class Depreciation extends DomainModel<String> {
 
     private static final Logger log = LoggerFactory.getLogger(Depreciation.class);
 
-    @Column(name="year")
+    @Column(name = "year")
     private int year;
 
-    @Column(name="month")
+    @Column(name = "month")
     private int month;
 
-    @Column(name="depreciation_period")
+    @Column(name = "depreciation_period")
     private YearMonth depreciationPeriod;
 
-    @Column(name="fixed_asset_id")
+    @Column(name = "fixed_asset_id")
     private int fixedAssetId;
 
-    @Column(name="category")
+    @Column(name = "category")
     private String category;
 
-    @Column(name="sol_id")
+    @Column(name = "sol_id")
     private String solId;
 
     @Column
@@ -73,7 +71,7 @@ public class Depreciation extends DomainModel<String> {
     }
 
     public Depreciation setMonth(int month) {
-        log.debug("Setting month for depreciationId : {}, as = {}",getId(),month);
+        log.debug("Setting month for depreciationId : {}, as = {}", getId(), month);
         this.month = month;
         return this;
     }
@@ -83,7 +81,7 @@ public class Depreciation extends DomainModel<String> {
     }
 
     public Depreciation setYear(int year) {
-        log.debug("Setting year for depreciationId : {}, as = {}",getId(),depreciationPeriod);
+        log.debug("Setting year for depreciationId : {}, as = {}", getId(), depreciationPeriod);
         this.year = year;
         return this;
     }
@@ -94,7 +92,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setDepreciationPeriod(YearMonth depreciationPeriod) {
 
-        log.debug("Setting depreciation period for depreciationId : {}, as = {}",getId(),depreciationPeriod);
+        log.debug("Setting depreciation period for depreciationId : {}, as = {}", getId(), depreciationPeriod);
         this.depreciationPeriod = depreciationPeriod;
         return this;
     }
@@ -105,7 +103,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setFixedAssetId(int fixedAssetId) {
 
-        log.debug("Setting fixedAssetId for depreciationId : {}, as = {}",getId(),fixedAssetId);
+        log.debug("Setting fixedAssetId for depreciationId : {}, as = {}", getId(), fixedAssetId);
         this.fixedAssetId = fixedAssetId;
         return this;
     }
@@ -116,7 +114,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setCategory(String category) {
 
-        log.debug("Setting the category for depreciationId : {}, as = {}",getId(),category);
+        log.debug("Setting the category for depreciationId : {}, as = {}", getId(), category);
         this.category = category;
         return this;
     }
@@ -127,7 +125,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setSolId(String solId) {
 
-        log.debug("Setting the sol id for depreciationId : {}, as ={}",getId(),solId);
+        log.debug("Setting the sol id for depreciationId : {}, as ={}", getId(), solId);
         this.solId = solId;
         return this;
     }
@@ -138,16 +136,22 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setDepreciation(Money depreciation) {
 
-        log.debug("Setting the depreciation for depreciationId : {}, as = {}",getId(),depreciation);
+        log.debug("Setting the depreciation for depreciationId : {}, as = {}", getId(), depreciation);
         this.depreciation = depreciation;
         return this;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
         Depreciation that = (Depreciation) o;
         return fixedAssetId == that.fixedAssetId &&
                 Objects.equals(that.depreciation, depreciation) &&
