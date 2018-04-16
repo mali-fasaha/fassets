@@ -36,6 +36,7 @@ public interface NetBookValueAgent extends Agent<NetBookValue> {
      *
      * @param asset FixedAsset item whose Net Book Value we are tracking
      * @param month YearMonth in which depreciation has occured
+     * @param proceeds DepreciationProceeds
      * @return The relevant NetBookValue item
      */
     NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);

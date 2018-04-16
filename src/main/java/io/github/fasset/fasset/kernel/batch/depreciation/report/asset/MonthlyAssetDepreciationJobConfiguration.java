@@ -39,39 +39,48 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import javax.persistence.EntityManagerFactory;
+import javax.annotation.PostConstruct;
 
+/**
+ * Configuration for the MonthlyAssetDepreciationJob
+ */
 @Configuration
 public class MonthlyAssetDepreciationJobConfiguration {
 
+    /*@Value("#{jobParameters['year']}")
+    private static final String year = null;*/
+
+    // Trust me I know. I find the existence of this thing very creepy
     @Value("#{jobParameters['year']}")
-    public static final String YEAR = null;
+    private static String year;
+
     private final JobBuilderFactory jobBuilderFactory;
-    @Autowired
-    @Qualifier("monthlyAssetDepreciationService")
-    MonthlyAssetDepreciationService monthlyAssetDepreciationService;
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
-    @Autowired
-    private ItemReader<FixedAsset> fixedAssetItemReader;
-    @Autowired
-    @Qualifier("monthlyAssetDepreciationExecutor")
-    private MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
+
+    private final MonthlyAssetDepreciationService monthlyAssetDepreciationService;
+
+    private final StepBuilderFactory stepBuilderFactory;
+
+    private final ItemReader<FixedAsset> fixedAssetItemReader;
+
+    private final MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
+
+    private final MonthlySolDepreciationService monthlySolDepreciationService;
+
+    private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
 
     @Autowired
-    private EntityManagerFactory entityManagerFactory;
-
-    @Autowired
-    private MonthlySolDepreciationService monthlySolDepreciationService;
-    @Autowired
-    private MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
-
-    @Autowired
-    private ItemReader monthlySolDepreciationReader;
-
-    @Autowired
-    public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
+    public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, @Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService,
+                                                    StepBuilderFactory stepBuilderFactory, ItemReader<FixedAsset> fixedAssetItemReader,
+                                                    @Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor,
+                                                    MonthlySolDepreciationService monthlySolDepreciationService,
+                                                    MonthlySolDepreciationExecutor monthlySolDepreciationExecutor) {
         this.jobBuilderFactory = jobBuilderFactory;
+        this.monthlyAssetDepreciationService = monthlyAssetDepreciationService;
+        this.stepBuilderFactory = stepBuilderFactory;
+        this.fixedAssetItemReader = fixedAssetItemReader;
+        this.monthlyAssetDepreciationExecutor = monthlyAssetDepreciationExecutor;
+        this.monthlySolDepreciationService = monthlySolDepreciationService;
+        this.monthlySolDepreciationExecutor = monthlySolDepreciationExecutor;
     }
 
 
@@ -118,7 +127,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
         Step updateMonthlyAssetDepreciation = null;
         try {
             updateMonthlyAssetDepreciation = stepBuilderFactory.get("updateMonthlyAssetDepreciation").<FixedAsset, MonthlyAssetDepreciation>chunk(100).reader(fixedAssetItemReader)
-                .processor(monthlyAssetDepreciationProcessor(YEAR)).writer(monthlyAssetDepreciationWriter()).build();
+                .processor(monthlyAssetDepreciationProcessor(year)).writer(monthlyAssetDepreciationWriter()).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,7 +160,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
                     .<String,MonthlySolDepreciation>chunk(5)
                     .reader(monthlySolDepreciationReader)
                     .writer(monthlySolDepreciationWriter())
-                    .processor(monthlySolDepreciationProcessor(YEAR))
+                    .processor(monthlySolDepreciationProcessor(year))
                     .build();
         } catch (Exception e) {
             e.printStackTrace();

@@ -37,32 +37,40 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * Configuration for MonthlyCategoryDepreciation job
+ */
 @Configuration
 public class MonthlyCategoryDepreciationJobConfiguration {
 
+    // Still find the existence of this thing quite creepy.
     @Value("#{jobParameters['year']}")
-    private static String YEAR;
+    private static String year;
 
     private final JobBuilderFactory jobBuilderFactory;
 
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
+    private final StepBuilderFactory stepBuilderFactory;
 
-    @Autowired
-    private MonthlyCategoryDepreciationService monthlyCategoryDepreciationService;
+    private final MonthlyCategoryDepreciationService monthlyCategoryDepreciationService;
 
-    @Autowired
-    private MonthyCategoryDepreciationJobListener monthyCategoryDepreciationJobListener;
+    private final MonthyCategoryDepreciationJobListener monthyCategoryDepreciationJobListener;
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
-    @Autowired
-    private MonthlyCategoryDepreciationExecutor monthlyCategoryDepreciationExecutor;
+    private final EntityManagerFactory entityManagerFactory;
+
+    private final MonthlyCategoryDepreciationExecutor monthlyCategoryDepreciationExecutor;
 
 
     @Autowired
-    public MonthlyCategoryDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
+    public MonthlyCategoryDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
+                                                       MonthlyCategoryDepreciationService monthlyCategoryDepreciationService,
+                                                       MonthyCategoryDepreciationJobListener monthyCategoryDepreciationJobListener, EntityManagerFactory entityManagerFactory,
+                                                       MonthlyCategoryDepreciationExecutor monthlyCategoryDepreciationExecutor) {
         this.jobBuilderFactory = jobBuilderFactory;
+        this.stepBuilderFactory = stepBuilderFactory;
+        this.monthlyCategoryDepreciationService = monthlyCategoryDepreciationService;
+        this.monthyCategoryDepreciationJobListener = monthyCategoryDepreciationJobListener;
+        this.entityManagerFactory = entityManagerFactory;
+        this.monthlyCategoryDepreciationExecutor = monthlyCategoryDepreciationExecutor;
     }
 
     @Bean("monthlyCategoryDepreciationJob")
@@ -79,7 +87,7 @@ public class MonthlyCategoryDepreciationJobConfiguration {
         try {
             createMonthlyCategoryDepreciationItems =
                 stepBuilderFactory.get("createMonthlyCategoryDepreciationItems").<String, MonthlyCategoryDepreciation>chunk(5).reader(monthlyCategoryDepreciationReader())
-                    .writer(monthlyCategoryDepreciationWriter()).processor(monthlyCategoryDepreciationProcessor(YEAR)).build();
+                    .writer(monthlyCategoryDepreciationWriter()).processor(monthlyCategoryDepreciationProcessor(year)).build();
         } catch (Exception e) {
             e.printStackTrace();
         }

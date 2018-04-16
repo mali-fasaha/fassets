@@ -23,6 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 
+/**
+ * Configuration for MonthlyAssetDepreciation job
+ */
 public class MonthlyAssetDepreciationJobListener implements JobExecutionListener {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyAssetDepreciationJobListener.class);

@@ -20,6 +20,9 @@ package io.github.fasset.fasset.kernel.batch.depreciation.report.category;
 
 import io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation;
 
+/**
+ * Executes summary of Categories' depreciation on a month by month basis
+ */
 public interface MonthlyCategoryDepreciationExecutor {
 
     /**

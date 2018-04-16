@@ -24,6 +24,9 @@ import org.springframework.batch.item.ItemWriter;
 
 import java.util.List;
 
+/**
+ * Writes the MonthlyAssetDepreciation from the processor to persistent repository
+ */
 public class MonthlyAssetDepreciationWriter implements ItemWriter<MonthlyAssetDepreciation> {
 
 

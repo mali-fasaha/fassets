@@ -25,14 +25,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-
+/**
+ * Processor for MonthlyAssetDepreciation creates a MonthlyAssetDepreciation object from a FixedAsset object
+ */
 public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAsset, MonthlyAssetDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyAssetDepreciationProcessor.class);
 
     private String year;
 
-    private MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
+    private final MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
 
     public MonthlyAssetDepreciationProcessor(@Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor, String year) {
         this.year = year;

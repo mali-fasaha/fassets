@@ -27,6 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+/**
+ * Executes the process of summarising depreciation for categories' depreciation on a month by month basis
+ */
 @Service("monthlyCategoryDepreciationExecutor")
 public class MonthlyCategoryDepreciationExecutorImpl implements MonthlyCategoryDepreciationExecutor {
 

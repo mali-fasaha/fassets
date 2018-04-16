@@ -32,6 +32,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Executes generation of the MonthlyAssetDepreciation summary items
+ */
 @Service("monthlyAssetDepreciationExecutor")
 @Transactional
 public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreciationExecutor {

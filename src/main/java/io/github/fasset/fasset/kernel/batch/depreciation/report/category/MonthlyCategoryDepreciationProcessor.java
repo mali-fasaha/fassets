@@ -25,14 +25,17 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+/**
+ * Processes data for a given year generating a MonthlyCategoryDepreciation for the same year
+ */
 public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<String, MonthlyCategoryDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyCategoryDepreciationProcessor.class);
-    String year;
-    private MonthlyCategoryDepreciationExecutor executor;
+    private String year;
+    private final MonthlyCategoryDepreciationExecutor executor;
 
-    @Autowired
-    public MonthlyCategoryDepreciationProcessor(@Qualifier("monthylDepreciationDepreciationExecutor") MonthlyCategoryDepreciationExecutor executor, String year) {
+    @Autowired// Check if dependencies are autowired correctly
+    public MonthlyCategoryDepreciationProcessor(@Qualifier("monthlyCategoryDepreciationExecutor") MonthlyCategoryDepreciationExecutor executor, String year) {
         this.executor = executor;
         this.year = year;
     }

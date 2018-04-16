@@ -38,7 +38,7 @@ public interface DepreciationAgent extends Agent<Depreciation> {
      * @param asset    {@link FixedAsset} being depreciated
      * @param month    {@link YearMonth} in which this AccruedDepreciation is effective
      * @param proceeds {@link DepreciationProceeds} items to hold the values calculated from depreciation
-     * @return
+     * @return Depreciation
      */
     Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }
