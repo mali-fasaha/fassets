@@ -34,6 +34,9 @@ import javax.transaction.Transactional;
 import java.time.YearMonth;
 import java.util.List;
 
+/**
+ * {@link AccruedDepreciationService} implementation
+ */
 @Service("accruedDepreciationService")
 @Transactional
 public class AccruedDepreciationServiceImpl implements AccruedDepreciationService {

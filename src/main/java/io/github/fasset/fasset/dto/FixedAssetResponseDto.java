@@ -24,6 +24,10 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
 
+/**
+ * This is a DTO used to list assets from the persistent sink into simpler data types suitable for
+ * viewing over the Restful template
+ */
 public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> {
 
     private int id;
@@ -149,14 +153,9 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
             return false;
         }
         FixedAssetResponseDto that = (FixedAssetResponseDto) o;
-        return id == that.id &&
-                Double.compare(that.purchaseCost, purchaseCost) == 0 &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
-                Objects.equals(solId, that.solId) &&
-                Objects.equals(barcode, that.barcode) &&
-                Objects.equals(assetDescription, that.assetDescription) &&
-                Objects.equals(purchaseDate, that.purchaseDate) &&
-                Objects.equals(category, that.category);
+        return id == that.id && Double.compare(that.purchaseCost, purchaseCost) == 0 && Double.compare(that.netBookValue, netBookValue) == 0 && Objects.equals(solId, that.solId) &&
+            Objects.equals(barcode, that.barcode) && Objects.equals(assetDescription, that.assetDescription) && Objects.equals(purchaseDate, that.purchaseDate) &&
+            Objects.equals(category, that.category);
     }
 
     @Override
@@ -166,16 +165,8 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
 
     @Override
     public String toString() {
-        return "FixedAssetResponseDto{" +
-                "id=" + id +
-                ", solId='" + solId + '\'' +
-                ", barcode='" + barcode + '\'' +
-                ", assetDescription='" + assetDescription + '\'' +
-                ", purchaseDate=" + purchaseDate +
-                ", category='" + category + '\'' +
-                ", purchaseCost=" + purchaseCost +
-                ", netBookValue=" + netBookValue +
-                '}';
+        return "FixedAssetResponseDto{" + "id=" + id + ", solId='" + solId + '\'' + ", barcode='" + barcode + '\'' + ", assetDescription='" + assetDescription + '\'' + ", purchaseDate=" +
+            purchaseDate + ", category='" + category + '\'' + ", purchaseCost=" + purchaseCost + ", netBookValue=" + netBookValue + '}';
     }
 
     /**
@@ -219,14 +210,8 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
     @Override
     public int compareTo(FixedAssetResponseDto o) {
 
-        return Comparator.comparing(FixedAssetResponseDto::getId)
-                .thenComparing(FixedAssetResponseDto::getSolId)
-                .thenComparing(FixedAssetResponseDto::getBarcode)
-                .thenComparing(FixedAssetResponseDto::getAssetDescription)
-                .thenComparing(FixedAssetResponseDto::getPurchaseDate)
-                .thenComparing(FixedAssetResponseDto::getCategory)
-                .thenComparing(FixedAssetResponseDto::getPurchaseCost)
-                .thenComparing(FixedAssetResponseDto::getNetBookValue)
-                .compare(this, o);
+        return Comparator.comparing(FixedAssetResponseDto::getId).thenComparing(FixedAssetResponseDto::getSolId).thenComparing(FixedAssetResponseDto::getBarcode)
+            .thenComparing(FixedAssetResponseDto::getAssetDescription).thenComparing(FixedAssetResponseDto::getPurchaseDate).thenComparing(FixedAssetResponseDto::getCategory)
+            .thenComparing(FixedAssetResponseDto::getPurchaseCost).thenComparing(FixedAssetResponseDto::getNetBookValue).compare(this, o);
     }
 }

@@ -44,22 +44,16 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 public class MonthlyAssetDepreciationJobConfiguration {
 
+    @Value("#{jobParameters['year']}")
+    public static final String YEAR = null;
     private final JobBuilderFactory jobBuilderFactory;
-
-
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
-
     @Autowired
     @Qualifier("monthlyAssetDepreciationService")
     MonthlyAssetDepreciationService monthlyAssetDepreciationService;
-
+    @Autowired
+    private StepBuilderFactory stepBuilderFactory;
     @Autowired
     private ItemReader<FixedAsset> fixedAssetItemReader;
-
-    @Value("#{jobParameters['year']}")
-    public static final String YEAR = null;
-
     @Autowired
     @Qualifier("monthlyAssetDepreciationExecutor")
     private MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
@@ -102,13 +96,8 @@ public class MonthlyAssetDepreciationJobConfiguration {
     @Bean("monthlyAssetDepreciationJob")
     @DependsOn("monthlyAssetDepreciationJobListener")
     public Job monthlyAssetDepreciationJob() {
-        return jobBuilderFactory.get("monthlyAssetDepreciationJob")
-                .incrementer(new RunIdIncrementer())
-                .listener(monthlyAssetDepreciationJobListener())
-                .preventRestart()
-                .flow(updateMonthlyAssetDepreciation())
-                .end()
-                .build();
+        return jobBuilderFactory.get("monthlyAssetDepreciationJob").incrementer(new RunIdIncrementer()).listener(monthlyAssetDepreciationJobListener()).preventRestart()
+            .flow(updateMonthlyAssetDepreciation()).end().build();
     }
 
     @Bean
@@ -128,12 +117,8 @@ public class MonthlyAssetDepreciationJobConfiguration {
     public Step updateMonthlyAssetDepreciation() {
         Step updateMonthlyAssetDepreciation = null;
         try {
-            updateMonthlyAssetDepreciation = stepBuilderFactory.get("updateMonthlyAssetDepreciation")
-                    .<FixedAsset, MonthlyAssetDepreciation>chunk(100)
-                    .reader(fixedAssetItemReader)
-                    .processor(monthlyAssetDepreciationProcessor(YEAR))
-                    .writer(monthlyAssetDepreciationWriter())
-                    .build();
+            updateMonthlyAssetDepreciation = stepBuilderFactory.get("updateMonthlyAssetDepreciation").<FixedAsset, MonthlyAssetDepreciation>chunk(100).reader(fixedAssetItemReader)
+                .processor(monthlyAssetDepreciationProcessor(YEAR)).writer(monthlyAssetDepreciationWriter()).build();
         } catch (Exception e) {
             e.printStackTrace();
         }

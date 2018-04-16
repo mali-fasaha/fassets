@@ -44,13 +44,11 @@ import java.time.YearMonth;
 public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationPreprocessorImpl.class);
-
+    private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
+    private final MoneyProperties moneyProperties;
     private YearMonth month;
     private FixedAsset asset;
     private Money depreciationAmount;
-
-    private final LocalDateToYearMonthConverter localDateToYearMonthConverter;
-    private final MoneyProperties moneyProperties;
 
 
     @Autowired
@@ -131,8 +129,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
         log.debug("Setting depreciation preprocessor properties...");
 
         if (asset == null || month == null) {
-            String message = String.format("Exception encountered : Either the FixedAsset " +
-                    "instance %s or the month %s instance is null", asset, month);
+            String message = String.format("Exception encountered : Either the FixedAsset " + "instance %s or the month %s instance is null", asset, month);
             throw new DepreciationExecutionException(message, new NullPointerException());
         } else {
             depreciationAmountRealignment(asset, month);
@@ -179,21 +176,19 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
         } else {
 
-            log.warn("The asset has a negative purchase cost, meaning the " +
-                    " asset is actually an adjustment, ideally we are to leave it alone...but a " +
-                    "quick review of your books wouldn't hurt...");
+            log.warn(
+                "The asset has a negative purchase cost, meaning the " + " asset is actually an adjustment, ideally we are to leave it alone...but a " + "quick review of your books wouldn't hurt...");
             //If the purchase cost is less than zero we do nothing
         }
     }
 
     @SuppressWarnings("all")
     private void depreciationTimingCheck(FixedAsset asset, YearMonth month) {
-        log.debug("Reviewing the depreciation timing for asset : {}, relative to the " +
-                "month: {}", asset, month);
+        log.debug("Reviewing the depreciation timing for asset : {}, relative to the " + "month: {}", asset, month);
         if (localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)) {
-            log.debug("The month of purchase of asset: {} comes later than the depreciation period : {}" +
-                    "therefore we are resetting the depreciation formally calculated as : {} " +
-                    "amount to zero", asset, month, depreciationAmount);
+            log.debug(
+                "The month of purchase of asset: {} comes later than the depreciation period : {}" + "therefore we are resetting the depreciation formally calculated as : {} " + "amount to zero",
+                asset, month, depreciationAmount);
             this.depreciationAmount = Money.of(0.00, moneyProperties.getDefaultCurrency());
             log.debug("Depreciation amount has been reset to zero : {}", depreciationAmount);
         }

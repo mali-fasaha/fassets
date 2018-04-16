@@ -24,6 +24,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.YearMonth;
 
+/**
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
+ * nature of the {@code Entity}
+ */
 @Repository("accruedDepreciationRepository")
 public interface AccruedDepreciationRepository extends JpaRepository<AccruedDepreciation, Integer> {
 

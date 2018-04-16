@@ -22,6 +22,9 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import io.github.fasset.fasset.model.brief.CategoryBrief;
 
+/**
+ * DTO for {@code CategoryBrief} items to be displayed in the views
+ */
 public class CategoryBriefResponseDto {
 
     private int id;
@@ -114,12 +117,8 @@ public class CategoryBriefResponseDto {
             return false;
         }
         CategoryBriefResponseDto that = (CategoryBriefResponseDto) o;
-        return id == that.id &&
-                Double.compare(that.purchaseCost, purchaseCost) == 0 &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
-                Double.compare(that.accruedDepreciation, accruedDepreciation) == 0 &&
-                poll == that.poll &&
-                Objects.equal(designation, that.designation);
+        return id == that.id && Double.compare(that.purchaseCost, purchaseCost) == 0 && Double.compare(that.netBookValue, netBookValue) == 0 &&
+            Double.compare(that.accruedDepreciation, accruedDepreciation) == 0 && poll == that.poll && Objects.equal(designation, that.designation);
     }
 
     @Override
@@ -129,13 +128,7 @@ public class CategoryBriefResponseDto {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("designation", designation)
-                .add("purchaseCost", purchaseCost)
-                .add("netBookValue", netBookValue)
-                .add("accruedDepreciation", accruedDepreciation)
-                .add("poll", poll)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("id", id).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue)
+            .add("accruedDepreciation", accruedDepreciation).add("poll", poll).toString();
     }
 }

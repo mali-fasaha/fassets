@@ -32,6 +32,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * Controller for MonthlyDepreciation views
+ */
 @Controller
 public class MonthlyDepreciationController {
 
@@ -41,7 +44,9 @@ public class MonthlyDepreciationController {
     private final MonthlyCategoryDepreciationService monthlyCategoryDepreciationService;
 
     @Autowired
-    public MonthlyDepreciationController(@Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService, @Qualifier("monthlySolDepreciationService") MonthlySolDepreciationService monthlySolDepreciationService, @Qualifier("monthlyCategoryDepreciationService") MonthlyCategoryDepreciationService monthlyCategoryDepreciationService) {
+    public MonthlyDepreciationController(@Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService,
+                                         @Qualifier("monthlySolDepreciationService") MonthlySolDepreciationService monthlySolDepreciationService,
+                                         @Qualifier("monthlyCategoryDepreciationService") MonthlyCategoryDepreciationService monthlyCategoryDepreciationService) {
         this.monthlyAssetDepreciationService = monthlyAssetDepreciationService;
         this.monthlySolDepreciationService = monthlySolDepreciationService;
         this.monthlyCategoryDepreciationService = monthlyCategoryDepreciationService;

@@ -24,8 +24,17 @@ import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
 
+/**
+ * Calculates AccruedDepreciation
+ */
 public interface AccruedDepreciationAgent extends Agent<AccruedDepreciation> {
 
+    /**
+     * @param asset    {@link FixedAsset} being depreciated
+     * @param month    {@link YearMonth} in which this AccruedDepreciation is effective
+     * @param proceeds {@link DepreciationProceeds} items to hold the values calculated from depreciation
+     * @return Computed item for AccruedDepreciation
+     */
     @Override
     AccruedDepreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

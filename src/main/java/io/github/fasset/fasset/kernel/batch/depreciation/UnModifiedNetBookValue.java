@@ -24,6 +24,9 @@ import io.github.fasset.fasset.model.NetBookValue;
 import java.time.YearMonth;
 import java.util.Objects;
 
+/**
+ * Default value of NetBookValue for an asset if depreciation does not occur in a given month
+ */
 public class UnModifiedNetBookValue {
 
     private NetBookValue netBookValue;
@@ -33,12 +36,7 @@ public class UnModifiedNetBookValue {
 
         netBookValue = new NetBookValue();
 
-        netBookValue
-                .setCategory(asset.getCategory())
-                .setNetBookValue(asset.getNetBookValue())
-                .setMonth(month)
-                .setSolId(asset.getSolId())
-                .setFixedAssetId(asset.getId());
+        netBookValue.setCategory(asset.getCategory()).setNetBookValue(asset.getNetBookValue()).setMonth(month).setSolId(asset.getSolId()).setFixedAssetId(asset.getId());
     }
 
     public NetBookValue getNetBookValue() {

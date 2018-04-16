@@ -25,6 +25,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Creates a map of the fields in the FixedAssetDto to be read from the excel file
+ */
 @Component("excelMapperService")
 public class ExcelMapperServiceImpl implements ExcelMapperService {
 

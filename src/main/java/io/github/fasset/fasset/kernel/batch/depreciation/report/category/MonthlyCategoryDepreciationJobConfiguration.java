@@ -67,13 +67,8 @@ public class MonthlyCategoryDepreciationJobConfiguration {
 
     @Bean("monthlyCategoryDepreciationJob")
     public Job monthlyCategoryDepreciationJob() {
-        return jobBuilderFactory.get("monthlyCategoryDepreciationJob")
-                .incrementer(new RunIdIncrementer())
-                .listener(monthyCategoryDepreciationJobListener)
-                .preventRestart()
-                .flow(createMonthlyCategoryDepreciationItems())
-                .end()
-                .build();
+        return jobBuilderFactory.get("monthlyCategoryDepreciationJob").incrementer(new RunIdIncrementer()).listener(monthyCategoryDepreciationJobListener).preventRestart()
+            .flow(createMonthlyCategoryDepreciationItems()).end().build();
     }
 
     @Bean
@@ -82,13 +77,9 @@ public class MonthlyCategoryDepreciationJobConfiguration {
         Step createMonthlyCategoryDepreciationItems = null;
 
         try {
-            createMonthlyCategoryDepreciationItems = stepBuilderFactory
-                    .get("createMonthlyCategoryDepreciationItems")
-                    .<String, MonthlyCategoryDepreciation>chunk(5)
-                    .reader(monthlyCategoryDepreciationReader())
-                    .writer(monthlyCategoryDepreciationWriter())
-                    .processor(monthlyCategoryDepreciationProcessor(YEAR))
-                    .build();
+            createMonthlyCategoryDepreciationItems =
+                stepBuilderFactory.get("createMonthlyCategoryDepreciationItems").<String, MonthlyCategoryDepreciation>chunk(5).reader(monthlyCategoryDepreciationReader())
+                    .writer(monthlyCategoryDepreciationWriter()).processor(monthlyCategoryDepreciationProcessor(YEAR)).build();
         } catch (Exception e) {
             e.printStackTrace();
         }

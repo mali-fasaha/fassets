@@ -25,42 +25,30 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
  * Main fields for models used in this business doamin
  *
- * @author edwin.njeru
+ * @param <U> Data type used for user identification
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class DomainModel<U> {
 
 
-    @GenericGenerator(
-            name = "sequenceGenerator",
-            strategy = "enhanced-sequence",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(
-                            name = "optimizer",
-                            value = "pooled-lo"
-                    ),
-                    @org.hibernate.annotations.Parameter(
-                            name = "initial_value",
-                            value = "1"
-                    ),
-                    @org.hibernate.annotations.Parameter(
-                            name = "increment_size",
-                            value = "1"
-                    )
-            }
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "sequenceGenerator"
-    )
+    @GenericGenerator(name = "sequenceGenerator", strategy = "enhanced-sequence",
+        parameters = {@org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo"), @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+            @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Id
     @Column(name = "id", updatable = false, nullable = false)
     private int id;
@@ -116,12 +104,8 @@ public class DomainModel<U> {
             return false;
         }
         DomainModel<?> that = (DomainModel<?>) o;
-        return id == that.id &&
-                version == that.version &&
-                Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(modifiedAt, that.modifiedAt) &&
-                Objects.equals(createdBy, that.createdBy) &&
-                Objects.equals(lastModifiedBy, that.lastModifiedBy);
+        return id == that.id && version == that.version && Objects.equals(createdAt, that.createdAt) && Objects.equals(modifiedAt, that.modifiedAt) && Objects.equals(createdBy, that.createdBy) &&
+            Objects.equals(lastModifiedBy, that.lastModifiedBy);
     }
 
     @Override

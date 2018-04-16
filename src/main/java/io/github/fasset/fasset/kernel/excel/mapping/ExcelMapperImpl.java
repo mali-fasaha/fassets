@@ -47,13 +47,13 @@ public class ExcelMapperImpl implements ExcelMapper {
     private MapperOptions mapperOptions;
 
 
-    @Override
-    public void setMapperOptions(MapperOptions mapperOptions) {
+    @Autowired
+    public ExcelMapperImpl(@Qualifier("mapperOptions") MapperOptions mapperOptions) {
         this.mapperOptions = mapperOptions;
     }
 
-    @Autowired
-    public ExcelMapperImpl(@Qualifier("mapperOptions") MapperOptions mapperOptions) {
+    @Override
+    public void setMapperOptions(MapperOptions mapperOptions) {
         this.mapperOptions = mapperOptions;
     }
 
@@ -68,8 +68,7 @@ public class ExcelMapperImpl implements ExcelMapper {
     @Override
     public List mappedList(Class<?> clazz, String path) {
 
-        LOGGER.info("Creating a mapped list for class : {}, using file from the path : {}",
-                clazz, path);
+        LOGGER.info("Creating a mapped list for class : {}, using file from the path : {}", clazz, path);
 
         List mappedlist = new LinkedList<>();
 
@@ -79,8 +78,7 @@ public class ExcelMapperImpl implements ExcelMapper {
 
         } catch (Throwable e) {
 
-            String message = String.format("Unable to read from excel file : %s for class : %S with options : %s",
-                    path, clazz, mapperOptions);
+            String message = String.format("Unable to read from excel file : %s for class : %S with options : %s", path, clazz, mapperOptions);
 
             throw new ExcelMapperException(message, e);
         }

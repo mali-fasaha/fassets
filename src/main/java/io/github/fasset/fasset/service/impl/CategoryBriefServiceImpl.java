@@ -33,6 +33,9 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@link CategoryBriefService} implementation
+ */
 @Service("categoryBriefService")
 public class CategoryBriefServiceImpl implements CategoryBriefService {
 
@@ -104,8 +107,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
 
         for (CategoryBrief brief : categoryBriefs) {
 
-            CategoryBrief persisted = categoryBriefRepository
-                    .findDistinctByDesignation(brief.getDesignation());
+            CategoryBrief persisted = categoryBriefRepository.findDistinctByDesignation(brief.getDesignation());
 
             if (persisted != null) {
                 persisted.setDesignation(brief.getDesignation());

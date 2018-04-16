@@ -22,6 +22,9 @@ import io.github.fasset.fasset.model.brief.CategoryBrief;
 
 import java.util.List;
 
+/**
+ * Service for data retrieval from database for {@link CategoryBrief}
+ */
 public interface CategoryBriefService {
 
     /**

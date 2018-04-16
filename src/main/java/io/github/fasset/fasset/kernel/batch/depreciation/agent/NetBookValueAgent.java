@@ -24,6 +24,10 @@ import io.github.fasset.fasset.model.NetBookValue;
 
 import java.time.YearMonth;
 
+/**
+ * Another Agent in the depreciation chain which calculates and generates the appropriate
+ * NetBookValue for a FixedAsset at a given time period in months
+ */
 public interface NetBookValueAgent extends Agent<NetBookValue> {
 
     /**

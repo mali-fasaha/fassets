@@ -28,9 +28,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<String, MonthlyCategoryDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyCategoryDepreciationProcessor.class);
-
-    private MonthlyCategoryDepreciationExecutor executor;
     String year;
+    private MonthlyCategoryDepreciationExecutor executor;
 
     @Autowired
     public MonthlyCategoryDepreciationProcessor(@Qualifier("monthylDepreciationDepreciationExecutor") MonthlyCategoryDepreciationExecutor executor, String year) {

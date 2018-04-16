@@ -35,8 +35,10 @@ public interface DepreciationAgent extends Agent<Depreciation> {
      * This method calculates depreciation and updates internal variables from
      * which the depreciation variables can be drawn
      *
-     * @param asset
-     * @param month
+     * @param asset    {@link FixedAsset} being depreciated
+     * @param month    {@link YearMonth} in which this AccruedDepreciation is effective
+     * @param proceeds {@link DepreciationProceeds} items to hold the values calculated from depreciation
+     * @return
      */
     Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

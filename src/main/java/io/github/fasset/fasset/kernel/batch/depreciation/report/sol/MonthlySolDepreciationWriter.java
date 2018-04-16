@@ -28,6 +28,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
+/**
+ * Writes {@link MonthlySolDepreciation} to the database
+ */
 public class MonthlySolDepreciationWriter implements ItemWriter<MonthlySolDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlySolDepreciationWriter.class);

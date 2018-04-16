@@ -22,6 +22,9 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * listener for the service outlet depreciation job
+ */
 @Component("monthlySolDepreciationJobListener")
 public class MonthlySolDepreciationJobListener implements JobExecutionListener {
 

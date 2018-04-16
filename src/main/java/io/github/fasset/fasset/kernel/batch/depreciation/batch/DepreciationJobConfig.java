@@ -33,6 +33,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration for Depreciation batch process
+ */
 @Configuration
 public class DepreciationJobConfig {
 
@@ -51,12 +54,7 @@ public class DepreciationJobConfig {
 
     @Bean("depreciationJob")
     public Job depreciationJob(DepreciationJobListener depreciationJobListener) {
-        return jobBuilderFactory.get("depreciationJob")
-                .incrementer(new RunIdIncrementer())
-                .listener(depreciationJobListener)
-                .flow(depreciationStep1())
-                .end()
-                .build();
+        return jobBuilderFactory.get("depreciationJob").incrementer(new RunIdIncrementer()).listener(depreciationJobListener).flow(depreciationStep1()).end().build();
     }
 
     @Bean
@@ -73,12 +71,8 @@ public class DepreciationJobConfig {
 
     @Bean
     public Step depreciationStep1() {
-        return stepBuilderFactory.get("depreciationStep1")
-                .<FixedAsset, ProcessingList<DepreciationProceeds>>chunk(100)
-                .reader(fixedAssetItemReader)
-                .processor(depreciationProcessor())
-                .writer(depreciationWriter())
-                .build();
+        return stepBuilderFactory.get("depreciationStep1").<FixedAsset, ProcessingList<DepreciationProceeds>>chunk(100).reader(fixedAssetItemReader).processor(depreciationProcessor())
+            .writer(depreciationWriter()).build();
     }
 
 

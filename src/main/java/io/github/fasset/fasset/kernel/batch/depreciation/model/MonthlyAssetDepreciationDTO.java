@@ -25,6 +25,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.money.MonetaryAmount;
 
+/**
+ * DTO to carry the depreciation for each month of a year for each asset
+ */
 public class MonthlyAssetDepreciationDTO {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyAssetDepreciationDTO.class);
@@ -47,7 +50,8 @@ public class MonthlyAssetDepreciationDTO {
     public MonthlyAssetDepreciationDTO() {
     }
 
-    public MonthlyAssetDepreciationDTO(Integer assetId, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun, MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
+    public MonthlyAssetDepreciationDTO(Integer assetId, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun,
+                                       MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.assetId = assetId;
         this.year = year;
         this.jan = jan.getNumber().doubleValue();
@@ -215,20 +219,9 @@ public class MonthlyAssetDepreciationDTO {
             return false;
         }
         MonthlyAssetDepreciationDTO that = (MonthlyAssetDepreciationDTO) o;
-        return Objects.equal(assetId, that.assetId) &&
-                Objects.equal(year, that.year) &&
-                Objects.equal(jan, that.jan) &&
-                Objects.equal(feb, that.feb) &&
-                Objects.equal(mar, that.mar) &&
-                Objects.equal(apr, that.apr) &&
-                Objects.equal(may, that.may) &&
-                Objects.equal(jun, that.jun) &&
-                Objects.equal(jul, that.jul) &&
-                Objects.equal(aug, that.aug) &&
-                Objects.equal(sep, that.sep) &&
-                Objects.equal(oct, that.oct) &&
-                Objects.equal(nov, that.nov) &&
-                Objects.equal(dec, that.dec);
+        return Objects.equal(assetId, that.assetId) && Objects.equal(year, that.year) && Objects.equal(jan, that.jan) && Objects.equal(feb, that.feb) && Objects.equal(mar, that.mar) &&
+            Objects.equal(apr, that.apr) && Objects.equal(may, that.may) && Objects.equal(jun, that.jun) && Objects.equal(jul, that.jul) && Objects.equal(aug, that.aug) &&
+            Objects.equal(sep, that.sep) && Objects.equal(oct, that.oct) && Objects.equal(nov, that.nov) && Objects.equal(dec, that.dec);
     }
 
     @Override
@@ -238,21 +231,7 @@ public class MonthlyAssetDepreciationDTO {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("assetId", assetId)
-                .add("year", year)
-                .add("jan", jan)
-                .add("feb", feb)
-                .add("mar", mar)
-                .add("apr", apr)
-                .add("may", may)
-                .add("jun", jun)
-                .add("jul", jul)
-                .add("aug", aug)
-                .add("sep", sep)
-                .add("oct", oct)
-                .add("nov", nov)
-                .add("dec", dec)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("assetId", assetId).add("year", year).add("jan", jan).add("feb", feb).add("mar", mar).add("apr", apr).add("may", may).add("jun", jun)
+            .add("jul", jul).add("aug", aug).add("sep", sep).add("oct", oct).add("nov", nov).add("dec", dec).toString();
     }
 }

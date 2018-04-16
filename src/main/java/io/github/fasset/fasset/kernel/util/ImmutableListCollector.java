@@ -23,6 +23,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collector;
 
+/**
+ * This utility is used in a Collector operation in a lambda to generate an immutable collection
+ */
 public class ImmutableListCollector {
 
     public static <t> Collector<t, List<t>, List<t>> toImmutableList() {

@@ -24,6 +24,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.money.MonetaryAmount;
 
+/**
+ * DTO to carry all depreciations for each month of a year for a given category
+ */
 public class MonthlyCategoryDepreciationDTO {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyCategoryDepreciationDTO.class);
@@ -43,7 +46,8 @@ public class MonthlyCategoryDepreciationDTO {
     private Double nov;
     private Double dec;
 
-    public MonthlyCategoryDepreciationDTO(String categoryName, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun, MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
+    public MonthlyCategoryDepreciationDTO(String categoryName, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun,
+                                          MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.categoryName = categoryName;
         this.year = year;
         this.jan = jan.getNumber().doubleValue();
@@ -224,20 +228,11 @@ public class MonthlyCategoryDepreciationDTO {
             return false;
         }
         MonthlyCategoryDepreciationDTO that = (MonthlyCategoryDepreciationDTO) o;
-        return com.google.common.base.Objects.equal(categoryName, that.categoryName) &&
-                com.google.common.base.Objects.equal(year, that.year) &&
-                com.google.common.base.Objects.equal(jan, that.jan) &&
-                com.google.common.base.Objects.equal(feb, that.feb) &&
-                com.google.common.base.Objects.equal(mar, that.mar) &&
-                com.google.common.base.Objects.equal(apr, that.apr) &&
-                com.google.common.base.Objects.equal(may, that.may) &&
-                com.google.common.base.Objects.equal(jun, that.jun) &&
-                com.google.common.base.Objects.equal(jul, that.jul) &&
-                com.google.common.base.Objects.equal(aug, that.aug) &&
-                com.google.common.base.Objects.equal(sep, that.sep) &&
-                com.google.common.base.Objects.equal(oct, that.oct) &&
-                com.google.common.base.Objects.equal(nov, that.nov) &&
-                com.google.common.base.Objects.equal(dec, that.dec);
+        return com.google.common.base.Objects.equal(categoryName, that.categoryName) && com.google.common.base.Objects.equal(year, that.year) && com.google.common.base.Objects.equal(jan, that.jan) &&
+            com.google.common.base.Objects.equal(feb, that.feb) && com.google.common.base.Objects.equal(mar, that.mar) && com.google.common.base.Objects.equal(apr, that.apr) &&
+            com.google.common.base.Objects.equal(may, that.may) && com.google.common.base.Objects.equal(jun, that.jun) && com.google.common.base.Objects.equal(jul, that.jul) &&
+            com.google.common.base.Objects.equal(aug, that.aug) && com.google.common.base.Objects.equal(sep, that.sep) && com.google.common.base.Objects.equal(oct, that.oct) &&
+            com.google.common.base.Objects.equal(nov, that.nov) && com.google.common.base.Objects.equal(dec, that.dec);
     }
 
     @Override
@@ -247,21 +242,7 @@ public class MonthlyCategoryDepreciationDTO {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("categoryName", categoryName)
-                .add("year", year)
-                .add("jan", jan)
-                .add("feb", feb)
-                .add("mar", mar)
-                .add("apr", apr)
-                .add("may", may)
-                .add("jun", jun)
-                .add("jul", jul)
-                .add("aug", aug)
-                .add("sep", sep)
-                .add("oct", oct)
-                .add("nov", nov)
-                .add("dec", dec)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("categoryName", categoryName).add("year", year).add("jan", jan).add("feb", feb).add("mar", mar).add("apr", apr).add("may", may).add("jun", jun)
+            .add("jul", jul).add("aug", aug).add("sep", sep).add("oct", oct).add("nov", nov).add("dec", dec).toString();
     }
 }

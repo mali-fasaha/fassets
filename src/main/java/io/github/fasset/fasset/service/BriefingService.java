@@ -16,8 +16,11 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.fasset.fasset.kernel.batch;
+package io.github.fasset.fasset.service;
 
+/**
+ * Used to create summaries if FixedAssets in the backend
+ */
 public interface BriefingService {
     /**
      * Updates the summary for ServiceOutlets using data queried from the fixed assets

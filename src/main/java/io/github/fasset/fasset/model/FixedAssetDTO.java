@@ -25,6 +25,10 @@ import org.slf4j.LoggerFactory;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * This model represents a row of data in the excel file that is soon to be deserialized
+ * and persisted into the repository
+ */
 public class FixedAssetDTO {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAssetDTO.class);
@@ -58,39 +62,14 @@ public class FixedAssetDTO {
         return solId;
     }
 
-    public String getBarcode() {
-        log.trace("Retval : {}", barcode);
-        return barcode;
-    }
-
-    public String getAssetDescription() {
-        log.trace("Retval : {}", assetDescription);
-        return assetDescription;
-    }
-
-    public Date getPurchaseDate() {
-        log.trace("Retval : {}", purchaseDate);
-        return purchaseDate;
-    }
-
-    public String getCategory() {
-        log.trace("Retval : {}", category);
-        return category;
-    }
-
-    public String getPurchaseCost() {
-        log.trace("Retval : {}", purchaseCost);
-        return purchaseCost;
-    }
-
-    public String getNetBookValue() {
-        log.trace("Retval : {}", netBookValue);
-        return netBookValue;
-    }
-
     public FixedAssetDTO setSolId(String solId) {
         this.solId = solId;
         return this;
+    }
+
+    public String getBarcode() {
+        log.trace("Retval : {}", barcode);
+        return barcode;
     }
 
     public FixedAssetDTO setBarcode(String barcode) {
@@ -98,9 +77,19 @@ public class FixedAssetDTO {
         return this;
     }
 
+    public String getAssetDescription() {
+        log.trace("Retval : {}", assetDescription);
+        return assetDescription;
+    }
+
     public FixedAssetDTO setAssetDescription(String assetDescription) {
         this.assetDescription = assetDescription;
         return this;
+    }
+
+    public Date getPurchaseDate() {
+        log.trace("Retval : {}", purchaseDate);
+        return purchaseDate;
     }
 
     public FixedAssetDTO setPurchaseDate(Date purchaseDate) {
@@ -108,14 +97,29 @@ public class FixedAssetDTO {
         return this;
     }
 
+    public String getCategory() {
+        log.trace("Retval : {}", category);
+        return category;
+    }
+
     public FixedAssetDTO setCategory(String category) {
         this.category = category;
         return this;
     }
 
+    public String getPurchaseCost() {
+        log.trace("Retval : {}", purchaseCost);
+        return purchaseCost;
+    }
+
     public FixedAssetDTO setPurchaseCost(String purchaseCost) {
         this.purchaseCost = purchaseCost;
         return this;
+    }
+
+    public String getNetBookValue() {
+        log.trace("Retval : {}", netBookValue);
+        return netBookValue;
     }
 
     public FixedAssetDTO setNetBookValue(String netBookValue) {
@@ -132,13 +136,9 @@ public class FixedAssetDTO {
             return false;
         }
         FixedAssetDTO that = (FixedAssetDTO) o;
-        return Objects.equals(solId, that.solId) &&
-                Objects.equals(barcode, that.barcode) &&
-                Objects.equals(assetDescription, that.assetDescription) &&
-                Objects.equals(purchaseDate, that.purchaseDate) &&
-                Objects.equals(category, that.category) &&
-                Objects.equals(purchaseCost, that.purchaseCost) &&
-                Objects.equals(netBookValue, that.netBookValue);
+        return Objects.equals(solId, that.solId) && Objects.equals(barcode, that.barcode) && Objects.equals(assetDescription, that.assetDescription) &&
+            Objects.equals(purchaseDate, that.purchaseDate) && Objects.equals(category, that.category) && Objects.equals(purchaseCost, that.purchaseCost) &&
+            Objects.equals(netBookValue, that.netBookValue);
     }
 
     @Override

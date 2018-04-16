@@ -47,18 +47,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class SimpleSubscription implements SubscriptionService {
 
     private static final Logger log = LoggerFactory.getLogger(SimpleSubscription.class);
-
+    // Mutant expression object to prevent inconsistent states in the subscriber list
+    private final Object mutex = new Object();
     // track all current subscribers
     private List<Subscriber> subscribers = FastList.newList();
-
     // Queue for updates
     private Queue<Update> updateQueue = new ConcurrentLinkedQueue<>();
-
     // the state being tracked by the {@link Subscriber}
     private boolean updated;
-
-    // Mutant expression object to prevent inconsistent states in the subscriber list
-    private final Object MUTEX = new Object();
 
     @Override
     public void registerSubscriber(Subscriber subscriber) {
@@ -66,7 +62,7 @@ public class SimpleSubscription implements SubscriptionService {
             throw new NullPointerException("Null observer");
         }
 
-        synchronized (MUTEX) {
+        synchronized (mutex) {
             if (!subscribers.contains(subscriber)) {
                 subscribers.add(subscriber);
             }
@@ -77,7 +73,7 @@ public class SimpleSubscription implements SubscriptionService {
     @Override
     public void deregisterSubscriber(Subscriber observer) {
 
-        synchronized (MUTEX) {
+        synchronized (mutex) {
             subscribers.remove(observer);
         }
     }
@@ -89,7 +85,7 @@ public class SimpleSubscription implements SubscriptionService {
 
         // this sync block ensures that observer registered after file
         // has been updated are not notified
-        synchronized (MUTEX) {
+        synchronized (mutex) {
             if (!updated) {
                 return;
             }

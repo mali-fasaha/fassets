@@ -34,11 +34,7 @@ import java.util.Objects;
  */
 @Entity(name = "CategoryConfiguration")
 @Table(name = "category_configuration",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {
-                        "designation", "depreciation_logic", "depreciation_logic",
-                        "deprecant", "depreciation_rate", "category_ledger_id"
-                })})
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"designation", "depreciation_logic", "depreciation_logic", "deprecant", "depreciation_rate", "category_ledger_id"})})
 @Audited
 public class CategoryConfiguration extends DomainModel<String> {
 
@@ -69,7 +65,11 @@ public class CategoryConfiguration extends DomainModel<String> {
     @Column(name = "category_ledger_id")
     private String categoryLedgerId;
 
-    public CategoryConfiguration(@NotNull(message = "Please provide a valid designation for category") String designation, @NotNull(message = "Please provide a valid designation for depreciation logic") String depreciationLogic, @NotNull(message = "Please provide a valid designation for depreciation deprecant") String deprecant, @NotNull(message = "Please provide depreciation per annum") double depreciationRate, @NotNull(message = "Kindly supply the ledgerId for thiis category") String categoryLedgerId) {
+    public CategoryConfiguration(@NotNull(message = "Please provide a valid designation for category") String designation,
+                                 @NotNull(message = "Please provide a valid designation for depreciation logic") String depreciationLogic,
+                                 @NotNull(message = "Please provide a valid designation for depreciation deprecant") String deprecant,
+                                 @NotNull(message = "Please provide depreciation per annum") double depreciationRate,
+                                 @NotNull(message = "Kindly supply the ledgerId for thiis category") String categoryLedgerId) {
         this.designation = designation.toUpperCase();
         this.depreciationLogic = depreciationLogic.toUpperCase();
         this.deprecant = deprecant.toUpperCase();
@@ -132,11 +132,8 @@ public class CategoryConfiguration extends DomainModel<String> {
             return false;
         }
         CategoryConfiguration that = (CategoryConfiguration) o;
-        return Double.compare(that.depreciationRate, depreciationRate) == 0 &&
-                Objects.equals(designation, that.designation) &&
-                Objects.equals(depreciationLogic, that.depreciationLogic) &&
-                Objects.equals(deprecant, that.deprecant) &&
-                Objects.equals(categoryLedgerId, that.categoryLedgerId);
+        return Double.compare(that.depreciationRate, depreciationRate) == 0 && Objects.equals(designation, that.designation) && Objects.equals(depreciationLogic, that.depreciationLogic) &&
+            Objects.equals(deprecant, that.deprecant) && Objects.equals(categoryLedgerId, that.categoryLedgerId);
     }
 
     @Override

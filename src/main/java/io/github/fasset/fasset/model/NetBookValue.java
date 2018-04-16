@@ -37,11 +37,7 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "fixed_asset_id", "month", "sol_id", "category"
-        })
-})
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
 @Entity(name = "NetBookValue")
 @Audited
 public class NetBookValue extends DomainModel<String> {
@@ -55,8 +51,7 @@ public class NetBookValue extends DomainModel<String> {
     private YearMonth month;
 
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money netBookValue;
 
     @Column(name = "sol_id")
@@ -140,11 +135,8 @@ public class NetBookValue extends DomainModel<String> {
             return false;
         }
         NetBookValue that = (NetBookValue) o;
-        return fixedAssetId == that.fixedAssetId &&
-                Objects.equals(that.netBookValue, netBookValue) &&
-                Objects.equals(month, that.month) &&
-                Objects.equals(solId, that.solId) &&
-                Objects.equals(category, that.category);
+        return fixedAssetId == that.fixedAssetId && Objects.equals(that.netBookValue, netBookValue) && Objects.equals(month, that.month) && Objects.equals(solId, that.solId) &&
+            Objects.equals(category, that.category);
     }
 
     @Override

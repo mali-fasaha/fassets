@@ -35,6 +35,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 
+/**
+ * Another Agent in the DepreciationChain that specifically calculates and generates a depreciation
+ * object
+ */
 @DependsOn("depreciationExecutor")
 @Component("depreciationAgent")
 public class DepreciationAgentImpl implements DepreciationAgent {
@@ -104,8 +108,7 @@ public class DepreciationAgentImpl implements DepreciationAgent {
      */
     private Money getDeprecant(FixedAsset asset, CategoryConfiguration configuration) {
 
-        log.trace("Determining the deprecant for Asset : {}, with category configuration : {}",
-                asset, configuration);
+        log.trace("Determining the deprecant for Asset : {}, with category configuration : {}", asset, configuration);
 
         Money deprecant = null;
 
@@ -123,8 +126,8 @@ public class DepreciationAgentImpl implements DepreciationAgent {
                 log.trace("Using the netBookValue as deprecant : {}", deprecant);
             }
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while determining the deprecant applicable for the " +
-                    "asset : %s, pursuant to the categoryConfiguration : %s", asset, configuration);
+            String message =
+                String.format("Exception encountered while determining the deprecant applicable for the " + "asset : %s, pursuant to the categoryConfiguration : %s", asset, configuration);
             throw new DepreciationExecutionException(message, e);
         }
         return deprecant;
@@ -149,8 +152,7 @@ public class DepreciationAgentImpl implements DepreciationAgent {
 
             log.trace("Depreciation for deprecant : {} and depreciationRate : {} calculated as : {}", deprecant, depreciationRate, depreciation);
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while calculating depreciation amount for " +
-                    "deprecant amount of : %s and depreciation rate of :%s", deprecant, depreciationRate);
+            String message = String.format("Exception encountered while calculating depreciation amount for " + "deprecant amount of : %s and depreciation rate of :%s", deprecant, depreciationRate);
             throw new DepreciationExecutionException(message, e);
         }
 
@@ -168,17 +170,12 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         log.trace("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}", preprocessor.getAsset(), preprocessor.getMonth());
         Depreciation depreciation = new Depreciation();
         try {
-            depreciation
-                    .setDepreciationPeriod(preprocessor.getMonth())
-                    .setFixedAssetId(preprocessor.getAsset().getId())
-                    .setCategory(preprocessor.getAsset().getCategory())
-                    .setSolId(preprocessor.getAsset().getSolId())
-                    .setYear(preprocessor.getMonth().getYear())
-                    .setMonth(preprocessor.getMonth().getMonthValue())
-                    .setDepreciation(preprocessor.getDepreciationAmount());
+            depreciation.setDepreciationPeriod(preprocessor.getMonth()).setFixedAssetId(preprocessor.getAsset().getId()).setCategory(preprocessor.getAsset().getCategory())
+                .setSolId(preprocessor.getAsset().getSolId()).setYear(preprocessor.getMonth().getYear()).setMonth(preprocessor.getMonth().getMonthValue())
+                .setDepreciation(preprocessor.getDepreciationAmount());
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while creating depreciation instance relative to" +
-                    " asset : %s, for the period : %s", preprocessor.getAsset(), preprocessor.getMonth());
+            String message =
+                String.format("Exception encountered while creating depreciation instance relative to" + " asset : %s, for the period : %s", preprocessor.getAsset(), preprocessor.getMonth());
             throw new DepreciationExecutionException(message, e);
         }
 

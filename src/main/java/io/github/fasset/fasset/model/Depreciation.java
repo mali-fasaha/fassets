@@ -59,8 +59,7 @@ public class Depreciation extends DomainModel<String> {
     private String solId;
 
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money depreciation;
 
     public Depreciation() {
@@ -153,11 +152,8 @@ public class Depreciation extends DomainModel<String> {
             return false;
         }
         Depreciation that = (Depreciation) o;
-        return fixedAssetId == that.fixedAssetId &&
-                Objects.equals(that.depreciation, depreciation) &&
-                Objects.equals(depreciationPeriod, that.depreciationPeriod) &&
-                Objects.equals(category, that.category) &&
-                Objects.equals(solId, that.solId);
+        return fixedAssetId == that.fixedAssetId && Objects.equals(that.depreciation, depreciation) && Objects.equals(depreciationPeriod, that.depreciationPeriod) &&
+            Objects.equals(category, that.category) && Objects.equals(solId, that.solId);
     }
 
     @Override
@@ -167,12 +163,7 @@ public class Depreciation extends DomainModel<String> {
 
     @Override
     public String toString() {
-        return "Depreciation{" +
-                "depreciationPeriod=" + depreciationPeriod +
-                ", fixedAssetId=" + fixedAssetId +
-                ", category='" + category + '\'' +
-                ", solId='" + solId + '\'' +
-                ", depreciation=" + depreciation +
-                '}';
+        return "Depreciation{" + "depreciationPeriod=" + depreciationPeriod + ", fixedAssetId=" + fixedAssetId + ", category='" + category + '\'' + ", solId='" + solId + '\'' + ", depreciation=" +
+            depreciation + '}';
     }
 }

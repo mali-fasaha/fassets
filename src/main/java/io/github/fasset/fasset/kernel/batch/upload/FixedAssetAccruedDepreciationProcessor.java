@@ -29,6 +29,9 @@ import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 
+/**
+ * Reads data from a collection of fixedAssets and creates accruedDepreciation items out of it
+ */
 @Component("fixedAssetAccruedDepreciationProcessor")
 public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<FixedAsset, AccruedDepreciation> {
 
@@ -54,14 +57,10 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
         Money acc = fixedAsset.getPurchaseCost().subtract(fixedAsset.getNetBookValue());
 
         try {
-            retVal.setCategory(fixedAsset.getCategory())
-                    .setFixedAssetId(fixedAsset.getId())
-                    .setSolId(fixedAsset.getSolId())
-                    .setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
-                    .setAccruedDepreciation(acc);
+            retVal.setCategory(fixedAsset.getCategory()).setFixedAssetId(fixedAsset.getId()).setSolId(fixedAsset.getSolId()).setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
+                .setAccruedDepreciation(acc);
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while deriving accruedDepreciation from" +
-                    "%S", fixedAsset);
+            String message = String.format("Exception encountered while deriving accruedDepreciation from" + "%S", fixedAsset);
 
             throw new ConverterException(message, e);
         }

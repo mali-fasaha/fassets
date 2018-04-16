@@ -32,6 +32,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * {@link ServiceOutletBriefService} implementation
+ */
 @Service("serviceOutletBriefService")
 public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService {
 
@@ -102,8 +105,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
 
         for (ServiceOutletBrief brief : serviceOutletBriefs) {
 
-            ServiceOutletBrief persistedBrief = serviceOutletBriefRepository
-                    .findDistinctByDesignation(brief.getDesignation());
+            ServiceOutletBrief persistedBrief = serviceOutletBriefRepository.findDistinctByDesignation(brief.getDesignation());
 
             if (persistedBrief != null) {
 

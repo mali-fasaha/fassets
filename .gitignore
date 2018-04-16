@@ -18,6 +18,9 @@ local.properties
 .project
 .classpath
 
+# Changelog plugin files#
+.okhttpcache/
+
 # Generic Android ignores #
 ###########################
 bin/

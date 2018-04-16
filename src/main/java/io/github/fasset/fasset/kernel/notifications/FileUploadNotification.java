@@ -20,7 +20,9 @@ package io.github.fasset.fasset.kernel.notifications;
 
 import java.util.Objects;
 
-
+/**
+ * Notification object containing properties of a file recently uploaded into the back end
+ */
 public class FileUploadNotification {
 
     /* the name and location of file*/
@@ -39,6 +41,9 @@ public class FileUploadNotification {
         this.timeUploaded = timeUploaded;
     }
 
+    public FileUploadNotification() {
+    }
+
     public String getFileName() {
         return fileName;
     }
@@ -51,9 +56,6 @@ public class FileUploadNotification {
         return timeUploaded;
     }
 
-    public FileUploadNotification() {
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -63,9 +65,7 @@ public class FileUploadNotification {
             return false;
         }
         FileUploadNotification that = (FileUploadNotification) o;
-        return Objects.equals(fileName, that.fileName) &&
-                Objects.equals(month, that.month) &&
-                Objects.equals(timeUploaded, that.timeUploaded);
+        return Objects.equals(fileName, that.fileName) && Objects.equals(month, that.month) && Objects.equals(timeUploaded, that.timeUploaded);
     }
 
     @Override

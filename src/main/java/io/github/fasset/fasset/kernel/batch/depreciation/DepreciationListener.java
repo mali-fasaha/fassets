@@ -18,6 +18,9 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
+/**
+ * Listener to update caller on [rogress of Depreciation
+ */
 @FunctionalInterface
 public interface DepreciationListener {
 

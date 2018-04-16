@@ -22,6 +22,9 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+/**
+ * Converts string object to Double object
+ */
 @Component()
 public class StringToDoubleConverter implements Converter<String, Double> {
 

@@ -30,6 +30,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * {@link MonthlyAssetDepreciationService} implementation
+ */
 @Service("monthlyAssetDepreciationService")
 public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDepreciationService {
 
@@ -49,10 +52,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
      */
     @Override
     public List<MonthlyAssetDepreciation> fetchAllMonthlyDepreciations() {
-        return monthlyAssetDepreciationRepository.findAll()
-                .parallelStream()
-                .sorted(Comparator.comparing(MonthlyAssetDepreciation::getYear))
-                .collect(Collectors.toList());
+        return monthlyAssetDepreciationRepository.findAll().parallelStream().sorted(Comparator.comparing(MonthlyAssetDepreciation::getYear)).collect(Collectors.toList());
     }
 
     /**

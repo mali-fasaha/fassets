@@ -95,8 +95,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
                 } else {
 
                     try {
-                        Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName),
-                                StandardCopyOption.REPLACE_EXISTING);
+                        Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
                     } catch (IOException e) {
                         throw new StorageException("Failed to store file " + fileName, e);
                     }
@@ -115,8 +114,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
         LocalDateTime uploadTime = LocalDateTime.now();
 
-        log.info("Configuring notification to server of the file uploaded : {} for the month : {} at time :{}" +
-                "", fileName, month, uploadTime);
+        log.info("Configuring notification to server of the file uploaded : {} for the month : {} at time :{}" + "", fileName, month, uploadTime);
 
         return new FileUpload(fileName, month, uploadTime);
     }
@@ -135,9 +133,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
         Stream<Path> filePathStream = null;
 
         try {
-            filePathStream = Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(this.rootLocation::relativize);
+            filePathStream = Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation)).map(this.rootLocation::relativize);
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }

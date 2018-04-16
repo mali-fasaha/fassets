@@ -30,6 +30,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
+/**
+ * Writes depreciation items to the database
+ */
 public class DepreciationWriter implements ItemWriter<ProcessingList<DepreciationProceeds>> {
 
     private static final Logger log = LoggerFactory.getLogger(DepreciationWriter.class);
@@ -58,8 +61,8 @@ public class DepreciationWriter implements ItemWriter<ProcessingList<Depreciatio
             });
 
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while persisting depreciation items" +
-                    "passed in the list to the depreciation writer. These are the items : %s", depreciationProceedsLists);
+            String message =
+                String.format("Exception encountered while persisting depreciation items" + "passed in the list to the depreciation writer. These are the items : %s", depreciationProceedsLists);
             throw new DepreciationExecutionException(message, e);
         }
 

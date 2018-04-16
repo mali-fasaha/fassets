@@ -23,6 +23,9 @@ import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.YearMonth;
 
+/**
+ * This interface manages the excecution of Depreciation for a given Asset in a given month
+ */
 public interface DepreciationExecutor {
 
     /**

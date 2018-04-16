@@ -53,18 +53,7 @@ public class MonthlyCategoryDepreciationExecutorImpl implements MonthlyCategoryD
 
         MonthlyCategoryDepreciationDTO dto = depreciationRepository.getMonthlyCategoryDepreciation(categoryName, year).get(0);
 
-        return new MonthlyCategoryDepreciation(dto.getCategoryName(), dto.getYear(),
-                dto.getJan(),
-                dto.getFeb(),
-                dto.getMar(),
-                dto.getApr(),
-                dto.getMay(),
-                dto.getJun(),
-                dto.getJul(),
-                dto.getAug(),
-                dto.getSep(),
-                dto.getOct(),
-                dto.getNov(),
-                dto.getDec());
+        return new MonthlyCategoryDepreciation(dto.getCategoryName(), dto.getYear(), dto.getJan(), dto.getFeb(), dto.getMar(), dto.getApr(), dto.getMay(), dto.getJun(), dto.getJul(), dto.getAug(),
+            dto.getSep(), dto.getOct(), dto.getNov(), dto.getDec());
     }
 }

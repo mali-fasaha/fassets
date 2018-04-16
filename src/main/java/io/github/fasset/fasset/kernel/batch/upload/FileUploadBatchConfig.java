@@ -42,28 +42,21 @@ import javax.persistence.EntityManagerFactory;
 @Configuration
 public class FileUploadBatchConfig {
 
+    @Value("#{jobParameters['fileName']}")
+    public static final String FILE_PATH = null;
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
-
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
-
     @Autowired
     @Qualifier("excelMapperService")
     private ExcelMapperService excelMapperService;
-
     @Autowired
     @Qualifier("excelItemProcessor")
     private ExcelItemProcessor excelItemProcessor;
-
     @Autowired
     @Qualifier("excelItemWriter")
     private ExcelItemWriter excelItemWriter;
-
-
-    @Value("#{jobParameters['fileName']}")
-    public static final String FILE_PATH = null;
-
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
@@ -109,24 +102,13 @@ public class FileUploadBatchConfig {
 
     @Bean("importExcelJob")
     public Job importExcelJob(BatchNotifications listener) {
-        return jobBuilderFactory.get("importExcelJob")
-                .incrementer(new RunIdIncrementer())
-                .listener(listener)
-                .flow(readExcelFileStep()).on("COMPLETED")
-                .to(accrueDepreciationStep()).on("COMPLETED")
-                .to(netBookValueUpdateStep())
-                .end()
-                .build();
+        return jobBuilderFactory.get("importExcelJob").incrementer(new RunIdIncrementer()).listener(listener).flow(readExcelFileStep()).on("COMPLETED").to(accrueDepreciationStep()).on("COMPLETED")
+            .to(netBookValueUpdateStep()).end().build();
     }
 
     @Bean
     public Step readExcelFileStep() {
-        return stepBuilderFactory.get("readExcelFileStep")
-                .<FixedAssetDTO, FixedAsset>chunk(100)
-                .reader(excelItemReader(FILE_PATH))
-                .processor(excelItemProcessor)
-                .writer(excelItemWriter)
-                .build();
+        return stepBuilderFactory.get("readExcelFileStep").<FixedAssetDTO, FixedAsset>chunk(100).reader(excelItemReader(FILE_PATH)).processor(excelItemProcessor).writer(excelItemWriter).build();
     }
 
     @Bean
@@ -135,12 +117,8 @@ public class FileUploadBatchConfig {
         Step step2 = null;
 
         try {
-            step2 = stepBuilderFactory.get("accrueDepreciationStep")
-                    .<FixedAsset, AccruedDepreciation>chunk(100)
-                    .reader(fixedAssetItemReader())
-                    .processor(fixedAssetAccruedDepreciationProcessor)
-                    .writer(accruedDepreciationWriter)
-                    .build();
+            step2 = stepBuilderFactory.get("accrueDepreciationStep").<FixedAsset, AccruedDepreciation>chunk(100).reader(fixedAssetItemReader()).processor(fixedAssetAccruedDepreciationProcessor)
+                .writer(accruedDepreciationWriter).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,12 +132,8 @@ public class FileUploadBatchConfig {
         Step step3 = null;
 
         try {
-            step3 = stepBuilderFactory.get("netBookValueUpdateStep")
-                    .<FixedAsset, NetBookValue>chunk(100)
-                    .reader(fixedAssetItemReader())
-                    .processor(fixedAssetNetBookValueProcessor)
-                    .writer(netBookValueWriter)
-                    .build();
+            step3 = stepBuilderFactory.get("netBookValueUpdateStep").<FixedAsset, NetBookValue>chunk(100).reader(fixedAssetItemReader()).processor(fixedAssetNetBookValueProcessor)
+                .writer(netBookValueWriter).build();
         } catch (Exception e) {
             e.printStackTrace();
         }

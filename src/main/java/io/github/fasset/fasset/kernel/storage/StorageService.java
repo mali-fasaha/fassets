@@ -25,6 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+/**
+ * Provides storage service to clients for files uploads
+ */
 public interface StorageService extends SubscriptionService {
 
     /**
@@ -35,30 +38,30 @@ public interface StorageService extends SubscriptionService {
     /**
      * To store the file into storage
      *
-     * @param file
+     * @param file Multipart file to be stored
      */
     void store(MultipartFile file);
 
     /**
      * Loads all files into storage
      *
-     * @return
+     * @return Stream containing the paths of all the files saved
      */
     Stream<Path> loadAll();
 
     /**
      * Load the fileName given into storage
      *
-     * @param fileName
-     * @return
+     * @param fileName of the file being loaded
+     * @return Path of the file after being loaded
      */
     Path load(String fileName);
 
     /**
      * Loads the file given as a {@link Resource} object
      *
-     * @param fileName
-     * @return
+     * @param fileName of the file being loaded as resource
+     * @return Path of the file after being loaded as resource
      */
     Resource loadAsResource(String fileName);
 

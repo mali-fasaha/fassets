@@ -24,17 +24,17 @@ import io.github.fasset.fasset.model.FixedAsset;
 import java.time.YearMonth;
 import java.util.Objects;
 
+/**
+ * Default AccruedDepreciation for an asset if depreciation does not occur in a given month
+ */
 public class UnModifiedAccruedDepreciation {
 
     private AccruedDepreciation accruedDepreciation;
 
     public UnModifiedAccruedDepreciation(FixedAsset asset, YearMonth month) {
 
-        accruedDepreciation = new AccruedDepreciation()
-                .setAccruedDepreciation(asset.getPurchaseCost().subtract(asset.getNetBookValue()))
-                .setCategory(asset.getCategory())
-                .setFixedAssetId(asset.getId())
-                .setMonth(month)
+        accruedDepreciation =
+            new AccruedDepreciation().setAccruedDepreciation(asset.getPurchaseCost().subtract(asset.getNetBookValue())).setCategory(asset.getCategory()).setFixedAssetId(asset.getId()).setMonth(month)
                 .setSolId(asset.getSolId());
     }
 

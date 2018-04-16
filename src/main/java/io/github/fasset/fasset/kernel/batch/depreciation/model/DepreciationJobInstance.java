@@ -25,6 +25,9 @@ import java.time.YearMonth;
 import java.util.Comparator;
 import java.util.Objects;
 
+/**
+ * A record of a depreciation job that is to be saved in the database
+ */
 @Entity
 public class DepreciationJobInstance extends DomainModel<String> implements Comparable<DepreciationJobInstance> {
 
@@ -76,8 +79,6 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
 
     @Override
     public int compareTo(DepreciationJobInstance o) {
-        return Comparator
-                .comparing(DepreciationJobInstance::getMonth)
-                .compare(this, o);
+        return Comparator.comparing(DepreciationJobInstance::getMonth).compare(this, o);
     }
 }

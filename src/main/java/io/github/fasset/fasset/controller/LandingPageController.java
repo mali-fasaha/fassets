@@ -21,6 +21,9 @@ package io.github.fasset.fasset.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Index for the program's landing page
+ */
 @Controller
 public class LandingPageController {
 

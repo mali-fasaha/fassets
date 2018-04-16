@@ -29,6 +29,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Writes {@code NetBookValue} items to the database
+ */
 @Component("netBookValueWriter")
 public class NetBookValueWriter implements ItemWriter<NetBookValue> {
 

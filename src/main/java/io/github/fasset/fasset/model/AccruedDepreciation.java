@@ -30,11 +30,10 @@ import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.Objects;
 
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "fixed_asset_id", "month", "sol_id", "category"
-        })
-})
+/**
+ * This model represents a unit AccruedDepreciation in the repository
+ */
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
 @Audited
 @Entity(name = "AccruedDepreciation")
 public class AccruedDepreciation extends DomainModel<String> {
@@ -52,8 +51,7 @@ public class AccruedDepreciation extends DomainModel<String> {
     private String category;
 
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money accruedDepreciation;
 
     public int getFixedAssetId() {
@@ -113,11 +111,8 @@ public class AccruedDepreciation extends DomainModel<String> {
             return false;
         }
         AccruedDepreciation that = (AccruedDepreciation) o;
-        return fixedAssetId == that.fixedAssetId &&
-                Objects.equals(that.accruedDepreciation, accruedDepreciation) &&
-                Objects.equals(month, that.month) &&
-                Objects.equals(solId, that.solId) &&
-                Objects.equals(category, that.category);
+        return fixedAssetId == that.fixedAssetId && Objects.equals(that.accruedDepreciation, accruedDepreciation) && Objects.equals(month, that.month) && Objects.equals(solId, that.solId) &&
+            Objects.equals(category, that.category);
     }
 
     @Override

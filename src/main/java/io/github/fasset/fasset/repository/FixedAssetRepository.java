@@ -27,17 +27,17 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
+ * nature of the {@code Entity}
+ */
 @Repository("fixedAssetRepository")
 public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer> {
 
-    @Query("SELECT " +
-            "DISTINCT e.category " +
-            "FROM FixedAsset e")
+    @Query("SELECT " + "DISTINCT e.category " + "FROM FixedAsset e")
     List<String> getDistinctCategories();
 
-    @Query("SELECT " +
-            "DISTINCT e.solId " +
-            "FROM FixedAsset e")
+    @Query("SELECT " + "DISTINCT e.solId " + "FROM FixedAsset e")
     List<String> getDistinctSolIds();
 
     /**
@@ -46,16 +46,10 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
      * @param category of fixed asset
      * @return
      */
-    @Query("Select " +
-            "SUM(e.purchaseCost) " +
-            "FROM FixedAsset e " +
-            "WHERE e.category = :category ")
+    @Query("Select " + "SUM(e.purchaseCost) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     Money getTotalCategoryPurchaseCost(@Param("category") String category);
 
-    @Query("SELECT " +
-            "SUM(e.purchaseCost) " +
-            "FROM FixedAsset e " +
-            "WHERE e.solId = :solId ")
+    @Query("SELECT " + "SUM(e.purchaseCost) " + "FROM FixedAsset e " + "WHERE e.solId = :solId ")
     Money getTotalSolPurchaseCost(@Param("solId") String solId);
 
     /**
@@ -64,16 +58,10 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
      * @param category of fixed asset
      * @return
      */
-    @Query("Select " +
-            "SUM(e.netBookValue) " +
-            "FROM FixedAsset e " +
-            "WHERE e.category = :category ")
+    @Query("Select " + "SUM(e.netBookValue) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     Money getTotalCategoryNetBookValue(@Param("category") String category);
 
-    @Query("SELECT " +
-            "SUM(e.netBookValue) " +
-            "FROM FixedAsset e " +
-            "WHERE e.solId = :solId ")
+    @Query("SELECT " + "SUM(e.netBookValue) " + "FROM FixedAsset e " + "WHERE e.solId = :solId ")
     Money getTotalSolNetBookValue(@Param("solId") String solId);
 
     /**
@@ -82,16 +70,10 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
      * @param category of fixed asset
      * @return
      */
-    @Query("Select " +
-            "COUNT(e.category) " +
-            "FROM FixedAsset e " +
-            "WHERE e.category = :category ")
+    @Query("Select " + "COUNT(e.category) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     int getTotalCategoryCount(@Param("category") String category);
 
-    @Query("SELECT " +
-            "COUNT(e.solId) " +
-            "FROM FixedAsset e " +
-            "WHERE e.solId = :solId ")
+    @Query("SELECT " + "COUNT(e.solId) " + "FROM FixedAsset e " + "WHERE e.solId = :solId ")
     int getTotalSolCount(@Param("solId") String solId);
 
 

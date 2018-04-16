@@ -61,11 +61,7 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
         if (attribute != null) {
             log.trace("Converting attribute : {} to database column", attribute);
             try {
-                dbDate = Date.from(
-                        attribute.atDay(1)
-                                .atStartOfDay(ZoneId.systemDefault())
-                                .toInstant()
-                );
+                dbDate = Date.from(attribute.atDay(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
             } catch (Throwable e) {
                 String message = String.format("Exception thrown while converting %s to java.sql.Date", attribute);
                 throw new ConverterException(message, e);
@@ -98,9 +94,7 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
         YearMonth retval = null;
 
         try {
-            retval = YearMonth.from(dbData.toInstant()
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate());
+            retval = YearMonth.from(dbData.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         } catch (Throwable e) {
             String message = String.format("Exception thrown while converting date: %s to yearMonth", dbData);
             throw new ConverterException(message, e);

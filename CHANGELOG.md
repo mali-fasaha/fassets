@@ -6,6 +6,11 @@ Changelog for fassets implementation by ghacupha
 **amendment to build configuration to automate deployment**
 
 
+[1be28452b2f3357](https://github.com/ghacupha/fassets/commit/1be28452b2f3357) ghacupha *2018-04-15 11:21:01*
+
+**amendment to build configuration to automate deployment**
+
+
 [b64a986b4e710c7](https://github.com/ghacupha/fassets/commit/b64a986b4e710c7) ghacupha *2018-04-15 10:56:15*
 
 **amendment to build configuration to automate deployment**

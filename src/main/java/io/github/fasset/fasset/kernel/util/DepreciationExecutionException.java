@@ -18,6 +18,9 @@
 
 package io.github.fasset.fasset.kernel.util;
 
+/**
+ * Runtime exception thrown while depreciation is in execution
+ */
 public class DepreciationExecutionException extends RuntimeException {
 
     /**

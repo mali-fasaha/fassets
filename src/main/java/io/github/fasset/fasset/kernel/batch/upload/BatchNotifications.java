@@ -18,9 +18,9 @@
 
 package io.github.fasset.fasset.kernel.batch.upload;
 
-import io.github.fasset.fasset.kernel.batch.BriefingService;
 import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobProxy;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
+import io.github.fasset.fasset.service.BriefingService;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
 import org.springframework.batch.core.JobExecution;
@@ -31,6 +31,9 @@ import org.springframework.stereotype.Component;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+/**
+ * Raises notifications during start and end of a batch or to interface between two batches
+ */
 @Component
 public class BatchNotifications implements JobExecutionListener {
 
@@ -46,10 +49,8 @@ public class BatchNotifications implements JobExecutionListener {
     private BriefingService briefingService;
 
     @Autowired
-    public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader,
-                              @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
-                              @Qualifier("briefingService") BriefingService briefingService,
-                              @Qualifier("depreciationJobProxy") DepreciationJobProxy depreciationJobProxy) {
+    public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
+                              @Qualifier("briefingService") BriefingService briefingService, @Qualifier("depreciationJobProxy") DepreciationJobProxy depreciationJobProxy) {
         this.excelItemReader = excelItemReader;
         this.fixedAssetService = fixedAssetService;
         this.briefingService = briefingService;

@@ -35,8 +35,9 @@ public interface MonthlyAssetDepreciationExecutor {
      * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation
      * item
      *
-     * @param fixedAsset
-     * @return
+     * @param fixedAsset {@link FixedAsset} being depreciated
+     * @param year in which the depreciation is taking place
+     * @return MonthlyAssetDepreciation
      */
     MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset, Integer year);
 }

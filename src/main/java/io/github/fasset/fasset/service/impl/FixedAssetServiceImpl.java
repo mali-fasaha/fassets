@@ -36,6 +36,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * {@link FixedAssetService} implementation
+ */
 @Service("fixedAssetService")
 @Transactional
 public class FixedAssetServiceImpl implements FixedAssetService {
@@ -69,10 +72,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     @Override
     public List<FixedAsset> fetchAllExistingAssets() {
 
-        return fixedAssetRepository.findAll()
-                .parallelStream()
-                .sorted()
-                .collect(ImmutableListCollector.toImmutableList());
+        return fixedAssetRepository.findAll().parallelStream().sorted().collect(ImmutableListCollector.toImmutableList());
     }
 
     /**

@@ -24,6 +24,9 @@ import org.springframework.stereotype.Repository;
 import java.time.YearMonth;
 import java.util.List;
 
+/**
+ * Repository for depreciationJobInstance
+ */
 @Repository("depreciationJobInstanceRepository")
 public interface DepreciationJobInstanceRepository extends JpaRepository<DepreciationJobInstance, Integer> {
 

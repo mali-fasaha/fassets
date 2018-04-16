@@ -2,26 +2,28 @@ package io.github.fasset.fasset.kernel;
 
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
 import io.github.fasset.fasset.kernel.subscriptions.SimpleSubscription;
-import io.github.fasset.fasset.kernel.subscriptions.Subscriber;
 import io.github.fasset.fasset.kernel.subscriptions.SubscriptionService;
-import io.github.fasset.fasset.kernel.subscriptions.Update;
 
 import java.time.LocalDateTime;
 
-public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService {
+/**
+ * Provides storage service for file uploaded to the backend
+ */
+class FileSystemStorageService extends SimpleSubscription implements SubscriptionService {
 
-    FileStorageSubscriber subscriber;
+    private FileStorageSubscriber subscriber;
 
-    FileStoragePersistenceSubscriber persistenceSubscriber;
+    private FileStoragePersistenceSubscriber persistenceSubscriber;
 
 
-    public FileSystemStorageService() {
+    FileSystemStorageService() {
         super();
         this.subscriber = new FileStorageSubscriber("FileStorageSubscriber1");
         persistenceSubscriber = new FileStoragePersistenceSubscriber("PersistenceSubscriber1");
     }
 
-    public void store(String fileName){
+    @SuppressWarnings("all")
+    void store(String fileName){
 
         subscriber.addSubscription(this);
         persistenceSubscriber.addSubscription(this);

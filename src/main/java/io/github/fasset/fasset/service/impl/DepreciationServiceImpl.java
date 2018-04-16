@@ -34,6 +34,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * {@link DepreciationService} implementation
+ */
 @Transactional
 @Service("depreciationService")
 public class DepreciationServiceImpl implements DepreciationService {
@@ -48,7 +51,8 @@ public class DepreciationServiceImpl implements DepreciationService {
     private final NetBookValueService netBookValueService;
 
     @Autowired
-    public DepreciationServiceImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository, AccruedDepreciationService accruedDepreciationService, NetBookValueService netBookValueService) {
+    public DepreciationServiceImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository, AccruedDepreciationService accruedDepreciationService,
+                                   NetBookValueService netBookValueService) {
         this.depreciationRepository = depreciationRepository;
         this.accruedDepreciationService = accruedDepreciationService;
         this.netBookValueService = netBookValueService;
@@ -99,24 +103,12 @@ public class DepreciationServiceImpl implements DepreciationService {
     @Override
     public void saveAllDepreciationProceeds(List<DepreciationProceeds> list) {
 
-        depreciationRepository.saveAll(
-                list.stream()
-                        .map(DepreciationProceeds::getDepreciation)
-                        .collect(ImmutableListCollector.toImmutableList())
-        );
+        depreciationRepository.saveAll(list.stream().map(DepreciationProceeds::getDepreciation).collect(ImmutableListCollector.toImmutableList()));
 
 
-        accruedDepreciationService.saveAllAccruedDepreciationRecords(
-                list.stream()
-                        .map(DepreciationProceeds::getAccruedDepreciation)
-                        .collect(ImmutableListCollector.toImmutableList())
-        );
+        accruedDepreciationService.saveAllAccruedDepreciationRecords(list.stream().map(DepreciationProceeds::getAccruedDepreciation).collect(ImmutableListCollector.toImmutableList()));
 
-        netBookValueService.saveAllNetBookValueItems(
-                list.stream()
-                        .map(DepreciationProceeds::getNetBookValue)
-                        .collect(ImmutableListCollector.toImmutableList())
-        );
+        netBookValueService.saveAllNetBookValueItems(list.stream().map(DepreciationProceeds::getNetBookValue).collect(ImmutableListCollector.toImmutableList()));
 
     }
 }

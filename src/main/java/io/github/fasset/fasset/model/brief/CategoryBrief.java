@@ -44,20 +44,17 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
 
     /* total costs of all items in this category*/
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money purchaseCost;
 
     /* total NBVs of all items in this category*/
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money netBookValue;
 
     /* Total accumulated depreciation for items in this category*/
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money accruedDepreciation;
 
     /* total no. of items in this category*/
@@ -88,28 +85,13 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     }
 
     @Override
-    public Money getPurchaseCost() {
-        return purchaseCost;
-    }
-
-    @Override
-    public Money getNetBookValue() {
-        return netBookValue;
-    }
-
-    @Override
-    public Money getAccruedDepreciation() {
-        return accruedDepreciation;
-    }
-
-    @Override
-    public int getPoll() {
-        return poll;
-    }
-
-    @Override
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    @Override
+    public Money getPurchaseCost() {
+        return purchaseCost;
     }
 
     @Override
@@ -118,13 +100,28 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     }
 
     @Override
+    public Money getNetBookValue() {
+        return netBookValue;
+    }
+
+    @Override
     public void setNetBookValue(Money netBookValue) {
         this.netBookValue = netBookValue;
     }
 
     @Override
+    public Money getAccruedDepreciation() {
+        return accruedDepreciation;
+    }
+
+    @Override
     public void setAccruedDepreciation(Money accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
+    }
+
+    @Override
+    public int getPoll() {
+        return poll;
     }
 
     @Override
@@ -144,11 +141,8 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
             return false;
         }
         CategoryBrief that = (CategoryBrief) o;
-        return poll == that.poll &&
-                Objects.equal(designation, that.designation) &&
-                Objects.equal(purchaseCost, that.purchaseCost) &&
-                Objects.equal(netBookValue, that.netBookValue) &&
-                Objects.equal(accruedDepreciation, that.accruedDepreciation);
+        return poll == that.poll && Objects.equal(designation, that.designation) && Objects.equal(purchaseCost, that.purchaseCost) && Objects.equal(netBookValue, that.netBookValue) &&
+            Objects.equal(accruedDepreciation, that.accruedDepreciation);
     }
 
     @Override
@@ -158,19 +152,13 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("designation", designation)
-                .add("purchaseCost", purchaseCost)
-                .add("netBookValue", netBookValue)
-                .add("accruedDepreciation", accruedDepreciation)
-                .add("poll", poll)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue).add("accruedDepreciation", accruedDepreciation)
+            .add("poll", poll).toString();
     }
 
     @Override
     public int compareTo(CategoryBrief o) {
 
-        return Comparator.comparing(CategoryBrief::getDesignation)
-                .compare(this, o);
+        return Comparator.comparing(CategoryBrief::getDesignation).compare(this, o);
     }
 }

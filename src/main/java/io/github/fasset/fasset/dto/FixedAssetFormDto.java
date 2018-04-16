@@ -25,6 +25,9 @@ import io.github.fasset.fasset.model.FixedAsset;
 
 import java.time.LocalDate;
 
+/**
+ * This is a DTO used by the Additions workflow to transfer user input from the front end
+ */
 public class FixedAssetFormDto {
 
     private DoubleToMoneyConverter doubleToMoneyConverter;
@@ -49,14 +52,8 @@ public class FixedAssetFormDto {
 
     public FixedAsset getFixedAsset() {
 
-        return new FixedAsset()
-                .setSolId(solId)
-                .setBarcode(barcode)
-                .setAssetDescription(assetDescription)
-                .setPurchaseDate(purchaseDate)
-                .setCategory(category)
-                .setPurchaseCost(doubleToMoneyConverter.convert(purchaseCost))
-                .setNetBookValue(doubleToMoneyConverter.convert(netBookValue));
+        return new FixedAsset().setSolId(solId).setBarcode(barcode).setAssetDescription(assetDescription).setPurchaseDate(purchaseDate).setCategory(category)
+            .setPurchaseCost(doubleToMoneyConverter.convert(purchaseCost)).setNetBookValue(doubleToMoneyConverter.convert(netBookValue));
 
     }
 
@@ -132,14 +129,9 @@ public class FixedAssetFormDto {
             return false;
         }
         FixedAssetFormDto that = (FixedAssetFormDto) o;
-        return Double.compare(that.purchaseCost, purchaseCost) == 0 &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
-                Objects.equal(doubleToMoneyConverter, that.doubleToMoneyConverter) &&
-                Objects.equal(solId, that.solId) &&
-                Objects.equal(barcode, that.barcode) &&
-                Objects.equal(assetDescription, that.assetDescription) &&
-                Objects.equal(purchaseDate, that.purchaseDate) &&
-                Objects.equal(category, that.category);
+        return Double.compare(that.purchaseCost, purchaseCost) == 0 && Double.compare(that.netBookValue, netBookValue) == 0 && Objects.equal(doubleToMoneyConverter, that.doubleToMoneyConverter) &&
+            Objects.equal(solId, that.solId) && Objects.equal(barcode, that.barcode) && Objects.equal(assetDescription, that.assetDescription) && Objects.equal(purchaseDate, that.purchaseDate) &&
+            Objects.equal(category, that.category);
     }
 
     @Override
@@ -149,14 +141,7 @@ public class FixedAssetFormDto {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("solId", solId)
-                .add("barcode", barcode)
-                .add("assetDescription", assetDescription)
-                .add("purchaseDate", purchaseDate)
-                .add("category", category)
-                .add("purchaseCost", purchaseCost)
-                .add("netBookValue", netBookValue)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("solId", solId).add("barcode", barcode).add("assetDescription", assetDescription).add("purchaseDate", purchaseDate).add("category", category)
+            .add("purchaseCost", purchaseCost).add("netBookValue", netBookValue).toString();
     }
 }

@@ -29,6 +29,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Writes AccruedDepreciation items to the database
+ */
 @Component("accruedDepreciationWriter")
 public class AccruedDepreciationWriter implements ItemWriter<AccruedDepreciation> {
 

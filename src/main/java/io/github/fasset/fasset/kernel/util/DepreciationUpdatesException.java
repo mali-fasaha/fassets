@@ -26,5 +26,6 @@ package io.github.fasset.fasset.kernel.util;
 public class DepreciationUpdatesException extends RuntimeException {
 
     public DepreciationUpdatesException(String errorMessage, Throwable e) {
+        super(errorMessage, e);
     }
 }

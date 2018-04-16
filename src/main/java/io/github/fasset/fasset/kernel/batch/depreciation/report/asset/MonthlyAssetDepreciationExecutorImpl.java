@@ -74,18 +74,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
         }
 
         assert dto != null;
-        return new MonthlyAssetDepreciation(dto.getAssetId(), dto.getYear(),
-                dto.getJan(),
-                dto.getFeb(),
-                dto.getMar(),
-                dto.getApr(),
-                dto.getMay(),
-                dto.getJun(),
-                dto.getJul(),
-                dto.getAug(),
-                dto.getSep(),
-                dto.getOct(),
-                dto.getNov(),
-                dto.getDec());
+        return new MonthlyAssetDepreciation(dto.getAssetId(), dto.getYear(), dto.getJan(), dto.getFeb(), dto.getMar(), dto.getApr(), dto.getMay(), dto.getJun(), dto.getJul(), dto.getAug(),
+            dto.getSep(), dto.getOct(), dto.getNov(), dto.getDec());
     }
 }

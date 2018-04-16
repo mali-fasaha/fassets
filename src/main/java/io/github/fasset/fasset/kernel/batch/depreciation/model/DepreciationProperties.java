@@ -22,6 +22,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.time.YearMonth;
 
+/**
+ * Configuration for period from when depreciation starts and when depreciation ends for the initial
+ * data uploads
+ */
 @ConfigurationProperties("depreciation")
 public class DepreciationProperties {
 

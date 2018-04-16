@@ -28,6 +28,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * Converts java.util.Date to java.time.LocalDate
+ */
 @Component("dateToLocalDateConverter")
 public class DateToLocalDateConverter implements Converter<Date, LocalDate> {
 

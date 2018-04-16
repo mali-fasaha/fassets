@@ -20,6 +20,9 @@ package io.github.fasset.fasset.kernel.util;
 
 import org.springframework.batch.core.JobExecutionException;
 
+/**
+ * Exception encountered during execution of any Batch process
+ */
 public class BatchJobExecutionException extends JobExecutionException {
 
     public BatchJobExecutionException(String msg) {

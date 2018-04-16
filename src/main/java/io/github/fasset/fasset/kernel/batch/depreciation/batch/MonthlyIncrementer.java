@@ -28,6 +28,10 @@ import java.time.YearMonth;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This object takes a month and generates the appropriate consequent month while
+ * recording the month for which depreciation has already occurred
+ */
 @Component("MonthlyIncrementer")
 public class MonthlyIncrementer {
 
@@ -40,19 +44,12 @@ public class MonthlyIncrementer {
 
     public List<DepreciationJobInstance> getJobInstanceSequence() {
 
-        return depreciationJobInstanceRepository
-                .findAll()
-                .parallelStream()
-                .sorted()
-                .collect(Collectors.toList());
+        return depreciationJobInstanceRepository.findAll().parallelStream().sorted().collect(Collectors.toList());
     }
 
     public List<YearMonth> getMonthSequence() {
 
-        return getJobInstanceSequence()
-                .stream()
-                .map(DepreciationJobInstance::getMonth)
-                .collect(Collectors.toList());
+        return getJobInstanceSequence().stream().map(DepreciationJobInstance::getMonth).collect(Collectors.toList());
     }
 
     public YearMonth getLatest() {

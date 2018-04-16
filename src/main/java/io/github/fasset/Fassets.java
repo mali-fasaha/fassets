@@ -41,6 +41,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.concurrent.Executor;
 
+/**
+ * This is the entry point for the fassets program
+ */
 @EnableAsync
 @EnableCaching
 @EnableJpaRepositories
@@ -50,10 +53,7 @@ import java.util.concurrent.Executor;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EntityScan("io.github.fasset.fasset")
 @ComponentScan("io.github.fasset.fasset")
-@EnableConfigurationProperties(
-        value = {StorageProperties.class,
-                MoneyProperties.class,
-                DepreciationProperties.class})
+@EnableConfigurationProperties(value = {StorageProperties.class, MoneyProperties.class, DepreciationProperties.class})
 public class Fassets {
 
     public static void main(String[] args) {

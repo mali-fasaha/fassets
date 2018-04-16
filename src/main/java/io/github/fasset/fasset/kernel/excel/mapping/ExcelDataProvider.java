@@ -68,14 +68,12 @@ public class ExcelDataProvider<T> {
             try {
                 dtoList.addAll(excelMapper.mappedList(clazz, filePath));
             } catch (Throwable e) {
-                String message = String.format("Unable to read from excel file : %s for class : %S",
-                        filePath, clazz);
+                String message = String.format("Unable to read from excel file : %s for class : %S", filePath, clazz);
 
                 throw new ExcelMapperException(message, e);
             }
 
-            LOGGER.info("Returning generated list of : {} items generated of type : {} from file path :{}",
-                    dtoList.size(), clazz, filePath);
+            LOGGER.info("Returning generated list of : {} items generated of type : {} from file path :{}", dtoList.size(), clazz, filePath);
         } else {
 
             LOGGER.error("The FILE_PATH given is null...");

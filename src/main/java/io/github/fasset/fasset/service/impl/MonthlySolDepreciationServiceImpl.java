@@ -30,6 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * {@link MonthlySolDepreciationService} implementation
+ */
 @Service("monthlySolDepreciationService")
 @Transactional
 public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciationService {
@@ -48,10 +51,7 @@ public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciation
     @Override
     public List<MonthlySolDepreciation> fetchAllMonthlySolDepreciations() {
 
-        return monthlySolDepreciationRepository.findAll()
-                .parallelStream()
-                .sorted(Comparator.comparing(MonthlySolDepreciation::getSolId))
-                .collect(ImmutableListCollector.toImmutableList());
+        return monthlySolDepreciationRepository.findAll().parallelStream().sorted(Comparator.comparing(MonthlySolDepreciation::getSolId)).collect(ImmutableListCollector.toImmutableList());
     }
 
     /**

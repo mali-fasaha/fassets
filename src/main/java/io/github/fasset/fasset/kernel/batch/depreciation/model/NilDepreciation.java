@@ -64,27 +64,20 @@ public class NilDepreciation {
         this.depreciation = 0.00;
     }
 
+    public NilDepreciation() {
+    }
+
     /**
      * Creates a depreciation object whose depreciation is Zero relative to the
      * fixedAsset item given and the depreciation period
      *
-     * @return
+     * @return Depreciation amount for the object
      */
     public Depreciation getNilDepreciation() {
 
-        log.trace("Returning nil depreciation item relative to asset : {} for the" +
-                " depreciation period : {}", fixedAssetId, depreciationPeriod);
-        return new Depreciation()
-                .setMonth(month)
-                .setYear(year)
-                .setDepreciationPeriod(depreciationPeriod)
-                .setCategory(category)
-                .setSolId(solId)
-                .setFixedAssetId(fixedAssetId)
-                .setDepreciation(Money.of(0.00, moneyProperties.getDefaultCurrency()));
-    }
-
-    public NilDepreciation() {
+        log.trace("Returning nil depreciation item relative to asset : {} for the" + " depreciation period : {}", fixedAssetId, depreciationPeriod);
+        return new Depreciation().setMonth(month).setYear(year).setDepreciationPeriod(depreciationPeriod).setCategory(category).setSolId(solId).setFixedAssetId(fixedAssetId)
+            .setDepreciation(Money.of(0.00, moneyProperties.getDefaultCurrency()));
     }
 
     public int getYear() {
@@ -152,13 +145,8 @@ public class NilDepreciation {
             return false;
         }
         NilDepreciation that = (NilDepreciation) o;
-        return year == that.year &&
-                month == that.month &&
-                fixedAssetId == that.fixedAssetId &&
-                Double.compare(that.depreciation, depreciation) == 0 &&
-                Objects.equals(depreciationPeriod, that.depreciationPeriod) &&
-                Objects.equals(category, that.category) &&
-                Objects.equals(solId, that.solId);
+        return year == that.year && month == that.month && fixedAssetId == that.fixedAssetId && Double.compare(that.depreciation, depreciation) == 0 &&
+            Objects.equals(depreciationPeriod, that.depreciationPeriod) && Objects.equals(category, that.category) && Objects.equals(solId, that.solId);
     }
 
     @Override

@@ -22,6 +22,9 @@ import io.github.fasset.fasset.model.CategoryConfiguration;
 
 import java.util.List;
 
+/**
+ * Service for data retrieval from database for {@link CategoryConfiguration}
+ */
 public interface CategoryConfigurationService {
 
 

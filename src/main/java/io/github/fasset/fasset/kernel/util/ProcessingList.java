@@ -20,6 +20,12 @@ package io.github.fasset.fasset.kernel.util;
 
 import java.util.List;
 
+/**
+ * This is an extension used to carry data through the depreciation chain from one handler to the next
+ * and then to the batch process writer
+ *
+ * @param <E> Type of element in the collection
+ */
 public interface ProcessingList<E> extends List<E> {
 
     /**

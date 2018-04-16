@@ -22,6 +22,10 @@ import io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
+ * nature of the {@code Entity}
+ */
 @Repository("monthlyCategoryDepreciationRepository")
 public interface MonthlyCategoryDepreciationReposiory extends JpaRepository<MonthlyCategoryDepreciation, Integer> {
 }

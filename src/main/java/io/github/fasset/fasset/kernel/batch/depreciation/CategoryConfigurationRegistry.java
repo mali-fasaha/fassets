@@ -42,10 +42,8 @@ import java.util.Map;
 public class CategoryConfigurationRegistry {
 
     private static final Logger log = LoggerFactory.getLogger(CategoryConfigurationRegistry.class);
-
-    private Map<String, CategoryConfiguration> categoryConfigurationMap = new ConcurrentHashMap<>();
-
     private final CategoryConfigurationService categoryConfigurationService;
+    private Map<String, CategoryConfiguration> categoryConfigurationMap = new ConcurrentHashMap<>();
 
     @Autowired
     public CategoryConfigurationRegistry(CategoryConfigurationService categoryConfigurationService) {
@@ -62,8 +60,7 @@ public class CategoryConfigurationRegistry {
         }
 
         if (categoryConfigurationRegistryDoesNotContain(categoryName)) {
-            log.error("The category Named : {} has not been configured in the category configuration repo. Please " +
-                    "check your category configurations listing...", categoryName);
+            log.error("The category Named : {} has not been configured in the category configuration repo. Please " + "check your category configurations listing...", categoryName);
             categoryConfiguration = new NilCategoryConfiguration().getCategoryConfiguration();
         }
 
@@ -91,14 +88,10 @@ public class CategoryConfigurationRegistry {
 
             log.trace("Refreshing the category configuration mapping...");
 
-            categoryConfigurationService
-                    .getAllCategoryConfigurations()
-                    .stream()
-                    .map(CategoryConfiguration::getDesignation)
-                    .forEach(categoryName -> {
-                        log.trace("Registering category : {}", categoryName);
-                        categoryConfigurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
-                    });
+            categoryConfigurationService.getAllCategoryConfigurations().stream().map(CategoryConfiguration::getDesignation).forEach(categoryName -> {
+                log.trace("Registering category : {}", categoryName);
+                categoryConfigurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
+            });
         }
 
     }

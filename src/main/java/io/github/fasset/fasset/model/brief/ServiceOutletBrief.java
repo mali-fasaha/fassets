@@ -28,6 +28,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Comparator;
 
+/**
+ * Back-end representation of a record of a service outlet and its summary in terms of total
+ * purchase costs, net book value etc etc
+ *
+ * @author edwin.njeru
+ */
 @Entity(name = "ServiceOutletBrief")
 @Audited
 public class ServiceOutletBrief extends DomainModel<String> implements Comparable<ServiceOutletBrief>, Brief {
@@ -37,20 +43,17 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
 
     /* total costs of all items in this category*/
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money purchaseCost;
 
     /* total NBVs of all items in this category*/
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money netBookValue;
 
     /* Total accumulated depreciaton for items in this category*/
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money accruedDepreciation;
 
     /* total no. of items in this category*/
@@ -126,11 +129,8 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
             return false;
         }
         ServiceOutletBrief that = (ServiceOutletBrief) o;
-        return poll == that.poll &&
-                com.google.common.base.Objects.equal(designation, that.designation) &&
-                com.google.common.base.Objects.equal(purchaseCost, that.purchaseCost) &&
-                com.google.common.base.Objects.equal(netBookValue, that.netBookValue) &&
-                com.google.common.base.Objects.equal(accruedDepreciation, that.accruedDepreciation);
+        return poll == that.poll && com.google.common.base.Objects.equal(designation, that.designation) && com.google.common.base.Objects.equal(purchaseCost, that.purchaseCost) &&
+            com.google.common.base.Objects.equal(netBookValue, that.netBookValue) && com.google.common.base.Objects.equal(accruedDepreciation, that.accruedDepreciation);
     }
 
     @Override
@@ -140,19 +140,13 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("designation", designation)
-                .add("purchaseCost", purchaseCost)
-                .add("netBookValue", netBookValue)
-                .add("accruedDepreciation", accruedDepreciation)
-                .add("poll", poll)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue).add("accruedDepreciation", accruedDepreciation)
+            .add("poll", poll).toString();
     }
 
     @Override
     public int compareTo(ServiceOutletBrief o) {
 
-        return Comparator.comparing(ServiceOutletBrief::getDesignation)
-                .compare(this, o);
+        return Comparator.comparing(ServiceOutletBrief::getDesignation).compare(this, o);
     }
 }

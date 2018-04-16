@@ -22,6 +22,9 @@ import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 
 import java.util.List;
 
+/**
+ * Service for data retrieval from database for {@link ServiceOutletBrief}
+ */
 public interface ServiceOutletBriefService {
 
     /**

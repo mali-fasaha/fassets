@@ -53,13 +53,9 @@ public class MonthlyDepreciationJobProxy {
 
 
     @Autowired
-    public MonthlyDepreciationJobProxy(JobLauncher jobLauncher,
-                                       @Qualifier("monthlyAssetDepreciationJob") Job monthlyAssetDepreciationJob,
-                                       @Qualifier("monthlyCategoryDepreciationJob") Job monthlyCategoryDepreciationJob,
-                                       @Qualifier("monthlySolDepreciationJob") Job monthlySolDepreciationJob,
-                                       @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
-                                       FixedAssetsJobsActivator fixedAssetsJobsActivator,
-                                       DepreciationRelay depreciationRelay) {
+    public MonthlyDepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("monthlyAssetDepreciationJob") Job monthlyAssetDepreciationJob,
+                                       @Qualifier("monthlyCategoryDepreciationJob") Job monthlyCategoryDepreciationJob, @Qualifier("monthlySolDepreciationJob") Job monthlySolDepreciationJob,
+                                       @Qualifier("fixedAssetService") FixedAssetService fixedAssetService, FixedAssetsJobsActivator fixedAssetsJobsActivator, DepreciationRelay depreciationRelay) {
         this.jobLauncher = jobLauncher;
         this.monthlyAssetDepreciationJob = monthlyAssetDepreciationJob;
         this.fixedAssetService = fixedAssetService;
@@ -71,13 +67,7 @@ public class MonthlyDepreciationJobProxy {
 
     private List<Integer> annualRelay() {
 
-        List<Integer> annualList = depreciationRelay
-                .getMonthlyDepreciationSequence()
-                .parallelStream()
-                .map(YearMonth::getYear)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList());
+        List<Integer> annualList = depreciationRelay.getMonthlyDepreciationSequence().parallelStream().map(YearMonth::getYear).distinct().sorted().collect(Collectors.toList());
 
         //Just to ensure only unique items are returned
         return ImmutableSet.copyOf(annualList).asList();
@@ -90,9 +80,7 @@ public class MonthlyDepreciationJobProxy {
 
         log.info("Depreciation has begun with {} items at time: {}", no_of_assets, starting_time);
 
-        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder()
-                .addString("no_of_assets", String.valueOf(no_of_assets))
-                .addString("starting_time", starting_time.toString());
+        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("no_of_assets", String.valueOf(no_of_assets)).addString("starting_time", starting_time.toString());
 
         log.info("executing MonthlyAssetDepreciation job : {}", monthlyAssetDepreciationJob);
         executeMonthlyJob(jobParametersBuilder, monthlyAssetDepreciationJob);

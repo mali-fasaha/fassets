@@ -64,13 +64,11 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
     private String category;
 
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money purchaseCost;
 
     @Column
-    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
+    @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money netBookValue;
 
     public FixedAsset() {
@@ -155,13 +153,9 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
             return false;
         }
         FixedAsset that = (FixedAsset) o;
-        return Objects.equals(solId, that.solId) &&
-                Objects.equals(barcode, that.barcode) &&
-                Objects.equals(assetDescription, that.assetDescription) &&
-                Objects.equals(purchaseDate, that.purchaseDate) &&
-                Objects.equals(category, that.category) &&
-                Objects.equals(purchaseCost, that.purchaseCost) &&
-                Objects.equals(netBookValue, that.netBookValue);
+        return Objects.equals(solId, that.solId) && Objects.equals(barcode, that.barcode) && Objects.equals(assetDescription, that.assetDescription) &&
+            Objects.equals(purchaseDate, that.purchaseDate) && Objects.equals(category, that.category) && Objects.equals(purchaseCost, that.purchaseCost) &&
+            Objects.equals(netBookValue, that.netBookValue);
     }
 
     @Override
@@ -186,11 +180,7 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
     @Override
     public int compareTo(FixedAsset o) {
 
-        return Comparator.comparing(FixedAsset::getSolId)
-                .thenComparing(FixedAsset::getCategory)
-                .thenComparing(FixedAsset::getPurchaseDate)
-                .thenComparing(FixedAsset::getPurchaseCost)
-                .compare(this, o);
+        return Comparator.comparing(FixedAsset::getSolId).thenComparing(FixedAsset::getCategory).thenComparing(FixedAsset::getPurchaseDate).thenComparing(FixedAsset::getPurchaseCost).compare(this, o);
     }
 
 }

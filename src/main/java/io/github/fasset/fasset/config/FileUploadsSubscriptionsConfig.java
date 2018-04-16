@@ -26,6 +26,12 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * This configuration loads up the ExcelUPloadJob object which is "subsribed" to observe and act on a
+ * file once uploaded to the server.
+ * The StorageService is also autowired here and added to the subscription in the PostConstruct
+ * callback method.
+ */
 @Configuration
 public class FileUploadsSubscriptionsConfig {
 

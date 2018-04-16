@@ -25,6 +25,9 @@ import org.javamoney.moneta.Money;
 import java.time.YearMonth;
 import java.util.List;
 
+/**
+ * Service for data retrieval from database for {@link AccruedDepreciation}
+ */
 public interface AccruedDepreciationService {
 
     /**

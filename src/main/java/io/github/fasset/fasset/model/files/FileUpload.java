@@ -27,6 +27,9 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Objects;
 
+/**
+ * This object represents a row of record of an Excel file that has been uploaded to the server
+ */
 @Entity(name = "FileUpload")
 @Audited
 public class FileUpload extends DomainModel<String> implements Serializable {
@@ -87,9 +90,7 @@ public class FileUpload extends DomainModel<String> implements Serializable {
             return false;
         }
         FileUpload that = (FileUpload) o;
-        return Objects.equals(fileName, that.fileName) &&
-                Objects.equals(month, that.month) &&
-                Objects.equals(timeUploaded, that.timeUploaded);
+        return Objects.equals(fileName, that.fileName) && Objects.equals(month, that.month) && Objects.equals(timeUploaded, that.timeUploaded);
     }
 
     @Override

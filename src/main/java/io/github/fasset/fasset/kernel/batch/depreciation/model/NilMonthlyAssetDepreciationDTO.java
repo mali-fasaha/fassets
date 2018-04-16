@@ -18,6 +18,9 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
+/**
+ * Default depreciation for each month of the year for a given asset
+ */
 public class NilMonthlyAssetDepreciationDTO extends MonthlyAssetDepreciationDTO {
 
     public NilMonthlyAssetDepreciationDTO(Integer assetId, Integer year) {

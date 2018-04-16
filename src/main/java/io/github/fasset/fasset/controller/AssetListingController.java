@@ -35,6 +35,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * This controller generates the template for the asset list and provides Response to the
+ * dataTable implementation running in the client, providing with it a collection of
+ * all {@link FixedAsset} items in the data sink
+ */
 @Controller
 public class AssetListingController {
 
@@ -62,17 +67,13 @@ public class AssetListingController {
         try {
             fixedAssets = fixedAssetService.fetchAllExistingAssets();
         } catch (Throwable e) {
-            String message = "Exception encountered: Could not extract assets from repo" +
-                    "for the path \"/assetList\"";
+            String message = "Exception encountered: Could not extract assets from repo" + "for the path \"/assetList\"";
             throw new DataRetrievalFromControllerException(message, e);
         }
 
         log.info("Returning a list of : {} assets", fixedAssets.size());
 
-        return fixedAssets
-                .parallelStream()
-                .map(FixedAssetResponseDto::new)
-                .collect(ImmutableListCollector.toImmutableList());
+        return fixedAssets.parallelStream().map(FixedAssetResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/listing/assets/data/{id}")

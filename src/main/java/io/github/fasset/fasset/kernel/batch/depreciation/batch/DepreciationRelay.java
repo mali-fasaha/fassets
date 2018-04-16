@@ -31,6 +31,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Object generates months in  an increasing order in which depreciation is supposed to be
+ * pre-calculated
+ */
 @Component("depreciationRelay")
 public class DepreciationRelay {
 
@@ -63,11 +67,11 @@ public class DepreciationRelay {
 
         monthlySequence.add(from);
 
-        long no_of_months = from.until(to, ChronoUnit.MONTHS);
+        long noOfMonths = from.until(to, ChronoUnit.MONTHS);
 
-        log.debug("Creating a monthly depreciation sequence for : {}", no_of_months);
+        log.debug("Creating a monthly depreciation sequence for : {}", noOfMonths);
 
-        for (long i = 0; i < no_of_months; i++) {
+        for (long i = 0; i < noOfMonths; i++) {
 
             YearMonth monthSeq = monthlyIncrementer.getNext(from.plusMonths(i));
 

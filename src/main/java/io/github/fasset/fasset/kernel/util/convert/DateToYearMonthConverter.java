@@ -58,6 +58,9 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
     }
 
 
+    public DateToYearMonthConverter() {
+    }
+
     public DateToLocalDateConverter getDateToLocalDateConverter() {
         return dateToLocalDateConverter;
     }
@@ -65,9 +68,6 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
     public DateToYearMonthConverter setDateToLocalDateConverter(DateToLocalDateConverter dateToLocalDateConverter) {
         this.dateToLocalDateConverter = dateToLocalDateConverter;
         return this;
-    }
-
-    public DateToYearMonthConverter() {
     }
 
     /**

@@ -18,6 +18,9 @@
 
 package io.github.fasset.fasset.kernel.util;
 
+/**
+ * Exception thrown when uploaded file cannot be obtained by the server
+ */
 public class StorageFileNotFoundException extends RuntimeException {
 
     /**
@@ -29,8 +32,7 @@ public class StorageFileNotFoundException extends RuntimeException {
         super();
     }
 
-    public StorageFileNotFoundException(String message, Throwable cause, boolean enableSuppression,
-                                        boolean writableStackTrace) {
+    public StorageFileNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

@@ -25,13 +25,15 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+/**
+ * Takes the year and generates the appropriate monthly by month Service outlet depreciation for
+ * a given Service Outlet
+ */
 public class MonthlySolDepreciationProcessor implements ItemProcessor<String, MonthlySolDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlySolDepreciationProcessor.class);
-
-    private String year;
-
     private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
+    private String year;
 
     @Autowired
     public MonthlySolDepreciationProcessor(@Qualifier("monthylSolDepreciationExecutor") MonthlySolDepreciationExecutor monthlySolDepreciationExecutor, String year) {

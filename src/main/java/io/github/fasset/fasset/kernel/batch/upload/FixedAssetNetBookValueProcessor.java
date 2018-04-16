@@ -28,6 +28,9 @@ import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 
+/**
+ * Creates {@code NetBookValue} objects from data obtained from a FixedAsset item
+ */
 @Component("fixedAssetNetBookValueProcessor")
 public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset, NetBookValue> {
 
@@ -51,11 +54,8 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
         NetBookValue retVal = new NetBookValue();
 
         try {
-            retVal.setFixedAssetId(fixedAsset.getId())
-                    .setCategory(fixedAsset.getCategory())
-                    .setSolId(fixedAsset.getSolId())
-                    .setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
-                    .setNetBookValue(fixedAsset.getNetBookValue());
+            retVal.setFixedAssetId(fixedAsset.getId()).setCategory(fixedAsset.getCategory()).setSolId(fixedAsset.getSolId()).setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
+                .setNetBookValue(fixedAsset.getNetBookValue());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while processing fixedAsset item : %s", fixedAsset);
             throw new ConverterException(message, e);

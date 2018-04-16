@@ -47,7 +47,8 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
     private final StringToMoneyConverter stringToMoneyConverter;
 
     @Autowired
-    public ExcelItemProcessor(@Qualifier("dateToLocalDateConverter") DateToLocalDateConverter dateToLocalDateConverter, @Qualifier("stringToMoneyConverter") StringToMoneyConverter stringToMoneyConverter) {
+    public ExcelItemProcessor(@Qualifier("dateToLocalDateConverter") DateToLocalDateConverter dateToLocalDateConverter,
+                              @Qualifier("stringToMoneyConverter") StringToMoneyConverter stringToMoneyConverter) {
         this.dateToLocalDateConverter = dateToLocalDateConverter;
         this.stringToMoneyConverter = stringToMoneyConverter;
     }
@@ -61,13 +62,9 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
         FixedAsset fixedAsset = new FixedAsset();
 
         try {
-            fixedAsset.setAssetDescription(fixedAssetDTO.getAssetDescription())
-                    .setBarcode(fixedAssetDTO.getBarcode())
-                    .setCategory(fixedAssetDTO.getCategory())
-                    .setNetBookValue(stringToMoneyConverter.convert(fixedAssetDTO.getNetBookValue()))
-                    .setPurchaseCost(stringToMoneyConverter.convert(fixedAssetDTO.getPurchaseCost()))
-                    .setSolId(fixedAssetDTO.getSolId())
-                    .setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
+            fixedAsset.setAssetDescription(fixedAssetDTO.getAssetDescription()).setBarcode(fixedAssetDTO.getBarcode()).setCategory(fixedAssetDTO.getCategory())
+                .setNetBookValue(stringToMoneyConverter.convert(fixedAssetDTO.getNetBookValue())).setPurchaseCost(stringToMoneyConverter.convert(fixedAssetDTO.getPurchaseCost()))
+                .setSolId(fixedAssetDTO.getSolId()).setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
 
         } catch (Throwable e) {
             String message = String.format("Exception encountered while processing : {}", fixedAssetDTO);

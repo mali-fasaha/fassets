@@ -20,6 +20,9 @@ package io.github.fasset.fasset.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * This is a configuration for storage location for uploaded files
+ */
 @ConfigurationProperties("storage")
 public class StorageProperties {
 

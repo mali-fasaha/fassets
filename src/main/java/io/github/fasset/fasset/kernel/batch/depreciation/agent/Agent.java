@@ -27,9 +27,17 @@ import java.time.YearMonth;
  * General representation of an object that given the {@link FixedAsset} and the {@YearMonth} will
  * return the desired object to the caller
  *
- * @author edwin.njeru
+ * @param <T> Type of object to be calculated at invocation
  */
 public interface Agent<T> {
 
+    /**
+     * This method takes the following parameters and returns desired object to the caller
+     *
+     * @param asset    {@link FixedAsset} being depreciated
+     * @param month    {@link YearMonth} in which this AccruedDepreciation is effective
+     * @param proceeds {@link DepreciationProceeds} items to hold the values calculated from depreciation
+     * @return Computed item from the above parameters
+     */
     T invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

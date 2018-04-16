@@ -18,6 +18,9 @@
 
 package io.github.fasset.fasset.kernel.util;
 
+/**
+ * Exception thrown during upload of the program's data files
+ */
 public class StorageException extends RuntimeException {
 
     private static final long serialVersionUID = 1569324982377679466L;

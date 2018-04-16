@@ -28,6 +28,9 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
+/**
+ * Converts java.time.LocalDate to java.time.YearMonth
+ */
 @Component("localDateToYearMonthConverter")
 public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearMonth> {
 

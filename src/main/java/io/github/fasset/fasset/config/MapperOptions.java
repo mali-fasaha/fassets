@@ -48,15 +48,12 @@ public class MapperOptions {
         this.skipRows = skipRows;
     }
 
-    public PoijiOptions getPoijiOptions() {
-
-        return PoijiOptionsBuilder.settings()
-                .datePattern(datePattern)
-                .skip(skipRows)
-                .build();
+    public MapperOptions() {
     }
 
-    public MapperOptions() {
+    public PoijiOptions getPoijiOptions() {
+
+        return PoijiOptionsBuilder.settings().datePattern(datePattern).skip(skipRows).build();
     }
 
     public String getDatePattern() {
@@ -86,8 +83,7 @@ public class MapperOptions {
             return false;
         }
         MapperOptions options = (MapperOptions) o;
-        return Objects.equal(datePattern, options.datePattern) &&
-                Objects.equal(skipRows, options.skipRows);
+        return Objects.equal(datePattern, options.datePattern) && Objects.equal(skipRows, options.skipRows);
     }
 
     @Override
@@ -97,9 +93,6 @@ public class MapperOptions {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("datePattern", datePattern)
-                .add("skipRows", skipRows)
-                .toString();
+        return MoreObjects.toStringHelper(this).add("datePattern", datePattern).add("skipRows", skipRows).toString();
     }
 }

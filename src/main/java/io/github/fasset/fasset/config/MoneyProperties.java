@@ -22,6 +22,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Objects;
 
+/**
+ * This object simply configures the default of the pogram's default currency
+ */
 @ConfigurationProperties("money")
 public class MoneyProperties {
 
@@ -58,8 +61,6 @@ public class MoneyProperties {
 
     @Override
     public String toString() {
-        return "MoneyProperties{" +
-                "defaultCurrency='" + defaultCurrency + '\'' +
-                '}';
+        return "MoneyProperties{" + "defaultCurrency='" + defaultCurrency + '\'' + '}';
     }
 }

@@ -36,14 +36,15 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * Configuration object for the monthly service outlet depreciation job
+ */
 @Configuration
 public class MonthlySolDepreciationJobConfiguration {
 
-    private final JobBuilderFactory jobBuilderFactory;
-
     @Value("#{jobParameters['year']}")
     private static String YEAR;
-
+    private final JobBuilderFactory jobBuilderFactory;
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
@@ -69,13 +70,8 @@ public class MonthlySolDepreciationJobConfiguration {
 
     @Bean("monthlySolDepreciationJob")
     public Job monthlySolDepreciationJob() {
-        return jobBuilderFactory.get("monthlySolDepreciationJob")
-                .incrementer(new RunIdIncrementer())
-                .listener(monthlySolDepreciationJobListener)
-                .preventRestart()
-                .flow(createMonthlySolDepreciationItems())
-                .end()
-                .build();
+        return jobBuilderFactory.get("monthlySolDepreciationJob").incrementer(new RunIdIncrementer()).listener(monthlySolDepreciationJobListener).preventRestart()
+            .flow(createMonthlySolDepreciationItems()).end().build();
     }
 
     @Bean
@@ -118,13 +114,9 @@ public class MonthlySolDepreciationJobConfiguration {
         Step createMonthlySolDepreciationItems = null;
 
         try {
-            createMonthlySolDepreciationItems = stepBuilderFactory
-                    .get("createMonthlySolDepreciationItems")
-                    .<String, MonthlySolDepreciation>chunk(5)
-                    .reader(monthlySolDepreciationReader())
-                    .writer(monthlySolDepreciationWriter())
-                    .processor(monthlySolDepreciationProcessor(YEAR))
-                    .build();
+            createMonthlySolDepreciationItems =
+                stepBuilderFactory.get("createMonthlySolDepreciationItems").<String, MonthlySolDepreciation>chunk(5).reader(monthlySolDepreciationReader()).writer(monthlySolDepreciationWriter())
+                    .processor(monthlySolDepreciationProcessor(YEAR)).build();
         } catch (Exception e) {
             e.printStackTrace();
         }

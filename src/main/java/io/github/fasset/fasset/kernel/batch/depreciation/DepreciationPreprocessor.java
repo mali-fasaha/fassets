@@ -39,9 +39,25 @@ public interface DepreciationPreprocessor {
     YearMonth getMonth();
 
     /**
+     * Sets depreciation period in months
+     *
+     * @param month Month in which the depreciation is occurring
+     * @return this
+     */
+    DepreciationPreprocessor setMonth(YearMonth month);
+
+    /**
      * @return FixedAsset item being depreciated
      */
     FixedAsset getAsset();
+
+    /**
+     * Sets the asset to be reviewed for depreciation
+     *
+     * @param asset {@link FixedAsset} being depreciated
+     * @return this
+     */
+    DepreciationPreprocessor setAsset(FixedAsset asset);
 
     /**
      * @return amount of depreciation
@@ -49,33 +65,17 @@ public interface DepreciationPreprocessor {
     Money getDepreciationAmount();
 
     /**
-     * Sets the asset to be reviewed for depreciation
-     *
-     * @param asset
-     * @return
-     */
-    DepreciationPreprocessor setAsset(FixedAsset asset);
-
-    /**
-     * Sets depreciation period in months
-     *
-     * @param month
-     * @return
-     */
-    DepreciationPreprocessor setMonth(YearMonth month);
-
-    /**
      * Sets the amount of depreciation for review
      *
-     * @param depreciationAmount
-     * @return
+     * @param depreciationAmount {@link Money} amount of depreciation
+     * @return this
      */
     DepreciationPreprocessor setDepreciationAmount(Money depreciationAmount);
 
     /**
      * This method ensures all properties are set and evaluated
      *
-     * @return
+     * @return this
      */
     DepreciationPreprocessor setProperties();
 }

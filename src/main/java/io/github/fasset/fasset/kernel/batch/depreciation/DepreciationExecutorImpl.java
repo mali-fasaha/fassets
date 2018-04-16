@@ -88,32 +88,25 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
 
         if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
-            log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " +
-                    "depreciation", asset);
+            log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " + "depreciation", asset);
 
             depreciation = getNilDepreciation(asset, month);
 
-            depreciationProceeds
-                    .setDepreciation(depreciation)
-                    .setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
-                    .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
+            depreciationProceeds.setDepreciation(depreciation).setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
+                .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
 
         } else if (localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)) {
 
-            log.trace("The depreciation period : {} is sooner that the assets purchase date {} " +
-                    "resorting to nil depreciation", month, asset.getPurchaseDate());
+            log.trace("The depreciation period : {} is sooner that the assets purchase date {} " + "resorting to nil depreciation", month, asset.getPurchaseDate());
 
             depreciation = getNilDepreciation(asset, month);
 
-            depreciationProceeds
-                    .setDepreciation(depreciation)
-                    .setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
-                    .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
+            depreciationProceeds.setDepreciation(depreciation).setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
+                .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
 
         } else {
 
-            log.trace("The asset : {} has passed the frontal Business rules filter, initiating configuration" +
-                    "registry for category : {}", asset, asset.getCategory());
+            log.trace("The asset : {} has passed the frontal Business rules filter, initiating configuration" + "registry for category : {}", asset, asset.getCategory());
 
             //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
             depreciationAgentsHandler.sendRequest(asset, month, depreciationProceeds); //for now
@@ -136,12 +129,12 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
         return new NilDepreciation(moneyProperties, asset, depreciationPeriod).getNilDepreciation();
     }
 
-    public void setDepreciation(Depreciation depreciation) {
-        this.depreciation = depreciation;
-    }
-
     public Depreciation getDepreciation() {
         return depreciation;
+    }
+
+    public void setDepreciation(Depreciation depreciation) {
+        this.depreciation = depreciation;
     }
 
     public DepreciationProceeds getDepreciationProceeds() {

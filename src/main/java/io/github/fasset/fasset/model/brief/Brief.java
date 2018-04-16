@@ -39,14 +39,29 @@ public interface Brief {
     String getDesignation();
 
     /**
+     * @param designation name of the brief
+     */
+    void setDesignation(String designation);
+
+    /**
      * @return total purchase cost
      */
     Money getPurchaseCost();
 
     /**
+     * @param purchaseCost of all items in the brief
+     */
+    void setPurchaseCost(Money purchaseCost);
+
+    /**
      * @return total net book value of items
      */
     Money getNetBookValue();
+
+    /**
+     * @param netBookValue of all items in the brief
+     */
+    void setNetBookValue(Money netBookValue);
 
     /**
      * @return Total AccruedDepreciation of items in the
@@ -55,29 +70,14 @@ public interface Brief {
     Money getAccruedDepreciation();
 
     /**
-     * @return # of items in the brief
-     */
-    int getPoll();
-
-    /**
-     * @param designation name of the brief
-     */
-    void setDesignation(String designation);
-
-    /**
-     * @param purchaseCost of all items in the brief
-     */
-    void setPurchaseCost(Money purchaseCost);
-
-    /**
-     * @param netBookValue of all items in the brief
-     */
-    void setNetBookValue(Money netBookValue);
-
-    /**
      * @param accruedDepreciation of items in the brief
      */
     void setAccruedDepreciation(Money accruedDepreciation);
+
+    /**
+     * @return # of items in the brief
+     */
+    int getPoll();
 
     /**
      * @param poll # of items in the brief

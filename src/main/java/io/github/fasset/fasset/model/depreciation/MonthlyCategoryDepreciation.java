@@ -24,6 +24,10 @@ import org.hibernate.envers.Audited;
 import javax.persistence.Entity;
 import java.util.Objects;
 
+/**
+ * This object represents a record of a Category's depreciation for all the months of
+ * a year
+ */
 @Entity
 @Audited
 public class MonthlyCategoryDepreciation extends DomainModel<String> {
@@ -43,7 +47,8 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
     private double nov;
     private double dec;
 
-    public MonthlyCategoryDepreciation(String categoryName, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct, double nov, double dec) {
+    public MonthlyCategoryDepreciation(String categoryName, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct,
+                                       double nov, double dec) {
         this.categoryName = categoryName;
         this.year = year;
         this.jan = jan;
@@ -198,20 +203,10 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
             return false;
         }
         MonthlyCategoryDepreciation that = (MonthlyCategoryDepreciation) o;
-        return year == that.year &&
-                Double.compare(that.jan, jan) == 0 &&
-                Double.compare(that.feb, feb) == 0 &&
-                Double.compare(that.mar, mar) == 0 &&
-                Double.compare(that.apr, apr) == 0 &&
-                Double.compare(that.may, may) == 0 &&
-                Double.compare(that.jun, jun) == 0 &&
-                Double.compare(that.jul, jul) == 0 &&
-                Double.compare(that.aug, aug) == 0 &&
-                Double.compare(that.sep, sep) == 0 &&
-                Double.compare(that.oct, oct) == 0 &&
-                Double.compare(that.nov, nov) == 0 &&
-                Double.compare(that.dec, dec) == 0 &&
-                Objects.equals(categoryName, that.categoryName);
+        return year == that.year && Double.compare(that.jan, jan) == 0 && Double.compare(that.feb, feb) == 0 && Double.compare(that.mar, mar) == 0 && Double.compare(that.apr, apr) == 0 &&
+            Double.compare(that.may, may) == 0 && Double.compare(that.jun, jun) == 0 && Double.compare(that.jul, jul) == 0 && Double.compare(that.aug, aug) == 0 &&
+            Double.compare(that.sep, sep) == 0 && Double.compare(that.oct, oct) == 0 && Double.compare(that.nov, nov) == 0 && Double.compare(that.dec, dec) == 0 &&
+            Objects.equals(categoryName, that.categoryName);
     }
 
     @Override

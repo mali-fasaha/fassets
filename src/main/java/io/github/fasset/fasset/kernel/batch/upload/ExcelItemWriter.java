@@ -28,6 +28,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Writes {@code FixedAsset} items to the database
+ */
 @Component("excelItemWriter")
 public class ExcelItemWriter implements ItemWriter<FixedAsset> {
 

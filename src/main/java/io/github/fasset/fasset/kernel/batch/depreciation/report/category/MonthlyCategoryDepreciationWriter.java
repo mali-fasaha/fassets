@@ -28,9 +28,8 @@ import java.util.List;
 
 public class MonthlyCategoryDepreciationWriter implements ItemWriter<MonthlyCategoryDepreciation> {
 
-    private final MonthlyCategoryDepreciationService monthlyCategoryDepreciationService;
-
     private static final Logger log = LoggerFactory.getLogger(MonthlyCategoryDepreciationWriter.class);
+    private final MonthlyCategoryDepreciationService monthlyCategoryDepreciationService;
 
     public MonthlyCategoryDepreciationWriter(MonthlyCategoryDepreciationService monthlyCategoryDepreciationService) {
         this.monthlyCategoryDepreciationService = monthlyCategoryDepreciationService;

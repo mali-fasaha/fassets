@@ -24,12 +24,10 @@ import org.hibernate.envers.Audited;
 import javax.persistence.Entity;
 import java.util.Objects;
 
-
-/*@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "assetId","year"
-        })
-})*/
+/**
+ * This object represents a record of an Asset's depreciation for all the months of
+ * a year
+ */
 @Entity
 @Audited
 public class MonthlyAssetDepreciation extends DomainModel<String> {
@@ -49,7 +47,8 @@ public class MonthlyAssetDepreciation extends DomainModel<String> {
     private double nov;
     private double dec;
 
-    public MonthlyAssetDepreciation(int assetId, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct, double nov, double dec) {
+    public MonthlyAssetDepreciation(int assetId, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct, double nov,
+                                    double dec) {
         this.assetId = assetId;
         this.year = year;
         this.jan = jan;
@@ -207,20 +206,9 @@ public class MonthlyAssetDepreciation extends DomainModel<String> {
             return false;
         }
         MonthlyAssetDepreciation that = (MonthlyAssetDepreciation) o;
-        return assetId == that.assetId &&
-                year == that.year &&
-                Double.compare(that.jan, jan) == 0 &&
-                Double.compare(that.feb, feb) == 0 &&
-                Double.compare(that.mar, mar) == 0 &&
-                Double.compare(that.apr, apr) == 0 &&
-                Double.compare(that.may, may) == 0 &&
-                Double.compare(that.jun, jun) == 0 &&
-                Double.compare(that.jul, jul) == 0 &&
-                Double.compare(that.aug, aug) == 0 &&
-                Double.compare(that.sep, sep) == 0 &&
-                Double.compare(that.oct, oct) == 0 &&
-                Double.compare(that.nov, nov) == 0 &&
-                Double.compare(that.dec, dec) == 0;
+        return assetId == that.assetId && year == that.year && Double.compare(that.jan, jan) == 0 && Double.compare(that.feb, feb) == 0 && Double.compare(that.mar, mar) == 0 &&
+            Double.compare(that.apr, apr) == 0 && Double.compare(that.may, may) == 0 && Double.compare(that.jun, jun) == 0 && Double.compare(that.jul, jul) == 0 &&
+            Double.compare(that.aug, aug) == 0 && Double.compare(that.sep, sep) == 0 && Double.compare(that.oct, oct) == 0 && Double.compare(that.nov, nov) == 0 && Double.compare(that.dec, dec) == 0;
     }
 
     @Override

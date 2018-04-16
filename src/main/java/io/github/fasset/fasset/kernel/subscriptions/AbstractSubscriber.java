@@ -36,7 +36,7 @@ public abstract class AbstractSubscriber implements Subscriber {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractSubscriber.class);
 
-    private Object MUTEX = new Object();
+    private Object mutex = new Object();
 
     // name of subscriber
     private String name;
@@ -51,7 +51,7 @@ public abstract class AbstractSubscriber implements Subscriber {
     @Override
     public void update() {
 
-        synchronized (MUTEX) {
+        synchronized (mutex) {
             subscriptions.forEach(this::checkSubscriptions);
         }
     }
@@ -62,7 +62,7 @@ public abstract class AbstractSubscriber implements Subscriber {
     @Override
     public void addSubscription(SubscriptionService subscription) {
 
-        synchronized (MUTEX) {
+        synchronized (mutex) {
             this.subscriptions.add(subscription);
         }
     }
@@ -85,7 +85,7 @@ public abstract class AbstractSubscriber implements Subscriber {
     @Override
     public void unSubscribe(SubscriptionService subscription) {
 
-        synchronized (MUTEX) {
+        synchronized (mutex) {
             this.subscriptions.remove(subscription);
         }
     }

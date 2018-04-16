@@ -31,10 +31,12 @@ import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
 
+/**
+ * Interface for launching the depreciation job. This abstraction enables the launch to be carried out from any
+ * object
+ */
 @Component("depreciationJobProxy")
 public class DepreciationJobProxy {
-
-    private final static Logger log = LoggerFactory.getLogger(DepreciationJobProxy.class);
 
     private final JobLauncher jobLauncher;
 
@@ -45,7 +47,8 @@ public class DepreciationJobProxy {
     private final FixedAssetsJobsActivator fixedAssetsJobsActivator;
 
     @Autowired
-    public DepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("depreciationJob") Job depreciationRun, FixedAssetsJobsActivator fixedAssetsJobsActivator) {
+    public DepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("depreciationJob") Job depreciationRun,
+                                FixedAssetsJobsActivator fixedAssetsJobsActivator) {
         this.jobLauncher = jobLauncher;
         this.fixedAssetService = fixedAssetService;
         this.depreciationRun = depreciationRun;
@@ -57,26 +60,6 @@ public class DepreciationJobProxy {
 
         fixedAssetsJobsActivator.bootstrap(jobLauncher, depreciationRun, fixedAssetService);
     }
-
-    /**
-     * Listens for messages from the queue
-     * @param message
-     * @throws JMSException
-     *//*
-        @JmsListener(destination = "depreciationJobs", containerFactory = "messageFactory")
-        public void listenForMessages(FileUploadNotification message){
-
-            String fileName = message.getFileName();
-            String month = message.getMonth();
-
-            log.debug("File : {} has been received on the server side and is about to be actioned",fileName);
-
-            try {
-                initializeDepreciationRun();
-            } catch (BatchJobExecutionException e) {
-                log.error("Exception encountered while uploading excel file from : {}",fileName);
-            }
-        }*/
 
 }
 

@@ -22,6 +22,10 @@ import io.github.fasset.fasset.model.NetBookValue;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
+ * nature of the {@code Entity}
+ */
 @Repository("netBookValueRepository")
 public interface NetBookValueRepository extends JpaRepository<NetBookValue, Integer> {
 }

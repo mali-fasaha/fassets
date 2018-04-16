@@ -20,6 +20,9 @@ package io.github.fasset.fasset.service;
 
 import io.github.fasset.fasset.model.files.FileUpload;
 
+/**
+ * Service for data retrieval from database for {@link FileUpload}
+ */
 public interface FileUploadService {
 
 

@@ -32,49 +32,30 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * Used to bootstrap launch of another batch process in the backend
+ */
 @Component("fixedAssetsJobsActivator")
 public class FixedAssetsJobsActivator {
 
     private static final Logger log = LoggerFactory.getLogger(FixedAssetsJobsActivator.class);
 
-    /**
-     * Will start any job that draws poll data fom the fixedAssetService
-     *
-     * @throws BatchJobExecutionException
-     */
     public void bootstrap(JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener) throws BatchJobExecutionException {
 
         bootstrap(jobLauncher, job, fixedAssetService);
     }
 
 
-    /**
-     * Will start any job that draws poll data fom the fixedAssetService
-     *
-     * @param jobLauncher
-     * @param job
-     * @param fixedAssetService
-     * @throws BatchJobExecutionException
-     */
     public void bootstrap(JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService) throws BatchJobExecutionException {
 
         int no_of_assets = fixedAssetService.getPoll();
 
-        bootstrap(new JobParametersBuilder()
-                .addString("no_of_assets", String.valueOf(no_of_assets))
-                .addString("starting_time", LocalDateTime.now().toString())
-                .toJobParameters(), jobLauncher, job, fixedAssetService, null);
+        bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(no_of_assets)).addString("starting_time", LocalDateTime.now().toString()).toJobParameters(), jobLauncher, job,
+            fixedAssetService, null);
     }
 
-    /**
-     * Will start any job that draws poll data fom the fixedAssetService
-     *
-     * @param jobLauncher
-     * @param job
-     * @param fixedAssetService
-     * @throws BatchJobExecutionException
-     */
-    public void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener) throws BatchJobExecutionException {
+    private void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener)
+        throws BatchJobExecutionException {
 
         int no_of_assets = fixedAssetService.getPoll();
         LocalDateTime starting_time = LocalDateTime.now();
@@ -87,9 +68,8 @@ public class FixedAssetsJobsActivator {
             jobExecution = jobLauncher.run(job, jobParameters);
         } catch (Throwable e) {
 
-            String message = String.format("Exception encountered %s caused by %s,while launching job" +
-                            "id %s at time %s",
-                    e.getMessage(), e.getCause(), job.getName(), jobParameters.getString("starting_time"));
+            String message =
+                String.format("Exception encountered %s caused by %s,while launching job" + "id %s at time %s", e.getMessage(), e.getCause(), job.getName(), jobParameters.getString("starting_time"));
 
             throw new BatchJobExecutionException(message, e);
 

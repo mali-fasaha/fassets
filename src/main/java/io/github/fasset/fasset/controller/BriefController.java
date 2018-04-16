@@ -21,6 +21,8 @@ package io.github.fasset.fasset.controller;
 import io.github.fasset.fasset.dto.CategoryBriefResponseDto;
 import io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
+import io.github.fasset.fasset.model.brief.CategoryBrief;
+import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import io.github.fasset.fasset.service.CategoryBriefService;
 import io.github.fasset.fasset.service.ServiceOutletBriefService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * This controller serves up to the view data containing{@link CategoryBrief}
+ * and {@link ServiceOutletBrief} items from the data sink
+ */
 @Controller
 public class BriefController {
 
@@ -66,10 +72,7 @@ public class BriefController {
     public List<ServiceOutletBriefResponseDto> getServiceOutletBriefs(Model model) {
 
         //TODO update other brief controllers
-        return serviceOutletBriefService.fetchAllServiceOutletBriefs()
-                .parallelStream()
-                .map(ServiceOutletBriefResponseDto::new)
-                .collect(ImmutableListCollector.toImmutableList());
+        return serviceOutletBriefService.fetchAllServiceOutletBriefs().parallelStream().map(ServiceOutletBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/briefs/serviceOutlets/data/{id}")
@@ -83,10 +86,7 @@ public class BriefController {
     @ResponseBody
     public List<CategoryBriefResponseDto> getCategoryBriefs(Model model) {
 
-        return categoryBriefService.fetchAllCategoryBriefs()
-                .parallelStream()
-                .map(CategoryBriefResponseDto::new)
-                .collect(ImmutableListCollector.toImmutableList());
+        return categoryBriefService.fetchAllCategoryBriefs().parallelStream().map(CategoryBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/briefs/categories/data/{id}")

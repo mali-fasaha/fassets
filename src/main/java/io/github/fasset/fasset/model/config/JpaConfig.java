@@ -18,6 +18,9 @@
 
 package io.github.fasset.fasset.model.config;
 
+/**
+ * Contains general configurations for JPA
+ */
 //@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 //@Configuration
 public class JpaConfig {

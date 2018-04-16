@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.fasset.fasset.kernel.batch;
+package io.github.fasset.fasset.kernel.util.convert;
 
 import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.javamoney.moneta.Money;
@@ -26,6 +26,9 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+/**
+ * Converts Money object to Doublw
+ */
 @Component("moneyToDoubleConverter")
 public class MoneyToDoubleConverter implements Converter<Money, Double> {
 

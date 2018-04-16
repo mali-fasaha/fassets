@@ -25,6 +25,10 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Objects;
 
+/**
+ * Model that represents a depreciation unit of work done that can be recorded in the
+ * database
+ */
 @Entity(name = "DepreciationJobExecution")
 public class DepreciationJobExecution extends DomainModel<String> {
 
@@ -98,12 +102,8 @@ public class DepreciationJobExecution extends DomainModel<String> {
             return false;
         }
         DepreciationJobExecution that = (DepreciationJobExecution) o;
-        return noOfItems == that.noOfItems &&
-                Objects.equals(startTime, that.startTime) &&
-                Objects.equals(finishTime, that.finishTime) &&
-                Objects.equals(lastUpdatedTime, that.lastUpdatedTime) &&
-                Objects.equals(status, that.status) &&
-                Objects.equals(period, that.period);
+        return noOfItems == that.noOfItems && Objects.equals(startTime, that.startTime) && Objects.equals(finishTime, that.finishTime) && Objects.equals(lastUpdatedTime, that.lastUpdatedTime) &&
+            Objects.equals(status, that.status) && Objects.equals(period, that.period);
     }
 
     @Override

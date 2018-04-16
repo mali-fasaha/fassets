@@ -18,10 +18,12 @@
 
 package io.github.fasset.fasset.dto;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 
+/**
+ * This is a DTO for {@link ServiceOutletBrief} items containing simpler data types for viewing on the
+ * front end
+ */
 public class ServiceOutletBriefResponseDto {
 
     private int id;
@@ -105,6 +107,7 @@ public class ServiceOutletBriefResponseDto {
         return this;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -113,29 +116,53 @@ public class ServiceOutletBriefResponseDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         ServiceOutletBriefResponseDto that = (ServiceOutletBriefResponseDto) o;
-        return id == that.id &&
-                Double.compare(that.purchaseCost, purchaseCost) == 0 &&
-                Double.compare(that.netBookValue, netBookValue) == 0 &&
-                Double.compare(that.accruedDepreciation, accruedDepreciation) == 0 &&
-                poll == that.poll &&
-                Objects.equal(designation, that.designation);
+
+        if (id != that.id) {
+            return false;
+        }
+        if (Double.compare(that.purchaseCost, purchaseCost) != 0) {
+            return false;
+        }
+        if (Double.compare(that.netBookValue, netBookValue) != 0) {
+            return false;
+        }
+        if (Double.compare(that.accruedDepreciation, accruedDepreciation) != 0) {
+            return false;
+        }
+        if (poll != that.poll) {
+            return false;
+        }
+        return designation != null ? designation.equals(that.designation) : that.designation == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, designation, purchaseCost, netBookValue, accruedDepreciation, poll);
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (designation != null ? designation.hashCode() : 0);
+        temp = Double.doubleToLongBits(purchaseCost);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(netBookValue);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(accruedDepreciation);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + poll;
+        return result;
     }
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("designation", designation)
-                .add("purchaseCost", purchaseCost)
-                .add("netBookValue", netBookValue)
-                .add("accruedDepreciation", accruedDepreciation)
-                .add("poll", poll)
-                .toString();
+        final StringBuffer sb = new StringBuffer("ServiceOutletBriefResponseDto{");
+        sb.append("id=").append(id);
+        sb.append(", designation='").append(designation).append('\'');
+        sb.append(", purchaseCost=").append(purchaseCost);
+        sb.append(", netBookValue=").append(netBookValue);
+        sb.append(", accruedDepreciation=").append(accruedDepreciation);
+        sb.append(", poll=").append(poll);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -31,12 +31,17 @@ import javax.annotation.PostConstruct;
 import java.time.YearMonth;
 import java.util.List;
 
+/**
+ * Object encapsulates a chain of Agents through which a depreciation item is processed as a FixedAsset
+ * is passed through
+ */
 @Component("depreciationAgentsChain")
 public class DepreciationAgentsChainImpl {
 
     private final DepreciationAgent depreciationAgent;
     private final AccruedDepreciationAgent accruedDepreciationAgent;
     private final NetBookValueAgent netBookValueAgent;
+    private final List<Agent> agents = new FastList<>();
 
     @Autowired
     public DepreciationAgentsChainImpl(DepreciationAgent depreciationAgent, AccruedDepreciationAgent accruedDepreciationAgent, NetBookValueAgent netBookValueAgent) {
@@ -52,9 +57,6 @@ public class DepreciationAgentsChainImpl {
         agents.add(accruedDepreciationAgent);
         agents.add(netBookValueAgent);
     }
-
-    private final List<Agent> agents = new FastList<>();
-
 
     void addAgent(Agent agent) {
         agents.add(agent);

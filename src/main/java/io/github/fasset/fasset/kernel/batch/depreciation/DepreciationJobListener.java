@@ -24,6 +24,10 @@ import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Listens for the start and completion for start and end of the depreciation batch after which it
+ * calls the appropriate job which is next in line
+ */
 @Component("depreciationJobListener")
 public class DepreciationJobListener implements JobExecutionListener {
 

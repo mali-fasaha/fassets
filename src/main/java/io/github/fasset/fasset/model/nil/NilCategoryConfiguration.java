@@ -20,6 +20,10 @@ package io.github.fasset.fasset.model.nil;
 
 import io.github.fasset.fasset.model.CategoryConfiguration;
 
+/**
+ * This object represents data improperly configured CategoryConfiguration through
+ * the use of defaults
+ */
 public class NilCategoryConfiguration {
 
     private String designation = "Category";

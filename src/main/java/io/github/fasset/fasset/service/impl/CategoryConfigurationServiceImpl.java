@@ -20,6 +20,7 @@ package io.github.fasset.fasset.service.impl;
 
 import io.github.fasset.fasset.model.CategoryConfiguration;
 import io.github.fasset.fasset.repository.CategoryConfigurationRepository;
+import io.github.fasset.fasset.service.CategoryBriefService;
 import io.github.fasset.fasset.service.CategoryConfigurationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * {@link CategoryBriefService} implementation
+ */
 @Service("categoryConfigurationService")
 public class CategoryConfigurationServiceImpl implements CategoryConfigurationService {
 
