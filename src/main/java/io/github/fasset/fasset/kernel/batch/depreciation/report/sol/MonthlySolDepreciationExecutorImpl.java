@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
  * might involve changing the structure of the entire batch. Future performance enhancement might start
  * from implementation of this interface
  */
-@Service("monthylSolDepreciationExecutor")
+@Service("monthlySolDepreciationExecutor")
 public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciationExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlySolDepreciationExecutorImpl.class);
@@ -51,7 +51,7 @@ public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciatio
      * and the solId
      *
      * @param solId The service outlet Id
-     * @param year Year of depreciation
+     * @param year  Year of depreciation
      * @return MonthlySolDepreciation
      */
     @Override

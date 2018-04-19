@@ -28,20 +28,23 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * <p>
  * Implements the {@link SubscriptionService} interface which is being observed by the registered {@link Subscriber}.
- * This is made possible through the {@link this#registerSubscriber} and the {@link this#deregisterSubscriber} methods.
- * The boolean {@link this#updated} keeps track of whether or not there's an update in the {@link SubscriptionService} and is
+ * This is made possible through the {@code registerSubscriber} and the {@code deregisterSubscriber} methods.
+ * The boolean {@code updated} keeps track of whether or not there's an update in the {@link SubscriptionService} and is
  * used to notify subscribers. Therefore if there is no update and someone calls {@link SubscriptionService#notifyObservers()}
  * it doesn't send false notifications
  * Synchronization is also used to make sure that the notification is only sent to the subscribers
- * registered before the {@link Update} is published to the {@link SubscriptionService}
+ * registered before the {@link Update} is published to the {@link SubscriptionService}</p>
  * <p>
  * adapted from https://www.journaldev.com/1739/observer-design-pattern-in-java
- * posted on AUGUST 2, 2016
+ * posted on AUGUST 2, 2016</p>
  *
- * @author Pankaj
  * <p>
- * modified by
+ * @author Pankaj
+ * </p>
+ * <p>
+ * modified by</p>
  * @author edwin.njeru
  */
 public class SimpleSubscription implements SubscriptionService {

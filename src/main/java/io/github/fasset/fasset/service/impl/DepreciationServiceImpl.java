@@ -62,7 +62,7 @@ public class DepreciationServiceImpl implements DepreciationService {
     /**
      * Saves the {@link Depreciation} object given as parameter to the {@link DepreciationRepository}
      *
-     * @param depreciation
+     * @param depreciation entity to be saved in the repository
      */
     @Override
     public void saveDepreciation(Depreciation depreciation) {

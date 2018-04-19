@@ -20,6 +20,8 @@ package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.config.MoneyProperties;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.NilDepreciation;
+import io.github.fasset.fasset.kernel.util.DepreciationOfNullAssetException;
+import io.github.fasset.fasset.kernel.util.NullDepreciationMonthException;
 import io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter;
 import io.github.fasset.fasset.model.Depreciation;
 import io.github.fasset.fasset.model.FixedAsset;
@@ -86,6 +88,8 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
 
         DepreciationProceeds depreciationProceeds = new DepreciationProceeds();
 
+        checkIfNull(asset, month);
+
         if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
             log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " + "depreciation", asset);
@@ -114,6 +118,17 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
         }
 
         return depreciationProceeds;
+    }
+
+    private void checkIfNull(FixedAsset asset, YearMonth month) {
+
+        if (asset != null && month != null) {
+            return;
+        } else if (asset == null) {
+            throw new DepreciationOfNullAssetException("A null asset cannot be depreciated");
+        } else {
+            throw new NullDepreciationMonthException("An asset cannot be depreciated in a null month");
+        }
     }
 
     /**

@@ -30,6 +30,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 /**
  * Creates a persist-ready {@link FixedAsset} object from the {@link FixedAssetDTO} object
  * coming from the ExcelItemReader
@@ -57,6 +59,8 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
     @Override
     public FixedAsset process(FixedAssetDTO fixedAssetDTO) throws Exception {
 
+        Objects.requireNonNull(fixedAssetDTO);
+
         log.debug("Processing {}", fixedAssetDTO);
 
         FixedAsset fixedAsset = new FixedAsset();
@@ -67,7 +71,7 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
                 .setSolId(fixedAssetDTO.getSolId()).setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
 
         } catch (Throwable e) {
-            String message = String.format("Exception encountered while processing : {}", fixedAssetDTO);
+            String message = String.format("%s could not be converted to FixedAsset entity", fixedAssetDTO);
             throw new BatchJobExecutionException(message, e);
         }
 

@@ -74,9 +74,9 @@ public class FileUploadServiceImpl implements FileUploadService {
 
         if (!theFileIsAlreadyUploaded(fileUpload)) {
             fileUploadRepository.save(fileUpload);
-            String fileName = fileUpload.getFileName();
+            /*String fileName = fileUpload.getFileName();
             String month = fileUpload.getMonth().toString();
-            String timeUploaded = fileUpload.getTimeUploaded().toString();
+            String timeUploaded = fileUpload.getTimeUploaded().toString();*/
             //FIXME : To implement observer pattern here
             //notificationService.sendNotification(new FileUploadNotification(fileName,month,timeUploaded));
         } else {

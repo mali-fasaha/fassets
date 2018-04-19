@@ -29,6 +29,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 /**
  * Converts string argument into money
  */
@@ -59,7 +61,7 @@ public class StringToMoneyConverter implements Converter<String, Money> {
         try {
             double moneyAmount = 0;
             if (stringMoney != null) {
-                moneyAmount = stringToDoubleConverter.convert(stringMoney);
+                moneyAmount = Objects.requireNonNull(stringToDoubleConverter.convert(stringMoney));
             } else {
                 log.error("The string money amount passed is null");
             }

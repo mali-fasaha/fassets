@@ -28,7 +28,7 @@ import java.util.List;
 public interface CategoryBriefService {
 
     /**
-     * @return {@link List<CategoryBrief>} fetched from the repository
+     * @return {@link List} of {@link CategoryBrief} items fetched from the repository
      */
     List<CategoryBrief> fetchAllCategoryBriefs();
 

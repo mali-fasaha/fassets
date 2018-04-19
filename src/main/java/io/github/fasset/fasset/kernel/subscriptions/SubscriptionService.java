@@ -21,8 +21,8 @@ package io.github.fasset.fasset.kernel.subscriptions;
 /**
  * This interface allows a client to be able to publish an {@link Update} to each {@link Subscriber}
  * currently subscribed.
- * The method {@link this#postUpdate(Update)} once triggered will change the state of the client
- * and then call {@link this#notifyObservers()}, effectively publishing the {@link Update} to
+ * The method {@code postUpdate(Update)} once triggered will change the state of the client
+ * and then call {@code notifyObservers()}, effectively publishing the {@link Update} to
  * each {@link Subscriber}
  *
  * @author edwin.njeru

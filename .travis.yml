@@ -1,11 +1,11 @@
 language: java
 install: true
 script:
-- mvn install
+- mvn clean test
+- mvn clean validate
+- mvn clean verify
 - mvn compile
 - mvn clean package
-- mvn clean test
-- mvn clean verify
-- mvn pdf:pdf
+- mvn install
 jdk:
   - oraclejdk8

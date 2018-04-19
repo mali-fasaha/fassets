@@ -86,7 +86,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
     /**
      * Saves a {@link List} collection of {@link AccruedDepreciation} items
      *
-     * @param items
+     * @param items AccruedDepreciation items to be saved to the repository
      */
     @Override
     public void saveAllAccruedDepreciationRecords(List<? extends AccruedDepreciation> items) {

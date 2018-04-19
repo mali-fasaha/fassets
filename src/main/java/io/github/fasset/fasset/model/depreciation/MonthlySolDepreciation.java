@@ -23,7 +23,6 @@ import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
-import java.util.Objects;
 
 /**
  * This object represents a record of an SOL's depreciation for all the months of
@@ -207,17 +206,19 @@ public class MonthlySolDepreciation extends DomainModel<String> {
             return false;
         }
         MonthlySolDepreciation that = (MonthlySolDepreciation) o;
-        return solId == that.solId && year == that.year && Double.compare(that.jan, jan) == 0 && Double.compare(that.feb, feb) == 0 && Double.compare(that.mar, mar) == 0 &&
-            Double.compare(that.apr, apr) == 0 && Double.compare(that.may, may) == 0 && Double.compare(that.jun, jun) == 0 && Double.compare(that.jul, jul) == 0 &&
-            Double.compare(that.aug, aug) == 0 && Double.compare(that.sep, sep) == 0 && Double.compare(that.oct, oct) == 0 && Double.compare(that.nov, nov) == 0 && Double.compare(that.dec, dec) == 0;
+        return year == that.year && Double.compare(that.jan, jan) == 0 && Double.compare(that.feb, feb) == 0 && Double.compare(that.mar, mar) == 0 && Double.compare(that.apr, apr) == 0 &&
+            Double.compare(that.may, may) == 0 && Double.compare(that.jun, jun) == 0 && Double.compare(that.jul, jul) == 0 && Double.compare(that.aug, aug) == 0 &&
+            Double.compare(that.sep, sep) == 0 && Double.compare(that.oct, oct) == 0 && Double.compare(that.nov, nov) == 0 && Double.compare(that.dec, dec) == 0 &&
+            com.google.common.base.Objects.equal(solId, that.solId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), solId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
+        return com.google.common.base.Objects.hashCode(super.hashCode(), solId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 
     @Override
+    @SuppressWarnings("all")
     public String toString() {
         final StringBuilder sb = new StringBuilder("MonthlySolDepreciation{");
         sb.append("solId=").append(solId);

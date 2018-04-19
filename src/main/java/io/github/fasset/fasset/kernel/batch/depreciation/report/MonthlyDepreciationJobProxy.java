@@ -100,8 +100,10 @@ public class MonthlyDepreciationJobProxy {
         annualRelay().forEach(year -> {
 
             log.info("Running {} job for the year : {}", job, year);
-            jobParametersBuilder.addString("year", year.toString()).toJobParameters();
-            fixedAssetsJobsActivator.bootstrap(jobParametersBuilder.addLong("year", Long.valueOf(year)).toJobParameters(), jobLauncher, job, fixedAssetService);
+
+            JobParametersBuilder parametersBuilder = jobParametersBuilder.addString("year", year.toString());
+
+            fixedAssetsJobsActivator.bootstrap(parametersBuilder.addLong("year", Long.valueOf(year)).toJobParameters(), jobLauncher, job, fixedAssetService);
         });
     }
 

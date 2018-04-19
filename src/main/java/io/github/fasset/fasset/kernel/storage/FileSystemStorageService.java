@@ -45,6 +45,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -77,7 +78,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     @Override
     public void store(MultipartFile file) {
 
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         log.info("Storing file into the directory : {}", fileName);
 
         if (file.isEmpty()) {

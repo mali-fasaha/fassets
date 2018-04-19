@@ -57,7 +57,7 @@ public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciation
     /**
      * Save all the items in the parameter into the MonthlySolDepreciationRepository
      *
-     * @param items
+     * @param items {@link List} of {@link MonthlySolDepreciation} entities to be saved in the repository
      */
     @Override
     public void saveAllMonthlyDepreciationItems(List<? extends MonthlySolDepreciation> items) {

@@ -49,7 +49,7 @@ public class NetBookValueServiceImpl implements NetBookValueService {
     /**
      * Saves the {@link NetBookValue} object in the param
      *
-     * @param netBookValue
+     * @param netBookValue entity to be saved into the repository
      */
     @Override
     public void saveNetBookValue(NetBookValue netBookValue) {
@@ -61,7 +61,7 @@ public class NetBookValueServiceImpl implements NetBookValueService {
      * Saves a {@link List} collection of all items passed in the parameter to the
      * {@link NetBookValueRepository}
      *
-     * @param netBookValues
+     * @param netBookValues {@link List} of {@link NetBookValue} entities to be saved in the repository
      */
     @Override
     public void saveAllNetBookValueItems(List<? extends NetBookValue> netBookValues) {

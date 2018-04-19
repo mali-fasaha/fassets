@@ -28,7 +28,7 @@ import java.util.List;
 public interface ServiceOutletBriefService {
 
     /**
-     * @return {@link List<ServiceOutletBrief>} of service outlets from repository
+     * @return {@link List} of {@link ServiceOutletBrief} items from repository
      */
     List<ServiceOutletBrief> fetchAllServiceOutletBriefs();
 

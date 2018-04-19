@@ -29,6 +29,7 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.time.YearMonth;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Takes {@link Date} converting it to {@link YearMonth}
@@ -87,15 +88,11 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
 
         try {
 
-            convertedMonth = localDateToYearMonthConverter.convert(dateToLocalDateConverter.convert(convertFrom));
+            convertedMonth = localDateToYearMonthConverter.convert(Objects.requireNonNull(dateToLocalDateConverter.convert(convertFrom)));
 
         } catch (Throwable e) {
             if (dateToLocalDateConverter == null) {
                 throw new ConverterException("The dateToLocalDateConverter is null", e);
-            } else if (source == null) {
-                throw new ConverterException("The date provided is null, kindly review the source data again...", e);
-            } else if (convertFrom == null) {
-                throw new ConverterException("The month we are converting evaluates to null", e);
             } else {
                 throw new ConverterException(String.format("Exception thrown while converting %s to YearMonth", source), e);
             }

@@ -62,7 +62,7 @@ public class MonthlySolDepreciationJobConfiguration {
     public MonthlySolDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
                                                   @Qualifier("monthlySolDepreciationJobListener") MonthlySolDepreciationJobListener monthlySolDepreciationJobListener,
                                                   MonthlySolDepreciationService monthlySolDepreciationService,
-                                                  @Qualifier("monthylSolDepreciationExecutor") MonthlySolDepreciationExecutor monthlySolDepreciationExecutor,
+                                                  @Qualifier("monthlySolDepreciationExecutor") MonthlySolDepreciationExecutor monthlySolDepreciationExecutor,
                                                   EntityManagerFactory entityManagerFactory) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;

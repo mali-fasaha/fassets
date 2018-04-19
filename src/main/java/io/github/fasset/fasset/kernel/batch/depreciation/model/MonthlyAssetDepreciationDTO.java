@@ -26,7 +26,13 @@ import org.slf4j.LoggerFactory;
 import javax.money.MonetaryAmount;
 
 /**
- * DTO to carry the depreciation for each month of a year for each asset
+ * DTO to carry the depreciation for each month of a year for each asset. Okay, a possible
+ * performance issue is that there is a lot of boxing and un boxing going on, but this is
+ * something that we will suffer because the database may not contain certain  months leading
+ * to null items as opposed to zeroes. The only way to refactor this is to put tests on all batches
+ * end to end, then see if they will still run without the auto boxing.
+ * <p>
+ * //TODO remove auto boxing
  */
 public class MonthlyAssetDepreciationDTO {
 

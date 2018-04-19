@@ -31,6 +31,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * {@link ServiceOutletBriefService} implementation
@@ -49,7 +50,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
     }
 
     /**
-     * @return {@link List < ServiceOutletBrief >} of service outlets from repository
+     * @return {@link List} of {@link ServiceOutletBrief} entities from repository
      */
     @Override
     public List<ServiceOutletBrief> fetchAllServiceOutletBriefs() {
@@ -78,10 +79,10 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
     @Cacheable("serviceOutletBriefsByIds")
     public ServiceOutletBrief fetchServiceOutletBriefGivenId(int id) {
 
-        ServiceOutletBrief serviceOutletBrief = null;
+        ServiceOutletBrief serviceOutletBrief;
 
         try {
-            serviceOutletBrief = serviceOutletBriefRepository.findById(id).get();
+            serviceOutletBrief = Objects.requireNonNull(serviceOutletBriefRepository.findById(id)).get();
         } catch (Throwable e) {
             String message = "Exception encountered while extracting data from the serviceOutletBriefRepository";
             throw new DataRetrievalFromControllerException(message, e);

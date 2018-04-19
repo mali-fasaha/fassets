@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
+import java.util.Objects;
 
 /**
  * This component acts as middleware between calculated depreciation and actual application of calculated
@@ -112,7 +113,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     /**
      * Sets the amount of depreciation for review
      *
-     * @param depreciationAmount => amount by which we are to depreciate the asset
+     * @param depreciationAmount This is the amount by which we are to depreciate the asset
      */
     @Override
     public DepreciationPreprocessor setDepreciationAmount(Money depreciationAmount) {
@@ -185,7 +186,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     @SuppressWarnings("all")
     private void depreciationTimingCheck(FixedAsset asset, YearMonth month) {
         log.debug("Reviewing the depreciation timing for asset : {}, relative to the " + "month: {}", asset, month);
-        if (localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)) {
+        if (localDateToYearMonthConverter.convert(Objects.requireNonNull(asset.getPurchaseDate())).isAfter(month)) {
             log.debug(
                 "The month of purchase of asset: {} comes later than the depreciation period : {}" + "therefore we are resetting the depreciation formally calculated as : {} " + "amount to zero",
                 asset, month, depreciationAmount);

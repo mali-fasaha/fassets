@@ -48,7 +48,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
      * Return an ordered list of all monthly depreciation from the
      * monthlyAssetDepreciationRepository
      *
-     * @return
+     * @return {@link List} of {@link MonthlyAssetDepreciation} entities from the repository
      */
     @Override
     public List<MonthlyAssetDepreciation> fetchAllMonthlyDepreciations() {
@@ -58,9 +58,9 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
     /**
      * Returns the MonthlyAssetDepreciation for a given assetId and Year
      *
-     * @param fixedAssetId
-     * @param year
-     * @return
+     * @param fixedAssetId Id of the asset whose month on month depreciation we require
+     * @param year Year of depreciation for the asset
+     * @return this
      */
     @Override
     @Cacheable("monthlyAssetDepreciationByIdAnYears")
@@ -72,7 +72,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
     /**
      * Saves all new monthly depreciation items and updates exiting ones
      *
-     * @param items
+     * @param items Entities to be persisted into the repository
      */
     @Override
     public void saveAllMonthlyDepreciationItems(List<? extends MonthlyAssetDepreciation> items) {

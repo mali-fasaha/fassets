@@ -56,7 +56,7 @@ public class ExcelMapperImpl implements ExcelMapper {
     }
 
     /**
-     * This return a list of all items of type @param <M>  as they are read from the library
+     * This return a list of all items as they are read from the excel document in the file system.
      *
      * @param clazz class defining the mapped object
      * @param path  path of the excel file

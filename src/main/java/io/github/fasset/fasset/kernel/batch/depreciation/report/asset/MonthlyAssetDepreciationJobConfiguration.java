@@ -18,8 +18,6 @@
 
 package io.github.fasset.fasset.kernel.batch.depreciation.report.asset;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor;
-import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationProcessor;
 import io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationWriter;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
@@ -38,8 +36,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-
-import javax.annotation.PostConstruct;
 
 /**
  * Configuration for the MonthlyAssetDepreciationJob
@@ -66,21 +62,21 @@ public class MonthlyAssetDepreciationJobConfiguration {
 
     private final MonthlySolDepreciationService monthlySolDepreciationService;
 
-    private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
+    //private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
 
     @Autowired
     public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, @Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService,
                                                     StepBuilderFactory stepBuilderFactory, ItemReader<FixedAsset> fixedAssetItemReader,
                                                     @Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor,
-                                                    MonthlySolDepreciationService monthlySolDepreciationService,
-                                                    MonthlySolDepreciationExecutor monthlySolDepreciationExecutor) {
+                                                    MonthlySolDepreciationService monthlySolDepreciationService /*,
+                                                    MonthlySolDepreciationExecutor monthlySolDepreciationExecutor*/) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.monthlyAssetDepreciationService = monthlyAssetDepreciationService;
         this.stepBuilderFactory = stepBuilderFactory;
         this.fixedAssetItemReader = fixedAssetItemReader;
         this.monthlyAssetDepreciationExecutor = monthlyAssetDepreciationExecutor;
         this.monthlySolDepreciationService = monthlySolDepreciationService;
-        this.monthlySolDepreciationExecutor = monthlySolDepreciationExecutor;
+        //this.monthlySolDepreciationExecutor = monthlySolDepreciationExecutor;
     }
 
 
@@ -141,12 +137,12 @@ public class MonthlyAssetDepreciationJobConfiguration {
         return new MonthlySolDepreciationWriter(monthlySolDepreciationService);
     }
 
-    @Bean
+    /*@Bean
     @JobScope
     public MonthlySolDepreciationProcessor monthlySolDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
 
         return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor, year);
-    }
+    }*/
 
 
     /*@Bean("createMonthlySolDepreciationItems")

@@ -454,26 +454,6 @@
                 </executions>
             </plugin>
 
-            <!-- Setup pdf plugin-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pdf-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>pdf</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>pdf</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
-                            <includeReports>true</includeReports>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- Setup surefire plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -596,23 +576,6 @@
                     <includeTestResources>${checkstyle.config.includeTestResources}</includeTestResources>
                     <includeTestSourceDirectory>${checkstyle.config.includeTestSourceDirectory}</includeTestSourceDirectory>
                     <linkXRef>${linkXRef}</linkXRef>
-                </configuration>
-            </plugin>
-            <!-- Setup Jar file manifest entries -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                        </manifest>
-                        <!--<manifestEntries>
-                            <Automatic-Module-Name>${fassets.module.name}</Automatic-Module-Name>
-                        </manifestEntries>-->
-                    </archive>
                 </configuration>
             </plugin>
             <!-- Setup Javadoc jar -->

@@ -89,13 +89,16 @@ public class FixedAssetDTO {
 
     public Date getPurchaseDate() {
         log.trace("Retval : {}", purchaseDate);
-        return purchaseDate;
+        // trying to protect internal variables which hopefully remain invariant
+        //return Date.from(purchaseDate.toInstant());
+
+        return new Date(purchaseDate.getTime());
     }
 
-    public FixedAssetDTO setPurchaseDate(Date purchaseDate) {
+    /*public FixedAssetDTO setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
         return this;
-    }
+    }*/
 
     public String getCategory() {
         log.trace("Retval : {}", category);

@@ -25,14 +25,16 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.util.Objects;
+
 /**
  * Processes data for a given year generating a MonthlyCategoryDepreciation for the same year
  */
 public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<String, MonthlyCategoryDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyCategoryDepreciationProcessor.class);
-    private String year;
     private final MonthlyCategoryDepreciationExecutor executor;
+    private String year;
 
     @Autowired// Check if dependencies are autowired correctly
     public MonthlyCategoryDepreciationProcessor(@Qualifier("monthlyCategoryDepreciationExecutor") MonthlyCategoryDepreciationExecutor executor, String year) {
@@ -53,11 +55,6 @@ public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<Strin
     @Override
     public MonthlyCategoryDepreciation process(String item) throws Exception {
 
-        if (year == null) {
-
-            log.warn("The year value passed is null : {}", year);
-        }
-
-        return executor.getMonthlyDepreciation(item, Integer.parseInt(year));
+        return executor.getMonthlyDepreciation(item, Integer.parseInt(Objects.requireNonNull(year)));
     }
 }

@@ -32,13 +32,18 @@ import java.util.List;
 public class ExcelMapperServiceImpl implements ExcelMapperService {
 
 
+    private final ExcelDataProvider excelDataProvider;
+
     @Autowired
-    private ExcelDataProvider excelDataProvider;
+    public ExcelMapperServiceImpl(ExcelDataProvider excelDataProvider) {
+        this.excelDataProvider = excelDataProvider;
+    }
 
     /**
      * @param fileName where the excel file is located
-     * @return {@link List < FixedAssetDTO >} from the fileName
+     * @return {@link List} of {@link FixedAssetDTO} items from the fileName
      */
+    @SuppressWarnings("unchecked")
     @Override
     public List<FixedAssetDTO> fetchExcelData(String fileName) {
 

@@ -22,11 +22,11 @@ import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.Objects;
 
 /**
  * Converts java.time.LocalDate to java.time.YearMonth
@@ -43,26 +43,43 @@ public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearM
      * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
      * @throws IllegalArgumentException if the source cannot be converted to the desired target type
      */
-    @Nullable
     @Override
     public YearMonth convert(LocalDate source) {
 
-        YearMonth convertedMonth = null;
+        YearMonth convertedMonth;
 
         log.debug("Converting {} to YearMonth", source.toString());
 
         try {
+            checkIfSourceIsNull(source);
+        } catch (Exception e) {
+            return convert(); //TODO ... Will review this later
+        }
 
-            convertedMonth = YearMonth.from(source);
+        try {
+
+            convertedMonth = YearMonth.from(Objects.requireNonNull(source)); // Jus being careful
 
         } catch (Throwable e) {
-            if (source == null) {
-                throw new ConverterException("The date provided is null, kindly review the source data again...", e);
-            } else {
-                throw new ConverterException(String.format("Exception thrown while converting %s to YearMonth", source), e);
-            }
+            throw new ConverterException(String.format("Exception thrown while converting %s to YearMonth", source), e);
         }
 
         return convertedMonth;
+    }
+
+    /**
+     * Convert the source object of type {@code S} to target type {@code T}.
+     *
+     * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
+     * @throws IllegalArgumentException if the source cannot be converted to the desired target type
+     */
+    public YearMonth convert() {
+        return convert(LocalDate.now());
+    }
+
+    private void checkIfSourceIsNull(LocalDate date) {
+        if (date == null) {
+            throw new ConverterException("The date provided is null, kindly review the source data again...");
+        }
     }
 }

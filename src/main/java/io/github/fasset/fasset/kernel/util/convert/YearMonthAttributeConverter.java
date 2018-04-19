@@ -31,7 +31,7 @@ import java.util.Date;
 /**
  * This class enables the JPA specification to convert a {@link java.time.YearMonth} variable
  * into database-friendly format that is not persisted as a blob through implementation of
- * JPA 2.1's {@link javax.persistence.AttributeConverter<java.time.YearMonth,java.sql.Date>}
+ * JPA 2.1's {@link javax.persistence.AttributeConverter}
  * interface.
  * It is applied automatically to any {@link YearMonth} variable that is being persisted to the
  * database, just before the persistence engines flushes it to the database.

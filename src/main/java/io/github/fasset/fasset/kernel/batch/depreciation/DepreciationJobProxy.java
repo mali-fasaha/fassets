@@ -21,15 +21,11 @@ package io.github.fasset.fasset.kernel.batch.depreciation;
 import io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.FixedAssetService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-
-import javax.jms.JMSException;
 
 /**
  * Interface for launching the depreciation job. This abstraction enables the launch to be carried out from any

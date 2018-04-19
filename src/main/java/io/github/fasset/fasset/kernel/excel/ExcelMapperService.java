@@ -29,7 +29,7 @@ public interface ExcelMapperService {
 
     /**
      * @param fileName where the excel file is located
-     * @return {@link List<FixedAssetDTO>} from the fileName
+     * @return {@link List} of {@link FixedAssetDTO} items from the fileName
      */
     List<FixedAssetDTO> fetchExcelData(String fileName);
 }

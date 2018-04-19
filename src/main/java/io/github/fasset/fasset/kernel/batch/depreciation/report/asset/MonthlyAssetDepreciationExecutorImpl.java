@@ -52,8 +52,9 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
      * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation
      * item
      *
-     * @param fixedAsset
-     * @return
+     * @param fixedAsset {@link FixedAsset} for which we require the monthly Depreciation for a given year
+     * @param year for which we are getting monthly depreciation
+     * @return MonthlyAssetDepreciation
      */
     @Override
     public MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset, Integer year) {

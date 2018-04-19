@@ -91,4 +91,30 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
     public int getRemainingItems() {
         return remainingItems;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        ProcessingListImpl<?> that = (ProcessingListImpl<?>) o;
+
+        return itemsAdded == that.itemsAdded && itemsProcessed == that.itemsProcessed && remainingItems == that.remainingItems;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + itemsAdded;
+        result = 31 * result + itemsProcessed;
+        result = 31 * result + remainingItems;
+        return result;
+    }
 }

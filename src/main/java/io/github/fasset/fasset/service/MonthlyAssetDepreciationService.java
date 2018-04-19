@@ -39,7 +39,7 @@ public interface MonthlyAssetDepreciationService {
      * Returns the MonthlyAssetDepreciation for a given assetId and Year
      *
      * @param fixedAssetId Id of FixedAsset for whose MonthlyAssetDepreciation we need
-     * @param year Year of depreciation for the asset
+     * @param year         Year of depreciation for the asset
      * @return MonthlyAssetDepreciation for a FixedAsset entity whose id was found in the database
      */
     MonthlyAssetDepreciation getMonthlyAssetDepreciationByAssetIdAndYear(int fixedAssetId, int year);

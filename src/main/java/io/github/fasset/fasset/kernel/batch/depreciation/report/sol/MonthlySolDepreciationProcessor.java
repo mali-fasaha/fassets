@@ -22,8 +22,8 @@ import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
+import java.util.Objects;
 
 /**
  * Takes the year and generates the appropriate monthly by month Service outlet depreciation for
@@ -32,11 +32,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 public class MonthlySolDepreciationProcessor implements ItemProcessor<String, MonthlySolDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlySolDepreciationProcessor.class);
+
     private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
     private String year;
 
-    @Autowired
-    public MonthlySolDepreciationProcessor(@Qualifier("monthylSolDepreciationExecutor") MonthlySolDepreciationExecutor monthlySolDepreciationExecutor, String year) {
+    public MonthlySolDepreciationProcessor(MonthlySolDepreciationExecutor monthlySolDepreciationExecutor, String year) {
         this.year = year;
         this.monthlySolDepreciationExecutor = monthlySolDepreciationExecutor;
     }
@@ -54,11 +54,8 @@ public class MonthlySolDepreciationProcessor implements ItemProcessor<String, Mo
     @Override
     public MonthlySolDepreciation process(String item) throws Exception {
 
-        if (year == null) {
+        log.debug("Generating MonthlySolDepreciation for the sol : {}", item);
 
-            log.warn("The year value passed is null : {}", year);
-        }
-
-        return monthlySolDepreciationExecutor.getMonthlyDepreciation(item, Integer.parseInt(year));
+        return monthlySolDepreciationExecutor.getMonthlyDepreciation(item, Integer.parseInt(Objects.requireNonNull(year)));
     }
 }

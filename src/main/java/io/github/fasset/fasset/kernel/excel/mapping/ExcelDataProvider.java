@@ -34,7 +34,7 @@ import java.util.List;
  * Given a filePath and a class it can generate a list of the objects of the class when
  * class and the excel file resonate with each other
  *
- * @param <T>
+ * @param <T> Type of objects in a collection as read from the excel file
  */
 @Component("excelDataProvider")
 public class ExcelDataProvider<T> {

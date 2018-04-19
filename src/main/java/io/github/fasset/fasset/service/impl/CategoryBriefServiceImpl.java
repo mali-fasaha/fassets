@@ -50,7 +50,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
     }
 
     /**
-     * @return {@link List < CategoryBrief >} fetched from the repository
+     * @return {@link List} of {@link CategoryBrief} items fetched from the repository
      */
     @Override
     public List<CategoryBrief> fetchAllCategoryBriefs() {

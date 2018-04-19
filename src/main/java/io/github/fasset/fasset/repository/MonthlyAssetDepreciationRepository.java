@@ -33,7 +33,7 @@ public interface MonthlyAssetDepreciationRepository extends JpaRepository<Monthl
      * Returns an asset that corresponds the assetId and year given
      *
      * @param assetId Id of the fixed asset being depreciated
-     * @param year Year of the occurrence of depreciation
+     * @param year    Year of the occurrence of depreciation
      * @return MonthlyAssetDepreciation
      */
     MonthlyAssetDepreciation findFirstByAssetIdAndYearEquals(int assetId, int year);

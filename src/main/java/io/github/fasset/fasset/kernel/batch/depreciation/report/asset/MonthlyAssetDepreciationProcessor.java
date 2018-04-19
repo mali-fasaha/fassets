@@ -25,16 +25,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.util.Objects;
+
 /**
  * Processor for MonthlyAssetDepreciation creates a MonthlyAssetDepreciation object from a FixedAsset object
  */
 public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAsset, MonthlyAssetDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyAssetDepreciationProcessor.class);
-
-    private String year;
-
     private final MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
+    private String year;
 
     public MonthlyAssetDepreciationProcessor(@Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor, String year) {
         this.year = year;
@@ -54,11 +54,8 @@ public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAss
     @Override
     public MonthlyAssetDepreciation process(FixedAsset fixedAsset) throws Exception {
 
-        if (year == null) {
+        log.debug("Generating monthlyAssetDepreciation for fixedAsset id : {}", fixedAsset.getId());
 
-            log.warn("The year value passed is null : {}", year);
-        }
-
-        return monthlyAssetDepreciationExecutor.getMonthlyDepreciation(fixedAsset, Integer.parseInt(year));
+        return monthlyAssetDepreciationExecutor.getMonthlyDepreciation(fixedAsset, Integer.parseInt(Objects.requireNonNull(year)));
     }
 }

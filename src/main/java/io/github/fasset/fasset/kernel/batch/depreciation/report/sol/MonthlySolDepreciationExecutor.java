@@ -30,7 +30,7 @@ public interface MonthlySolDepreciationExecutor {
      * and the solId
      *
      * @param solId The service outlet Id
-     * @param year Year of depreciation
+     * @param year  Year of depreciation
      * @return MonthlySolDepreciation
      */
     MonthlySolDepreciation getMonthlyDepreciation(String solId, Integer year);

@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Fixed all checkstyle issues**
+
+
+[8a9c353ca35b706](https://github.com/ghacupha/fassets/commit/8a9c353ca35b706) Edwin Njeru *2018-04-19 08:04:19*
+
 **migration to springboot 2.0.1.RELEASE**
 
 
