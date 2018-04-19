@@ -26,22 +26,30 @@ import io.github.fasset.fasset.model.CategoryConfiguration;
  */
 public class NilCategoryConfiguration {
 
-    private String designation = "Category";
+    private final String designation;
 
     /**
      * The name of the depreciation logic
      */
-    private String depreciationLogic = "DECLININGBALANCE";
+    private final String depreciationLogic;
 
     /**
      * This is the item on which the depreciation rate is applied, as in either the cost
      * or the net book value
      */
-    private String deprecant = "NETBOOKVALUE";
+    private final String deprecant;
 
-    private double depreciationRate = 0.00;
+    private final double depreciationRate;
 
-    private String categoryLedgerId = "0000000000";
+    private final String categoryLedgerId;
+
+    public NilCategoryConfiguration() {
+        this.designation = "Category";
+        this.depreciationLogic = "DECLININGBALANCE";
+        this.deprecant = "NETBOOKVALUE";
+        this.depreciationRate = 0.00;
+        this.categoryLedgerId = "0000000000";
+    }
 
     public CategoryConfiguration getCategoryConfiguration() {
         return new CategoryConfiguration(designation, depreciationLogic, deprecant, depreciationRate, categoryLedgerId);

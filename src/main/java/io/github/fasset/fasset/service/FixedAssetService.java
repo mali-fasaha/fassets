@@ -32,22 +32,22 @@ public interface FixedAssetService {
     /**
      * Saves all {@link FixedAsset} items passed in a list, avoiding duplicate items
      *
-     * @param fixedAssets
+     * @param fixedAssets Collection of fixedAsset items to be saved
      */
     void saveAllFixedAssets(List<? extends FixedAsset> fixedAssets);
 
     /**
      * Fetches a List of all existing items in the {@link io.github.fasset.fasset.repository.FixedAssetRepository}
      *
-     * @return
+     * @return Collection of persistent FixedAsset items as drawn from the database
      */
     List<FixedAsset> fetchAllExistingAssets();
 
     /**
      * Extracts the fixed asset when the id is known
      *
-     * @param id
-     * @return
+     * @param id Id of the fixedAsset item to be extracted
+     * @return FixedAsset item whose Id was found in the database
      */
     FixedAsset fetchAssetGivenId(int id);
 
@@ -81,6 +81,7 @@ public interface FixedAssetService {
 
     /**
      * @param fixedAsset to be saved to fixedAssetRepository
+     * @return FixedAsset entity saved in the database
      */
     FixedAsset saveFixedAsset(FixedAsset fixedAsset);
 

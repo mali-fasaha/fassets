@@ -36,6 +36,9 @@ import java.time.YearMonth;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Used to launch the monthly depreciation job
+ */
 @Component("monthlyDepreciationJobProxy")
 public class MonthlyDepreciationJobProxy {
 
@@ -75,12 +78,12 @@ public class MonthlyDepreciationJobProxy {
 
     public void initializeMonthlyDepreciationReporting() {
 
-        int no_of_assets = fixedAssetService.getPoll();
-        LocalDateTime starting_time = LocalDateTime.now();
+        int numberOfAssets = fixedAssetService.getPoll();
+        LocalDateTime startingTime = LocalDateTime.now();
 
-        log.info("Depreciation has begun with {} items at time: {}", no_of_assets, starting_time);
+        log.info("Depreciation has begun with {} items at time: {}", numberOfAssets, startingTime);
 
-        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("no_of_assets", String.valueOf(no_of_assets)).addString("starting_time", starting_time.toString());
+        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets)).addString("starting_time", startingTime.toString());
 
         log.info("executing MonthlyAssetDepreciation job : {}", monthlyAssetDepreciationJob);
         executeMonthlyJob(jobParametersBuilder, monthlyAssetDepreciationJob);

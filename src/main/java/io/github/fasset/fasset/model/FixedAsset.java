@@ -37,11 +37,6 @@ import java.util.Objects;
  *
  * @author edwin.njeru
  */
-/*@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "sol_id","barcode","asset_description","purchase_date","category","purchase_cost"
-        })
-})*/
 @Entity(name = "FixedAsset")
 @Audited
 public class FixedAsset extends DomainModel<String> implements Serializable, Comparable<FixedAsset> {

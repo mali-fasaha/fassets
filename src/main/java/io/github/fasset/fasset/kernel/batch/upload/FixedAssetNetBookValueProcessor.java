@@ -34,7 +34,7 @@ import java.time.YearMonth;
 @Component("fixedAssetNetBookValueProcessor")
 public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset, NetBookValue> {
 
-    private final static Logger log = LoggerFactory.getLogger(FixedAssetNetBookValueProcessor.class);
+    private static final Logger log = LoggerFactory.getLogger(FixedAssetNetBookValueProcessor.class);
 
     /**
      * Process the provided item, returning a potentially modified or new item for continued

@@ -20,15 +20,18 @@ package io.github.fasset.fasset.kernel.batch.depreciation.report.sol;
 
 import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 
+/**
+ * Interface for that carries out execution of depreciation summary by SOL
+ */
 public interface MonthlySolDepreciationExecutor {
 
     /**
      * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation
      * and the solId
      *
-     * @param solId
-     * @param year
-     * @return
+     * @param solId The service outlet Id
+     * @param year Year of depreciation
+     * @return MonthlySolDepreciation
      */
     MonthlySolDepreciation getMonthlyDepreciation(String solId, Integer year);
 }

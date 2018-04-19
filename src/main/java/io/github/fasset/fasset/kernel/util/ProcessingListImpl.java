@@ -36,9 +36,15 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
 
     private static final Logger log = LoggerFactory.getLogger(ProcessingListImpl.class);
 
-    private int itemsAdded = 0;
-    private int itemsProcessed = 0;
-    private int remainingItems = 0;
+    private int itemsAdded;
+    private int itemsProcessed;
+    private int remainingItems;
+
+    public ProcessingListImpl() {
+        this.itemsAdded = 0;
+        this.itemsProcessed = 0;
+        this.remainingItems = 0;
+    }
 
     /**
      * Appends the specified element to the end of this list.

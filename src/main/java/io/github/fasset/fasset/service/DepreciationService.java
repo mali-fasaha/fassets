@@ -33,14 +33,14 @@ public interface DepreciationService {
     /**
      * Saves the {@link Depreciation} object given as parameter to the {@link io.github.fasset.fasset.repository.DepreciationRepository}
      *
-     * @param depreciation
+     * @param depreciation item to be saved
      */
     void saveDepreciation(Depreciation depreciation);
 
     /**
      * Saves all items in the list
      *
-     * @param depreciationList
+     * @param depreciationList Collection of depreciation items to be saved
      */
     void saveAllDepreciationItems(List<Depreciation> depreciationList);
 

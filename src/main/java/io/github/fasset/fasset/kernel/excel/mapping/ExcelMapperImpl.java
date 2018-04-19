@@ -21,6 +21,7 @@ package io.github.fasset.fasset.kernel.excel.mapping;
 import com.poiji.bind.Poiji;
 import io.github.fasset.fasset.config.MapperOptions;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -29,8 +30,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Thread-safe implementation of the {@link ExcelMapper}
@@ -41,8 +40,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Component("excelMapper")
 public class ExcelMapperImpl implements ExcelMapper {
 
-    private final static Logger LOGGER = getLogger(ExcelMapperImpl.class);
-
+    private static final Logger log = LoggerFactory.getLogger(ExcelMapperImpl.class);
 
     private MapperOptions mapperOptions;
 
@@ -68,7 +66,7 @@ public class ExcelMapperImpl implements ExcelMapper {
     @Override
     public List mappedList(Class<?> clazz, String path) {
 
-        LOGGER.info("Creating a mapped list for class : {}, using file from the path : {}", clazz, path);
+        log.info("Creating a mapped list for class : {}, using file from the path : {}", clazz, path);
 
         List mappedlist = new LinkedList<>();
 
@@ -83,7 +81,7 @@ public class ExcelMapperImpl implements ExcelMapper {
             throw new ExcelMapperException(message, e);
         }
 
-        LOGGER.info("{} items have been inserted into a list...", mappedlist.size());
+        log.info("{} items have been inserted into a list...", mappedlist.size());
 
         return Collections.unmodifiableList(mappedlist);
     }

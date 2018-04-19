@@ -35,7 +35,7 @@ public interface MonthlySolDepreciationService {
     /**
      * Save all the items in the parameter into the MonthlySolDepreciationRepository
      *
-     * @param items
+     * @param items MonthlyDepreciation entities to be persisted to the repository
      */
     void saveAllMonthlyDepreciationItems(List<? extends MonthlySolDepreciation> items);
 }

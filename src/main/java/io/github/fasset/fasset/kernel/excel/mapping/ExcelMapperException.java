@@ -18,7 +18,12 @@
 
 package io.github.fasset.fasset.kernel.excel.mapping;
 
-public class ExcelMapperException extends RuntimeException {
-    public ExcelMapperException(String message, Throwable e) {
+/**
+ * Exception thrown by the excelMapper in the process of deserializing data from an excel file
+ */
+class ExcelMapperException extends RuntimeException {
+
+    ExcelMapperException(String message, Throwable e) {
+        super(message, e);
     }
 }

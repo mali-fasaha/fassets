@@ -24,6 +24,7 @@ import io.github.fasset.fasset.kernel.subscriptions.Subscriber;
 import io.github.fasset.fasset.kernel.subscriptions.Update;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -34,15 +35,13 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 /**
  * This object bootstraps an excel upload job after the file has been uploaded to the server
  */
 @Component("excelUploadJob")
 public class ExcelUploadJob extends AbstractSubscriber implements Subscriber {
 
-    private final static Logger log = getLogger(ExcelUploadJob.class);
+    private static final Logger log = LoggerFactory.getLogger(ExcelUploadJob.class);
 
     private final JobLauncher jobLauncher;
 

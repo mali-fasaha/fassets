@@ -29,6 +29,9 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+/**
+ * Converts string argument into money
+ */
 @Component("stringToMoneyConverter")
 public class StringToMoneyConverter implements Converter<String, Money> {
 

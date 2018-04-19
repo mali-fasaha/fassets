@@ -23,13 +23,12 @@ import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.BriefingService;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-
-import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Raises notifications during start and end of a batch or to interface between two batches
@@ -37,7 +36,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Component
 public class BatchNotifications implements JobExecutionListener {
 
-    private final static Logger LOGGER = getLogger(BatchNotifications.class);
+    private static final Logger log = LoggerFactory.getLogger(BatchNotifications.class);
 
     private final ExcelItemReader excelItemReader;
 
@@ -66,8 +65,8 @@ public class BatchNotifications implements JobExecutionListener {
     @Override
     public void beforeJob(JobExecution jobExecution) {
 
-        // Trying to log the FILE_PATH here
-        LOGGER.info("reading file from FILE_PATH : {} ", jobExecution.getJobParameters().getString("fileName"));
+        // Trying to log the filePath here
+        log.info("reading file from filePath : {} ", jobExecution.getJobParameters().getString("fileName"));
 
         // this will reset the nextItem to Zero
         excelItemReader.resetNextItem();
@@ -85,7 +84,7 @@ public class BatchNotifications implements JobExecutionListener {
     @Override
     public void afterJob(JobExecution jobExecution) {
 
-        LOGGER.debug("Step 1 completed : following items have been persisted...");
+        log.debug("Step 1 completed : following items have been persisted...");
 
         //fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
 

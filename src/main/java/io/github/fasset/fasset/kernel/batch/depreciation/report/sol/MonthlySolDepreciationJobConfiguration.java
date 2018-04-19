@@ -43,29 +43,33 @@ import javax.persistence.EntityManagerFactory;
 public class MonthlySolDepreciationJobConfiguration {
 
     @Value("#{jobParameters['year']}")
-    private static String YEAR;
+    private static String year;
+
     private final JobBuilderFactory jobBuilderFactory;
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
 
-    @Autowired
-    @Qualifier("monthlySolDepreciationJobListener")
-    private MonthlySolDepreciationJobListener monthlySolDepreciationJobListener;
+    private final StepBuilderFactory stepBuilderFactory;
 
-    @Autowired
-    private MonthlySolDepreciationService monthlySolDepreciationService;
+    private final MonthlySolDepreciationJobListener monthlySolDepreciationJobListener;
 
-    @Autowired
-    @Qualifier("monthylSolDepreciationExecutor")
-    private MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
+    private final MonthlySolDepreciationService monthlySolDepreciationService;
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
+
+    private final EntityManagerFactory entityManagerFactory;
 
 
     @Autowired
-    public MonthlySolDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory) {
+    public MonthlySolDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
+                                                  @Qualifier("monthlySolDepreciationJobListener") MonthlySolDepreciationJobListener monthlySolDepreciationJobListener,
+                                                  MonthlySolDepreciationService monthlySolDepreciationService,
+                                                  @Qualifier("monthylSolDepreciationExecutor") MonthlySolDepreciationExecutor monthlySolDepreciationExecutor,
+                                                  EntityManagerFactory entityManagerFactory) {
         this.jobBuilderFactory = jobBuilderFactory;
+        this.stepBuilderFactory = stepBuilderFactory;
+        this.monthlySolDepreciationJobListener = monthlySolDepreciationJobListener;
+        this.monthlySolDepreciationService = monthlySolDepreciationService;
+        this.monthlySolDepreciationExecutor = monthlySolDepreciationExecutor;
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Bean("monthlySolDepreciationJob")
@@ -116,7 +120,7 @@ public class MonthlySolDepreciationJobConfiguration {
         try {
             createMonthlySolDepreciationItems =
                 stepBuilderFactory.get("createMonthlySolDepreciationItems").<String, MonthlySolDepreciation>chunk(5).reader(monthlySolDepreciationReader()).writer(monthlySolDepreciationWriter())
-                    .processor(monthlySolDepreciationProcessor(YEAR)).build();
+                    .processor(monthlySolDepreciationProcessor(year)).build();
         } catch (Exception e) {
             e.printStackTrace();
         }

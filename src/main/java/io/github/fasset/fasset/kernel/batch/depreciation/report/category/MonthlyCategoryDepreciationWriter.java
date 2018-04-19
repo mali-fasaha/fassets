@@ -26,6 +26,9 @@ import org.springframework.batch.item.ItemWriter;
 
 import java.util.List;
 
+/**
+ * Writes to repository Monthly depreciation by category
+ */
 public class MonthlyCategoryDepreciationWriter implements ItemWriter<MonthlyCategoryDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyCategoryDepreciationWriter.class);

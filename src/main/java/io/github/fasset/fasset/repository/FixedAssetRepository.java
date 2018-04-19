@@ -44,7 +44,7 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
      * Return total purchase cost for a given category
      *
      * @param category of fixed asset
-     * @return
+     * @return Purchase cost for the category
      */
     @Query("Select " + "SUM(e.purchaseCost) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     Money getTotalCategoryPurchaseCost(@Param("category") String category);
@@ -56,7 +56,7 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
      * Return total net book value for a given category
      *
      * @param category of fixed asset
-     * @return
+     * @return Total net book value for a given category
      */
     @Query("Select " + "SUM(e.netBookValue) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     Money getTotalCategoryNetBookValue(@Param("category") String category);
@@ -68,7 +68,7 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
      * Return total no. of items for a given category
      *
      * @param category of fixed asset
-     * @return
+     * @return No of fixed assets in a given category
      */
     @Query("Select " + "COUNT(e.category) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     int getTotalCategoryCount(@Param("category") String category);

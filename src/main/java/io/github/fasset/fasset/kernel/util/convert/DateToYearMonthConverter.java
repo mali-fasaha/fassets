@@ -20,6 +20,7 @@ package io.github.fasset.fasset.kernel.util.convert;
 
 import io.github.fasset.fasset.kernel.util.ConverterException;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
@@ -29,8 +30,6 @@ import java.time.Instant;
 import java.time.YearMonth;
 import java.util.Date;
 
-import static org.slf4j.LoggerFactory.getLogger;
-
 /**
  * Takes {@link Date} converting it to {@link YearMonth}
  *
@@ -39,7 +38,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Component("dateToYearMonthConverter")
 public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
 
-    private final static Logger log = getLogger(DateToYearMonthConverter.class);
+    private static final Logger log = LoggerFactory.getLogger(DateToYearMonthConverter.class);
 
     private DateToLocalDateConverter dateToLocalDateConverter;
 
@@ -80,7 +79,7 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
     @Override
     public YearMonth convert(Date source) {
 
-        YearMonth convertedMonth = null;
+        YearMonth convertedMonth;
 
         log.debug("Converting {} to YearMonth", source.toString());
 

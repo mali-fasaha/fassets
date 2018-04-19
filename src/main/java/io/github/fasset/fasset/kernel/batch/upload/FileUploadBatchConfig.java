@@ -39,42 +39,47 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * Configuration for fileUpload job
+ */
 @Configuration
 public class FileUploadBatchConfig {
 
+    /*@Value("#{jobParameters['fileName']}")
+    public static final String filePath = null;*/
+
     @Value("#{jobParameters['fileName']}")
-    public static final String FILE_PATH = null;
-    @Autowired
-    private JobBuilderFactory jobBuilderFactory;
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
-    @Autowired
-    @Qualifier("excelMapperService")
-    private ExcelMapperService excelMapperService;
-    @Autowired
-    @Qualifier("excelItemProcessor")
-    private ExcelItemProcessor excelItemProcessor;
-    @Autowired
-    @Qualifier("excelItemWriter")
-    private ExcelItemWriter excelItemWriter;
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    private static String filePath;
+
+    private final JobBuilderFactory jobBuilderFactory;
+    private final StepBuilderFactory stepBuilderFactory;
+    private final ExcelMapperService excelMapperService;
+    private final ExcelItemProcessor excelItemProcessor;
+    private final ExcelItemWriter excelItemWriter;
+    private final EntityManagerFactory entityManagerFactory;
+    private final FixedAssetAccruedDepreciationProcessor fixedAssetAccruedDepreciationProcessor;
+    private final AccruedDepreciationWriter accruedDepreciationWriter;
+    private final NetBookValueWriter netBookValueWriter;
+    private final FixedAssetNetBookValueProcessor fixedAssetNetBookValueProcessor;
 
     @Autowired
-    @Qualifier("fixedAssetAccruedDepreciationProcessor")
-    private FixedAssetAccruedDepreciationProcessor fixedAssetAccruedDepreciationProcessor;
-
-    @Autowired
-    @Qualifier("accruedDepreciationWriter")
-    private AccruedDepreciationWriter accruedDepreciationWriter;
-
-    @Autowired
-    @Qualifier("netBookValueWriter")
-    private NetBookValueWriter netBookValueWriter;
-
-    @Autowired
-    @Qualifier("fixedAssetNetBookValueProcessor")
-    private FixedAssetNetBookValueProcessor fixedAssetNetBookValueProcessor;
+    public FileUploadBatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, @Qualifier("excelMapperService") ExcelMapperService excelMapperService,
+                                 @Qualifier("excelItemProcessor") ExcelItemProcessor excelItemProcessor, @Qualifier("excelItemWriter") ExcelItemWriter excelItemWriter,
+                                 EntityManagerFactory entityManagerFactory,
+                                 @Qualifier("fixedAssetAccruedDepreciationProcessor") FixedAssetAccruedDepreciationProcessor fixedAssetAccruedDepreciationProcessor,
+                                 @Qualifier("accruedDepreciationWriter") AccruedDepreciationWriter accruedDepreciationWriter, @Qualifier("netBookValueWriter") NetBookValueWriter netBookValueWriter,
+                                 @Qualifier("fixedAssetNetBookValueProcessor") FixedAssetNetBookValueProcessor fixedAssetNetBookValueProcessor) {
+        this.jobBuilderFactory = jobBuilderFactory;
+        this.stepBuilderFactory = stepBuilderFactory;
+        this.excelMapperService = excelMapperService;
+        this.excelItemProcessor = excelItemProcessor;
+        this.excelItemWriter = excelItemWriter;
+        this.entityManagerFactory = entityManagerFactory;
+        this.fixedAssetAccruedDepreciationProcessor = fixedAssetAccruedDepreciationProcessor;
+        this.accruedDepreciationWriter = accruedDepreciationWriter;
+        this.netBookValueWriter = netBookValueWriter;
+        this.fixedAssetNetBookValueProcessor = fixedAssetNetBookValueProcessor;
+    }
 
 
     @Bean
@@ -108,7 +113,7 @@ public class FileUploadBatchConfig {
 
     @Bean
     public Step readExcelFileStep() {
-        return stepBuilderFactory.get("readExcelFileStep").<FixedAssetDTO, FixedAsset>chunk(100).reader(excelItemReader(FILE_PATH)).processor(excelItemProcessor).writer(excelItemWriter).build();
+        return stepBuilderFactory.get("readExcelFileStep").<FixedAssetDTO, FixedAsset>chunk(100).reader(excelItemReader(filePath)).processor(excelItemProcessor).writer(excelItemWriter).build();
     }
 
     @Bean

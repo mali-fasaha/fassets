@@ -33,22 +33,23 @@ public interface AccruedDepreciationService {
     /**
      * Returns the accruedDepreciationAmount for a fixed asset and month given as param
      *
-     * @param asset
-     * @return
+     * @param asset Asset being depreciated
+     * @param month in which the accrued depreciation is effective
+     * @return Accrued depreciation for asset
      */
     Money getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month);
 
     /**
      * Saves the {@link AccruedDepreciation} object given in the parameter
      *
-     * @param accruedDepreciation
+     * @param accruedDepreciation Accrued depreciation to be saved
      */
     void saveAccruedDepreciation(AccruedDepreciation accruedDepreciation);
 
     /**
      * Saves a {@link List} collection of {@link AccruedDepreciation} items
      *
-     * @param items
+     * @param items Collection of accruedDepreciation objects to be saved
      */
     void saveAllAccruedDepreciationRecords(List<? extends AccruedDepreciation> items);
 }

@@ -41,7 +41,7 @@ public interface ServiceOutletBriefService {
     /**
      * Save all ServiceOutletBrief items in the collection
      *
-     * @param serviceOutletBriefs
+     * @param serviceOutletBriefs entities to be saved into the repository
      */
     void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs);
 }

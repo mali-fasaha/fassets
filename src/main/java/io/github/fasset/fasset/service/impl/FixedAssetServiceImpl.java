@@ -56,7 +56,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
      * Saves all {@link FixedAsset} items passed in a list, saving unique items only.
      * Quietly fails if the asset is already in the database
      *
-     * @param fixedAssets
+     * @param fixedAssets Collection of fixedAsset entities to be saved in the database
      */
     @Override
     public void saveAllFixedAssets(List<? extends FixedAsset> fixedAssets) {
@@ -67,7 +67,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     /**
      * Fetches a List of all existing items in the {@link FixedAssetRepository}
      *
-     * @return
+     * @return Collection of fixedAsset entities extracted from the database
      */
     @Override
     public List<FixedAsset> fetchAllExistingAssets() {
@@ -78,8 +78,8 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     /**
      * Extracts the fixed asset when the id is known
      *
-     * @param id
-     * @return
+     * @param id of fixedAsset entity to be fetched from database
+     * @return FixedAsset entity whose id was found in the database
      */
     @Override
     @Cacheable("fixedAssetsFetchedByIds")
@@ -119,12 +119,12 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         log.info("Setting accrued depreciation as : {}", acc);
         brief.setAccruedDepreciation(acc);
 
-        try {
+        /*try {
             //TODO include the methods here
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating a categoryBrief for category : %s", category);
             throw new DataRetrievalFromServiceException(message, e);
-        }
+        }*/
 
         log.debug("Brief for category returned : {}", brief);
 

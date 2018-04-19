@@ -48,21 +48,21 @@ public class FixedAssetsJobsActivator {
 
     public void bootstrap(JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService) throws BatchJobExecutionException {
 
-        int no_of_assets = fixedAssetService.getPoll();
+        int numberOfAssets = fixedAssetService.getPoll();
 
-        bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(no_of_assets)).addString("starting_time", LocalDateTime.now().toString()).toJobParameters(), jobLauncher, job,
+        bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets)).addString("starting_time", LocalDateTime.now().toString()).toJobParameters(), jobLauncher, job,
             fixedAssetService, null);
     }
 
     private void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener)
         throws BatchJobExecutionException {
 
-        int no_of_assets = fixedAssetService.getPoll();
-        LocalDateTime starting_time = LocalDateTime.now();
+        int numberOfAssets = fixedAssetService.getPoll();
+        LocalDateTime startingTime = LocalDateTime.now();
 
         JobExecution jobExecution;
 
-        log.info("Depreciation has begun with {} items at time: {}", no_of_assets, starting_time);
+        log.info("Depreciation has begun with {} items at time: {}", numberOfAssets, startingTime);
 
         try {
             jobExecution = jobLauncher.run(job, jobParameters);

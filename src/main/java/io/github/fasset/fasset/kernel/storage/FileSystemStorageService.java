@@ -47,6 +47,11 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.stream.Stream;
 
+/**
+ * Implements storageService interface while at the same time implementing the subscriptionService. The later allows
+ * a {@link io.github.fasset.fasset.kernel.subscriptions.Subscriber} implementation to observe changes and act
+ * accordingly, and this this case upload data stored in the the file recently uploaded in the file system
+ */
 @Service("fileSystemStorageService")
 public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService, StorageService {
 
@@ -67,7 +72,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     /**
      * To store the file into storage
      *
-     * @param file
+     * @param file Multipart file being uploaded to the file system from the front end
      */
     @Override
     public void store(MultipartFile file) {
@@ -123,14 +128,14 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     /**
      * Loads all files into storage
      *
-     * @return
+     * @return Stream containing file names of files currently in the file system
      */
     @Override
     public Stream<Path> loadAll() {
 
         log.info("Checking for files in the directory...");
 
-        Stream<Path> filePathStream = null;
+        Stream<Path> filePathStream;
 
         try {
             filePathStream = Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation)).map(this.rootLocation::relativize);
@@ -144,8 +149,8 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     /**
      * Load the fileName given into storage
      *
-     * @param fileName
-     * @return
+     * @param fileName String name of the file being loaded
+     * @return Path of the file after it has been loaded
      */
     @Override
     public Path load(String fileName) {
@@ -158,8 +163,8 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
     /**
      * Loads the file given as a {@link Resource} object
      *
-     * @param fileName
-     * @return
+     * @param fileName String name of the file being loaded as a resource
+     * @return Resource containing the file path
      */
     @Override
     public Resource loadAsResource(String fileName) {

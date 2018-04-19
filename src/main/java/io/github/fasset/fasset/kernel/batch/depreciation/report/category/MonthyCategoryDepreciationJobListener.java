@@ -22,6 +22,9 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * Listener for the MonthlyCategoryDepreciation batch job
+ */
 @Component("monthlyCategoryDepreciationJobListener")
 public class MonthyCategoryDepreciationJobListener implements JobExecutionListener {
 

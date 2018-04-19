@@ -28,6 +28,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation for the MonthlySolDepreciationExecutor. This implementation could be improved upon if we
+ * reduce the trips to the depreciation repository, and cache all data into a list instead. But that
+ * might involve changing the structure of the entire batch. Future performance enhancement might start
+ * from implementation of this interface
+ */
 @Service("monthylSolDepreciationExecutor")
 public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciationExecutor {
 
@@ -44,9 +50,9 @@ public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciatio
      * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation
      * and the solId
      *
-     * @param solId
-     * @param year
-     * @return
+     * @param solId The service outlet Id
+     * @param year Year of depreciation
+     * @return MonthlySolDepreciation
      */
     @Override
     public MonthlySolDepreciation getMonthlyDepreciation(String solId, Integer year) {

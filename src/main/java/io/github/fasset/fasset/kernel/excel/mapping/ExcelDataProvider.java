@@ -31,7 +31,7 @@ import java.util.List;
 
 /**
  * This is a delegate for generating a {@link List} of {@code T}
- * Given a FILE_PATH and a class it can generate a list of the objects of the class when
+ * Given a filePath and a class it can generate a list of the objects of the class when
  * class and the excel file resonate with each other
  *
  * @param <T>
@@ -76,7 +76,7 @@ public class ExcelDataProvider<T> {
             LOGGER.info("Returning generated list of : {} items generated of type : {} from file path :{}", dtoList.size(), clazz, filePath);
         } else {
 
-            LOGGER.error("The FILE_PATH given is null...");
+            LOGGER.error("The filePath given is null...");
         }
 
         return Collections.unmodifiableList(dtoList);
