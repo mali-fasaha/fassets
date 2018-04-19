@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Fixed most spotbugs and javadoc issues and error to stabilize the build**
+
+
+[c226f4bd79e9ff8](https://github.com/ghacupha/fassets/commit/c226f4bd79e9ff8) Edwin Njeru *2018-04-19 12:10:45*
+
 **Fixed all checkstyle issues**
 
 

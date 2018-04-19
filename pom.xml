@@ -35,6 +35,7 @@
     </parent>
 
     <properties>
+        <!--General-->
         <build.profile.id>dev</build.profile.id>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -62,6 +63,7 @@
         <converalls.repo.token>Aq0A50mRusMNemvnkmtWtUgUpxsgvMWGC</converalls.repo.token>
         <changelog.template.file>${project.basedir}/config/changelog.mustache</changelog.template.file>
         <maven.compiler.fork>true</maven.compiler.fork>
+        <maven.enforcer.required.maven.version>3.5.0</maven.enforcer.required.maven.version>
 
         <!--Plugin versions-->
         <git-changelog-maven-plugin.version>1.54</git-changelog-maven-plugin.version>
@@ -544,7 +546,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>3.5.0</version>
+                                    <version>${maven.enforcer.required.maven.version}</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
