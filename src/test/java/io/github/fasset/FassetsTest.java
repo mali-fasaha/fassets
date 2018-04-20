@@ -13,5 +13,6 @@ public class FassetsTest {
     @Test
     public void contextLoads(){
 
+        // For this to run the entire ApplicationContext has to load correctly
     }
 }

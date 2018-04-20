@@ -3,6 +3,16 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**added base tests for importExcelJob and depreciationJob**
+
+
+[a0d0cef01e59eb9](https://github.com/ghacupha/fassets/commit/a0d0cef01e59eb9) Edwin Njeru *2018-04-19 13:46:41*
+
+**minor alignement to install coverage reporting**
+
+
+[17535e83d2649d6](https://github.com/ghacupha/fassets/commit/17535e83d2649d6) Edwin Njeru *2018-04-19 13:13:22*
+
 **Fixed most spotbugs and javadoc issues and error to stabilize the build**
 
 

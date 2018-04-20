@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel;
+package io.github.fasset.fasset.kernel.subscriber;
 
 import io.github.fasset.fasset.kernel.subscriptions.AbstractSubscriber;
 import io.github.fasset.fasset.kernel.subscriptions.Subscriber;
