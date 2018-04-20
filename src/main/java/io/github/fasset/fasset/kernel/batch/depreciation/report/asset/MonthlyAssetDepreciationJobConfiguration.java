@@ -101,7 +101,7 @@ public class MonthlyAssetDepreciationJobConfiguration {
     @Bean("monthlyAssetDepreciationJob")
     @DependsOn("monthlyAssetDepreciationJobListener")
     public Job monthlyAssetDepreciationJob() {
-        return jobBuilderFactory.get("monthlyAssetDepreciationJob").incrementer(new RunIdIncrementer()).listener(monthlyAssetDepreciationJobListener()).preventRestart()
+        return jobBuilderFactory.get("monthlyAssetDepreciationJob").preventRestart().incrementer(new RunIdIncrementer()).listener(monthlyAssetDepreciationJobListener()).preventRestart()
             .flow(updateMonthlyAssetDepreciation()).end().build();
     }
 

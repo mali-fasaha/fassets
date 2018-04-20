@@ -54,7 +54,7 @@ public class DepreciationJobConfig {
 
     @Bean("depreciationJob")
     public Job depreciationJob(DepreciationJobListener depreciationJobListener) {
-        return jobBuilderFactory.get("depreciationJob").incrementer(new RunIdIncrementer()).listener(depreciationJobListener).flow(depreciationStep1()).end().build();
+        return jobBuilderFactory.get("depreciationJob").preventRestart().incrementer(new RunIdIncrementer()).listener(depreciationJobListener).flow(depreciationStep1()).end().build();
     }
 
     @Bean

@@ -107,7 +107,14 @@ public class FileUploadBatchConfig {
 
     @Bean("importExcelJob")
     public Job importExcelJob(BatchNotifications listener) {
-        return jobBuilderFactory.get("importExcelJob").incrementer(new RunIdIncrementer()).listener(listener).flow(readExcelFileStep()).on("COMPLETED").to(accrueDepreciationStep()).on("COMPLETED")
+        return jobBuilderFactory
+            .get("importExcelJob")
+            .preventRestart()
+            .incrementer(new RunIdIncrementer())
+            .listener(listener).flow(readExcelFileStep())
+            .on("COMPLETED")
+            .to(accrueDepreciationStep())
+            .on("COMPLETED")
             .to(netBookValueUpdateStep()).end().build();
     }
 

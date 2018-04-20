@@ -74,7 +74,7 @@ public class MonthlySolDepreciationJobConfiguration {
 
     @Bean("monthlySolDepreciationJob")
     public Job monthlySolDepreciationJob() {
-        return jobBuilderFactory.get("monthlySolDepreciationJob").incrementer(new RunIdIncrementer()).listener(monthlySolDepreciationJobListener).preventRestart()
+        return jobBuilderFactory.get("monthlySolDepreciationJob").preventRestart().incrementer(new RunIdIncrementer()).listener(monthlySolDepreciationJobListener).preventRestart()
             .flow(createMonthlySolDepreciationItems()).end().build();
     }
 

@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**additional tests to the batch processes launch**
+
+
+[acd56563ee5749a](https://github.com/ghacupha/fassets/commit/acd56563ee5749a) Edwin Njeru *2018-04-20 08:11:52*
+
 **added base tests for importExcelJob and depreciationJob**
 
 
