@@ -70,7 +70,7 @@ public class DepreciationRelay {
 
         long noOfMonths = from.until(to, ChronoUnit.MONTHS);
 
-        log.debug("Creating a monthly depreciation sequence for : {} months", noOfMonths);
+        log.debug("Creating a monthly depreciation sequence for : {} months", noOfMonths + 1);
 
         LongStream.range(0, noOfMonths).mapToObj(i -> monthlyIncrementer.getNext(from.plusMonths(i))).forEachOrdered(monthSeq -> {
             log.trace("Adding the month : {} to the sequence", monthSeq);
