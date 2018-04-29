@@ -32,12 +32,12 @@ import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.Objects;
 
+//@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
 /**
  * Record of the net book value for a gived fixed asset at a given month after previous month's depreciation
  *
  * @author edwin.njeru
  */
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
 @Entity(name = "NetBookValue")
 @Audited
 public class NetBookValue extends DomainModel<String> {

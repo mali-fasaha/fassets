@@ -30,10 +30,10 @@ import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.Objects;
 
+//@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
 /**
  * This model represents a unit AccruedDepreciation in the repository
  */
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
 @Audited
 @Entity(name = "AccruedDepreciation")
 public class AccruedDepreciation extends DomainModel<String> {
