@@ -3,6 +3,7 @@ package io.github.fasset.fasset.controller;
 import io.github.fasset.fasset.kernel.storage.FileSystemStorageService;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -58,20 +59,22 @@ public class FileUploadTests {
         this.fileSystemStorageService.store(multipartFile1);
         this.fileSystemStorageService.store(multipartFile2);
 
-        //Stream files = fileSystemStorageService.loadAll();
+        Stream files = fileSystemStorageService.loadAll();
 
-        this.mockMvc.perform(get("/files")).andExpect(status().isOk())
+        this.mockMvc.perform(get("/files"))
+                .andExpect(status().isOk())
                 .andExpect(model().attribute("files",
-                        Matchers.contains("http://localhost/files/Data1.xlsx",
-                                "http://localhost/files/Data2.xlsx")));
-        /*Matchers.contains("http://localhost/files/Data1.xlxs")));*/
+                        Matchers.contains("http://localhost/files/Data2.xlsx",
+                                "http://localhost/files/Data1.xlsx")));
+
+        Assert.assertEquals(2,files.count());
     }
 
     @Test
     public void shouldSaveUploadedFile() throws Exception {
         MockMultipartFile multipartFile = new MockMultipartFile("file", "Data1.xlsx",
                 "text/plain", "Spring Framework".getBytes());
-        this.mockMvc.perform(fileUpload("/files").file(multipartFile))
+        this.mockMvc.perform(multipart("/files").file(multipartFile))
                 .andExpect(status().isFound())
                 .andExpect(header().string("Location", "/files"));
 

@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**configured the batch operations to be non restartable**
+
+
+[e9c82fc4d49a08e](https://github.com/ghacupha/fassets/commit/e9c82fc4d49a08e) Edwin Njeru *2018-04-20 14:46:02*
+
 **additional tests to the batch processes launch**
 
 
