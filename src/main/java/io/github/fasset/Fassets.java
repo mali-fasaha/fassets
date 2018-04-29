@@ -33,6 +33,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -53,6 +54,7 @@ import java.util.concurrent.Executor;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EntityScan("io.github.fasset.fasset")
 @ComponentScan("io.github.fasset.fasset")
+@PropertySource("classpath:batch.properties")
 @EnableConfigurationProperties(value = {StorageProperties.class, MoneyProperties.class, DepreciationProperties.class})
 public class Fassets {
 
