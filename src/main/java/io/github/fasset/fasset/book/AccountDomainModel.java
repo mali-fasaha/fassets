@@ -19,6 +19,7 @@
 package io.github.fasset.fasset.book;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -33,6 +34,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Main fields for models used to represent {@code persistentAccount} and {@code persistentEntry} items
@@ -52,7 +54,8 @@ public class AccountDomainModel<U> {
     private int id;
 
     @Version
-    private int version;
+    @Type(type = "dbtimestamp")
+    private Date version;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -73,7 +76,7 @@ public class AccountDomainModel<U> {
         return id;
     }
 
-    public int getVersion() {
+    public Date getVersion() {
         return version;
     }
 
@@ -107,7 +110,7 @@ public class AccountDomainModel<U> {
         if (id != that.id) {
             return false;
         }
-        if (version != that.version) {
+        if (!version.equals(that.version)) {
             return false;
         }
         if (!createdAt.equals(that.createdAt)) {
@@ -125,7 +128,7 @@ public class AccountDomainModel<U> {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + version;
+        result = 31 * result + version.hashCode();
         result = 31 * result + createdAt.hashCode();
         result = 31 * result + modifiedAt.hashCode();
         result = 31 * result + createdBy.hashCode();

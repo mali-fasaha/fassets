@@ -3,6 +3,16 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Created the persistentAccont and all related objects and their modifications, including making the ImmutableListCollector concurrent**
+
+
+[e7d44767264c4ea](https://github.com/ghacupha/fassets/commit/e7d44767264c4ea) Edwin Njeru *2018-05-02 16:21:29*
+
+**made the ImmutableListCollector concurrent**
+
+
+[79cf37c5ad35614](https://github.com/ghacupha/fassets/commit/79cf37c5ad35614) Edwin Njeru *2018-05-02 15:21:58*
+
 **Created the PersitentEntry class with relevant attributeConverters for the custom fields, their decorators and appropriate tests**
 
 
