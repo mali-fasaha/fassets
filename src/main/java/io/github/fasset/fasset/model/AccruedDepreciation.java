@@ -25,12 +25,11 @@ import org.javamoney.moneta.Money;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.Objects;
 
 //@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
+
 /**
  * This model represents a unit AccruedDepreciation in the repository
  */

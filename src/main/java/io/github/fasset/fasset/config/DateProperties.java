@@ -20,47 +20,33 @@ package io.github.fasset.fasset.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.Objects;
-
 /**
- * This object simply configures the default of the program's default currency
+ * This object simply configures the default of the program's default date parsing pattern
  */
-@ConfigurationProperties("money")
-public class MoneyProperties {
+@ConfigurationProperties("date-parsing")
+public class DateProperties {
 
-    private String defaultCurrency = "KES";
+    private String datePattern = "dd/MM/yyyy";
 
-    public MoneyProperties() {
+    public DateProperties() {
     }
 
-    public String getDefaultCurrency() {
-        return defaultCurrency;
+    public DateProperties(String datePattern) {
+        this.datePattern = datePattern;
     }
 
-    public MoneyProperties setDefaultCurrency(String defaultCurrency) {
-        this.defaultCurrency = defaultCurrency;
-        return this;
+    public String getDatePattern() {
+        return datePattern;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        MoneyProperties that = (MoneyProperties) o;
-        return Objects.equals(defaultCurrency, that.defaultCurrency);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(defaultCurrency);
+    public void setDatePattern(String datePattern) {
+        this.datePattern = datePattern;
     }
 
     @Override
     public String toString() {
-        return "MoneyProperties{" + "defaultCurrency='" + defaultCurrency + '\'' + '}';
+        return "DateProperties{" + "datePattern='" + datePattern + '\'' + '}';
     }
 }
+
+

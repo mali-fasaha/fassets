@@ -32,10 +32,9 @@ import java.util.Set;
 public interface Transaction {
 
     /**
-     *
      * @param accountSide {@link io.github.fasset.fasset.book.keeper.balance.AccountSide} in which the entry is for
-     * @param account {@link Account} into which the {@link Entry} is posted
-     * @param entry {@link Entry} being added to the above account for this transaction
+     * @param account     {@link Account} into which the {@link Entry} is posted
+     * @param entry       {@link Entry} being added to the above account for this transaction
      */
     void addEntry(AccountSide accountSide, Account account, Entry entry) throws ImmutableEntryException, MismatchedCurrencyException;
 
@@ -45,7 +44,6 @@ public interface Transaction {
     void post() throws UnableToPostException, ImmutableEntryException;
 
     /**
-     *
      * @return Collection of {@link Entry} items in the Transaction
      */
     Set<Entry> getEntries();

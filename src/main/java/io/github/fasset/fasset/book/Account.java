@@ -29,23 +29,23 @@ import java.util.List;
 
 /**
  * A collection of {@link Entry} items.
+ *
+ * @author edwin.njeru
  * @implNote The specification of this interface hides the fact that the {@link Account} contains an {@link AccountSide}
  * field. This reduces excessive of the implementation internals, but if the implementation does not contain
  * an {@link AccountSide} then the point of this interface is moot. Therefore the only to safely access the
  * {@link AccountSide} is through the {@link AccountBalance}.
- *
- * @author edwin.njeru
  */
 public interface Account {
 
     /**
-     *
      * @param entry {@link Entry} to be added to this
      */
     void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException;
 
     /**
      * Returns the balance of the Account
+     *
      * @param asAt {@link TimePoint} at which is Effective
      * @return {@link AccountBalance}
      */
@@ -65,29 +65,25 @@ public interface Account {
     AccountBalance balance(int... asAt);
 
     /**
-     *
      * @return Currency of the account
      */
     Currency getCurrency();
 
     /**
-     *
      * @return {@link TimePoint} date when the account was opened
      */
     TimePoint getOpeningDate();
 
     /**
+     * @return Shows the side of the balance sheet to which this belongs which could be either
+     * {@code AccountSide#DEBIT} or {@code AccountSide#CREDIT}
      * @implSpec As per implementation notes this is for use only by the {@code AccountAppraisalDelegate}
      * allowing inexpensive evaluation of the {@link AccountBalance} without causing circular reference. Otherwise anyone else who needs
      * to know the {@code AccountSide} of this needs to query the {@link AccountBalance} first, and from it acquire the {@link AccountSide}
-     *
-     * @return Shows the side of the balance sheet to which this belongs which could be either
-     * {@code AccountSide#DEBIT} or {@code AccountSide#CREDIT}
      */
     AccountSide getAccountSide();
 
     /**
-     *
      * @return Returns this object's current copy of the {@link Entry} items
      */
     List<Entry> getEntries();

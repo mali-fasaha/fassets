@@ -18,6 +18,7 @@
 
 package io.github.fasset;
 
+import io.github.fasset.fasset.config.DateProperties;
 import io.github.fasset.fasset.config.MoneyProperties;
 import io.github.fasset.fasset.config.StorageProperties;
 import io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties;
@@ -50,19 +51,12 @@ import java.util.concurrent.Executor;
 @EnableTransactionManagement
 @EnableBatchProcessing
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {
-        "io.github.fasset.fasset.repository",
-        "io.github.fasset.fasset.kernel.batch.depreciation.model"})
+@EnableJpaRepositories(basePackages = {"io.github.fasset.fasset.repository", "io.github.fasset.fasset.kernel.batch.depreciation.model"})
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-@EntityScan(basePackages = {
-        "io.github.fasset.fasset.model",
-        "io.github.fasset.fasset.kernel.batch.depreciation.model"})
+@EntityScan(basePackages = {"io.github.fasset.fasset.model", "io.github.fasset.fasset.kernel.batch.depreciation.model"})
 @ComponentScan("io.github.fasset.fasset")
 @PropertySource("classpath:batch.properties")
-@EnableConfigurationProperties(value = {
-        StorageProperties.class,
-        MoneyProperties.class,
-        DepreciationProperties.class})
+@EnableConfigurationProperties(value = {StorageProperties.class, MoneyProperties.class, DepreciationProperties.class, DateProperties.class})
 public class Fassets {
 
     public static void main(String[] args) {

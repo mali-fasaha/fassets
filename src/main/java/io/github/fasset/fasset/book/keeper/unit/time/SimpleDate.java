@@ -32,7 +32,7 @@ public class SimpleDate implements TimePoint {
 
     private LocalDate base;
 
-    private SimpleDate(LocalDate arg) {
+    public SimpleDate(LocalDate arg) {
         initialize(arg);
     }
 
@@ -42,6 +42,10 @@ public class SimpleDate implements TimePoint {
 
     public SimpleDate() {
         initialize(LocalDate.now());
+    }
+
+    SimpleDate(TimePoint timePoint) {
+        this.base = getDay(timePoint);
     }
 
     public static TimePoint newMoment(int year, int month, int day) {
@@ -107,7 +111,7 @@ public class SimpleDate implements TimePoint {
         return base.toString();
     }
 
-    private LocalDate getDay(TimePoint arg) {
+    protected LocalDate getDay(TimePoint arg) {
         SimpleDate simpleDate = (SimpleDate) arg;
         return simpleDate.base;
     }

@@ -27,12 +27,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.time.YearMonth;
 import java.util.Objects;
 
 //@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"fixed_asset_id", "month", "sol_id", "category"})})
+
 /**
  * Record of the net book value for a gived fixed asset at a given month after previous month's depreciation
  *

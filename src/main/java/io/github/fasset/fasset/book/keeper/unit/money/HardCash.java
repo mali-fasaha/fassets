@@ -49,6 +49,10 @@ public class HardCash implements Cash {
         this(amount, currency.getCurrencyCode());
     }
 
+    public HardCash(Cash cash) {
+        base = Money.of(CurrencyUnit.of(cash.getCurrency()),cash.getNumber().doubleValue());
+    }
+
     /**
      * Creates {@link Cash} with double amount and an ISO-4217 getCurrency code
      *
@@ -61,9 +65,9 @@ public class HardCash implements Cash {
         return new HardCash(value, currencyString);
     }
 
-    public static Cash of(double value, Currency currency){
+    public static Cash of(double value, Currency currency) {
 
-        return of(value,currency.getCurrencyCode());
+        return of(value, currency.getCurrencyCode());
     }
 
     /**

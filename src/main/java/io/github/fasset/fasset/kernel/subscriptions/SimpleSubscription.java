@@ -39,8 +39,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * <p>
  * adapted from https://www.journaldev.com/1739/observer-design-pattern-in-java
  * posted on AUGUST 2, 2016</p>
- *
  * <p>
+ * <p>
+ *
  * @author Pankaj
  * </p>
  * <p>

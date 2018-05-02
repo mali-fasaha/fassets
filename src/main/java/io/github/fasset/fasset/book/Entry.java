@@ -18,9 +18,11 @@
 
 package io.github.fasset.fasset.book;
 
+import io.github.fasset.fasset.book.keeper.EntryAttribute;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.book.keeper.unit.money.Cash;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
+import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 
 import java.util.Currency;
 
@@ -32,30 +34,40 @@ import java.util.Currency;
 public interface Entry {
 
     /**
-     *
      * @return Currency of the monetary amounts to be save in this
      */
     Currency getCurrency();
 
     /**
-     *
      * @return {@link AccountSide} to which this Entry is aggregating the
      * Account balance
      */
     AccountSide getAccountSide();
 
     /**
-     *
      * @return Booking date of the Entry
      */
     TimePoint getBookingDate();
 
     /**
-     *
      * @return The amount being posted into the Account and encapsulated
      * by the Entry
      */
     Cash getAmount();
+
+    /**
+     * Adds unstructured additional attributes as required into the entry
+     *
+     * @param entryAttribute {@link EntryAttribute} identity of the attribute in an entry
+     * @param attribute      the object content being registered as an attribute
+     */
+    void addAttribute(EntryAttribute entryAttribute, Object attribute);
+
+    /**
+     * @param entryAttribute identification of the attribute we wish to obtain from the entry
+     * @return Object containing the attribute value
+     */
+    Object getAttribute(EntryAttribute entryAttribute) throws UnEnteredDetailsException;
 
     /**
      * Assigns this Entry with a specific account into which it is aggregated as

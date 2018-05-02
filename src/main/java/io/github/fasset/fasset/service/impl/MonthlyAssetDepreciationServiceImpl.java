@@ -59,7 +59,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
      * Returns the MonthlyAssetDepreciation for a given assetId and Year
      *
      * @param fixedAssetId Id of the asset whose month on month depreciation we require
-     * @param year Year of depreciation for the asset
+     * @param year         Year of depreciation for the asset
      * @return this
      */
     @Override
