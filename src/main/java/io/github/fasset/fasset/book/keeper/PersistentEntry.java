@@ -57,16 +57,19 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
     private static final Logger log = LoggerFactory.getLogger(PersistentEntry.class);
 
     // Ref TimePointAttributeConverter.class
+    @Column
     private TimePoint bookingDate;
 
     private Account account;
 
+    @Column
     private String narration;
 
     @Enumerated
     private AccountSide accountSide;
 
     // Ref CashAttributeConverter
+    @Column
     private Cash amount;
 
     @ElementCollection

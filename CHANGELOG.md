@@ -3,6 +3,26 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Created the PersitentEntry class with relevant attributeConverters for the custom fields, their decorators and appropriate tests**
+
+
+[ad3840c1d79cf7c](https://github.com/ghacupha/fassets/commit/ad3840c1d79cf7c) Edwin Njeru *2018-05-02 14:43:41*
+
+**added base classes and interface required to start implementing persistent account and transaction patterns**
+
+
+[2648f92694c52ac](https://github.com/ghacupha/fassets/commit/2648f92694c52ac) Edwin Njeru *2018-05-02 11:19:22*
+
+**added base classes and interface required to start implementing persistent account and transaction patterns**
+
+
+[06be8f5ca29d436](https://github.com/ghacupha/fassets/commit/06be8f5ca29d436) Edwin Njeru *2018-05-02 11:17:39*
+
+**created package arrays for repositories, and for entities to reduce spring startup scanning activities**
+
+
+[968d42b65aaacc3](https://github.com/ghacupha/fassets/commit/968d42b65aaacc3) Edwin Njeru *2018-05-02 10:43:04*
+
 **Removed table unique contraints from the AccruedDepreciation and NetBookValue models to allow multi-annual monthly depreciations for the same fixed assets**
 
 

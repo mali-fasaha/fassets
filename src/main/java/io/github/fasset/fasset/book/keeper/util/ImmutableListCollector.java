@@ -24,6 +24,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collector;
 
+/**
+ * Used in lambda to collect data into immutable lists
+ */
 public class ImmutableListCollector {
 
     /**
@@ -34,6 +37,6 @@ public class ImmutableListCollector {
         return Collector.of(ArrayList::new, List::add, (left, right) -> {
             left.addAll(right);
             return left;
-        }, Collections::unmodifiableList);
+        }, Collections::unmodifiableList, Collector.Characteristics.CONCURRENT);
     }
 }
