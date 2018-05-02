@@ -47,15 +47,22 @@ import java.util.concurrent.Executor;
  */
 @EnableAsync
 @EnableCaching
-@EnableJpaRepositories
 @EnableTransactionManagement
 @EnableBatchProcessing
 @SpringBootApplication
+@EnableJpaRepositories(basePackages = {
+        "io.github.fasset.fasset.repository",
+        "io.github.fasset.fasset.kernel.batch.depreciation.model"})
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-@EntityScan("io.github.fasset.fasset")
+@EntityScan(basePackages = {
+        "io.github.fasset.fasset.model",
+        "io.github.fasset.fasset.kernel.batch.depreciation.model"})
 @ComponentScan("io.github.fasset.fasset")
 @PropertySource("classpath:batch.properties")
-@EnableConfigurationProperties(value = {StorageProperties.class, MoneyProperties.class, DepreciationProperties.class})
+@EnableConfigurationProperties(value = {
+        StorageProperties.class,
+        MoneyProperties.class,
+        DepreciationProperties.class})
 public class Fassets {
 
     public static void main(String[] args) {

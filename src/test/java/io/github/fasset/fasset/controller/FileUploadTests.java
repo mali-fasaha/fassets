@@ -64,8 +64,8 @@ public class FileUploadTests {
         this.mockMvc.perform(get("/files"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("files",
-                        Matchers.contains("http://localhost/files/Data2.xlsx",
-                                "http://localhost/files/Data1.xlsx")));
+                        Matchers.contains("http://localhost/files/Data1.xlsx",
+                                "http://localhost/files/Data2.xlsx")));
 
         Assert.assertEquals(2,files.count());
     }

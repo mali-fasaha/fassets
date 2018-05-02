@@ -3,6 +3,41 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Removed table unique contraints from the AccruedDepreciation and NetBookValue models to allow multi-annual monthly depreciations for the same fixed assets**
+
+
+[dd48c65ed455beb](https://github.com/ghacupha/fassets/commit/dd48c65ed455beb) ghacupha *2018-04-29 08:59:49*
+
+**Reduced logs for adding months to depreciationRelay from debug to trace level, and increased initial depreciation period to 5 years.TODO make the start date dynamic marking the date that the data is uploaded to the server**
+
+
+[ef36b5dc246754e](https://github.com/ghacupha/fassets/commit/ef36b5dc246754e) ghacupha *2018-04-29 08:25:39*
+
+**Reduced logs for adding months to depreciationRelay from debug to trace level, and increased initial depreciation period to 5 years.TODO make the start date dynamic marking the date that the data is uploaded to the server**
+
+
+[ced7a24f4e0bb54](https://github.com/ghacupha/fassets/commit/ced7a24f4e0bb54) ghacupha *2018-04-29 08:21:53*
+
+**Reduced logs for adding months to depreciationRelay from debug to trace level, and increased initial depreciation period to 5 years.TODO make the start date dynamic marking the date that the data is uploaded to the server**
+
+
+[c43af91ea10b1c9](https://github.com/ghacupha/fassets/commit/c43af91ea10b1c9) ghacupha *2018-04-29 08:18:58*
+
+**Fixed missing dataTables js script when running the path '/reports/depreciations/categories'**
+
+
+[5a48ceb2714594b](https://github.com/ghacupha/fassets/commit/5a48ceb2714594b) ghacupha *2018-04-29 08:10:55*
+
+**configured prevention of auto start for all batch jobs using batch.properties configuration file**
+
+
+[23a82009c84ea7b](https://github.com/ghacupha/fassets/commit/23a82009c84ea7b) ghacupha *2018-04-29 07:57:48*
+
+**changed order of uploaded files in the FileUpload test to allow test to pass in a linux based file system**
+
+
+[2108b563caf48b9](https://github.com/ghacupha/fassets/commit/2108b563caf48b9) ghacupha *2018-04-29 07:28:32*
+
 **configured the batch operations to be non restartable**
 
 
