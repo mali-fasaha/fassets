@@ -111,8 +111,13 @@ public class SimpleDate implements TimePoint {
         return base.toString();
     }
 
-    protected LocalDate getDay(TimePoint arg) {
+    protected static LocalDate getDay(TimePoint arg) {
         SimpleDate simpleDate = (SimpleDate) arg;
         return simpleDate.base;
+    }
+
+    public static TimePoint newTimePoint(TimePoint arg){
+
+        return new SimpleDate(getDay(arg));
     }
 }

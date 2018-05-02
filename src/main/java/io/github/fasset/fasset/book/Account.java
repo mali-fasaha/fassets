@@ -18,10 +18,12 @@
 
 package io.github.fasset.fasset.book;
 
+import io.github.fasset.fasset.book.keeper.AccountAttribute;
 import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
+import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.book.keeper.util.UntimelyBookingDateException;
 
 import java.util.Currency;
@@ -70,6 +72,8 @@ public interface Account {
     Currency getCurrency();
 
     /**
+     * To the extent possible this account's opening date remains unchanged
+     *
      * @return {@link TimePoint} date when the account was opened
      */
     TimePoint getOpeningDate();
@@ -82,6 +86,21 @@ public interface Account {
      * to know the {@code AccountSide} of this needs to query the {@link AccountBalance} first, and from it acquire the {@link AccountSide}
      */
     AccountSide getAccountSide();
+
+    /**
+     * Used to add additional attributes to the account
+     *
+     * @param accountAttribute Name of the attribute
+     * @param value value of the attribute
+     */
+    void addAttribute(AccountAttribute accountAttribute,Object value);
+
+    /**
+     *
+     * @param accountAttribute Name of attribute being searched for e.g. Owner, Contra a/c, Rereference
+     * @return The value of the attribute
+     */
+    Object value(AccountAttribute accountAttribute) throws UnEnteredDetailsException;
 
     /**
      * @return Returns this object's current copy of the {@link Entry} items

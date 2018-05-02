@@ -36,7 +36,9 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyEnumerated;
 import javax.persistence.Table;
@@ -60,6 +62,8 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
     @Column
     private TimePoint bookingDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "persistent_account")
     private Account account;
 
     @Column

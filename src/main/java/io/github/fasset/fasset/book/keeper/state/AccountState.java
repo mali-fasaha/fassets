@@ -15,28 +15,32 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package io.github.fasset.fasset.book.keeper.state;
 
-package io.github.fasset.fasset.book.keeper.util;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collector;
+import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
+import io.github.fasset.fasset.book.keeper.balance.AccountSide;
+import io.github.fasset.fasset.book.keeper.unit.money.Cash;
 
 /**
- * Used in lambda to collect data into immutable lists
+ * The Account could either be in {@link AccountSide#CREDIT} or {@link AccountSide#DEBIT}
+ * This interface maintains the methods common to all these states to allow
+ * reuse
+ * 
+ * @author edwin.njeru
  */
-public class ImmutableListCollector {
+public interface AccountState {
 
     /**
-     * @param <t> Type of collection
-     * @return An Immutable {@link List} {@link Collection}
+     * Get AccountBalance given the sum of debits and sum of credits
+     * @param debits
+     * @param credits
+     * @return
      */
-    public static <t> Collector<t, List<t>, List<t>> toImmutableList() {
-        return Collector.of(ArrayList::new, List::add, (left, right) -> {
-            left.addAll(right);
-            return left;
-        }, Collections::unmodifiableList, Collector.Characteristics.CONCURRENT);
-    }
+    AccountBalance getAccountBalance(Cash debits, Cash credits);
+
+    /**
+     *
+     * @return {@code AccountSide} of the Account
+     */
+    AccountSide getAccountSide();
 }

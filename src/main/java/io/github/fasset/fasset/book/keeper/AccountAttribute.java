@@ -16,22 +16,7 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.fasset.fasset.kernel.util;
+package io.github.fasset.fasset.book.keeper;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collector;
-
-/**
- * This utility is used in a Collector operation in a lambda to generate an immutable collection
- */
-public class ImmutableListCollector {
-
-    public static <t> Collector<t, List<t>, List<t>> toImmutableList() {
-        return Collector.of(ArrayList::new, List::add, (left, right) -> {
-            left.addAll(right);
-            return left;
-        }, Collections::unmodifiableList,Collector.Characteristics.CONCURRENT);
-    }
+public enum AccountAttribute {
 }
