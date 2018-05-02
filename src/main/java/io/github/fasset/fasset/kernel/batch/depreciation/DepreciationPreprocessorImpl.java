@@ -178,7 +178,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
         } else {
 
             log.warn(
-                "The asset has a negative purchase cost, meaning the " + " asset is actually an adjustment, ideally we are to leave it alone...but a " + "quick review of your books wouldn't hurt...");
+                "The asset has a negative purchase cost, meaning the " + " asset is actually an adjustment, ideally we are to leave it alone...but a " + "quick review of your book wouldn't hurt...");
             //If the purchase cost is less than zero we do nothing
         }
     }

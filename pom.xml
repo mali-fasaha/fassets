@@ -346,7 +346,12 @@
             <artifactId>xstream</artifactId>
             <version>1.4.10</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.joda/joda-money -->
+        <dependency>
+            <groupId>org.joda</groupId>
+            <artifactId>joda-money</artifactId>
+            <version>0.12</version>
+        </dependency>
     </dependencies>
 
     <!--<dependencyManagement>
