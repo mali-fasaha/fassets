@@ -3,6 +3,46 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Added the transaction interface, its implementation and basic tests for the same**
+
+
+[1d01a9c424610f3](https://github.com/ghacupha/fassets/commit/1d01a9c424610f3) Edwin Njeru *2018-05-03 18:16:04*
+
+**Removed Account and Entry interfaces, for practical compatibility with JPA specification and created test for AccountService**
+
+
+[22bb4639b6e569b](https://github.com/ghacupha/fassets/commit/22bb4639b6e569b) Edwin Njeru *2018-05-03 17:05:25*
+
+**Removed Account and Entry interfaces, for practical compatibility with JPA specification, created test for Accounts, and implemented equals and hashcode in the Cash interface**
+
+
+[fb6d85eabc2c07a](https://github.com/ghacupha/fassets/commit/fb6d85eabc2c07a) Edwin Njeru *2018-05-03 16:57:01*
+
+**Removed Account and Entry interfaces, for practical compatibility with JPA specification, created test for Accounts, and implemented equals and hashcode in the Cash interface**
+
+
+[776736cbba5ece9](https://github.com/ghacupha/fassets/commit/776736cbba5ece9) Edwin Njeru *2018-05-03 16:32:26*
+
+**Tested consistency of the Account when adding entries**
+
+
+[4ae5391d3341c69](https://github.com/ghacupha/fassets/commit/4ae5391d3341c69) Edwin Njeru *2018-05-03 16:06:26*
+
+**Removed Account and Entry interfaces, for practical compatibility with JPA specification and created test for AccountService**
+
+
+[3fc915ec7cba530](https://github.com/ghacupha/fassets/commit/3fc915ec7cba530) Edwin Njeru *2018-05-03 15:26:41*
+
+**Created the persistentAccount tests**
+
+
+[0850f85aa2e340d](https://github.com/ghacupha/fassets/commit/0850f85aa2e340d) Edwin Njeru *2018-05-03 13:17:12*
+
+**replaced integers with timestamps for version locking in hibernate**
+
+
+[1e697e4e7b293fb](https://github.com/ghacupha/fassets/commit/1e697e4e7b293fb) Edwin Njeru *2018-05-02 17:14:23*
+
 **Created the persistentAccont and all related objects and their modifications, including making the ImmutableListCollector concurrent**
 
 
