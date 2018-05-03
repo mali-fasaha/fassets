@@ -94,4 +94,8 @@ public interface Cash extends Comparable<Cash>, IsNumberical, HasDenomination {
      * @return {@link Cash} as absolute amount
      */
     Cash abs();
+
+    boolean equals(Object o);
+
+    int hashCode();
 }

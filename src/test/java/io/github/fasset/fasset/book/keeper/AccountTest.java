@@ -4,6 +4,7 @@ import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
 import io.github.fasset.fasset.book.keeper.unit.money.HardCash;
 import io.github.fasset.fasset.book.keeper.unit.time.ReadableDate;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
+import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.book.keeper.util.UntimelyBookingDateException;
@@ -11,9 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Currency;
+import java.util.Map;
 
 import static io.github.fasset.fasset.book.keeper.AccountAttribute.Account_Type;
 import static io.github.fasset.fasset.book.keeper.AccountAttribute.Contra_Account;
+import static io.github.fasset.fasset.book.keeper.AccountAttribute.General_Ledger;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.*;
 
@@ -29,6 +32,8 @@ public class AccountTest {
             DEBIT,
             Currency.getInstance("USD"),
             ReadableDate.on(2018,12,20));
+
+        account.addAttribute(General_Ledger,"4875");
     }
 
     @Test(expected = UnEnteredDetailsException.class)
@@ -42,9 +47,9 @@ public class AccountTest {
     @Test
     public void addAttribute() throws Exception {
 
-        account.addAttribute(Contra_Account,"Accumulated Test Acccount");
+        account.addAttribute(Contra_Account,"Accumulated Test Account");
 
-        assertEquals("Accumulated Test Acccount",account.getAttribute(Contra_Account));
+        assertEquals("Accumulated Test Account",account.getAttribute(Contra_Account));
     }
 
     @Test
@@ -90,4 +95,29 @@ public class AccountTest {
 
     }
 
+    @Test
+    public void openingDateRemainsUnchanged() throws Exception {
+
+        TimePoint openingDate = account.getOpeningDate();
+
+        assertEquals(SimpleDate.on(2018,12,20),openingDate);
+
+        // Adding 50 days to the opening date of the account
+        openingDate.addDays(50);
+
+        // Opening date should not have changed
+        assertEquals(SimpleDate.on(2018,12,20),openingDate);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void accountAttributesAreImmutable() throws Exception {
+
+        Map<AccountAttribute,String> attributes = account.getAccountAttributes();
+
+        assertEquals("4875",attributes.get(General_Ledger));
+
+        attributes.put(General_Ledger,"4846");
+
+        assertEquals("4875",attributes.get(General_Ledger));
+    }
 }

@@ -48,6 +48,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.List;
 import java.util.Map;
@@ -277,9 +278,9 @@ public class Account extends AccountDomainModel<String> {
     }
 
     @SuppressWarnings("unused")
-    public Map<AccountAttribute, String> getAccountAttributes() {
+    Map<AccountAttribute, String> getAccountAttributes() {
 
-        return accountAttributes;
+        return Collections.unmodifiableMap(accountAttributes);
     }
 
     public void setAccountSide(final AccountSide accountSide) {
@@ -288,7 +289,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setCurrency(Currency currency) {
-        this.currency = currency;
+        // Crickets
     }
 
     public String getName() {
@@ -296,7 +297,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setName(String name) {
-        this.name = name;
+        // Crickets
     }
 
     public String getNumber() {
@@ -304,19 +305,19 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setNumber(String number) {
-        this.number = number;
+        // Crickets
     }
 
     public void setOpeningDate(TimePoint openingDate) {
-        this.openingDate = openingDate;
+        // Crickets
     }
 
     public void setAccountAttributes(Map<AccountAttribute, String> accountAttributes) {
-        this.accountAttributes = accountAttributes;
+        // Crickets. Please use addAttribute
     }
 
     public void setEntries(List<Entry> entries) {
-        this.entries = entries;
+        // Crickets. Please use addEntry
     }
 
     @Override
