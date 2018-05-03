@@ -23,6 +23,7 @@ import io.github.fasset.fasset.book.keeper.unit.time.ReadableTime;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.config.DateProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -32,6 +33,13 @@ import javax.persistence.Converter;
  */
 @Converter(autoApply = true)
 public class TimePointAttributeConverter implements AttributeConverter<TimePoint, String> {
+
+    private DateProperties dateProperties;
+
+    public TimePointAttributeConverter() {
+
+        dateProperties = new DateProperties();
+    }
 
     /**
      * Converts the value stored in the entity attribute into the
@@ -43,7 +51,7 @@ public class TimePointAttributeConverter implements AttributeConverter<TimePoint
     @Override
     public String convertToDatabaseColumn(TimePoint attribute) {
 
-        ReadableTime readableTime = new ReadableDate("dd/MM/yyyy", attribute);
+        ReadableTime readableTime = new ReadableDate(dateProperties.getDatePattern(), attribute);
 
         return readableTime.toString();
     }
@@ -62,6 +70,6 @@ public class TimePointAttributeConverter implements AttributeConverter<TimePoint
     @Override
     public TimePoint convertToEntityAttribute(String dbData) {
 
-        return TimePointUtils.parseString(dbData, "dd/MM/yyyy");
+        return TimePointUtils.parseString(dbData, dateProperties.getDatePattern());
     }
 }

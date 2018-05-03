@@ -99,8 +99,8 @@ public class Account extends AccountDomainModel<String> {
     @Column
     private String number;
 
+    //@Convert(converter = TimePointAttributeConverter.class)
     @Column
-    @Convert(converter = TimePointAttributeConverter.class)
     private TimePoint openingDate;
 
     @Column
