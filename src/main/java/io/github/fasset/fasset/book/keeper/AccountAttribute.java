@@ -18,5 +18,10 @@
 
 package io.github.fasset.fasset.book.keeper;
 
+/**
+ * This enum is used to add additional features to an account which cannot be added
+ * through the constructor
+ */
 public enum AccountAttribute {
+    Contra_Account, Account_Type, Account_SubType, Account_Scheme, General_Ledger, Interest_Rate, Remarks
 }

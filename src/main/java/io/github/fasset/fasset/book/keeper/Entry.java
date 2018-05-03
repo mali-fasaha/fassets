@@ -244,4 +244,9 @@ public class Entry extends AccountDomainModel<String> {
         result = 31 * result + (entryAttributes != null ? entryAttributes.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return narration;
+    }
 }

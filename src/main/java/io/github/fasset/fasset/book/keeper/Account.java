@@ -165,7 +165,7 @@ public class Account extends AccountDomainModel<String> {
      * @param accountAttribute Name of attribute being searched for e.g. Owner, Contra a/c, Rereference
      * @return The value of the attribute
      */
-    public Object value(AccountAttribute accountAttribute) throws UnEnteredDetailsException {
+    public String getAttribute(AccountAttribute accountAttribute) throws UnEnteredDetailsException {
 
         if(!this.accountAttributes.containsKey(accountAttribute)){
             throw new UnEnteredDetailsException(String.format("account # %s does not contain field : %s",getId(),accountAttribute));
@@ -179,7 +179,7 @@ public class Account extends AccountDomainModel<String> {
      */
     public void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
 
-        log.debug("Adding entry to account : {}", entry);
+        log.debug("Adding entry {} to account : {}", entry,this);
 
         if (entry.getBookingDate().before(this.openingDate)) {
 
