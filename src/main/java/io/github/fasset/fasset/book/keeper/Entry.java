@@ -18,9 +18,7 @@
 
 package io.github.fasset.fasset.book.keeper;
 
-import io.github.fasset.fasset.book.Account;
 import io.github.fasset.fasset.book.AccountDomainModel;
-import io.github.fasset.fasset.book.Entry;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.book.keeper.unit.money.Cash;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
@@ -52,11 +50,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * {@code accountSide} into which we are posting. The rest of attributes are added into the {@code entryAttributes}
  * field.
  */
-@Entity(name = "PersistentEntry")
-@Table(name = "persistent_entry")
-public class PersistentEntry extends AccountDomainModel<String> implements Entry {
+@Entity(name = "Entry")
+@Table(name = "entry")
+public class Entry extends AccountDomainModel<String> {
 
-    private static final Logger log = LoggerFactory.getLogger(PersistentEntry.class);
+    private static final Logger log = LoggerFactory.getLogger(Entry.class);
 
     // Ref TimePointAttributeConverter.class
     @Column
@@ -64,7 +62,7 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account")
-    private PersistentAccount account;
+    private Account account;
 
     @Column
     private String narration;
@@ -80,10 +78,13 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
     @MapKeyColumn(name = "entry_attribute_name", length = 100)
     @MapKeyEnumerated(EnumType.STRING)
     @Column(name = "entry_attribute")
-    @CollectionTable(name = "entry_attributes", joinColumns = @JoinColumn(name = "persistent_entry_id"))
-    private Map<EntryAttribute, Object> entryAttributes = new ConcurrentHashMap<>();
+    @CollectionTable(name = "entry_attributes", joinColumns = @JoinColumn(name = "entry_id"))
+    private Map<EntryAttribute, String> entryAttributes = new ConcurrentHashMap<>();
 
-    public PersistentEntry(TimePoint bookingDate, PersistentAccount account, String narration, AccountSide accountSide, Cash amount) {
+    public Entry() {
+    }
+
+    public Entry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
         this.bookingDate = bookingDate;
         this.account = account;
         this.narration = narration;
@@ -97,8 +98,7 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
      * @param entryAttribute {@link EntryAttribute} identity of the attribute in an entry
      * @param attribute      the object content being registered as an attribute
      */
-    @Override
-    public void addAttribute(EntryAttribute entryAttribute, Object attribute) {
+    public void addAttribute(EntryAttribute entryAttribute, String attribute) {
         this.entryAttributes.put(entryAttribute, attribute);
     }
 
@@ -106,8 +106,7 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
      * @param entryAttribute identification of the attribute we wish to obtain from the entry
      * @return Object containing the attribute value
      */
-    @Override
-    public Object getAttribute(EntryAttribute entryAttribute) throws UnEnteredDetailsException {
+    public String getAttribute(EntryAttribute entryAttribute) throws UnEnteredDetailsException {
 
         if (!this.entryAttributes.containsKey(entryAttribute)) {
             throw new UnEnteredDetailsException(String.format("Exception: %s has not been added to entry : %s", entryAttribute.toString(), toString()));
@@ -119,7 +118,6 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
     /**
      * @return Currency of the monetary amounts to be save in this
      */
-    @Override
     public Currency getCurrency() {
         return amount.getCurrency();
     }
@@ -128,7 +126,6 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
      * @return {@link AccountSide} to which this Entry is aggregating the
      * Account balance
      */
-    @Override
     public AccountSide getAccountSide() {
         return accountSide;
     }
@@ -136,7 +133,6 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
     /**
      * @return Booking date of the Entry
      */
-    @Override
     public TimePoint getBookingDate() {
         return bookingDate;
     }
@@ -145,7 +141,6 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
      * @return The amount being posted into the Account and encapsulated
      * by the Entry
      */
-    @Override
     public Cash getAmount() {
         return amount;
     }
@@ -154,19 +149,19 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
         this.bookingDate = bookingDate;
     }
 
-    public PersistentAccount getAccount() {
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(PersistentAccount account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 
-    public Map<EntryAttribute, Object> getEntryAttributes() {
+    public Map<EntryAttribute, String> getEntryAttributes() {
         return entryAttributes;
     }
 
-    public void setEntryAttributes(Map<EntryAttribute, Object> entryAttributes) {
+    public void setEntryAttributes(Map<EntryAttribute, String> entryAttributes) {
         this.entryAttributes = entryAttributes;
     }
 
@@ -190,7 +185,6 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
      * Assigns this Entry with a specific account into which it is aggregated as
      * {@code AccountBalance}
      */
-    @Override
     public void post() {
 
         try {
@@ -205,5 +199,49 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
             log.error("Cause the entry's currency : {} does not match the forAccount's currency : {}", amount.getCurrency(), account.getCurrency(), e.getStackTrace());
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        Entry entry = (Entry) o;
+
+        if (bookingDate != null ? !bookingDate.equals(entry.bookingDate) : entry.bookingDate != null) {
+            return false;
+        }
+        if (!account.equals(entry.account)) {
+            return false;
+        }
+        if (!narration.equals(entry.narration)) {
+            return false;
+        }
+        if (accountSide != entry.accountSide) {
+            return false;
+        }
+        if (amount != null ? !amount.equals(entry.amount) : entry.amount != null) {
+            return false;
+        }
+        return entryAttributes != null ? entryAttributes.equals(entry.entryAttributes) : entry.entryAttributes == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (bookingDate != null ? bookingDate.hashCode() : 0);
+        result = 31 * result + account.hashCode();
+        result = 31 * result + narration.hashCode();
+        result = 31 * result + accountSide.hashCode();
+        result = 31 * result + (amount != null ? amount.hashCode() : 0);
+        result = 31 * result + (entryAttributes != null ? entryAttributes.hashCode() : 0);
+        return result;
     }
 }

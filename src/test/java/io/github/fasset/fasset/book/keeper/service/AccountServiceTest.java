@@ -18,7 +18,7 @@
 
 package io.github.fasset.fasset.book.keeper.service;
 
-import io.github.fasset.fasset.book.keeper.PersistentAccount;
+import io.github.fasset.fasset.book.keeper.Account;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +30,16 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class PersistentAccountServiceTest {
+public class AccountServiceTest {
 
-    @Qualifier("persistentAccountService")
+    @Qualifier("accountService")
     @Autowired
-    private PersistentAccountService persistentAccountService;
+    private AccountService persistentAccountService;
 
     @Test
     public void serviceOutletBriefRepositoryWorks() throws Exception {
 
-        assertNotNull(persistentAccountService.saveAccount(new PersistentAccount()));
+        assertNotNull(persistentAccountService.saveAccount(new Account()));
     }
 
 }

@@ -18,15 +18,26 @@
 
 package io.github.fasset.fasset.book.keeper.service;
 
-import io.github.fasset.fasset.book.keeper.PersistentAccount;
+import io.github.fasset.fasset.book.keeper.Account;
+import io.github.fasset.fasset.book.keeper.repo.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
- * Provides api for saving, deleting and updating {@code PersistentAccount} objects
+ * @see {@link AccountService}
  */
-public interface PersistentAccountService {
+@Service("accountService")
+public class AccountServiceImpl implements AccountService {
+
+    private AccountRepository repository;
+
+    @Autowired
+    public AccountServiceImpl(@Qualifier("accountRepository") AccountRepository repository) {
+        this.repository = repository;
+    }
 
     /**
      * Saves the item passed to the parameter
@@ -34,13 +45,21 @@ public interface PersistentAccountService {
      * @param persistentAccount Object to be saved in the repository
      * @return The newly saved item from the repository
      */
-    PersistentAccount saveAccount(PersistentAccount persistentAccount);
+    @Override
+    public Account saveAccount(Account persistentAccount) {
+
+        return repository.save(persistentAccount);
+    }
 
     /**
      * Saves items in a  {@code Collection} of {@code PersistentAccount} items to the
      * repository
      *
-     * @param persistentAccounts {@link PersistentAccount} items to be saved
+     * @param persistentAccounts {@link Account} items to be saved
      */
-    void saveAccounts(Collection<PersistentAccount> persistentAccounts);
+    @Override
+    public void saveAccounts(Collection<Account> persistentAccounts) {
+
+        this.repository.saveAll(persistentAccounts);
+    }
 }

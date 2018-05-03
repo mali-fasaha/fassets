@@ -18,9 +18,7 @@
 
 package io.github.fasset.fasset.book.keeper;
 
-import io.github.fasset.fasset.book.Account;
 import io.github.fasset.fasset.book.AccountDomainModel;
-import io.github.fasset.fasset.book.Entry;
 import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.book.keeper.state.AccountState;
@@ -77,12 +75,12 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
  *
  * @author edwin.njeru
  */
-@Entity(name = "PersistentAccount")
-@Table(name = "persistent_account")
-public class PersistentAccount extends AccountDomainModel<String> implements Account {
+@Entity(name = "Account")
+@Table(name = "account")
+public class Account extends AccountDomainModel<String> {
 
     @Transient
-    private static final Logger log = LoggerFactory.getLogger(PersistentAccount.class);
+    private static final Logger log = LoggerFactory.getLogger(Account.class);
 
     @Transient
     private final AccountAppraisalDelegate appraisalDelegate = new AccountAppraisalDelegate(this);
@@ -112,11 +110,11 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     @MapKeyColumn(name="attribute_name", length = 100)
     @MapKeyEnumerated(EnumType.STRING)
     @Column(name = "account_attribute")
-    @CollectionTable(name="account_attributes", joinColumns = @JoinColumn(name = "persistent_account_id"))
-    private Map<AccountAttribute, Object> accountAttributes = new ConcurrentHashMap<>();
+    @CollectionTable(name="account_attributes", joinColumns = @JoinColumn(name = "account_id"))
+    private Map<AccountAttribute, String> accountAttributes = new ConcurrentHashMap<>();
 
-    @OneToMany(mappedBy = "persistent_account")
-    private volatile List<PersistentEntry> entries = new CopyOnWriteArrayList<>();
+    @OneToMany(mappedBy = "account")
+    private volatile List<Entry> entries = new CopyOnWriteArrayList<>();
 
     /**
      * This constructor will one day allow someone to implement the {@link List} interface with anything,
@@ -130,8 +128,8 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      *                       like a database or some Restful service making changes in this account persistent.
      */
     @SuppressWarnings("unused")
-    PersistentAccount(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, Object> accountDetails, final
-    List<PersistentEntry> entries) {
+    Account(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, String> accountDetails, final
+    List<Entry> entries) {
         this.currency = currency;
         this.accountSide = accountSide;
         this.accountAttributes = accountDetails;
@@ -142,7 +140,7 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     }
 
     @SuppressWarnings("unused")
-    public PersistentAccount(final String name,final String number,final AccountSide accountSide,final Currency currency,final TimePoint openingDate) {
+    public Account(final String name, final String number, final AccountSide accountSide, final Currency currency, final TimePoint openingDate) {
         this.name = name;
         this.number = number;
         this.currency = currency;
@@ -150,7 +148,7 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
         this.openingDate = openingDate;
     }
 
-    public PersistentAccount() {
+    public Account() {
     }
 
     /**
@@ -159,8 +157,7 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      * @param accountAttribute Name of the attribute
      * @param value            value of the attribute
      */
-    @Override
-    public void addAttribute(AccountAttribute accountAttribute, Object value) {
+    public void addAttribute(AccountAttribute accountAttribute, String value) {
         this.accountAttributes.put(accountAttribute,value);
     }
 
@@ -168,7 +165,6 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      * @param accountAttribute Name of attribute being searched for e.g. Owner, Contra a/c, Rereference
      * @return The value of the attribute
      */
-    @Override
     public Object value(AccountAttribute accountAttribute) throws UnEnteredDetailsException {
 
         if(!this.accountAttributes.containsKey(accountAttribute)){
@@ -181,8 +177,7 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     /**
      * @param entry {@link Entry} to be added to this
      */
-    @Override
-    public void addEntry(PersistentEntry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
+    public void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
 
         log.debug("Adding entry to account : {}", entry);
 
@@ -210,7 +205,6 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      * @param asAt {@link TimePoint} at which is Effective
      * @return {@link AccountBalance}
      */
-    @Override
     public AccountBalance balance(TimePoint asAt) {
 
         log.debug("Account balance enquiry raised as at {}, for account : {}", asAt, this);
@@ -233,7 +227,6 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      *             <p>iii) Date</p>
      * @return {@link AccountBalance} effective the date specified by the varargs
      */
-    @Override
     public AccountBalance balance(int... asAt) {
 
         AccountBalance balance = balance(new SimpleDate(asAt[0], asAt[1], asAt[2]));
@@ -246,12 +239,10 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     /**
      * @return Currency of the account
      */
-    @Override
     public Currency getCurrency() {
         return Currency.getInstance(this.currency.getCurrencyCode());
     }
 
-    @Override
     public List<Entry> getEntries() {
 
         return new CopyOnWriteArrayList<>(
@@ -261,7 +252,6 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
                     ImmutableListCollector.toImmutableList()));
     }
 
-    @Override
     public TimePoint getOpeningDate() {
         return SimpleDate.newTimePoint(openingDate);
     }
@@ -280,7 +270,6 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      * Also note that the object's {@link AccountSide} is never really exposed since this implementation is returning a value based on its
      * current status.
      */
-    @Override
     public AccountSide getAccountSide() {
 
         // The original accountSide remains. No side effects
@@ -288,12 +277,11 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     }
 
     @SuppressWarnings("unused")
-    public Map<AccountAttribute, Object> getAccountAttributes() {
+    public Map<AccountAttribute, String> getAccountAttributes() {
 
         return accountAttributes;
     }
 
-    @Override
     public void setAccountSide(final AccountSide accountSide) {
 
         this.accountSide = accountSide;
@@ -323,11 +311,67 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
         this.openingDate = openingDate;
     }
 
-    public void setAccountAttributes(Map<AccountAttribute, Object> accountAttributes) {
+    public void setAccountAttributes(Map<AccountAttribute, String> accountAttributes) {
         this.accountAttributes = accountAttributes;
     }
 
-    public void setEntries(List<PersistentEntry> entries) {
+    public void setEntries(List<Entry> entries) {
         this.entries = entries;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        Account account = (Account) o;
+
+        if (appraisalDelegate != null ? !appraisalDelegate.equals(account.appraisalDelegate) : account.appraisalDelegate != null) {
+            return false;
+        }
+        if (accountState != null ? !accountState.equals(account.accountState) : account.accountState != null) {
+            return false;
+        }
+        if (!currency.equals(account.currency)) {
+            return false;
+        }
+        if (!name.equals(account.name)) {
+            return false;
+        }
+        if (number != null ? !number.equals(account.number) : account.number != null) {
+            return false;
+        }
+        if (!openingDate.equals(account.openingDate)) {
+            return false;
+        }
+        if (accountSide != account.accountSide) {
+            return false;
+        }
+        if (accountAttributes != null ? !accountAttributes.equals(account.accountAttributes) : account.accountAttributes != null) {
+            return false;
+        }
+        return entries != null ? entries.equals(account.entries) : account.entries == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (appraisalDelegate != null ? appraisalDelegate.hashCode() : 0);
+        result = 31 * result + (accountState != null ? accountState.hashCode() : 0);
+        result = 31 * result + currency.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + openingDate.hashCode();
+        result = 31 * result + accountSide.hashCode();
+        result = 31 * result + (accountAttributes != null ? accountAttributes.hashCode() : 0);
+        result = 31 * result + (entries != null ? entries.hashCode() : 0);
+        return result;
     }
 }

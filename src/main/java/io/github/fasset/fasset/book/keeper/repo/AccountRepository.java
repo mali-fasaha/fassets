@@ -18,14 +18,14 @@
 
 package io.github.fasset.fasset.book.keeper.repo;
 
-import io.github.fasset.fasset.book.keeper.PersistentAccount;
+import io.github.fasset.fasset.book.keeper.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Interface to act as repository for the {@link io.github.fasset.fasset.book.keeper.PersistentAccount} model
+ * Interface to act as repository for the {@link Account} model
  * using the spring template
  */
-@Repository("persistentAccountRepository")
-public interface PersistentAccountRepository extends JpaRepository<PersistentAccount,Integer> {
+@Repository("accountRepository")
+public interface AccountRepository extends JpaRepository<Account,Integer> {
 }
