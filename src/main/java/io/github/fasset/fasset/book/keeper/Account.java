@@ -26,7 +26,6 @@ import io.github.fasset.fasset.book.keeper.unit.time.DateRange;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
-import io.github.fasset.fasset.book.keeper.util.TimePointAttributeConverter;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.book.keeper.util.UntimelyBookingDateException;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
@@ -35,7 +34,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
