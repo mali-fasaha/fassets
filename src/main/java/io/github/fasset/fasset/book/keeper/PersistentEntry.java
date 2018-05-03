@@ -63,8 +63,8 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
     private TimePoint bookingDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "persistent_account")
-    private Account account;
+    @JoinColumn(name = "account")
+    private PersistentAccount account;
 
     @Column
     private String narration;
@@ -83,7 +83,7 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
     @CollectionTable(name = "entry_attributes", joinColumns = @JoinColumn(name = "persistent_entry_id"))
     private Map<EntryAttribute, Object> entryAttributes = new ConcurrentHashMap<>();
 
-    public PersistentEntry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
+    public PersistentEntry(TimePoint bookingDate, PersistentAccount account, String narration, AccountSide accountSide, Cash amount) {
         this.bookingDate = bookingDate;
         this.account = account;
         this.narration = narration;
@@ -154,12 +154,20 @@ public class PersistentEntry extends AccountDomainModel<String> implements Entry
         this.bookingDate = bookingDate;
     }
 
-    public Account getAccount() {
+    public PersistentAccount getAccount() {
         return account;
     }
 
-    public void setAccount(Account account) {
+    public void setAccount(PersistentAccount account) {
         this.account = account;
+    }
+
+    public Map<EntryAttribute, Object> getEntryAttributes() {
+        return entryAttributes;
+    }
+
+    public void setEntryAttributes(Map<EntryAttribute, Object> entryAttributes) {
+        this.entryAttributes = entryAttributes;
     }
 
     public String getNarration() {

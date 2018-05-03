@@ -28,6 +28,7 @@ import io.github.fasset.fasset.book.keeper.unit.time.DateRange;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
+import io.github.fasset.fasset.book.keeper.util.TimePointAttributeConverter;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.book.keeper.util.UntimelyBookingDateException;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
@@ -36,6 +37,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -99,6 +101,7 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     private String number;
 
     @Column
+    @Convert(converter = TimePointAttributeConverter.class)
     private TimePoint openingDate;
 
     @Column
@@ -112,8 +115,8 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     @CollectionTable(name="account_attributes", joinColumns = @JoinColumn(name = "persistent_account_id"))
     private Map<AccountAttribute, Object> accountAttributes = new ConcurrentHashMap<>();
 
-    @OneToMany(mappedBy = "account")
-    private volatile List<Entry> entries = new CopyOnWriteArrayList<>();
+    @OneToMany(mappedBy = "persistent_account")
+    private volatile List<PersistentEntry> entries = new CopyOnWriteArrayList<>();
 
     /**
      * This constructor will one day allow someone to implement the {@link List} interface with anything,
@@ -128,8 +131,7 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      */
     @SuppressWarnings("unused")
     PersistentAccount(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, Object> accountDetails, final
-    List<Entry>
-        entries) {
+    List<PersistentEntry> entries) {
         this.currency = currency;
         this.accountSide = accountSide;
         this.accountAttributes = accountDetails;
@@ -146,6 +148,9 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
         this.currency = currency;
         this.accountSide = accountSide;
         this.openingDate = openingDate;
+    }
+
+    public PersistentAccount() {
     }
 
     /**
@@ -177,7 +182,7 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
      * @param entry {@link Entry} to be added to this
      */
     @Override
-    public void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
+    public void addEntry(PersistentEntry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
 
         log.debug("Adding entry to account : {}", entry);
 
@@ -292,5 +297,37 @@ public class PersistentAccount extends AccountDomainModel<String> implements Acc
     public void setAccountSide(final AccountSide accountSide) {
 
         this.accountSide = accountSide;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setOpeningDate(TimePoint openingDate) {
+        this.openingDate = openingDate;
+    }
+
+    public void setAccountAttributes(Map<AccountAttribute, Object> accountAttributes) {
+        this.accountAttributes = accountAttributes;
+    }
+
+    public void setEntries(List<PersistentEntry> entries) {
+        this.entries = entries;
     }
 }

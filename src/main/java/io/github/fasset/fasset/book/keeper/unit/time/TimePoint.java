@@ -19,6 +19,8 @@
 
 package io.github.fasset.fasset.book.keeper.unit.time;
 
+import java.io.Serializable;
+
 /**
  * This is used and library-specific representation of time for the library.
  * The granularity of the implementation is set to days.
@@ -27,7 +29,7 @@ package io.github.fasset.fasset.book.keeper.unit.time;
  *
  * @author edwin.njeru
  */
-public interface TimePoint extends Comparable<TimePoint> {
+public interface TimePoint extends Comparable<TimePoint>, Serializable {
 
     /**
      * @param arg SimpleDate by which we compare this

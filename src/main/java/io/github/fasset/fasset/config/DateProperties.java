@@ -19,10 +19,12 @@
 package io.github.fasset.fasset.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * This object simply configures the default of the program's default date parsing pattern
  */
+@Component
 @ConfigurationProperties("date-parsing")
 public class DateProperties {
 

@@ -19,6 +19,7 @@
 package io.github.fasset.fasset.book;
 
 import io.github.fasset.fasset.book.keeper.AccountAttribute;
+import io.github.fasset.fasset.book.keeper.PersistentEntry;
 import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
@@ -43,7 +44,7 @@ public interface Account {
     /**
      * @param entry {@link Entry} to be added to this
      */
-    void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException;
+    void addEntry(PersistentEntry entry) throws MismatchedCurrencyException, UntimelyBookingDateException;
 
     /**
      * Returns the balance of the Account

@@ -33,13 +33,6 @@ import javax.persistence.Converter;
 @Converter(autoApply = true)
 public class TimePointAttributeConverter implements AttributeConverter<TimePoint, String> {
 
-    private String datePattern;
-
-    @Autowired
-    TimePointAttributeConverter(DateProperties dateProperties) {
-        this.datePattern = dateProperties.getDatePattern();
-    }
-
     /**
      * Converts the value stored in the entity attribute into the
      * data representation to be stored in the database.
@@ -50,7 +43,7 @@ public class TimePointAttributeConverter implements AttributeConverter<TimePoint
     @Override
     public String convertToDatabaseColumn(TimePoint attribute) {
 
-        ReadableTime readableTime = new ReadableDate(datePattern, attribute);
+        ReadableTime readableTime = new ReadableDate("dd/MM/yyyy", attribute);
 
         return readableTime.toString();
     }
@@ -69,6 +62,6 @@ public class TimePointAttributeConverter implements AttributeConverter<TimePoint
     @Override
     public TimePoint convertToEntityAttribute(String dbData) {
 
-        return TimePointUtils.parseString(dbData, datePattern);
+        return TimePointUtils.parseString(dbData, "dd/MM/yyyy");
     }
 }

@@ -16,34 +16,30 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package io.github.fasset.fasset.book.keeper.util;
+package io.github.fasset.fasset.book.keeper.service;
 
-import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
-import io.github.fasset.fasset.config.DateProperties;
-import org.junit.Before;
+import io.github.fasset.fasset.book.keeper.PersistentAccount;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 
-public class TimePointAttributeConverterTest {
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class PersistentAccountServiceTest {
 
-    private TimePointAttributeConverter timePointAttributeConverter;
-
-    @Before
-    public void setUp() throws Exception {
-
-        timePointAttributeConverter = new TimePointAttributeConverter();
-    }
+    @Qualifier("persistentAccountService")
+    @Autowired
+    private PersistentAccountService persistentAccountService;
 
     @Test
-    public void convertToDatabaseColumn() {
+    public void serviceOutletBriefRepositoryWorks() throws Exception {
 
-        assertEquals("04/05/2013", timePointAttributeConverter.convertToDatabaseColumn(SimpleDate.on(2013,5,4)));
+        assertNotNull(persistentAccountService.saveAccount(new PersistentAccount()));
     }
 
-    @Test
-    public void convertToEntityAttribute() {
-
-        assertEquals(SimpleDate.on(2016,11,3), timePointAttributeConverter.convertToEntityAttribute("03/11/2016"));
-    }
 }
