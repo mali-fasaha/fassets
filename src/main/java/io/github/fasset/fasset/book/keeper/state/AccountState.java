@@ -25,13 +25,14 @@ import io.github.fasset.fasset.book.keeper.unit.money.Cash;
  * The Account could either be in {@link AccountSide#CREDIT} or {@link AccountSide#DEBIT}
  * This interface maintains the methods common to all these states to allow
  * reuse
- * 
+ *
  * @author edwin.njeru
  */
 public interface AccountState {
 
     /**
      * Get AccountBalance given the sum of debits and sum of credits
+     *
      * @param debits
      * @param credits
      * @return
@@ -39,7 +40,6 @@ public interface AccountState {
     AccountBalance getAccountBalance(Cash debits, Cash credits);
 
     /**
-     *
      * @return {@code AccountSide} of the Account
      */
     AccountSide getAccountSide();

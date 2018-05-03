@@ -27,5 +27,5 @@ import org.springframework.stereotype.Repository;
  * using the spring template
  */
 @Repository("accountRepository")
-public interface AccountRepository extends JpaRepository<Account,Integer> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
 }

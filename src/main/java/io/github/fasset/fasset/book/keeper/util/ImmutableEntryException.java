@@ -32,7 +32,7 @@ public class ImmutableEntryException extends Exception {
      * Constructs a new throwable with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
-     *
+     * <p>
      * <p>The {@link #fillInStackTrace()} method is called to initialize
      * the stack trace data in the newly created throwable.
      */
@@ -44,7 +44,7 @@ public class ImmutableEntryException extends Exception {
      * Constructs a new throwable with the specified detail message.  The
      * cause is not initialized, and may subsequently be initialized by
      * a call to {@link #initCause}.
-     *
+     * <p>
      * <p>The {@link #fillInStackTrace()} method is called to initialize
      * the stack trace data in the newly created throwable.
      *

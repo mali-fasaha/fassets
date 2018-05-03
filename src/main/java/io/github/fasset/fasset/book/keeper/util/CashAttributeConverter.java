@@ -31,7 +31,7 @@ import javax.persistence.Converter;
  * @author edwin.njeru
  */
 @Converter(autoApply = true)
-public class CashAttributeConverter implements AttributeConverter<Cash,String> {
+public class CashAttributeConverter implements AttributeConverter<Cash, String> {
 
     /**
      * Converts the value stored in the entity attribute into the

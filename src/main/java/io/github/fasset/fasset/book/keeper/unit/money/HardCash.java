@@ -50,7 +50,7 @@ public class HardCash implements Cash {
     }
 
     public HardCash(Cash cash) {
-        base = Money.of(CurrencyUnit.of(cash.getCurrency()),cash.getNumber().doubleValue());
+        base = Money.of(CurrencyUnit.of(cash.getCurrency()), cash.getNumber().doubleValue());
     }
 
     /**

@@ -17,7 +17,6 @@
  */
 
 
-
 package io.github.fasset.fasset.book.keeper;
 
 
@@ -47,11 +46,9 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 public class AccountAppraisalDelegate {
 
     private final Account account;
-
-    private AccountState accountSideState;
-
     private final AccountState debitAccountState;
     private final AccountState creditAccountState;
+    private AccountState accountSideState;
 
     AccountAppraisalDelegate(Account account) {
 
@@ -62,41 +59,33 @@ public class AccountAppraisalDelegate {
         this.accountSideState = account.getAccountSide() == DEBIT ? debitAccountState : creditAccountState;
     }
 
-    public AccountBalance balance(DateRange dateRange){
+    public AccountBalance balance(DateRange dateRange) {
 
-        Cash debits = getDebits(dateRange,account.getEntries());
+        Cash debits = getDebits(dateRange, account.getEntries());
 
         Cash credits = getCredits(dateRange, account.getEntries());
 
         if (debits.isZero() || credits.isZero()) {
-            if(!debits.isZero() && credits.isZero()){
+            if (!debits.isZero() && credits.isZero()) {
                 return new AccountBalance(debits, DEBIT);
-            } else if(debits.isZero() && !credits.isZero()){
+            } else if (debits.isZero() && !credits.isZero()) {
                 return new AccountBalance(credits, CREDIT);
             }
         } else {
 
-           return accountSideState.getAccountBalance(debits,credits);
+            return accountSideState.getAccountBalance(debits, credits);
         }
 
-        return new AccountBalance(HardCash.of(0.0,account.getCurrency()),account.getAccountSide());
+        return new AccountBalance(HardCash.of(0.0, account.getCurrency()), account.getAccountSide());
     }
 
-    private Cash getCredits(DateRange dateRange,List<Entry> accountEntries) {
-        return HardCash.of(accountEntries
-                .parallelStream()
-                .filter(entry -> dateRange.includes(entry.getBookingDate()))
-                .filter(entry -> entry.getAccountSide() == CREDIT)
-                .map(entry -> entry.getAmount().getNumber().doubleValue())
-                .reduce(0.00,(acc,value) -> acc + value), account.getCurrency());
+    private Cash getCredits(DateRange dateRange, List<Entry> accountEntries) {
+        return HardCash.of(accountEntries.parallelStream().filter(entry -> dateRange.includes(entry.getBookingDate())).filter(entry -> entry.getAccountSide() == CREDIT)
+            .map(entry -> entry.getAmount().getNumber().doubleValue()).reduce(0.00, (acc, value) -> acc + value), account.getCurrency());
     }
 
-    private Cash getDebits(DateRange dateRange,List<Entry> accountEntries) {
-        return HardCash.of(accountEntries
-                .parallelStream()
-                .filter(entry -> dateRange.includes(entry.getBookingDate()))
-                .filter(entry -> entry.getAccountSide() == DEBIT)
-                .map(entry -> entry.getAmount().getNumber().doubleValue())
-                .reduce(0.00,(acc,value) -> acc + value), account.getCurrency());
+    private Cash getDebits(DateRange dateRange, List<Entry> accountEntries) {
+        return HardCash.of(accountEntries.parallelStream().filter(entry -> dateRange.includes(entry.getBookingDate())).filter(entry -> entry.getAccountSide() == DEBIT)
+            .map(entry -> entry.getAmount().getNumber().doubleValue()).reduce(0.00, (acc, value) -> acc + value), account.getCurrency());
     }
 }

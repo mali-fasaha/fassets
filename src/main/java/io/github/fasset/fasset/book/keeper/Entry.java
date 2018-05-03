@@ -84,7 +84,7 @@ public class Entry extends AccountDomainModel<String> {
     public Entry() {
     }
 
-    public Entry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
+    Entry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
         this.bookingDate = bookingDate;
         this.account = account;
         this.narration = narration;
@@ -130,11 +130,19 @@ public class Entry extends AccountDomainModel<String> {
         return accountSide;
     }
 
+    public void setAccountSide(AccountSide accountSide) {
+        this.accountSide = accountSide;
+    }
+
     /**
      * @return Booking date of the Entry
      */
     public TimePoint getBookingDate() {
         return bookingDate;
+    }
+
+    public void setBookingDate(TimePoint bookingDate) {
+        this.bookingDate = bookingDate;
     }
 
     /**
@@ -145,8 +153,8 @@ public class Entry extends AccountDomainModel<String> {
         return amount;
     }
 
-    public void setBookingDate(TimePoint bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setAmount(Cash amount) {
+        this.amount = amount;
     }
 
     public Account getAccount() {
@@ -171,14 +179,6 @@ public class Entry extends AccountDomainModel<String> {
 
     public void setNarration(String narration) {
         this.narration = narration;
-    }
-
-    public void setAccountSide(AccountSide accountSide) {
-        this.accountSide = accountSide;
-    }
-
-    public void setAmount(Cash amount) {
-        this.amount = amount;
     }
 
     /**

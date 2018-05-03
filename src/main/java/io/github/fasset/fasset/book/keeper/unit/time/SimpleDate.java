@@ -62,6 +62,16 @@ public class SimpleDate implements TimePoint {
         return new SimpleDate(year, month, dayOfMonth);
     }
 
+    protected static LocalDate getDay(TimePoint arg) {
+        SimpleDate simpleDate = (SimpleDate) arg;
+        return simpleDate.base;
+    }
+
+    public static TimePoint newTimePoint(TimePoint arg) {
+
+        return new SimpleDate(getDay(arg));
+    }
+
     private void initialize(LocalDate arg) {
         this.base = arg;
     }
@@ -109,15 +119,5 @@ public class SimpleDate implements TimePoint {
     @Override
     public String toString() {
         return base.toString();
-    }
-
-    protected static LocalDate getDay(TimePoint arg) {
-        SimpleDate simpleDate = (SimpleDate) arg;
-        return simpleDate.base;
-    }
-
-    public static TimePoint newTimePoint(TimePoint arg){
-
-        return new SimpleDate(getDay(arg));
     }
 }

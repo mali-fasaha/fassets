@@ -35,12 +35,12 @@ public class HardCashDecorator extends HardCash implements Cash {
 
     public HardCashDecorator(double amount, String currencyCode) {
         super(amount, currencyCode);
-        this.readableBase = Money.of(CurrencyUnit.of(currencyCode),amount);
+        this.readableBase = Money.of(CurrencyUnit.of(currencyCode), amount);
     }
 
     public HardCashDecorator(double amount, Currency currency) {
         super(amount, currency);
-        this.readableBase = Money.of(CurrencyUnit.of(currency),amount);
+        this.readableBase = Money.of(CurrencyUnit.of(currency), amount);
     }
 
     public HardCashDecorator(Money arg) {
@@ -50,6 +50,6 @@ public class HardCashDecorator extends HardCash implements Cash {
 
     public HardCashDecorator(Cash cash) {
         super(cash);
-        readableBase = Money.of(CurrencyUnit.of(cash.getCurrency()),cash.getNumber().doubleValue());
+        readableBase = Money.of(CurrencyUnit.of(cash.getCurrency()), cash.getNumber().doubleValue());
     }
 }

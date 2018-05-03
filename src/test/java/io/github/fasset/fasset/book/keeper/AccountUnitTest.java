@@ -20,7 +20,7 @@ import static io.github.fasset.fasset.book.keeper.AccountAttribute.General_Ledge
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.*;
 
-public class AccountTest {
+public class AccountUnitTest {
 
     private Account account;
 

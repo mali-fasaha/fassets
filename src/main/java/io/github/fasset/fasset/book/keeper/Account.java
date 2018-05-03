@@ -63,6 +63,7 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
  * default {@link AccountSide} of the {@link Account}.
  *
  * @author edwin.njeru
+ * @author edwin.njeru
  * @implNote Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not
  * be obviously evident by the usual use of words like "synchronized" et al. In fact synchronization would probably just
  * slow us down. Instead what has been done is that the {@link Collection} of {@link Entry} items, which is the whole
@@ -71,8 +72,6 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
  * {@code ConcurrentModificationException} and it does not reflect additions, removals or changes to the list, once they
  * have been created. The rest of the getters return new instances of values of similar equivalence or copies of themselves
  * this objects attributes will largely therefore remain unchanged.
- *
- * @author edwin.njeru
  */
 @Entity(name = "Account")
 @Table(name = "account")
@@ -106,10 +105,10 @@ public class Account extends AccountDomainModel<String> {
     private volatile AccountSide accountSide;
 
     @ElementCollection
-    @MapKeyColumn(name="attribute_name", length = 100)
+    @MapKeyColumn(name = "attribute_name", length = 100)
     @MapKeyEnumerated(EnumType.STRING)
     @Column(name = "account_attribute")
-    @CollectionTable(name="account_attributes", joinColumns = @JoinColumn(name = "account_id"))
+    @CollectionTable(name = "account_attributes", joinColumns = @JoinColumn(name = "account_id"))
     private Map<AccountAttribute, String> accountAttributes = new ConcurrentHashMap<>();
 
     @OneToMany(mappedBy = "account")
@@ -127,8 +126,8 @@ public class Account extends AccountDomainModel<String> {
      *                       like a database or some Restful service making changes in this account persistent.
      */
     @SuppressWarnings("unused")
-    Account(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, String> accountDetails, final
-    List<Entry> entries) {
+    Account(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, String> accountDetails,
+            final List<Entry> entries) {
         this.currency = currency;
         this.accountSide = accountSide;
         this.accountAttributes = accountDetails;
@@ -157,7 +156,7 @@ public class Account extends AccountDomainModel<String> {
      * @param value            value of the attribute
      */
     public void addAttribute(AccountAttribute accountAttribute, String value) {
-        this.accountAttributes.put(accountAttribute,value);
+        this.accountAttributes.put(accountAttribute, value);
     }
 
     /**
@@ -166,8 +165,8 @@ public class Account extends AccountDomainModel<String> {
      */
     public String getAttribute(AccountAttribute accountAttribute) throws UnEnteredDetailsException {
 
-        if(!this.accountAttributes.containsKey(accountAttribute)){
-            throw new UnEnteredDetailsException(String.format("account # %s does not contain field : %s",getId(),accountAttribute));
+        if (!this.accountAttributes.containsKey(accountAttribute)) {
+            throw new UnEnteredDetailsException(String.format("account # %s does not contain field : %s", getId(), accountAttribute));
         }
 
         return this.accountAttributes.get(accountAttribute);
@@ -178,7 +177,7 @@ public class Account extends AccountDomainModel<String> {
      */
     public void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
 
-        log.debug("Adding entry {} to account : {}", entry,this);
+        log.debug("Adding entry {} to account : {}", entry, this);
 
         if (entry.getBookingDate().before(this.openingDate)) {
 
@@ -242,22 +241,30 @@ public class Account extends AccountDomainModel<String> {
         return Currency.getInstance(this.currency.getCurrencyCode());
     }
 
+    public void setCurrency(Currency currency) {
+        // Crickets
+    }
+
     public List<Entry> getEntries() {
 
-        return new CopyOnWriteArrayList<>(
-            entries
-                .parallelStream()
-                .collect(
-                    ImmutableListCollector.toImmutableList()));
+        return new CopyOnWriteArrayList<>(entries.parallelStream().collect(ImmutableListCollector.toImmutableList()));
+    }
+
+    public void setEntries(List<Entry> entries) {
+        // Crickets. Please use addEntry
     }
 
     public TimePoint getOpeningDate() {
         return SimpleDate.newTimePoint(openingDate);
     }
 
+    public void setOpeningDate(TimePoint openingDate) {
+        // Crickets
+    }
+
     @Override
     public String toString() {
-        return this.name+" "+this.number;
+        return this.name + " " + this.number;
     }
 
     /**
@@ -275,19 +282,19 @@ public class Account extends AccountDomainModel<String> {
         return this.accountSide == DEBIT ? DEBIT : CREDIT;
     }
 
+    public void setAccountSide(final AccountSide accountSide) {
+
+        this.accountSide = accountSide;
+    }
+
     @SuppressWarnings("unused")
     Map<AccountAttribute, String> getAccountAttributes() {
 
         return Collections.unmodifiableMap(accountAttributes);
     }
 
-    public void setAccountSide(final AccountSide accountSide) {
-
-        this.accountSide = accountSide;
-    }
-
-    public void setCurrency(Currency currency) {
-        // Crickets
+    public void setAccountAttributes(Map<AccountAttribute, String> accountAttributes) {
+        // Crickets. Please use addAttribute
     }
 
     public String getName() {
@@ -304,18 +311,6 @@ public class Account extends AccountDomainModel<String> {
 
     public void setNumber(String number) {
         // Crickets
-    }
-
-    public void setOpeningDate(TimePoint openingDate) {
-        // Crickets
-    }
-
-    public void setAccountAttributes(Map<AccountAttribute, String> accountAttributes) {
-        // Crickets. Please use addAttribute
-    }
-
-    public void setEntries(List<Entry> entries) {
-        // Crickets. Please use addEntry
     }
 
     @Override

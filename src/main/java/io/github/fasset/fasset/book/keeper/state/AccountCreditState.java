@@ -26,13 +26,13 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 
 /**
  * This class represents the Account's state when it is in CREDIT balance
- * 
- * @author edwin.njeru
  *
+ * @author edwin.njeru
  */
 public class AccountCreditState implements AccountState {
 
     private Account account;
+
     public AccountCreditState(Account account) {
         this.account = account;
     }
@@ -40,21 +40,21 @@ public class AccountCreditState implements AccountState {
     /**
      * Get AccountBalance given the sum of debits and sum of credits
      *
-     * @param debits Amount of {@link Cash} debits in the account
+     * @param debits  Amount of {@link Cash} debits in the account
      * @param credits Amount of {@link Cash} credits in the account
      * @return {@link AccountBalance} of the {@link Account}
      */
     @Override
     public AccountBalance getAccountBalance(final Cash debits, final Cash credits) {
 
-        if(credits.isMoreThan(debits)){
-            return new AccountBalance(credits.minus(debits).abs(),account.getAccountSide());
+        if (credits.isMoreThan(debits)) {
+            return new AccountBalance(credits.minus(debits).abs(), account.getAccountSide());
         }
 
         // The journal side of the account changes to DEBIT
         account.setAccountSide(DEBIT);
 
-        return new AccountBalance(credits.minus(debits).abs(),DEBIT);
+        return new AccountBalance(credits.minus(debits).abs(), DEBIT);
     }
 
     /**

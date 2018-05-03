@@ -32,6 +32,6 @@ public class ImmutableListCollector {
         return Collector.of(ArrayList::new, List::add, (left, right) -> {
             left.addAll(right);
             return left;
-        }, Collections::unmodifiableList,Collector.Characteristics.CONCURRENT);
+        }, Collections::unmodifiableList, Collector.Characteristics.CONCURRENT);
     }
 }

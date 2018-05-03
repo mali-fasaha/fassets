@@ -25,10 +25,9 @@ package io.github.fasset.fasset.book.keeper.unit.money;
  *
  * @author edwin.njeru
  */
-public interface ReadableCash extends Cash{
+public interface ReadableCash extends Cash {
 
     /**
-     *
      * @return String equivalent of this
      */
     String getString();

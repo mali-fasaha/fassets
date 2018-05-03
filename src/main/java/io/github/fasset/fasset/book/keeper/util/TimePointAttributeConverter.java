@@ -22,8 +22,6 @@ import io.github.fasset.fasset.book.keeper.unit.time.ReadableDate;
 import io.github.fasset.fasset.book.keeper.unit.time.ReadableTime;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.config.DateProperties;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
