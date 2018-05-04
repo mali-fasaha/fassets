@@ -20,6 +20,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation.model;
 
 import io.github.fasset.fasset.DomainModel;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.time.YearMonth;
 import java.util.Comparator;
@@ -28,9 +29,10 @@ import java.util.Objects;
 /**
  * A record of a depreciation job that is to be saved in the database
  */
-@Entity
+@Entity(name = "DepreciationJobInstance")
 public class DepreciationJobInstance extends DomainModel<String> implements Comparable<DepreciationJobInstance> {
 
+    @Column(name = "month")
     private YearMonth month;
 
     public DepreciationJobInstance() {

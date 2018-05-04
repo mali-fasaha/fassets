@@ -54,8 +54,7 @@ public class AccountDomainModel<U> {
     private int id;
 
     @Version
-    @Type(type = "dbtimestamp")
-    private Date version;
+    private int version;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -76,7 +75,7 @@ public class AccountDomainModel<U> {
         return id;
     }
 
-    public Date getVersion() {
+    public int getVersion() {
         return version;
     }
 
@@ -110,29 +109,29 @@ public class AccountDomainModel<U> {
         if (id != that.id) {
             return false;
         }
-        if (!version.equals(that.version)) {
+        if (version != that.version) {
             return false;
         }
-        if (!createdAt.equals(that.createdAt)) {
+        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) {
             return false;
         }
-        if (!modifiedAt.equals(that.modifiedAt)) {
+        if (modifiedAt != null ? !modifiedAt.equals(that.modifiedAt) : that.modifiedAt != null) {
             return false;
         }
-        if (!createdBy.equals(that.createdBy)) {
+        if (createdBy != null ? !createdBy.equals(that.createdBy) : that.createdBy != null) {
             return false;
         }
-        return lastModifiedBy.equals(that.lastModifiedBy);
+        return lastModifiedBy != null ? lastModifiedBy.equals(that.lastModifiedBy) : that.lastModifiedBy == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + version.hashCode();
-        result = 31 * result + createdAt.hashCode();
-        result = 31 * result + modifiedAt.hashCode();
-        result = 31 * result + createdBy.hashCode();
-        result = 31 * result + lastModifiedBy.hashCode();
+        result = 31 * result + version;
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+        result = 31 * result + (modifiedAt != null ? modifiedAt.hashCode() : 0);
+        result = 31 * result + (createdBy != null ? createdBy.hashCode() : 0);
+        result = 31 * result + (lastModifiedBy != null ? lastModifiedBy.hashCode() : 0);
         return result;
     }
 

@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  * This object simply configures the default of the program's default date parsing pattern
  */
 @Component
-@ConfigurationProperties("date-parsing")
+@ConfigurationProperties(prefix = "date-parsing")
 public class DateProperties {
 
     private String datePattern = "dd/MM/yyyy";

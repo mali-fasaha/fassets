@@ -25,7 +25,7 @@ import java.util.Objects;
 /**
  * This object simply configures the default of the program's default currency
  */
-@ConfigurationProperties("money")
+@ConfigurationProperties(prefix = "money")
 public class MoneyProperties {
 
     private String defaultCurrency = "KES";
