@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
- * @see {@link AccountService}
+ * @see AccountService interface
  */
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {

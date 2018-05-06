@@ -64,7 +64,7 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
  *
  * @author edwin.njeru
  * @author edwin.njeru
- * @implNote Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not
+ * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not
  * be obviously evident by the usual use of words like "synchronized" et al. In fact synchronization would probably just
  * slow us down. Instead what has been done is that the {@link Collection} of {@link Entry} items, which is the whole
  * concept of this Account pattern, has been implemented using a {@link List} interface implementation that creates a new
@@ -162,6 +162,7 @@ public class Account extends AccountDomainModel<String> {
     /**
      * @param accountAttribute Name of attribute being searched for e.g. Owner, Contra a/c, Rereference
      * @return The value of the attribute
+     * @throws UnEnteredDetailsException when the Parameter Attribute is not available in the account
      */
     public String getAttribute(AccountAttribute accountAttribute) throws UnEnteredDetailsException {
 
@@ -174,6 +175,8 @@ public class Account extends AccountDomainModel<String> {
 
     /**
      * @param entry {@link Entry} to be added to this
+     * @throws MismatchedCurrencyException when the Entry's currency is not similar to the account's currency
+     * @throws UntimelyBookingDateException when the Entry's booking date is sooner than the account's opening date
      */
     public void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
 
@@ -270,7 +273,7 @@ public class Account extends AccountDomainModel<String> {
     /**
      * @return Shows the side of the balance sheet to which this belongs which could be either
      * {@link AccountSide#DEBIT} or {@link AccountSide#CREDIT}
-     * @implSpec As per implementation notes this is for use only by the {@link AccountAppraisalDelegate}
+     * Implementation Note : As per implementation notes this is for use only by the {@link AccountAppraisalDelegate}
      * allowing inexpensive evaluation of the {@link AccountBalance} without causing circular reference. Otherwise anyone else who needs
      * to know the {@code AccountSide} of this needs to query the {@link AccountBalance} first, and from it acquire the {@link AccountSide}.
      * Also note that the object's {@link AccountSide} is never really exposed since this implementation is returning a value based on its

@@ -23,5 +23,41 @@ package io.github.fasset.fasset.book.keeper;
  * through the constructor
  */
 public enum AccountAttribute {
-    Contra_Account, Account_Type, Account_SubType, Account_Scheme, General_Ledger, Interest_Rate, Remarks
+    /**
+     * The Account that maintains the status of balance for this account
+     */
+    Contra_Account,
+
+    /**
+     * The type classification of the account on the balance sheet, which could be either
+     * asset, liability or capital or equity
+     */
+    Account_Type,
+
+    /**
+     * The subtype where one would wish to classify this account
+     */
+    Account_SubType,
+
+    /**
+     * An extra classification layer for the account should one be needed
+     */
+    Account_Scheme,
+
+    /**
+     * General ledger identification of the account should such a system exist with which
+     * one would like to integrate this system
+     */
+    General_Ledger,
+
+    /**
+     * Interest which is associated with this account if the same has such considerations according
+     * to the application business domain
+     */
+    Interest_Rate,
+
+    /**
+     * Typical narration associated with this account
+     */
+    Remarks
 }

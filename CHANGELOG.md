@@ -3,6 +3,16 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**work in progress to replicate the YearMonthAttributeConverter 'month' related exception into a test**
+
+
+[fd1c3f3cdae252b](https://github.com/ghacupha/fassets/commit/fd1c3f3cdae252b) Edwin Njeru *2018-05-04 16:51:25*
+
+**Added the transaction interface, its implementation and basic tests for the same**
+
+
+[9e4a36ec74dfa3a](https://github.com/ghacupha/fassets/commit/9e4a36ec74dfa3a) Edwin Njeru *2018-05-03 18:26:47*
+
 **Added the transaction interface, its implementation and basic tests for the same**
 
 

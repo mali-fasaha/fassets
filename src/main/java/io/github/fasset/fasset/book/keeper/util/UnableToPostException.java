@@ -21,14 +21,14 @@ package io.github.fasset.fasset.book.keeper.util;
 
 /**
  * This exception is thrown when the {@link io.github.fasset.fasset.book.Transaction} client
- * tries to post a transaction when the sum of the {@link io.github.fasset.fasset.book.Entry} items does not
+ * tries to post a transaction when the sum of the {@link io.github.fasset.fasset.book.keeper.Entry} items does not
  * evaluate to zero, or when the caller of {@link io.github.fasset.fasset.book.Transaction#post()}
  * does not first ensure that {@link io.github.fasset.fasset.book.keeper.unit.money.Cash} amounts of
  * {@link io.github.fasset.fasset.book.keeper.balance.AccountSide#CREDIT}
- * {@link io.github.fasset.fasset.book.Entry} items
+ * {@link io.github.fasset.fasset.book.keeper.Entry} items
  * are not equivalent to the {@link io.github.fasset.fasset.book.keeper.unit.money.Cash} amounts of
  * {@link io.github.fasset.fasset.book.keeper.balance.AccountSide#CREDIT}
- * {@link io.github.fasset.fasset.book.Entry} items
+ * {@link io.github.fasset.fasset.book.keeper.Entry} items
  *
  * @author edwin.njeru
  */

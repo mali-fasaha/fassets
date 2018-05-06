@@ -39,8 +39,11 @@ public interface Transaction {
      * @param account         {@link Account} into which the {@link Entry} is posted
      * @param narration       {@link Entry} specifications of the {@link Entry}
      * @param entryAttributes Map containing additional info about the entry
+     * @throws ImmutableEntryException when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code Entry} or {@code Transaction} currencies
+     * do not match
      */
-    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<EntryAttribute, String> entryAttributes)
+    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<EntryAttribute, String> entryAttributes)
         throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
@@ -53,11 +56,15 @@ public interface Transaction {
      * @param amount      {@link Cash} amount being posted to the journal
      * @param account     {@link Account} into which the {@link Entry} is being added
      * @param narration   a brief narration of the entry
+     * @throws ImmutableEntryException when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code Entry} or {@code Transaction} currencies
      */
-    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException;
+    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
      * Adds the {@link Entry} items into the accounts involved in this {@link Transaction}
+     * @throws UnableToPostException when the transaction could not be posted because the amount is not balanced
+     * @throws ImmutableEntryException when an Entry is added to a posted transaction
      */
     void post() throws UnableToPostException, ImmutableEntryException;
 

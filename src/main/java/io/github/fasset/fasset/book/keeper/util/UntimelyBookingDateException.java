@@ -20,7 +20,7 @@ package io.github.fasset.fasset.book.keeper.util;
 
 /**
  * This exception is thrown when the {@link io.github.fasset.fasset.book.keeper.unit.time.TimePoint} bookingDate
- * of the {@link io.github.fasset.fasset.book.Entry} is sooner than the
+ * of the {@link io.github.fasset.fasset.book.keeper.Entry} is sooner than the
  * {@link io.github.fasset.fasset.book.keeper.unit.time.TimePoint} openingDate attribute of the
  * {@code Account}
  *

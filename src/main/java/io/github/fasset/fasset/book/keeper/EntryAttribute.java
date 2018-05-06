@@ -22,5 +22,24 @@ package io.github.fasset.fasset.book.keeper;
  * Represents, types of Attributes we can expect in an {@code Entry}
  */
 public enum EntryAttribute {
-    Invoice, Supplier, AssetId, ReferenceNumber;
+
+    /**
+     * Invoice number for a transaction associated with this account
+     */
+    Invoice,
+
+    /**
+     * A supplier for a service or item attached to this account
+     */
+    Supplier,
+
+    /**
+     * Unique identification for an asset item in the server
+     */
+    AssetId,
+
+    /**
+     * The reference number for the transaction associated with this Entry
+     */
+    ReferenceNumber
 }

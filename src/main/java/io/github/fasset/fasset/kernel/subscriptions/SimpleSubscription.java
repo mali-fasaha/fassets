@@ -40,7 +40,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * adapted from https://www.journaldev.com/1739/observer-design-pattern-in-java
  * posted on AUGUST 2, 2016</p>
  * <p>
- * <p>
  *
  * @author Pankaj
  * </p>
@@ -85,7 +84,7 @@ public class SimpleSubscription implements SubscriptionService {
     @Override
     public void notifyObservers() {
 
-        List<Subscriber> observersLocal = null;
+        List<Subscriber> observersLocal;
 
         // this sync block ensures that observer registered after file
         // has been updated are not notified

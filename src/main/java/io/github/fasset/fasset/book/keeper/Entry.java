@@ -105,6 +105,8 @@ public class Entry extends AccountDomainModel<String> {
     /**
      * @param entryAttribute identification of the attribute we wish to obtain from the entry
      * @return Object containing the attribute value
+     * @throws UnEnteredDetailsException When an attribute is enquired from the Entry before it has been added
+     * into the Entry
      */
     public String getAttribute(EntryAttribute entryAttribute) throws UnEnteredDetailsException {
 
