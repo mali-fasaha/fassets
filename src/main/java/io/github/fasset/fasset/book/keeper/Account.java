@@ -155,7 +155,7 @@ public class Account extends AccountDomainModel<String> {
      * @param accountAttribute Name of the attribute
      * @param value            value of the attribute
      */
-    public void addAttribute(AccountAttribute accountAttribute, String value) {
+    void addAttribute(AccountAttribute accountAttribute, String value) {
         this.accountAttributes.put(accountAttribute, value);
     }
 
@@ -178,7 +178,7 @@ public class Account extends AccountDomainModel<String> {
      * @throws MismatchedCurrencyException when the Entry's currency is not similar to the account's currency
      * @throws UntimelyBookingDateException when the Entry's booking date is sooner than the account's opening date
      */
-    public void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
+    void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
 
         log.debug("Adding entry {} to account : {}", entry, this);
 
@@ -257,7 +257,7 @@ public class Account extends AccountDomainModel<String> {
         // Crickets. Please use addEntry
     }
 
-    public TimePoint getOpeningDate() {
+    TimePoint getOpeningDate() {
         return SimpleDate.newTimePoint(openingDate);
     }
 

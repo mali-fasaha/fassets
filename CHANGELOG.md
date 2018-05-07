@@ -6,6 +6,11 @@ Changelog for fassets implementation by ghacupha
 **fixed some javadoc issues preventing maven goal package from completing successfully**
 
 
+[014375aea4cbfef](https://github.com/ghacupha/fassets/commit/014375aea4cbfef) Edwin Njeru *2018-05-06 11:50:35*
+
+**fixed some javadoc issues preventing maven goal package from completing successfully**
+
+
 [106618a61934974](https://github.com/ghacupha/fassets/commit/106618a61934974) Edwin Njeru *2018-05-06 11:40:33*
 
 **work in progress to replicate the YearMonthAttributeConverter 'month' related exception into a test**

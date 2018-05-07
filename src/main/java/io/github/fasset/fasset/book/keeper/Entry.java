@@ -98,7 +98,7 @@ public class Entry extends AccountDomainModel<String> {
      * @param entryAttribute {@link EntryAttribute} identity of the attribute in an entry
      * @param attribute      the object content being registered as an attribute
      */
-    public void addAttribute(EntryAttribute entryAttribute, String attribute) {
+    void addAttribute(EntryAttribute entryAttribute, String attribute) {
         this.entryAttributes.put(entryAttribute, attribute);
     }
 
@@ -128,7 +128,7 @@ public class Entry extends AccountDomainModel<String> {
      * @return {@link AccountSide} to which this Entry is aggregating the
      * Account balance
      */
-    public AccountSide getAccountSide() {
+    AccountSide getAccountSide() {
         return accountSide;
     }
 
@@ -139,7 +139,7 @@ public class Entry extends AccountDomainModel<String> {
     /**
      * @return Booking date of the Entry
      */
-    public TimePoint getBookingDate() {
+    TimePoint getBookingDate() {
         return bookingDate;
     }
 

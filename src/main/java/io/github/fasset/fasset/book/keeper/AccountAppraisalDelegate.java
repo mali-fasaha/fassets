@@ -46,15 +46,13 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 public class AccountAppraisalDelegate {
 
     private final Account account;
-    private final AccountState debitAccountState;
-    private final AccountState creditAccountState;
     private AccountState accountSideState;
 
     AccountAppraisalDelegate(Account account) {
 
         this.account = account;
-        debitAccountState = new AccountDebitState(this.account);
-        creditAccountState = new AccountCreditState(this.account);
+        AccountState debitAccountState = new AccountDebitState(this.account);
+        AccountState creditAccountState = new AccountCreditState(this.account);
 
         this.accountSideState = account.getAccountSide() == DEBIT ? debitAccountState : creditAccountState;
     }

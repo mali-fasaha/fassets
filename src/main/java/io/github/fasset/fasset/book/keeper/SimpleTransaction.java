@@ -101,6 +101,9 @@ public final class SimpleTransaction implements Transaction {
      * @param account         {@link Account} into which the {@link Entry} is being added
      * @param narration       a brief narration of the entry
      * @param entryAttributes Map containing additional details about the entry being entered
+     * @throws ImmutableEntryException when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code Entry} or {@code Transaction} currencies
+     * do not match
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<EntryAttribute, String> entryAttributes)
@@ -137,6 +140,8 @@ public final class SimpleTransaction implements Transaction {
      * @param amount      {@link Cash} amount being posted to the journal
      * @param account     {@link Account} into which the {@link Entry} is being added
      * @param narration   a brief narration of the entry
+     * @throws ImmutableEntryException when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code Entry} or {@code Transaction} currencies
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException {
