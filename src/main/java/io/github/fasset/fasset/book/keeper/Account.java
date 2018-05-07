@@ -59,14 +59,14 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 /**
  * Implements the {@link Account} interface and maintains states for {@link Currency}, name, number, openingDate and
  * {@link AccountSide}. The AccountSide remains volatile, inorder to represent the changing nature of the account as the
- * {@link Entry} items are added. This is also assigned on initialization allowing the client to describe
+ * {@link AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe
  * default {@link AccountSide} of the {@link Account}.
  *
  * @author edwin.njeru
  * @author edwin.njeru
  * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not
  * be obviously evident by the usual use of words like "synchronized" et al. In fact synchronization would probably just
- * slow us down. Instead what has been done is that the {@link Collection} of {@link Entry} items, which is the whole
+ * slow us down. Instead what has been done is that the {@link Collection} of {@link AccountingEntry} items, which is the whole
  * concept of this Account pattern, has been implemented using a {@link List} interface implementation that creates a new
  * copy of itself every time time a mutative process is carried out. It's iterator as a result is guaranteed never to throw
  * {@code ConcurrentModificationException} and it does not reflect additions, removals or changes to the list, once they
@@ -112,22 +112,22 @@ public class Account extends AccountDomainModel<String> {
     private Map<AccountAttribute, String> accountAttributes = new ConcurrentHashMap<>();
 
     @OneToMany(mappedBy = "account")
-    private volatile List<Entry> entries = new CopyOnWriteArrayList<>();
+    private volatile List<AccountingEntry> entries = new CopyOnWriteArrayList<>();
 
     /**
      * This constructor will one day allow someone to implement the {@link List} interface with anything,
      * including a database and assign the same to this {@link Account} making this object persistent.
      *
      * @param accountSide    {@link AccountSide} to which this account belongs by default
-     * @param currency       {@link Currency} to be used for all {@link Entry} items to be added to this account
+     * @param currency       {@link Currency} to be used for all {@link AccountingEntry} items to be added to this account
      * @param accountDetails {@code AccountDetails} describes the basic nature of this account from business domain's perspective
-     * @param entries        {@link List<Entry>} collection allowing assignment of a Collection interface for this account. One day this
+     * @param entries        {@link List< AccountingEntry >} collection allowing assignment of a Collection interface for this account. One day this
      *                       parameter will allow a dev to something like implement the list interface with a back end
      *                       like a database or some Restful service making changes in this account persistent.
      */
     @SuppressWarnings("unused")
     Account(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, String> accountDetails,
-            final List<Entry> entries) {
+            final List<AccountingEntry> entries) {
         this.currency = currency;
         this.accountSide = accountSide;
         this.accountAttributes = accountDetails;
@@ -174,29 +174,30 @@ public class Account extends AccountDomainModel<String> {
     }
 
     /**
-     * @param entry {@link Entry} to be added to this
-     * @throws MismatchedCurrencyException when the Entry's currency is not similar to the account's currency
-     * @throws UntimelyBookingDateException when the Entry's booking date is sooner than the account's opening date
+     * @param accountingEntry {@link AccountingEntry} to be added to this
+     * @throws MismatchedCurrencyException  when the AccountingEntry's currency is not similar to the account's currency
+     * @throws UntimelyBookingDateException when the AccountingEntry's booking date is sooner than the account's opening date
      */
-    void addEntry(Entry entry) throws MismatchedCurrencyException, UntimelyBookingDateException {
+    void addEntry(AccountingEntry accountingEntry) throws MismatchedCurrencyException, UntimelyBookingDateException {
 
-        log.debug("Adding entry {} to account : {}", entry, this);
+        log.debug("Adding accountingEntry {} to account : {}", accountingEntry, this);
 
-        if (entry.getBookingDate().before(this.openingDate)) {
+        if (accountingEntry.getBookingDate().before(this.openingDate)) {
 
-            String message = String.format("Opening date : %s . The entry date was %s", this.openingDate, entry.getBookingDate());
+            String message = String.format("Opening date : %s . The accountingEntry date was %s", this.openingDate, accountingEntry.getBookingDate());
             throw new UntimelyBookingDateException("The booking date cannot be earlier than the account opening date : " + message);
 
-        } else if (!this.currency.equals(entry.getAmount().getCurrency())) {
+        } else if (!this.currency.equals(accountingEntry.getAmount().getCurrency())) {
 
-            String message = String.format("Currencies mismatched :Expected getCurrency : %s but found entry denominated in %s", this.currency.toString(), entry.getAmount().getCurrency());
+            String message =
+                String.format("Currencies mismatched :Expected getCurrency : %s but found accountingEntry denominated in %s", this.currency.toString(), accountingEntry.getAmount().getCurrency());
             throw new MismatchedCurrencyException(message);
 
         } else {
 
-            entries.add(entry); // done
+            entries.add(accountingEntry); // done
 
-            log.debug("Entry : {} has been added into account : {}", entry, this);
+            log.debug("AccountingEntry : {} has been added into account : {}", accountingEntry, this);
         }
     }
 
@@ -248,12 +249,12 @@ public class Account extends AccountDomainModel<String> {
         // Crickets
     }
 
-    public List<Entry> getEntries() {
+    public List<AccountingEntry> getEntries() {
 
         return new CopyOnWriteArrayList<>(entries.parallelStream().collect(ImmutableListCollector.toImmutableList()));
     }
 
-    public void setEntries(List<Entry> entries) {
+    public void setEntries(List<AccountingEntry> entries) {
         // Crickets. Please use addEntry
     }
 

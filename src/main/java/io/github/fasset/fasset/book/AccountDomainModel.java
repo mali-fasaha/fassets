@@ -19,7 +19,6 @@
 package io.github.fasset.fasset.book;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -34,7 +33,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Main fields for models used to represent {@code persistentAccount} and {@code persistentEntry} items

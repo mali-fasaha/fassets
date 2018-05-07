@@ -42,4 +42,12 @@ public interface AccountService {
      * @param persistentAccounts {@link Account} items to be saved
      */
     void saveAccounts(Collection<Account> persistentAccounts);
+
+    /**
+     * Returns the Account instance whose id is given in the parameter
+     *
+     * @param accountId Of the account whose instance we are fetching from the repo
+     * @return Requested Account instance
+     */
+    Account fetchAccountById(int accountId);
 }

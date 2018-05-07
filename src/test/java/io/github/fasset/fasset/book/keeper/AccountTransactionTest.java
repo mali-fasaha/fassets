@@ -51,7 +51,7 @@ public class AccountTransactionTest {
     public void directedTransactionWorks() throws Exception, UnableToPostException, MismatchedCurrencyException, ImmutableEntryException {
 
         log.info("\n Testing if the transaction will work. First we create the pay for bills Transaction, using period 2017-11-2, and currency KES");
-        Transaction payForBillBoards = new SimpleTransaction("BillboardsPayment",new SimpleDate(2017,11,2),Currency.getInstance("KES"));
+        Transaction payForBillBoards = new AccountingTransaction("BillboardsPayment",new SimpleDate(2017,11,2),Currency.getInstance("KES"));
 
         log.info("\n Done. We DEBIT the Advertisement account, and credit the VAT and Banker's Cheque accounts....");
         payForBillBoards.addEntry(DEBIT, HardCash.shilling(200),advertisement,"Billboards ltd inv 10");
@@ -76,7 +76,7 @@ public class AccountTransactionTest {
         // Reimbursement Transaction
         log.info("\n Alright now we gotta reimburse Edwin for the meeting expenses, when he met with the Billboard guys. We create the" +
                 " reimbursement transaction, as of 2017-12-20 in currency KES");
-        Transaction reimbursement = new SimpleTransaction("Edwin\'s reimbursement",new SimpleDate(2017,12,20), Currency.getInstance("KES"));
+        Transaction reimbursement = new AccountingTransaction("Edwin\'s reimbursement",new SimpleDate(2017,12,20), Currency.getInstance("KES"));
 
         log.info("\n Alright, all we gotta do is debit the advertisement account and credit Edwin's account...");
         reimbursement.addEntry(DEBIT,HardCash.shilling(150),advertisement,"Reimburse Edwin For Meeting expenses with Billboard guys");
@@ -108,7 +108,7 @@ public class AccountTransactionTest {
         // Someone screwed up the taxes, we have to reverse
         log.info("\n The internal audit reveals that someone had screwed up our taxes. Our taxes should be on the asset side by at least 13 joys. " +
                 "Time to create some tax reversal transaction as at 2018-04-20, in KES as always");
-        Transaction taxReversal = new SimpleTransaction("Tax reversal",SimpleDate.on(2018,4,20), Currency.getInstance("KES"));
+        Transaction taxReversal = new AccountingTransaction("Tax reversal",SimpleDate.on(2018,4,20), Currency.getInstance("KES"));
 
         log.info("\n Adding entries to the tax reversal. We need to debit VAT by 45 joys and CREDIT advertisement expense by the same amount");
         taxReversal.addEntry(DEBIT,HardCash.shilling(45),vat,"Reversal of Excess VAT");

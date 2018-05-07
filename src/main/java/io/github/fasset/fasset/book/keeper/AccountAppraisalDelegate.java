@@ -77,12 +77,12 @@ public class AccountAppraisalDelegate {
         return new AccountBalance(HardCash.of(0.0, account.getCurrency()), account.getAccountSide());
     }
 
-    private Cash getCredits(DateRange dateRange, List<Entry> accountEntries) {
+    private Cash getCredits(DateRange dateRange, List<AccountingEntry> accountEntries) {
         return HardCash.of(accountEntries.parallelStream().filter(entry -> dateRange.includes(entry.getBookingDate())).filter(entry -> entry.getAccountSide() == CREDIT)
             .map(entry -> entry.getAmount().getNumber().doubleValue()).reduce(0.00, (acc, value) -> acc + value), account.getCurrency());
     }
 
-    private Cash getDebits(DateRange dateRange, List<Entry> accountEntries) {
+    private Cash getDebits(DateRange dateRange, List<AccountingEntry> accountEntries) {
         return HardCash.of(accountEntries.parallelStream().filter(entry -> dateRange.includes(entry.getBookingDate())).filter(entry -> entry.getAccountSide() == DEBIT)
             .map(entry -> entry.getAmount().getNumber().doubleValue()).reduce(0.00, (acc, value) -> acc + value), account.getCurrency());
     }

@@ -19,7 +19,7 @@
 package io.github.fasset.fasset.book.keeper;
 
 /**
- * Represents, types of Attributes we can expect in an {@code Entry}
+ * Represents, types of Attributes we can expect in an {@code AccountingEntry}
  */
 public enum EntryAttribute {
 
@@ -39,7 +39,7 @@ public enum EntryAttribute {
     AssetId,
 
     /**
-     * The reference number for the transaction associated with this Entry
+     * The reference number for the transaction associated with this AccountingEntry
      */
     ReferenceNumber
 }

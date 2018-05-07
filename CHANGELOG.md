@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Hid internal package in the Account, Entry and the SimpleTransaction**
+
+
+[20655f19fc31abd](https://github.com/ghacupha/fassets/commit/20655f19fc31abd) Edwin Njeru *2018-05-07 06:46:03*
+
 **fixed some javadoc issues preventing maven goal package from completing successfully**
 
 

@@ -55,10 +55,10 @@ public class AccountUnitTest {
     @Test
     public void addEntry() throws Exception {
 
-        account.addEntry(new Entry(SimpleDate.on(2018,12,21),account,"Entry Test 1",DEBIT, HardCash.dollar(115.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,23),account,"Entry Test 2",DEBIT, HardCash.dollar(110.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,24),account,"Entry Test 3",DEBIT, HardCash.dollar(95.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,28),account,"Entry Test 4",DEBIT, HardCash.dollar(90.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,21),account,"AccountingEntry Test 1",DEBIT, HardCash.dollar(115.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,23),account,"AccountingEntry Test 2",DEBIT, HardCash.dollar(110.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, HardCash.dollar(95.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,28),account,"AccountingEntry Test 4",DEBIT, HardCash.dollar(90.23)));
 
         assertEquals(new AccountBalance(HardCash.dollar(320.69),DEBIT),account.balance(2018,12,25));
     }
@@ -66,9 +66,9 @@ public class AccountUnitTest {
     @Test(expected = UntimelyBookingDateException.class)
     public void bookingDateOnlyAfterAccountOpening() throws Exception {
 
-        account.addEntry(new Entry(SimpleDate.on(2018,12,21),account,"Entry Test 1",DEBIT, HardCash.dollar(115.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,24),account,"Entry Test 3",DEBIT, HardCash.dollar(95.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,19),account,"Entry Test 4",DEBIT, HardCash.dollar(90.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,21),account,"AccountingEntry Test 1",DEBIT, HardCash.dollar(115.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, HardCash.dollar(95.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,19),account,"AccountingEntry Test 4",DEBIT, HardCash.dollar(90.23)));
 
         // Exception thrown no need for assertion
     }
@@ -76,9 +76,9 @@ public class AccountUnitTest {
     @Test(expected = MismatchedCurrencyException.class)
     public void entryCurrencyMustMatchAccount() throws Exception {
 
-        account.addEntry(new Entry(SimpleDate.on(2018,12,21),account,"Entry Test 1",DEBIT, HardCash.dollar(115.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,24),account,"Entry Test 3",DEBIT, HardCash.shilling(95.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,19),account,"Entry Test 4",DEBIT, HardCash.dollar(90.23)));// test never reaches here
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,21),account,"AccountingEntry Test 1",DEBIT, HardCash.dollar(115.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, HardCash.shilling(95.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,19),account,"AccountingEntry Test 4",DEBIT, HardCash.dollar(90.23)));// test never reaches here
 
         // Exception thrown no need for assertion
     }
@@ -86,10 +86,10 @@ public class AccountUnitTest {
     @Test
     public void balance() throws Exception {
 
-        account.addEntry(new Entry(SimpleDate.on(2018,12,20),account,"Entry Test 1",DEBIT, HardCash.dollar(115.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,23),account,"Entry Test 2",DEBIT, HardCash.dollar(110.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,24),account,"Entry Test 3",DEBIT, HardCash.dollar(95.23)));
-        account.addEntry(new Entry(SimpleDate.on(2018,12,26),account,"Entry Test 4",DEBIT, HardCash.dollar(90.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,20),account,"AccountingEntry Test 1",DEBIT, HardCash.dollar(115.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,23),account,"AccountingEntry Test 2",DEBIT, HardCash.dollar(110.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, HardCash.dollar(95.23)));
+        account.addEntry(new AccountingEntry(SimpleDate.on(2018,12,26),account,"AccountingEntry Test 4",DEBIT, HardCash.dollar(90.23)));
 
         assertEquals(new AccountBalance(HardCash.dollar(410.92),DEBIT),account.balance(2018,12,27));
 

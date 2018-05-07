@@ -18,9 +18,11 @@
 
 package io.github.fasset.fasset.book.keeper.util;
 
+import io.github.fasset.fasset.book.keeper.AccountingEntry;
+
 /**
  * This exception is thrown when the {@link io.github.fasset.fasset.book.keeper.unit.time.TimePoint} bookingDate
- * of the {@link io.github.fasset.fasset.book.keeper.Entry} is sooner than the
+ * of the {@link AccountingEntry} is sooner than the
  * {@link io.github.fasset.fasset.book.keeper.unit.time.TimePoint} openingDate attribute of the
  * {@code Account}
  *

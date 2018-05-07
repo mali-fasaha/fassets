@@ -50,11 +50,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * {@code accountSide} into which we are posting. The rest of attributes are added into the {@code entryAttributes}
  * field.
  */
-@Entity(name = "Entry")
-@Table(name = "entry")
-public class Entry extends AccountDomainModel<String> {
+@Entity(name = "AccountingEntry")
+@Table(name = "accounting_entry")
+public class AccountingEntry extends AccountDomainModel<String> {
 
-    private static final Logger log = LoggerFactory.getLogger(Entry.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountingEntry.class);
 
     // Ref TimePointAttributeConverter.class
     @Column
@@ -78,13 +78,13 @@ public class Entry extends AccountDomainModel<String> {
     @MapKeyColumn(name = "entry_attribute_name", length = 100)
     @MapKeyEnumerated(EnumType.STRING)
     @Column(name = "entry_attribute")
-    @CollectionTable(name = "entry_attributes", joinColumns = @JoinColumn(name = "entry_id"))
+    @CollectionTable(name = "entry_attributes", joinColumns = @JoinColumn(name = "accounting_entry_id"))
     private Map<EntryAttribute, String> entryAttributes = new ConcurrentHashMap<>();
 
-    public Entry() {
+    public AccountingEntry() {
     }
 
-    Entry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
+    AccountingEntry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
         this.bookingDate = bookingDate;
         this.account = account;
         this.narration = narration;
@@ -105,8 +105,8 @@ public class Entry extends AccountDomainModel<String> {
     /**
      * @param entryAttribute identification of the attribute we wish to obtain from the entry
      * @return Object containing the attribute value
-     * @throws UnEnteredDetailsException When an attribute is enquired from the Entry before it has been added
-     * into the Entry
+     * @throws UnEnteredDetailsException When an attribute is enquired from the AccountingEntry before it has been added
+     *                                   into the AccountingEntry
      */
     public String getAttribute(EntryAttribute entryAttribute) throws UnEnteredDetailsException {
 
@@ -125,7 +125,7 @@ public class Entry extends AccountDomainModel<String> {
     }
 
     /**
-     * @return {@link AccountSide} to which this Entry is aggregating the
+     * @return {@link AccountSide} to which this AccountingEntry is aggregating the
      * Account balance
      */
     AccountSide getAccountSide() {
@@ -137,7 +137,7 @@ public class Entry extends AccountDomainModel<String> {
     }
 
     /**
-     * @return Booking date of the Entry
+     * @return Booking date of the AccountingEntry
      */
     TimePoint getBookingDate() {
         return bookingDate;
@@ -149,7 +149,7 @@ public class Entry extends AccountDomainModel<String> {
 
     /**
      * @return The amount being posted into the Account and encapsulated
-     * by the Entry
+     * by the AccountingEntry
      */
     public Cash getAmount() {
         return amount;
@@ -184,7 +184,7 @@ public class Entry extends AccountDomainModel<String> {
     }
 
     /**
-     * Assigns this Entry with a specific account into which it is aggregated as
+     * Assigns this AccountingEntry with a specific account into which it is aggregated as
      * {@code AccountBalance}
      */
     public void post() {
@@ -195,7 +195,7 @@ public class Entry extends AccountDomainModel<String> {
         } catch (UntimelyBookingDateException e) {
             log.error("Could not post the entry : {} into forAccount : {}", this, account, e.getStackTrace());
 
-            log.error("Cause : the Entry booking date :{} is sooner than the forAccount's opening date {} ", bookingDate, account.getOpeningDate(), e.getStackTrace());
+            log.error("Cause : the AccountingEntry booking date :{} is sooner than the forAccount's opening date {} ", bookingDate, account.getOpeningDate(), e.getStackTrace());
         } catch (MismatchedCurrencyException e) {
             log.error("Could not post the entry : {} into the forAccount : {} ", this, account, e.getStackTrace());
             log.error("Cause the entry's currency : {} does not match the forAccount's currency : {}", amount.getCurrency(), account.getCurrency(), e.getStackTrace());
@@ -215,24 +215,24 @@ public class Entry extends AccountDomainModel<String> {
             return false;
         }
 
-        Entry entry = (Entry) o;
+        AccountingEntry accountingEntry = (AccountingEntry) o;
 
-        if (bookingDate != null ? !bookingDate.equals(entry.bookingDate) : entry.bookingDate != null) {
+        if (bookingDate != null ? !bookingDate.equals(accountingEntry.bookingDate) : accountingEntry.bookingDate != null) {
             return false;
         }
-        if (!account.equals(entry.account)) {
+        if (!account.equals(accountingEntry.account)) {
             return false;
         }
-        if (!narration.equals(entry.narration)) {
+        if (!narration.equals(accountingEntry.narration)) {
             return false;
         }
-        if (accountSide != entry.accountSide) {
+        if (accountSide != accountingEntry.accountSide) {
             return false;
         }
-        if (amount != null ? !amount.equals(entry.amount) : entry.amount != null) {
+        if (amount != null ? !amount.equals(accountingEntry.amount) : accountingEntry.amount != null) {
             return false;
         }
-        return entryAttributes != null ? entryAttributes.equals(entry.entryAttributes) : entry.entryAttributes == null;
+        return entryAttributes != null ? entryAttributes.equals(accountingEntry.entryAttributes) : accountingEntry.entryAttributes == null;
     }
 
     @Override

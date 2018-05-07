@@ -72,6 +72,11 @@ public class SimpleDate implements TimePoint {
         return new SimpleDate(getDay(arg));
     }
 
+    public static TimePoint of(int... date) {
+
+        return on(date[0], date[1], date[2]);
+    }
+
     private void initialize(LocalDate arg) {
         this.base = arg;
     }

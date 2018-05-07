@@ -47,48 +47,52 @@ import static java.util.Collections.EMPTY_MAP;
  * Immutable implementation of the {@link Transaction} interface once created nothing about it can change, except
  * addition of entries. The underlying {@link Collection} cannot be re-assigned once created, and is implemented by
  * {@link List} whose implementation involved a data structure that copies itself for every mutative procedure that
- * is done, in this case involving addition of {@link Entry} items. There is a boolean that says whether or not the
+ * is done, in this case involving addition of {@link AccountingEntry} items. There is a boolean that says whether or not the
  * {@link Transaction} has been posted, which is dangerously non final, but is volatile nevertheless.
  *
  * @author edwin.njeru
  */
-public final class SimpleTransaction implements Transaction {
+public final class AccountingTransaction implements Transaction {
 
-    private static final Logger log = LoggerFactory.getLogger(SimpleTransaction.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountingTransaction.class);
 
     private final String label;
 
     private final TimePoint date;
     private final Currency currency;
-    private final List<Entry> entries = new CopyOnWriteArrayList<>();
+    private final List<AccountingEntry> entries = new CopyOnWriteArrayList<>();
     private volatile boolean wasPosted;
 
-    SimpleTransaction(String label, TimePoint date, Currency currency) {
+    AccountingTransaction(String label, TimePoint date, Currency currency) {
 
         this.label = label;
         this.date = date;
         this.currency = currency;
 
-        log.info("SimpleTransaction created {}", this);
+        log.info("AccountingTransaction created {}", this);
     }
 
-    private static Double mapCashToDouble(Entry entry) {
-        return entry.getAmount().getNumber().doubleValue();
+    public static AccountingTransaction create(String label, TimePoint date, Currency currency) {
+        return new AccountingTransaction(label, date, currency);
     }
 
-    private static boolean predicateCredits(Entry entry) {
+    private static Double mapCashToDouble(AccountingEntry accountingEntry) {
+        return accountingEntry.getAmount().getNumber().doubleValue();
+    }
+
+    private static boolean predicateCredits(AccountingEntry accountingEntry) {
         boolean credit;
-        log.trace("Checking if entry {} is credit ", entry);
-        credit = entry.getAccountSide() == CREDIT;
-        log.trace("Entry : {} is credit {}", entry, credit);
+        log.trace("Checking if accountingEntry {} is credit ", accountingEntry);
+        credit = accountingEntry.getAccountSide() == CREDIT;
+        log.trace("AccountingEntry : {} is credit {}", accountingEntry, credit);
         return credit;
     }
 
-    private static boolean predicateDebits(Entry entry) {
+    private static boolean predicateDebits(AccountingEntry accountingEntry) {
         boolean debit;
-        log.trace("Checking if entry {} is debit ", entry);
-        debit = entry.getAccountSide() == DEBIT;
-        log.trace("Entry : {} is credit {}", entry, debit);
+        log.trace("Checking if accountingEntry {} is debit ", accountingEntry);
+        debit = accountingEntry.getAccountSide() == DEBIT;
+        log.trace("AccountingEntry : {} is credit {}", accountingEntry, debit);
         return debit;
     }
 
@@ -98,12 +102,12 @@ public final class SimpleTransaction implements Transaction {
      *
      * @param accountSide     to which the entry is being posted
      * @param amount          {@link Cash} amount being posted to the journal
-     * @param account         {@link Account} into which the {@link Entry} is being added
+     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
      * @param narration       a brief narration of the entry
      * @param entryAttributes Map containing additional details about the entry being entered
-     * @throws ImmutableEntryException when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code Entry} or {@code Transaction} currencies
-     * do not match
+     * @throws ImmutableEntryException     when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
+     *                                     do not match
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<EntryAttribute, String> entryAttributes)
@@ -117,31 +121,31 @@ public final class SimpleTransaction implements Transaction {
             throw new MismatchedCurrencyException("Cannot add entry whose getCurrency differs to that of the transaction");
         } else {
             log.debug("Adding entry  : {} into transaction : {}", narration, this);
-            Entry tempEntry = new Entry(date, account, narration, accountSide, amount);
+            AccountingEntry tempAccountingEntry = new AccountingEntry(date, account, narration, accountSide, amount);
 
             // Add attributes to the entry
             if (!entryAttributes.isEmpty()) {
-                entryAttributes.forEach(tempEntry::addAttribute);
+                entryAttributes.forEach(tempAccountingEntry::addAttribute);
             }
 
-            entries.add(tempEntry);
+            entries.add(tempAccountingEntry);
 
-            log.debug("Entry {} has been added to {}", tempEntry, this);
+            log.debug("AccountingEntry {} has been added to {}", tempAccountingEntry, this);
         }
     }
 
     /**
      * Same method as {code Transaction.addEntry()} but with an empty map as description of the
-     * entry. The {@code Entry} can therefore only be distinguished by its narration.
+     * entry. The {@code AccountingEntry} can therefore only be distinguished by its narration.
      * The add method adds entries to the transaction provided the transaction has not already
      * been posted
      *
      * @param accountSide to which the entry is being posted
      * @param amount      {@link Cash} amount being posted to the journal
-     * @param account     {@link Account} into which the {@link Entry} is being added
+     * @param account     {@link Account} into which the {@link AccountingEntry} is being added
      * @param narration   a brief narration of the entry
-     * @throws ImmutableEntryException when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code Entry} or {@code Transaction} currencies
+     * @throws ImmutableEntryException     when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException {
@@ -172,7 +176,7 @@ public final class SimpleTransaction implements Transaction {
 
             log.debug("Posting : {} entries ...", entries.size());
 
-            entries.parallelStream().forEach(Entry::post);
+            entries.parallelStream().forEach(AccountingEntry::post);
 
             wasPosted = true;
         }
@@ -180,13 +184,13 @@ public final class SimpleTransaction implements Transaction {
 
     private double balanced() {
 
-        double debits = entries.parallelStream().filter(SimpleTransaction::predicateDebits).map(SimpleTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
+        double debits = entries.parallelStream().filter(AccountingTransaction::predicateDebits).map(AccountingTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
 
-        return debits - entries.parallelStream().filter(SimpleTransaction::predicateCredits).map(SimpleTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
+        return debits - entries.parallelStream().filter(AccountingTransaction::predicateCredits).map(AccountingTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
     }
 
     @Override
-    public Set<Entry> getEntries() {
+    public Set<AccountingEntry> getEntries() {
 
         return Collections.unmodifiableSet(new CopyOnWriteArraySet<>(entries));
     }
@@ -199,7 +203,7 @@ public final class SimpleTransaction implements Transaction {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SimpleTransaction that = (SimpleTransaction) o;
+        AccountingTransaction that = (AccountingTransaction) o;
         return wasPosted == that.wasPosted && Objects.equals(label, that.label) && Objects.equals(date, that.date) && Objects.equals(currency, that.currency) && Objects.equals(entries, that.entries);
     }
 

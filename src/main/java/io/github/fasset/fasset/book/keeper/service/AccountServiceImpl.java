@@ -62,4 +62,16 @@ public class AccountServiceImpl implements AccountService {
 
         this.repository.saveAll(persistentAccounts);
     }
+
+    /**
+     * Returns the Account instance whose id is given in the parameter
+     *
+     * @param accountId Of the account whose instance we are fetching from the repo
+     * @return Requested Account instance
+     */
+    @Override
+    public Account fetchAccountById(int accountId) {
+
+        return repository.getOne(accountId);
+    }
 }

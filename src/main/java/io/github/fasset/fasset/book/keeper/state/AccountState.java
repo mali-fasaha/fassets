@@ -33,7 +33,7 @@ public interface AccountState {
     /**
      * Get AccountBalance given the sum of debits and sum of credits
      *
-     * @param debits Total Cash amounts of debits
+     * @param debits  Total Cash amounts of debits
      * @param credits Total CAsh amounts of credits
      * @return Account balance for the account Containing Cash and AccountSide
      */
