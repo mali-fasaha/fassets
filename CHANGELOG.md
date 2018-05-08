@@ -3,6 +3,21 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Added a stress testing adding a transaction of 100000 items and changed the base field in Cash implementation to prevent precision errors**
+
+
+[46bda4efaed4870](https://github.com/ghacupha/fassets/commit/46bda4efaed4870) Edwin Njeru *2018-05-08 10:24:21*
+
+**Added test methods for accountService to cover exceptional situations**
+
+
+[12ac0432099f2e3](https://github.com/ghacupha/fassets/commit/12ac0432099f2e3) Edwin Njeru *2018-05-08 07:29:58*
+
+**added tests to cover AccoutingService, Account, AccountingEntry and AccountingTraction posting through a repository**
+
+
+[c135ad7b90f70c9](https://github.com/ghacupha/fassets/commit/c135ad7b90f70c9) Edwin Njeru *2018-05-07 09:34:22*
+
 **Hid internal package in the Account, Entry and the SimpleTransaction**
 
 

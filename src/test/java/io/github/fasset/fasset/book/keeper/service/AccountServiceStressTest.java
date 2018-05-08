@@ -74,25 +74,6 @@ public class AccountServiceStressTest {
     }
 
     @Test
-    public void dataRecallFromDB() throws Exception {
-
-        assertEquals("Computers", persistentAccountService.fetchAccountById(computersId).getName());
-        assertEquals("001", persistentAccountService.fetchAccountById(computersId).getNumber());
-        assertEquals(DEBIT, persistentAccountService.fetchAccountById(computersId).getAccountSide());
-        assertEquals(Currency.getInstance("KES"), persistentAccountService.fetchAccountById(computersId).getCurrency());
-
-        assertEquals("Sundry Debtor's Account", persistentAccountService.fetchAccountById(sundryDebtorsId).getName());
-        assertEquals("002", persistentAccountService.fetchAccountById(sundryDebtorsId).getNumber());
-        assertEquals(DEBIT, persistentAccountService.fetchAccountById(sundryDebtorsId).getAccountSide());
-        assertEquals(KES, persistentAccountService.fetchAccountById(sundryDebtorsId).getCurrency());
-
-        assertEquals("Cash Account", persistentAccountService.fetchAccountById(cashAccountId).getName());
-        assertEquals("003", persistentAccountService.fetchAccountById(cashAccountId).getNumber());
-        assertEquals(CREDIT, persistentAccountService.fetchAccountById(cashAccountId).getAccountSide());
-        assertEquals(KES, persistentAccountService.fetchAccountById(cashAccountId).getCurrency());
-    }
-
-    @Test
     public void entriesRecallAfterAcSideReversal() throws Exception {
 
         //reQuisitionForChairs();
