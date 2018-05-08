@@ -61,7 +61,8 @@ public interface Transaction {
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
-     * Adds the {@link AccountingEntry} items into the accounts involved in this {@link Transaction}
+     * Adds the {@link AccountingEntry} items into the accounts involved in this {@link Transaction}.
+     * This method will not run if it is already posted
      *
      * @throws UnableToPostException   when the transaction could not be posted because the amount is not balanced
      * @throws ImmutableEntryException when an AccountingEntry is added to a posted transaction
