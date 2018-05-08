@@ -155,15 +155,15 @@ public final class AccountingTransaction implements Transaction {
     /**
      * Posts the transactions into respective {@link Account} items
      *
-     * @throws UnableToPostException {@link UnableToPostException} thrown when the transaction is not balanced
-     *                               That is if the items posted on the debit are more than those posted on the credit or vice versa.
+     * @throws UnableToPostException   {@link UnableToPostException} thrown when the transaction is not balanced
+     *                                 That is if the items posted on the debit are more than those posted on the credit or vice versa.
      * @throws ImmutableEntryException when an AccountingEntry is added to a posted transaction
      */
     @Override
     public void post() throws UnableToPostException, ImmutableEntryException {
 
-        if (wasPosted){
-            throw new ImmutableEntryException(String.format("The transaction : %s is already posted",this.label));
+        if (wasPosted) {
+            throw new ImmutableEntryException(String.format("The transaction : %s is already posted", this.label));
         }
 
         if (balanced() != 0) {

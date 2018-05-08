@@ -22,7 +22,6 @@ package io.github.fasset.fasset.book.keeper.unit.money;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 
@@ -41,8 +40,8 @@ public class HardCash implements Cash {
 
         // Make sure double doesn't bring items with more than 2 DPs
         //base = Money.of(CurrencyUnit.getInstance(currencyCode), amount);
-        Money major = Money.ofMajor(CurrencyUnit.getInstance(currencyCode),Math.round(amount*100));
-        base = major.dividedBy(100,HALF_EVEN);
+        Money major = Money.ofMajor(CurrencyUnit.getInstance(currencyCode), Math.round(amount * 100));
+        base = major.dividedBy(100, HALF_EVEN);
     }
 
     // for use in class only

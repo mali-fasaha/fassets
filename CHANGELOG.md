@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**configure accountServiceStressTest to run 100000 items**
+
+
+[8657ea29fc83b5a](https://github.com/ghacupha/fassets/commit/8657ea29fc83b5a) Edwin Njeru *2018-05-08 12:39:03*
+
 **Added a stress testing adding a transaction of 100000 items and changed the base field in Cash implementation to prevent precision errors**
 
 
