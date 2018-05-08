@@ -22,8 +22,11 @@ package io.github.fasset.fasset.book.keeper.unit.money;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
+
+import static java.math.RoundingMode.HALF_EVEN;
 
 /**
  * Implements the {@link Cash} interface and is immutable
@@ -36,8 +39,10 @@ public class HardCash implements Cash {
 
     public HardCash(double amount, String currencyCode) {
 
-        base = (Money.of(CurrencyUnit.getInstance(currencyCode), amount));
-
+        // Make sure double doesn't bring items with more than 2 DPs
+        //base = Money.of(CurrencyUnit.getInstance(currencyCode), amount);
+        Money major = Money.ofMajor(CurrencyUnit.getInstance(currencyCode),Math.round(amount*100));
+        base = major.dividedBy(100,HALF_EVEN);
     }
 
     // for use in class only
@@ -150,7 +155,7 @@ public class HardCash implements Cash {
     @Override
     public Cash multiply(double arg) {
 
-        return multiply(arg, RoundingMode.HALF_EVEN);
+        return multiply(arg, HALF_EVEN);
     }
 
     @Override
@@ -162,7 +167,7 @@ public class HardCash implements Cash {
     @Override
     public Cash divide(double arg) {
 
-        return divide(arg, RoundingMode.HALF_EVEN);
+        return divide(arg, HALF_EVEN);
     }
 
     @Override
