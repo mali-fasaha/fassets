@@ -22,6 +22,7 @@ import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.model.FixedAsset;
 
 import java.util.Currency;
+import java.util.List;
 
 /**
  * This object will be used to abstract acquisition transactions for an asset, using the Asset account and
@@ -34,11 +35,6 @@ import java.util.Currency;
  */
 public interface Acquirer {
 
-    /**
-     * Persists a fixedAsset as an accounting item, and returns the accounting entry from repository
-     * @param fixedAsset to be purchased
-     * @return Accounting entry after being persisted in the repository
-     */
-    AccountingEntry purchaseAsset(FixedAsset fixedAsset);
+    List<AccountingEntry> recognizeAssets(List<FixedAsset> fixedAsset);
 
 }

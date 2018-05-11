@@ -20,9 +20,11 @@ package io.github.fasset.fasset.book;
 
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountAttribute;
+import io.github.fasset.fasset.book.keeper.AccountingEntry;
 
 import java.time.LocalDate;
 import java.util.Currency;
+import java.util.List;
 import java.util.Map;
 
 /**
