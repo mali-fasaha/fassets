@@ -79,7 +79,7 @@ public class AccountServiceStressTest {
         //reQuisitionForChairs();
 
         log.info("Loading 100000 entries through transaction");
-        for(int i = 0; i < 100000; i++) {
+        for(int i = 0; i < 10000; i++) {
             Transaction temp = AccountingTransaction.create("Purchase Computers", SimpleDate.of(2018, 3, 31), KES);
             temp.addEntry(DEBIT, shilling(350.23), computers, "Invoice100");
             temp.addEntry(CREDIT, shilling(150.23), sundryDebtorsAccount, "Accounting for expense Id 100");

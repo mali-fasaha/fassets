@@ -3,6 +3,21 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Created Accountant abstraction together with TransactionBuilder and Acquirer interface**
+
+
+[4a11512754ee440](https://github.com/ghacupha/fassets/commit/4a11512754ee440) Edwin Njeru *2018-05-11 04:59:32*
+
+**Added the accountant and acquirer interfaces**
+
+
+[74a4022428b37bc](https://github.com/ghacupha/fassets/commit/74a4022428b37bc) Edwin Njeru *2018-05-09 15:37:34*
+
+**Fixed some checktyle formatting issues**
+
+
+[fafbb642c561123](https://github.com/ghacupha/fassets/commit/fafbb642c561123) Edwin Njeru *2018-05-08 15:21:20*
+
 **configure accountServiceStressTest to run 100000 items**
 
 
