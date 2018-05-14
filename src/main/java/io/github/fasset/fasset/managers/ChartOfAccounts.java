@@ -19,15 +19,27 @@
 package io.github.fasset.fasset.managers;
 
 import io.github.fasset.fasset.book.keeper.Account;
+import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.stereotype.Component;
 
+import java.util.Currency;
+
+import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+
 /**
  * This object can dictate appropriate account for tracking a given {@code FixedAsset} item. This is obtained from a manually configured
- * properties
+ * properties. While the account must be appropriate to the circumstances of the transaction (i.e. whether acquisition, transfer,disposal)
+ * the account must match the fixedAsset's currency amount, the service outlet, and the fixedAsset's category. Ideally the account names
+ * are pre-stated in a properties file. But that is to implemented another time, since implementing that now messes up the
+ * container configuration which recognizes this object as a singleton called "chartOfAccounts".
+ * The Object must lookup whether the account exists before generating a new Account for the fixedAsset. Which bring a new problem,
+ * the resolution of the opening date. Will it be pegged to the purchase date of the asset
  */
 @Component("chartOfAccounts")
 public class ChartOfAccounts {
+
+    private AccountIDResolver accountIDResolver;
 
     /**
      * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
@@ -37,7 +49,12 @@ public class ChartOfAccounts {
      * fixedAsset
      */
     Account getAcquistionDebitAccount(FixedAsset fixedAsset) {
-        return null;
+        return new Account(
+            accountIDResolver.resolveName(fixedAsset),
+            accountIDResolver.resolveNumber(fixedAsset),
+            DEBIT,
+            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()),
+            SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
     }
 
     /**

@@ -6,6 +6,11 @@ Changelog for fassets implementation by ghacupha
 **Implemented Acquirer interface with AcquirerImpl, and change EntryAttributes map from 'Map<EntryAttribute,String>' to 'Map<String, String>' to allow flexible use of the persistentBookKeeper implementation**
 
 
+[6a9c073499fa006](https://github.com/ghacupha/fassets/commit/6a9c073499fa006) ghacupha *2018-05-14 16:35:41*
+
+**Implemented Acquirer interface with AcquirerImpl, and change EntryAttributes map from 'Map<EntryAttribute,String>' to 'Map<String, String>' to allow flexible use of the persistentBookKeeper implementation**
+
+
 [be84af13dc00f27](https://github.com/ghacupha/fassets/commit/be84af13dc00f27) ghacupha *2018-05-14 16:12:31*
 
 **reset accountService to 10k transactions and fixed failing tests**
