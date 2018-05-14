@@ -118,6 +118,11 @@ public class HardCash implements Cash {
         return new HardCash(value, Currency.getInstance("KES"));
     }
 
+    public static Cash fromMoneta(org.javamoney.moneta.Money money) {
+
+        return HardCash.of(money.getNumber().doubleValue(),Currency.getInstance(money.getCurrency().getCurrencyCode()));
+    }
+
     @Override
     public Currency getCurrency() {
         return base.getCurrencyUnit().toCurrency();

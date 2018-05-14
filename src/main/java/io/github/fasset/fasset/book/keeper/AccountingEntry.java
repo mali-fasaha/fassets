@@ -74,17 +74,17 @@ public class AccountingEntry extends AccountDomainModel<String> {
     @Column
     private Cash amount;
 
+    //@MapKeyEnumerated(EnumType.STRING)
     @ElementCollection
     @MapKeyColumn(name = "entry_attribute_name", length = 100)
-    @MapKeyEnumerated(EnumType.STRING)
     @Column(name = "entry_attribute")
     @CollectionTable(name = "entry_attributes", joinColumns = @JoinColumn(name = "accounting_entry_id"))
-    private Map<EntryAttribute, String> entryAttributes = new ConcurrentHashMap<>();
+    private Map<String, String> entryAttributes = new ConcurrentHashMap<>();
 
     public AccountingEntry() {
     }
 
-    AccountingEntry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
+    public AccountingEntry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
         this.bookingDate = bookingDate;
         this.account = account;
         this.narration = narration;
@@ -98,7 +98,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
      * @param entryAttribute {@link EntryAttribute} identity of the attribute in an entry
      * @param attribute      the object content being registered as an attribute
      */
-    void addAttribute(EntryAttribute entryAttribute, String attribute) {
+    public void addAttribute(String entryAttribute, String attribute) {
         this.entryAttributes.put(entryAttribute, attribute);
     }
 
@@ -167,11 +167,11 @@ public class AccountingEntry extends AccountDomainModel<String> {
         this.account = account;
     }
 
-    public Map<EntryAttribute, String> getEntryAttributes() {
+    public Map<String, String> getEntryAttributes() {
         return entryAttributes;
     }
 
-    public void setEntryAttributes(Map<EntryAttribute, String> entryAttributes) {
+    public void setEntryAttributes(Map<String, String> entryAttributes) {
         this.entryAttributes = entryAttributes;
     }
 

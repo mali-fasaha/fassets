@@ -41,5 +41,10 @@ public enum EntryAttribute {
     /**
      * The reference number for the transaction associated with this AccountingEntry
      */
-    ReferenceNumber
+    ReferenceNumber,
+
+    /**
+     * The barcode associated with a given account Entry
+     */
+    Barcode
 }
