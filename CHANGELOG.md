@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Changed accountService Iterations to 10k**
+
+
+[c7532d2f5fd87ba](https://github.com/ghacupha/fassets/commit/c7532d2f5fd87ba) Edwin Njeru *2018-05-13 08:56:40*
+
 **Created Accountant abstraction together with TransactionBuilder and Acquirer interface**
 
 
