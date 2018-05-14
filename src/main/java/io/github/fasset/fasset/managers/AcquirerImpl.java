@@ -57,30 +57,25 @@ public class AcquirerImpl implements Acquirer {
 
         List<AccountingEntry> entries = new FastList<>();
 
-        fixedAssets
-                .parallelStream()
-                .forEach(
-                        fixedAsset -> {
-                            entries.add(getAssetEntry(fixedAsset));
-                            entries.add(getSundryCreditorEntry(fixedAsset));
-                        });
+        fixedAssets.parallelStream().forEach(fixedAsset -> {
+            entries.add(getAssetEntry(fixedAsset));
+            entries.add(getSundryCreditorEntry(fixedAsset));
+        });
 
         return entries;
     }
 
     /**
      * Generates the Entry which is to be made to the {@code sundryAccount} in respect of this fixedAsset
+     *
      * @param fixedAsset for which we recognize acquisition settlement
      * @return AccountingEntry into the {@code sundryAccount}
      */
     private AccountingEntry getSundryCreditorEntry(FixedAsset fixedAsset) {
 
-        AccountingEntry sundryEntry = new AccountingEntry(
-            SimpleDate.ofLocal(fixedAsset.getPurchaseDate()),
-            chartOfAccounts.getAcquisitionCreditAccount(fixedAsset),
-            fixedAsset.getAssetDescription(),
-            CREDIT,
-            HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
+        AccountingEntry sundryEntry =
+            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), chartOfAccounts.getAcquisitionCreditAccount(fixedAsset), fixedAsset.getAssetDescription(), CREDIT,
+                HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         sundryEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));
 
@@ -90,16 +85,14 @@ public class AcquirerImpl implements Acquirer {
 
     /**
      * Generates the Entry which is to be made in the {@code fixedAssetAccount} in respect to this fixedAsset
+     *
      * @param fixedAsset for which we generate the appropriate {@code DEBIT} entry
      * @return AccountingEntry into the {@code fixedAssetAccount}
      */
-    private AccountingEntry getAssetEntry(FixedAsset fixedAsset){
+    private AccountingEntry getAssetEntry(FixedAsset fixedAsset) {
 
-        AccountingEntry fixedAssetEntry = new AccountingEntry(
-                SimpleDate.ofLocal(fixedAsset.getPurchaseDate()),
-                chartOfAccounts.getAcquistionDebitAccount(fixedAsset),
-                fixedAsset.getAssetDescription(),
-                DEBIT,
+        AccountingEntry fixedAssetEntry =
+            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), chartOfAccounts.getAcquistionDebitAccount(fixedAsset), fixedAsset.getAssetDescription(), DEBIT,
                 HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         fixedAssetEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));
@@ -110,10 +103,10 @@ public class AcquirerImpl implements Acquirer {
     private Map<String, String> getFixedAssetsAttributes(FixedAsset fixedAsset) {
 
         Map<String, String> fixedAssetsAttributes = new ConcurrentSkipListMap<>();
-        fixedAssetsAttributes.put("Barcode",fixedAsset.getBarcode());
-        fixedAssetsAttributes.put("SolId",fixedAsset.getSolId());
-        fixedAssetsAttributes.put("Category",fixedAsset.getCategory());
-        fixedAssetsAttributes.put("NetBookValue",fixedAsset.getNetBookValue().toString());
+        fixedAssetsAttributes.put("Barcode", fixedAsset.getBarcode());
+        fixedAssetsAttributes.put("SolId", fixedAsset.getSolId());
+        fixedAssetsAttributes.put("Category", fixedAsset.getCategory());
+        fixedAssetsAttributes.put("NetBookValue", fixedAsset.getNetBookValue().toString());
 
         return fixedAssetsAttributes;
     }

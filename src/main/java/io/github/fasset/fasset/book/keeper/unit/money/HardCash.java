@@ -120,7 +120,7 @@ public class HardCash implements Cash {
 
     public static Cash fromMoneta(org.javamoney.moneta.Money money) {
 
-        return HardCash.of(money.getNumber().doubleValue(),Currency.getInstance(money.getCurrency().getCurrencyCode()));
+        return HardCash.of(money.getNumber().doubleValue(), Currency.getInstance(money.getCurrency().getCurrencyCode()));
     }
 
     @Override

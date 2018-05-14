@@ -21,7 +21,6 @@ package io.github.fasset.fasset.managers;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.model.FixedAsset;
 
-import java.util.Currency;
 import java.util.List;
 
 /**
@@ -37,6 +36,7 @@ public interface Acquirer {
 
     /**
      * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args
+     *
      * @param fixedAssets Collection of {@code FixedAsset} items from which we are to generate entries
      * @return List containing Entry bookings for the fixedAssets passed in the parameter
      */

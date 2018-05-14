@@ -43,7 +43,7 @@ public interface Transaction {
      * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
      *                                     do not match
      */
-    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<EntryAttribute, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException;
+    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
      * Same method as {code Transaction.addEntry()} but with an empty map as description of the

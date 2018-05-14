@@ -31,6 +31,10 @@ import java.util.Currency;
  */
 public class HardCashDecorator extends HardCash implements Cash {
 
+    /**
+     * This new element added into the decorator will add the ability for cash to be converted to and from
+     * String using the APIs provided by the joda money libary.
+     */
     protected final Money readableBase;
 
     public HardCashDecorator(double amount, String currencyCode) {

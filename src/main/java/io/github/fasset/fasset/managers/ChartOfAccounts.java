@@ -22,11 +22,16 @@ import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.stereotype.Component;
 
+/**
+ * This object can dictate appropriate account for tracking a given {@code FixedAsset} item. This is obtained from a manually configured
+ * properties
+ */
 @Component("chartOfAccounts")
 public class ChartOfAccounts {
 
     /**
      * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
+     *
      * @param fixedAsset for which we seek an appropriate Account
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset
@@ -37,6 +42,7 @@ public class ChartOfAccounts {
 
     /**
      * Generates appropriate credit Account for the asset passed in the parameter, when we are posting Acquisition
+     *
      * @param fixedAsset for which we seek an appropriate Account
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset

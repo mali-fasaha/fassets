@@ -28,7 +28,13 @@ import io.github.fasset.fasset.book.keeper.util.UnableToPostException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Currency;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -104,7 +110,7 @@ public final class AccountingTransaction implements Transaction {
      *                                     do not match
      */
     @Override
-    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<EntryAttribute, String> entryAttributes)
+    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes)
         throws ImmutableEntryException, MismatchedCurrencyException {
 
         log.debug("Attempting to add entry {} amount of : {} in account : {} narration : {}", accountSide, amount, account, narration);
