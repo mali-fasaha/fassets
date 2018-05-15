@@ -80,12 +80,13 @@
         <maven-pmd-plugin.version>3.9.0</maven-pmd-plugin.version>
         <maven-surefire-report-plugin.version>2.20.1</maven-surefire-report-plugin.version>
         <copy-maven-plugin.version>0.2.5</copy-maven-plugin.version>
+        <codehaus.license.maven.plugin.version>1.16</codehaus.license.maven.plugin.version>
         <!--<maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>-->
 
-        <!--License plugin-->
-        <license.maven.plugin.version>3.0</license.maven.plugin.version>
+        <!--Mycila License plugin-->
+        <mycila.license.maven.plugin.version>3.0</mycila.license.maven.plugin.version>
         <license.header.location>com/mycila/maven/plugin/license/templates/GPL-3.txt</license.header.location>
         <license.maven.owner>Edwin Njeru</license.maven.owner>
         <license.maven.email>mailnjeru@gmail.com</license.maven.email>
@@ -746,12 +747,12 @@
                 </executions>
             </plugin>
 
-            <!-- Setup license maven plugin-->
+            <!-- Setup scaffolding mycila license maven plugin-->
             <!--Use with mvn "mvn license:check", "mvn license:format" & "mvn license:remove"-->
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>${license.maven.plugin.version}</version>
+                <version>${mycila.license.maven.plugin.version}</version>
                 <configuration>
                     <header>${license.header.location}</header>
                     <properties>
@@ -777,6 +778,22 @@
                         <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Setup codehaus mojo license management plugin-->
+            <!-- Invocation by 'mvn package'-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${codehaus.license.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>download-licenses</id>
+                        <goals>
+                            <goal>download-licenses</goal>
                         </goals>
                     </execution>
                 </executions>

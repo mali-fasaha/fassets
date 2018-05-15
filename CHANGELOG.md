@@ -4,6 +4,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**added DefaultAccountIDResolver to resolve failing integration test, since an implementation of the AccountIDResolver interface must be detected and loaded into the spring container before the context-dependent tests can run properly**
+
+
+[07e598b65da6bed](https://github.com/ghacupha/fassets/commit/07e598b65da6bed) ghacupha *2018-05-15 13:09:08*
+
 **Made the AccountingTransaction implementation date-agnostic by overloading the #addEntry method with constructor-supplied date where the Entry bookingDate is null**
 
 
