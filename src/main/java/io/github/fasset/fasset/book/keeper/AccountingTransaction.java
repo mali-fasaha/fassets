@@ -1,17 +1,17 @@
 /**
  * fassets - Project for light-weight tracking of fixed assets
  * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -112,6 +112,27 @@ public final class AccountingTransaction implements Transaction {
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException {
 
+        this.addEntry(accountSide, amount, account, narration, entryAttributes, this.date);
+    }
+
+    /**
+     * The add method adds entries to the transaction provided the transaction has not already
+     * been posted
+     *
+     * @param accountSide     to which the entry is being posted
+     * @param amount          {@link Cash} amount being posted to the journal
+     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
+     * @param narration       a brief narration of the entry
+     * @param entryAttributes Map containing additional details about the entry being entered
+     * @param date            posting date of the entry
+     * @throws ImmutableEntryException     when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
+     *                                     do not match
+     */
+    @Override
+    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes, TimePoint date)
+        throws ImmutableEntryException, MismatchedCurrencyException {
+
         log.debug("Attempting to add entry {} amount of : {} in account : {} narration : {}", accountSide, amount, account, narration);
         // assign currency
         if (wasPosted) {
@@ -134,15 +155,36 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
+     * The add method adds entries to the transaction provided the transaction has not already
+     * been posted
+     *
+     * @param accountSide     to which the entry is being posted
+     * @param amount          {@link Cash} amount being posted to the journal
+     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
+     * @param narration       a brief narration of the entry
+     * @param date            posting date of the entry
+     * @throws ImmutableEntryException     when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
+     *                                     do not match
+     */
+    @Override
+    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date)
+        throws ImmutableEntryException, MismatchedCurrencyException {
+
+        this.addEntry(accountSide, amount, account, narration, EMPTY_MAP, date);
+    }
+
+    /**
      * Experimental method for adding a fully formed {@code AccountingEntry}
      *
      * @param entry Fully formed Entry for addition to this
      */
+    @Override
     public void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException {
 
         checkNotNull(entry.getAccount(), "Each entry must have an explicitly declared account to which we are posting it");
 
-        this.addEntry(entry.getAccountSide(), entry.getAmount(), entry.getAccount(), entry.getNarration(), entry.getEntryAttributes());
+        this.addEntry(entry.getAccountSide(), entry.getAmount(), entry.getAccount(), entry.getNarration(), entry.getEntryAttributes(), entry.getBookingDate() == null ? this.date : entry.getBookingDate());
     }
 
     /**
@@ -160,7 +202,7 @@ public final class AccountingTransaction implements Transaction {
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException {
-        this.addEntry(accountSide, amount, account, narration, EMPTY_MAP);
+        this.addEntry(accountSide, amount, account, narration, EMPTY_MAP, this.date);
     }
 
     /**

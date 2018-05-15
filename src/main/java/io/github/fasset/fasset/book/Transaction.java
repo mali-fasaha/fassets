@@ -22,6 +22,7 @@ import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.EntryAttribute;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.book.keeper.unit.money.Cash;
+import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnableToPostException;
@@ -47,8 +48,48 @@ public interface Transaction {
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
+     * The add method adds entries to the transaction provided the transaction has not already
+     * been posted
+     *
+     * @param accountSide     to which the entry is being posted
+     * @param amount          {@link Cash} amount being posted to the journal
+     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
+     * @param narration       a brief narration of the entry
+     * @param entryAttributes Map containing additional details about the entry being entered
+     * @param date            posting date of the entry
+     * @throws ImmutableEntryException     when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
+     *                                     do not match
+     */
+    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes, TimePoint date)
+        throws ImmutableEntryException, MismatchedCurrencyException;
+
+    /**
+     * The add method adds entries to the transaction provided the transaction has not already
+     * been posted
+     *
+     * @param accountSide     to which the entry is being posted
+     * @param amount          {@link Cash} amount being posted to the journal
+     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
+     * @param narration       a brief narration of the entry
+     * @param date            posting date of the entry
+     * @throws ImmutableEntryException     when you addEntry to a posted transaction
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
+     *                                     do not match
+     */
+    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date)
+        throws ImmutableEntryException, MismatchedCurrencyException;
+
+    /**
+     * Experimental method for adding a fully formed {@code AccountingEntry}
+     *
+     * @param entry Fully formed Entry for addition to this
+     */
+    void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException;
+
+    /**
      * Same method as {code Transaction.addEntry()} but with an empty map as description of the
-     * entry. The {@code AccountingEntry} can therefore only be distinguished from its narration.
+     * entry. The {@code AccountingEntry} can therefore only be distinguished by its narration.
      * The add method adds entries to the transaction provided the transaction has not already
      * been posted
      *
