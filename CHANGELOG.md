@@ -1,7 +1,28 @@
+
 Changelog for fassets implementation by ghacupha
 
 ## Unreleased
 ### No issue
+
+**Made the AccountingTransaction implementation date-agnostic by overloading the #addEntry method with constructor-supplied date where the Entry bookingDate is null**
+
+
+[6208293e604acc5](https://github.com/ghacupha/fassets/commit/6208293e604acc5) ghacupha *2018-05-15 12:32:30*
+
+**added maven-license-plugin for scaffolding license headers with commands 'mvn license:check', 'mvn license:format' and 'mvn license:remove' and updated the same in the checkstyle config, eliminating dependence on ide setups**
+
+
+[608cb1ab395dae4](https://github.com/ghacupha/fassets/commit/608cb1ab395dae4) ghacupha *2018-05-15 12:10:27*
+
+**Created and tested the methods for the EntryResolver interface using the DEfaultEntryREsolver implementation**
+
+
+[0e37dbfc5cce83c](https://github.com/ghacupha/fassets/commit/0e37dbfc5cce83c) ghacupha *2018-05-15 11:25:37*
+
+**Created and tested the methods for the EntryResolver interface using the DEfaultEntryREsolver implementation**
+
+
+[44e1496a78427b4](https://github.com/ghacupha/fassets/commit/44e1496a78427b4) ghacupha *2018-05-15 10:59:37*
 
 **created AccountIdResolver to resolve account names required to implement the account proliferation policy version 1.0**
 

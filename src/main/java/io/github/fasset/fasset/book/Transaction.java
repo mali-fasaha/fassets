@@ -77,8 +77,7 @@ public interface Transaction {
      * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
      *                                     do not match
      */
-    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date)
-        throws ImmutableEntryException, MismatchedCurrencyException;
+    void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
      * Experimental method for adding a fully formed {@code AccountingEntry}
