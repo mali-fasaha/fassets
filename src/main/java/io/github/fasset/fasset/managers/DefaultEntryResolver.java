@@ -60,7 +60,7 @@ public class DefaultEntryResolver implements EntryResolver {
     @Override
     public List<AccountingEntry> resolveAcquisitionEntries(List<FixedAsset> fixedAssets) {
 
-        log.debug("Resolving entries for : {} fixed assets",fixedAssets.size());
+        log.debug("Resolving entries for : {} fixed assets", fixedAssets.size());
 
         List<AccountingEntry> entries = new CopyOnWriteArrayList<>();
 

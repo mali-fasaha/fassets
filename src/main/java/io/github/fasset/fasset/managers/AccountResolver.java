@@ -34,6 +34,7 @@ public interface AccountResolver {
      * fixedAsset
      */
     Account getAcquisitionDebitAccount(FixedAsset fixedAsset);
+
     /**
      * Generates appropriate credit Account for the asset passed in the parameter, when we are posting Acquisition
      *

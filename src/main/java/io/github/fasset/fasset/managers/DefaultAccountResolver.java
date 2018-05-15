@@ -58,14 +58,10 @@ public class DefaultAccountResolver implements AccountResolver {
      */
     public Account getAcquisitionDebitAccount(FixedAsset fixedAsset) {
 
-        log.debug("Getting acquisition debit account for asset : {}",fixedAsset.getAssetDescription());
+        log.debug("Getting acquisition debit account for asset : {}", fixedAsset.getAssetDescription());
 
-        return new Account(
-            accountIDResolver.resolveName(fixedAsset),
-            accountIDResolver.resolveNumber(fixedAsset),
-            DEBIT,
-            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()),
-            SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
+        return new Account(accountIDResolver.resolveName(fixedAsset), accountIDResolver.resolveNumber(fixedAsset), DEBIT,
+            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
     }
 
     /**
@@ -77,13 +73,9 @@ public class DefaultAccountResolver implements AccountResolver {
      */
     public Account getAcquisitionCreditAccount(FixedAsset fixedAsset) {
 
-        log.debug("Getting acquisition debit account for asset : {}",fixedAsset.getAssetDescription());
+        log.debug("Getting acquisition debit account for asset : {}", fixedAsset.getAssetDescription());
 
-        return new Account(
-            accountIDResolver.resolveName(fixedAsset),
-            accountIDResolver.resolveNumber(fixedAsset),
-            DEBIT,
-            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()),
-            SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
+        return new Account(accountIDResolver.resolveName(fixedAsset), accountIDResolver.resolveNumber(fixedAsset), DEBIT,
+            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
     }
 }

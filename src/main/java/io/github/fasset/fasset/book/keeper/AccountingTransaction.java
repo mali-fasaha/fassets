@@ -111,8 +111,7 @@ public final class AccountingTransaction implements Transaction {
      *                                     do not match
      */
     @Override
-    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes)
-        throws ImmutableEntryException, MismatchedCurrencyException {
+    public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException {
 
         log.debug("Attempting to add entry {} amount of : {} in account : {} narration : {}", accountSide, amount, account, narration);
         // assign currency
@@ -137,13 +136,14 @@ public final class AccountingTransaction implements Transaction {
 
     /**
      * Experimental method for adding a fully formed {@code AccountingEntry}
+     *
      * @param entry Fully formed Entry for addition to this
      */
     public void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException {
 
-        checkNotNull(entry.getAccount(),"Each entry must have an explicitly declared account to which we are posting it");
+        checkNotNull(entry.getAccount(), "Each entry must have an explicitly declared account to which we are posting it");
 
-        this.addEntry(entry.getAccountSide(),entry.getAmount(),entry.getAccount(),entry.getNarration(),entry.getEntryAttributes());
+        this.addEntry(entry.getAccountSide(), entry.getAmount(), entry.getAccount(), entry.getNarration(), entry.getEntryAttributes());
     }
 
     /**
