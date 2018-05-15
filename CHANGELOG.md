@@ -7,6 +7,11 @@ Changelog for fassets implementation by ghacupha
 **Made the AccountingTransaction implementation date-agnostic by overloading the #addEntry method with constructor-supplied date where the Entry bookingDate is null**
 
 
+[6959f6e6abbdf6e](https://github.com/ghacupha/fassets/commit/6959f6e6abbdf6e) ghacupha *2018-05-15 12:53:18*
+
+**Made the AccountingTransaction implementation date-agnostic by overloading the #addEntry method with constructor-supplied date where the Entry bookingDate is null**
+
+
 [6208293e604acc5](https://github.com/ghacupha/fassets/commit/6208293e604acc5) ghacupha *2018-05-15 12:32:30*
 
 **added maven-license-plugin for scaffolding license headers with commands 'mvn license:check', 'mvn license:format' and 'mvn license:remove' and updated the same in the checkstyle config, eliminating dependence on ide setups**

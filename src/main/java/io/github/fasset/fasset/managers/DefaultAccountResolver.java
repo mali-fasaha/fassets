@@ -21,6 +21,8 @@ import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Currency;
@@ -44,7 +46,8 @@ public class DefaultAccountResolver implements AccountResolver {
 
     private AccountIDResolver accountIDResolver;
 
-    public DefaultAccountResolver(AccountIDResolver accountIDResolver) {
+    @Autowired
+    public DefaultAccountResolver(@Qualifier("accountIDResolver") AccountIDResolver accountIDResolver) {
         this.accountIDResolver = accountIDResolver;
     }
 
