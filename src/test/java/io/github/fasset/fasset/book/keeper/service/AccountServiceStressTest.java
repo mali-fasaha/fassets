@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.swing.colorchooser.AbstractColorChooserPanel;
 import java.util.Currency;
 
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
@@ -88,9 +87,9 @@ public class AccountServiceStressTest {
         }
 
         log.info("Now checking account balances posted....");
-        assertEquals(balance(shilling(3502300.00), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(1502300.00), CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(2000000), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.now()));
+        assertEquals(balance(shilling(3502300.00), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(1502300.00), CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(2000000), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
     }
 
     private void reQuisitionForChairs() throws Exception {

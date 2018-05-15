@@ -164,7 +164,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
                     // No further processing required
                     this.depreciationAmount = Money.of(0.00, moneyProperties.getDefaultCurrency());
 
-                    log.debug("The depreciation amount is now zero : {}", depreciationAmount);
+                    log.debug("The depreciation amount is today zero : {}", depreciationAmount);
 
                 } else {
 

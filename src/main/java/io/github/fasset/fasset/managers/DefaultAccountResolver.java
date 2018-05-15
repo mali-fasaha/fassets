@@ -21,25 +21,33 @@ package io.github.fasset.fasset.managers;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.util.Currency;
 
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * This object can dictate appropriate account for tracking a given {@code FixedAsset} item. This is obtained from a manually configured
  * properties. While the account must be appropriate to the circumstances of the transaction (i.e. whether acquisition, transfer,disposal)
  * the account must match the fixedAsset's currency amount, the service outlet, and the fixedAsset's category. Ideally the account names
- * are pre-stated in a properties file. But that is to implemented another time, since implementing that now messes up the
+ * are pre-stated in a properties file. But that is to implemented another time, since implementing that today messes up the
  * container configuration which recognizes this object as a singleton called "chartOfAccounts".
  * The Object must lookup whether the account exists before generating a new Account for the fixedAsset. Which bring a new problem,
  * the resolution of the opening date. Will it be pegged to the purchase date of the asset
  */
-@Component("chartOfAccounts")
-public class ChartOfAccounts {
+@Component("accountResolver")
+public class DefaultAccountResolver implements AccountResolver {
+
+    private static final org.slf4j.Logger log = getLogger(DefaultAccountResolver.class);
 
     private AccountIDResolver accountIDResolver;
+
+    public DefaultAccountResolver(AccountIDResolver accountIDResolver) {
+        this.accountIDResolver = accountIDResolver;
+    }
 
     /**
      * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
@@ -48,7 +56,10 @@ public class ChartOfAccounts {
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset
      */
-    Account getAcquistionDebitAccount(FixedAsset fixedAsset) {
+    public Account getAcquisitionDebitAccount(FixedAsset fixedAsset) {
+
+        log.debug("Getting acquisition debit account for asset : {}",fixedAsset.getAssetDescription());
+
         return new Account(
             accountIDResolver.resolveName(fixedAsset),
             accountIDResolver.resolveNumber(fixedAsset),
@@ -64,7 +75,15 @@ public class ChartOfAccounts {
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset
      */
-    Account getAcquisitionCreditAccount(FixedAsset fixedAsset) {
-        return null;
+    public Account getAcquisitionCreditAccount(FixedAsset fixedAsset) {
+
+        log.debug("Getting acquisition debit account for asset : {}",fixedAsset.getAssetDescription());
+
+        return new Account(
+            accountIDResolver.resolveName(fixedAsset),
+            accountIDResolver.resolveNumber(fixedAsset),
+            DEBIT,
+            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()),
+            SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
     }
 }

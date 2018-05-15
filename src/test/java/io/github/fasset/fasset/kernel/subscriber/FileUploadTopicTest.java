@@ -37,16 +37,16 @@ public class FileUploadTopicTest {
         // check if any update is available
         obj1.update();
 
-        // now send the file to the topic
+        // today send the file to the topic
         //topic.postUpdate("Data listing 15646");
         topic.postUpdate(() -> "Data listing 15646");
 
-        // now send a new file to the topic. Expecting observers to not read the former topic
+        // today send a new file to the topic. Expecting observers to not read the former topic
         // only the current one
         //topic.postUpdate("New Data listing 15647");
         topic.postUpdate(() -> "New Data listing 15647");
 
-        // now send a new file to the topic. Expecting observers to not read the former topic
+        // today send a new file to the topic. Expecting observers to not read the former topic
         // only the current one
         //topic.postUpdate("Even Newer Data listing 15648");
         topic.postUpdate(() -> "Even Newer Data listing 15648");

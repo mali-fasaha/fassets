@@ -42,7 +42,7 @@ public class YearMonthAttributeConverterTest {
     public void convertToDatabaseColumn() throws Exception {
 
         /*assertEquals(Date.from(LocalDate.of(2018,5,1).),
-        yearMonthAttributeConverter.convertToDatabaseColumn(YearMonth.of(LocalDate.now().getYear(),LocalDate.now().getMonthValue())));*/
+        yearMonthAttributeConverter.convertToDatabaseColumn(YearMonth.of(LocalDate.today().getYear(),LocalDate.today().getMonthValue())));*/
     }
 
     @Test

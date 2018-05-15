@@ -113,7 +113,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
             log.trace("The asset : {} has passed the frontal Business rules filter, initiating configuration" + "registry for category : {}", asset, asset.getCategory());
 
             //TODO agents to handle nonNilNetBookValueCriteria and DateAuthenticCriteria logic
-            depreciationAgentsHandler.sendRequest(asset, month, depreciationProceeds); //for now
+            depreciationAgentsHandler.sendRequest(asset, month, depreciationProceeds); //for today
 
         }
 

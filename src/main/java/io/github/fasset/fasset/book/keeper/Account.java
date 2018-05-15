@@ -246,7 +246,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setCurrency(Currency currency) {
-        // Crickets
+        throw new UnsupportedOperationException("The currency for Account can only be set in the constructor");
     }
 
     public List<AccountingEntry> getEntries() {
@@ -255,7 +255,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setEntries(List<AccountingEntry> entries) {
-        // Crickets. Please use addEntry
+        throw new UnsupportedOperationException("Entries can only be entered through the #addEntry method");
     }
 
     TimePoint getOpeningDate() {
@@ -263,7 +263,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setOpeningDate(TimePoint openingDate) {
-        // Crickets
+        throw new UnsupportedOperationException("Dude! Can you imagine, setting the opening date for an account that's already opened?");
     }
 
     @Override
@@ -298,7 +298,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setAccountAttributes(Map<AccountAttribute, String> accountAttributes) {
-        // Crickets. Please use addAttribute
+        throw new UnsupportedOperationException("Kindly use the #addAttribute. This method only exists to make JPA happy :)");
     }
 
     public String getName() {
@@ -306,7 +306,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setName(String name) {
-        // Crickets
+        throw new UnsupportedOperationException("Setting the name of the account is reserved for the constructor. This method only exists to make JPA happy :)");
     }
 
     public String getNumber() {
@@ -314,7 +314,7 @@ public class Account extends AccountDomainModel<String> {
     }
 
     public void setNumber(String number) {
-        // Crickets
+        throw new UnsupportedOperationException("Setting the number of the account is reserved for the constructor. This method only exists to make JPA happy :)");
     }
 
     @Override

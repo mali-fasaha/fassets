@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static java.util.Collections.EMPTY_MAP;
@@ -132,6 +133,17 @@ public final class AccountingTransaction implements Transaction {
 
             log.debug("AccountingEntry {} has been added to {}", tempAccountingEntry, this);
         }
+    }
+
+    /**
+     * Experimental method for adding a fully formed {@code AccountingEntry}
+     * @param entry Fully formed Entry for addition to this
+     */
+    public void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException {
+
+        checkNotNull(entry.getAccount(),"Each entry must have an explicitly declared account to which we are posting it");
+
+        this.addEntry(entry.getAccountSide(),entry.getAmount(),entry.getAccount(),entry.getNarration(),entry.getEntryAttributes());
     }
 
     /**

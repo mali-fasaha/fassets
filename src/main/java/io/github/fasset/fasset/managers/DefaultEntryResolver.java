@@ -22,28 +22,33 @@ import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.unit.money.HardCash;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.model.FixedAsset;
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements {@link Acquirer} interface whose job really is to generate entries based on a list of actual
- * {@code FixedAsset} items passed through the parameter in the main method
+ * Implements {@link EntryResolver} interface whose job really is to generate entries based on a list of actual
+ * {@code FixedAsset} items passed through the parameter in the main method.
  */
-public class AcquirerImpl implements Acquirer {
+@Component("entryResolver")
+public class DefaultEntryResolver implements EntryResolver {
 
-    private ChartOfAccounts chartOfAccounts;
+    private static final org.slf4j.Logger log = getLogger(DefaultEntryResolver.class);
+
+    private AccountResolver accountResolver;
 
     @Autowired
-    public AcquirerImpl(@Qualifier("chartOfAccounts") ChartOfAccounts chartOfAccounts) {
-        this.chartOfAccounts = chartOfAccounts;
+    public DefaultEntryResolver(@Qualifier("accountResolver") AccountResolver accountResolver) {
+        this.accountResolver = accountResolver;
     }
 
     /**
@@ -53,9 +58,11 @@ public class AcquirerImpl implements Acquirer {
      * @return List containing Entry bookings for the fixedAssets passed in the parameter
      */
     @Override
-    public List<AccountingEntry> getAccountingEntries(List<FixedAsset> fixedAssets) {
+    public List<AccountingEntry> resolveAcquisitionEntries(List<FixedAsset> fixedAssets) {
 
-        List<AccountingEntry> entries = new FastList<>();
+        log.debug("Resolving entries for : {} fixed assets",fixedAssets.size());
+
+        List<AccountingEntry> entries = new CopyOnWriteArrayList<>();
 
         fixedAssets.parallelStream().forEach(fixedAsset -> {
             entries.add(getAssetEntry(fixedAsset));
@@ -73,8 +80,10 @@ public class AcquirerImpl implements Acquirer {
      */
     private AccountingEntry getSundryCreditorEntry(FixedAsset fixedAsset) {
 
+        log.debug("Resolving credit account for acquisition of asset: {}", fixedAsset.getAssetDescription());
+
         AccountingEntry sundryEntry =
-            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), chartOfAccounts.getAcquisitionCreditAccount(fixedAsset), fixedAsset.getAssetDescription(), CREDIT,
+            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.getAcquisitionCreditAccount(fixedAsset), fixedAsset.getAssetDescription(), CREDIT,
                 HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         sundryEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));
@@ -91,8 +100,10 @@ public class AcquirerImpl implements Acquirer {
      */
     private AccountingEntry getAssetEntry(FixedAsset fixedAsset) {
 
+        log.debug("Resolving debit account for acquisition of asset: {}", fixedAsset.getAssetDescription());
+
         AccountingEntry fixedAssetEntry =
-            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), chartOfAccounts.getAcquistionDebitAccount(fixedAsset), fixedAsset.getAssetDescription(), DEBIT,
+            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.getAcquisitionDebitAccount(fixedAsset), fixedAsset.getAssetDescription(), DEBIT,
                 HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         fixedAssetEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));

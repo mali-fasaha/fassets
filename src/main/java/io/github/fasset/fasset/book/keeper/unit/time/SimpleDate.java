@@ -52,7 +52,7 @@ public class SimpleDate implements TimePoint {
         return new SimpleDate(year, month, day);
     }
 
-    public static TimePoint now() {
+    public static TimePoint today() {
 
         return new SimpleDate();
     }

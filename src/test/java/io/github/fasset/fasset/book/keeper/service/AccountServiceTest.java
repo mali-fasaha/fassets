@@ -118,9 +118,9 @@ public class AccountServiceTest {
 
         payForNewComputer();
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(150.23),CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(200),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.now()));
+        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(150.23),CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(200),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
 
     }
 
@@ -129,10 +129,10 @@ public class AccountServiceTest {
         payForNewComputer();
         reQuisitionForChairs();
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.now()));
+        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
 
         assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.of(2018,4,20)));
         assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.of(2018,4,20)));
@@ -153,10 +153,10 @@ public class AccountServiceTest {
 
         buysChairs.post();
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.now()));
+        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
     }
 
     @Test(expected = ImmutableEntryException.class)
@@ -166,10 +166,10 @@ public class AccountServiceTest {
 
         buysChairs.addEntry(DEBIT,shilling(485.54),sundryDebtorsAccount,"Additional chairs in invoice 218");
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.now()));
-        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.now()));
+        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
     }
 
     private void reQuisitionForChairs() throws Exception {

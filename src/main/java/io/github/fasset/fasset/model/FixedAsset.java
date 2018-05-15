@@ -69,6 +69,36 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
     public FixedAsset() {
     }
 
+    public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate, String barcode, Money netBookValue){
+        this(assetDescription,purchaseCost, category, solId, purchaseDate, barcode);
+        this.netBookValue = netBookValue;
+    }
+
+    public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate, String barcode){
+        this(assetDescription,purchaseCost, category, solId, purchaseDate);
+        this.barcode = barcode;
+    }
+
+    public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate){
+        this(assetDescription,purchaseCost, category, solId);
+        this.purchaseDate = purchaseDate;
+    }
+
+    public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId){
+        this(assetDescription,purchaseCost, category);
+        this.solId = solId;
+    }
+
+    public FixedAsset(String assetDescription, Money purchaseCost, String category){
+        this(assetDescription,purchaseCost);
+        this.category = category;
+    }
+
+    public FixedAsset(String assetDescription, Money purchaseCost) {
+        this.assetDescription = assetDescription;
+        this.purchaseCost = purchaseCost;
+    }
+
     public String getSolId() {
         return solId;
     }

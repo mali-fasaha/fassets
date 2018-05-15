@@ -65,7 +65,7 @@ public class AccountTransactionTest {
         assertEquals(AccountBalance.newBalance(HardCash.shilling(0),CREDIT),chequeAccount.balance(2018,1,3));
 
         // after posting
-        log.info("\n Nothing? Good. So now lets post the transaction...");
+        log.info("\n Nothing? Good. So today lets post the transaction...");
         payForBillBoards.post();
 
         log.info("\n Posted. Done. Now lets check if the balances in the account reflect our intentions");
@@ -74,7 +74,7 @@ public class AccountTransactionTest {
         assertEquals(AccountBalance.newBalance(HardCash.shilling(168),CREDIT),chequeAccount.balance(2017,11,30));
 
         // Reimbursement Transaction
-        log.info("\n Alright now we gotta reimburse Edwin for the meeting expenses, when he met with the Billboard guys. We create the" +
+        log.info("\n Alright today we gotta reimburse Edwin for the meeting expenses, when he met with the Billboard guys. We create the" +
                 " reimbursement transaction, as of 2017-12-20 in currency KES");
         Transaction reimbursement = new AccountingTransaction("Edwin\'s reimbursement",new SimpleDate(2017,12,20), Currency.getInstance("KES"));
 
@@ -114,7 +114,7 @@ public class AccountTransactionTest {
         taxReversal.addEntry(DEBIT,HardCash.shilling(45),vat,"Reversal of Excess VAT");
         taxReversal.addEntry(CREDIT,HardCash.shilling(45),advertisement,"Reversal of Excess VAT");
 
-        log.info("\n We now post the tax reversal transaction");
+        log.info("\n We today post the tax reversal transaction");
         taxReversal.post();
 
         log.info("\n As per internal audit the VAT should be at 13 joys, asset side. Meaning the advertisement should be an expense of just 305");

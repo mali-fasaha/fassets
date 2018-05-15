@@ -25,21 +25,24 @@ import java.util.List;
 
 /**
  * This object will be used to abstract acquisition transactions for an asset, using the Asset account and
- * the Asset acquisition account. This simplifies the story, of how the asset was acquired and, and how much
+ * the Sundry Creditors account. This simplifies the story, of how the asset was acquired and, and how much
  * was paid to a vendor, since such, is subject to withholding tax obligations and sometimes contract-related
  * provisions, as such we are only interest with the financial representation of assets in this application.
- * As Accounting goes, each asset is represented by an entry
+ * In accordance to the Account Proliferation policy version 1.0, each asset is represented by an entry to the
+ * respective Asset account.
  *
  * @author edwin.njeru
  */
-public interface Acquirer {
+public interface EntryResolver {
 
     /**
-     * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args
+     * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args.
+     * The method creates entries for both {@code DEBIT} and {@code CREDIT} side. In this case SundryCreditors
+     * account is credited and an Asset account is DEBITED with the full purchase cost of the asset.
      *
      * @param fixedAssets Collection of {@code FixedAsset} items from which we are to generate entries
      * @return List containing Entry bookings for the fixedAssets passed in the parameter
      */
-    List<AccountingEntry> getAccountingEntries(List<FixedAsset> fixedAssets);
+    List<AccountingEntry> resolveAcquisitionEntries(List<FixedAsset> fixedAssets);
 
 }

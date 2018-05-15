@@ -3,6 +3,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**created AccountIdResolver to resolve account names required to implement the account proliferation policy version 1.0**
+
+
+[7631e305b4494d5](https://github.com/ghacupha/fassets/commit/7631e305b4494d5) ghacupha *2018-05-14 19:42:59*
+
 **Implemented Acquirer interface with AcquirerImpl, and change EntryAttributes map from 'Map<EntryAttribute,String>' to 'Map<String, String>' to allow flexible use of the persistentBookKeeper implementation**
 
 

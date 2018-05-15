@@ -50,6 +50,6 @@ public class AccruedDepreciationRepositoryTest {
         assertNotNull(saved);*/
 
         //assertEquals(4465,saved.getFixedAssetId());
-        //assertEquals(YearMonth.now(),saved.getMonth());
+        //assertEquals(YearMonth.today(),saved.getMonth());
     }
 }
