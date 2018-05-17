@@ -17,7 +17,6 @@
  */
 package io.github.fasset.fasset.kernel.util;
 
-import org.hibernate.validator.internal.metadata.location.FieldConstraintLocation;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -27,6 +26,14 @@ import java.util.Properties;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+/**
+ * Reads properties data from a properties file at start up for any preconfigured client. For instance a client could
+ * get instantiated with an argument that provides a location for the properties file to the {@code #fetchProperties}
+ * method, in the constructor or spring's container {@code @PostConstruct} initialization method,
+ * which will in turn instantiate a private properties file in the same class.
+ *
+ * @author edwin_njeru
+ */
 public class PropertiesUtils {
 
     private static final org.slf4j.Logger log = getLogger(PropertiesUtils.class);
