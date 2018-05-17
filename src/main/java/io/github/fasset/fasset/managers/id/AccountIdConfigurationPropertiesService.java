@@ -68,7 +68,11 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
 
         log.debug("Fetching gl code for category: {}", category);
 
-        return accountConfigProperties.getProperty(String.format("%s.acquisition.gl.code",category.toLowerCase()));
+        return accountConfigProperties.getProperty(formatKey(category));
+    }
+
+    private String formatKey(String propertyKey) {
+        return String.format("%s.acquisition.gl.code", propertyKey.toLowerCase()).replace(" ","-").replace("&","and");
     }
 
     /**

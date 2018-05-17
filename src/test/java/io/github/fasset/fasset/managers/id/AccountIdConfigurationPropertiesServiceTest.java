@@ -40,6 +40,7 @@ public class AccountIdConfigurationPropertiesServiceTest {
 
         assertEquals("00150", configurationService.acquisitionGlCode("COMPUTERS"));
         assertEquals("00155", configurationService.acquisitionGlCode("COMPUTER SOFTWARE"));
+        assertEquals("00153", configurationService.acquisitionGlCode("FURNITURE & FITTINGS"));
     }
 
     @Test
