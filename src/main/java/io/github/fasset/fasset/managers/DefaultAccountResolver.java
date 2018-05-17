@@ -93,6 +93,8 @@ public class DefaultAccountResolver implements AccountResolver {
      */
     public Account getAcquisitionCreditAccount(FixedAsset fixedAsset) {
 
+        //TODO implement acquisitionCreditAccount for credits
+
         log.debug("Getting acquisition credit account for asset : {}", fixedAsset.getAssetDescription());
 
         Account creditAccount = new Account(debitAccountIDResolver.resolveName(fixedAsset), debitAccountIDResolver.resolveNumber(fixedAsset), CREDIT,

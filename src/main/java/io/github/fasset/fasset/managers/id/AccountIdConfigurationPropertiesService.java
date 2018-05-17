@@ -35,7 +35,7 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
     // Using external configuration
     private Properties accountConfigProperties;
 
-    public AccountIdConfigurationPropertiesService(String propertiesFile){
+    public AccountIdConfigurationPropertiesService(String propertiesFile) {
 
         accountConfigProperties = PropertiesUtils.fetchProperties("account-id-config");
 
@@ -74,7 +74,7 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
     }
 
     private String formatKey(String propertyKey, String transaction, String element) {
-        return String.format("%s.%s.%s", propertyKey.toLowerCase(), transaction, element).replace(" ","-").replace("&","and");
+        return String.format("%s.%s.%s", propertyKey.toLowerCase(), transaction, element).replace(" ", "-").replace("&", "and");
     }
 
     /**

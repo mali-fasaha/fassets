@@ -39,15 +39,15 @@ public class PropertiesUtils {
      * @param fileName Filename containing property definitions
      * @return Properties read from the properties file
      */
-    public static Properties fetchProperties(String fileName){
+    public static Properties fetchProperties(String fileName) {
 
         log.info("Reading properties from the path : {}", fileName);
 
         Properties properties = new Properties();
 
         try {
-            File file = ResourceUtils.getFile(String.format("classpath:%s.properties",fileName));
-            InputStream in  = new FileInputStream(file);
+            File file = ResourceUtils.getFile(String.format("classpath:%s.properties", fileName));
+            InputStream in = new FileInputStream(file);
             properties.load(in);
         } catch (java.io.IOException e) {
             log.error(e.getMessage());

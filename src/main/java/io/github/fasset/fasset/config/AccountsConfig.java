@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 public class AccountsConfig {
 
     @Bean("accountIdConfigurationPropertiesService")
-    public AccountIdConfigurationService accountIdConfigurationPropertiesService(){
+    public AccountIdConfigurationService accountIdConfigurationPropertiesService() {
 
         return new AccountIdConfigurationPropertiesService("account-id-config");
     }

@@ -28,7 +28,7 @@ public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccoun
 
     private AccountIdConfigurationService idConfigurationService;
 
-    AcquisitionDebitAccountIDResolver(AccountIdConfigurationService idConfigurationService) {
+    public AcquisitionDebitAccountIDResolver(AccountIdConfigurationService idConfigurationService) {
         this.idConfigurationService = idConfigurationService;
     }
 
