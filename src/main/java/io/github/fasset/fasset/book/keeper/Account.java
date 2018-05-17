@@ -52,8 +52,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static java.lang.Enum.valueOf;
 
 /**
  * Implements the {@link Account} interface and maintains states for {@link Currency}, name, number, openingDate and
@@ -61,8 +63,6 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
  * {@link AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe
  * default {@link AccountSide} of the {@link Account}.
  *
- * @author edwin.njeru
- * @author edwin.njeru
  * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not
  * be obviously evident by the usual use of words like "synchronized" et al. In fact synchronization would probably just
  * slow us down. Instead what has been done is that the {@link Collection} of {@link AccountingEntry} items, which is the whole
@@ -71,6 +71,8 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
  * {@code ConcurrentModificationException} and it does not reflect additions, removals or changes to the list, once they
  * have been created. The rest of the getters return new instances of values of similar equivalence or copies of themselves
  * this objects attributes will largely therefore remain unchanged.
+ *
+ * @author edwin.njeru
  */
 @Entity(name = "Account")
 @Table(name = "account")
@@ -154,7 +156,8 @@ public class Account extends AccountDomainModel<String> {
      * @param accountAttribute Name of the attribute
      * @param value            value of the attribute
      */
-    void addAttribute(AccountAttribute accountAttribute, String value) {
+    public void addAttribute(AccountAttribute accountAttribute, String value) {
+        checkNotNull(value, "Sorry mate, you cannot add a null attribute");
         this.accountAttributes.put(accountAttribute, value);
     }
 

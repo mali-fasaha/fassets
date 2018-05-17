@@ -31,9 +31,9 @@ import org.junit.Test;
 import java.util.Currency;
 import java.util.Map;
 
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.Account_Type;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.Contra_Account;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.General_Ledger;
+import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_TYPE;
+import static io.github.fasset.fasset.book.keeper.AccountAttribute.CONTRA_ACCOUNT;
+import static io.github.fasset.fasset.book.keeper.AccountAttribute.GENERAL_LEDGER;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.*;
 
@@ -50,23 +50,23 @@ public class AccountUnitTest {
             Currency.getInstance("USD"),
             ReadableDate.on(2018,12,20));
 
-        account.addAttribute(General_Ledger,"4875");
+        account.addAttribute(GENERAL_LEDGER,"4875");
     }
 
     @Test(expected = UnEnteredDetailsException.class)
     public void youCannotGetUnenteredDetails() throws Exception {
 
-        account.addAttribute(Contra_Account,"Accumulated Test Account");
+        account.addAttribute(CONTRA_ACCOUNT,"Accumulated Test Account");
 
-        assertEquals("Asset Account",account.getAttribute(Account_Type));
+        assertEquals("Asset Account",account.getAttribute(ACCOUNT_TYPE));
     }
 
     @Test
     public void addAttribute() throws Exception {
 
-        account.addAttribute(Contra_Account,"Accumulated Test Account");
+        account.addAttribute(CONTRA_ACCOUNT,"Accumulated Test Account");
 
-        assertEquals("Accumulated Test Account",account.getAttribute(Contra_Account));
+        assertEquals("Accumulated Test Account",account.getAttribute(CONTRA_ACCOUNT));
     }
 
     @Test
@@ -131,10 +131,10 @@ public class AccountUnitTest {
 
         Map<AccountAttribute,String> attributes = account.getAccountAttributes();
 
-        assertEquals("4875",attributes.get(General_Ledger));
+        assertEquals("4875",attributes.get(GENERAL_LEDGER));
 
-        attributes.put(General_Ledger,"4846");
+        attributes.put(GENERAL_LEDGER,"4846");
 
-        assertEquals("4875",attributes.get(General_Ledger));
+        assertEquals("4875",attributes.get(GENERAL_LEDGER));
     }
 }
