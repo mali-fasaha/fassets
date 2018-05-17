@@ -19,6 +19,7 @@ package io.github.fasset.fasset.managers;
 
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
+import io.github.fasset.fasset.managers.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
@@ -46,21 +47,21 @@ public class DefaultAccountResolverTest {
     @Before
     public void setUp() throws Exception {
 
-        AccountIDResolver accountIDResolver = Mockito.mock(AccountIDResolver.class);
+        DebitAccountIDResolver debitAccountIDResolver = Mockito.mock(DebitAccountIDResolver.class);
 
-        defaultAccountResolver = new DefaultAccountResolver(accountIDResolver);
+        defaultAccountResolver = new DefaultAccountResolver(debitAccountIDResolver);
 
-        when(accountIDResolver.resolveCategoryId(lenovo)).thenReturn("Computers");
-        when(accountIDResolver.resolveContraAccountId(lenovo)).thenReturn("Accumulated Depreciation on Computers");
-        when(accountIDResolver.resolveGeneralLedgerId(lenovo)).thenReturn("1025648");
+        when(debitAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("Computers");
+        when(debitAccountIDResolver.resolveContraAccountId(lenovo)).thenReturn("Accumulated Depreciation on Computers");
+        when(debitAccountIDResolver.resolveGeneralLedgerName(lenovo)).thenReturn("1025648");
 
-        when(accountIDResolver.resolveCategoryId(radio)).thenReturn("Electronics");
-        when(accountIDResolver.resolveContraAccountId(radio)).thenReturn("Accumulated Depreciation on Electronics");
-        when(accountIDResolver.resolveGeneralLedgerId(radio)).thenReturn("1025649");
+        when(debitAccountIDResolver.resolveCategoryId(radio)).thenReturn("Electronics");
+        when(debitAccountIDResolver.resolveContraAccountId(radio)).thenReturn("Accumulated Depreciation on Electronics");
+        when(debitAccountIDResolver.resolveGeneralLedgerName(radio)).thenReturn("1025649");
 
-        when(accountIDResolver.resolveCategoryId(chair)).thenReturn("Furniture");
-        when(accountIDResolver.resolveContraAccountId(chair)).thenReturn("Accumulated Depreciation on Furniture");
-        when(accountIDResolver.resolveGeneralLedgerId(chair)).thenReturn("1025650");
+        when(debitAccountIDResolver.resolveCategoryId(chair)).thenReturn("Furniture");
+        when(debitAccountIDResolver.resolveContraAccountId(chair)).thenReturn("Accumulated Depreciation on Furniture");
+        when(debitAccountIDResolver.resolveGeneralLedgerName(chair)).thenReturn("1025650");
 
 
     }

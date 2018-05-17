@@ -15,64 +15,42 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.managers;
+package io.github.fasset.fasset.managers.id;
 
 import io.github.fasset.fasset.model.FixedAsset;
-import org.springframework.stereotype.Component;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+/**
+ * Generates the name of an existing account, if one exists, or the name of one to be created
+ */
+public interface DebitAccountIDResolver {
 
-@Component("accountIDResolver")
-public class DefaultAccountIDResolver implements AccountIDResolver {
+    String resolveName(FixedAsset fixedAsset);
 
-    @Override
-    public String resolveName(FixedAsset fixedAsset) {
-        return null;
-    }
-
-    @Override
-    public String resolveNumber(FixedAsset fixedAsset) {
-        return null;
-    }
+    String resolveNumber(FixedAsset fixedAsset);
 
     /**
      * Resolve the name of a Contra account for a main account used for tracking the asset
-     *
      * @param fixedAsset The asset for which we seek an account to track financially
      * @return The name of the contra account
      */
-    @Override
-    public String resolveContraAccountId(FixedAsset fixedAsset) {
-
-        checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
-
-        return String.format("Accumulated Depreciation on %s", fixedAsset.getCategory());
-    }
+    String resolveContraAccountId(FixedAsset fixedAsset);
 
     /**
      * Resolves the name of the appropriate general ledger that out to be used in this case for the
      * fixed assets. The general ledger is taken to be one hierarchy higher than an account. This is
      * being done by the accountIDResolver as the general-ledger id has something to do with the id
      * of the account itself
-     *
      * @param fixedAsset For which we need a general ledger
      * @return The ID of the general ledger
      */
-    @Override
-    public String resolveGeneralLedgerId(FixedAsset fixedAsset) {
-        return null;
-    }
+    String resolveGeneralLedgerName(FixedAsset fixedAsset);
 
     /**
      * The category is of a lower hierarchy than an account yet for the account to be representative
      * of fixed assets comprehensively this out to be mandated as part of the account id or at least
-     * as a field in an account that can be trackedsudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
-     *
+     * as a field in an account that can be tracked
      * @param fixedAsset For which we need category id
      * @return The id of the category
      */
-    @Override
-    public String resolveCategoryId(FixedAsset fixedAsset) {
-        return null;
-    }
+    String resolveCategoryId(FixedAsset fixedAsset);
 }

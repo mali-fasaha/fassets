@@ -19,6 +19,7 @@ package io.github.fasset.fasset.managers;
 
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
+import io.github.fasset.fasset.managers.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -51,11 +52,11 @@ public class DefaultAccountResolver implements AccountResolver {
 
     private static final org.slf4j.Logger log = getLogger(DefaultAccountResolver.class);
 
-    private AccountIDResolver accountIDResolver;
+    private DebitAccountIDResolver debitAccountIDResolver;
 
     @Autowired
-    public DefaultAccountResolver(@Qualifier("accountIDResolver") AccountIDResolver accountIDResolver) {
-        this.accountIDResolver = accountIDResolver;
+    public DefaultAccountResolver(@Qualifier("debitAccountIDResolver") DebitAccountIDResolver debitAccountIDResolver) {
+        this.debitAccountIDResolver = debitAccountIDResolver;
     }
 
     /**
@@ -69,15 +70,15 @@ public class DefaultAccountResolver implements AccountResolver {
 
         log.debug("Getting acquisition debit account for asset : {}", fixedAsset.getAssetDescription());
 
-        Account debitAccount = new Account(accountIDResolver.resolveName(fixedAsset), accountIDResolver.resolveNumber(fixedAsset), DEBIT,
+        Account debitAccount = new Account(debitAccountIDResolver.resolveName(fixedAsset), debitAccountIDResolver.resolveNumber(fixedAsset), DEBIT,
             Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
 
-        debitAccount.addAttribute(CONTRA_ACCOUNT, accountIDResolver.resolveContraAccountId(fixedAsset));
-        debitAccount.addAttribute(GENERAL_LEDGER, accountIDResolver.resolveGeneralLedgerId(fixedAsset));
+        debitAccount.addAttribute(CONTRA_ACCOUNT, debitAccountIDResolver.resolveContraAccountId(fixedAsset));
+        debitAccount.addAttribute(GENERAL_LEDGER, debitAccountIDResolver.resolveGeneralLedgerName(fixedAsset));
         debitAccount.addAttribute(ACCOUNT_TYPE, "Asset");
         debitAccount.addAttribute(ACCOUNT_SUB_TYPE, "Non Current Asset");
         debitAccount.addAttribute(ACCOUNT_SCHEME, "Fixed Assets");
-        debitAccount.addAttribute(CATEGORY, accountIDResolver.resolveCategoryId(fixedAsset));
+        debitAccount.addAttribute(CATEGORY, debitAccountIDResolver.resolveCategoryId(fixedAsset));
         debitAccount.addAttribute(SERVICE_OUTLET, fixedAsset.getSolId());
 
         return debitAccount;
@@ -94,14 +95,14 @@ public class DefaultAccountResolver implements AccountResolver {
 
         log.debug("Getting acquisition credit account for asset : {}", fixedAsset.getAssetDescription());
 
-        Account creditAccount = new Account(accountIDResolver.resolveName(fixedAsset), accountIDResolver.resolveNumber(fixedAsset), CREDIT,
+        Account creditAccount = new Account(debitAccountIDResolver.resolveName(fixedAsset), debitAccountIDResolver.resolveNumber(fixedAsset), CREDIT,
             Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
 
-        creditAccount.addAttribute(GENERAL_LEDGER, accountIDResolver.resolveGeneralLedgerId(fixedAsset));
+        creditAccount.addAttribute(GENERAL_LEDGER, debitAccountIDResolver.resolveGeneralLedgerName(fixedAsset));
         creditAccount.addAttribute(ACCOUNT_TYPE, "Liability"); //TBD on this
         creditAccount.addAttribute(ACCOUNT_SUB_TYPE, "Current Liability");
         creditAccount.addAttribute(ACCOUNT_SCHEME, "Sundry Creditors");
-        creditAccount.addAttribute(CATEGORY, accountIDResolver.resolveCategoryId(fixedAsset));
+        creditAccount.addAttribute(CATEGORY, debitAccountIDResolver.resolveCategoryId(fixedAsset));
         creditAccount.addAttribute(SERVICE_OUTLET, fixedAsset.getSolId());
 
         return creditAccount;
