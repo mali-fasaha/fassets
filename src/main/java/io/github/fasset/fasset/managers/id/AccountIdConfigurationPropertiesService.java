@@ -18,7 +18,6 @@
 package io.github.fasset.fasset.managers.id;
 
 import io.github.fasset.fasset.kernel.util.PropertiesUtils;
-import sun.rmi.runtime.Log;
 
 import java.util.Properties;
 
@@ -52,7 +51,10 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
      */
     @Override
     public String acquisitionGlId(String category) {
-        return null;
+
+        log.debug("Fetching gl id for category: {}", category);
+
+        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.id"));
     }
 
     /**
@@ -68,11 +70,11 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
 
         log.debug("Fetching gl code for category: {}", category);
 
-        return accountConfigProperties.getProperty(formatKey(category));
+        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.code"));
     }
 
-    private String formatKey(String propertyKey) {
-        return String.format("%s.acquisition.gl.code", propertyKey.toLowerCase()).replace(" ","-").replace("&","and");
+    private String formatKey(String propertyKey, String transaction, String element) {
+        return String.format("%s.%s.%s", propertyKey.toLowerCase(), transaction, element).replace(" ","-").replace("&","and");
     }
 
     /**

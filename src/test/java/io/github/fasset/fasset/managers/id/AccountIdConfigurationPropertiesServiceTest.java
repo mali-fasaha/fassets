@@ -17,7 +17,6 @@
  */
 package io.github.fasset.fasset.managers.id;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -27,12 +26,14 @@ public class AccountIdConfigurationPropertiesServiceTest {
 
     private AccountIdConfigurationService configurationService = new AccountIdConfigurationPropertiesService("account-id-config");
 
-    @Before
-    public void setUp() throws Exception {
-    }
-
     @Test
     public void acquisitionGlId() {
+
+        assertEquals("013", configurationService.acquisitionGlId("COMPUTERS"));
+        assertEquals("017", configurationService.acquisitionGlId("COMPUTER SOFTWARE"));
+        assertEquals("015", configurationService.acquisitionGlId("FURNITURE & FITTINGS"));
+        assertEquals("014", configurationService.acquisitionGlId("ELECTRONICS"));
+        assertEquals("016", configurationService.acquisitionGlId("MOTOR VEHICLES"));
     }
 
     @Test
@@ -41,11 +42,20 @@ public class AccountIdConfigurationPropertiesServiceTest {
         assertEquals("00150", configurationService.acquisitionGlCode("COMPUTERS"));
         assertEquals("00155", configurationService.acquisitionGlCode("COMPUTER SOFTWARE"));
         assertEquals("00153", configurationService.acquisitionGlCode("FURNITURE & FITTINGS"));
+        assertEquals("00151", configurationService.acquisitionGlCode("ELECTRONICS"));
+        assertEquals("00154", configurationService.acquisitionGlCode("MOTOR VEHICLES"));
     }
 
     @Test
     public void getCurrencyCode() {
 
         assertEquals("00", configurationService.getCurrencyCode("KES"));
+        assertEquals("01", configurationService.getCurrencyCode("USD"));
+        assertEquals("02", configurationService.getCurrencyCode("GBP"));
+        assertEquals("03", configurationService.getCurrencyCode("EUR"));
+        assertEquals("04", configurationService.getCurrencyCode("INR"));
+        assertEquals("05", configurationService.getCurrencyCode("CAD"));
+        assertEquals("06", configurationService.getCurrencyCode("CHF"));
+        assertEquals("07", configurationService.getCurrencyCode("ZAR"));
     }
 }
