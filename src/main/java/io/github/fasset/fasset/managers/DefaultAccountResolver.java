@@ -19,6 +19,7 @@ package io.github.fasset.fasset.managers;
 
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
+import io.github.fasset.fasset.managers.id.CreditAccountIDResolver;
 import io.github.fasset.fasset.managers.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +54,12 @@ public class DefaultAccountResolver implements AccountResolver {
     private static final org.slf4j.Logger log = getLogger(DefaultAccountResolver.class);
 
     private DebitAccountIDResolver debitAccountIDResolver;
+    private CreditAccountIDResolver creditAccountIDResolver;
 
     @Autowired
-    public DefaultAccountResolver(@Qualifier("debitAccountIDResolver") DebitAccountIDResolver debitAccountIDResolver) {
+    public DefaultAccountResolver(@Qualifier("debitAccountIDResolver") DebitAccountIDResolver debitAccountIDResolver, CreditAccountIDResolver creditAccountIDResolver) {
         this.debitAccountIDResolver = debitAccountIDResolver;
+        this.creditAccountIDResolver = creditAccountIDResolver;
     }
 
     /**
@@ -97,14 +100,14 @@ public class DefaultAccountResolver implements AccountResolver {
 
         log.debug("Getting acquisition credit account for asset : {}", fixedAsset.getAssetDescription());
 
-        Account creditAccount = new Account(debitAccountIDResolver.resolveName(fixedAsset), debitAccountIDResolver.resolveNumber(fixedAsset), CREDIT,
+        Account creditAccount = new Account(creditAccountIDResolver.resolveName(fixedAsset), creditAccountIDResolver.resolveNumber(fixedAsset), CREDIT,
             Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
 
-        creditAccount.addAttribute(GENERAL_LEDGER, debitAccountIDResolver.resolveGeneralLedgerName(fixedAsset));
+        creditAccount.addAttribute(GENERAL_LEDGER, creditAccountIDResolver.resolveGeneralLedgerName(fixedAsset));
         creditAccount.addAttribute(ACCOUNT_TYPE, "Liability"); //TBD on this
         creditAccount.addAttribute(ACCOUNT_SUB_TYPE, "Current Liability");
         creditAccount.addAttribute(ACCOUNT_SCHEME, "Sundry Creditors");
-        creditAccount.addAttribute(CATEGORY, debitAccountIDResolver.resolveCategoryId(fixedAsset));
+        creditAccount.addAttribute(CATEGORY, creditAccountIDResolver.resolveCategoryId(fixedAsset));
         creditAccount.addAttribute(SERVICE_OUTLET, fixedAsset.getSolId());
 
         return creditAccount;

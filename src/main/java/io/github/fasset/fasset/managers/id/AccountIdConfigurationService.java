@@ -52,4 +52,16 @@ public interface AccountIdConfigurationService {
      * @return Account number sequence code to follow the service outlet id
      */
     String getCurrencyCode(String currencyCode);
+
+    /**
+     *
+     * @return String GL Code to be used for credit transactions
+     */
+    String getAcquisitionCreditGlCode();
+
+    /**
+     *
+     * @return String GL Id to be used for credit transactions
+     */
+    String getAcquisitionCreditGlId();
 }

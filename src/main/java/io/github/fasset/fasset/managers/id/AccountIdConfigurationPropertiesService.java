@@ -91,4 +91,24 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
 
         return accountConfigProperties.getProperty(currencyCode);
     }
+
+    /**
+     * @return String GL Code to be used for credit transactions
+     */
+    @Override
+    public String getAcquisitionCreditGlCode() {
+
+        log.debug("Fetching credit account for acquisitions...");
+
+        return accountConfigProperties.getProperty("sundry.acquisition.gl.code");
+    }
+
+    /**
+     * @return String GL Id to be used for credit transactions
+     */
+    @Override
+    public String getAcquisitionCreditGlId() {
+
+        return accountConfigProperties.getProperty("sundry.acquisition.gl.id");
+    }
 }

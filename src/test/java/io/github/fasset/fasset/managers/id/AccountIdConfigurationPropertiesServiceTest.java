@@ -58,4 +58,16 @@ public class AccountIdConfigurationPropertiesServiceTest {
         assertEquals("06", configurationService.getCurrencyCode("CHF"));
         assertEquals("07", configurationService.getCurrencyCode("ZAR"));
     }
+
+    @Test
+    public void getAcquisitionCreditGlCode() {
+
+        assertEquals("10051", configurationService.getAcquisitionCreditGlCode());
+    }
+
+    @Test
+    public void getAcquisitionCreditGlId() {
+
+        assertEquals("001", configurationService.getAcquisitionCreditGlId());
+    }
 }

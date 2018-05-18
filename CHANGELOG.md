@@ -4,6 +4,36 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Implemented PropertiesUtil for reading properties files at start-up with the classloader**
+
+
+[eba177db6d5760b](https://github.com/ghacupha/fassets/commit/eba177db6d5760b) ghacupha *2018-05-17 17:08:16*
+
+**additional tests to cover resolution of debit acquisition accounts**
+
+
+[493445fc5ab7fc8](https://github.com/ghacupha/fassets/commit/493445fc5ab7fc8) ghacupha *2018-05-17 16:59:48*
+
+**Complete implementation of the AccountIdConfigService and its test**
+
+
+[6c4af34ed631432](https://github.com/ghacupha/fassets/commit/6c4af34ed631432) ghacupha *2018-05-17 16:11:26*
+
+**included formatting logic for extracting keys in accordance with the properties configurattion annotation policy version 1.0**
+
+
+[65919c0d51816b0](https://github.com/ghacupha/fassets/commit/65919c0d51816b0) ghacupha *2018-05-17 14:01:48*
+
+**Implemented the DebitAccountIDResolver, and the AccountIDConfigurationService with AccountIDPropertiesConfigurationService together with its unit test, and configured a spring bean called 'accountIdPropertiesConfigurationService' for intergration with the rest of the application's container**
+
+
+[8f9f5e88a731710](https://github.com/ghacupha/fassets/commit/8f9f5e88a731710) ghacupha *2018-05-17 13:53:37*
+
+**Definition of the fixed assets transaction types in the FixedAssetsTransactionType enum**
+
+
+[d94f1f88f2e0f4d](https://github.com/ghacupha/fassets/commit/d94f1f88f2e0f4d) ghacupha *2018-05-17 09:00:06*
+
 **added DefaultAccountIDResolver to resolve failing integration test, since an implementation of the AccountIDResolver interface must be detected and loaded into the spring container before the context-dependent tests can run properly**
 
 

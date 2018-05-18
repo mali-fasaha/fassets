@@ -19,6 +19,7 @@ package io.github.fasset.fasset.managers;
 
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
+import io.github.fasset.fasset.managers.id.CreditAccountIDResolver;
 import io.github.fasset.fasset.managers.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
@@ -49,7 +50,22 @@ public class DefaultAccountResolverTest {
 
         DebitAccountIDResolver debitAccountIDResolver = Mockito.mock(DebitAccountIDResolver.class);
 
-        defaultAccountResolver = new DefaultAccountResolver(debitAccountIDResolver);
+        CreditAccountIDResolver creditAccountIDResolver = Mockito.mock(CreditAccountIDResolver.class);
+
+        when(creditAccountIDResolver.resolveName(radio)).thenReturn("Sundry Creditors Account");
+        when(creditAccountIDResolver.resolveName(lenovo)).thenReturn("Sundry Creditors Account");
+        when(creditAccountIDResolver.resolveName(chair)).thenReturn("Sundry Creditors Account");
+        when(creditAccountIDResolver.resolveNumber(radio)).thenReturn("0230010051011");
+        when(creditAccountIDResolver.resolveNumber(lenovo)).thenReturn("0140010051011");
+        when(creditAccountIDResolver.resolveNumber(chair)).thenReturn("0180010051011");
+        when(creditAccountIDResolver.resolveCategoryId(radio)).thenReturn("ELECTRONICS");
+        when(creditAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("COMPUTERS");
+        when(creditAccountIDResolver.resolveCategoryId(chair)).thenReturn("FURNITURE");
+        when(creditAccountIDResolver.resolveGeneralLedgerName(chair)).thenReturn("FURNITURE");
+        when(creditAccountIDResolver.resolveGeneralLedgerName(lenovo)).thenReturn("COMPUTERS");
+        when(creditAccountIDResolver.resolveGeneralLedgerName(radio)).thenReturn("ELECTRONICS");
+
+        defaultAccountResolver = new DefaultAccountResolver(debitAccountIDResolver, creditAccountIDResolver);
 
         when(debitAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("Computers");
         when(debitAccountIDResolver.resolveContraAccountId(lenovo)).thenReturn("Accumulated Depreciation on Computers");

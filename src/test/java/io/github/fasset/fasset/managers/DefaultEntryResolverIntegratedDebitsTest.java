@@ -20,18 +20,19 @@ package io.github.fasset.fasset.managers;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.AccountingTransaction;
-import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
-import io.github.fasset.fasset.book.keeper.unit.money.HardCash;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnableToPostException;
 import io.github.fasset.fasset.managers.id.AccountIdConfigurationPropertiesService;
 import io.github.fasset.fasset.managers.id.AcquisitionDebitAccountIDResolver;
+import io.github.fasset.fasset.managers.id.CreditAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockingDetails;
+import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.on;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class DefaultEntryResolverIntegratedDebitsTest {
 
@@ -51,7 +53,7 @@ public class DefaultEntryResolverIntegratedDebitsTest {
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronics", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
-    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
+    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE & FITTINGS", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
 
     private final static List<FixedAsset> fixedAssets = new ArrayList<>();
 
@@ -65,11 +67,26 @@ public class DefaultEntryResolverIntegratedDebitsTest {
     @Before
     public void setUp() throws Exception {
 
+        CreditAccountIDResolver creditAccountIDResolver = Mockito.mock(CreditAccountIDResolver.class);
+
+        when(creditAccountIDResolver.resolveName(radio)).thenReturn("Sundry Creditors Account");
+        when(creditAccountIDResolver.resolveName(lenovo)).thenReturn("Sundry Creditors Account");
+        when(creditAccountIDResolver.resolveName(chair)).thenReturn("Sundry Creditors Account");
+        when(creditAccountIDResolver.resolveNumber(radio)).thenReturn("0230010051011");
+        when(creditAccountIDResolver.resolveNumber(lenovo)).thenReturn("0140010051011");
+        when(creditAccountIDResolver.resolveNumber(chair)).thenReturn("0180010051011");
+        when(creditAccountIDResolver.resolveCategoryId(radio)).thenReturn("ELECTRONICS");
+        when(creditAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("COMPUTERS");
+        when(creditAccountIDResolver.resolveCategoryId(chair)).thenReturn("FURNITURE");
+        when(creditAccountIDResolver.resolveGeneralLedgerName(chair)).thenReturn("FURNITURE");
+        when(creditAccountIDResolver.resolveGeneralLedgerName(lenovo)).thenReturn("COMPUTERS");
+        when(creditAccountIDResolver.resolveGeneralLedgerName(radio)).thenReturn("ELECTRONICS");
+
         defaultEntryResolver =
             new DefaultEntryResolver(
                 new DefaultAccountResolver(
                     new AcquisitionDebitAccountIDResolver(
-                        new AccountIdConfigurationPropertiesService("account-id-config"))));
+                        new AccountIdConfigurationPropertiesService("account-id-config")), creditAccountIDResolver));
 
         fixedAssets.add(radio);
         fixedAssets.add(lenovo);
