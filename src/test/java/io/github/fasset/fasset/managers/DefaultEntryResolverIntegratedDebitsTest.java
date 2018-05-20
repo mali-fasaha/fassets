@@ -20,11 +20,15 @@ package io.github.fasset.fasset.managers;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.AccountingTransaction;
+import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
+import io.github.fasset.fasset.book.keeper.unit.money.HardCash;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnableToPostException;
+import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.managers.id.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.managers.id.AcquisitionCreditAccountIDResolver;
 import io.github.fasset.fasset.managers.id.AcquisitionDebitAccountIDResolver;
 import io.github.fasset.fasset.managers.id.CreditAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
@@ -37,7 +41,9 @@ import org.mockito.Mockito;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -58,35 +64,16 @@ public class DefaultEntryResolverIntegratedDebitsTest {
     private final static List<FixedAsset> fixedAssets = new ArrayList<>();
 
 
-    // Mock account
-    private static final Account electronics = new Account("Electronics", "101", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
-    private static final Account computers = new Account("Computers", "102", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
-    private static final Account furniture = new Account("Furnitures", "103", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
-    private static final Account sundryCreditors = new Account("Sundry Creditors", "104", CREDIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
-
     @Before
     public void setUp() throws Exception {
-
-        CreditAccountIDResolver creditAccountIDResolver = Mockito.mock(CreditAccountIDResolver.class);
-
-        when(creditAccountIDResolver.resolveName(radio)).thenReturn("Sundry Creditors Account");
-        when(creditAccountIDResolver.resolveName(lenovo)).thenReturn("Sundry Creditors Account");
-        when(creditAccountIDResolver.resolveName(chair)).thenReturn("Sundry Creditors Account");
-        when(creditAccountIDResolver.resolveNumber(radio)).thenReturn("0230010051011");
-        when(creditAccountIDResolver.resolveNumber(lenovo)).thenReturn("0140010051011");
-        when(creditAccountIDResolver.resolveNumber(chair)).thenReturn("0180010051011");
-        when(creditAccountIDResolver.resolveCategoryId(radio)).thenReturn("ELECTRONICS");
-        when(creditAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("COMPUTERS");
-        when(creditAccountIDResolver.resolveCategoryId(chair)).thenReturn("FURNITURE");
-        when(creditAccountIDResolver.resolveGeneralLedgerName(chair)).thenReturn("FURNITURE");
-        when(creditAccountIDResolver.resolveGeneralLedgerName(lenovo)).thenReturn("COMPUTERS");
-        when(creditAccountIDResolver.resolveGeneralLedgerName(radio)).thenReturn("ELECTRONICS");
 
         defaultEntryResolver =
             new DefaultEntryResolver(
                 new DefaultAccountResolver(
                     new AcquisitionDebitAccountIDResolver(
-                        new AccountIdConfigurationPropertiesService("account-id-config")), creditAccountIDResolver));
+                        new AccountIdConfigurationPropertiesService("account-id-config")),
+                    new AcquisitionCreditAccountIDResolver(
+                        new AccountIdConfigurationPropertiesService("account-id-config"))));
 
         fixedAssets.add(radio);
         fixedAssets.add(lenovo);
@@ -119,17 +106,31 @@ public class DefaultEntryResolverIntegratedDebitsTest {
         List<Account> accountsFromEntries =
             IntStream.range(0, fixedAssets.size() * 2 - 1)
                 .mapToObj(i -> entries.get(i).getAccount())
-                .collect(Collectors.toList());
+                .collect(ImmutableListCollector.toImmutableList());
 
+        // check names
+        List<String> accountNames =
+            accountsFromEntries
+                .parallelStream()
+            .map(Account::getName)
+            .collect(ImmutableListCollector.toImmutableList());
 
-        /* TODO Implement assertions for checking account balances along with credit side acquisition accounts
-        assertTrue(accountsFromEntries.contains(electronics));
-        assertTrue(accountsFromEntries.contains(computers));
-        assertTrue(accountsFromEntries.contains(furniture));
-        assertTrue(accountsFromEntries.contains(sundryCreditors));
-        assertEquals(new AccountBalance(HardCash.shilling(200),DEBIT), accountsFromEntries.get(accountsFromEntries.indexOf(electronics)).balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(HardCash.shilling(5600),DEBIT), accountsFromEntries.get(accountsFromEntries.indexOf(computers)).balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(HardCash.shilling(156),DEBIT), accountsFromEntries.get(accountsFromEntries.indexOf(furniture)).balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(HardCash.shilling(5956),CREDIT), accountsFromEntries.get(accountsFromEntries.indexOf(sundryCreditors)).balance(on(2018,2,21)));*/
+        assertTrue(accountNames.contains("ELECTRONICS"));
+        assertTrue(accountNames.contains("FURNITURE & FITTINGS"));
+        assertTrue(accountNames.contains("COMPUTERS"));
+        assertTrue(accountNames.contains("SUNDRY CREDITORS ACCOUNT"));
+
+        // check balances
+        Map<String, AccountBalance> accountBalances =
+            accountsFromEntries
+                .parallelStream()
+                .collect(
+                    Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, Hashtable::new));
+
+        assertEquals(AccountBalance.newBalance(HardCash.shilling(200), DEBIT), accountBalances.get("ELECTRONICS"));
+        assertEquals(AccountBalance.newBalance(HardCash.shilling(156), DEBIT), accountBalances.get("FURNITURE & FITTINGS"));
+        assertEquals(AccountBalance.newBalance(HardCash.shilling(5600), DEBIT), accountBalances.get("COMPUTERS"));
+        assertEquals(AccountBalance.newBalance(HardCash.shilling(5956), DEBIT), accountBalances.get("SUNDRY CREDITORS ACCOUNT"));
+
     }
 }

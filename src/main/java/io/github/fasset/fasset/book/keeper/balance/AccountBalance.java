@@ -18,6 +18,9 @@
 package io.github.fasset.fasset.book.keeper.balance;
 
 import io.github.fasset.fasset.book.keeper.unit.money.Cash;
+import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents the amount and sign of the amount you could find in an account. Using this
@@ -27,12 +30,50 @@ import io.github.fasset.fasset.book.keeper.unit.money.Cash;
  */
 public class AccountBalance {
 
+    private static final Logger log = LoggerFactory.getLogger(AccountBalance.class);
+
     private final Cash amount;
     private final AccountSide accountSide;
 
     public AccountBalance(Cash amount, AccountSide accountSide) {
         this.amount = amount;
         this.accountSide = accountSide;
+    }
+
+    public AccountBalance add(AccountBalance arg) throws MismatchedCurrencyException {
+
+        checkCurrency(arg);
+
+        log.debug("Adding {} to {}", arg, this);
+
+        if ( arg.getAccountSide() == accountSide){
+
+            return newBalance(this.amount.plus( arg.getAmount()), this.accountSide);
+
+        } else {
+
+            if( arg.getAmount().isLessThan(this.amount )){
+
+                return newBalance(this.amount.minus(arg.getAmount()), this.accountSide);
+            }
+
+            if( arg.getAmount().isMoreThan( this.amount)){
+
+                return newBalance(arg.getAmount().minus(this.amount), arg.getAccountSide());
+            }
+        }
+
+        return newBalance(this.amount, this.accountSide);
+    }
+
+    private void checkCurrency(AccountBalance arg) throws MismatchedCurrencyException {
+
+        if( !arg.getAmount().getCurrency().equals(this.amount.getCurrency())){
+            String message = String.format("Cannot add balance containing mismatched currency. Expected : %s but found : %s",
+                this.amount.getCurrency().getCurrencyCode(), arg.getAmount().getCurrency().getCurrencyCode());
+
+            throw new MismatchedCurrencyException(message);
+        }
     }
 
     public static AccountBalance newBalance(Cash amount, AccountSide accountSide) {

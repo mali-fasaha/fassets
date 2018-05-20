@@ -23,7 +23,13 @@ import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements the {@code CreditAccountIDResolver} interface for the transaction that involves acquisition of assets
+ * Implements the {@code CreditAccountIDResolver} interface for the transaction that involves acquisition of assets. In summary
+ * one can expect that all acquisition transaction would be posted to the Sundry Creditor's account abstracting this application
+ * from the knowledge of to which stakeholders settlements as this varies to a large degree depending on the domain of a given
+ * tax authority, the same amount being split between vendor and tax authority in varying ratios. This is complicated situation to
+ * master that requires more than one account, the effect of which could hardly be justified by the effort.
+ *
+ * @author edwin.njeru
  *
  */
 public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolver {
@@ -39,21 +45,30 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
     @Override
     public String resolveName(FixedAsset fixedAsset) {
 
+        log.debug("Resolving the account name for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
+
         return "SUNDRY CREDITORS ACCOUNT";
     }
 
     @Override
     public String resolveNumber(FixedAsset fixedAsset) {
 
+        log.debug("Resolving the account number for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
+
+        //TODO Abstract account number resolution
         return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode() + glId();
     }
 
     private String glCode() {
 
-       return idConfigurationService.getAcquisitionCreditGlCode();
+        log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
+
+        return idConfigurationService.getAcquisitionCreditGlCode();
     }
 
     private String glId(){
+
+        log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
         return idConfigurationService.getAcquisitionCreditGlId();
     }
@@ -73,6 +88,9 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
      */
     @Override
     public String resolveContraAccountId(FixedAsset fixedAsset) {
+
+        log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
+
         return resolveName(fixedAsset);
     }
 
