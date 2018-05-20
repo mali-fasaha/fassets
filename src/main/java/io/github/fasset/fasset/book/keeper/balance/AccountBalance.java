@@ -22,6 +22,9 @@ import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collection;
+import java.util.Collections;
+
 /**
  * Represents the amount and sign of the amount you could find in an account. Using this
  * you could say an account has 20 dollars on Credit side.
@@ -40,26 +43,44 @@ public class AccountBalance {
         this.accountSide = accountSide;
     }
 
+    public AccountBalance add(Collection<AccountBalance> args){
+
+        final AccountBalance[] thisBalance = {newBalance(this.amount, this.accountSide)};
+
+        args.forEach( i -> {
+            try {
+                thisBalance[0] = thisBalance[0].add(i);
+            } catch (MismatchedCurrencyException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return thisBalance[0];
+    }
+
     public AccountBalance add(AccountBalance arg) throws MismatchedCurrencyException {
 
         checkCurrency(arg);
 
         log.debug("Adding {} to {}", arg, this);
 
-        if ( arg.getAccountSide() == accountSide){
+        synchronized (this) {
 
-            return newBalance(this.amount.plus( arg.getAmount()), this.accountSide);
+            if (arg.getAccountSide() == accountSide) {
 
-        } else {
+                return newBalance(this.amount.plus(arg.getAmount()), this.accountSide);
 
-            if( arg.getAmount().isLessThan(this.amount )){
+            } else {
 
-                return newBalance(this.amount.minus(arg.getAmount()), this.accountSide);
-            }
+                if (arg.getAmount().isLessThan(this.amount)) {
 
-            if( arg.getAmount().isMoreThan( this.amount)){
+                    return newBalance(this.amount.minus(arg.getAmount()), this.accountSide);
+                }
 
-                return newBalance(arg.getAmount().minus(this.amount), arg.getAccountSide());
+                if (arg.getAmount().isMoreThan(this.amount)) {
+
+                    return newBalance(arg.getAmount().minus(this.amount), arg.getAccountSide());
+                }
             }
         }
 

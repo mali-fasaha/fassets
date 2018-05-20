@@ -58,6 +58,7 @@ public class AccountBalanceTest {
 
         // Reference balance is immutable
         assertEquals(newBalance(shilling(500), CREDIT), creditReference);
+        assertEquals(newBalance(shilling(1250), CREDIT), creditReference.add(balances2Add));
 
         // You  could add debitReference to itself instead
         balances2Add.forEach(bal -> {
@@ -87,6 +88,7 @@ public class AccountBalanceTest {
 
         // Reference balance is immutable
         assertEquals(newBalance(shilling(500), DEBIT), debitReference);
+        assertEquals(newBalance(shilling(250), CREDIT), debitReference.add(balances2Add));
 
         // You  could add debitReference to itself instead
         balances2Add.forEach(bal -> {
