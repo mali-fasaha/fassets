@@ -15,9 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.managers;
+package io.github.fasset.fasset.accounts;
 
 import com.google.common.collect.ImmutableList;
+
+import io.github.fasset.fasset.accounts.DefaultAccountResolver;
+import io.github.fasset.fasset.accounts.DefaultEntryResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.AccountingTransaction;
