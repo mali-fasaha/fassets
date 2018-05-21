@@ -4,6 +4,26 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Enhanced the DefaultEntryResolverDebitsTest to integrate DebitEntriesResolver and the CreditEntriesResolver in creating accounts during assets acqusition. Also the ImmutableListCollector was enahanced with a FastList implementation using the method #toImmutableFastList**
+
+
+[6a6a3f833b730ea](https://github.com/ghacupha/fassets/commit/6a6a3f833b730ea) ghacupha *2018-05-21 07:37:28*
+
+**Implemented #add(collection) method in AccountBalance to enable aggregation of account balances from a list**
+
+
+[5edba043c2430ec](https://github.com/ghacupha/fassets/commit/5edba043c2430ec) ghacupha *2018-05-20 15:56:07*
+
+**Implemented the #add method in the AccountBalance object to enable aggregation of balances from different accounts**
+
+
+[dd9f4faa9df8476](https://github.com/ghacupha/fassets/commit/dd9f4faa9df8476) ghacupha *2018-05-20 15:36:09*
+
+**Implemented the AcquisitionCreditAccountIdResolver interface together with accompanying unit tests**
+
+
+[773b51212186efd](https://github.com/ghacupha/fassets/commit/773b51212186efd) ghacupha *2018-05-18 12:07:34*
+
 **Implemented PropertiesUtil for reading properties files at start-up with the classloader**
 
 
