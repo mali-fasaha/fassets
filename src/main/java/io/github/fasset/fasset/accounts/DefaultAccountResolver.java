@@ -17,10 +17,10 @@
  */
 package io.github.fasset.fasset.accounts;
 
+import io.github.fasset.fasset.accounts.id.CreditAccountIDResolver;
+import io.github.fasset.fasset.accounts.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
-import io.github.fasset.fasset.managers.id.CreditAccountIDResolver;
-import io.github.fasset.fasset.managers.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

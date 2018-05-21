@@ -18,10 +18,10 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.accounts.DefaultAccountResolver;
+import io.github.fasset.fasset.accounts.id.CreditAccountIDResolver;
+import io.github.fasset.fasset.accounts.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
-import io.github.fasset.fasset.managers.id.CreditAccountIDResolver;
-import io.github.fasset.fasset.managers.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;

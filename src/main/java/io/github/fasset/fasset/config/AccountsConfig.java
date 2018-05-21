@@ -17,10 +17,11 @@
  */
 package io.github.fasset.fasset.config;
 
-import io.github.fasset.fasset.managers.id.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.managers.id.AccountIdConfigurationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import io.github.fasset.fasset.accounts.id.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.id.AccountIdConfigurationService;
 
 /**
  * Configuration beans used for configuration of resolver objects

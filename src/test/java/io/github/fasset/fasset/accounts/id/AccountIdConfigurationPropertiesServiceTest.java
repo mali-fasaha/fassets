@@ -19,8 +19,8 @@ package io.github.fasset.fasset.accounts.id;
 
 import org.junit.Test;
 
-import io.github.fasset.fasset.managers.id.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.managers.id.AccountIdConfigurationService;
+import io.github.fasset.fasset.accounts.id.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.id.AccountIdConfigurationService;
 
 import static org.junit.Assert.assertEquals;
 

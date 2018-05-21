@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.managers.id;
+package io.github.fasset.fasset.accounts.id;
 
 import io.github.fasset.fasset.model.FixedAsset;
 

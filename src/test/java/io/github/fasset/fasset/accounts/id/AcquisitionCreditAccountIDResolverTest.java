@@ -17,9 +17,9 @@
  */
 package io.github.fasset.fasset.accounts.id;
 
-import io.github.fasset.fasset.managers.id.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.managers.id.AccountIdConfigurationService;
-import io.github.fasset.fasset.managers.id.AcquisitionCreditAccountIDResolver;
+import io.github.fasset.fasset.accounts.id.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.id.AccountIdConfigurationService;
+import io.github.fasset.fasset.accounts.id.AcquisitionCreditAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
