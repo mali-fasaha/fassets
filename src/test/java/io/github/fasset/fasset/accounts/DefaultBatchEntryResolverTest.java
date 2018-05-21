@@ -18,8 +18,8 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.accounts.AccountResolver;
-import io.github.fasset.fasset.accounts.DefaultEntryResolver;
-import io.github.fasset.fasset.accounts.EntryResolver;
+import io.github.fasset.fasset.accounts.DefaultBatchEntryResolver;
+import io.github.fasset.fasset.accounts.BatchEntryResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.AccountingTransaction;
@@ -45,9 +45,9 @@ import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.on;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class DefaultEntryResolverTest {
+public class DefaultBatchEntryResolverTest {
 
-    private EntryResolver entryResolver;
+    private BatchEntryResolver batchEntryResolver;
     private List<FixedAsset> fixedAssets = new ArrayList<>();
 
     private final static Currency KES = Currency.getInstance("KES");
@@ -80,13 +80,13 @@ public class DefaultEntryResolverTest {
         when(accountResolver.getAcquisitionCreditAccount(chair)).thenReturn(sundryCreditors);
 
 
-        entryResolver = new DefaultEntryResolver(accountResolver);
+        batchEntryResolver = new DefaultBatchEntryResolver(accountResolver);
     }
 
     @Test
     public void numberOfEntriesGenerated() throws Exception {
 
-        List<AccountingEntry> entries = entryResolver.resolveAcquisitionEntries(fixedAssets);
+        List<AccountingEntry> entries = batchEntryResolver.resolveAcquisitionEntries(fixedAssets);
 
         // each asset is represented by an entry
         assertEquals(fixedAssets.size() * 2, entries.size());
@@ -95,7 +95,7 @@ public class DefaultEntryResolverTest {
     @Test
     public void entriesCanBePosted() throws Exception {
 
-        List<AccountingEntry> entries = entryResolver.resolveAcquisitionEntries(fixedAssets);
+        List<AccountingEntry> entries = batchEntryResolver.resolveAcquisitionEntries(fixedAssets);
 
         AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver",on(2018,2,21),Currency.getInstance("KES"));
 

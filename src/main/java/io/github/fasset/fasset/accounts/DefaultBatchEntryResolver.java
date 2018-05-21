@@ -35,18 +35,18 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements {@link EntryResolver} interface whose job really is to generate entries based on a list of actual
+ * Implements {@link BatchEntryResolver} interface whose job really is to generate entries based on a list of actual
  * {@code FixedAsset} items passed through the parameter in the main method.
  */
-@Component("entryResolver")
-public class DefaultEntryResolver implements EntryResolver {
+@Component("batchEntryResolver")
+public class DefaultBatchEntryResolver implements BatchEntryResolver {
 
-    private static final org.slf4j.Logger log = getLogger(DefaultEntryResolver.class);
+    private static final org.slf4j.Logger log = getLogger(DefaultBatchEntryResolver.class);
 
     private AccountResolver accountResolver;
 
     @Autowired
-    public DefaultEntryResolver(@Qualifier("accountResolver") AccountResolver accountResolver) {
+    public DefaultBatchEntryResolver(@Qualifier("accountResolver") AccountResolver accountResolver) {
         this.accountResolver = accountResolver;
     }
 
@@ -120,4 +120,19 @@ public class DefaultEntryResolver implements EntryResolver {
 
         return fixedAssetsAttributes;
     }
+
+    /**
+     * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter.
+     * The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract from
+     * client the logic of obtaining depreciation rates and values from configurations in the application
+     * @param fixedAssets Items to be depreciated
+     * @return {@code AccountingEntries} to post depreciation
+     */
+	@Override
+	public List<AccountingEntry> resolveDepreciationEntries(List<FixedAsset> fixedAssets) {
+		// TODO Auto-generated method stub
+		// TODO Implement tests for entry resolution
+		return null;
+	}
+
 }

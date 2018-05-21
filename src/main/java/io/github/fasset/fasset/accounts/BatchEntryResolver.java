@@ -29,10 +29,12 @@ import java.util.List;
  * provisions, as such we are only interest with the financial representation of assets in this application.
  * In accordance to the Account Proliferation policy version 1.0, each asset is represented by an entry to the
  * respective Asset account.
+ * Depreciation and acquisition could be done in bulk for sensitive things like disposal and revaluation it has
+ * been thought better to post as individual items which will warrant like another interface altogether
  *
  * @author edwin.njeru
  */
-public interface EntryResolver {
+public interface BatchEntryResolver {
 
     /**
      * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args.
@@ -43,5 +45,14 @@ public interface EntryResolver {
      * @return List containing Entry bookings for the fixedAssets passed in the parameter
      */
     List<AccountingEntry> resolveAcquisitionEntries(List<FixedAsset> fixedAssets);
+    
+    /**
+     * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter.
+     * The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract from
+     * client the logic of obtaining depreciation rates and values from configurations in the application
+     * @param fixedAssets Items to be depreciated
+     * @return {@code AccountingEntries} to post depreciation
+     */
+    List<AccountingEntry> resolveDepreciationEntries(List<FixedAsset> fixedAssets);
 
 }
