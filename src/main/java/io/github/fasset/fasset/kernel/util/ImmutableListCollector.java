@@ -17,6 +17,8 @@
  */
 package io.github.fasset.fasset.kernel.util;
 
+import org.eclipse.collections.impl.list.mutable.FastList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +31,13 @@ public class ImmutableListCollector {
 
     public static <t> Collector<t, List<t>, List<t>> toImmutableList() {
         return Collector.of(ArrayList::new, List::add, (left, right) -> {
+            left.addAll(right);
+            return left;
+        }, Collections::unmodifiableList, Collector.Characteristics.CONCURRENT);
+    }
+
+    public static <t> Collector<t, List<t>, List<t>> toImmutableFastList() {
+        return Collector.of(FastList::new, List::add, (left, right) -> {
             left.addAll(right);
             return left;
         }, Collections::unmodifiableList, Collector.Characteristics.CONCURRENT);

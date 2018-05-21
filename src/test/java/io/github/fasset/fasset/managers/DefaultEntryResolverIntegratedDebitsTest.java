@@ -17,120 +17,154 @@
  */
 package io.github.fasset.fasset.managers;
 
+import com.google.common.collect.ImmutableList;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.AccountingTransaction;
 import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
-import io.github.fasset.fasset.book.keeper.unit.money.HardCash;
-import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
-import io.github.fasset.fasset.book.keeper.util.UnableToPostException;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.managers.id.AccountIdConfigurationPropertiesService;
 import io.github.fasset.fasset.managers.id.AcquisitionCreditAccountIDResolver;
 import io.github.fasset.fasset.managers.id.AcquisitionDebitAccountIDResolver;
-import io.github.fasset.fasset.managers.id.CreditAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.MockingDetails;
-import org.mockito.Mockito;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Currency;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static io.github.fasset.fasset.book.keeper.balance.AccountBalance.newBalance;
+import static io.github.fasset.fasset.book.keeper.balance.AccountBalance.nil;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.book.keeper.unit.money.HardCash.shilling;
 import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.on;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class DefaultEntryResolverIntegratedDebitsTest {
 
-    private DefaultEntryResolver defaultEntryResolver;
+    private final static Currency KES = Currency.getInstance("KES");
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronics", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
     private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE & FITTINGS", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
 
-    private final static List<FixedAsset> fixedAssets = new ArrayList<>();
-
+    private static List<FixedAsset> fixedAssets = ImmutableList.of(radio, lenovo, chair);
+    private static List<AccountingEntry> entries;
+    private static AccountingTransaction assetAcquisition;
+    private static List<String> accountNames;
+    private static Map<String, AccountBalance> accountBalances;
+    private static Map<String, String> accountNumbers;
+    private static List<AccountBalance> sundryCreditorBalances;
+    private static List<String> sundryCreditorNumbers;
 
     @Before
     public void setUp() throws Exception {
 
-        defaultEntryResolver =
-            new DefaultEntryResolver(
-                new DefaultAccountResolver(
-                    new AcquisitionDebitAccountIDResolver(
-                        new AccountIdConfigurationPropertiesService("account-id-config")),
-                    new AcquisitionCreditAccountIDResolver(
-                        new AccountIdConfigurationPropertiesService("account-id-config"))));
+        DefaultEntryResolver defaultEntryResolver = new DefaultEntryResolver(
+            new DefaultAccountResolver(new AcquisitionDebitAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config")),
+                new AcquisitionCreditAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config"))));
 
-        fixedAssets.add(radio);
-        fixedAssets.add(lenovo);
-        fixedAssets.add(chair);
-    }
+        entries = defaultEntryResolver.resolveAcquisitionEntries(fixedAssets);
 
-    @Test
-    public void resolveAcquisitionEntries() throws ImmutableEntryException, UnableToPostException {
-
-        List<AccountingEntry> entries = defaultEntryResolver.resolveAcquisitionEntries(fixedAssets);
-
-        assertEquals(fixedAssets.size() * 2, entries.size());
-
-        AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver",on(2018,2,21),Currency.getInstance("KES"));
+        assetAcquisition = AccountingTransaction.create("Test posting entry resolver",on(2018,2,21),Currency.getInstance("KES"));
 
         entries.forEach(entry -> {
             try {
-                testPostingAssets.addEntry(entry);
+                assetAcquisition.addEntry(entry);
             } catch (MismatchedCurrencyException | ImmutableEntryException e) {
                 e.printStackTrace();
             }
         });
 
-        testPostingAssets.post();
+        assetAcquisition.post();
+
+        List<Account> accountsFromEntries =
+            IntStream.range(0, fixedAssets.size() * 2).mapToObj(i -> entries.get(i).getAccount()).collect(ImmutableListCollector.toImmutableList());
+
+        accountNames =
+            accountsFromEntries
+                .parallelStream()
+                .map(Account::getName)
+                .collect(ImmutableListCollector.toImmutableFastList());
+
+        accountBalances =
+            accountsFromEntries
+                .parallelStream()
+                .collect(
+                    Collectors
+                        .toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentSkipListMap::new));
+
+        accountNumbers =
+            accountsFromEntries
+            .parallelStream()
+            .collect(
+                Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentSkipListMap::new));
+
+        sundryCreditorBalances =
+            accountsFromEntries
+                .parallelStream()
+                .filter(i -> i.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
+                .map(account -> account.balance(on(2018,2,26)))
+                .collect(ImmutableListCollector.toImmutableFastList());
+
+        sundryCreditorNumbers =
+            accountsFromEntries
+            .parallelStream()
+            .filter(account -> account.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
+            .map(Account::getNumber)
+            .collect(ImmutableListCollector.toImmutableFastList());
+    }
+
+    @Test
+    public void numberOfEntriesGeneratedByEntryResolution() {
 
         // each asset is represented by an entry
         assertEquals(fixedAssets.size() * 2, entries.size());
+    }
 
-        // fetching accounts
-        List<Account> accountsFromEntries =
-            IntStream.range(0, fixedAssets.size() * 2 - 1)
-                .mapToObj(i -> entries.get(i).getAccount())
-                .collect(ImmutableListCollector.toImmutableList());
-
-        // check names
-        List<String> accountNames =
-            accountsFromEntries
-                .parallelStream()
-            .map(Account::getName)
-            .collect(ImmutableListCollector.toImmutableList());
+    @Test
+    public void namesOfAccountsGeneratedByEntryResolution() {
 
         assertTrue(accountNames.contains("ELECTRONICS"));
         assertTrue(accountNames.contains("FURNITURE & FITTINGS"));
         assertTrue(accountNames.contains("COMPUTERS"));
         assertTrue(accountNames.contains("SUNDRY CREDITORS ACCOUNT"));
+    }
 
-        // check balances
-        Map<String, AccountBalance> accountBalances =
-            accountsFromEntries
-                .parallelStream()
-                .collect(
-                    Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, Hashtable::new));
+    @Test
+    public void accountNumbersOfAccountsGeneratedByEntryResolution() {
 
-        assertEquals(AccountBalance.newBalance(HardCash.shilling(200), DEBIT), accountBalances.get("ELECTRONICS"));
-        assertEquals(AccountBalance.newBalance(HardCash.shilling(156), DEBIT), accountBalances.get("FURNITURE & FITTINGS"));
-        assertEquals(AccountBalance.newBalance(HardCash.shilling(5600), DEBIT), accountBalances.get("COMPUTERS"));
-        assertEquals(AccountBalance.newBalance(HardCash.shilling(5956), DEBIT), accountBalances.get("SUNDRY CREDITORS ACCOUNT"));
+        // Can't check "Sundry Creditors Account" since it has the same for different accounts
+        assertEquals("9870000150013", accountNumbers.get("COMPUTERS"));
+        assertEquals("0100000153015", accountNumbers.get("FURNITURE & FITTINGS"));
+        assertEquals("0010000151014", accountNumbers.get("ELECTRONICS"));
+    }
 
+    @Test
+    public void sundryCreditorsAccountNumbersGeneratedByEntryResolution() {
+
+        assertEquals(3, sundryCreditorNumbers.size());
+        assertTrue(sundryCreditorNumbers.contains("9870010051001"));
+        assertTrue(sundryCreditorNumbers.contains("0100010051001"));
+        assertTrue(sundryCreditorNumbers.contains("0010010051001"));
+    }
+
+    @Test
+    public void balancesOfAccountsGeneratedByEntryResolution() {
+
+        assertEquals(newBalance(shilling(200), DEBIT), accountBalances.get("ELECTRONICS"));
+        assertEquals(newBalance(shilling(156), DEBIT), accountBalances.get("FURNITURE & FITTINGS"));
+        assertEquals(newBalance(shilling(5600), DEBIT), accountBalances.get("COMPUTERS"));
+        assertEquals(newBalance(shilling(5956),CREDIT), nil(KES,CREDIT).add(sundryCreditorBalances));
     }
 }
