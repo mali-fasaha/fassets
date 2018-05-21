@@ -242,8 +242,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-envers</artifactId>
-            <version>${spring.data.envers.version}</version>
-        </dependency>
+            </dependency>
         <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
         <dependency>
             <groupId>javax.xml.bind</groupId>

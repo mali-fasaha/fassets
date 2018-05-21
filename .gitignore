@@ -17,6 +17,7 @@ local.properties
 .settings/
 .project
 .classpath
+.factorypath
 
 # Changelog plugin files#
 .okhttpcache/
