@@ -19,8 +19,8 @@ package io.github.fasset.fasset.accounts;
 
 import com.google.common.collect.ImmutableList;
 
-import io.github.fasset.fasset.accounts.DefaultAccountResolver;
-import io.github.fasset.fasset.accounts.DefaultBatchEntryResolver;
+import io.github.fasset.fasset.accounts.AcquisitionAccountResolver;
+import io.github.fasset.fasset.accounts.BatchAcquisitionEntryResolver;
 import io.github.fasset.fasset.accounts.id.AccountIdConfigurationPropertiesService;
 import io.github.fasset.fasset.accounts.id.AcquisitionCreditAccountIDResolver;
 import io.github.fasset.fasset.accounts.id.AcquisitionDebitAccountIDResolver;
@@ -73,11 +73,11 @@ public class DefaultEntryResolverIntegratedDebitsTest {
     @Before
     public void setUp() throws Exception {
 
-        DefaultBatchEntryResolver defaultBatchEntryResolver = new DefaultBatchEntryResolver(
-            new DefaultAccountResolver(new AcquisitionDebitAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config")),
+        BatchAcquisitionEntryResolver batchAcquisitionEntryResolver = new BatchAcquisitionEntryResolver(
+            new AcquisitionAccountResolver(new AcquisitionDebitAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config")),
                 new AcquisitionCreditAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config"))));
 
-        entries = defaultBatchEntryResolver.resolveAcquisitionEntries(fixedAssets);
+        entries = batchAcquisitionEntryResolver.resolveEntries(fixedAssets);
 
         assetAcquisition = AccountingTransaction.create("Test posting entry resolver",on(2018,2,21),Currency.getInstance("KES"));
 

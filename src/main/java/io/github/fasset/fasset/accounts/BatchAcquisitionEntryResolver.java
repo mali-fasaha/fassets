@@ -39,14 +39,14 @@ import static org.slf4j.LoggerFactory.getLogger;
  * {@code FixedAsset} items passed through the parameter in the main method.
  */
 @Component("batchEntryResolver")
-public class DefaultBatchEntryResolver implements BatchEntryResolver {
+public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
-    private static final org.slf4j.Logger log = getLogger(DefaultBatchEntryResolver.class);
+    private static final org.slf4j.Logger log = getLogger(BatchAcquisitionEntryResolver.class);
 
     private AccountResolver accountResolver;
 
     @Autowired
-    public DefaultBatchEntryResolver(@Qualifier("accountResolver") AccountResolver accountResolver) {
+    public BatchAcquisitionEntryResolver(@Qualifier("accountResolver") AccountResolver accountResolver) {
         this.accountResolver = accountResolver;
     }
 
@@ -57,7 +57,7 @@ public class DefaultBatchEntryResolver implements BatchEntryResolver {
      * @return List containing Entry bookings for the fixedAssets passed in the parameter
      */
     @Override
-    public List<AccountingEntry> resolveAcquisitionEntries(List<FixedAsset> fixedAssets) {
+    public List<AccountingEntry> resolveEntries(List<FixedAsset> fixedAssets) {
 
         log.debug("Resolving entries for : {} fixed assets", fixedAssets.size());
 
@@ -74,7 +74,7 @@ public class DefaultBatchEntryResolver implements BatchEntryResolver {
     /**
      * Generates the Entry which is to be made to the {@code sundryAccount} in respect of this fixedAsset
      *
-     * @param fixedAsset for which we recognize acquisition settlement
+     * @param fixedAsset for which we recognise acquisition settlement
      * @return AccountingEntry into the {@code sundryAccount}
      */
     private AccountingEntry getSundryCreditorEntry(FixedAsset fixedAsset) {
@@ -82,7 +82,7 @@ public class DefaultBatchEntryResolver implements BatchEntryResolver {
         log.debug("Resolving credit account for acquisition of asset: {}", fixedAsset.getAssetDescription());
 
         AccountingEntry sundryEntry =
-            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.getAcquisitionCreditAccount(fixedAsset), fixedAsset.getAssetDescription(), CREDIT,
+            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.resolveCreditAccount(fixedAsset), fixedAsset.getAssetDescription(), CREDIT,
                 HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         sundryEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));
@@ -102,7 +102,7 @@ public class DefaultBatchEntryResolver implements BatchEntryResolver {
         log.debug("Resolving debit account for acquisition of asset: {}", fixedAsset.getAssetDescription());
 
         AccountingEntry fixedAssetEntry =
-            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.getAcquisitionDebitAccount(fixedAsset), fixedAsset.getAssetDescription(), DEBIT,
+            new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.resolveDebitAccount(fixedAsset), fixedAsset.getAssetDescription(), DEBIT,
                 HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         fixedAssetEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));
@@ -120,19 +120,4 @@ public class DefaultBatchEntryResolver implements BatchEntryResolver {
 
         return fixedAssetsAttributes;
     }
-
-    /**
-     * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter.
-     * The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract from
-     * client the logic of obtaining depreciation rates and values from configurations in the application
-     * @param fixedAssets Items to be depreciated
-     * @return {@code AccountingEntries} to post depreciation
-     */
-	@Override
-	public List<AccountingEntry> resolveDepreciationEntries(List<FixedAsset> fixedAssets) {
-		// TODO Auto-generated method stub
-		// TODO Implement tests for entry resolution
-		return null;
-	}
-
 }

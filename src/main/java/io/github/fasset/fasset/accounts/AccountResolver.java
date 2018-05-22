@@ -26,20 +26,22 @@ import io.github.fasset.fasset.model.FixedAsset;
 public interface AccountResolver {
 
     /**
-     * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
+     * Generates appropriate Account for the asset passed in the parameter, when we are posting simple transactions
+     * like acquisition or depreciation
      *
      * @param fixedAsset for which we seek an appropriate Account
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset
      */
-    Account getAcquisitionDebitAccount(FixedAsset fixedAsset);
+    Account resolveDebitAccount(FixedAsset fixedAsset);
 
     /**
-     * Generates appropriate credit Account for the asset passed in the parameter, when we are posting Acquisition
+     * Generates appropriate credit Account for the asset passed in the parameter, when we are posting simple transactions
+     * like acquisition or depreciation
      *
      * @param fixedAsset for which we seek an appropriate Account
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset
      */
-    Account getAcquisitionCreditAccount(FixedAsset fixedAsset);
+    Account resolveCreditAccount(FixedAsset fixedAsset);
 }

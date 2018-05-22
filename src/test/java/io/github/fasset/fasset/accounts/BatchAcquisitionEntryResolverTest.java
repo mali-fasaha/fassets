@@ -18,7 +18,7 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.accounts.AccountResolver;
-import io.github.fasset.fasset.accounts.DefaultBatchEntryResolver;
+import io.github.fasset.fasset.accounts.BatchAcquisitionEntryResolver;
 import io.github.fasset.fasset.accounts.BatchEntryResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
@@ -45,7 +45,7 @@ import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.on;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class DefaultBatchEntryResolverTest {
+public class BatchAcquisitionEntryResolverTest {
 
     private BatchEntryResolver batchEntryResolver;
     private List<FixedAsset> fixedAssets = new ArrayList<>();
@@ -72,21 +72,21 @@ public class DefaultBatchEntryResolverTest {
         fixedAssets.add(chair);
 
         AccountResolver accountResolver = Mockito.mock(AccountResolver.class);
-        when(accountResolver.getAcquisitionDebitAccount(radio)).thenReturn(electronics);
-        when(accountResolver.getAcquisitionDebitAccount(lenovo)).thenReturn(computers);
-        when(accountResolver.getAcquisitionDebitAccount(chair)).thenReturn(furniture);
-        when(accountResolver.getAcquisitionCreditAccount(radio)).thenReturn(sundryCreditors);
-        when(accountResolver.getAcquisitionCreditAccount(lenovo)).thenReturn(sundryCreditors);
-        when(accountResolver.getAcquisitionCreditAccount(chair)).thenReturn(sundryCreditors);
+        when(accountResolver.resolveDebitAccount(radio)).thenReturn(electronics);
+        when(accountResolver.resolveDebitAccount(lenovo)).thenReturn(computers);
+        when(accountResolver.resolveDebitAccount(chair)).thenReturn(furniture);
+        when(accountResolver.resolveCreditAccount(radio)).thenReturn(sundryCreditors);
+        when(accountResolver.resolveCreditAccount(lenovo)).thenReturn(sundryCreditors);
+        when(accountResolver.resolveCreditAccount(chair)).thenReturn(sundryCreditors);
 
 
-        batchEntryResolver = new DefaultBatchEntryResolver(accountResolver);
+        batchEntryResolver = new BatchAcquisitionEntryResolver(accountResolver);
     }
 
     @Test
     public void numberOfEntriesGenerated() throws Exception {
 
-        List<AccountingEntry> entries = batchEntryResolver.resolveAcquisitionEntries(fixedAssets);
+        List<AccountingEntry> entries = batchEntryResolver.resolveEntries(fixedAssets);
 
         // each asset is represented by an entry
         assertEquals(fixedAssets.size() * 2, entries.size());
@@ -95,7 +95,7 @@ public class DefaultBatchEntryResolverTest {
     @Test
     public void entriesCanBePosted() throws Exception {
 
-        List<AccountingEntry> entries = batchEntryResolver.resolveAcquisitionEntries(fixedAssets);
+        List<AccountingEntry> entries = batchEntryResolver.resolveEntries(fixedAssets);
 
         AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver",on(2018,2,21),Currency.getInstance("KES"));
 

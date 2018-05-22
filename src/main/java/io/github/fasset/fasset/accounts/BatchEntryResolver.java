@@ -40,19 +40,12 @@ public interface BatchEntryResolver {
      * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args.
      * The method creates entries for both {@code DEBIT} and {@code CREDIT} side. In this case SundryCreditors
      * account is credited and an Asset account is DEBITED with the full purchase cost of the asset.
+     * When an account is being depreciated this method creates postings for {@code DEBIT} in the depreciation
+     * account and {@code CREDIT} in the accumulated depreciation account
      *
      * @param fixedAssets Collection of {@code FixedAsset} items from which we are to generate entries
      * @return List containing Entry bookings for the fixedAssets passed in the parameter
      */
-    List<AccountingEntry> resolveAcquisitionEntries(List<FixedAsset> fixedAssets);
+    List<AccountingEntry> resolveEntries(List<FixedAsset> fixedAssets);
     
-    /**
-     * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter.
-     * The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract from
-     * client the logic of obtaining depreciation rates and values from configurations in the application
-     * @param fixedAssets Items to be depreciated
-     * @return {@code AccountingEntries} to post depreciation
-     */
-    List<AccountingEntry> resolveDepreciationEntries(List<FixedAsset> fixedAssets);
-
 }

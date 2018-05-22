@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.accounts.DefaultAccountResolver;
+import io.github.fasset.fasset.accounts.AcquisitionAccountResolver;
 import io.github.fasset.fasset.accounts.id.CreditAccountIDResolver;
 import io.github.fasset.fasset.accounts.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.book.keeper.Account;
@@ -38,9 +38,9 @@ import static io.github.fasset.fasset.book.keeper.AccountAttribute.SERVICE_OUTLE
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class DefaultAccountResolverTest {
+public class AcquisitionAccountResolverTest {
 
-    private DefaultAccountResolver defaultAccountResolver;
+    private AcquisitionAccountResolver acquisitionAccountResolver;
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronics", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "Computers", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
@@ -66,7 +66,7 @@ public class DefaultAccountResolverTest {
         when(creditAccountIDResolver.resolveGeneralLedgerName(lenovo)).thenReturn("COMPUTERS");
         when(creditAccountIDResolver.resolveGeneralLedgerName(radio)).thenReturn("ELECTRONICS");
 
-        defaultAccountResolver = new DefaultAccountResolver(debitAccountIDResolver, creditAccountIDResolver);
+        acquisitionAccountResolver = new AcquisitionAccountResolver(debitAccountIDResolver, creditAccountIDResolver);
 
         when(debitAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("Computers");
         when(debitAccountIDResolver.resolveContraAccountId(lenovo)).thenReturn("Accumulated Depreciation on Computers");
@@ -86,14 +86,14 @@ public class DefaultAccountResolverTest {
     @Test
     public void getAcquisitionDebitAccount() throws UnEnteredDetailsException {
 
-        Account computers = defaultAccountResolver.getAcquisitionDebitAccount(lenovo);
-        Account sundryCreditors = defaultAccountResolver.getAcquisitionCreditAccount(lenovo);
+        Account computers = acquisitionAccountResolver.resolveDebitAccount(lenovo);
+        Account sundryCreditors = acquisitionAccountResolver.resolveCreditAccount(lenovo);
 
-        Account electronics = defaultAccountResolver.getAcquisitionDebitAccount(radio);
-        Account sundryCreditors1 = defaultAccountResolver.getAcquisitionCreditAccount(radio);
+        Account electronics = acquisitionAccountResolver.resolveDebitAccount(radio);
+        Account sundryCreditors1 = acquisitionAccountResolver.resolveCreditAccount(radio);
 
-        Account furniture = defaultAccountResolver.getAcquisitionDebitAccount(chair);
-        Account sundryCreditors2 = defaultAccountResolver.getAcquisitionCreditAccount(chair);
+        Account furniture = acquisitionAccountResolver.resolveDebitAccount(chair);
+        Account sundryCreditors2 = acquisitionAccountResolver.resolveCreditAccount(chair);
 
 
         assertNotEquals(computers, sundryCreditors);
@@ -113,8 +113,8 @@ public class DefaultAccountResolverTest {
     @Test
     public void getAcquisitionCreditAccount() throws UnEnteredDetailsException {
 
-        Account computers = defaultAccountResolver.getAcquisitionDebitAccount(lenovo);
-        Account sundryCreditors = defaultAccountResolver.getAcquisitionCreditAccount(lenovo);
+        Account computers = acquisitionAccountResolver.resolveDebitAccount(lenovo);
+        Account sundryCreditors = acquisitionAccountResolver.resolveCreditAccount(lenovo);
 
         assertNotEquals(sundryCreditors, computers);
         assertEquals("Liability", sundryCreditors.getAttribute(ACCOUNT_TYPE));

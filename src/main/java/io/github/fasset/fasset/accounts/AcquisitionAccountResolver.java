@@ -48,16 +48,16 @@ import static org.slf4j.LoggerFactory.getLogger;
  * The Object must lookup whether the account exists before generating a new Account for the fixedAsset. Which bring a new problem,
  * the resolution of the opening date. Will it be pegged to the purchase date of the asset
  */
-@Component("accountResolver")
-public class DefaultAccountResolver implements AccountResolver {
+@Component("acquisitionAccountResolver")
+public class AcquisitionAccountResolver implements AccountResolver {
 
-    private static final org.slf4j.Logger log = getLogger(DefaultAccountResolver.class);
+    private static final org.slf4j.Logger log = getLogger(AcquisitionAccountResolver.class);
 
     private DebitAccountIDResolver debitAccountIDResolver;
     private CreditAccountIDResolver creditAccountIDResolver;
 
     @Autowired
-    public DefaultAccountResolver(@Qualifier("debitAccountIDResolver") DebitAccountIDResolver debitAccountIDResolver, CreditAccountIDResolver creditAccountIDResolver) {
+    public AcquisitionAccountResolver(@Qualifier("debitAccountIDResolver") DebitAccountIDResolver debitAccountIDResolver, CreditAccountIDResolver creditAccountIDResolver) {
         this.debitAccountIDResolver = debitAccountIDResolver;
         this.creditAccountIDResolver = creditAccountIDResolver;
     }
@@ -69,7 +69,7 @@ public class DefaultAccountResolver implements AccountResolver {
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset
      */
-    public Account getAcquisitionDebitAccount(FixedAsset fixedAsset) {
+    public Account resolveDebitAccount(FixedAsset fixedAsset) {
 
         log.debug("Getting acquisition debit account for asset : {}", fixedAsset.getAssetDescription());
 
@@ -94,7 +94,7 @@ public class DefaultAccountResolver implements AccountResolver {
      * @return Account appropriate for the recording of transaction for the parameter
      * fixedAsset
      */
-    public Account getAcquisitionCreditAccount(FixedAsset fixedAsset) {
+    public Account resolveCreditAccount(FixedAsset fixedAsset) {
 
         //TODO implement acquisitionCreditAccount for credits
 
