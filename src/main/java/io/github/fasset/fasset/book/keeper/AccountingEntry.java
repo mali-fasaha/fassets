@@ -105,7 +105,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
      * @throws UnEnteredDetailsException When an attribute is enquired from the AccountingEntry before it has been added
      *                                   into the AccountingEntry
      */
-    public String getAttribute(EntryAttribute entryAttribute) throws UnEnteredDetailsException {
+    public String getAttribute(String entryAttribute) throws UnEnteredDetailsException {
 
         if (!this.entryAttributes.containsKey(entryAttribute)) {
             throw new UnEnteredDetailsException(String.format("Exception: %s has not been added to entry : %s", entryAttribute.toString(), toString()));
@@ -125,7 +125,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
      * @return {@link AccountSide} to which this AccountingEntry is aggregating the
      * Account balance
      */
-    AccountSide getAccountSide() {
+    public AccountSide getAccountSide() {
         return accountSide;
     }
 
