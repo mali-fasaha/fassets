@@ -19,8 +19,6 @@ package io.github.fasset.fasset.accounts;
 
 import com.google.common.collect.ImmutableList;
 
-import io.github.fasset.fasset.accounts.AcquisitionAccountResolver;
-import io.github.fasset.fasset.accounts.BatchAcquisitionEntryResolver;
 import io.github.fasset.fasset.accounts.id.AccountIdConfigurationPropertiesService;
 import io.github.fasset.fasset.accounts.id.AcquisitionCreditAccountIDResolver;
 import io.github.fasset.fasset.accounts.id.AcquisitionDebitAccountIDResolver;
@@ -48,8 +46,8 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountBalance.newBala
 import static io.github.fasset.fasset.book.keeper.balance.AccountBalance.nil;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
-import static io.github.fasset.fasset.book.keeper.unit.money.HardCash.shilling;
 import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.on;
+import static io.github.ghacupha.cash.HardCash.shilling;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

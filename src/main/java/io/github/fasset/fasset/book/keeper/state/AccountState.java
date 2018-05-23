@@ -19,7 +19,7 @@ package io.github.fasset.fasset.book.keeper.state;
 
 import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
-import io.github.fasset.fasset.book.keeper.unit.money.Cash;
+import io.github.ghacupha.cash.Cash;
 
 /**
  * The Account could either be in {@link AccountSide#CREDIT} or {@link AccountSide#DEBIT}

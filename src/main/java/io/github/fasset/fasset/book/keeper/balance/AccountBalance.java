@@ -17,14 +17,13 @@
  */
 package io.github.fasset.fasset.book.keeper.balance;
 
-import io.github.fasset.fasset.book.keeper.unit.money.Cash;
-import io.github.fasset.fasset.book.keeper.unit.money.HardCash;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
+import io.github.ghacupha.cash.Cash;
+import io.github.ghacupha.cash.HardCash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Currency;
 
 /**

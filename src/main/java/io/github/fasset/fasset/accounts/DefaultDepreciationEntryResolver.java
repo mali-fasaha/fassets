@@ -8,7 +8,7 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationAlgorithm;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationPeriod;
-import io.github.fasset.fasset.book.keeper.unit.money.Cash;
+import io.github.ghacupha.cash.Cash;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

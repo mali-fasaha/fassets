@@ -19,11 +19,11 @@ package io.github.fasset.fasset.book.keeper;
 
 import io.github.fasset.fasset.book.Transaction;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
-import io.github.fasset.fasset.book.keeper.unit.money.Cash;
 import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnableToPostException;
+import io.github.ghacupha.cash.Cash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

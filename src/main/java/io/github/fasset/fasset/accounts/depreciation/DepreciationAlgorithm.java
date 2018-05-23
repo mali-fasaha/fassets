@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.accounts.depreciation;
 
-import io.github.fasset.fasset.book.keeper.unit.money.Cash;
 import io.github.fasset.fasset.model.FixedAsset;
+import io.github.ghacupha.cash.Cash;
 
 public interface DepreciationAlgorithm {
 

@@ -17,18 +17,15 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.accounts.AccountResolver;
-import io.github.fasset.fasset.accounts.BatchAcquisitionEntryResolver;
-import io.github.fasset.fasset.accounts.BatchEntryResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.AccountingTransaction;
 import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
-import io.github.fasset.fasset.book.keeper.unit.money.HardCash;
 import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.model.FixedAsset;
+import io.github.ghacupha.cash.HardCash;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +39,7 @@ import java.util.List;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.on;
+import static io.github.ghacupha.cash.HardCash.shilling;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
@@ -112,9 +110,9 @@ public class BatchAcquisitionEntryResolverTest {
 
         // each asset is represented by an entry
         assertEquals(fixedAssets.size() * 2, entries.size());
-        assertEquals(new AccountBalance(HardCash.shilling(200),DEBIT), electronics.balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(HardCash.shilling(5600),DEBIT), computers.balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(HardCash.shilling(156),DEBIT), furniture.balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(HardCash.shilling(5956),CREDIT), sundryCreditors.balance(on(2018,2,21)));
+        assertEquals(new AccountBalance(shilling(200),DEBIT), electronics.balance(on(2018,2,21)));
+        assertEquals(new AccountBalance(shilling(5600),DEBIT), computers.balance(on(2018,2,21)));
+        assertEquals(new AccountBalance(shilling(156),DEBIT), furniture.balance(on(2018,2,21)));
+        assertEquals(new AccountBalance(shilling(5956),CREDIT), sundryCreditors.balance(on(2018,2,21)));
     }
 }

@@ -17,9 +17,10 @@
  */
 package io.github.fasset.fasset.book.keeper.util;
 
-import io.github.fasset.fasset.book.keeper.unit.money.Cash;
-import io.github.fasset.fasset.book.keeper.unit.money.ReadableCash;
-import io.github.fasset.fasset.book.keeper.unit.money.ReadableHardCash;
+
+import io.github.ghacupha.cash.Cash;
+import io.github.ghacupha.cash.ReadableCash;
+import io.github.ghacupha.cash.ReadableHardCash;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

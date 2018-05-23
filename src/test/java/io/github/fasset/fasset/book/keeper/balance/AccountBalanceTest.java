@@ -26,7 +26,7 @@ import java.util.List;
 import static io.github.fasset.fasset.book.keeper.balance.AccountBalance.newBalance;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
-import static io.github.fasset.fasset.book.keeper.unit.money.HardCash.shilling;
+import static io.github.ghacupha.cash.HardCash.shilling;
 import static org.junit.Assert.*;
 
 public class AccountBalanceTest {
