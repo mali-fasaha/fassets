@@ -67,7 +67,7 @@ public class DefaultBatchDepreciationEntryResolverTest {
         AccountResolver accountResolver = Mockito.mock(AccountResolver.class);
         DepreciationAlgorithm depreciationAlgorithm = Mockito.mock(DepreciationAlgorithm.class);
 
-        when(depreciationAlgorithm.name()).thenReturn("Mock Depreciaiton Algorithm");
+        when(depreciationAlgorithm.name()).thenReturn("Mock Depreciation Algorithm");
 
         batchEntryResolver = new DefaultDepreciationEntryResolver(accountResolver, depreciationAlgorithm);
 
@@ -88,14 +88,14 @@ public class DefaultBatchDepreciationEntryResolverTest {
     public void depreciationAlgorithmSignature() throws Exception {
 
         assertTrue(entries.stream()
-                .filter(i -> i.getAccountSide() == DEBIT)
-                .map(i -> {
+                .filter(entry -> entry.getAccountSide() == DEBIT)
+                .map(debitEntry -> {
                     try {
-                        return i.getAttribute("DEPRECIATION_ALGORITHM");
+                        return debitEntry.getAttribute("DEPRECIATION_ALGORITHM");
                     } catch (UnEnteredDetailsException e) {
                         e.printStackTrace();
                     }
                 return "";})
-            .allMatch(i -> i.equalsIgnoreCase("Mock Depreciaiton Algorithm")));
+            .allMatch(att -> att.equalsIgnoreCase("Mock Depreciation Algorithm")));
     }
 }
