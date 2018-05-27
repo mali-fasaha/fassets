@@ -48,7 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureWebMvc
-public class AssetListingControllerTest {
+public class AssetListingControllerTestIT {
 
     private MockMvc mockMvc;
 

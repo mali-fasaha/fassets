@@ -15,21 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset;
+package io.github.fasset.fasset.repository;
 
+import io.github.fasset.fasset.model.FixedAsset;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class FassetsTest {
+import static org.junit.Assert.*;
 
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class FixedAssetRepositoryIT {
+
+
+    @Qualifier("fixedAssetRepository")
+    @Autowired
+    private FixedAssetRepository fixedAssetRepository;
 
     @Test
-    public void contextLoads(){
+    public void fixedAssetRepositoryWorks() throws Exception {
 
-        // For this to run the entire ApplicationContext has to load correctly
+        assertNotNull(fixedAssetRepository.save(new FixedAsset()));
     }
 }

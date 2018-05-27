@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.repository;
 
-import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
+import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,16 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class ServiceOutletBriefRepositoryTest {
+public class MonthlyAssetDepreciationRepositoryIT {
 
 
-    @Qualifier("serviceOutletBriefRepository")
+    @Qualifier("monthlyAssetDepreciationRepository")
     @Autowired
-    private ServiceOutletBriefRepository serviceOutletBriefRepository;
+    private MonthlyAssetDepreciationRepository depreciationRepository;
 
     @Test
-    public void serviceOutletBriefRepositoryWorks() throws Exception {
+    public void monthlyAssetDepreciationWorks() throws Exception {
 
-        assertNotNull(serviceOutletBriefRepository.save(new ServiceOutletBrief()));
+        assertNotNull(depreciationRepository.save(new MonthlyAssetDepreciation()));
     }
 }

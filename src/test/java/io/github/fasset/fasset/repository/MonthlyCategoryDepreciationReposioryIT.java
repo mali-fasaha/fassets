@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.repository;
 
-import io.github.fasset.fasset.model.files.FileUpload;
+import io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,16 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class FileUploadRepositoryTest {
+public class MonthlyCategoryDepreciationReposioryIT {
 
 
-    @Qualifier("fileUploadRepository")
+    @Qualifier("monthlyCategoryDepreciationRepository")
     @Autowired
-    private FileUploadRepository fileUploadRepository;
+    private MonthlyCategoryDepreciationReposiory depreciationReposiory;
 
     @Test
-    public void fileUploadRepositoryWorks() throws Exception {
+    public void monthlyCategoryDepreciationRepositoryWorks() throws Exception {
 
-        assertNotNull(fileUploadRepository.save(new FileUpload()));
+        assertNotNull(depreciationReposiory.save(new MonthlyCategoryDepreciation()));
     }
 }

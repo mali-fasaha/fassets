@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest// WebMvcTest could be more practical if I did not need the entityManagerFactory
-public class LandingPageControllerTest {
+public class LandingPageControllerTestIT {
 
     private MockMvc mockMvc;
     @Qualifier("landingPageController")

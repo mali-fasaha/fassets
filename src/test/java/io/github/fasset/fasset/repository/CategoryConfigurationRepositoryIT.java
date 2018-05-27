@@ -17,8 +17,7 @@
  */
 package io.github.fasset.fasset.repository;
 
-import io.github.fasset.fasset.model.Depreciation;
-import org.hibernate.envers.Audited;
+import io.github.fasset.fasset.model.CategoryConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +29,16 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class DepreciationRepositoryTest {
+public class CategoryConfigurationRepositoryIT {
 
-    @Qualifier("depreciationRepository")
+
+    @Qualifier("categoryConfigurationRepository")
     @Autowired
-    private DepreciationRepository depreciationRepository;
+    private CategoryConfigurationRepository categoryConfigurationRepository;
 
     @Test
-    public void depreciationRepositoryWorks() throws Exception {
+    public void categoryConfigurationRepositoryWorks() throws Exception {
 
-        assertNotNull(depreciationRepository.save(new Depreciation()));
+        assertNotNull(categoryConfigurationRepository.save(new CategoryConfiguration()));
     }
 }

@@ -44,7 +44,7 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class AccountServiceTest {
+public class AccountServiceTestIT {
 
     private static final Currency KES = Currency.getInstance("KES");
 

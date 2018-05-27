@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.repository;
 
-import io.github.fasset.fasset.model.CategoryConfiguration;
+import io.github.fasset.fasset.model.files.FileUpload;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,16 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class CategoryConfigurationRepositoryTest {
+public class FileUploadRepositoryIT {
 
 
-    @Qualifier("categoryConfigurationRepository")
+    @Qualifier("fileUploadRepository")
     @Autowired
-    private CategoryConfigurationRepository categoryConfigurationRepository;
+    private FileUploadRepository fileUploadRepository;
 
     @Test
-    public void categoryConfigurationRepositoryWorks() throws Exception {
+    public void fileUploadRepositoryWorks() throws Exception {
 
-        assertNotNull(categoryConfigurationRepository.save(new CategoryConfiguration()));
+        assertNotNull(fileUploadRepository.save(new FileUpload()));
     }
 }

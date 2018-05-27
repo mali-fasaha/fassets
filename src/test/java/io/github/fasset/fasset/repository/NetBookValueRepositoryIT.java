@@ -29,7 +29,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class NetBookValueRepositoryTest {
+public class NetBookValueRepositoryIT {
 
 
     @Qualifier("netBookValueRepository")

@@ -17,7 +17,10 @@
  */
 package io.github.fasset.fasset.repository;
 
-import io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation;
+import io.github.fasset.fasset.config.MoneyProperties;
+import io.github.fasset.fasset.model.brief.CategoryBrief;
+import org.javamoney.moneta.Money;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +32,35 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class MonthlyCategoryDepreciationReposioryTest {
+public class CategoryBriefRepositoryIT {
 
-
-    @Qualifier("monthlyCategoryDepreciationRepository")
+    CategoryBrief categoryBrief;
+    @Qualifier("categoryBriefRepository")
     @Autowired
-    private MonthlyCategoryDepreciationReposiory depreciationReposiory;
+    private CategoryBriefRepository categoryBriefRepository;
+    @Autowired
+    private MoneyProperties moneyProperties;
+
+
+    @Before
+    public void setUp() throws Exception {
+
+        categoryBrief = new CategoryBrief();
+        categoryBrief.setAccruedDepreciation(Money.of(560,moneyProperties.getDefaultCurrency()));
+        categoryBrief.setDesignation("COMPUTERS");
+        categoryBrief.setPoll(5);
+        categoryBrief.setPurchaseCost(Money.of(1000,moneyProperties.getDefaultCurrency()));
+        categoryBrief.setNetBookValue(Money.of(440,moneyProperties.getDefaultCurrency()));
+    }
 
     @Test
-    public void monthlyCategoryDepreciationRepositoryWorks() throws Exception {
+    public void categoryRepositoryWorks() throws Exception {
 
-        assertNotNull(depreciationReposiory.save(new MonthlyCategoryDepreciation()));
+        assertNotNull(categoryBriefRepository.save(categoryBrief));
+
+        /*CategoryBrief savedCategoryBrief = categoryBriefRepository.findDistinctByDesignation("COMPUTERS");
+
+        //assertEquals(1000,categoryBrief.getPurchaseCost(),0.0);
+        assertNotNull(savedCategoryBrief.getId());*/
     }
 }

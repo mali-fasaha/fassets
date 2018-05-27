@@ -15,30 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.repository;
+package io.github.fasset;
 
-import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
-@DataJpaTest
-public class MonthlyAssetDepreciationRepositoryTest {
+@SpringBootTest
+public class FassetsTestIT {
 
-
-    @Qualifier("monthlyAssetDepreciationRepository")
-    @Autowired
-    private MonthlyAssetDepreciationRepository depreciationRepository;
 
     @Test
-    public void monthlyAssetDepreciationWorks() throws Exception {
+    public void contextLoads(){
 
-        assertNotNull(depreciationRepository.save(new MonthlyAssetDepreciation()));
+        // For this to run the entire ApplicationContext has to load correctly
     }
 }

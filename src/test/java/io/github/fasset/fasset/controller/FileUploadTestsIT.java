@@ -48,7 +48,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-public class FileUploadTests {
+public class FileUploadTestsIT {
 
     private MockMvc mockMvc;
     @Qualifier("fileUploadsController")

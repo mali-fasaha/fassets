@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class AccruedDepreciationRepositoryTest {
+public class AccruedDepreciationRepositoryTestIT {
 
 
 

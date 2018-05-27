@@ -44,7 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureWebMvc
-public class MonthlyDepreciationControllerTest {
+public class MonthlyDepreciationControllerTestIT {
 
     private MockMvc mockMvc;
     @Qualifier("monthlyDepreciationController")

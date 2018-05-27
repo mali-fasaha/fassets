@@ -47,7 +47,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureWebMvc
-public class BriefControllerTest {
+public class BriefControllerTestIT {
 
     private MockMvc mockMvc;
     @Qualifier("briefController")

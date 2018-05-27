@@ -67,7 +67,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         TransactionalTestExecutionListener.class })
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FixedAssetsControllerTest {
+public class FixedAssetsControllerTestIT {
 
 
 

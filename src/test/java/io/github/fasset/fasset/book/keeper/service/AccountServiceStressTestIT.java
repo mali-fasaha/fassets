@@ -44,9 +44,9 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class AccountServiceStressTest {
+public class AccountServiceStressTestIT {
 
-    private static final Logger log = LoggerFactory.getLogger(AccountServiceStressTest.class);
+    private static final Logger log = LoggerFactory.getLogger(AccountServiceStressTestIT.class);
 
     private static final Currency KES = Currency.getInstance("KES");
 
