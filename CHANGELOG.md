@@ -4,6 +4,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Sorted unit test checkstyle issues**
+
+
+[b02e160cf44ba1e](https://github.com/ghacupha/fassets/commit/b02e160cf44ba1e) Edwin Njeru *2018-05-28 14:28:13*
+
 **Segregated IT tests from unit tests**
 
 

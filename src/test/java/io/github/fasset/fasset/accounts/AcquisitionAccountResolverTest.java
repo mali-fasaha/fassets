@@ -68,7 +68,7 @@ public class AcquisitionAccountResolverTest {
 
         acquisitionAccountResolver = new AcquisitionAccountResolver(debitAccountIDResolver, creditAccountIDResolver);
 
-        when(debitAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("Computers");
+        when(debitAccountIDResolver.resolveCategoryId(lenovo)).thenReturn("COMPUTERS");
         when(debitAccountIDResolver.resolveContraAccountId(lenovo)).thenReturn("Accumulated Depreciation on Computers");
         when(debitAccountIDResolver.resolveGeneralLedgerName(lenovo)).thenReturn("1025648");
 
@@ -83,7 +83,7 @@ public class AcquisitionAccountResolverTest {
 
     }
 
-    //@Test
+    @Test
     public void getAcquisitionDebitAccount() throws UnEnteredDetailsException {
 
         Account computers = acquisitionAccountResolver.resolveDebitAccount(lenovo);
