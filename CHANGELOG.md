@@ -4,6 +4,71 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Segregated IT tests from unit tests**
+
+
+[aceacb801f3e970](https://github.com/ghacupha/fassets/commit/aceacb801f3e970) ghacupha *2018-05-27 09:45:26*
+
+**Adopted the Cash library to replace internal representation**
+
+
+[0da481326411845](https://github.com/ghacupha/fassets/commit/0da481326411845) ghacupha *2018-05-23 16:16:14*
+
+**further test amendments to the DefaultBatchDepreciationEntryResolverTest to enhance readability**
+
+
+[3d5fa82746edc54](https://github.com/ghacupha/fassets/commit/3d5fa82746edc54) ghacupha *2018-05-23 06:41:26*
+
+**Made additional framework structure and additional data structures to support depreciation accounting**
+
+
+[c068636f1da5e5c](https://github.com/ghacupha/fassets/commit/c068636f1da5e5c) ghacupha *2018-05-22 11:59:11*
+
+**Working on BatchDepreciationEntryResolver framework**
+
+
+[100dd52aa05f4bb](https://github.com/ghacupha/fassets/commit/100dd52aa05f4bb) Edwin Njeru *2018-05-22 08:28:15*
+
+**rename managers package to 'accounts'**
+
+
+[7f579f7f125c94f](https://github.com/ghacupha/fassets/commit/7f579f7f125c94f) Edwin Njeru *2018-05-21 18:47:30*
+
+**Created  the DefaultBatchDepreciationEntryResolverTest to cover depreciation entries resolution**
+
+
+[00485a895493e4d](https://github.com/ghacupha/fassets/commit/00485a895493e4d) Edwin Njeru *2018-05-21 18:43:11*
+
+**Created  the DefaultBatchDepreciationEntryResolverTest to cover depreciation entries resolution**
+
+
+[66caea55a3a979c](https://github.com/ghacupha/fassets/commit/66caea55a3a979c) Edwin Njeru *2018-05-21 18:42:50*
+
+**rename managers package to 'accounts'**
+
+
+[3f7173449dc4b24](https://github.com/ghacupha/fassets/commit/3f7173449dc4b24) Edwin Njeru *2018-05-21 18:15:04*
+
+**rename managers package to 'accounts'**
+
+
+[ff2c75f822e4b90](https://github.com/ghacupha/fassets/commit/ff2c75f822e4b90) Edwin Njeru *2018-05-21 18:12:20*
+
+**rename managers package to 'accounts'**
+
+
+[fe8c5026c6203a8](https://github.com/ghacupha/fassets/commit/fe8c5026c6203a8) Edwin Njeru *2018-05-21 18:11:36*
+
+**Removed version declaration for EntityManager which is a spring-boot managed dependency**
+
+
+[b8895a2c211c22d](https://github.com/ghacupha/fassets/commit/b8895a2c211c22d) Edwin Njeru *2018-05-21 17:34:04*
+
+**added the pom checkstyle:check command to mvn verify**
+
+
+[07714b7642dfff3](https://github.com/ghacupha/fassets/commit/07714b7642dfff3) ghacupha *2018-05-21 08:23:40*
+
 **Enhanced the DefaultEntryResolverDebitsTest to integrate DebitEntriesResolver and the CreditEntriesResolver in creating accounts during assets acqusition. Also the ImmutableListCollector was enahanced with a FastList implementation using the method #toImmutableFastList**
 
 

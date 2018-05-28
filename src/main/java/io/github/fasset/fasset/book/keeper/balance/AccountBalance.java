@@ -1,17 +1,17 @@
 /**
  * fassets - Project for light-weight tracking of fixed assets
  * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -44,11 +44,21 @@ public class AccountBalance {
         this.accountSide = accountSide;
     }
 
-    public AccountBalance add(Collection<AccountBalance> args){
+    public static AccountBalance nil(Currency currency, AccountSide accountSide) {
+
+        return newBalance(HardCash.of(0, currency), accountSide);
+    }
+
+    public static AccountBalance newBalance(Cash amount, AccountSide accountSide) {
+
+        return new AccountBalance(amount, accountSide);
+    }
+
+    public AccountBalance add(Collection<AccountBalance> args) {
 
         final AccountBalance[] thisBalance = {newBalance(this.amount, this.accountSide)};
 
-        args.forEach( i -> {
+        args.forEach(i -> {
             try {
                 thisBalance[0] = thisBalance[0].add(i);
             } catch (MismatchedCurrencyException e) {
@@ -90,22 +100,12 @@ public class AccountBalance {
 
     private void checkCurrency(AccountBalance arg) throws MismatchedCurrencyException {
 
-        if( !arg.getAmount().getCurrency().equals(this.amount.getCurrency())){
-            String message = String.format("Cannot add balance containing mismatched currency. Expected : %s but found : %s",
-                this.amount.getCurrency().getCurrencyCode(), arg.getAmount().getCurrency().getCurrencyCode());
+        if (!arg.getAmount().getCurrency().equals(this.amount.getCurrency())) {
+            String message = String.format("Cannot add balance containing mismatched currency. Expected : %s but found : %s", this.amount.getCurrency().getCurrencyCode(),
+                arg.getAmount().getCurrency().getCurrencyCode());
 
             throw new MismatchedCurrencyException(message);
         }
-    }
-
-    public static AccountBalance nil(Currency currency, AccountSide accountSide){
-
-        return newBalance(HardCash.of(0, currency), accountSide);
-    }
-
-    public static AccountBalance newBalance(Cash amount, AccountSide accountSide) {
-
-        return new AccountBalance(amount, accountSide);
     }
 
     public Cash getAmount() {

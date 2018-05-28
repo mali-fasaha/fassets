@@ -1,17 +1,17 @@
 /**
  * fassets - Project for light-weight tracking of fixed assets
  * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
- *
+ * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,20 +20,19 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationAlgorithm;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationPeriod;
+import io.github.fasset.fasset.book.keeper.AccountingEntry;
+import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
+import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.cash.Cash;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import io.github.fasset.fasset.book.keeper.AccountingEntry;
-import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
-import io.github.fasset.fasset.model.FixedAsset;
+import java.util.List;
 
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.ofLocal;
@@ -87,11 +86,7 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
 
     private AccountingEntry debitEntry(FixedAsset asset, DepreciationPeriod period) {
 
-        AccountingEntry debit =
-            new AccountingEntry(
-                ofLocal(asset.getPurchaseDate()),
-                accountResolver.resolveDebitAccount(asset),
-                narration(asset), DEBIT, depreciation(asset, period));
+        AccountingEntry debit = new AccountingEntry(ofLocal(asset.getPurchaseDate()), accountResolver.resolveDebitAccount(asset), narration(asset), DEBIT, depreciation(asset, period));
 
         updateAttributes(debit, asset);
 
@@ -113,7 +108,7 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
         return String.format("depreciation for %s", asset.getAssetDescription());
     }
 
-    private AccountingEntry creditEntry(FixedAsset asset,  DepreciationPeriod period) {
+    private AccountingEntry creditEntry(FixedAsset asset, DepreciationPeriod period) {
         AccountingEntry credit = new AccountingEntry();
         return credit;
     }
