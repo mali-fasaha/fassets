@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './http/in-memory-data.service';
+import { AssetSearchComponent } from './asset-search/asset-search.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InMemoryDataService } from './http/in-memory-data.service';
     AssetComponent,
     AssetDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    AssetSearchComponent
   ],
   imports: [
     BrowserModule,

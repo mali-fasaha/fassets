@@ -74,6 +74,20 @@ export class AssetService {
     );
   }
 
+  /**GET: assets whose name contains search term */
+  searchAssets(term: string): Observable<Asset[]>{
+      if( !term.trim()){
+        // return empty array
+        return of([]);
+      }
+      return this.http.get<Asset[]>(`${this.assetsUrl}/?name=${term}`)
+      .pipe(
+        tap(() => this.log(`found assets matching "${term}`)),
+        catchError(this.handleError<Asset[]>('searchAssets', []))
+      );
+
+  }
+
   private handleError<T>(operation = 'operation', result?: T){
 
     return (error: any): Observable<T> => {
