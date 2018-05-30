@@ -1,24 +1,33 @@
 <div>
-  <label>Asset name:
-    <input #assetName />
-  </label>
 
-  <!-- (click) will pass input value to add then clear the input -->
-  <button (click)="add(assetName.value); assetName.value=''">
-    add
-  </button>
-</div>
+  <div>
+    <label>Asset name:
+      <input #assetName />
+    </label>
 
-<div class="list-group">
-  <h2>Assets List</h2>
-  <ul >
-    <li class="list-group-item" *ngFor="let asset of assets">
-        <span class="list-group-item list-group-item-action">
-      <a  routerLink="/detail/{{asset.id}}">
-        <span class="badge">{{asset.id}}</span> {{asset.name}}
-      </a>
-      <button title="delete asset" (click)="delete(asset)">x</button>
-    </span>
-    </li>
-  </ul>
+    <!-- (click) will pass input value to add then clear the input -->
+    <button (click)="add(assetName.value); assetName.value=''">
+      add
+    </button>
+  </div>
+
+  <div>
+    <h2>Assets List</h2>
+    <div class="col-6 list-group">
+      <ul>
+        <li *ngFor="let asset of assets" class="row tab-content list-group-item">
+          <span class="row col-9">
+            <a class="list-group-item list-group-item-action">
+              <span routerLink="/detail/{{asset.id}}">
+                <span>
+                  <span class="badge badge-primary badge-pill">{{asset.id}}</span> {{asset.name}}
+                </span>
+              </span>
+              <button class="col-3" title="delete asset" (click)="delete(asset)">x</button>
+            </a>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
