@@ -61,7 +61,7 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
  * {@link AccountSide}. The AccountSide remains volatile, inorder to represent the changing nature of the account as the
  * {@link AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe
  * default {@link AccountSide} of the {@link Account}.
- *
+ * <p>
  * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not
  * be obviously evident by the usual use of words like "synchronized" et al. In fact synchronization would probably just
  * slow us down. Instead what has been done is that the {@link Collection} of {@link AccountingEntry} items, which is the whole

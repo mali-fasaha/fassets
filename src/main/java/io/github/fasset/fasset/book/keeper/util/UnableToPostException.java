@@ -18,18 +18,12 @@
 package io.github.fasset.fasset.book.keeper.util;
 
 
-import io.github.fasset.fasset.book.keeper.AccountingEntry;
-
 /**
- * This exception is thrown when the {@link io.github.fasset.fasset.book.Transaction} client
- * tries to post a transaction when the sum of the {@link AccountingEntry} items does not
- * evaluate to zero, or when the caller of {@link io.github.fasset.fasset.book.Transaction#post()}
- * does not first ensure that {@link io.github.fasset.fasset.book.keeper.unit.money.Cash} amounts of
- * {@link io.github.fasset.fasset.book.keeper.balance.AccountSide#CREDIT}
- * {@link AccountingEntry} items
- * are not equivalent to the {@link io.github.fasset.fasset.book.keeper.unit.money.Cash} amounts of
- * {@link io.github.fasset.fasset.book.keeper.balance.AccountSide#CREDIT}
- * {@link AccountingEntry} items
+ * This exception is thrown when the {@code Transaction} client
+ * tries to post a transaction when the sum of the {@code AccountingEntry} items does not
+ * evaluate to zero, or when the caller of {@code Transaction#post()}
+ * does not first ensure that {@code Cash} amounts of {@code CREDIT} {@code AccountingEntry} items
+ * are not equivalent to the {@code Cash} amounts of {@code CREDIT} {@code AccountingEntry} items
  *
  * @author edwin.njeru
  */

@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.accounts.id;
 
 import io.github.fasset.fasset.kernel.util.PropertiesUtils;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
@@ -27,6 +28,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Implements the {@code AccountIdConfigurationService} using prestated values in a properties which are managed in
  * an internal map
  */
+@Component("accountIdConfigurationPropertiesService")
 public class AccountIdConfigurationPropertiesService implements AccountIdConfigurationService {
 
     //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-id-config");

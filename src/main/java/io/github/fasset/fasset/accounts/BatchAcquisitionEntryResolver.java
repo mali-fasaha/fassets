@@ -46,7 +46,7 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
     private AccountResolver accountResolver;
 
     @Autowired
-    public BatchAcquisitionEntryResolver(@Qualifier("accountResolver") AccountResolver accountResolver) {
+    public BatchAcquisitionEntryResolver(@Qualifier("acquisitionAccountResolver") AccountResolver accountResolver) {
         this.accountResolver = accountResolver;
     }
 

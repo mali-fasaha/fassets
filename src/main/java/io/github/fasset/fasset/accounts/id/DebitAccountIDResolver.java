@@ -30,6 +30,7 @@ public interface DebitAccountIDResolver {
 
     /**
      * Resolve the name of a Contra account for a main account used for tracking the asset
+     *
      * @param fixedAsset The asset for which we seek an account to track financially
      * @return The name of the contra account
      */
@@ -40,6 +41,7 @@ public interface DebitAccountIDResolver {
      * fixed assets. The general ledger is taken to be one hierarchy higher than an account. This is
      * being done by the accountIDResolver as the general-ledger id has something to do with the id
      * of the account itself
+     *
      * @param fixedAsset For which we need a general ledger
      * @return The ID of the general ledger
      */
@@ -49,6 +51,7 @@ public interface DebitAccountIDResolver {
      * The category is of a lower hierarchy than an account yet for the account to be representative
      * of fixed assets comprehensively this out to be mandated as part of the account id or at least
      * as a field in an account that can be tracked
+     *
      * @param fixedAsset For which we need category id
      * @return The id of the category
      */

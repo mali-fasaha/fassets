@@ -19,7 +19,7 @@ package io.github.fasset.fasset.accounts.id;
 
 /**
  * This service reads data from a configuration properties file and maintains a map which is used to provide
- *
+ * <p>
  * properties required to implement the account nomenclature and hierarchy policy version 1.0
  */
 public interface AccountIdConfigurationService {
@@ -54,13 +54,11 @@ public interface AccountIdConfigurationService {
     String getCurrencyCode(String currencyCode);
 
     /**
-     *
      * @return String GL Code to be used for credit transactions
      */
     String getAcquisitionCreditGlCode();
 
     /**
-     *
      * @return String GL Id to be used for credit transactions
      */
     String getAcquisitionCreditGlId();

@@ -67,11 +67,11 @@ public interface Transaction {
      * The add method adds entries to the transaction provided the transaction has not already
      * been posted
      *
-     * @param accountSide     to which the entry is being posted
-     * @param amount          {@link Cash} amount being posted to the journal
-     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
-     * @param narration       a brief narration of the entry
-     * @param date            posting date of the entry
+     * @param accountSide to which the entry is being posted
+     * @param amount      {@link Cash} amount being posted to the journal
+     * @param account     {@link Account} into which the {@link AccountingEntry} is being added
+     * @param narration   a brief narration of the entry
+     * @param date        posting date of the entry
      * @throws ImmutableEntryException     when you addEntry to a posted transaction
      * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
      *                                     do not match
@@ -82,6 +82,8 @@ public interface Transaction {
      * Experimental method for adding a fully formed {@code AccountingEntry}
      *
      * @param entry Fully formed Entry for addition to this
+     * @throws MismatchedCurrencyException when the entry's currency differs from the Transaction's currency
+     * @throws ImmutableEntryException     when the Transaction is already posted at the time the entry is being added
      */
     void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException;
 

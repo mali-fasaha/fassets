@@ -19,6 +19,9 @@ package io.github.fasset.fasset.accounts.id;
 
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -30,15 +33,16 @@ import static org.slf4j.LoggerFactory.getLogger;
  * master that requires more than one account, the effect of which could hardly be justified by the effort.
  *
  * @author edwin.njeru
- *
  */
+@Component("creditAccountIDResolver")
 public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolver {
 
     private static final Logger log = getLogger(AcquisitionCreditAccountIDResolver.class);
 
     private AccountIdConfigurationService idConfigurationService;
 
-    public AcquisitionCreditAccountIDResolver(AccountIdConfigurationService idConfigurationService) {
+    @Autowired
+    public AcquisitionCreditAccountIDResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdConfigurationService idConfigurationService) {
         this.idConfigurationService = idConfigurationService;
     }
 

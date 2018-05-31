@@ -18,17 +18,26 @@
 package io.github.fasset.fasset.accounts.id;
 
 import io.github.fasset.fasset.model.FixedAsset;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.slf4j.LoggerFactory.getLogger;
 
+/**
+ * Resolves names of the accounts for posting acquisitions
+ */
+@Component("debitAccountIDResolver")
 public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccountIDResolver implements DebitAccountIDResolver {
 
-    private static final org.slf4j.Logger log = getLogger(AcquisitionDebitAccountIDResolver.class);
+    private static final Logger log = getLogger(AcquisitionDebitAccountIDResolver.class);
 
     private AccountIdConfigurationService idConfigurationService;
 
-    public AcquisitionDebitAccountIDResolver(AccountIdConfigurationService idConfigurationService) {
+    @Autowired
+    public AcquisitionDebitAccountIDResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdConfigurationService idConfigurationService) {
         this.idConfigurationService = idConfigurationService;
     }
 
@@ -38,6 +47,7 @@ public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccoun
      * <p>2. Currency</p>
      * <p>3. General Ledger</p>
      * <p>4. Account's unique ID #</p>
+     *
      * @param fixedAsset Item for which we need an account number
      * @return The account number to track the fixed asset as String
      */

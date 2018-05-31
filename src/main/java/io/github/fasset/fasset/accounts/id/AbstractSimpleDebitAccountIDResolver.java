@@ -49,7 +49,7 @@ public abstract class AbstractSimpleDebitAccountIDResolver implements DebitAccou
     /**
      * The category is of a lower hierarchy than an account yet for the account to be representative
      * of fixed assets comprehensively this out to be mandated as part of the account id or at least
-     * as a field in an account that can be trackedsudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+     * as a field in an account that can be tracked
      *
      * @param fixedAsset For which we need category id
      * @return The id of the category

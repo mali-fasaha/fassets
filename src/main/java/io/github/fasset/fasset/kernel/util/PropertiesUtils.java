@@ -43,6 +43,7 @@ public class PropertiesUtils {
      * path from the resources folder.
      * For instance the "application.properties" in the resources folder will look like this: "application".
      * Yes, leave out the ".properties" bit
+     *
      * @param fileName Filename containing property definitions
      * @return Properties read from the properties file
      */

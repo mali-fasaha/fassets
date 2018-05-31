@@ -4,6 +4,51 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**removed boostrap and fixed styling issues, using vanilla css**
+
+
+[d891c6394496e4f](https://github.com/ghacupha/fassets/commit/d891c6394496e4f) Edwin Njeru *2018-05-30 17:37:15*
+
+**modified asset list component to activate both the delete button and the asset id link**
+
+
+[d17755c1de15904](https://github.com/ghacupha/fassets/commit/d17755c1de15904) Edwin Njeru *2018-05-30 17:00:07*
+
+**setup basic styling for the assets list**
+
+
+[96168ebb04c6377](https://github.com/ghacupha/fassets/commit/96168ebb04c6377) Edwin Njeru *2018-05-30 16:25:10*
+
+**amended wrong method call to the clear method in the messageService**
+
+
+[7269a14faee19ae](https://github.com/ghacupha/fassets/commit/7269a14faee19ae) Edwin Njeru *2018-05-30 15:08:47*
+
+**added search feature to the client**
+
+
+[628514084b62c2b](https://github.com/ghacupha/fassets/commit/628514084b62c2b) Edwin Njeru *2018-05-30 15:06:04*
+
+**added application client shell**
+
+
+[43d1a7496247beb](https://github.com/ghacupha/fassets/commit/43d1a7496247beb) Edwin Njeru *2018-05-29 16:40:02*
+
+**amended client installation**
+
+
+[5b492638b6c3673](https://github.com/ghacupha/fassets/commit/5b492638b6c3673) Edwin Njeru *2018-05-29 16:38:45*
+
+**created application client shell**
+
+
+[c7306fc16275373](https://github.com/ghacupha/fassets/commit/c7306fc16275373) Edwin Njeru *2018-05-29 16:23:54*
+
+**Fixed a failing test in the AcquisitionAccountResolverTest**
+
+
+[39d7dd175769fd8](https://github.com/ghacupha/fassets/commit/39d7dd175769fd8) Edwin Njeru *2018-05-28 15:59:03*
+
 **Sorted unit test checkstyle issues**
 
 

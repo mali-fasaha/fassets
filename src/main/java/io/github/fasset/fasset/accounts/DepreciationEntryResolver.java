@@ -37,7 +37,7 @@ public interface DepreciationEntryResolver {
      * client the logic of obtaining depreciation rates and values from configurations in the application
      *
      * @param fixedAssets Items to be depreciated
-     * @param period when the depreciation Entries are effective
+     * @param period      when the depreciation Entries are effective
      * @return {@code AccountingEntries} to post depreciation
      */
     List<AccountingEntry> resolveEntries(List<FixedAsset> fixedAssets, DepreciationPeriod period);

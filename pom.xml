@@ -780,6 +780,7 @@
                         <exclude>**/.mvn/**</exclude>
                         <exclude>**/.okhttpcache/**</exclude>
                         <exclude>**/target/**</exclude>
+                        <exclude>**/client/**</exclude>
                         <exclude>**/temp-uploads/**</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>

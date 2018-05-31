@@ -27,7 +27,6 @@ import org.springframework.stereotype.Component;
  * in the register at revaluation.
  *
  * @author edwin.njeru
- *
  */
 @Component("depreciationAccountResolver")
 public class DepreciationAccountResolver implements AccountResolver {
