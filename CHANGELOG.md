@@ -4,6 +4,16 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Moved the client to resources to avoid it's monitoring by checkstyle**
+
+
+[fed44995e6b5693](https://github.com/ghacupha/fassets/commit/fed44995e6b5693) Edwin Njeru *2018-05-31 15:56:15*
+
+**Fixed issues causing failure of context**
+
+
+[4266aa3836bb2c4](https://github.com/ghacupha/fassets/commit/4266aa3836bb2c4) Edwin Njeru *2018-05-31 15:55:12*
+
 **removed boostrap and fixed styling issues, using vanilla css**
 
 
