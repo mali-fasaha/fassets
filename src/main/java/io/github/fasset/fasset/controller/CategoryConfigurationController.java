@@ -72,10 +72,10 @@ public class CategoryConfigurationController {
         return "redirect:/categories";
     }
 
-    @GetMapping(value = "/categories/{id}/edit")
+    @GetMapping(value = "/categories/{nomenclature}/edit")
     public String handleEditGet(@PathVariable int id, Model model) {
 
-        log.info("Editing categaory id : {}", id);
+        log.info("Editing categaory nomenclature : {}", id);
 
         model.addAttribute("categories", categoryConfigurationService.getAllCategoryConfigurations());
 
@@ -84,7 +84,7 @@ public class CategoryConfigurationController {
         return "forms/category";
     }
 
-    /*@RequestMapping(value="/category/{id}/edit", method = RequestMethod.POST)
+    /*@RequestMapping(value="/category/{nomenclature}/edit", method = RequestMethod.POST)
     public String handleEdit(@Valid @ModelAttribute CategoryConfiguration category, BindingResult bindingResult){
 
         categoryConfigurationService.updateCategoryConfiguration(category);

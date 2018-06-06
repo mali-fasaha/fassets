@@ -123,7 +123,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setSolId(String solId) {
 
-        log.debug("Setting the sol id for depreciationId : {}, as ={}", getId(), solId);
+        log.debug("Setting the sol nomenclature for depreciationId : {}, as ={}", getId(), solId);
         this.solId = solId;
         return this;
     }

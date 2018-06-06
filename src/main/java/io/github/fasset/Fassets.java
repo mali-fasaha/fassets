@@ -80,7 +80,6 @@ public class Fassets {
         executor.setCorePoolSize(4);
         executor.setMaxPoolSize(4);
         executor.setQueueCapacity(500);
-        executor.setThreadNamePrefix("FSTS:");
         executor.initialize();
         return executor;
     }

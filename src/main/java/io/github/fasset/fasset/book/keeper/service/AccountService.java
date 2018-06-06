@@ -43,7 +43,7 @@ public interface AccountService {
     void saveAccounts(Collection<Account> persistentAccounts);
 
     /**
-     * Returns the Account instance whose id is given in the parameter
+     * Returns the Account instance whose nomenclature is given in the parameter
      *
      * @param accountId Of the account whose instance we are fetching from the repo
      * @return Requested Account instance

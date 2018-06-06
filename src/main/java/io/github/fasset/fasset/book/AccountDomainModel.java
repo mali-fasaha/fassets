@@ -47,7 +47,7 @@ public class AccountDomainModel<U> {
             @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "nomenclature", updatable = false, nullable = false)
     private int id;
 
     @Version

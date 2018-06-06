@@ -43,7 +43,7 @@ public interface FixedAssetService {
     List<FixedAsset> fetchAllExistingAssets();
 
     /**
-     * Extracts the fixed asset when the id is known
+     * Extracts the fixed asset when the nomenclature is known
      *
      * @param id Id of the fixedAsset item to be extracted
      * @return FixedAsset item whose Id was found in the database

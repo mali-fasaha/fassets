@@ -26,7 +26,9 @@ import java.time.LocalDate;
 import java.util.Currency;
 import java.util.List;
 
+import io.github.fasset.fasset.accounts.depreciation.DefaultDepreciationEntryResolver;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationAlgorithm;
+import io.github.fasset.fasset.accounts.depreciation.DepreciationEntryResolver;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationPeriod;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;

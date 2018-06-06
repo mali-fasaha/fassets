@@ -74,9 +74,9 @@ public class BriefController {
         return serviceOutletBriefService.fetchAllServiceOutletBriefs().parallelStream().map(ServiceOutletBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
-    @GetMapping("/briefs/serviceOutlets/data/{id}")
+    @GetMapping("/briefs/serviceOutlets/data/{nomenclature}")
     @ResponseBody
-    public ServiceOutletBriefResponseDto getServiceOutletBriefGivenId(@PathVariable("id") int id) {
+    public ServiceOutletBriefResponseDto getServiceOutletBriefGivenId(@PathVariable("nomenclature") int id) {
 
         return new ServiceOutletBriefResponseDto(serviceOutletBriefService.fetchServiceOutletBriefGivenId(id));
     }
@@ -88,9 +88,9 @@ public class BriefController {
         return categoryBriefService.fetchAllCategoryBriefs().parallelStream().map(CategoryBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
-    @GetMapping("/briefs/categories/data/{id}")
+    @GetMapping("/briefs/categories/data/{nomenclature}")
     @ResponseBody
-    public CategoryBriefResponseDto getCategoryGivenId(@PathVariable("id") int id) {
+    public CategoryBriefResponseDto getCategoryGivenId(@PathVariable("nomenclature") int id) {
 
         return new CategoryBriefResponseDto(categoryBriefService.fetchCategoryBriefGivenId(id));
     }

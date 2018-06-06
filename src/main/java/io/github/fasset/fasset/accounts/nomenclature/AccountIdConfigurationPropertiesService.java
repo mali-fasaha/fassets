@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.accounts.id;
+package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.kernel.util.PropertiesUtils;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Component("accountIdConfigurationPropertiesService")
 public class AccountIdConfigurationPropertiesService implements AccountIdConfigurationService {
 
-    //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-id-config");
+    //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
     private static final org.slf4j.Logger log = getLogger(AccountIdConfigurationPropertiesService.class);
 
     // Using external configuration
@@ -39,28 +39,28 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
 
     public AccountIdConfigurationPropertiesService(String propertiesFile) {
 
-        accountConfigProperties = PropertiesUtils.fetchProperties("account-id-config");
+        accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
 
     }
 
     /**
-     * Using the provided category of an asset this method returns a specific id code for the
+     * Using the provided category of an asset this method returns a specific nomenclature code for the
      * category. This is the code segment that typically follows the general ledger code in the
      * account number sequence
      *
-     * @param category The category of the asset for which we need a category id
-     * @return The category id to be added to the account number sequence after the general ledger code
+     * @param category The category of the asset for which we need a category nomenclature
+     * @return The category nomenclature to be added to the account number sequence after the general ledger code
      */
     @Override
     public String acquisitionGlId(String category) {
 
-        log.debug("Fetching gl id for category: {}", category);
+        log.debug("Fetching gl nomenclature for category: {}", category);
 
-        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.id"));
+        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.nomenclature"));
     }
 
     /**
-     * Using the category of an asset this method returns the generic id code for the category, which in
+     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
      * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
      * code in the account number sequence
      *
@@ -84,7 +84,7 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
      * the unique code to be used in the account number sequence after the service outlet code
      *
      * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
-     * @return Account number sequence code to follow the service outlet id
+     * @return Account number sequence code to follow the service outlet nomenclature
      */
     @Override
     public String getCurrencyCode(String currencyCode) {

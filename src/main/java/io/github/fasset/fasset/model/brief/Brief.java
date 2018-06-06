@@ -33,7 +33,7 @@ public interface Brief {
     void addPoll();
 
     /**
-     * @return The id or name of the Brief item
+     * @return The nomenclature or name of the Brief item
      */
     String getDesignation();
 

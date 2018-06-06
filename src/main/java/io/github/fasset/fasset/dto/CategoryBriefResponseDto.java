@@ -127,7 +127,7 @@ public class CategoryBriefResponseDto {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("id", id).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue)
+        return MoreObjects.toStringHelper(this).add("nomenclature", id).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue)
             .add("accruedDepreciation", accruedDepreciation).add("poll", poll).toString();
     }
 }

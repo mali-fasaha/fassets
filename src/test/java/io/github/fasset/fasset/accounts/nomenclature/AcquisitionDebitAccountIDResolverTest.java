@@ -15,11 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.accounts.id;
+package io.github.fasset.fasset.accounts.nomenclature;
 
-import io.github.fasset.fasset.accounts.id.AccountIdConfigurationService;
-import io.github.fasset.fasset.accounts.id.AcquisitionDebitAccountIDResolver;
-import io.github.fasset.fasset.accounts.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;

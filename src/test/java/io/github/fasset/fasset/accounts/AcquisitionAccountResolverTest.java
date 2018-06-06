@@ -17,8 +17,8 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.accounts.id.CreditAccountIDResolver;
-import io.github.fasset.fasset.accounts.id.DebitAccountIDResolver;
+import io.github.fasset.fasset.accounts.nomenclature.CreditAccountIDResolver;
+import io.github.fasset.fasset.accounts.nomenclature.DebitAccountIDResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.model.FixedAsset;

@@ -75,10 +75,10 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     }
 
     /**
-     * Extracts the fixed asset when the id is known
+     * Extracts the fixed asset when the nomenclature is known
      *
      * @param id of fixedAsset entity to be fetched from database
-     * @return FixedAsset entity whose id was found in the database
+     * @return FixedAsset entity whose nomenclature was found in the database
      */
     @Override
     @Cacheable("fixedAssetsFetchedByIds")

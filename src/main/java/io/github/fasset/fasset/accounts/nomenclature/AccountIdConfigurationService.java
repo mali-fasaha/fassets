@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.accounts.id;
+package io.github.fasset.fasset.accounts.nomenclature;
 
 /**
  * This service reads data from a configuration properties file and maintains a map which is used to provide
@@ -25,17 +25,17 @@ package io.github.fasset.fasset.accounts.id;
 public interface AccountIdConfigurationService {
 
     /**
-     * Using the provided category of an asset this method returns a specific id code for the
+     * Using the provided category of an asset this method returns a specific nomenclature code for the
      * category. This is the code segment that typically follows the general ledger code in the
      * account number sequence
      *
-     * @param category The category of the asset for which we need a category id
-     * @return The category id to be added to the account number sequence after the general ledger code
+     * @param category The category of the asset for which we need a category nomenclature
+     * @return The category nomenclature to be added to the account number sequence after the general ledger code
      */
     String acquisitionGlId(String category);
 
     /**
-     * Using the category of an asset this method returns the generic id code for the category, which in
+     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
      * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
      * code in the account number sequence
      *
@@ -49,7 +49,7 @@ public interface AccountIdConfigurationService {
      * the unique code to be used in the account number sequence after the service outlet code
      *
      * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
-     * @return Account number sequence code to follow the service outlet id
+     * @return Account number sequence code to follow the service outlet nomenclature
      */
     String getCurrencyCode(String currencyCode);
 

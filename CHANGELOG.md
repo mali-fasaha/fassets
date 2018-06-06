@@ -4,6 +4,11 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Fixed broken timepoint dependency links in the tests**
+
+
+[93af300fc35da86](https://github.com/ghacupha/fassets/commit/93af300fc35da86) Edwin Njeru *2018-06-06 12:20:09*
+
 **changed license header definition from javadoc to block comment**
 
 
@@ -44,7 +49,7 @@ Changelog for fassets implementation by ghacupha
 
 [d891c6394496e4f](https://github.com/ghacupha/fassets/commit/d891c6394496e4f) Edwin Njeru *2018-05-30 17:37:15*
 
-**modified asset list component to activate both the delete button and the asset id link**
+**modified asset list component to activate both the delete button and the asset nomenclature link**
 
 
 [d17755c1de15904](https://github.com/ghacupha/fassets/commit/d17755c1de15904) Edwin Njeru *2018-05-30 17:00:07*

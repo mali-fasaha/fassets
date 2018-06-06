@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.accounts.id;
+package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
@@ -101,7 +101,7 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
     /**
      * Resolves the name of the appropriate general ledger that out to be used in this case for the
      * fixed assets. The general ledger is taken to be one hierarchy higher than an account. This is
-     * being done by the accountIDResolver as the general-ledger id has something to do with the id
+     * being done by the accountIDResolver as the general-ledger nomenclature has something to do with the nomenclature
      * of the account itself
      *
      * @param fixedAsset For which we need a general ledger
@@ -115,11 +115,11 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
 
     /**
      * The category is of a lower hierarchy than an account yet for the account to be representative
-     * of fixed assets comprehensively this out to be mandated as part of the account id or at least
+     * of fixed assets comprehensively this out to be mandated as part of the account nomenclature or at least
      * as a field in an account that can be tracked
      *
-     * @param fixedAsset For which we need category id
-     * @return The id of the category
+     * @param fixedAsset For which we need category nomenclature
+     * @return The nomenclature of the category
      */
     @Override
     public String resolveCategoryId(FixedAsset fixedAsset) {

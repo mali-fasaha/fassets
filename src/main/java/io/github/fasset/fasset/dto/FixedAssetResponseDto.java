@@ -164,7 +164,7 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
 
     @Override
     public String toString() {
-        return "FixedAssetResponseDto{" + "id=" + id + ", solId='" + solId + '\'' + ", barcode='" + barcode + '\'' + ", assetDescription='" + assetDescription + '\'' + ", purchaseDate=" +
+        return "FixedAssetResponseDto{" + "nomenclature=" + id + ", solId='" + solId + '\'' + ", barcode='" + barcode + '\'' + ", assetDescription='" + assetDescription + '\'' + ", purchaseDate=" +
             purchaseDate + ", category='" + category + '\'' + ", purchaseCost=" + purchaseCost + ", netBookValue=" + netBookValue + '}';
     }
 

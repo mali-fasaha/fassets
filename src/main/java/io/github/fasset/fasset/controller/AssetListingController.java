@@ -75,16 +75,16 @@ public class AssetListingController {
         return fixedAssets.parallelStream().map(FixedAssetResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
-    @GetMapping("/listing/assets/data/{id}")
+    @GetMapping("/listing/assets/data/{nomenclature}")
     @ResponseBody
-    public FixedAssetResponseDto getMonthGivenId(@PathVariable("id") int id) {
+    public FixedAssetResponseDto getMonthGivenId(@PathVariable("nomenclature") int id) {
 
         FixedAsset asset = null;
 
         try {
             asset = fixedAssetService.fetchAssetGivenId(id);
         } catch (Throwable e) {
-            String message = String.format("Exception encountered when extracting asset with id# : %s", id);
+            String message = String.format("Exception encountered when extracting asset with nomenclature# : %s", id);
 
             throw new DataRetrievalFromControllerException(message, e);
         }

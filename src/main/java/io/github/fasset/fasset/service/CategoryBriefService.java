@@ -33,7 +33,7 @@ public interface CategoryBriefService {
 
     /**
      * @param id of the CategoryBrief
-     * @return {@link CategoryBrief} of the id given as param
+     * @return {@link CategoryBrief} of the nomenclature given as param
      */
     CategoryBrief fetchCategoryBriefGivenId(int id);
 

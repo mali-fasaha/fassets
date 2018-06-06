@@ -37,7 +37,7 @@ import java.util.Comparator;
 @Audited
 public class ServiceOutletBrief extends DomainModel<String> implements Comparable<ServiceOutletBrief>, Brief {
 
-    /* id of the service outlet*/
+    /* nomenclature of the service outlet*/
     private String designation;
 
     /* total costs of all items in this category*/

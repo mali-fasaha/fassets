@@ -15,19 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.accounts.id;
+package io.github.fasset.fasset.accounts.nomenclature;
 
 import org.junit.Test;
-
-import io.github.fasset.fasset.accounts.id.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.accounts.id.AccountIdConfigurationService;
 
 import static org.junit.Assert.assertEquals;
 
 public class AccountIdConfigurationPropertiesServiceTest {
 
 
-    private AccountIdConfigurationService configurationService = new AccountIdConfigurationPropertiesService("account-id-config");
+    private AccountIdConfigurationService configurationService = new AccountIdConfigurationPropertiesService("account-nomenclature-config");
 
     @Test
     public void acquisitionGlId() {

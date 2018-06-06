@@ -49,7 +49,7 @@ public class DomainModel<U> {
             @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "nomenclature", updatable = false, nullable = false)
     private int id;
 
     @Version
@@ -115,7 +115,7 @@ public class DomainModel<U> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DomainModel{");
-        sb.append("id=").append(id);
+        sb.append("nomenclature=").append(id);
         sb.append(", version=").append(version);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", modifiedAt=").append(modifiedAt);

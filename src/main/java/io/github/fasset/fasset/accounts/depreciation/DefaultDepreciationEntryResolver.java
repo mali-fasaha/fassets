@@ -15,14 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-/**
- *
- */
-package io.github.fasset.fasset.accounts;
+package io.github.fasset.fasset.accounts.depreciation;
 
 import com.google.common.collect.ImmutableList;
-import io.github.fasset.fasset.accounts.depreciation.DepreciationAlgorithm;
-import io.github.fasset.fasset.accounts.depreciation.DepreciationPeriod;
+import io.github.fasset.fasset.accounts.AccountResolver;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.FixedAsset;

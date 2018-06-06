@@ -33,7 +33,7 @@ public interface ServiceOutletBriefService {
 
     /**
      * @param id of the serviceOutletBrief
-     * @return {@link ServiceOutletBrief} of the id given as parameter
+     * @return {@link ServiceOutletBrief} of the nomenclature given as parameter
      */
     ServiceOutletBrief fetchServiceOutletBriefGivenId(int id);
 

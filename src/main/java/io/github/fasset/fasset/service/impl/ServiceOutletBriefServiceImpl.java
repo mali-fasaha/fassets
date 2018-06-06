@@ -72,7 +72,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
 
     /**
      * @param id of the serviceOutletBrief
-     * @return {@link ServiceOutletBrief} of the id given as parameter
+     * @return {@link ServiceOutletBrief} of the nomenclature given as parameter
      */
     @Override
     @Cacheable("serviceOutletBriefsByIds")

@@ -418,7 +418,7 @@
                         generate-test-sources phase.
                     &ndash;&gt;
                     <execution>
-                        <id>add-integration-test-sources</id>
+                        <nomenclature>add-integration-test-sources</nomenclature>
                         <phase>generate-test-sources</phase>
                         <goals>
                             <goal>add-test-source</goal>

@@ -19,9 +19,9 @@ package io.github.fasset.fasset.accounts;
 
 import com.google.common.collect.ImmutableList;
 
-import io.github.fasset.fasset.accounts.id.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.accounts.id.AcquisitionCreditAccountIDResolver;
-import io.github.fasset.fasset.accounts.id.AcquisitionDebitAccountIDResolver;
+import io.github.fasset.fasset.accounts.nomenclature.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.nomenclature.AcquisitionCreditAccountIDResolver;
+import io.github.fasset.fasset.accounts.nomenclature.AcquisitionDebitAccountIDResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.AccountingTransaction;
@@ -72,8 +72,8 @@ public class DefaultEntryResolverIntegratedDebitsTest {
     public void setUp() throws Exception {
 
         BatchAcquisitionEntryResolver batchAcquisitionEntryResolver = new BatchAcquisitionEntryResolver(
-            new AcquisitionAccountResolver(new AcquisitionDebitAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config")),
-                new AcquisitionCreditAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config"))));
+            new AcquisitionAccountResolver(new AcquisitionDebitAccountIDResolver(new AccountIdConfigurationPropertiesService("account-nomenclature-config")),
+                new AcquisitionCreditAccountIDResolver(new AccountIdConfigurationPropertiesService("account-nomenclature-config"))));
 
         entries = batchAcquisitionEntryResolver.resolveEntries(fixedAssets);
 

@@ -53,7 +53,7 @@ public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAss
     @Override
     public MonthlyAssetDepreciation process(FixedAsset fixedAsset) throws Exception {
 
-        log.debug("Generating monthlyAssetDepreciation for fixedAsset id : {}", fixedAsset.getId());
+        log.debug("Generating monthlyAssetDepreciation for fixedAsset nomenclature : {}", fixedAsset.getId());
 
         return monthlyAssetDepreciationExecutor.getMonthlyDepreciation(fixedAsset, Integer.parseInt(Objects.requireNonNull(year)));
     }

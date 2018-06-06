@@ -27,7 +27,7 @@ public class ServiceOutletBriefResponseDto {
 
     private int id;
 
-    /* id of the service outlet*/
+    /* nomenclature of the service outlet*/
     private String designation;
 
     /* total costs of all items in this category*/
@@ -155,7 +155,7 @@ public class ServiceOutletBriefResponseDto {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ServiceOutletBriefResponseDto{");
-        sb.append("id=").append(id);
+        sb.append("nomenclature=").append(id);
         sb.append(", designation='").append(designation).append('\'');
         sb.append(", purchaseCost=").append(purchaseCost);
         sb.append(", netBookValue=").append(netBookValue);
