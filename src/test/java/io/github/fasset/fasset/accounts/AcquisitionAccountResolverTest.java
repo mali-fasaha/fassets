@@ -17,7 +17,6 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.accounts.AcquisitionAccountResolver;
 import io.github.fasset.fasset.accounts.id.CreditAccountIDResolver;
 import io.github.fasset.fasset.accounts.id.DebitAccountIDResolver;
 import io.github.fasset.fasset.book.keeper.Account;

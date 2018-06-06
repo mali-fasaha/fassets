@@ -17,8 +17,7 @@
  */
 package io.github.fasset.fasset.book.keeper.util;
 
-import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
-import io.github.fasset.fasset.config.DateProperties;
+import io.github.ghacupha.time.point.SimpleDate;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -35,7 +35,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
-import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.ofLocal;
+import static io.github.ghacupha.time.point.SimpleDate.ofLocal;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**

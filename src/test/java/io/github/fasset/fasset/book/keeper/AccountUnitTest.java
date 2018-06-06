@@ -18,11 +18,11 @@
 package io.github.fasset.fasset.book.keeper;
 
 import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
-import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.book.keeper.util.UntimelyBookingDateException;
 import io.github.ghacupha.cash.HardCash;
+import io.github.ghacupha.time.point.TimePoint;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,8 +33,8 @@ import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_TYPE;
 import static io.github.fasset.fasset.book.keeper.AccountAttribute.CONTRA_ACCOUNT;
 import static io.github.fasset.fasset.book.keeper.AccountAttribute.GENERAL_LEDGER;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
-import static io.github.fasset.fasset.book.keeper.unit.time.SimpleDate.on;
 import static io.github.ghacupha.cash.HardCash.dollar;
+import static io.github.ghacupha.time.point.SimpleDate.on;
 import static org.junit.Assert.*;
 
 public class AccountUnitTest {

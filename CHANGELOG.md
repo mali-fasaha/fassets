@@ -4,6 +4,31 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**changed license header definition from javadoc to block comment**
+
+
+[a487f14cffef597](https://github.com/ghacupha/fassets/commit/a487f14cffef597) Edwin Njeru *2018-06-06 11:20:31*
+
+**Fixed broken timePoint imports**
+
+
+[409c61e258ecb31](https://github.com/ghacupha/fassets/commit/409c61e258ecb31) Edwin Njeru *2018-06-06 11:11:21*
+
+**Removed time-point implementation from the project**
+
+
+[8db680ef267b1b6](https://github.com/ghacupha/fassets/commit/8db680ef267b1b6) Edwin Njeru *2018-06-06 11:03:40*
+
+**Update springboot to version 2.0.2**
+
+
+[215ab23db38b9dc](https://github.com/ghacupha/fassets/commit/215ab23db38b9dc) Edwin Njeru *2018-06-06 11:01:02*
+
+**Fixed pending checkstyle issues. Something to do with the licenses not being properly formatted. I highly suspect my playing around with eclipse ide last week**
+
+
+[de1ab1571de0758](https://github.com/ghacupha/fassets/commit/de1ab1571de0758) ghacupha *2018-06-01 08:49:17*
+
 **Moved the client to resources to avoid it's monitoring by checkstyle**
 
 

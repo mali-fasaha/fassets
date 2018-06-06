@@ -17,8 +17,7 @@
  */
 package io.github.fasset.fasset.book.keeper.util;
 
-import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
-import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
+import io.github.ghacupha.time.point.SimpleDate;
 import io.github.ghacupha.time.point.TimePoint;
 
 import java.time.LocalDate;

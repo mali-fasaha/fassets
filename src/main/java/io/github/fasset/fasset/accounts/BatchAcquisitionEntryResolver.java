@@ -18,9 +18,9 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
-import io.github.fasset.fasset.book.keeper.unit.time.SimpleDate;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.cash.HardCash;
+import io.github.ghacupha.time.point.SimpleDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
