@@ -20,11 +20,11 @@ package io.github.fasset.fasset.book;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
-import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnableToPostException;
 import io.github.ghacupha.cash.Cash;
+import io.github.ghacupha.time.point.TimePoint;
 
 import java.util.Map;
 import java.util.Set;

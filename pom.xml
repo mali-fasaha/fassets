@@ -321,13 +321,11 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-
         <dependency>
             <groupId>javax.json.bind</groupId>
             <artifactId>javax.json.bind-api</artifactId>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
@@ -361,6 +359,11 @@
         <dependency>
             <groupId>com.github.ghacupha</groupId>
             <artifactId>cash</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ghacupha</groupId>
+            <artifactId>time-point</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>

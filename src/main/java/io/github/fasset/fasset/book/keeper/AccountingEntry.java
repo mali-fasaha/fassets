@@ -19,11 +19,11 @@ package io.github.fasset.fasset.book.keeper;
 
 import io.github.fasset.fasset.book.AccountDomainModel;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
-import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.book.keeper.util.UntimelyBookingDateException;
 import io.github.ghacupha.cash.Cash;
+import io.github.ghacupha.time.point.TimePoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

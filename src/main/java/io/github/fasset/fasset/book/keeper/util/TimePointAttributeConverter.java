@@ -17,10 +17,10 @@
  */
 package io.github.fasset.fasset.book.keeper.util;
 
-import io.github.fasset.fasset.book.keeper.unit.time.ReadableDate;
-import io.github.fasset.fasset.book.keeper.unit.time.ReadableTime;
-import io.github.fasset.fasset.book.keeper.unit.time.TimePoint;
 import io.github.fasset.fasset.config.DateProperties;
+import io.github.ghacupha.time.point.ReadableDate;
+import io.github.ghacupha.time.point.ReadableTime;
+import io.github.ghacupha.time.point.TimePoint;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
