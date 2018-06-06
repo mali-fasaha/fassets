@@ -88,6 +88,7 @@
         <!--Mycila License plugin-->
         <mycila.license.maven.plugin.version>3.0</mycila.license.maven.plugin.version>
         <license.header.location>com/mycila/maven/plugin/license/templates/GPL-3.txt</license.header.location>
+        <license.header.definition>${project.basedir}/config/header_definition.xml</license.header.definition>
         <license.maven.owner>Edwin Njeru</license.maven.owner>
         <license.maven.email>mailnjeru@gmail.com</license.maven.email>
 
@@ -367,18 +368,6 @@
             <version>1.0.0</version>
         </dependency>
     </dependencies>
-
-    <!--<dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>Brussels-SR7</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>-->
 
     <build>
         <plugins>
@@ -770,6 +759,7 @@
                 <version>${mycila.license.maven.plugin.version}</version>
                 <configuration>
                     <header>${license.header.location}</header>
+                    <headerDefinitions>${license.header.definition}</headerDefinitions>
                     <properties>
                         <owner>${license.maven.owner}</owner>
                         <email>${license.maven.email}</email>

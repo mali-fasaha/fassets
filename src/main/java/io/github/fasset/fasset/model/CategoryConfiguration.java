@@ -1,4 +1,4 @@
-/**
+/*
  * fassets - Project for light-weight tracking of fixed assets
  * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
  *

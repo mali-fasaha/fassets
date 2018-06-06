@@ -147,12 +147,12 @@
     </module>
     <property name="severity" value="warning"/>
   </module>
-  <!-- Header inlined due to m2e-->
+  <!--&lt;!&ndash; Header inlined due to m2e&ndash;&gt;
   <module name="RegexpHeader">
     <property name="header" value="^/\*[*]?\n^ \* fassets - Project for light-weight tracking of fixed assets"/>
     <property name="fileExtensions" value="java"/>
     <property name="severity" value="error"/>
-  </module>
+  </module>-->
   <module name="SuppressionCommentFilter">
     <property name="offCommentFormat" value="CSOFF"/>
     <property name="onCommentFormat" value="CSON"/>
