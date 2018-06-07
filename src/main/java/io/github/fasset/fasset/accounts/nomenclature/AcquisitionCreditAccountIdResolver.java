@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
+import io.github.fasset.fasset.accounts.Posting;
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
@@ -52,7 +53,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
         log.debug("Resolving the account name for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
         //return "SUNDRY CREDITORS ACCOUNT";
-        return idConfigurationService.creditAccountName(FixedAssetTransactionType.ACQUISITION, fixedAsset);
+        return idConfigurationService.accountName(FixedAssetTransactionType.ACQUISITION, Posting.CREDIT, fixedAsset);
     }
 
     @Override

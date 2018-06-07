@@ -357,6 +357,13 @@
             <artifactId>joda-money</artifactId>
             <version>0.12</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>com.github.ghacupha</groupId>
             <artifactId>cash</artifactId>

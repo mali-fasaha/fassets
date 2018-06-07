@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
+import io.github.fasset.fasset.accounts.Posting;
 import io.github.fasset.fasset.model.FixedAsset;
 
 /**
@@ -72,5 +73,5 @@ public interface AccountIdService {
      * @param fixedAsset Asset for which we seek transaction account name
      * @return Name of the account
      */
-    String creditAccountName(FixedAssetTransactionType transactionType, FixedAsset fixedAsset);
+    String accountName(FixedAssetTransactionType transactionType, Posting posting, FixedAsset fixedAsset);
 }

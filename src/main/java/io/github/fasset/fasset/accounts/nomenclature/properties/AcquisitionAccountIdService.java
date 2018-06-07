@@ -119,13 +119,13 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return Name of the account
      */
     @Override
-    public String creditAccountName(FixedAssetTransactionType transactionType, FixedAsset fixedAsset) {
+    public String accountName(FixedAssetTransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
         String propertyKey = fixedAsset.getCategory().toLowerCase()+"."+transactionType.toString()+"."+"credit";
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, CREDIT);
+        String key = formatKey(fixedAsset.getCategory(), transactionType, posting);
 
         log.debug("Fetching account label for the key: {}", key);
 
