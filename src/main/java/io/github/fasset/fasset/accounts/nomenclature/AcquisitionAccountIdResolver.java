@@ -31,15 +31,13 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Resolves names of the accounts for posting acquisitions
  */
 @Component("debitAccountIDResolver")
-public class AcquisitionAccountIdResolver extends AbstractSimpleAccountIdResolver implements AccountIdResolver {
+public class AcquisitionAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
 
     private static final Logger log = getLogger(AcquisitionAccountIdResolver.class);
 
-    private AccountIdService idConfigurationService;
-
     @Autowired
     public AcquisitionAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
-        this.idConfigurationService = idConfigurationService;
+        super(idConfigurationService);
     }
 
     /**
@@ -75,13 +73,6 @@ public class AcquisitionAccountIdResolver extends AbstractSimpleAccountIdResolve
         log.debug("Resolving general ledger code # for fixedAsset : {}", fixedAsset.getAssetDescription());
 
         return idConfigurationService.debitGeneralLedgerCode(fixedAsset.getCategory());
-    }
-
-    private String currencyCode(FixedAsset fixedAsset) {
-
-        log.debug("Resolving currency code # for fixedAsset : {}", fixedAsset.getAssetDescription());
-
-        return idConfigurationService.getCurrencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
     }
 
     /**

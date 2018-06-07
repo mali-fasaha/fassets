@@ -17,7 +17,10 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -26,7 +29,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * however embedded hierarchies which are partitioned by variables like, service outlet, currency
  * account type and so on and so forth.
  */
-public abstract class AbstractSimpleAccountIdResolver implements AccountIdResolver {
+public abstract class AbstractAccountIdResolver implements AccountIdResolver {
+
+    private static final Logger log = LoggerFactory.getLogger(AbstractAccountIdResolver.class);
+
+    final AccountIdService idConfigurationService;
+
+    AbstractAccountIdResolver(AccountIdService idConfigurationService) {
+        this.idConfigurationService = idConfigurationService;
+    }
 
     @Override
     public String accountName(FixedAsset fixedAsset) {
@@ -34,6 +45,13 @@ public abstract class AbstractSimpleAccountIdResolver implements AccountIdResolv
         checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
 
         return fixedAsset.getCategory().toUpperCase();
+    }
+
+    protected String currencyCode(FixedAsset fixedAsset) {
+
+        log.debug("Resolving currency code # for fixedAsset : {}", fixedAsset.getAssetDescription());
+
+        return idConfigurationService.getCurrencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
     }
 
     /**

@@ -24,6 +24,8 @@ package io.github.fasset.fasset.accounts.nomenclature;
  * different accounts, acquisition would require a sundry creditors account, in disposals we are going to credit, the
  * FixedAsset's cost account, while in depreciation we are either crediting the Cost account or the cost account's contra
  * account (Accumulated depreciation account)
+ *
+ * @Deprecated redundancy
  */
 public interface CreditAccountIdResolver extends AccountIdResolver {
 
