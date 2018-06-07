@@ -43,14 +43,14 @@ public class AcquisitionDebitAccountIDResolverTest {
         AccountIdService configurationService = Mockito.mock(AccountIdService.class);
 
         // General ledger Codes
-        when(configurationService.acquisitionGlCode("COMPUTERS")).thenReturn("00152");
-        when(configurationService.acquisitionGlCode("FURNITURE")).thenReturn("00153");
-        when(configurationService.acquisitionGlCode("ELECTRONICS")).thenReturn("00154");
+        when(configurationService.debitGeneralLedgerCode("COMPUTERS")).thenReturn("00152");
+        when(configurationService.debitGeneralLedgerCode("FURNITURE")).thenReturn("00153");
+        when(configurationService.debitGeneralLedgerCode("ELECTRONICS")).thenReturn("00154");
 
         // General ledger Ids
-        when(configurationService.acquisitionGlId("COMPUTERS")).thenReturn("013");
-        when(configurationService.acquisitionGlId("FURNITURE")).thenReturn("014");
-        when(configurationService.acquisitionGlId("ELECTRONICS")).thenReturn("015");
+        when(configurationService.debitAccountPlaceHolder("COMPUTERS")).thenReturn("013");
+        when(configurationService.debitAccountPlaceHolder("FURNITURE")).thenReturn("014");
+        when(configurationService.debitAccountPlaceHolder("ELECTRONICS")).thenReturn("015");
 
         // ISO 4217 Currency codes
         when(configurationService.getCurrencyCode("KES")).thenReturn("00");

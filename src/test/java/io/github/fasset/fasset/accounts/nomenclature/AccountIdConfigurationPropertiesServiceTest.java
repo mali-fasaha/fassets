@@ -31,21 +31,21 @@ public class AccountIdConfigurationPropertiesServiceTest {
     @Test
     public void acquisitionGlId() {
 
-        assertEquals("013", configurationService.acquisitionGlId("COMPUTERS"));
-        assertEquals("017", configurationService.acquisitionGlId("COMPUTER SOFTWARE"));
-        assertEquals("015", configurationService.acquisitionGlId("FURNITURE & FITTINGS"));
-        assertEquals("014", configurationService.acquisitionGlId("ELECTRONICS"));
-        assertEquals("016", configurationService.acquisitionGlId("MOTOR VEHICLES"));
+        assertEquals("013", configurationService.debitAccountPlaceHolder("COMPUTERS"));
+        assertEquals("017", configurationService.debitAccountPlaceHolder("COMPUTER SOFTWARE"));
+        assertEquals("015", configurationService.debitAccountPlaceHolder("FURNITURE & FITTINGS"));
+        assertEquals("014", configurationService.debitAccountPlaceHolder("ELECTRONICS"));
+        assertEquals("016", configurationService.debitAccountPlaceHolder("MOTOR VEHICLES"));
     }
 
     @Test
     public void acquisitionGlCode() {
 
-        assertEquals("00150", configurationService.acquisitionGlCode("COMPUTERS"));
-        assertEquals("00155", configurationService.acquisitionGlCode("COMPUTER SOFTWARE"));
-        assertEquals("00153", configurationService.acquisitionGlCode("FURNITURE & FITTINGS"));
-        assertEquals("00151", configurationService.acquisitionGlCode("ELECTRONICS"));
-        assertEquals("00154", configurationService.acquisitionGlCode("MOTOR VEHICLES"));
+        assertEquals("00150", configurationService.debitGeneralLedgerCode("COMPUTERS"));
+        assertEquals("00155", configurationService.debitGeneralLedgerCode("COMPUTER SOFTWARE"));
+        assertEquals("00153", configurationService.debitGeneralLedgerCode("FURNITURE & FITTINGS"));
+        assertEquals("00151", configurationService.debitGeneralLedgerCode("ELECTRONICS"));
+        assertEquals("00154", configurationService.debitGeneralLedgerCode("MOTOR VEHICLES"));
     }
 
     @Test
@@ -64,12 +64,12 @@ public class AccountIdConfigurationPropertiesServiceTest {
     @Test
     public void getAcquisitionCreditGlCode() {
 
-        assertEquals("10051", configurationService.getAcquisitionCreditGlCode());
+        assertEquals("10051", configurationService.creditGeneralLedgerCode());
     }
 
     @Test
     public void getAcquisitionCreditGlId() {
 
-        assertEquals("001", configurationService.getAcquisitionCreditGlId());
+        assertEquals("001", configurationService.creditAccountPlaceHolder());
     }
 }

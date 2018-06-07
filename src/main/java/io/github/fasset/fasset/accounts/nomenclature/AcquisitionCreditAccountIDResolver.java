@@ -68,14 +68,14 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
-        return idConfigurationService.getAcquisitionCreditGlCode();
+        return idConfigurationService.creditGeneralLedgerCode();
     }
 
     private String glId() {
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
-        return idConfigurationService.getAcquisitionCreditGlId();
+        return idConfigurationService.creditAccountPlaceHolder();
     }
 
     private String currencyCode(FixedAsset fixedAsset) {

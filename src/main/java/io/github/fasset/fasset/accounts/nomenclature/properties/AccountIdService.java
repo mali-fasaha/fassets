@@ -32,7 +32,7 @@ public interface AccountIdService {
      * @param category The category of the asset for which we need a category nomenclature
      * @return The category nomenclature to be added to the account number sequence after the general ledger code
      */
-    String acquisitionGlId(String category);
+    String debitAccountPlaceHolder(String category);
 
     /**
      * Using the category of an asset this method returns the generic nomenclature code for the category, which in
@@ -42,7 +42,7 @@ public interface AccountIdService {
      * @param category The category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
-    String acquisitionGlCode(String category);
+    String debitGeneralLedgerCode(String category);
 
     /**
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
@@ -56,10 +56,10 @@ public interface AccountIdService {
     /**
      * @return String GL Code to be used for credit transactions
      */
-    String getAcquisitionCreditGlCode();
+    String creditGeneralLedgerCode();
 
     /**
      * @return String GL Id to be used for credit transactions
      */
-    String getAcquisitionCreditGlId();
+    String creditAccountPlaceHolder();
 }

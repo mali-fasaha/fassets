@@ -45,7 +45,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return The category nomenclature to be added to the account number sequence after the general ledger code
      */
     @Override
-    public String acquisitionGlId(String category) {
+    public String debitAccountPlaceHolder(String category) {
 
         log.debug("Fetching gl nomenclature for category: {}", category);
 
@@ -61,7 +61,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return The category code to be added to the account number sequence after the currency code
      */
     @Override
-    public String acquisitionGlCode(String category) {
+    public String debitGeneralLedgerCode(String category) {
 
         log.debug("Fetching gl code for category: {}", category);
 
@@ -82,7 +82,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return String GL Code to be used for credit transactions
      */
     @Override
-    public String getAcquisitionCreditGlCode() {
+    public String creditGeneralLedgerCode() {
 
         log.debug("Fetching credit account for acquisitions...");
 
@@ -93,7 +93,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return String GL Id to be used for credit transactions
      */
     @Override
-    public String getAcquisitionCreditGlId() {
+    public String creditAccountPlaceHolder() {
 
         return accountConfigProperties.getProperty("sundry.acquisition.gl.id");
     }

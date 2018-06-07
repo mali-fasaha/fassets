@@ -67,14 +67,14 @@ public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccoun
 
         log.debug("Resolving general ledger nomenclature for fixedAsset : {}", fixedAsset.getAssetDescription());
 
-        return idConfigurationService.acquisitionGlId(fixedAsset.getCategory());
+        return idConfigurationService.debitAccountPlaceHolder(fixedAsset.getCategory());
     }
 
     private String glCode(FixedAsset fixedAsset) {
 
         log.debug("Resolving general ledger code # for fixedAsset : {}", fixedAsset.getAssetDescription());
 
-        return idConfigurationService.acquisitionGlCode(fixedAsset.getCategory());
+        return idConfigurationService.debitGeneralLedgerCode(fixedAsset.getCategory());
     }
 
     private String currencyCode(FixedAsset fixedAsset) {
