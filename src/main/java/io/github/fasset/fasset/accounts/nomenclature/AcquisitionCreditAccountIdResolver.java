@@ -17,6 +17,7 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
+import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
@@ -36,15 +37,13 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author edwin.njeru
  */
 @Component("creditAccountIDResolver")
-public class AcquisitionCreditAccountIdResolver implements CreditAccountIdResolver {
+public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
 
     private static final Logger log = getLogger(AcquisitionCreditAccountIdResolver.class);
 
-    private AccountIdService idConfigurationService;
-
     @Autowired
     public AcquisitionCreditAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
-        this.idConfigurationService = idConfigurationService;
+        super(idConfigurationService);
     }
 
     @Override
@@ -52,7 +51,8 @@ public class AcquisitionCreditAccountIdResolver implements CreditAccountIdResolv
 
         log.debug("Resolving the account name for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
-        return "SUNDRY CREDITORS ACCOUNT";
+        //return "SUNDRY CREDITORS ACCOUNT";
+        return idConfigurationService.creditAccountName(FixedAssetTransactionType.ACQUISITION, fixedAsset);
     }
 
     @Override
@@ -76,13 +76,6 @@ public class AcquisitionCreditAccountIdResolver implements CreditAccountIdResolv
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
         return idConfigurationService.creditAccountPlaceHolder();
-    }
-
-    private String currencyCode(FixedAsset fixedAsset) {
-
-        log.debug("Resolving general ledger code # for fixedAsset : {}", fixedAsset.getAssetDescription());
-
-        return idConfigurationService.getCurrencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
     }
 
     /**

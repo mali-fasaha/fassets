@@ -42,7 +42,7 @@ public class AcquisitionCreditAccountIDResolverTest {
 
         AccountIdService configurationService = Mockito.mock(AccountIdService.class);
 
-        accountIDResolver = new AcquisitionCreditAccountIdResolver(new AcquisitionAccountIdService("account-id"));
+        accountIDResolver = new AcquisitionCreditAccountIdResolver(new AcquisitionAccountIdService("account-id","account-label"));
     }
 
     @Test

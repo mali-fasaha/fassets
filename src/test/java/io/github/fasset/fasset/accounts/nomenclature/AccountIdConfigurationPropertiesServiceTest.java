@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 public class AccountIdConfigurationPropertiesServiceTest {
 
 
-    private AccountIdService configurationService = new AcquisitionAccountIdService("account-nomenclature-config");
+    private AccountIdService configurationService = new AcquisitionAccountIdService("account-id", "account-label");
 
     @Test
     public void acquisitionGlId() {

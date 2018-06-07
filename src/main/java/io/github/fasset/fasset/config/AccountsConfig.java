@@ -31,6 +31,6 @@ public class AccountsConfig {
     @Bean("accountIdConfigurationPropertiesService")
     public AccountIdService accountIdConfigurationPropertiesService() {
 
-        return new AcquisitionAccountIdService("account-nomenclature-config");
+        return new AcquisitionAccountIdService("account-id", "account-label");
     }
 }

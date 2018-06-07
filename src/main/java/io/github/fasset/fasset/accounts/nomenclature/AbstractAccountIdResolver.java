@@ -39,35 +39,12 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
         this.idConfigurationService = idConfigurationService;
     }
 
-    @Override
-    public String accountName(FixedAsset fixedAsset) {
-
-        checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
-
-        return fixedAsset.getCategory().toUpperCase();
-    }
-
     protected String currencyCode(FixedAsset fixedAsset) {
 
         log.debug("Resolving currency code # for fixedAsset : {}", fixedAsset.getAssetDescription());
 
         return idConfigurationService.getCurrencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
     }
-
-    /**
-     * Resolve the name of a Contra account for a main account used for tracking the asset
-     *
-     * @param fixedAsset The asset for which we seek an account to track financially
-     * @return The name of the contra account
-     */
-    @Override
-    public String resolveContraAccountId(FixedAsset fixedAsset) {
-
-        checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
-
-        return String.format("Accumulated Depreciation on %s", fixedAsset.getCategory()).toUpperCase();
-    }
-
 
     /**
      * The category is of a lower hierarchy than an account yet for the account to be representative

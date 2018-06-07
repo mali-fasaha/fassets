@@ -17,7 +17,6 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.accounts.nomenclature.CreditAccountIdResolver;
 import io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.model.FixedAsset;
@@ -54,11 +53,11 @@ public class AcquisitionAccountResolver implements AccountResolver {
     private static final org.slf4j.Logger log = getLogger(AcquisitionAccountResolver.class);
 
     private AccountIdResolver accountIdResolver;
-    private CreditAccountIdResolver creditAccountIDResolver;
+    private AccountIdResolver creditAccountIDResolver;
 
     @Autowired
     public AcquisitionAccountResolver(@Qualifier("accountIdResolver") AccountIdResolver accountIdResolver,
-                                      @Qualifier("creditAccountIDResolver") CreditAccountIdResolver creditAccountIDResolver) {
+                                      @Qualifier("creditAccountIDResolver") AccountIdResolver creditAccountIDResolver) {
         this.accountIdResolver = accountIdResolver;
         this.creditAccountIDResolver = creditAccountIDResolver;
     }

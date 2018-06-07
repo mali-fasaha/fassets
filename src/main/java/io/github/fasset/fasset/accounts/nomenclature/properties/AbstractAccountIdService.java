@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
+import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
+import io.github.fasset.fasset.accounts.Posting;
 import io.github.fasset.fasset.kernel.util.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,20 +14,36 @@ import java.util.Properties;
 public abstract class AbstractAccountIdService implements AccountIdService {
 
     // Using external configuration
-    protected Properties accountConfigProperties;
+    final Properties accountConfigProperties;
+    final Properties accountLabelProperties;
 
-    protected AbstractAccountIdService(String propertiesFile) {
+    protected AbstractAccountIdService(final String propertiesFile, final String labelsFile) {
 
         String source = propertiesFile == null ? "account-id" : propertiesFile;
+        String labelSource = propertiesFile == null ? "account-label" : labelsFile;
 
-        accountConfigProperties = PropertiesUtils.fetchConfigProperties(source);
+        this.accountConfigProperties = PropertiesUtils.fetchConfigProperties(source);
+        this.accountLabelProperties = PropertiesUtils.fetchConfigProperties(labelSource);
     }
 
     private static final Logger log = LoggerFactory.getLogger(AbstractAccountIdService.class);
 
-    protected String formatKey(String propertyKey, String transaction, String element) {
-        return String.format("%s.%s.%s", propertyKey.toLowerCase(), transaction, element).replace(" ", "-").replace("&", "and");
+    protected String formatKey(String category, String transaction, String element) {
+        return cleanString(String.format("%s.%s.%s", category.toLowerCase(), transaction, element));
     }
+
+    protected String cleanString(String toClean){
+
+        return toClean.replace(" ", "-").replace("&", "and");
+    }
+
+    protected String formatKey(String category, FixedAssetTransactionType transactionType, Posting posting) {
+
+        String formattedCategory = cleanString(category.toLowerCase());
+
+        return String.format("%s.%S.%s", formattedCategory, transactionType.toString(), posting.toString()).toLowerCase();
+    }
+
 
     /**
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates

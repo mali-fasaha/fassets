@@ -18,7 +18,6 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver;
-import io.github.fasset.fasset.accounts.nomenclature.CreditAccountIdResolver;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.model.FixedAsset;
@@ -50,7 +49,7 @@ public class AcquisitionAccountResolverTest {
 
         AccountIdResolver accountIdResolver = Mockito.mock(AccountIdResolver.class);
 
-        CreditAccountIdResolver creditAccountIDResolver = Mockito.mock(CreditAccountIdResolver.class);
+        AccountIdResolver creditAccountIDResolver = Mockito.mock(AccountIdResolver.class);
 
         when(creditAccountIDResolver.accountName(radio)).thenReturn("Sundry Creditors Account");
         when(creditAccountIDResolver.accountName(lenovo)).thenReturn("Sundry Creditors Account");

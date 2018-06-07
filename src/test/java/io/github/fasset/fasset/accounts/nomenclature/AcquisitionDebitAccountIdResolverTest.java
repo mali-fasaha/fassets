@@ -29,7 +29,7 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class AcquisitionAccountIdResolverTest {
+public class AcquisitionDebitAccountIdResolverTest {
 
     private AccountIdResolver accountIdResolver;
 
@@ -55,7 +55,7 @@ public class AcquisitionAccountIdResolverTest {
         // ISO 4217 Currency codes
         when(configurationService.getCurrencyCode("KES")).thenReturn("00");
 
-        accountIdResolver = new AcquisitionAccountIdResolver(configurationService);
+        accountIdResolver = new AcquisitionDebitAccountIdResolver(configurationService);
     }
 
     @Test

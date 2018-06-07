@@ -17,6 +17,9 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
+import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
+import io.github.fasset.fasset.model.FixedAsset;
+
 /**
  * This service reads data from a configuration properties file and maintains a map which is used to provide
  * <p>
@@ -62,4 +65,12 @@ public interface AccountIdService {
      * @return String GL Id to be used for credit transactions
      */
     String creditAccountPlaceHolder();
+
+    /**
+     *
+     * @param transactionType Type of transaction Enum
+     * @param fixedAsset Asset for which we seek transaction account name
+     * @return Name of the account
+     */
+    String creditAccountName(FixedAssetTransactionType transactionType, FixedAsset fixedAsset);
 }

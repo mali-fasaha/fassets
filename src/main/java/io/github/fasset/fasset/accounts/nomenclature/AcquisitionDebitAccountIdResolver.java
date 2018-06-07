@@ -31,12 +31,12 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Resolves names of the accounts for posting acquisitions
  */
 @Component("debitAccountIDResolver")
-public class AcquisitionAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
+public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
 
-    private static final Logger log = getLogger(AcquisitionAccountIdResolver.class);
+    private static final Logger log = getLogger(AcquisitionDebitAccountIdResolver.class);
 
     @Autowired
-    public AcquisitionAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
+    public AcquisitionDebitAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
         super(idConfigurationService);
     }
 
@@ -59,6 +59,14 @@ public class AcquisitionAccountIdResolver extends AbstractAccountIdResolver impl
         checkNotNull(fixedAsset.getPurchaseCost(), String.format("The Cost for the fixed asset : %s is null", fixedAsset.getAssetDescription()));
 
         return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode(fixedAsset) + glId(fixedAsset);
+    }
+
+    @Override
+    public String accountName(FixedAsset fixedAsset) {
+
+        checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
+
+        return fixedAsset.getCategory().toUpperCase();
     }
 
     private String glId(FixedAsset fixedAsset) {
@@ -90,5 +98,19 @@ public class AcquisitionAccountIdResolver extends AbstractAccountIdResolver impl
         checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
 
         return fixedAsset.getCategory().toUpperCase();
+    }
+
+    /**
+     * Resolve the name of a Contra account for a main account used for tracking the asset
+     *
+     * @param fixedAsset The asset for which we seek an account to track financially
+     * @return The name of the contra account
+     */
+    @Override
+    public String resolveContraAccountId(FixedAsset fixedAsset) {
+
+        checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
+
+        return String.format("Accumulated Depreciation on %s", fixedAsset.getCategory()).toUpperCase();
     }
 }

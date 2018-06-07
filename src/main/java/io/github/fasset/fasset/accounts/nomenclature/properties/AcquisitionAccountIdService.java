@@ -17,8 +17,12 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
+import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
+import io.github.fasset.fasset.accounts.Posting;
+import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.stereotype.Component;
 
+import static io.github.fasset.fasset.accounts.Posting.CREDIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -34,9 +38,9 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
     //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
     private static final org.slf4j.Logger log = getLogger(AcquisitionAccountIdService.class);
 
-    public AcquisitionAccountIdService(String propertiesFile) {
+    public AcquisitionAccountIdService(String propertiesFile, String labelsFile) {
 
-        super(propertiesFile);
+        super(propertiesFile, labelsFile);
     }
 
     /**
@@ -108,4 +112,28 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
         return accountConfigProperties.getProperty("sundry.acquisition.placeHolder");
     }
+
+    /**
+     * @param transactionType Type of transaction Enum
+     * @param fixedAsset      Asset for which we seek transaction account name
+     * @return Name of the account
+     */
+    @Override
+    public String creditAccountName(FixedAssetTransactionType transactionType, FixedAsset fixedAsset) {
+
+        log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
+
+        String propertyKey = fixedAsset.getCategory().toLowerCase()+"."+transactionType.toString()+"."+"credit";
+
+        String key = formatKey(fixedAsset.getCategory(), transactionType, CREDIT);
+
+        log.debug("Fetching account label for the key: {}", key);
+
+        String accountLabel = accountLabelProperties.getProperty(key);//e.g computers.acquisition.credit
+
+        log.debug("Credit posting account label for {} of the asset {} resolved to be {}, using the key: {}", transactionType, fixedAsset, accountLabel, key);
+
+        return accountLabel;
+    }
+
 }
