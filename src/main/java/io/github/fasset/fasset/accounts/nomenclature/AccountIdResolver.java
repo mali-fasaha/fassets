@@ -55,7 +55,7 @@ public interface AccountIdResolver {
      *
      * @param fixedAsset For which we need category nomenclature
      * @return The nomenclature of the category
-     * @Deprecated relevance
+     * @Deprecated redundancy
      */
     String resolveCategoryId(FixedAsset fixedAsset);
 }
