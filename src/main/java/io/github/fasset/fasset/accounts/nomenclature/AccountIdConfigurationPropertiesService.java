@@ -39,7 +39,7 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
 
     public AccountIdConfigurationPropertiesService(String propertiesFile) {
 
-        accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
+        accountConfigProperties = PropertiesUtils.fetchProperties("account-id-config");
 
     }
 
