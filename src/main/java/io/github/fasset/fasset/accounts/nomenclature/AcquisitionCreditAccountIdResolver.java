@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements the {@code CreditAccountIDResolver} interface for the transaction that involves acquisition of assets. In summary
+ * Implements the {@code CreditAccountIdResolver} interface for the transaction that involves acquisition of assets. In summary
  * one can expect that all acquisition transaction would be posted to the Sundry Creditor's account abstracting this application
  * from the knowledge of to which stakeholders settlements as this varies to a large degree depending on the domain of a given
  * tax authority, the same amount being split between vendor and tax authority in varying ratios. This is complicated situation to
@@ -36,19 +36,19 @@ import static org.slf4j.LoggerFactory.getLogger;
  * @author edwin.njeru
  */
 @Component("creditAccountIDResolver")
-public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolver {
+public class AcquisitionCreditAccountIdResolver implements CreditAccountIdResolver {
 
-    private static final Logger log = getLogger(AcquisitionCreditAccountIDResolver.class);
+    private static final Logger log = getLogger(AcquisitionCreditAccountIdResolver.class);
 
     private AccountIdService idConfigurationService;
 
     @Autowired
-    public AcquisitionCreditAccountIDResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
+    public AcquisitionCreditAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
         this.idConfigurationService = idConfigurationService;
     }
 
     @Override
-    public String resolveName(FixedAsset fixedAsset) {
+    public String accountName(FixedAsset fixedAsset) {
 
         log.debug("Resolving the account name for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
@@ -56,7 +56,7 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
     }
 
     @Override
-    public String resolveNumber(FixedAsset fixedAsset) {
+    public String accountNumber(FixedAsset fixedAsset) {
 
         log.debug("Resolving the account number for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
@@ -96,7 +96,7 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
-        return resolveName(fixedAsset);
+        return accountName(fixedAsset);
     }
 
     /**
@@ -109,7 +109,7 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
      * @return The ID of the general ledger
      */
     @Override
-    public String resolveGeneralLedgerName(FixedAsset fixedAsset) {
+    public String generalLedgerName(FixedAsset fixedAsset) {
 
         return "SUNDRY CREDITORS";
     }
@@ -125,6 +125,12 @@ public class AcquisitionCreditAccountIDResolver implements CreditAccountIDResolv
     @Override
     public String resolveCategoryId(FixedAsset fixedAsset) {
 
-        return fixedAsset.getCategory().toUpperCase();
+        log.debug("Resolving category id for asset: {}", fixedAsset);
+
+        String categoryId = fixedAsset.getCategory().toUpperCase();
+
+        log.debug("Category id for fixed asset : {} resolved as {}", fixedAsset, categoryId);
+
+        return categoryId;
     }
 }

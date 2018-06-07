@@ -16,9 +16,9 @@ public abstract class AbstractAccountIdService implements AccountIdService {
 
     protected AbstractAccountIdService(String propertiesFile) {
 
-        String source = propertiesFile == null ? "config/account-id" : propertiesFile;
+        String source = propertiesFile == null ? "account-id" : propertiesFile;
 
-        accountConfigProperties = PropertiesUtils.fetchProperties(source);
+        accountConfigProperties = PropertiesUtils.fetchConfigProperties(source);
     }
 
     private static final Logger log = LoggerFactory.getLogger(AbstractAccountIdService.class);
@@ -39,6 +39,10 @@ public abstract class AbstractAccountIdService implements AccountIdService {
 
         log.debug("Fetching currency code for Currency : {}", currencyCode);
 
-        return accountConfigProperties.getProperty(currencyCode);
+        String code = accountConfigProperties.getProperty(currencyCode);
+
+        log.debug("Currency code for ISO4217 currency code value {} resolved as {}", currencyCode, code);
+
+        return code;
     }
 }

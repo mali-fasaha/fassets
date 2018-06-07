@@ -25,6 +25,6 @@ package io.github.fasset.fasset.accounts.nomenclature;
  * FixedAsset's cost account, while in depreciation we are either crediting the Cost account or the cost account's contra
  * account (Accumulated depreciation account)
  */
-public interface CreditAccountIDResolver extends DebitAccountIDResolver {
+public interface CreditAccountIdResolver extends AccountIdResolver {
 
 }

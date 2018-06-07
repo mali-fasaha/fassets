@@ -22,19 +22,11 @@ import io.github.fasset.fasset.model.FixedAsset;
 /**
  * Generates the name of an existing account, if one exists, or the name of one to be created
  */
-public interface DebitAccountIDResolver {
+public interface AccountIdResolver {
 
-    String resolveName(FixedAsset fixedAsset);
+    String accountName(FixedAsset fixedAsset);
 
-    String resolveNumber(FixedAsset fixedAsset);
-
-    /**
-     * Resolve the name of a Contra account for a main account used for tracking the asset
-     *
-     * @param fixedAsset The asset for which we seek an account to track financially
-     * @return The name of the contra account
-     */
-    String resolveContraAccountId(FixedAsset fixedAsset);
+    String accountNumber(FixedAsset fixedAsset);
 
     /**
      * Resolves the name of the appropriate general ledger that out to be used in this case for the
@@ -45,7 +37,16 @@ public interface DebitAccountIDResolver {
      * @param fixedAsset For which we need a general ledger
      * @return The ID of the general ledger
      */
-    String resolveGeneralLedgerName(FixedAsset fixedAsset);
+    String generalLedgerName(FixedAsset fixedAsset);
+
+    /**
+     * Resolve the name of a Contra account for a main account used for tracking the asset
+     *
+     * @param fixedAsset The asset for which we seek an account to track financially
+     * @return The name of the contra account
+     * @Deprecated relevance
+     */
+    String resolveContraAccountId(FixedAsset fixedAsset);
 
     /**
      * The category is of a lower hierarchy than an account yet for the account to be representative
@@ -54,6 +55,7 @@ public interface DebitAccountIDResolver {
      *
      * @param fixedAsset For which we need category nomenclature
      * @return The nomenclature of the category
+     * @Deprecated relevance
      */
     String resolveCategoryId(FixedAsset fixedAsset);
 }

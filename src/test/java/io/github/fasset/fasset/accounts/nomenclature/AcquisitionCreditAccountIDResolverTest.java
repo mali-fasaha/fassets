@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
 
 public class AcquisitionCreditAccountIDResolverTest {
 
-    private AcquisitionCreditAccountIDResolver accountIDResolver;
+    private AcquisitionCreditAccountIdResolver accountIDResolver;
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronics", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
@@ -42,23 +42,23 @@ public class AcquisitionCreditAccountIDResolverTest {
 
         AccountIdService configurationService = Mockito.mock(AccountIdService.class);
 
-        accountIDResolver = new AcquisitionCreditAccountIDResolver(new AcquisitionAccountIdService("config/account-id"));
+        accountIDResolver = new AcquisitionCreditAccountIdResolver(new AcquisitionAccountIdService("account-id"));
     }
 
     @Test
     public void resolveName() {
 
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.resolveName(radio));
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.resolveName(lenovo));
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.resolveName(chair));
+        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.accountName(radio));
+        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.accountName(lenovo));
+        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.accountName(chair));
     }
 
     @Test
     public void resolveNumber() {
 
-        assertEquals("0010010051001", accountIDResolver.resolveNumber(radio));
-        assertEquals("9870010051001", accountIDResolver.resolveNumber(lenovo));
-        assertEquals("0100010051001", accountIDResolver.resolveNumber(chair));
+        assertEquals("0010010051001", accountIDResolver.accountNumber(radio));
+        assertEquals("9870010051001", accountIDResolver.accountNumber(lenovo));
+        assertEquals("0100010051001", accountIDResolver.accountNumber(chair));
     }
 
     @Test
@@ -72,9 +72,9 @@ public class AcquisitionCreditAccountIDResolverTest {
     @Test
     public void resolveGeneralLedgerName() {
 
-        assertEquals("SUNDRY CREDITORS", accountIDResolver.resolveGeneralLedgerName(radio));
-        assertEquals("SUNDRY CREDITORS", accountIDResolver.resolveGeneralLedgerName(chair));
-        assertEquals("SUNDRY CREDITORS", accountIDResolver.resolveGeneralLedgerName(lenovo));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.generalLedgerName(radio));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.generalLedgerName(chair));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.generalLedgerName(lenovo));
     }
 
     @Test

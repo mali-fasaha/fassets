@@ -26,10 +26,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * however embedded hierarchies which are partitioned by variables like, service outlet, currency
  * account type and so on and so forth.
  */
-public abstract class AbstractSimpleDebitAccountIDResolver implements DebitAccountIDResolver {
+public abstract class AbstractSimpleAccountIdResolver implements AccountIdResolver {
 
     @Override
-    public String resolveName(FixedAsset fixedAsset) {
+    public String accountName(FixedAsset fixedAsset) {
 
         checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
 
@@ -61,6 +61,6 @@ public abstract class AbstractSimpleDebitAccountIDResolver implements DebitAccou
      */
     @Override
     public String resolveCategoryId(FixedAsset fixedAsset) {
-        return resolveName(fixedAsset);
+        return accountName(fixedAsset);
     }
 }

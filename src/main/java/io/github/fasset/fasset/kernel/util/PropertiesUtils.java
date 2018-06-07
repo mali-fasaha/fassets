@@ -31,6 +31,9 @@ import static org.slf4j.LoggerFactory.getLogger;
  * get instantiated with an argument that provides a location for the properties file to the {@code #fetchProperties}
  * method, in the constructor or spring's container {@code @PostConstruct} initialization method,
  * which will in turn instantiate a private properties file in the same class.
+ * <br> The quiet convention here is that to fetch properties in in a subfolder under resources, the appropriate
+ * method name will have the name of the folder betwixt, right after the word fetch. For instance to fetch properties
+ * from the config subfolder we call the method {@code #fetchConfigProperties}.
  *
  * @author edwin_njeru
  */
@@ -61,6 +64,21 @@ public class PropertiesUtils {
             log.error(e.getMessage());
         }
 
+        log.debug("The following properties have been setup : {}", properties);
+
+        log.info("{} property items added to the property map", properties.size());
+
         return properties;
+    }
+
+    /**
+     * Will return Properties from any file on the classpath under the config folder
+     *
+     * @param fileName Filename containing property definitions
+     * @return Properties read from the properties file
+     */
+    public static Properties fetchConfigProperties(String fileName) {
+
+        return fetchProperties(String.format("config/%s",fileName));
     }
 }

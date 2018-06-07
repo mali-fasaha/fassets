@@ -22,8 +22,11 @@ import org.springframework.stereotype.Component;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements the {@code AccountIdService} using prestated values in a properties which are managed in
+ * Implements the {@code AccountIdService} using pre stated values in a properties which are managed in
  * an internal map
+ * <br> This implementation provides identities for accounts specific to acquisition transactions, in this
+ * case typical it is expected that the debit account would be the asset account tracking its category,
+ * and the credit account would be the sundry creditor's account
  */
 @Component("accountIdConfigurationPropertiesService")
 public final class AcquisitionAccountIdService extends AbstractAccountIdService implements AccountIdService {
@@ -49,7 +52,11 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
         log.debug("Fetching gl nomenclature for category: {}", category);
 
-        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.id"));
+        String placeHolder = accountConfigProperties.getProperty(formatKey(category, "acquisition", "placeholder"));
+
+        log.debug("Place holder for category: {} resolved as {}", category, placeHolder);
+
+        return placeHolder;
     }
 
     /**
@@ -65,7 +72,11 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
         log.debug("Fetching gl code for category: {}", category);
 
-        return accountConfigProperties.getProperty(formatKey(category));
+        String glCode = accountConfigProperties.getProperty(formatKey(category));
+
+        log.debug("General ledger code # for category : {} resolved as {}", category, glCode);
+
+        return glCode;
     }
 
     private String formatKey(String propertyKey) {
@@ -95,6 +106,6 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
     @Override
     public String creditAccountPlaceHolder() {
 
-        return accountConfigProperties.getProperty("sundry.acquisition.gl.id");
+        return accountConfigProperties.getProperty("sundry.acquisition.placeHolder");
     }
 }

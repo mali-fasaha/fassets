@@ -29,9 +29,9 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class AcquisitionDebitAccountIDResolverTest {
+public class AcquisitionAccountIdResolverTest {
 
-    private DebitAccountIDResolver debitAccountIDResolver;
+    private AccountIdResolver accountIdResolver;
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "ELECTRONICS", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
@@ -55,45 +55,45 @@ public class AcquisitionDebitAccountIDResolverTest {
         // ISO 4217 Currency codes
         when(configurationService.getCurrencyCode("KES")).thenReturn("00");
 
-        debitAccountIDResolver = new AcquisitionDebitAccountIDResolver(configurationService);
+        accountIdResolver = new AcquisitionAccountIdResolver(configurationService);
     }
 
     @Test
     public void resolveName() {
 
-        assertEquals("COMPUTERS", debitAccountIDResolver.resolveName(lenovo));
-        assertEquals("FURNITURE", debitAccountIDResolver.resolveName(chair));
-        assertEquals("ELECTRONICS", debitAccountIDResolver.resolveName(radio));
+        assertEquals("COMPUTERS", accountIdResolver.accountName(lenovo));
+        assertEquals("FURNITURE", accountIdResolver.accountName(chair));
+        assertEquals("ELECTRONICS", accountIdResolver.accountName(radio));
     }
 
     @Test
     public void resolveContraAccountId() {
 
-        assertEquals("ACCUMULATED DEPRECIATION ON COMPUTERS", debitAccountIDResolver.resolveContraAccountId(lenovo));
-        assertEquals("ACCUMULATED DEPRECIATION ON FURNITURE", debitAccountIDResolver.resolveContraAccountId(chair));
-        assertEquals("ACCUMULATED DEPRECIATION ON ELECTRONICS", debitAccountIDResolver.resolveContraAccountId(radio));
+        assertEquals("ACCUMULATED DEPRECIATION ON COMPUTERS", accountIdResolver.resolveContraAccountId(lenovo));
+        assertEquals("ACCUMULATED DEPRECIATION ON FURNITURE", accountIdResolver.resolveContraAccountId(chair));
+        assertEquals("ACCUMULATED DEPRECIATION ON ELECTRONICS", accountIdResolver.resolveContraAccountId(radio));
     }
 
     @Test
     public void resolveCategoryId() {
-        assertEquals("COMPUTERS", debitAccountIDResolver.resolveName(lenovo));
-        assertEquals("FURNITURE", debitAccountIDResolver.resolveName(chair));
-        assertEquals("ELECTRONICS", debitAccountIDResolver.resolveName(radio));
+        assertEquals("COMPUTERS", accountIdResolver.accountName(lenovo));
+        assertEquals("FURNITURE", accountIdResolver.accountName(chair));
+        assertEquals("ELECTRONICS", accountIdResolver.accountName(radio));
     }
 
     @Test
     public void resolveNumber() {
 
-        assertEquals("0010000154015", debitAccountIDResolver.resolveNumber(radio));
-        assertEquals("0100000153014", debitAccountIDResolver.resolveNumber(chair));
-        assertEquals("9870000152013", debitAccountIDResolver.resolveNumber(lenovo));
+        assertEquals("0010000154015", accountIdResolver.accountNumber(radio));
+        assertEquals("0100000153014", accountIdResolver.accountNumber(chair));
+        assertEquals("9870000152013", accountIdResolver.accountNumber(lenovo));
     }
 
     @Test
     public void resolveGeneralLedgerId() {
 
-        assertEquals("ELECTRONICS", debitAccountIDResolver.resolveGeneralLedgerName(radio));
-        assertEquals("FURNITURE", debitAccountIDResolver.resolveGeneralLedgerName(chair));
-        assertEquals("COMPUTERS", debitAccountIDResolver.resolveGeneralLedgerName(lenovo));
+        assertEquals("ELECTRONICS", accountIdResolver.generalLedgerName(radio));
+        assertEquals("FURNITURE", accountIdResolver.generalLedgerName(chair));
+        assertEquals("COMPUTERS", accountIdResolver.generalLedgerName(lenovo));
     }
 }

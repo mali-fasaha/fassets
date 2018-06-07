@@ -31,14 +31,14 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Resolves names of the accounts for posting acquisitions
  */
 @Component("debitAccountIDResolver")
-public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccountIDResolver implements DebitAccountIDResolver {
+public class AcquisitionAccountIdResolver extends AbstractSimpleAccountIdResolver implements AccountIdResolver {
 
-    private static final Logger log = getLogger(AcquisitionDebitAccountIDResolver.class);
+    private static final Logger log = getLogger(AcquisitionAccountIdResolver.class);
 
     private AccountIdService idConfigurationService;
 
     @Autowired
-    public AcquisitionDebitAccountIDResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
+    public AcquisitionAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
         this.idConfigurationService = idConfigurationService;
     }
 
@@ -53,7 +53,7 @@ public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccoun
      * @return The account number to track the fixed asset as String
      */
     @Override
-    public String resolveNumber(FixedAsset fixedAsset) {
+    public String accountNumber(FixedAsset fixedAsset) {
 
         log.debug("Resolving account # for fixed asset : {}", fixedAsset.getAssetDescription());
 
@@ -94,7 +94,7 @@ public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccoun
      * @return The ID of the general ledger
      */
     @Override
-    public String resolveGeneralLedgerName(FixedAsset fixedAsset) {
+    public String generalLedgerName(FixedAsset fixedAsset) {
 
         checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
 

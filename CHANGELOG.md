@@ -199,7 +199,7 @@ Changelog for fassets implementation by ghacupha
 
 [65919c0d51816b0](https://github.com/ghacupha/fassets/commit/65919c0d51816b0) ghacupha *2018-05-17 14:01:48*
 
-**Implemented the DebitAccountIDResolver, and the AccountIDConfigurationService with AccountIDPropertiesConfigurationService together with its unit test, and configured a spring bean called 'accountIdPropertiesConfigurationService' for intergration with the rest of the application's container**
+**Implemented the AccountIdResolver, and the AccountIDConfigurationService with AccountIDPropertiesConfigurationService together with its unit test, and configured a spring bean called 'accountIdPropertiesConfigurationService' for intergration with the rest of the application's container**
 
 
 [8f9f5e88a731710](https://github.com/ghacupha/fassets/commit/8f9f5e88a731710) ghacupha *2018-05-17 13:53:37*
