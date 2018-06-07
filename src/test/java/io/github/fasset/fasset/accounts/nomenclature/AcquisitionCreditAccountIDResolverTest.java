@@ -48,9 +48,9 @@ public class AcquisitionCreditAccountIDResolverTest {
     @Test
     public void resolveName() {
 
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.accountName(radio));
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.accountName(lenovo));
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.accountName(chair));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.accountName(radio));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.accountName(lenovo));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.accountName(chair));
     }
 
     @Test
@@ -64,9 +64,9 @@ public class AcquisitionCreditAccountIDResolverTest {
     @Test
     public void resolveContraAccountId() {
 
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.resolveContraAccountId(radio));
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.resolveContraAccountId(chair));
-        assertEquals("SUNDRY CREDITORS ACCOUNT", accountIDResolver.resolveContraAccountId(lenovo));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.resolveContraAccountId(radio));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.resolveContraAccountId(chair));
+        assertEquals("SUNDRY CREDITORS", accountIDResolver.resolveContraAccountId(lenovo));
     }
 
     @Test

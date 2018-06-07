@@ -65,7 +65,7 @@ public interface AccountIdService {
     /**
      * @return String GL Id to be used for credit transactions
      */
-    String creditAccountPlaceHolder();
+    String accountPlaceHolder(FixedAssetTransactionType transactionType, Posting posting, FixedAsset fixedAsset);
 
     /**
      *

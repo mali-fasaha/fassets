@@ -70,6 +70,6 @@ public class AccountIdConfigurationPropertiesServiceTest {
     @Test
     public void getAcquisitionCreditGlId() {
 
-        assertEquals("001", configurationService.creditAccountPlaceHolder());
+        assertEquals("001", configurationService.accountPlaceHolder());
     }
 }

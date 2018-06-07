@@ -108,9 +108,14 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return String GL Id to be used for credit transactions
      */
     @Override
-    public String creditAccountPlaceHolder() {
+    public String accountPlaceHolder(FixedAssetTransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
 
-        return accountConfigProperties.getProperty("sundry.acquisition.placeHolder");
+        log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
+
+        String key = formatKey(fixedAsset.getCategory(), transactionType, posting); // e.g "sundry.acquisition.placeHolder"
+
+        //TODO confirm this implementation works
+        return accountConfigProperties.getProperty(key);
     }
 
     /**
@@ -122,8 +127,6 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
     public String accountName(FixedAssetTransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
-
-        String propertyKey = fixedAsset.getCategory().toLowerCase()+"."+transactionType.toString()+"."+"credit";
 
         String key = formatKey(fixedAsset.getCategory(), transactionType, posting);
 
