@@ -54,7 +54,7 @@ public class PropertiesUtils {
 
         log.info("Reading properties from the path : {}", fileName);
 
-        Properties properties = new Properties();
+        Properties properties = new FassetsProperties();
 
         try {
             File file = ResourceUtils.getFile(String.format("classpath:%s.properties", fileName));
