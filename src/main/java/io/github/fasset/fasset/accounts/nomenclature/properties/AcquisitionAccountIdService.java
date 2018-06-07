@@ -17,12 +17,24 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
+import org.springframework.stereotype.Component;
+
+import static org.slf4j.LoggerFactory.getLogger;
+
 /**
- * This service reads data from a configuration properties file and maintains a map which is used to provide
- * <p>
- * properties required to implement the account nomenclature and hierarchy policy version 1.0
+ * Implements the {@code AccountIdService} using prestated values in a properties which are managed in
+ * an internal map
  */
-public interface AccountIdConfigurationService {
+@Component("accountIdConfigurationPropertiesService")
+public final class AcquisitionAccountIdService extends AbstractAccountIdService implements AccountIdService {
+
+    //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
+    private static final org.slf4j.Logger log = getLogger(AcquisitionAccountIdService.class);
+
+    public AcquisitionAccountIdService(String propertiesFile) {
+
+        super(propertiesFile);
+    }
 
     /**
      * Using the provided category of an asset this method returns a specific nomenclature code for the
@@ -32,7 +44,13 @@ public interface AccountIdConfigurationService {
      * @param category The category of the asset for which we need a category nomenclature
      * @return The category nomenclature to be added to the account number sequence after the general ledger code
      */
-    String acquisitionGlId(String category);
+    @Override
+    public String acquisitionGlId(String category) {
+
+        log.debug("Fetching gl nomenclature for category: {}", category);
+
+        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.id"));
+    }
 
     /**
      * Using the category of an asset this method returns the generic nomenclature code for the category, which in
@@ -42,24 +60,41 @@ public interface AccountIdConfigurationService {
      * @param category The category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
-    String acquisitionGlCode(String category);
+    @Override
+    public String acquisitionGlCode(String category) {
 
-    /**
-     * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
-     * the unique code to be used in the account number sequence after the service outlet code
-     *
-     * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
-     * @return Account number sequence code to follow the service outlet nomenclature
-     */
-    String getCurrencyCode(String currencyCode);
+        log.debug("Fetching gl code for category: {}", category);
+
+        return accountConfigProperties.getProperty(formatKey(category));
+    }
+
+    private String formatKey(String propertyKey) {
+        return formatKey(propertyKey, "acquisition", "gl.code");
+    }
+
+    private String formatKey(String propertyKey, String element) {
+        return formatKey(propertyKey, "acquisition", element);
+    }
+
+
 
     /**
      * @return String GL Code to be used for credit transactions
      */
-    String getAcquisitionCreditGlCode();
+    @Override
+    public String getAcquisitionCreditGlCode() {
+
+        log.debug("Fetching credit account for acquisitions...");
+
+        return accountConfigProperties.getProperty("sundry.acquisition.gl.code");
+    }
 
     /**
      * @return String GL Id to be used for credit transactions
      */
-    String getAcquisitionCreditGlId();
+    @Override
+    public String getAcquisitionCreditGlId() {
+
+        return accountConfigProperties.getProperty("sundry.acquisition.gl.id");
+    }
 }

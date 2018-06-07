@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
-import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +35,10 @@ public class AcquisitionDebitAccountIDResolver extends AbstractSimpleDebitAccoun
 
     private static final Logger log = getLogger(AcquisitionDebitAccountIDResolver.class);
 
-    private AccountIdConfigurationService idConfigurationService;
+    private AccountIdService idConfigurationService;
 
     @Autowired
-    public AcquisitionDebitAccountIDResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdConfigurationService idConfigurationService) {
+    public AcquisitionDebitAccountIDResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
         this.idConfigurationService = idConfigurationService;
     }
 

@@ -17,31 +17,12 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
-import io.github.fasset.fasset.kernel.util.PropertiesUtils;
-import org.springframework.stereotype.Component;
-
-import java.util.Properties;
-
-import static org.slf4j.LoggerFactory.getLogger;
-
 /**
- * Implements the {@code AccountIdConfigurationService} using prestated values in a properties which are managed in
- * an internal map
+ * This service reads data from a configuration properties file and maintains a map which is used to provide
+ * <p>
+ * properties required to implement the account nomenclature and hierarchy policy version 1.0
  */
-@Component("accountIdConfigurationPropertiesService")
-public class AccountIdConfigurationPropertiesService implements AccountIdConfigurationService {
-
-    //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
-    private static final org.slf4j.Logger log = getLogger(AccountIdConfigurationPropertiesService.class);
-
-    // Using external configuration
-    private Properties accountConfigProperties;
-
-    public AccountIdConfigurationPropertiesService(String propertiesFile) {
-
-        accountConfigProperties = PropertiesUtils.fetchProperties("account-id-config");
-
-    }
+public interface AccountIdService {
 
     /**
      * Using the provided category of an asset this method returns a specific nomenclature code for the
@@ -51,13 +32,7 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
      * @param category The category of the asset for which we need a category nomenclature
      * @return The category nomenclature to be added to the account number sequence after the general ledger code
      */
-    @Override
-    public String acquisitionGlId(String category) {
-
-        log.debug("Fetching gl nomenclature for category: {}", category);
-
-        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.nomenclature"));
-    }
+    String acquisitionGlId(String category);
 
     /**
      * Using the category of an asset this method returns the generic nomenclature code for the category, which in
@@ -67,17 +42,7 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
      * @param category The category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
-    @Override
-    public String acquisitionGlCode(String category) {
-
-        log.debug("Fetching gl code for category: {}", category);
-
-        return accountConfigProperties.getProperty(formatKey(category, "acquisition", "gl.code"));
-    }
-
-    private String formatKey(String propertyKey, String transaction, String element) {
-        return String.format("%s.%s.%s", propertyKey.toLowerCase(), transaction, element).replace(" ", "-").replace("&", "and");
-    }
+    String acquisitionGlCode(String category);
 
     /**
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
@@ -86,31 +51,15 @@ public class AccountIdConfigurationPropertiesService implements AccountIdConfigu
      * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
      * @return Account number sequence code to follow the service outlet nomenclature
      */
-    @Override
-    public String getCurrencyCode(String currencyCode) {
-
-        log.debug("Fetching currency code for Currency : {}", currencyCode);
-
-        return accountConfigProperties.getProperty(currencyCode);
-    }
+    String getCurrencyCode(String currencyCode);
 
     /**
      * @return String GL Code to be used for credit transactions
      */
-    @Override
-    public String getAcquisitionCreditGlCode() {
-
-        log.debug("Fetching credit account for acquisitions...");
-
-        return accountConfigProperties.getProperty("sundry.acquisition.gl.code");
-    }
+    String getAcquisitionCreditGlCode();
 
     /**
      * @return String GL Id to be used for credit transactions
      */
-    @Override
-    public String getAcquisitionCreditGlId() {
-
-        return accountConfigProperties.getProperty("sundry.acquisition.gl.id");
-    }
+    String getAcquisitionCreditGlId();
 }

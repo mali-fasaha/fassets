@@ -17,8 +17,8 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
-import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AcquisitionAccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 public class AccountIdConfigurationPropertiesServiceTest {
 
 
-    private AccountIdConfigurationService configurationService = new AccountIdConfigurationPropertiesService("account-nomenclature-config");
+    private AccountIdService configurationService = new AcquisitionAccountIdService("account-nomenclature-config");
 
     @Test
     public void acquisitionGlId() {

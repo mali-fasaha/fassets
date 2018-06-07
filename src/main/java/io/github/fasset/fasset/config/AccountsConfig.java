@@ -17,8 +17,8 @@
  */
 package io.github.fasset.fasset.config;
 
-import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AcquisitionAccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,8 +29,8 @@ import org.springframework.context.annotation.Configuration;
 public class AccountsConfig {
 
     @Bean("accountIdConfigurationPropertiesService")
-    public AccountIdConfigurationService accountIdConfigurationPropertiesService() {
+    public AccountIdService accountIdConfigurationPropertiesService() {
 
-        return new AccountIdConfigurationPropertiesService("account-nomenclature-config");
+        return new AcquisitionAccountIdService("account-nomenclature-config");
     }
 }

@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
-import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
@@ -40,7 +40,7 @@ public class AcquisitionDebitAccountIDResolverTest {
     @Before
     public void setUp() throws Exception {
 
-        AccountIdConfigurationService configurationService = Mockito.mock(AccountIdConfigurationService.class);
+        AccountIdService configurationService = Mockito.mock(AccountIdService.class);
 
         // General ledger Codes
         when(configurationService.acquisitionGlCode("COMPUTERS")).thenReturn("00152");
