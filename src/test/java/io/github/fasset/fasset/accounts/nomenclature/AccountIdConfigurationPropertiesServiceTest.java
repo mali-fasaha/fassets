@@ -17,6 +17,8 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

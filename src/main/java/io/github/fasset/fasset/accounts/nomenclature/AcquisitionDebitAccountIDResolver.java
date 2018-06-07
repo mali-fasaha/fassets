@@ -17,6 +17,7 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

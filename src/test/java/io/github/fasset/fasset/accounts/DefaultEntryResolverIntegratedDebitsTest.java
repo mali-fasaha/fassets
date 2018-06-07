@@ -19,7 +19,7 @@ package io.github.fasset.fasset.accounts;
 
 import com.google.common.collect.ImmutableList;
 
-import io.github.fasset.fasset.accounts.nomenclature.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationPropertiesService;
 import io.github.fasset.fasset.accounts.nomenclature.AcquisitionCreditAccountIDResolver;
 import io.github.fasset.fasset.accounts.nomenclature.AcquisitionDebitAccountIDResolver;
 import io.github.fasset.fasset.book.keeper.Account;

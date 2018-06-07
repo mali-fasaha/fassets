@@ -17,8 +17,8 @@
  */
 package io.github.fasset.fasset.config;
 
-import io.github.fasset.fasset.accounts.nomenclature.AccountIdConfigurationPropertiesService;
-import io.github.fasset.fasset.accounts.nomenclature.AccountIdConfigurationService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

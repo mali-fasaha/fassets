@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.accounts.nomenclature;
+package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 /**
  * This service reads data from a configuration properties file and maintains a map which is used to provide

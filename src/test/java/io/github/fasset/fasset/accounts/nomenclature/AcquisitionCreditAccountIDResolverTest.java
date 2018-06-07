@@ -17,6 +17,8 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationPropertiesService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdConfigurationService;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
@@ -40,7 +42,7 @@ public class AcquisitionCreditAccountIDResolverTest {
 
         AccountIdConfigurationService configurationService = Mockito.mock(AccountIdConfigurationService.class);
 
-        accountIDResolver = new AcquisitionCreditAccountIDResolver(new AccountIdConfigurationPropertiesService("account-nomenclature-config"));
+        accountIDResolver = new AcquisitionCreditAccountIDResolver(new AccountIdConfigurationPropertiesService("account-id-config"));
     }
 
     @Test
