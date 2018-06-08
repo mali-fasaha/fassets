@@ -58,9 +58,16 @@ public interface AccountIdService {
     String getCurrencyCode(String currencyCode);
 
     /**
-     * @return String GL Code to be used for credit transactions
+     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
+     * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
+     * code in the account number sequence
+     *
+     * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
+     * @param posting The direction which we are posting. This could be DEBIT or CREDIT
+     * @param fixedAsset From which we inquire the category of the asset for which we need a category code
+     * @return The category code to be added to the account number sequence after the currency code
      */
-    String creditGeneralLedgerCode();
+    String generalLedgerCode(TransactionType transactionType, Posting posting, FixedAsset fixedAsset);
 
     /**
      * @return String GL Id to be used for credit transactions

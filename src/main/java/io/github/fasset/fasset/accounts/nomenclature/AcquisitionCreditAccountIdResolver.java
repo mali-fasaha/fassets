@@ -69,7 +69,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
-        return idConfigurationService.creditGeneralLedgerCode();
+        return idConfigurationService.generalLedgerCode();
     }
 
     private String glId() {

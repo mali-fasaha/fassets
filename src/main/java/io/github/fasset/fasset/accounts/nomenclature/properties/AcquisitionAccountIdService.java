@@ -98,7 +98,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return String GL Code to be used for credit transactions
      */
     @Override
-    public String creditGeneralLedgerCode() {
+    public String generalLedgerCode(TransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
 
         log.debug("Fetching credit account for acquisitions...");
 

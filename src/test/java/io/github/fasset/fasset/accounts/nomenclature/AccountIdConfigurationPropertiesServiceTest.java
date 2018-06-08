@@ -73,7 +73,7 @@ public class AccountIdConfigurationPropertiesServiceTest {
     @Test
     public void getAcquisitionCreditGlCode() {
 
-        assertEquals("10051", configurationService.creditGeneralLedgerCode());
+        assertEquals("10051", configurationService.generalLedgerCode());
     }
 
     @Test
