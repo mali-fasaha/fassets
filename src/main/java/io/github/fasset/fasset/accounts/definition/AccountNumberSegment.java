@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.accounts;
+package io.github.fasset.fasset.accounts.definition;
 
 /**
  * The account is not just an arbitrary assignment but a representation of its various features. Each

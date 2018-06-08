@@ -17,13 +17,13 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
-import io.github.fasset.fasset.accounts.TransactionType;
-import io.github.fasset.fasset.accounts.Posting;
+import io.github.fasset.fasset.accounts.definition.TransactionType;
+import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import static io.github.fasset.fasset.accounts.AccountNumberSegment.PLACE_HOLDER;
+import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.PLACE_HOLDER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**

@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.accounts;
+package io.github.fasset.fasset.accounts.definition;
 
 public enum Posting {
 

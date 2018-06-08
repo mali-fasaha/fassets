@@ -24,8 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import static io.github.fasset.fasset.accounts.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.accounts.Posting.CREDIT;
+import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
+import static io.github.fasset.fasset.accounts.definition.Posting.CREDIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**

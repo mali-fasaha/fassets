@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static io.github.fasset.fasset.accounts.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.accounts.Posting.CREDIT;
+import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
+import static io.github.fasset.fasset.accounts.definition.Posting.CREDIT;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AcquisitionAccountIdServiceTest {
