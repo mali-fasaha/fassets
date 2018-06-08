@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import static io.github.fasset.fasset.accounts.definition.Posting.DEBIT;
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
 import static io.github.fasset.fasset.accounts.definition.Posting.CREDIT;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,5 +37,10 @@ class AcquisitionAccountIdServiceTest {
     @Test void accountPlaceHolder() throws Exception {
 
         assertEquals("001", acquisitionAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
+    }
+
+    @Test void generalLegerCode() throws Exception {
+
+        assertEquals("00152", acquisitionAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
     }
 }

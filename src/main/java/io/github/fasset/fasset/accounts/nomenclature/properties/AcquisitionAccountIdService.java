@@ -110,9 +110,15 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
         log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset, posting);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.placeHolder"
+        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.general-ledger-code"
 
-        return accountConfigProperties.getProperty(key);
+        log.debug("Fetching generalLedgerCode for an account whose key is encoded as {}", key);
+
+        String glcode = accountConfigProperties.getProperty(key);
+
+        log.debug("GL code for posting {} for the asset {} on the {} side, resolved as {}", transactionType, fixedAsset, posting, glcode);
+
+        return glcode;
     }
 
     /**

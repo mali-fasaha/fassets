@@ -62,15 +62,16 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
         log.debug("Resolving the account number for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
         //TODO Abstract account number resolution
-        return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode() + glId();
+        //return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode() + glId();
+        return null;
     }
 
-    private String glCode() {
+    /*private String glCode() {
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
         return idConfigurationService.generalLedgerCode();
-    }
+    }*/
 
     private String glId() {
 
