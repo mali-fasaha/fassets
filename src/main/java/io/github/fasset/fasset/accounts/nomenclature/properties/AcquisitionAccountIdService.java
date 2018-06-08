@@ -23,6 +23,7 @@ import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
+import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.GENERAL_LEDGER_CODE;
 import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.PLACE_HOLDER;
 import static org.slf4j.LoggerFactory.getLogger;
 
