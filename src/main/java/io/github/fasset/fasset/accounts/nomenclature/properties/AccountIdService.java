@@ -29,33 +29,13 @@ import io.github.fasset.fasset.model.FixedAsset;
 public interface AccountIdService {
 
     /**
-     * Using the provided category of an asset this method returns a specific nomenclature code for the
-     * category. This is the code segment that typically follows the general ledger code in the
-     * account number sequence
-     *
-     * @param category The category of the asset for which we need a category nomenclature
-     * @return The category nomenclature to be added to the account number sequence after the general ledger code
-     */
-    String debitAccountPlaceHolder(String category);
-
-    /**
-     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
-     * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
-     * code in the account number sequence
-     *
-     * @param category The category of the asset for which we need a category code
-     * @return The category code to be added to the account number sequence after the currency code
-     */
-    String debitGeneralLedgerCode(String category);
-
-    /**
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
      * the unique code to be used in the account number sequence after the service outlet code
      *
      * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
      * @return Account number sequence code to follow the service outlet nomenclature
      */
-    String getCurrencyCode(String currencyCode);
+    String currencyCode(String currencyCode);
 
     /**
      * Using the category of an asset this method returns the generic nomenclature code for the category, which in
@@ -70,6 +50,10 @@ public interface AccountIdService {
     String generalLedgerCode(TransactionType transactionType, Posting posting, FixedAsset fixedAsset);
 
     /**
+     * Using the provided category of an asset this method returns a specific nomenclature code for the
+     * category. This is the code segment that typically follows the general ledger code in the
+     * account number sequence
+     *
      * @return String GL Id to be used for credit transactions
      */
     String accountPlaceHolder(TransactionType transactionType, Posting posting, FixedAsset fixedAsset);

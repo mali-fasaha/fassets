@@ -25,8 +25,6 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.accounts.definition.Posting.CREDIT;
 import static org.junit.Assert.assertEquals;
 
 public class AccountIdConfigurationPropertiesServiceTest {
@@ -60,14 +58,14 @@ public class AccountIdConfigurationPropertiesServiceTest {
     //@Test
     public void getCurrencyCode() {
 
-        assertEquals("00", configurationService.getCurrencyCode("KES"));
-        assertEquals("01", configurationService.getCurrencyCode("USD"));
-        assertEquals("02", configurationService.getCurrencyCode("GBP"));
-        assertEquals("03", configurationService.getCurrencyCode("EUR"));
-        assertEquals("04", configurationService.getCurrencyCode("INR"));
-        assertEquals("05", configurationService.getCurrencyCode("CAD"));
-        assertEquals("06", configurationService.getCurrencyCode("CHF"));
-        assertEquals("07", configurationService.getCurrencyCode("ZAR"));
+        assertEquals("00", configurationService.currencyCode("KES"));
+        assertEquals("01", configurationService.currencyCode("USD"));
+        assertEquals("02", configurationService.currencyCode("GBP"));
+        assertEquals("03", configurationService.currencyCode("EUR"));
+        assertEquals("04", configurationService.currencyCode("INR"));
+        assertEquals("05", configurationService.currencyCode("CAD"));
+        assertEquals("06", configurationService.currencyCode("CHF"));
+        assertEquals("07", configurationService.currencyCode("ZAR"));
     }
 
     @Test

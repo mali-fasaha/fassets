@@ -59,7 +59,7 @@ public abstract class AbstractAccountIdService implements AccountIdService {
      * @return Account number sequence code to follow the service outlet nomenclature
      */
     @Override
-    public String getCurrencyCode(String currencyCode) {
+    public String currencyCode(String currencyCode) {
 
         log.debug("Fetching currency code for Currency : {}", currencyCode);
 

@@ -53,7 +53,7 @@ public class AcquisitionDebitAccountIdResolverTest {
         when(configurationService.debitAccountPlaceHolder("ELECTRONICS")).thenReturn("015");
 
         // ISO 4217 Currency codes
-        when(configurationService.getCurrencyCode("KES")).thenReturn("00");
+        when(configurationService.currencyCode("KES")).thenReturn("00");
 
         accountIdResolver = new AcquisitionDebitAccountIdResolver(configurationService);
     }

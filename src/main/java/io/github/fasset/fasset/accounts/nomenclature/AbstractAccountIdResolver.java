@@ -43,7 +43,7 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
 
         log.debug("Resolving currency code # for fixedAsset : {}", fixedAsset.getAssetDescription());
 
-        return idConfigurationService.getCurrencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
+        return idConfigurationService.currencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
     }
 
     /**
