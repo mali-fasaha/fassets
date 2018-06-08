@@ -37,10 +37,14 @@ class AcquisitionAccountIdServiceTest {
     @Test void accountPlaceHolder() throws Exception {
 
         assertEquals("001", acquisitionAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
+        assertEquals("001", acquisitionAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, lenovo));
+        assertEquals("001", acquisitionAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, radio));
     }
 
     @Test void generalLegerCode() throws Exception {
 
-        assertEquals("00152", acquisitionAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
+        assertEquals("00153", acquisitionAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
+        assertEquals("00150", acquisitionAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
+        assertEquals("00151", acquisitionAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
     }
 }
