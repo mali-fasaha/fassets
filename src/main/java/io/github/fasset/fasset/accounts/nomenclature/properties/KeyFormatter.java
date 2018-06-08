@@ -20,7 +20,7 @@ public class KeyFormatter {
 
     static String formatKey(String category, TransactionType transactionType, Posting posting) {
 
-        return cleanString(String.format("%s.%s.%s",category, transactionType, posting)); // e.g. computers.acquisition.posting
+        return cleanString(String.format("%s.%s.%s",category.toLowerCase(), transactionType, posting)); // e.g. computers.acquisition.posting
     }
 
     static String formatKey(String category, TransactionType transactionType, Posting posting, AccountNumberSegment segment) {

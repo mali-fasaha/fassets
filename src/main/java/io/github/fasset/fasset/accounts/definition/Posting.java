@@ -8,7 +8,7 @@ public enum Posting {
     DEBIT {
         @Override
         public String toString() {
-            return "DEBIT";
+            return "debit";
         }
     },
 
@@ -18,7 +18,7 @@ public enum Posting {
     CREDIT {
         @Override
         public String toString() {
-            return "CREDIT";
+            return "credit";
         }
     },
 }
