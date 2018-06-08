@@ -17,12 +17,13 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
-import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
+import io.github.fasset.fasset.accounts.TransactionType;
 import io.github.fasset.fasset.accounts.Posting;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import static io.github.fasset.fasset.accounts.Posting.CREDIT;
+import static io.github.fasset.fasset.accounts.AccountNumberSegment.PLACE_HOLDER;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -36,7 +37,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public final class AcquisitionAccountIdService extends AbstractAccountIdService implements AccountIdService {
 
     //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
-    private static final org.slf4j.Logger log = getLogger(AcquisitionAccountIdService.class);
+    private static final Logger log = getLogger(AcquisitionAccountIdService.class);
 
     public AcquisitionAccountIdService(String propertiesFile, String labelsFile) {
 
@@ -108,13 +109,14 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return String GL Id to be used for credit transactions
      */
     @Override
-    public String accountPlaceHolder(FixedAssetTransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
+    public String accountPlaceHolder(TransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting); // e.g "sundry.acquisition.placeHolder"
+        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, PLACE_HOLDER); // e.g "sundry.acquisition. credit.placeHolder"
 
-        //TODO confirm this implementation works
+        log.debug("Resolving placeholder for the key, {}", key);
+
         return accountConfigProperties.getProperty(key);
     }
 
@@ -124,7 +126,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
      * @return Name of the account
      */
     @Override
-    public String accountName(FixedAssetTransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
+    public String accountName(TransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 

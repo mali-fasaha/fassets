@@ -17,8 +17,6 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature;
 
-import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
-import io.github.fasset.fasset.accounts.Posting;
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
@@ -26,6 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import static io.github.fasset.fasset.accounts.TransactionType.ACQUISITION;
+import static io.github.fasset.fasset.accounts.Posting.CREDIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -53,7 +53,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
         log.debug("Resolving the account name for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
         //return "SUNDRY CREDITORS ACCOUNT";
-        return idConfigurationService.accountName(FixedAssetTransactionType.ACQUISITION, Posting.CREDIT, fixedAsset);
+        return idConfigurationService.accountName(ACQUISITION, CREDIT, fixedAsset);
     }
 
     @Override
@@ -76,7 +76,8 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
-        return idConfigurationService.accountPlaceHolder();
+        //TODO move this variables to params
+        return idConfigurationService.accountPlaceHolder(ACQUISITION, CREDIT, new FixedAsset());
     }
 
     /**

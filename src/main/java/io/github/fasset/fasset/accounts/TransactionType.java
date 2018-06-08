@@ -20,7 +20,7 @@ package io.github.fasset.fasset.accounts;
 /**
  * These  constants the types of transactions possible with fixed assets and their register
  */
-public enum FixedAssetTransactionType {
+public enum TransactionType {
 
     /**
      * These be the type of transaction where assets are purchased. It is expected at a minimum that 2 accounts
@@ -39,7 +39,7 @@ public enum FixedAssetTransactionType {
          */
         @Override
         public String toString() {
-            return "ACQUISITION";
+            return "acquisition";
         }
     },
 

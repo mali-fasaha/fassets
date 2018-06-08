@@ -1,6 +1,5 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
-import io.github.fasset.fasset.accounts.Posting;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static io.github.fasset.fasset.accounts.FixedAssetTransactionType.ACQUISITION;
+import static io.github.fasset.fasset.accounts.TransactionType.ACQUISITION;
 import static io.github.fasset.fasset.accounts.Posting.CREDIT;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,5 +31,10 @@ class AcquisitionAccountIdServiceTest {
         assertEquals("SUNDRY CREDITORS", acquisitionAccountIdService.accountName(ACQUISITION, CREDIT, radio));
         assertEquals("SUNDRY CREDITORS", acquisitionAccountIdService.accountName(ACQUISITION, CREDIT, lenovo));
         assertEquals("SUNDRY CREDITORS", acquisitionAccountIdService.accountName(ACQUISITION, CREDIT, chair));
+    }
+
+    @Test void accountPlaceHolder() throws Exception {
+
+        assertEquals("001", acquisitionAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
     }
 }

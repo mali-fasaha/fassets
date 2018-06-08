@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
-import io.github.fasset.fasset.accounts.FixedAssetTransactionType;
+import io.github.fasset.fasset.accounts.AccountNumberSegment;
+import io.github.fasset.fasset.accounts.TransactionType;
 import io.github.fasset.fasset.accounts.Posting;
 import io.github.fasset.fasset.kernel.util.PropertiesUtils;
 import org.slf4j.Logger;
@@ -37,11 +38,16 @@ public abstract class AbstractAccountIdService implements AccountIdService {
         return toClean.replace(" ", "-").replace("&", "and");
     }
 
-    protected String formatKey(String category, FixedAssetTransactionType transactionType, Posting posting) {
+    String formatKey(String category, TransactionType transactionType, Posting posting) {
+
+        return cleanString(String.format("%s.%s.%s",category, transactionType, posting)); // e.g. computers.acquisition.posting
+    }
+
+    String formatKey(String category, TransactionType transactionType, Posting posting, AccountNumberSegment segment) {
 
         String formattedCategory = cleanString(category.toLowerCase());
 
-        return String.format("%s.%S.%s", formattedCategory, transactionType.toString(), posting.toString()).toLowerCase();
+        return cleanString(String.format("%s.%S.%s.", formattedCategory, transactionType.toString(), posting.toString()).toLowerCase()) + segment;
     }
 
 
