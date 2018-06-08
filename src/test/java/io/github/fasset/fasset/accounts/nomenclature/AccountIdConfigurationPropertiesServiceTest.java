@@ -38,21 +38,21 @@ public class AccountIdConfigurationPropertiesServiceTest {
     //@Test
     public void acquisitionGlId() {
 
-        assertEquals("013", configurationService.debitAccountPlaceHolder("COMPUTERS"));
+        /*assertEquals("013", configurationService.debitAccountPlaceHolder("COMPUTERS"));
         assertEquals("017", configurationService.debitAccountPlaceHolder("COMPUTER SOFTWARE"));
         assertEquals("015", configurationService.debitAccountPlaceHolder("FURNITURE & FITTINGS"));
         assertEquals("014", configurationService.debitAccountPlaceHolder("ELECTRONICS"));
-        assertEquals("016", configurationService.debitAccountPlaceHolder("MOTOR VEHICLES"));
+        assertEquals("016", configurationService.debitAccountPlaceHolder("MOTOR VEHICLES"));*/
     }
 
     //@Test
     public void acquisitionGlCode() {
 
-        assertEquals("00150", configurationService.debitGeneralLedgerCode("COMPUTERS"));
+        /*assertEquals("00150", configurationService.debitGeneralLedgerCode("COMPUTERS"));
         assertEquals("00155", configurationService.debitGeneralLedgerCode("COMPUTER SOFTWARE"));
         assertEquals("00153", configurationService.debitGeneralLedgerCode("FURNITURE & FITTINGS"));
         assertEquals("00151", configurationService.debitGeneralLedgerCode("ELECTRONICS"));
-        assertEquals("00154", configurationService.debitGeneralLedgerCode("MOTOR VEHICLES"));
+        assertEquals("00154", configurationService.debitGeneralLedgerCode("MOTOR VEHICLES"));*/
     }
 
     //@Test

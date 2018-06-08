@@ -60,7 +60,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
         log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset, posting);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.general-ledger-code"
+        String key = KeyFormatter.formatKey(fixedAsset.getCategory(), transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.general-ledger-code"
 
         log.debug("Fetching generalLedgerCode for an account whose key is encoded as {}", key);
 
@@ -79,7 +79,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, PLACE_HOLDER); // e.g "sundry.acquisition. credit.placeHolder"
+        String key = KeyFormatter.formatKey(fixedAsset.getCategory(), transactionType, posting, PLACE_HOLDER); // e.g "sundry.acquisition. credit.placeHolder"
 
         log.debug("Resolving placeholder for the key, {}", key);
 
@@ -96,7 +96,7 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting);
+        String key = KeyFormatter.formatKey(fixedAsset.getCategory(), transactionType, posting);
 
         log.debug("Fetching account label for the key: {}", key);
 
