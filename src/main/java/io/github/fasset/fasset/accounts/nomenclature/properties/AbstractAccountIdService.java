@@ -18,7 +18,7 @@ public abstract class AbstractAccountIdService implements AccountIdService {
     final Properties accountConfigProperties;
     final Properties accountLabelProperties;
 
-    protected AbstractAccountIdService(final String propertiesFile, final String labelsFile) {
+    AbstractAccountIdService(final String propertiesFile, final String labelsFile) {
 
         String source = propertiesFile == null ? "account-id" : propertiesFile;
         String labelSource = propertiesFile == null ? "account-label" : labelsFile;
@@ -28,28 +28,6 @@ public abstract class AbstractAccountIdService implements AccountIdService {
     }
 
     private static final Logger log = LoggerFactory.getLogger(AbstractAccountIdService.class);
-
-    protected String formatKey(String category, String transaction, String element) {
-        return cleanString(String.format("%s.%s.%s", category.toLowerCase(), transaction, element));
-    }
-
-    protected String cleanString(String toClean){
-
-        return toClean.replace(" ", "-").replace("&", "and");
-    }
-
-    String formatKey(String category, TransactionType transactionType, Posting posting) {
-
-        return cleanString(String.format("%s.%s.%s",category, transactionType, posting)); // e.g. computers.acquisition.posting
-    }
-
-    String formatKey(String category, TransactionType transactionType, Posting posting, AccountNumberSegment segment) {
-
-        String formattedCategory = cleanString(category.toLowerCase());
-
-        return cleanString(String.format("%s.%S.%s.", formattedCategory, transactionType.toString(), posting.toString()).toLowerCase()) + segment;
-    }
-
 
     /**
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates

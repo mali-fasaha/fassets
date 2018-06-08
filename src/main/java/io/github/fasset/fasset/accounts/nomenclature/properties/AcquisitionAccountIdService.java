@@ -46,56 +46,6 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
     }
 
     /**
-     * Using the provided category of an asset this method returns a specific nomenclature code for the
-     * category. This is the code segment that typically follows the general ledger code in the
-     * account number sequence
-     *
-     * @param category The category of the asset for which we need a category nomenclature
-     * @return The category nomenclature to be added to the account number sequence after the general ledger code
-     */
-    @Override
-    public String debitAccountPlaceHolder(String category) {
-
-        log.debug("Fetching gl nomenclature for category: {}", category);
-
-        String placeHolder = accountConfigProperties.getProperty(formatKey(category, "acquisition", "placeholder"));
-
-        log.debug("Place holder for category: {} resolved as {}", category, placeHolder);
-
-        return placeHolder;
-    }
-
-    /**
-     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
-     * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
-     * code in the account number sequence
-     *
-     * @param category The category of the asset for which we need a category code
-     * @return The category code to be added to the account number sequence after the currency code
-     */
-    @Override
-    public String debitGeneralLedgerCode(String category) {
-
-        log.debug("Fetching gl code for category: {}", category);
-
-        String glCode = accountConfigProperties.getProperty(formatKey(category));
-
-        log.debug("General ledger code # for category : {} resolved as {}", category, glCode);
-
-        return glCode;
-    }
-
-    private String formatKey(String propertyKey) {
-        return formatKey(propertyKey, "acquisition", "gl.code");
-    }
-
-    private String formatKey(String propertyKey, String element) {
-        return formatKey(propertyKey, "acquisition", element);
-    }
-
-
-
-    /**
      * Using the category of an asset this method returns the generic nomenclature code for the category, which in
      * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
      * code in the account number sequence
