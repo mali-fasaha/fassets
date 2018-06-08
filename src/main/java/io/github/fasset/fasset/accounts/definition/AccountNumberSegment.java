@@ -8,6 +8,24 @@ package io.github.fasset.fasset.accounts.definition;
 public enum AccountNumberSegment {
 
     /**
+     * Defines a group of closely related accounts
+     */
+    GENERAL_LEDGER_CODE {
+        /**
+         * Returns the name of this enum constant, as contained in the
+         * declaration.  This method may be overridden, though it typically
+         * isn't necessary or desirable.  An enum type should override this
+         * method when a more "programmer-friendly" string form exists.
+         *
+         * @return the name of this enum constant
+         */
+        @Override
+        public String toString() {
+            return "general-ledger-code";
+        }
+    },
+
+    /**
      * Unique to the accounts in a given general ledger
      */
     PLACE_HOLDER {
@@ -21,7 +39,7 @@ public enum AccountNumberSegment {
          */
         @Override
         public String toString() {
-            return "placeHolder";
+            return "place-holder";
         }
     },
 }

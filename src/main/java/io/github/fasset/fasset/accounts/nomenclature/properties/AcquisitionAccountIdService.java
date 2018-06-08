@@ -95,14 +95,23 @@ public final class AcquisitionAccountIdService extends AbstractAccountIdService 
 
 
     /**
-     * @return String GL Code to be used for credit transactions
+     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
+     * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
+     * code in the account number sequence
+     *
+     * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
+     * @param posting The direction which we are posting. This could be DEBIT or CREDIT
+     * @param fixedAsset From which we inquire the category of the asset for which we need a category code
+     * @return The category code to be added to the account number sequence after the currency code
      */
     @Override
     public String generalLedgerCode(TransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
 
-        log.debug("Fetching credit account for acquisitions...");
+        log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset, posting);
 
-        return accountConfigProperties.getProperty("sundry.acquisition.gl.code");
+        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.placeHolder"
+
+        return accountConfigProperties.getProperty(key);
     }
 
     /**
