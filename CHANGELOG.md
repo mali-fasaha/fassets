@@ -4,6 +4,126 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Ammended format key which was returning the category of the asset in proper case instead of lower case**
+
+
+[54d60c341f02d06](https://github.com/ghacupha/fassets/commit/54d60c341f02d06) Edwin Njeru *2018-06-08 06:27:05*
+
+**Muted broken tests in the AcquisitionDebitAccountIdResolver**
+
+
+[c10e281e5d75dbf](https://github.com/ghacupha/fassets/commit/c10e281e5d75dbf) Edwin Njeru *2018-06-08 06:22:40*
+
+**Created package private KeyFormatter formatting property keys**
+
+
+[e2eec7565f1dbcd](https://github.com/ghacupha/fassets/commit/e2eec7565f1dbcd) Edwin Njeru *2018-06-08 06:18:59*
+
+**Removed unnecessary methods from the accountIdService interface**
+
+
+[e4d4269b0083b3d](https://github.com/ghacupha/fassets/commit/e4d4269b0083b3d) Edwin Njeru *2018-06-08 06:14:45*
+
+**Made additional assertions for the accountIdService with computer software and motor vehicle items**
+
+
+[36631bb25a818e2](https://github.com/ghacupha/fassets/commit/36631bb25a818e2) Edwin Njeru *2018-06-08 06:04:57*
+
+**Enhanced AcquisitionAccountIdService tests to computers and furniture and fittings**
+
+
+[87b3fb3d0d62b1d](https://github.com/ghacupha/fassets/commit/87b3fb3d0d62b1d) Edwin Njeru *2018-06-08 05:48:55*
+
+**Muted tests for the AccountIdConfigurationPropertiesService inorder to Isolate the acquistionAccountIdService for testing purposes**
+
+
+[2e0ef2abe227580](https://github.com/ghacupha/fassets/commit/2e0ef2abe227580) Edwin Njeru *2018-06-08 05:42:13*
+
+**Amended wrongly labelled general ledger code segment tags**
+
+
+[16df06ef3921b75](https://github.com/ghacupha/fassets/commit/16df06ef3921b75) Edwin Njeru *2018-06-08 05:34:12*
+
+**Redefined the case nomenclature used in the properties files**
+
+
+[41b5a7701a82853](https://github.com/ghacupha/fassets/commit/41b5a7701a82853) Edwin Njeru *2018-06-08 05:30:39*
+
+**Defined the generalLedgerCode with new parameters to allow more generalized re use**
+
+
+[d866bf50e44b9b3](https://github.com/ghacupha/fassets/commit/d866bf50e44b9b3) Edwin Njeru *2018-06-08 05:24:59*
+
+**Created accounts definitions package**
+
+
+[45fe515c539e5af](https://github.com/ghacupha/fassets/commit/45fe515c539e5af) Edwin Njeru *2018-06-08 05:11:46*
+
+**Created AccountNumberSegment definition**
+
+
+[84d56858caa29ee](https://github.com/ghacupha/fassets/commit/84d56858caa29ee) Edwin Njeru *2018-06-08 05:11:09*
+
+**Implemented account naming in AcquisitionAccountIdService**
+
+
+[e5bd425ad5f6e20](https://github.com/ghacupha/fassets/commit/e5bd425ad5f6e20) Edwin Njeru *2018-06-07 15:44:28*
+
+**Created FassetsProperties**
+
+
+[b7f5523650ba732](https://github.com/ghacupha/fassets/commit/b7f5523650ba732) Edwin Njeru *2018-06-07 09:15:45*
+
+**Enhanced methods of the AccountIdService implementations**
+
+
+[fa1a23661e3bcf3](https://github.com/ghacupha/fassets/commit/fa1a23661e3bcf3) Edwin Njeru *2018-06-07 09:02:11*
+
+**Implemented #creditAccountName method using configuration of labels**
+
+
+[5e89460d3bcc100](https://github.com/ghacupha/fassets/commit/5e89460d3bcc100) Edwin Njeru *2018-06-07 08:35:37*
+
+**Created AbstractAccountIdResolver**
+
+
+[b064524e4c692ec](https://github.com/ghacupha/fassets/commit/b064524e4c692ec) Edwin Njeru *2018-06-07 07:13:47*
+
+**Deprecated resolveConttraAccountId and resolveCategoryId methods, the later for redundancy the former for relevance**
+
+
+[02766eaabc3a44c](https://github.com/ghacupha/fassets/commit/02766eaabc3a44c) Edwin Njeru *2018-06-07 06:51:23*
+
+**Deprecated resolveConttraAccountId and resolveCategoryId methods, the later for redundancy the former for relevance**
+
+
+[3e02435deb937d6](https://github.com/ghacupha/fassets/commit/3e02435deb937d6) Edwin Njeru *2018-06-07 06:51:15*
+
+**Renamed methods in the AccountIdService to allow it to be reused for more transactions**
+
+
+[eb943c526262e10](https://github.com/ghacupha/fassets/commit/eb943c526262e10) Edwin Njeru *2018-06-07 06:06:08*
+
+**Created AbstractAccountIdService to share common methods and made the AcquisitionAccountIdService final**
+
+
+[acdc4969611f827](https://github.com/ghacupha/fassets/commit/acdc4969611f827) Edwin Njeru *2018-06-07 05:55:13*
+
+**Created specilized package for accountIdConfigurationService**
+
+
+[8c1f7c77c7e4fe7](https://github.com/ghacupha/fassets/commit/8c1f7c77c7e4fe7) Edwin Njeru *2018-06-07 05:20:49*
+
+**Amended the name of the config file to account-id-config**
+
+
+[a0523721465e861](https://github.com/ghacupha/fassets/commit/a0523721465e861) Edwin Njeru *2018-06-07 05:17:11*
+
+**Initial rearrangment for accounts management classes**
+
+
+[b53099107e7ec95](https://github.com/ghacupha/fassets/commit/b53099107e7ec95) Edwin Njeru *2018-06-06 15:07:33*
+
 **Fixed broken timepoint dependency links in the tests**
 
 
@@ -49,7 +169,7 @@ Changelog for fassets implementation by ghacupha
 
 [d891c6394496e4f](https://github.com/ghacupha/fassets/commit/d891c6394496e4f) Edwin Njeru *2018-05-30 17:37:15*
 
-**modified asset list component to activate both the delete button and the asset nomenclature link**
+**modified asset list component to activate both the delete button and the asset id link**
 
 
 [d17755c1de15904](https://github.com/ghacupha/fassets/commit/d17755c1de15904) Edwin Njeru *2018-05-30 17:00:07*
@@ -199,7 +319,7 @@ Changelog for fassets implementation by ghacupha
 
 [65919c0d51816b0](https://github.com/ghacupha/fassets/commit/65919c0d51816b0) ghacupha *2018-05-17 14:01:48*
 
-**Implemented the AccountIdResolver, and the AccountIDConfigurationService with AccountIDPropertiesConfigurationService together with its unit test, and configured a spring bean called 'accountIdPropertiesConfigurationService' for intergration with the rest of the application's container**
+**Implemented the DebitAccountIDResolver, and the AccountIDConfigurationService with AccountIDPropertiesConfigurationService together with its unit test, and configured a spring bean called 'accountIdPropertiesConfigurationService' for intergration with the rest of the application's container**
 
 
 [8f9f5e88a731710](https://github.com/ghacupha/fassets/commit/8f9f5e88a731710) ghacupha *2018-05-17 13:53:37*
