@@ -19,7 +19,7 @@ package io.github.fasset.fasset.accounts;
 
 import com.google.common.collect.ImmutableList;
 
-import io.github.fasset.fasset.accounts.nomenclature.properties.AcquisitionAccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
 import io.github.fasset.fasset.accounts.nomenclature.AcquisitionCreditAccountIdResolver;
 import io.github.fasset.fasset.accounts.nomenclature.AcquisitionDebitAccountIdResolver;
 import io.github.fasset.fasset.book.keeper.Account;
@@ -72,8 +72,8 @@ public class DefaultEntryResolverIntegratedDebitsTest {
     public void setUp() throws Exception {
 
         BatchAcquisitionEntryResolver batchAcquisitionEntryResolver = new BatchAcquisitionEntryResolver(
-            new AcquisitionAccountResolver(new AcquisitionDebitAccountIdResolver(new AcquisitionAccountIdService("account-id","account-label")),
-                new AcquisitionCreditAccountIdResolver(new AcquisitionAccountIdService("account-id","account-label"))));
+            new AcquisitionAccountResolver(new AcquisitionDebitAccountIdResolver(new FileAccountIdService("account-id","account-label")),
+                new AcquisitionCreditAccountIdResolver(new FileAccountIdService("account-id","account-label"))));
 
         entries = batchAcquisitionEntryResolver.resolveEntries(fixedAssets);
 

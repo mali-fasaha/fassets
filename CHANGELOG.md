@@ -29,7 +29,7 @@ Changelog for fassets implementation by ghacupha
 
 [36631bb25a818e2](https://github.com/ghacupha/fassets/commit/36631bb25a818e2) Edwin Njeru *2018-06-08 06:04:57*
 
-**Enhanced AcquisitionAccountIdService tests to computers and furniture and fittings**
+**Enhanced FileAccountIdService tests to computers and furniture and fittings**
 
 
 [87b3fb3d0d62b1d](https://github.com/ghacupha/fassets/commit/87b3fb3d0d62b1d) Edwin Njeru *2018-06-08 05:48:55*
@@ -64,7 +64,7 @@ Changelog for fassets implementation by ghacupha
 
 [84d56858caa29ee](https://github.com/ghacupha/fassets/commit/84d56858caa29ee) Edwin Njeru *2018-06-08 05:11:09*
 
-**Implemented account naming in AcquisitionAccountIdService**
+**Implemented account naming in FileAccountIdService**
 
 
 [e5bd425ad5f6e20](https://github.com/ghacupha/fassets/commit/e5bd425ad5f6e20) Edwin Njeru *2018-06-07 15:44:28*
@@ -104,7 +104,7 @@ Changelog for fassets implementation by ghacupha
 
 [eb943c526262e10](https://github.com/ghacupha/fassets/commit/eb943c526262e10) Edwin Njeru *2018-06-07 06:06:08*
 
-**Created AbstractAccountIdService to share common methods and made the AcquisitionAccountIdService final**
+**Created AbstractAccountIdService to share common methods and made the FileAccountIdService final**
 
 
 [acdc4969611f827](https://github.com/ghacupha/fassets/commit/acdc4969611f827) Edwin Njeru *2018-06-07 05:55:13*

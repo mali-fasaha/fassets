@@ -33,15 +33,17 @@ import static org.slf4j.LoggerFactory.getLogger;
  * an internal map
  * <br> This implementation provides identities for accounts specific to acquisition transactions, in this
  * case typical it is expected that the debit account would be the asset account tracking its category,
- * and the credit account would be the sundry creditor's account
+ * and the credit account would be the sundry creditor's account.
+ * <br> One peculiar aspect of this implementation is that pre-configured properties are read from a properties
+ * file.
  */
 @Component("accountIdConfigurationPropertiesService")
-public final class AcquisitionAccountIdService extends AbstractAccountIdService implements AccountIdService {
+public final class FileAccountIdService extends AbstractAccountIdService implements AccountIdService {
 
     //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
-    private static final Logger log = getLogger(AcquisitionAccountIdService.class);
+    private static final Logger log = getLogger(FileAccountIdService.class);
 
-    public AcquisitionAccountIdService(String propertiesFile, String labelsFile) {
+    public FileAccountIdService(String propertiesFile, String labelsFile) {
 
         super(propertiesFile, labelsFile);
     }
