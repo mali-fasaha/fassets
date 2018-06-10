@@ -37,7 +37,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  * and the credit account would be the sundry creditor's account. This being because tracking who exactly is paid
  * for this asset is beyond the scope of this application.
  * <br> One peculiar aspect of this implementation is that pre-configured properties are read from a properties
- * file.
+ * file. This is peculiar because this implementation will have siblings in future that could be reading configuration
+ * properties from a json api over http, from a database which is configured at runtime or even from an excel file.
  */
 @Component("accountIdConfigurationPropertiesService")
 public final class FileAccountIdService extends AbstractAccountIdService implements AccountIdService {
