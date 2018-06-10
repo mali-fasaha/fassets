@@ -42,7 +42,7 @@ class FileAccountIdServiceTest {
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, zemana));
         assertEquals("COMPUTER SOFTWARE", fileAccountIdService.accountName(ACQUISITION, DEBIT, zemana));
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, kca));
-        assertEquals("MOTOR VEHICLES", fileAccountIdService.accountName(ACQUISITION, CREDIT, kca));
+        assertEquals("MOTOR VEHICLES", fileAccountIdService.accountName(ACQUISITION, DEBIT, kca));
     }
 
     @Test void accountPlaceHolder() throws Exception {
