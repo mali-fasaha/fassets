@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.accounts.nomenclature.properties;
+package io.github.fasset.fasset.accounts.nomenclature.policy;
 
 /**
  * This interface acts as building blocks to how assets are identified in front-facing systems using simple structure
