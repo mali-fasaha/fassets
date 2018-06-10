@@ -24,7 +24,8 @@ import io.github.fasset.fasset.model.FixedAsset;
 /**
  * This service reads data from a configuration properties file and maintains a map which is used to provide
  * <p>
- * properties required to implement the account nomenclature and hierarchy policy version 1.0
+ * properties required to implement the account nomenclature and hierarchy policy version 1.0.
+ * <br> Th main philosohy here is that we can be able to generate account names if we know which asset we are transacting
  */
 public interface AccountIdService {
 

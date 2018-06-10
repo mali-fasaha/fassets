@@ -20,7 +20,8 @@ package io.github.fasset.fasset.accounts.nomenclature;
 import io.github.fasset.fasset.model.FixedAsset;
 
 /**
- * Generates the name of an existing account, if one exists, or the name of one to be created
+ * Generates the name of an existing account, if one exists, or the name of one to be created.
+ * <br> The main philosophy of this interface is that we would like to generate account names given the asset
  */
 public interface AccountIdResolver {
 

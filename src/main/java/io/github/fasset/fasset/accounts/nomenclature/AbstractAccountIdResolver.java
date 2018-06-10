@@ -28,6 +28,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * <br>Account naming policy is dirt simple. The account is simply the name of the category. There are
  * however embedded hierarchies which are partitioned by variables like, service outlet, currency
  * account type and so on and so forth.
+ * <br> This class provides common understanding for instance on implementation and meaning of currency
+ * code inclusion into the account number id sequence. That does not need to go into so many types of
+ * implementation.
  */
 public abstract class AbstractAccountIdResolver implements AccountIdResolver {
 
