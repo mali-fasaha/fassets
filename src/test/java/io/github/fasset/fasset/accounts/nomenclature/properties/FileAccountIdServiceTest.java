@@ -3,6 +3,7 @@ package io.github.fasset.fasset.accounts.nomenclature.properties;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUIS
 import static io.github.fasset.fasset.accounts.definition.Posting.CREDIT;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("FileAccountIdService unit-test")
 class FileAccountIdServiceTest {
 
     static FileAccountIdService fileAccountIdService;

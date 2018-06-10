@@ -31,16 +31,17 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * Implements the {@code AccountIdService} using pre stated values in a properties which are managed in
  * an internal map
- * <br> This implementation provides identities for accounts specific to acquisition transactions, in this
- * case typical it is expected that the debit account would be the asset account tracking its category,
- * and the credit account would be the sundry creditor's account.
+ * <br> This implementation provides identities for accounts various types of transactions, for instance:
+ * <br> i. acquisition transactions,
+ * <br>in this transaction it is expected that the debit account would be the asset account tracking its category,
+ * and the credit account would be the sundry creditor's account. This being because tracking who exactly is paid
+ * for this asset is beyond the scope of this application.
  * <br> One peculiar aspect of this implementation is that pre-configured properties are read from a properties
  * file.
  */
 @Component("accountIdConfigurationPropertiesService")
 public final class FileAccountIdService extends AbstractAccountIdService implements AccountIdService {
 
-    //private Properties accountConfigProperties = PropertiesUtils.fetchProperties("account-nomenclature-config");
     private static final Logger log = getLogger(FileAccountIdService.class);
 
     public FileAccountIdService(String propertiesFile, String labelsFile) {
