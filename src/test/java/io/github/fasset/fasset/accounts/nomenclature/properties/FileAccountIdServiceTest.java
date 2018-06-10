@@ -34,10 +34,15 @@ class FileAccountIdServiceTest {
     void accountName() {
 
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, radio));
+        assertEquals("ELECTRONIC EQUIPMENT", fileAccountIdService.accountName(ACQUISITION, DEBIT, radio));
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, lenovo));
+        assertEquals("COMPUTERS", fileAccountIdService.accountName(ACQUISITION, DEBIT, lenovo));
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, chair));
+        assertEquals("FURNITURE AND FITTINGS", fileAccountIdService.accountName(ACQUISITION, DEBIT, chair));
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, zemana));
+        assertEquals("COMPUTER SOFTWARE", fileAccountIdService.accountName(ACQUISITION, DEBIT, zemana));
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, kca));
+        assertEquals("MOTOR VEHICLES", fileAccountIdService.accountName(ACQUISITION, CREDIT, kca));
     }
 
     @Test void accountPlaceHolder() throws Exception {
