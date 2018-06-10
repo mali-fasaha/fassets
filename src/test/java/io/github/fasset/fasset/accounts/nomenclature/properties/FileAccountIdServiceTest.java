@@ -48,10 +48,15 @@ class FileAccountIdServiceTest {
     @Test void accountPlaceHolder() throws Exception {
 
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
+        assertEquals("015", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, lenovo));
+        assertEquals("013", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, lenovo));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, radio));
+        assertEquals("014", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, radio));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, zemana));
+        assertEquals("017", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, zemana));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, kca));
+        assertEquals("016", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, kca));
     }
 
     @Test void generalLegerCode() throws Exception {
@@ -61,5 +66,10 @@ class FileAccountIdServiceTest {
         assertEquals("00151", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
         assertEquals("00155", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, zemana));
         assertEquals("00154", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca));
     }
 }
