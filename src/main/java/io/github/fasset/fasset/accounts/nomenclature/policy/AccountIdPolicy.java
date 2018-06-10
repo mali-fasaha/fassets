@@ -9,6 +9,21 @@ package io.github.fasset.fasset.accounts.nomenclature.policy;
  * <br> This means that this interface can be reused for other things and not necessarily assets, since the queries are less abstract
  * <br> Also this means that the accountIdPolicy which should exist in the business domain and currently only exists in my
  * mind as the developer can be changed changed from a single point being an implementation of this policy.
+ * <br> The current implementation will be known as {@code AccountIdPolicyVersion1}. Upon emergence of more light this might
+ * be scrapped and be implemented as {@code AccountIdPolicyVersion2}. The 'scrapping' is a matter of changing default implementation
+ * in the dependency container.
+ * <br> One thing is not likely to change though. The fact that most things are assessed, depreciated, analysed, classified from
+ * the asset category perspective. Depreciation, reporting, verification, revaluation and maintenance policies are bound to
+ * be formulated and implemented with regards to an assets category.
+ * <br> Even as a developer well rehearsed with the problem space I do have or think to have attained all the light to clearly
+ * perceive the problem space and its attributes, but what I do think is that the business domain can be for the yet unforeseeable
+ * future, be bent to appreciate assets from the category perspective. Bigger companies would not lack the service-outlet guys,
+ * the currency guy, year of manufacture and year of acquisition guys. But that would be beyond the reach of this applications.
+ * Such guys should see me on the side and we can talk about how much value we need to give to my time, because such flexibility
+ * would require time to implement. Or we can still try and do in this rapid development cycle, without shooting our hypothetical
+ * but this is without guarantees or actually not blowing the whole damn foot in the process. One such scenario would be in
+ * a distributed environment ... oh! Here's another one, micro-services architecture. If you would think to implement mutating
+ * configurations in these two you are destined to experience pain the heights of which you have not experienced before.
  *
  */
 public interface AccountIdPolicy {
