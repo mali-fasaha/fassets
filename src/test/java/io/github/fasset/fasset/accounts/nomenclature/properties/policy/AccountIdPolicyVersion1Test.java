@@ -32,24 +32,46 @@ class AccountIdPolicyVersion1Test {
 
     @Test
     void generalLedgerCode() {
+
+        assertEquals("10051", accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
+        assertEquals("00153", accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
+        assertEquals("10051", accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "COMPUTERS"));
+        assertEquals("00152", accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "COMPUTERS"));
+        assertEquals("10051", accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT"));
+        assertEquals("00156", accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT"));
+        assertEquals("10051", accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "COMPUTER SOFTWARE"));
+        assertEquals("00155", accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "COMPUTER SOFTWARE"));
+        assertEquals("10051", accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "MOTOR VEHICLES"));
+        assertEquals("00151", accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "MOTOR VEHICLES"));
     }
 
     @Test
     void accountPlaceHolder() {
 
         assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
-        assertEquals("015", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
         assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTERS"));
-        assertEquals("013", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTERS"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTERS"));
         assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT"));
-        assertEquals("014", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT"));
         assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTER SOFTWARE"));
-        assertEquals("017", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTER SOFTWARE"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTER SOFTWARE"));
         assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "MOTOR VEHICLES"));
-        assertEquals("016", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "MOTOR VEHICLES"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "MOTOR VEHICLES"));
     }
 
     @Test
     void accountName() {
+
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTERS"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTERS"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTER SOFTWARE"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTER SOFTWARE"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "MOTOR VEHICLES"));
+        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "MOTOR VEHICLES"));
     }
 }
