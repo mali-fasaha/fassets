@@ -53,8 +53,11 @@ public interface AccountIdService {
     /**
      * Using the provided category of an asset this method returns a specific nomenclature code for the
      * category. This is the code segment that typically follows the general ledger code in the
-     * account number sequence
+     * account number sequence.
      *
+     * @param fixedAsset for which seek an account placeHolder
+     * @param posting Whether we are posting on the debit side or the credit side
+     * @param transactionType The type of transaction for the fixed asset
      * @return String GL Id to be used for credit transactions
      */
     String accountPlaceHolder(TransactionType transactionType, Posting posting, FixedAsset fixedAsset);

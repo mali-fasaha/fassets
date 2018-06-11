@@ -19,7 +19,6 @@ package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
 
-import java.util.Properties;
 
 /**
  * Implements common methods of the AccountIdService interface

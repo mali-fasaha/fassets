@@ -26,11 +26,11 @@ import io.github.fasset.fasset.accounts.definition.TransactionType;
  */
 public class KeyFormatter {
 
-    static String formatKey(String category, String transaction, String element) {
+    private static String formatKey(String category, String transaction, String element) {
         return cleanString(String.format("%s.%s.%s", category.toLowerCase(), transaction, element));
     }
 
-    static String cleanString(String toClean){
+    private static String cleanString(String toClean){
 
         return toClean.replace(" ", "-").replace("&", "and");
     }

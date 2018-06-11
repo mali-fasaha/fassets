@@ -34,13 +34,15 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("FileAccountIdService unit-test")
 class FileAccountIdServiceTest {
 
-    static FileAccountIdService fileAccountIdService;
+    private static FileAccountIdService fileAccountIdService;
 
-    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronics", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
+    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronic Equipment", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
     private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE & FITTINGS", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
     private final static FixedAsset zemana = new FixedAsset("Zemana Antilogger", Money.of(180,"KES"), "COMPUTER SOFTWARE", "986",LocalDate.of(2017,12,15),"abc48", Money.of(50.32,"KES"));
     private final static FixedAsset kca = new FixedAsset("KCA 265G", Money.of(950,"KES"), "MOTOR VEHICLES", "996",LocalDate.of(2018,1,5),"abc23", Money.of(500.12,"KES"));
+    private final static FixedAsset officePartitioning = new FixedAsset("Office Partitioning Works", Money.of(1500,"KES"), "OFFICE RENOVATION", "978",LocalDate.of(2018,1,12),"abc56", Money.of(50.13,
+        "KES"));
 
     @BeforeEach
     void setUp() {
@@ -66,28 +68,32 @@ class FileAccountIdServiceTest {
     @Test void accountPlaceHolder() throws Exception {
 
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
-        assertEquals("015", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair));
+        assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, lenovo));
-        assertEquals("013", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, lenovo));
+        assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, lenovo));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, radio));
-        assertEquals("014", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, radio));
+        assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, radio));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, zemana));
-        assertEquals("017", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, zemana));
+        assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, zemana));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, kca));
-        assertEquals("016", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, kca));
+        assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, kca));
+        assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, officePartitioning));
+        assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, officePartitioning));
     }
 
     @Test void generalLegerCode() throws Exception {
 
         assertEquals("00153", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
-        assertEquals("00150", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
-        assertEquals("00151", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
+        assertEquals("00152", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
+        assertEquals("00156", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
         assertEquals("00155", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, zemana));
-        assertEquals("00154", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca));
+        assertEquals("00151", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca));
+        assertEquals("00154", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, officePartitioning));
         assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair));
         assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo));
         assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio));
         assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana));
         assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning));
     }
 }

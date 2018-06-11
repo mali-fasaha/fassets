@@ -37,6 +37,9 @@ import static org.slf4j.LoggerFactory.getLogger;
  * <br> One peculiar aspect of this implementation is that pre-configured properties are read from a properties
  * file. This is peculiar because this implementation will have siblings in future that could be reading configuration
  * properties from a json api over http, from a database which is configured at runtime or even from an excel file.
+ * <br> Even though this is the case the underlying policy can be changed at compile time, should another be desired,
+ * you just have to initialize this object with anything that implements the {@link AccountIdPolicy} interface in the
+ * constructor.
  */
 @Component("accountIdConfigurationPropertiesService")
 public final class FileAccountIdService extends AbstractAccountIdService implements AccountIdService {
@@ -67,6 +70,9 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
+     * @param fixedAsset for which seek an account placeHolder
+     * @param posting Whether we are posting on the debit side or the credit side
+     * @param transactionType The type of transaction for the fixed asset
      * @return String GL Id to be used for credit transactions
      */
     @Override
@@ -78,6 +84,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
+     * @param posting This enum denotes whether or not we are posting on the CREDIT or on the DEBIT side
      * @param transactionType Type of transaction Enum
      * @param fixedAsset      Asset for which we seek transaction account name
      * @return Name of the account
