@@ -1,6 +1,5 @@
-package io.github.fasset.fasset.accounts.nomenclature.policy;
+package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
-import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
