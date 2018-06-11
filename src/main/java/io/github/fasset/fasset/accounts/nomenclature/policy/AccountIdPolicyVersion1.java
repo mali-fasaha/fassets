@@ -17,11 +17,17 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.policy;
 
+import ch.qos.logback.classic.gaffer.PropertyUtil;
 import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
-import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.KeyFormatter;
+import io.github.fasset.fasset.kernel.util.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Properties;
+
+import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.PLACE_HOLDER;
 
 /**
  * Version1 implementation of the {@code AccountIdPolicy}
@@ -30,10 +36,17 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
     private static final Logger log = LoggerFactory.getLogger(AccountIdPolicyVersion1.class);
 
-    private final AccountIdService idConfigurationService;
+    private final Properties accountConfigProperties;
 
-    public AccountIdPolicyVersion1(AccountIdService idConfigurationService) {
-        this.idConfigurationService = idConfigurationService;
+    private final Properties accountLabels;
+
+    public AccountIdPolicyVersion1(String accountIdProperties, String accountLabels) {
+        String accountProperties = accountIdProperties == null ? "account-id" : accountIdProperties;
+        String labels = accountLabels == null ? "account-label" : accountLabels;
+
+        this.accountConfigProperties = PropertiesUtils.fetchConfigProperties(accountProperties);
+        this.accountLabels = PropertiesUtils.fetchConfigProperties(labels);
+
     }
 
     /**
@@ -48,7 +61,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
         log.trace("Fetching currency code for ISO4217 currency code provided as : {}", iso4217Code);
 
-        String code = idConfigurationService.currencyCode(iso4217Code);
+        String code = accountConfigProperties.getProperty(iso4217Code);
 
         log.trace("Code for ISO4217 currency code : {} resolved as {}", iso4217Code, code);
 
@@ -82,7 +95,14 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      */
     @Override
     public String accountPlaceHolder(TransactionType transactionType, Posting posting, String category) {
-        return null;
+
+        log.debug("Resolving account placeHolder for {} transaction, posting on the {} side for {} category", transactionType, posting, category);
+
+        String key = KeyFormatter.formatKey(category, transactionType, posting, PLACE_HOLDER);
+
+        log.debug("Resolving placeHolder for the key, {}", key);
+
+        return accountConfigProperties.getProperty(key);
     }
 
     /**
