@@ -41,7 +41,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
     private final Properties accountLabels;
 
-    public AccountIdPolicyVersion1(String accountIdProperties, String accountLabels) {
+    AccountIdPolicyVersion1(String accountIdProperties, String accountLabels) {
         String accountProperties = accountIdProperties == null ? "account-id" : accountIdProperties;
         String labels = accountLabels == null ? "account-label" : accountLabels;
 

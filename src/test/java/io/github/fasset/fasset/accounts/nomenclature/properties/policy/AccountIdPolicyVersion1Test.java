@@ -14,7 +14,7 @@ class AccountIdPolicyVersion1Test {
 
     @BeforeEach void setUp() {
         accountIdPolicy =
-            new AccountIdPolicyVersion1("account -id", "account-label");
+            new AccountIdPolicyVersion1("account-id", "account-label");
     }
 
     @Test void testCurrencyCode() throws Exception {
