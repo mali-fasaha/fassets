@@ -53,12 +53,12 @@ class AbstractAccountIdResolverTest {
 
         assertEquals("00", fileAccountIdService.currencyCode("KES"));
         assertEquals("01", fileAccountIdService.currencyCode("USD"));
-        assertEquals("02", fileAccountIdService.currencyCode("USD"));
-        assertEquals("03", fileAccountIdService.currencyCode("USD"));
-        assertEquals("04", fileAccountIdService.currencyCode("USD"));
-        assertEquals("05", fileAccountIdService.currencyCode("USD"));
-        assertEquals("06", fileAccountIdService.currencyCode("USD"));
-        assertEquals("07", fileAccountIdService.currencyCode("USD"));
+        assertEquals("02", fileAccountIdService.currencyCode("GBP"));
+        assertEquals("03", fileAccountIdService.currencyCode("EUR"));
+        assertEquals("04", fileAccountIdService.currencyCode("INR"));
+        assertEquals("05", fileAccountIdService.currencyCode("CAD"));
+        assertEquals("06", fileAccountIdService.currencyCode("CHF"));
+        assertEquals("07", fileAccountIdService.currencyCode("ZAR"));
 
     }
 
