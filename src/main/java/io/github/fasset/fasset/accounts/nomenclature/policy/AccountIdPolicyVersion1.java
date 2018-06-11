@@ -19,22 +19,40 @@ package io.github.fasset.fasset.accounts.nomenclature.policy;
 
 import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
+import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Version1 implementation of the {@code AccountIdPolicy}
  */
 public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
+    private static final Logger log = LoggerFactory.getLogger(AccountIdPolicyVersion1.class);
+
+    private final AccountIdService idConfigurationService;
+
+    public AccountIdPolicyVersion1(AccountIdService idConfigurationService) {
+        this.idConfigurationService = idConfigurationService;
+    }
+
     /**
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
      * the unique code to be used in the account number sequence after the service outlet code
      *
-     * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
+     * @param iso4217Code ISO 4217 currency code used to retrieve account number sequence code
      * @return Account number sequence code to follow the service outlet nomenclature
      */
     @Override
-    public String currencyCode(String currencyCode) {
-        return null;
+    public String currencyCode(String iso4217Code) {
+
+        log.trace("Fetching currency code for ISO4217 currency code provided as : {}", iso4217Code);
+
+        String code = idConfigurationService.currencyCode(iso4217Code);
+
+        log.trace("Code for ISO4217 currency code : {} resolved as {}", iso4217Code, code);
+
+        return code;
     }
 
     /**
