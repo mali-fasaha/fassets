@@ -31,7 +31,9 @@ import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.P
 import static io.github.fasset.fasset.accounts.nomenclature.properties.KeyFormatter.formatKey;
 
 /**
- * Version1 implementation of the {@code AccountIdPolicy}
+ * Version1 implementation of the {@link AccountIdPolicy}.
+ * The most important client for this objects is the {@code FileAccountIdService}, since this class depends on the
+ * configurations written down in a properties file knows as the {@code config/account-id.properties}
  */
 public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
@@ -40,7 +42,6 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     private final Properties accountConfigProperties;
 
     public static AccountIdPolicyVersion1 idPolicy(){
-        // TODO review necessity of this
         return new AccountIdPolicyVersion1("account-id");
     }
 
@@ -99,9 +100,9 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      * category. This is the code segment that typically follows the general ledger code in the
      * account number sequence
      *
-     * @param transactionType
-     * @param posting
-     * @param category
+     * @param transactionType The type of fixed asset transaction
+     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param category of the Asset for which we need a placeholder
      * @return String GL Id to be used for credit transactions
      */
     @Override
@@ -117,9 +118,10 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
+     *
      * @param transactionType Type of transaction Enum
-     * @param posting
-     * @param category        of the asset for which we seek transaction account name
+     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param category of the asset for which we seek transaction account name
      * @return Name of the account
      */
     @Override

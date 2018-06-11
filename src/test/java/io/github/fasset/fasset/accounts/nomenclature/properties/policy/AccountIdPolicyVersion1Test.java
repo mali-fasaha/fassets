@@ -1,3 +1,20 @@
+/*
+ * fassets - Project for light-weight tracking of fixed assets
+ * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -63,15 +80,15 @@ class AccountIdPolicyVersion1Test {
     @Test
     void accountName() {
 
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTERS"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTERS"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTER SOFTWARE"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTER SOFTWARE"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "MOTOR VEHICLES"));
-        assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "MOTOR VEHICLES"));
+        assertEquals("SUNDRY CREDITORS", accountIdPolicy.accountName(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
+        assertEquals("FURNITURE AND FITTINGS", accountIdPolicy.accountName(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
+        assertEquals("SUNDRY CREDITORS", accountIdPolicy.accountName(ACQUISITION, CREDIT, "COMPUTERS"));
+        assertEquals("COMPUTERS", accountIdPolicy.accountName(ACQUISITION, DEBIT, "COMPUTERS"));
+        assertEquals("SUNDRY CREDITORS", accountIdPolicy.accountName(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT"));
+        assertEquals("ELECTRONIC EQUIPMENT", accountIdPolicy.accountName(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT"));
+        assertEquals("SUNDRY CREDITORS", accountIdPolicy.accountName(ACQUISITION, CREDIT, "COMPUTER SOFTWARE"));
+        assertEquals("COMPUTER SOFTWARE", accountIdPolicy.accountName(ACQUISITION, DEBIT, "COMPUTER SOFTWARE"));
+        assertEquals("SUNDRY CREDITORS", accountIdPolicy.accountName(ACQUISITION, CREDIT, "MOTOR VEHICLES"));
+        assertEquals("MOTOR VEHICLES", accountIdPolicy.accountName(ACQUISITION, DEBIT, "MOTOR VEHICLES"));
     }
 }

@@ -74,6 +74,9 @@ public interface AccountIdPolicy {
      * category. This is the code segment that typically follows the general ledger code in the
      * account number sequence
      *
+     * @param transactionType The type of fixed asset transaction
+     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param category of the Asset for which we need a placeholder
      * @return String GL Id to be used for credit transactions
      */
     String accountPlaceHolder(TransactionType transactionType, Posting posting, String category);
@@ -81,6 +84,7 @@ public interface AccountIdPolicy {
     /**
      *
      * @param transactionType Type of transaction Enum
+     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
      * @param category of the asset for which we seek transaction account name
      * @return Name of the account
      */
