@@ -26,7 +26,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
+import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.GENERAL_LEDGER_CODE;
 import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.PLACE_HOLDER;
+import static io.github.fasset.fasset.accounts.nomenclature.properties.KeyFormatter.formatKey;
 
 /**
  * Version1 implementation of the {@code AccountIdPolicy}
@@ -79,7 +81,18 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      */
     @Override
     public String generalLedgerCode(TransactionType transactionType, Posting posting, String category) {
-        return null;
+
+        log.debug("Fetching account ledger code transaction: {}, of the category {}, posting on the {} side", transactionType, category, posting);
+
+        String key = formatKey(category, transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.general-ledger-code"
+
+        log.debug("Fetching generalLedgerCode for an account whose key is encoded as {}", key);
+
+        String glcode = accountConfigProperties.getProperty(key);
+
+        log.debug("GL code for posting {} for the category {} on the {} side, resolved as {}", transactionType, category, posting, glcode);
+
+        return glcode;
     }
 
     /**
@@ -112,6 +125,17 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      */
     @Override
     public String accountName(TransactionType transactionType, Posting posting, String category) {
-        return null;
+
+        log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, category);
+
+        String key = KeyFormatter.formatKey(category, transactionType, posting);
+
+        log.debug("Fetching account label for the key: {}", key);
+
+        String accountLabel = accountLabels.getProperty(key);//e.g computers.acquisition.credit
+
+        log.debug("Credit posting account label for {} of the category {} resolved to be {}, using the key: {}", transactionType, category, accountLabel, key);
+
+        return accountLabel;
     }
 }

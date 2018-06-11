@@ -35,7 +35,7 @@ public class KeyFormatter {
         return toClean.replace(" ", "-").replace("&", "and");
     }
 
-    static String formatKey(String category, TransactionType transactionType, Posting posting) {
+    public static String formatKey(String category, TransactionType transactionType, Posting posting) {
 
         return cleanString(String.format("%s.%s.%s",category.toLowerCase(), transactionType, posting)); // e.g. computers.acquisition.posting
     }
