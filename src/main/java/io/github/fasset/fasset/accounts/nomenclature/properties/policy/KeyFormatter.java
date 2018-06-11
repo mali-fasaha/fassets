@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.fasset.fasset.accounts.nomenclature.properties;
+package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
 import io.github.fasset.fasset.accounts.definition.AccountNumberSegment;
 import io.github.fasset.fasset.accounts.definition.Posting;
@@ -24,7 +24,7 @@ import io.github.fasset.fasset.accounts.definition.TransactionType;
 /**
  * Utility methods for formatting the keys before search into the properties object
  */
-public class KeyFormatter {
+class KeyFormatter {
 
     private static String formatKey(String category, String transaction, String element) {
         return cleanString(String.format("%s.%s.%s", category.toLowerCase(), transaction, element));
@@ -35,12 +35,12 @@ public class KeyFormatter {
         return toClean.replace(" ", "-").replace("&", "and");
     }
 
-    public static String formatKey(String category, TransactionType transactionType, Posting posting) {
+    static String formatKey(String category, TransactionType transactionType, Posting posting) {
 
         return cleanString(String.format("%s.%s.%s",category.toLowerCase(), transactionType, posting)); // e.g. computers.acquisition.posting
     }
 
-    public static String formatKey(String category, TransactionType transactionType, Posting posting, AccountNumberSegment segment) {
+    static String formatKey(String category, TransactionType transactionType, Posting posting, AccountNumberSegment segment) {
 
         String formattedCategory = cleanString(category.toLowerCase());
 

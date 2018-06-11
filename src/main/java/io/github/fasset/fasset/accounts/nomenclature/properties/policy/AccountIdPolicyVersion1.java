@@ -19,7 +19,6 @@ package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
 import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
-import io.github.fasset.fasset.accounts.nomenclature.properties.KeyFormatter;
 import io.github.fasset.fasset.kernel.util.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ import java.util.Properties;
 
 import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.GENERAL_LEDGER_CODE;
 import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.PLACE_HOLDER;
-import static io.github.fasset.fasset.accounts.nomenclature.properties.KeyFormatter.formatKey;
+import static io.github.fasset.fasset.accounts.nomenclature.properties.policy.KeyFormatter.formatKey;
 
 /**
  * Version1 implementation of the {@link AccountIdPolicy}.
