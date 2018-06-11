@@ -17,6 +17,7 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +45,7 @@ class FileAccountIdServiceTest {
     @BeforeEach
     void setUp() {
 
-        fileAccountIdService = new FileAccountIdService("account-id", "account-label");
+        fileAccountIdService = new FileAccountIdService(new AccountIdPolicyVersion1("account-id"));
     }
 
     @Test

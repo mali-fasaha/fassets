@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,7 +46,7 @@ class AbstractAccountIdResolverTest {
 
     @BeforeAll private static void setUp(){
 
-        fileAccountIdService = new FileAccountIdService("account-id", "account-label");
+        fileAccountIdService = new FileAccountIdService(new AccountIdPolicyVersion1("account-id"));
     }
 
     @Test void testCurrencyCode() throws Exception {

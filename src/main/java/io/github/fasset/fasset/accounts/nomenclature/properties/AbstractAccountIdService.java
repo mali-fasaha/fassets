@@ -17,9 +17,7 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
-import io.github.fasset.fasset.kernel.util.PropertiesUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
 
 import java.util.Properties;
 
@@ -29,19 +27,12 @@ import java.util.Properties;
 public abstract class AbstractAccountIdService implements AccountIdService {
 
     // Using external configuration
-    final Properties accountConfigProperties;
-    final Properties accountLabelProperties;
+    final AccountIdPolicy accountIdPolicy;
 
-    AbstractAccountIdService(final String propertiesFile, final String labelsFile) {
+    AbstractAccountIdService(AccountIdPolicy accountIdPolicy) {
 
-        String source = propertiesFile == null ? "account-id" : propertiesFile;
-        String labelSource = propertiesFile == null ? "account-label" : labelsFile;
-
-        this.accountConfigProperties = PropertiesUtils.fetchConfigProperties(source);
-        this.accountLabelProperties = PropertiesUtils.fetchConfigProperties(labelSource);
+        this.accountIdPolicy = accountIdPolicy;
     }
-
-    private static final Logger log = LoggerFactory.getLogger(AbstractAccountIdService.class);
 
     /**
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
@@ -53,12 +44,6 @@ public abstract class AbstractAccountIdService implements AccountIdService {
     @Override
     public String currencyCode(String currencyCode) {
 
-        log.debug("Fetching currency code for Currency : {}", currencyCode);
-
-        String code = accountConfigProperties.getProperty(currencyCode);
-
-        log.debug("Currency code for ISO4217 currency code value {} resolved as {}", currencyCode, code);
-
-        return code;
+        return accountIdPolicy.currencyCode(currencyCode);
     }
 }

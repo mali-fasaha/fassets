@@ -19,8 +19,11 @@ package io.github.fasset.fasset.config;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * Configuration beans used for configuration of resolver objects
@@ -29,8 +32,15 @@ import org.springframework.context.annotation.Configuration;
 public class AccountsConfig {
 
     @Bean("accountIdConfigurationPropertiesService")
+    @DependsOn("accountIdPolicyVersion1")
     public AccountIdService accountIdConfigurationPropertiesService() {
 
-        return new FileAccountIdService("account-id", "account-label");
+        return new FileAccountIdService(accountIdPolicyVersion1());
+    }
+
+    @Bean("accountIdPolicyVersion1")
+    public AccountIdPolicy accountIdPolicyVersion1(){
+
+        return new AccountIdPolicyVersion1("account-id");
     }
 }

@@ -39,12 +39,12 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
     private final Properties accountConfigProperties;
 
-    public static AccountIdPolicyVersion1 version1(){
+    public static AccountIdPolicyVersion1 idPolicy(){
         // TODO review necessity of this
         return new AccountIdPolicyVersion1("account-id");
     }
 
-    AccountIdPolicyVersion1(String accountIdProperties) {
+    public AccountIdPolicyVersion1(String accountIdProperties) {
         String accountProperties = accountIdProperties == null ? "account-id" : accountIdProperties;
         this.accountConfigProperties = PropertiesUtils.fetchConfigProperties(accountProperties);
     }

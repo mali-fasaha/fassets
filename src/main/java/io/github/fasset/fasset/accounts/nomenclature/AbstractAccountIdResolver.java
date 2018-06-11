@@ -61,4 +61,6 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
     public String resolveCategoryId(FixedAsset fixedAsset) {
         return accountName(fixedAsset);
     }
+
+    public abstract String accountName(FixedAsset fixedAsset);
 }

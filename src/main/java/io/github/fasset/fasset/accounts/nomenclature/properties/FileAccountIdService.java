@@ -19,13 +19,11 @@ package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.definition.TransactionType;
 import io.github.fasset.fasset.accounts.definition.Posting;
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.GENERAL_LEDGER_CODE;
-import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.PLACE_HOLDER;
-import static io.github.fasset.fasset.accounts.nomenclature.properties.KeyFormatter.formatKey;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -45,9 +43,9 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
     private static final Logger log = getLogger(FileAccountIdService.class);
 
-    public FileAccountIdService(String propertiesFile, String labelsFile) {
+    public FileAccountIdService(AccountIdPolicy accountIdPolicy) {
 
-        super(propertiesFile, labelsFile);
+        super(accountIdPolicy);
     }
 
     /**
@@ -65,15 +63,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
         log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset, posting);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.general-ledger-code"
-
-        log.debug("Fetching generalLedgerCode for an account whose key is encoded as {}", key);
-
-        String glcode = accountConfigProperties.getProperty(key);
-
-        log.debug("GL code for posting {} for the asset {} on the {} side, resolved as {}", transactionType, fixedAsset, posting, glcode);
-
-        return glcode;
+        return accountIdPolicy.generalLedgerCode(transactionType, posting, fixedAsset.getCategory());
     }
 
     /**
@@ -84,11 +74,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting, PLACE_HOLDER); // e.g "sundry.acquisition. credit.placeHolder"
-
-        log.debug("Resolving placeholder for the key, {}", key);
-
-        return accountConfigProperties.getProperty(key);
+        return accountIdPolicy.accountPlaceHolder(transactionType, posting, fixedAsset.getCategory());
     }
 
     /**
@@ -101,15 +87,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
-        String key = formatKey(fixedAsset.getCategory(), transactionType, posting);
-
-        log.debug("Fetching account label for the key: {}", key);
-
-        String accountLabel = accountLabelProperties.getProperty(key);//e.g computers.acquisition.credit
-
-        log.debug("Credit posting account label for {} of the asset {} resolved to be {}, using the key: {}", transactionType, fixedAsset, accountLabel, key);
-
-        return accountLabel;
+        return accountIdPolicy.accountName(transactionType, posting, fixedAsset.getCategory());
     }
 
 }
