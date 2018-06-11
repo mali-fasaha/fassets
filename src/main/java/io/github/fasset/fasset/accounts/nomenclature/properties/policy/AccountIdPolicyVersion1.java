@@ -39,15 +39,14 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
     private final Properties accountConfigProperties;
 
-    private final Properties accountLabels;
+    public static AccountIdPolicyVersion1 version1(){
+        // TODO review necessity of this
+        return new AccountIdPolicyVersion1("account-id");
+    }
 
-    AccountIdPolicyVersion1(String accountIdProperties, String accountLabels) {
+    AccountIdPolicyVersion1(String accountIdProperties) {
         String accountProperties = accountIdProperties == null ? "account-id" : accountIdProperties;
-        String labels = accountLabels == null ? "account-label" : accountLabels;
-
         this.accountConfigProperties = PropertiesUtils.fetchConfigProperties(accountProperties);
-        this.accountLabels = PropertiesUtils.fetchConfigProperties(labels);
-
     }
 
     /**
@@ -132,7 +131,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
         log.debug("Fetching account label for the key: {}", key);
 
-        String accountLabel = accountLabels.getProperty(key);//e.g computers.acquisition.credit
+        String accountLabel = accountConfigProperties.getProperty(key);//e.g computers.acquisition.credit
 
         log.debug("Credit posting account label for {} of the category {} resolved to be {}, using the key: {}", transactionType, category, accountLabel, key);
 
