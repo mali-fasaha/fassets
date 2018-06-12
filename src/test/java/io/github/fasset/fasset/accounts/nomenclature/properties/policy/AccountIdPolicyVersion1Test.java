@@ -20,9 +20,9 @@ package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static io.github.fasset.fasset.accounts.definition.Posting.CREDIT;
-import static io.github.fasset.fasset.accounts.definition.Posting.DEBIT;
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
+import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountIdPolicyVersion1Test {
@@ -34,7 +34,7 @@ class AccountIdPolicyVersion1Test {
             new AccountIdPolicyVersion1("account-id");
     }
 
-    @Test void testCurrencyCode() throws Exception {
+    @Test void testCurrencyCode() {
 
         assertEquals("00", accountIdPolicy.currencyCode("KES"));
         assertEquals("01", accountIdPolicy.currencyCode("USD"));

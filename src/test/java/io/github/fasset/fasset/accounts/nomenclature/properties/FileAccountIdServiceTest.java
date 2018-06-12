@@ -26,9 +26,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static io.github.fasset.fasset.accounts.definition.Posting.DEBIT;
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.accounts.definition.Posting.CREDIT;
+import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("FileAccountIdService unit-test")
