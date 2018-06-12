@@ -18,6 +18,8 @@
 package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
@@ -26,6 +28,8 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
+import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
+import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
@@ -33,29 +37,23 @@ public class AcquisitionDebitAccountIdResolverTest {
 
     private AccountIdResolver accountIdResolver;
 
-    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "ELECTRONICS", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
+    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "ELECTRONIC EQUIPMENT", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
-    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
+    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE & FITTINGS", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
+    private final static FixedAsset zemana = new FixedAsset("Zemana Antilogger", Money.of(180,"KES"), "COMPUTER SOFTWARE", "986",LocalDate.of(2017,12,15),"abc48", Money.of(50.32,"KES"));
+    private final static FixedAsset kca = new FixedAsset("KCA 265G", Money.of(950,"KES"), "MOTOR VEHICLES", "996",LocalDate.of(2018,1,5),"abc23", Money.of(500.12,"KES"));
+    private final static FixedAsset officePartitioning = new FixedAsset("Office Partitioning Works", Money.of(1500,"KES"), "OFFICE RENOVATION", "978",LocalDate.of(2018,1,12),"abc56", Money.of(50.13,
+        "KES"));
+
 
     @Before
     public void setUp() throws Exception {
 
-        AccountIdService configurationService = Mockito.mock(AccountIdService.class);
+        AccountIdService accountIdService = Mockito.mock(AccountIdService.class);
 
-        // General ledger Codes
-        /*when(configurationService.debitGeneralLedgerCode("COMPUTERS")).thenReturn("00152");
-        when(configurationService.debitGeneralLedgerCode("FURNITURE")).thenReturn("00153");
-        when(configurationService.debitGeneralLedgerCode("ELECTRONICS")).thenReturn("00154");*/
+        when(accountIdService.accountName(ACQUISITION, DEBIT, ))
 
-        // General ledger Ids
-        /*when(configurationService.debitAccountPlaceHolder("COMPUTERS")).thenReturn("013");
-        when(configurationService.debitAccountPlaceHolder("FURNITURE")).thenReturn("014");
-        when(configurationService.debitAccountPlaceHolder("ELECTRONICS")).thenReturn("015");*/
-
-        // ISO 4217 Currency codes
-        when(configurationService.currencyCode("KES")).thenReturn("00");
-
-        accountIdResolver = new AcquisitionDebitAccountIdResolver(configurationService);
+        accountIdResolver = new AcquisitionDebitAccountIdResolver(new FileAccountIdService(new AccountIdPolicyVersion1("account-id")));
     }
 
     @Test
