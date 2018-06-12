@@ -89,4 +89,31 @@ public interface AccountIdPolicy {
      * @return Name of the account
      */
     String accountName(TransactionType transactionType, AccountSide accountSide, String category);
+
+    /**
+     * This method returns a string of pattern to be prefixed to an account name as  per query. It is
+     * assumed for instance when such a query is called on an asset account during an acquisition, that
+     * we are hoping to find the configure prefix that would go something like "Accumulated Depreciation
+     * on Computers" for instance.
+     * <br> Please note that this method was not created to supplant the account number sequences and
+     * is not even expected to be used so many times. In fact where the asset manager is maintaining the
+     * assets at their amortised value then this method will likely not be used at all.
+     *
+     * @param transaction Type of asset transaction  we are carrying out.
+     * @param accountSide The account side to which we are posting the transaction for this part of the entry
+     * @param category of the fixed asset being transacted
+     * @return The appendable prefix name to be added to the account name
+     */
+    Appendable accountNamePrefix(TransactionType transaction, AccountSide accountSide, String category);
+
+    /**
+     * This is a character value that can be used as a separator between the appended prefix or suffix
+     * where one might be required at an application wide level. For instance the contra account for
+     * computers account might be called "Accumulated Depreciation - Computers", where the hyphen is
+     * supplied by this method. Using the configuration you have whatever constructs the user has desired
+     * @param transaction Type of asset transaction  we are carrying out.
+     * @param accountSide The account side to which we are posting the transaction for this part of the entry
+     * @return The character to be used while appending account names to prefix or suffix
+     */
+    CharSequence appendant(TransactionType transaction, AccountSide accountSide);
 }

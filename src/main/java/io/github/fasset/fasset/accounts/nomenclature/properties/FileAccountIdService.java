@@ -24,6 +24,8 @@ import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -97,4 +99,28 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
         return accountIdPolicy.accountName(transactionType, accountSide, fixedAsset.getCategory());
     }
 
+    /**
+     * Resolves the name of the account to be used as a contra account in case the actual account  is
+     * required to retain the original valuation for reporting purposes
+     *
+     * @param transaction The type of transaction associated with the initialization of a contra account
+     * @param accountSide To which we are posting the transaction during initialization of a contra account
+     * @param fixedAsset  Fixed asset which we are tracking by means of the accounting system
+     * @return name of the contra account
+     */
+    @Override
+    public String resolveContraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset) {
+
+        String contraAccount = "";
+
+        try {
+            contraAccount = String.valueOf(accountIdPolicy.accountNamePrefix(transaction, accountSide, fixedAsset.getCategory())
+                .append(accountIdPolicy.appendant(transaction, accountSide))
+                .append(accountIdPolicy.accountName(transaction, accountSide, fixedAsset.getCategory())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return contraAccount;
+    }
 }
