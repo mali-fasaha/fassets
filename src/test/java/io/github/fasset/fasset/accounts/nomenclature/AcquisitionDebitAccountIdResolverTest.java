@@ -51,17 +51,42 @@ public class AcquisitionDebitAccountIdResolverTest {
 
         AccountIdService accountIdService = Mockito.mock(AccountIdService.class);
 
-        when(accountIdService.accountName(ACQUISITION, DEBIT, ))
+        when(accountIdService.accountName(ACQUISITION, DEBIT, radio)).thenReturn("ELECTRONICS");
+        when(accountIdService.accountName(ACQUISITION, DEBIT, lenovo)).thenReturn("COMPUTERS");
+        when(accountIdService.accountName(ACQUISITION, DEBIT, chair)).thenReturn("FURNITURE");
+        when(accountIdService.accountName(ACQUISITION, DEBIT, zemana)).thenReturn("COMPUTER SOFTWARE");
+        when(accountIdService.accountName(ACQUISITION, DEBIT, kca)).thenReturn("MOTOR VEHICLES");
+        when(accountIdService.accountName(ACQUISITION, DEBIT, officePartitioning)).thenReturn("OFFICE RENOVATION");
 
-        accountIdResolver = new AcquisitionDebitAccountIdResolver(new FileAccountIdService(new AccountIdPolicyVersion1("account-id")));
+        when(accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, radio)).thenReturn("010");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, lenovo)).thenReturn("011");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair)).thenReturn("012");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, zemana)).thenReturn("013");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, kca)).thenReturn("014");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, officePartitioning)).thenReturn("015");
+
+        when(accountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio)).thenReturn("00156");
+        when(accountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo)).thenReturn("00152");
+        when(accountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair)).thenReturn("00153");
+        when(accountIdService.generalLedgerCode(ACQUISITION, DEBIT, zemana)).thenReturn("00155");
+        when(accountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca)).thenReturn("00151");
+        when(accountIdService.generalLedgerCode(ACQUISITION, DEBIT, officePartitioning)).thenReturn("00154");
+
+        when(accountIdService.currencyCode("KES")).thenReturn("00");
+
+        accountIdResolver = new AcquisitionDebitAccountIdResolver(accountIdService);
     }
 
     @Test
     public void resolveName() {
 
+        assertEquals("ELECTRONICS", accountIdResolver.accountName(radio));
         assertEquals("COMPUTERS", accountIdResolver.accountName(lenovo));
         assertEquals("FURNITURE", accountIdResolver.accountName(chair));
-        assertEquals("ELECTRONICS", accountIdResolver.accountName(radio));
+        assertEquals("COMPUTER SOFTWARE", accountIdResolver.accountName(zemana));
+        assertEquals("MOTOR VEHICLES", accountIdResolver.accountName(kca));
+        assertEquals("OFFICE RENOVATION", accountIdResolver.accountName(officePartitioning));
+
     }
 
     @Test
@@ -74,9 +99,12 @@ public class AcquisitionDebitAccountIdResolverTest {
 
     @Test
     public void resolveCategoryId() {
-        assertEquals("COMPUTERS", accountIdResolver.accountName(lenovo));
-        assertEquals("FURNITURE", accountIdResolver.accountName(chair));
-        assertEquals("ELECTRONICS", accountIdResolver.accountName(radio));
+        assertEquals("ELECTRONICS", accountIdResolver.resolveCategoryId(radio));
+        assertEquals("COMPUTERS", accountIdResolver.resolveCategoryId(lenovo));
+        assertEquals("FURNITURE", accountIdResolver.resolveCategoryId(chair));
+        assertEquals("COMPUTER SOFTWARE", accountIdResolver.resolveCategoryId(zemana));
+        assertEquals("MOTOR VEHICLES", accountIdResolver.resolveCategoryId(kca));
+        assertEquals("OFFICE RENOVATION", accountIdResolver.resolveCategoryId(officePartitioning));
     }
 
     @Test

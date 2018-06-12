@@ -36,18 +36,13 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractAccountIdResolver.class);
 
-    final AccountIdService idConfigurationService;
+    final AccountIdService accountIdService;
 
-    AbstractAccountIdResolver(AccountIdService idConfigurationService) {
-        this.idConfigurationService = idConfigurationService;
+    AbstractAccountIdResolver(AccountIdService accountIdService) {
+        this.accountIdService = accountIdService;
     }
 
-    protected String currencyCode(FixedAsset fixedAsset) {
 
-        log.debug("Resolving currency code # for fixedAsset : {}", fixedAsset.getAssetDescription());
-
-        return idConfigurationService.currencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
-    }
 
     /**
      * The category is of a lower hierarchy than an account yet for the account to be representative

@@ -25,19 +25,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
+import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Resolves names of the accounts for posting acquisitions
  */
 @Component("debitAccountIDResolver")
-public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
+public class AcquisitionDebitAccountIdResolver implements AccountIdResolver {
 
     private static final Logger log = getLogger(AcquisitionDebitAccountIdResolver.class);
 
+    private final AccountIdService accountIdService;
+
     @Autowired
-    public AcquisitionDebitAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
-        super(idConfigurationService);
+    public AcquisitionDebitAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService accountIdService) {
+        this.accountIdService = accountIdService;
     }
 
     /**
@@ -61,30 +65,48 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
         return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode(fixedAsset) + glId(fixedAsset);
     }
 
+    private String currencyCode(FixedAsset fixedAsset) {
+
+        log.debug("Resolving currency code # for fixedAsset : {}", fixedAsset.getAssetDescription());
+
+        return accountIdService.currencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
+    }
+
     @Override
     public String accountName(FixedAsset fixedAsset) {
 
         checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
 
-        return fixedAsset.getCategory().toUpperCase();
+        return accountIdService.accountName(ACQUISITION, DEBIT, fixedAsset);
+    }
+
+    /**
+     * The category is of a lower hierarchy than an account yet for the account to be representative
+     * of fixed assets comprehensively this out to be mandated as part of the account nomenclature or at least
+     * as a field in an account that can be tracked
+     *
+     * @param fixedAsset For which we need category nomenclature
+     * @return The nomenclature of the category
+     * @Deprecated redundancy
+     */
+    @Override
+    public String resolveCategoryId(FixedAsset fixedAsset) {
+
+        return this.accountName(fixedAsset);
     }
 
     private String glId(FixedAsset fixedAsset) {
 
         log.debug("Resolving general ledger nomenclature for fixedAsset : {}", fixedAsset.getAssetDescription());
 
-        //TODO use new interface methods here
-        //return idConfigurationService.debitAccountPlaceHolder(fixedAsset.getCategory());
-        return null;
+        return accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, fixedAsset);
     }
 
     private String glCode(FixedAsset fixedAsset) {
 
         log.debug("Resolving general ledger code # for fixedAsset : {}", fixedAsset.getAssetDescription());
 
-        //TODO use new interface methods here
-        //return idConfigurationService.debitGeneralLedgerCode(fixedAsset.getCategory());
-        return null;
+        return accountIdService.generalLedgerCode(ACQUISITION, DEBIT, fixedAsset);
     }
 
     /**

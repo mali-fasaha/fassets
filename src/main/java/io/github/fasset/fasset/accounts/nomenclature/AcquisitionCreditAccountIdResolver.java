@@ -53,7 +53,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
         log.debug("Resolving the account name for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
         //return "SUNDRY CREDITORS ACCOUNT";
-        return idConfigurationService.accountName(ACQUISITION, CREDIT, fixedAsset);
+        return accountIdService.accountName(ACQUISITION, CREDIT, fixedAsset);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
-        return idConfigurationService.generalLedgerCode();
+        return accountIdService.generalLedgerCode();
     }*/
 
     private String glId() {
@@ -78,7 +78,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
         //TODO move this variables to params
-        return idConfigurationService.accountPlaceHolder(ACQUISITION, CREDIT, new FixedAsset());
+        return accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, new FixedAsset());
     }
 
     /**
