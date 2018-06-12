@@ -124,7 +124,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, category);
 
-        String key = KeyFormatter.formatKey(category, transactionType, accountSide);
+        String key = formatKey(category, transactionType, accountSide);
 
         log.debug("Fetching account label for the key: {}", key);
 

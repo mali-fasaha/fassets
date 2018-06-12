@@ -32,17 +32,17 @@ class KeyFormatter {
 
     private static String cleanString(String toClean){
 
-        return toClean.replace(" ", "-").replace("&", "and");
+        return toClean.replace(" ", "-").replace("&", "and").toLowerCase();
     }
 
     static String formatKey(String category, TransactionType transactionType, AccountSide accountSide) {
 
-        return cleanString(String.format("%s.%s.%s",category.toLowerCase(), transactionType, accountSide)); // e.g. computers.acquisition.posting
+        return cleanString(String.format("%s.%s.%s",category, transactionType, accountSide)); // e.g. computers.acquisition.posting
     }
 
     static String formatKey(String category, TransactionType transactionType, AccountSide accountSide, AccountNumberSegment segment) {
 
-        String formattedCategory = cleanString(category.toLowerCase());
+        String formattedCategory = cleanString(category);
 
         return cleanString(String.format("%s.%S.%s.", formattedCategory, transactionType.toString(), accountSide.toString()).toLowerCase()) + segment;
     }
