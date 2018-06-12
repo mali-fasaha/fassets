@@ -123,7 +123,7 @@ public class AcquisitionDebitAccountIdResolver implements AccountIdResolver {
 
         checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
 
-        return fixedAsset.getCategory().toUpperCase();
+        return accountIdService.accountName(ACQUISITION, DEBIT, fixedAsset);
     }
 
     /**

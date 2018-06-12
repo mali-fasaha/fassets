@@ -110,13 +110,16 @@ public class AcquisitionDebitAccountIdResolverTest {
     @Test
     public void resolveNumber() {
 
-        assertEquals("0010000154015", accountIdResolver.accountNumber(radio));
-        assertEquals("0100000153014", accountIdResolver.accountNumber(chair));
-        assertEquals("9870000152013", accountIdResolver.accountNumber(lenovo));
+        assertEquals("0010000156010", accountIdResolver.accountNumber(radio));
+        assertEquals("9870000152011", accountIdResolver.accountNumber(lenovo));
+        assertEquals("0100000153012", accountIdResolver.accountNumber(chair));
+        assertEquals("9860000155013", accountIdResolver.accountNumber(zemana));
+        assertEquals("9960000151014", accountIdResolver.accountNumber(kca));
+        assertEquals("9780000154015", accountIdResolver.accountNumber(officePartitioning));
     }
 
     @Test
-    public void resolveGeneralLedgerId() {
+    public void resolveGeneralLedgerName() {
 
         assertEquals("ELECTRONICS", accountIdResolver.generalLedgerName(radio));
         assertEquals("FURNITURE", accountIdResolver.generalLedgerName(chair));
