@@ -139,6 +139,6 @@ public class AcquisitionDebitAccountIdResolver implements AccountIdResolver {
 
         //return String.format("Accumulated Depreciation on %s", fixedAsset.getCategory()).toUpperCase();
 
-        return accountIdService.resolveContraAccountName(ACQUISITION, DEBIT, fixedAsset);
+        return accountIdService.contraAccountName(ACQUISITION, DEBIT, fixedAsset);
     }
 }

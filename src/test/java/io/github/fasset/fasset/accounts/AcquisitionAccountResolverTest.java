@@ -33,16 +33,16 @@ import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_SUB_T
 import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_TYPE;
 import static io.github.fasset.fasset.book.keeper.AccountAttribute.CATEGORY;
 import static io.github.fasset.fasset.book.keeper.AccountAttribute.SERVICE_OUTLET;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 public class AcquisitionAccountResolverTest {
 
+    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "ELECTRONICS", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
+    private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600, "KES"), "COMPUTERS", "987", LocalDate.of(2018, 2, 13), "abc02", Money.of(13.42, "KES"));
+    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156, "KES"), "FURNITURE", "010", LocalDate.of(2018, 1, 13), "abc03", Money.of(19.24, "KES"));
     private AcquisitionAccountResolver acquisitionAccountResolver;
-
-    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "ELECTRONICS", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
-    private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
-    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
 
     @Before
     public void setUp() throws Exception {

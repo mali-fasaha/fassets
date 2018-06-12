@@ -16,5 +16,8 @@
 @REM along with this program. If not, see <http://www.gnu.org/licenses/>.
 @REM
 
+@REM This is a temporary script for running minutes select tests while during
+@REM the development process.
+
 @REM Random tests
 mvnw -Dtest=AcquisitionDebitAccountIdResolverTest#* test

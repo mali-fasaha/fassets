@@ -35,7 +35,7 @@ import static io.github.fasset.fasset.book.keeper.AccountAttribute.GENERAL_LEDGE
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.ghacupha.cash.HardCash.dollar;
 import static io.github.ghacupha.time.point.SimpleDate.on;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AccountUnitTest {
 
@@ -44,48 +44,44 @@ public class AccountUnitTest {
     @Before
     public void setUp() throws Exception {
 
-        account = new Account("Test Account",
-            "TST001",
-            DEBIT,
-            Currency.getInstance("USD"),
-            on(2018,12,20));
+        account = new Account("Test Account", "TST001", DEBIT, Currency.getInstance("USD"), on(2018, 12, 20));
 
-        account.addAttribute(GENERAL_LEDGER,"4875");
+        account.addAttribute(GENERAL_LEDGER, "4875");
     }
 
     @Test(expected = UnEnteredDetailsException.class)
     public void youCannotGetUnenteredDetails() throws Exception {
 
-        account.addAttribute(CONTRA_ACCOUNT,"Accumulated Test Account");
+        account.addAttribute(CONTRA_ACCOUNT, "Accumulated Test Account");
 
-        assertEquals("Asset Account",account.getAttribute(ACCOUNT_TYPE));
+        assertEquals("Asset Account", account.getAttribute(ACCOUNT_TYPE));
     }
 
     @Test
     public void addAttribute() throws Exception {
 
-        account.addAttribute(CONTRA_ACCOUNT,"Accumulated Test Account");
+        account.addAttribute(CONTRA_ACCOUNT, "Accumulated Test Account");
 
-        assertEquals("Accumulated Test Account",account.getAttribute(CONTRA_ACCOUNT));
+        assertEquals("Accumulated Test Account", account.getAttribute(CONTRA_ACCOUNT));
     }
 
     @Test
     public void addEntry() throws Exception {
 
-        account.addEntry(new AccountingEntry(on(2018,12,21),account,"AccountingEntry Test 1",DEBIT, dollar(115.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,23),account,"AccountingEntry Test 2",DEBIT, dollar(110.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, dollar(95.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,28),account,"AccountingEntry Test 4",DEBIT, dollar(90.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 21), account, "AccountingEntry Test 1", DEBIT, dollar(115.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 23), account, "AccountingEntry Test 2", DEBIT, dollar(110.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 24), account, "AccountingEntry Test 3", DEBIT, dollar(95.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 28), account, "AccountingEntry Test 4", DEBIT, dollar(90.23)));
 
-        assertEquals(new AccountBalance(dollar(320.69),DEBIT),account.balance(2018,12,25));
+        assertEquals(new AccountBalance(dollar(320.69), DEBIT), account.balance(2018, 12, 25));
     }
 
     @Test(expected = UntimelyBookingDateException.class)
     public void bookingDateOnlyAfterAccountOpening() throws Exception {
 
-        account.addEntry(new AccountingEntry(on(2018,12,21),account,"AccountingEntry Test 1",DEBIT, dollar(115.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, dollar(95.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,19),account,"AccountingEntry Test 4",DEBIT, dollar(90.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 21), account, "AccountingEntry Test 1", DEBIT, dollar(115.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 24), account, "AccountingEntry Test 3", DEBIT, dollar(95.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 19), account, "AccountingEntry Test 4", DEBIT, dollar(90.23)));
 
         // Exception thrown no need for assertion
     }
@@ -93,9 +89,9 @@ public class AccountUnitTest {
     @Test(expected = MismatchedCurrencyException.class)
     public void entryCurrencyMustMatchAccount() throws Exception {
 
-        account.addEntry(new AccountingEntry(on(2018,12,21),account,"AccountingEntry Test 1",DEBIT, dollar(115.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, HardCash.shilling(95.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,19),account,"AccountingEntry Test 4",DEBIT, dollar(90.23)));// test never reaches here
+        account.addEntry(new AccountingEntry(on(2018, 12, 21), account, "AccountingEntry Test 1", DEBIT, dollar(115.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 24), account, "AccountingEntry Test 3", DEBIT, HardCash.shilling(95.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 19), account, "AccountingEntry Test 4", DEBIT, dollar(90.23)));// test never reaches here
 
         // Exception thrown no need for assertion
     }
@@ -103,12 +99,12 @@ public class AccountUnitTest {
     @Test
     public void balance() throws Exception {
 
-        account.addEntry(new AccountingEntry(on(2018,12,20),account,"AccountingEntry Test 1",DEBIT, dollar(115.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,23),account,"AccountingEntry Test 2",DEBIT, dollar(110.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,24),account,"AccountingEntry Test 3",DEBIT, dollar(95.23)));
-        account.addEntry(new AccountingEntry(on(2018,12,26),account,"AccountingEntry Test 4",DEBIT, dollar(90.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 20), account, "AccountingEntry Test 1", DEBIT, dollar(115.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 23), account, "AccountingEntry Test 2", DEBIT, dollar(110.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 24), account, "AccountingEntry Test 3", DEBIT, dollar(95.23)));
+        account.addEntry(new AccountingEntry(on(2018, 12, 26), account, "AccountingEntry Test 4", DEBIT, dollar(90.23)));
 
-        assertEquals(new AccountBalance(dollar(410.92),DEBIT),account.balance(2018,12,27));
+        assertEquals(new AccountBalance(dollar(410.92), DEBIT), account.balance(2018, 12, 27));
 
     }
 
@@ -117,24 +113,24 @@ public class AccountUnitTest {
 
         TimePoint openingDate = account.getOpeningDate();
 
-        assertEquals(on(2018,12,20),openingDate);
+        assertEquals(on(2018, 12, 20), openingDate);
 
         // Adding 50 days to the opening date of the account
         openingDate.addDays(50);
 
         // Opening date should not have changed
-        assertEquals(on(2018,12,20),openingDate);
+        assertEquals(on(2018, 12, 20), openingDate);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void accountAttributesAreImmutable() throws Exception {
 
-        Map<AccountAttribute,String> attributes = account.getAccountAttributes();
+        Map<AccountAttribute, String> attributes = account.getAccountAttributes();
 
-        assertEquals("4875",attributes.get(GENERAL_LEDGER));
+        assertEquals("4875", attributes.get(GENERAL_LEDGER));
 
-        attributes.put(GENERAL_LEDGER,"4846");
+        attributes.put(GENERAL_LEDGER, "4846");
 
-        assertEquals("4875",attributes.get(GENERAL_LEDGER));
+        assertEquals("4875", attributes.get(GENERAL_LEDGER));
     }
 }

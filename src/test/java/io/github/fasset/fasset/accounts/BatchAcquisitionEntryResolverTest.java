@@ -39,27 +39,22 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.ghacupha.cash.HardCash.shilling;
 import static io.github.ghacupha.time.point.SimpleDate.on;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class BatchAcquisitionEntryResolverTest {
 
+    private final static Currency KES = Currency.getInstance("KES");
+    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "Electronics", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
+    private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600, "KES"), "COMPUTERS", "987", LocalDate.of(2018, 2, 13), "abc02", Money.of(13.42, "KES"));
+    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156, "KES"), "FURNITURE", "010", LocalDate.of(2018, 1, 13), "abc03", Money.of(19.24, "KES"));
+    // Mock account
+    private static final Account electronics = new Account("Electronics", "101", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018, 1, 1));
+    private static final Account computers = new Account("Computers", "102", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018, 1, 1));
+    private static final Account furniture = new Account("Furnitures", "103", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018, 1, 1));
+    private static final Account sundryCreditors = new Account("Sundry Creditors", "104", CREDIT, Currency.getInstance("KES"), SimpleDate.of(2018, 1, 1));
     private BatchEntryResolver batchEntryResolver;
     private List<FixedAsset> fixedAssets = new ArrayList<>();
-
-    private final static Currency KES = Currency.getInstance("KES");
-
-    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronics", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
-    private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
-    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
-
-
-
-    // Mock account
-    private static final Account electronics = new Account("Electronics", "101", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
-    private static final Account computers = new Account("Computers", "102", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
-    private static final Account furniture = new Account("Furnitures", "103", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
-    private static final Account sundryCreditors = new Account("Sundry Creditors", "104", CREDIT, Currency.getInstance("KES"), SimpleDate.of(2018,1,1));
 
     @Before
     public void setUp() throws Exception {
@@ -94,24 +89,24 @@ public class BatchAcquisitionEntryResolverTest {
 
         List<AccountingEntry> entries = batchEntryResolver.resolveEntries(fixedAssets);
 
-        AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver",on(2018,2,21),Currency.getInstance("KES"));
+        AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver", on(2018, 2, 21), Currency.getInstance("KES"));
 
-            entries.forEach(entry -> {
-                try {
-                    testPostingAssets.addEntry(entry);
-                } catch (MismatchedCurrencyException | ImmutableEntryException e) {
-                    e.printStackTrace();
-                }
-            });
+        entries.forEach(entry -> {
+            try {
+                testPostingAssets.addEntry(entry);
+            } catch (MismatchedCurrencyException | ImmutableEntryException e) {
+                e.printStackTrace();
+            }
+        });
 
         testPostingAssets.post();
 
 
         // each asset is represented by an entry
         assertEquals(fixedAssets.size() * 2, entries.size());
-        assertEquals(new AccountBalance(shilling(200),DEBIT), electronics.balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(shilling(5600),DEBIT), computers.balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(shilling(156),DEBIT), furniture.balance(on(2018,2,21)));
-        assertEquals(new AccountBalance(shilling(5956),CREDIT), sundryCreditors.balance(on(2018,2,21)));
+        assertEquals(new AccountBalance(shilling(200), DEBIT), electronics.balance(on(2018, 2, 21)));
+        assertEquals(new AccountBalance(shilling(5600), DEBIT), computers.balance(on(2018, 2, 21)));
+        assertEquals(new AccountBalance(shilling(156), DEBIT), furniture.balance(on(2018, 2, 21)));
+        assertEquals(new AccountBalance(shilling(5956), CREDIT), sundryCreditors.balance(on(2018, 2, 21)));
     }
 }

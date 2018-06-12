@@ -23,7 +23,7 @@ import io.github.ghacupha.time.point.SimpleDate;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ReadableDateTest {
 
@@ -32,24 +32,24 @@ public class ReadableDateTest {
     @Before
     public void setUp() throws Exception {
 
-        readableTime = new ReadableDate("dd/MM/yyyy",SimpleDate.newMoment(2018,05,02));
+        readableTime = new ReadableDate("dd/MM/yyyy", SimpleDate.newMoment(2018, 05, 02));
     }
 
     @Test
     public void parseString() throws Exception {
 
-        assertEquals(SimpleDate.on(2018,4,03),readableTime.parseString("03/04/2018"));
+        assertEquals(SimpleDate.on(2018, 4, 03), readableTime.parseString("03/04/2018"));
     }
 
     @Test
     public void parseStringWithPattern() throws Exception {
 
-        assertEquals(SimpleDate.on(2018,8,03),readableTime.parseString("08/03/2018","MM/dd/yyyy"));
+        assertEquals(SimpleDate.on(2018, 8, 03), readableTime.parseString("08/03/2018", "MM/dd/yyyy"));
     }
 
     @Test
     public void toStringTest() {
 
-        assertEquals("02/05/2018",readableTime.toString());
+        assertEquals("02/05/2018", readableTime.toString());
     }
 }

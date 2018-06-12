@@ -68,17 +68,26 @@ public class AccountServiceTestIT {
 
     private Transaction buysChairs;
 
+    private static Cash shilling(double amount) {
+        return HardCash.shilling(amount);
+    }
+
+    private static AccountBalance balance(Cash ammount, AccountSide accountSide) {
+
+        return AccountBalance.newBalance(ammount, accountSide);
+    }
+
     @Before
     public void setUp() throws Exception {
 
-        buysChairs = AccountingTransaction.create("Buy chairs",SimpleDate.of(2018,4,20),KES);
+        buysChairs = AccountingTransaction.create("Buy chairs", SimpleDate.of(2018, 4, 20), KES);
 
         testAccount = new Account("Computers", "001", DEBIT, KES, openingDate);
 
         computers = persistentAccountService.saveAccount(testAccount);
         sundryDebtorsAccount = persistentAccountService.saveAccount(new Account("Sundry Debtor's Account", "002", DEBIT, KES, openingDate));
         cashAccount = persistentAccountService.saveAccount(new Account("Cash Account", "003", CREDIT, KES, openingDate));
-        taxAccount = persistentAccountService.saveAccount(new Account("Vat Account","211",CREDIT,KES,SimpleDate.of(2018,4,20)));
+        taxAccount = persistentAccountService.saveAccount(new Account("Vat Account", "211", CREDIT, KES, SimpleDate.of(2018, 4, 20)));
 
         computersId = computers.getId();
         sundryDebtorsId = sundryDebtorsAccount.getId();
@@ -117,9 +126,9 @@ public class AccountServiceTestIT {
 
         payForNewComputer();
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(150.23),CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(200),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(350.23), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(150.23), CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(200), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
 
     }
 
@@ -128,53 +137,53 @@ public class AccountServiceTestIT {
         payForNewComputer();
         reQuisitionForChairs();
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(350.23), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(330), DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(660), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(20.23), CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.of(2018,4,20)));
-        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.of(2018,4,20)));
-        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.of(2018,4,20)));
-        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.of(2018,4,20)));
+        assertEquals(balance(shilling(350.23), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.of(2018, 4, 20)));
+        assertEquals(balance(shilling(330), DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.of(2018, 4, 20)));
+        assertEquals(balance(shilling(660), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.of(2018, 4, 20)));
+        assertEquals(balance(shilling(20.23), CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.of(2018, 4, 20)));
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.of(2018,3,31)));
-        assertEquals(balance(shilling(150.23),CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.of(2018,3,31)));
-        assertEquals(balance(shilling(200),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.of(2018,3,31)));
-        assertEquals(balance(shilling(0),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.of(2018,3,31)));
+        assertEquals(balance(shilling(350.23), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.of(2018, 3, 31)));
+        assertEquals(balance(shilling(150.23), CREDIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.of(2018, 3, 31)));
+        assertEquals(balance(shilling(200), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.of(2018, 3, 31)));
+        assertEquals(balance(shilling(0), CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.of(2018, 3, 31)));
 
     }
 
     @Test(expected = ImmutableEntryException.class)
-    public void postedTransactionsAreImmutable() throws Exception{
+    public void postedTransactionsAreImmutable() throws Exception {
         payForNewComputer();
         reQuisitionForChairs();
 
         buysChairs.post();
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(350.23), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(330), DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(660), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(20.23), CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
     }
 
     @Test(expected = ImmutableEntryException.class)
-    public void postedTransactionsAreImmutableToEntries() throws Exception{
+    public void postedTransactionsAreImmutableToEntries() throws Exception {
         payForNewComputer();
         reQuisitionForChairs();
 
-        buysChairs.addEntry(DEBIT,shilling(485.54),sundryDebtorsAccount,"Additional chairs in invoice 218");
+        buysChairs.addEntry(DEBIT, shilling(485.54), sundryDebtorsAccount, "Additional chairs in invoice 218");
 
-        assertEquals(balance(shilling(350.23),DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(330),DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(660),CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
-        assertEquals(balance(shilling(20.23),CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(350.23), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(330), DEBIT), persistentAccountService.fetchAccountById(sundryDebtorsId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(660), CREDIT), persistentAccountService.fetchAccountById(cashAccountId).balance(SimpleDate.today()));
+        assertEquals(balance(shilling(20.23), CREDIT), persistentAccountService.fetchAccountById(taxAccountId).balance(SimpleDate.today()));
     }
 
     private void reQuisitionForChairs() throws Exception {
-        buysChairs.addEntry(DEBIT,shilling(480.23),sundryDebtorsAccount,"Furniture Suppliers invoice 218");
-        buysChairs.addEntry(CREDIT,shilling(20.23),taxAccount,"16% Vat for furniture suppliers");
-        buysChairs.addEntry(CREDIT,shilling(460.00),cashAccount,"Cash IFO Furniture Suppliers");
+        buysChairs.addEntry(DEBIT, shilling(480.23), sundryDebtorsAccount, "Furniture Suppliers invoice 218");
+        buysChairs.addEntry(CREDIT, shilling(20.23), taxAccount, "16% Vat for furniture suppliers");
+        buysChairs.addEntry(CREDIT, shilling(460.00), cashAccount, "Cash IFO Furniture Suppliers");
 
         buysChairs.post();
     }
@@ -183,18 +192,9 @@ public class AccountServiceTestIT {
         Transaction purchaseComputers = AccountingTransaction.create("Purchase Computers", SimpleDate.of(2018, 3, 31), KES);
 
         purchaseComputers.addEntry(DEBIT, shilling(350.23), computers, "Invoice100");
-        purchaseComputers.addEntry(CREDIT,shilling(150.23),sundryDebtorsAccount,"Accounting for expense Id 100");
-        purchaseComputers.addEntry(CREDIT,shilling(200),cashAccount,"Cash IFO Computer Suppliers");
+        purchaseComputers.addEntry(CREDIT, shilling(150.23), sundryDebtorsAccount, "Accounting for expense Id 100");
+        purchaseComputers.addEntry(CREDIT, shilling(200), cashAccount, "Cash IFO Computer Suppliers");
 
         purchaseComputers.post();
-    }
-
-    private static Cash shilling(double amount){
-        return HardCash.shilling(amount);
-    }
-
-    private static AccountBalance balance(Cash ammount, AccountSide accountSide){
-
-        return AccountBalance.newBalance(ammount,accountSide);
     }
 }

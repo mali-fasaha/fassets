@@ -67,8 +67,8 @@ public class FixedAssetsJobsActivator {
             jobExecution = jobLauncher.run(job, jobParameters);
         } catch (Throwable e) {
 
-            String message =
-                String.format("Exception encountered %s caused by %s,while launching job" + "nomenclature %s at time %s", e.getMessage(), e.getCause(), job.getName(), jobParameters.getString("starting_time"));
+            String message = String.format("Exception encountered %s caused by %s,while launching job" + "nomenclature %s at time %s", e.getMessage(), e.getCause(), job.getName(),
+                jobParameters.getString("starting_time"));
 
             throw new BatchJobExecutionException(message, e);
 

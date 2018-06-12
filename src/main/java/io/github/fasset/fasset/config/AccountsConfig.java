@@ -17,8 +17,8 @@
  */
 package io.github.fasset.fasset.config;
 
-import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
+import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import org.springframework.context.annotation.Bean;
@@ -39,7 +39,7 @@ public class AccountsConfig {
     }
 
     @Bean("accountIdPolicyVersion1")
-    public AccountIdPolicy accountIdPolicyVersion1(){
+    public AccountIdPolicy accountIdPolicyVersion1() {
 
         return new AccountIdPolicyVersion1("account-id");
     }

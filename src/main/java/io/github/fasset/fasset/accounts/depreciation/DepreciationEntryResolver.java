@@ -17,7 +17,6 @@
  */
 package io.github.fasset.fasset.accounts.depreciation;
 
-import io.github.fasset.fasset.accounts.depreciation.DepreciationPeriod;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.model.FixedAsset;
 

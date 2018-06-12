@@ -28,7 +28,7 @@ public class FassetsTestIT {
 
 
     @Test
-    public void contextLoads(){
+    public void contextLoads() {
 
         // For this to run the entire ApplicationContext has to load correctly
     }

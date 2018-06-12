@@ -22,7 +22,7 @@ import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DoubleToMoneyConverterTest {
 
@@ -36,6 +36,6 @@ public class DoubleToMoneyConverterTest {
     @Test
     public void convertMethodWorks() throws Exception {
 
-        assertEquals(Money.of(100.00,"KES"),doubleToMoneyConverter.convert(100.00));
+        assertEquals(Money.of(100.00, "KES"), doubleToMoneyConverter.convert(100.00));
     }
 }

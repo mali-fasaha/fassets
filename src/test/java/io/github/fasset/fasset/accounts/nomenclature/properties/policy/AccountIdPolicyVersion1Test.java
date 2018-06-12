@@ -23,18 +23,19 @@ import org.junit.jupiter.api.Test;
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AccountIdPolicyVersion1Test {
 
     private AccountIdPolicy accountIdPolicy;
 
-    @BeforeEach void setUp() {
-        accountIdPolicy =
-            new AccountIdPolicyVersion1("account-id");
+    @BeforeEach
+    void setUp() {
+        accountIdPolicy = new AccountIdPolicyVersion1("account-id");
     }
 
-    @Test void testCurrencyCode() {
+    @Test
+    void testCurrencyCode() {
 
         assertEquals("00", accountIdPolicy.currencyCode("KES"));
         assertEquals("01", accountIdPolicy.currencyCode("USD"));

@@ -37,6 +37,6 @@ public class FileStorageSubscriber extends AbstractSubscriber implements Subscri
 
         FileUploadNotification notification = (FileUploadNotification) update.getPayload();
 
-        log.info("{} has received the file : {} for processing",this,notification);
+        log.info("{} has received the file : {} for processing", this, notification);
     }
 }

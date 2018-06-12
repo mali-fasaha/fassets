@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class FixedAssetResponseDtoTest {
 
@@ -36,14 +36,8 @@ public class FixedAssetResponseDtoTest {
 
         purchaseDate = LocalDate.now();
 
-        fixedAsset = new FixedAsset()
-                .setSolId("001")
-                .setAssetDescription("Desktop")
-                .setBarcode("ACB52645")
-                .setCategory("Furniture & Fittings")
-                .setPurchaseDate(purchaseDate)
-                .setPurchaseCost(Money.of(200000.23,"KES"))
-                .setNetBookValue(Money.of(90000.05,"KES"));
+        fixedAsset = new FixedAsset().setSolId("001").setAssetDescription("Desktop").setBarcode("ACB52645").setCategory("Furniture & Fittings").setPurchaseDate(purchaseDate)
+            .setPurchaseCost(Money.of(200000.23, "KES")).setNetBookValue(Money.of(90000.05, "KES"));
     }
 
     @Test
@@ -51,8 +45,8 @@ public class FixedAssetResponseDtoTest {
 
         FixedAssetResponseDto fixedAssetResponseDto = new FixedAssetResponseDto(fixedAsset);
 
-        assertEquals(200000.23, fixedAssetResponseDto.getPurchaseCost(),0);
-        assertEquals(90000.05, fixedAssetResponseDto.getNetBookValue(),0);
+        assertEquals(200000.23, fixedAssetResponseDto.getPurchaseCost(), 0);
+        assertEquals(90000.05, fixedAssetResponseDto.getNetBookValue(), 0);
         assertEquals("001", fixedAssetResponseDto.getSolId());
         assertEquals("Desktop", fixedAssetResponseDto.getAssetDescription());
         assertEquals("ACB52645", fixedAssetResponseDto.getBarcode());

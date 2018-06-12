@@ -85,11 +85,11 @@ public class FileUploadTopicTest {
         fileUploadsRecorder.addSubscription(fileUploadsSubscriptionService);
 
 
-        fileUploadsSubscriptionService.postUpdate(() -> new FileUploadNotification("Data listing 15482","Jan 2018", LocalDateTime.now().toString()));
+        fileUploadsSubscriptionService.postUpdate(() -> new FileUploadNotification("Data listing 15482", "Jan 2018", LocalDateTime.now().toString()));
 
         fileUploadsSubscriber.unSubscribe(fileUploadsSubscriptionService);
 
-        fileUploadsSubscriptionService.postUpdate(() -> new FileUploadNotification("Data listing 10001","Mar 2018", LocalDateTime.now().toString()));
+        fileUploadsSubscriptionService.postUpdate(() -> new FileUploadNotification("Data listing 10001", "Mar 2018", LocalDateTime.now().toString()));
     }
 
     @Test

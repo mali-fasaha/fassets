@@ -68,9 +68,8 @@ public class ExcelUploadJob extends AbstractSubscriber implements Subscriber {
             jobLauncher.run(importExcelJob, jobParameters);
         } catch (Throwable e) {
 
-            String message = String
-                .format("Exception encountered %s caused by %s,while launching job" + "nomenclature %s, reading from excel file : %s at time %s", e.getMessage(), e.getCause(), importExcelJob.getName(),
-                    jobParameters.getString("fileName"), jobParameters.getString("time"));
+            String message = String.format("Exception encountered %s caused by %s,while launching job" + "nomenclature %s, reading from excel file : %s at time %s", e.getMessage(), e.getCause(),
+                importExcelJob.getName(), jobParameters.getString("fileName"), jobParameters.getString("time"));
 
             throw new BatchJobExecutionException(message, e);
 

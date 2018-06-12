@@ -37,6 +37,6 @@ public class CompositeFileUploadsSubscriber extends AbstractSubscriber implement
 
         FileUploadNotification notification = (FileUploadNotification) update.getPayload();
 
-        log.info("FileUploadNotification : {} has been received for processing",notification);
+        log.info("FileUploadNotification : {} has been received for processing", notification);
     }
 }

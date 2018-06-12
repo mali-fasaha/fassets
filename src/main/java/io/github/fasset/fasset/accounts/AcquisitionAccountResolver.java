@@ -57,8 +57,7 @@ public class AcquisitionAccountResolver implements AccountResolver {
     private AccountIdResolver creditAccountIDResolver;
 
     @Autowired
-    public AcquisitionAccountResolver(@Qualifier("debitAccountIdResolver") AccountIdResolver debitAccountIdResolver,
-                                      @Qualifier("creditAccountIDResolver") AccountIdResolver creditAccountIDResolver) {
+    public AcquisitionAccountResolver(@Qualifier("debitAccountIdResolver") AccountIdResolver debitAccountIdResolver, @Qualifier("creditAccountIDResolver") AccountIdResolver creditAccountIDResolver) {
         this.debitAccountIdResolver = debitAccountIdResolver;
         this.creditAccountIDResolver = creditAccountIDResolver;
     }

@@ -70,6 +70,15 @@ public class AccountServiceStressTestIT {
 
     private Transaction buysChairs;
 
+    private static Cash shilling(double amount) {
+        return HardCash.shilling(amount);
+    }
+
+    private static AccountBalance balance(Cash ammount, AccountSide accountSide) {
+
+        return AccountBalance.newBalance(ammount, accountSide);
+    }
+
     @Before
     public void setUp() throws Exception {
 
@@ -95,7 +104,7 @@ public class AccountServiceStressTestIT {
         //reQuisitionForChairs();
 
         log.info("Loading 100000 entries through transaction");
-        for(int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 10000; i++) {
             Transaction temp = AccountingTransaction.create("Purchase Computers", SimpleDate.of(2018, 3, 31), KES);
             temp.addEntry(DEBIT, shilling(350.23), computers, "Invoice100");
             temp.addEntry(CREDIT, shilling(150.23), sundryDebtorsAccount, "Accounting for expense Id 100");
@@ -115,14 +124,5 @@ public class AccountServiceStressTestIT {
         buysChairs.addEntry(CREDIT, shilling(460.00), cashAccount, "Cash IFO Furniture Suppliers");
 
         buysChairs.post();
-    }
-
-    private static Cash shilling(double amount) {
-        return HardCash.shilling(amount);
-    }
-
-    private static AccountBalance balance(Cash ammount, AccountSide accountSide) {
-
-        return AccountBalance.newBalance(ammount, accountSide);
     }
 }

@@ -30,14 +30,14 @@ class KeyFormatter {
         return cleanString(String.format("%s.%s.%s", category.toLowerCase(), transaction, element));
     }
 
-    private static String cleanString(String toClean){
+    private static String cleanString(String toClean) {
 
         return toClean.replace(" ", "-").replace("&", "and").toLowerCase();
     }
 
     static String formatKey(String category, TransactionType transactionType, AccountSide accountSide) {
 
-        return cleanString(String.format("%s.%s.%s",category, transactionType, accountSide)); // e.g. computers.acquisition.posting
+        return cleanString(String.format("%s.%s.%s", category, transactionType, accountSide)); // e.g. computers.acquisition.posting
     }
 
     static String formatKey(String category, TransactionType transactionType, AccountSide accountSide, AccountNumberSegment segment) {

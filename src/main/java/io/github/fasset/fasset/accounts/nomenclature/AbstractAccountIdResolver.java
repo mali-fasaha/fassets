@@ -22,8 +22,6 @@ import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * <br>Account naming policy is dirt simple. The account is simply the name of the category. There are
  * however embedded hierarchies which are partitioned by variables like, service outlet, currency
@@ -41,7 +39,6 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
     AbstractAccountIdResolver(AccountIdService accountIdService) {
         this.accountIdService = accountIdService;
     }
-
 
 
     /**

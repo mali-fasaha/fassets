@@ -28,7 +28,6 @@ public interface AccountIdResolver {
     String accountName(FixedAsset fixedAsset);
 
     /**
-     *
      * @param fixedAsset For which we need an account number
      * @return Account number for tracking the fixed asset
      */

@@ -4,6 +4,16 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Added accountPrefix and appendant methods to the accountIdPolicy**
+
+
+[3eff2fdf82bfb54](https://github.com/ghacupha/fassets/commit/3eff2fdf82bfb54) Edwin Njeru *2018-06-12 13:17:43*
+
+**Added test file launching individual tests,and added resolveContraAccountName in the accountIdService**
+
+
+[31414849bd123a2](https://github.com/ghacupha/fassets/commit/31414849bd123a2) Edwin Njeru *2018-06-12 12:08:08*
+
 **Added tests for the resolution of general ledger name**
 
 

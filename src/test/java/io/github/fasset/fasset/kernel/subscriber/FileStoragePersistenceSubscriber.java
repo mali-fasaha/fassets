@@ -37,6 +37,6 @@ public class FileStoragePersistenceSubscriber extends AbstractSubscriber impleme
 
         FileUploadNotification fileUploadNotification = (FileUploadNotification) update.getPayload();
 
-        log.info("File : {} has been received and recorded in the database",fileUploadNotification);
+        log.info("File : {} has been received and recorded in the database", fileUploadNotification);
     }
 }

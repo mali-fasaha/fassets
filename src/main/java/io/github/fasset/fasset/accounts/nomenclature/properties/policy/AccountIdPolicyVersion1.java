@@ -70,7 +70,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param accountSide         The direction which we are posting. This could be DEBIT or CREDIT
+     * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
      * @param category        of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
@@ -96,8 +96,8 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      * account number sequence
      *
      * @param transactionType The type of fixed asset transaction
-     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
-     * @param category of the Asset for which we need a placeholder
+     * @param accountSide     Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param category        of the Asset for which we need a placeholder
      * @return String GL Id to be used for credit transactions
      */
     @Override
@@ -113,10 +113,9 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
-     *
      * @param transactionType Type of transaction Enum
-     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
-     * @param category of the asset for which we seek transaction account name
+     * @param accountSide     Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param category        of the asset for which we seek transaction account name
      * @return Name of the account
      */
     @Override

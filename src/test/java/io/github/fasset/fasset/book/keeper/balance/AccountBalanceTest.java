@@ -27,7 +27,8 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountBalance.newBala
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.ghacupha.cash.HardCash.shilling;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class AccountBalanceTest {
 

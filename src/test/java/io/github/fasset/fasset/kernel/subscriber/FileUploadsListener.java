@@ -36,6 +36,6 @@ public class FileUploadsListener extends AbstractSubscriber implements Subscribe
 
         String fileName = (String) update.getPayload();
 
-        log.info("File name : {} has been received for processing",fileName);
+        log.info("File name : {} has been received for processing", fileName);
     }
 }

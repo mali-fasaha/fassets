@@ -19,7 +19,6 @@ package io.github.fasset.fasset.controller;
 
 import io.github.fasset.fasset.dto.FixedAssetFormDto;
 import io.github.fasset.fasset.kernel.util.convert.DoubleToMoneyConverter;
-import io.github.fasset.fasset.model.FixedAsset;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +40,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -51,7 +49,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * please note that the controller internally uses a service and this service uses a runtime-generated
  * repository.
  * Good design bureaucracy demands, that I load only the mvc-related context using the @WebMvcTest
- *  annotation provided by spring. But then this would miss dependencies which have been used to create
+ * annotation provided by spring. But then this would miss dependencies which have been used to create
  * repositories.
  * Am all for good test design but, I am not about to mock away a service and
  * its repository. If the service implementation changes I would have to note the method changes and
@@ -61,16 +59,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author edwin.njeru
  */
-@TestExecutionListeners({
-        DependencyInjectionTestExecutionListener.class,
-        DirtiesContextTestExecutionListener.class,
-        TransactionalTestExecutionListener.class })
+@TestExecutionListeners( {DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class, TransactionalTestExecutionListener.class})
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FixedAssetsControllerTestIT {
 
 
-
+    MockHttpServletResponse response;
     private MockMvc mockMvc;
     @Qualifier("fixedAssetsAdditionsController")
     @Autowired
@@ -81,8 +76,6 @@ public class FixedAssetsControllerTestIT {
     @Qualifier("requestMappingHandlerAdapter")
     @Autowired
     private RequestMappingHandlerAdapter handlerAdapter;
-
-    MockHttpServletResponse response;
     @Qualifier("doubleToMoneyConverter")
     @Autowired
     private DoubleToMoneyConverter toMoneyConverter;
@@ -97,10 +90,7 @@ public class FixedAssetsControllerTestIT {
 
     @Test
     public void assetAdditionFormWorks() throws Exception {
-        this.mockMvc.perform(get("/add/asset"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("forms/addAsset"))
-                .andDo(print());
+        this.mockMvc.perform(get("/add/asset")).andExpect(status().isOk()).andExpect(view().name("forms/addAsset")).andDo(print());
     }
 
     @Test
@@ -115,13 +105,13 @@ public class FixedAssetsControllerTestIT {
         try {
             FixedAssetFormDto fixedAsset = new FixedAssetFormDto(toMoneyConverter);
             request.setMethod("POST");
-            request.setAttribute("assetDescription","Laptop");
-            request.setAttribute("solId","010");
+            request.setAttribute("assetDescription", "Laptop");
+            request.setAttribute("solId", "010");
             handler = requestMappingHandlerMapping.getHandler(request).getHandler();
-            mv=handlerAdapter.handle(request,new MockHttpServletResponse(),handler);
-            assertEquals(200,response.getStatus());
-            assertEquals("Laptop",fixedAsset.getAssetDescription());
-            assertEquals("solId",fixedAsset.getSolId());
+            mv = handlerAdapter.handle(request, new MockHttpServletResponse(), handler);
+            assertEquals(200, response.getStatus());
+            assertEquals("Laptop", fixedAsset.getAssetDescription());
+            assertEquals("solId", fixedAsset.getSolId());
         } catch (Exception e) {
             e.printStackTrace();
         }

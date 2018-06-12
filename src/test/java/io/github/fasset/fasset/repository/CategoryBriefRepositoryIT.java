@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -46,11 +46,11 @@ public class CategoryBriefRepositoryIT {
     public void setUp() throws Exception {
 
         categoryBrief = new CategoryBrief();
-        categoryBrief.setAccruedDepreciation(Money.of(560,moneyProperties.getDefaultCurrency()));
+        categoryBrief.setAccruedDepreciation(Money.of(560, moneyProperties.getDefaultCurrency()));
         categoryBrief.setDesignation("COMPUTERS");
         categoryBrief.setPoll(5);
-        categoryBrief.setPurchaseCost(Money.of(1000,moneyProperties.getDefaultCurrency()));
-        categoryBrief.setNetBookValue(Money.of(440,moneyProperties.getDefaultCurrency()));
+        categoryBrief.setPurchaseCost(Money.of(1000, moneyProperties.getDefaultCurrency()));
+        categoryBrief.setNetBookValue(Money.of(440, moneyProperties.getDefaultCurrency()));
     }
 
     @Test

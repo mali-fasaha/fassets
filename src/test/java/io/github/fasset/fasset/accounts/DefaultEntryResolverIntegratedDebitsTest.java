@@ -18,10 +18,9 @@
 package io.github.fasset.fasset.accounts;
 
 import com.google.common.collect.ImmutableList;
-
-import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
 import io.github.fasset.fasset.accounts.nomenclature.AcquisitionCreditAccountIdResolver;
 import io.github.fasset.fasset.accounts.nomenclature.AcquisitionDebitAccountIdResolver;
+import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.book.keeper.Account;
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
@@ -56,9 +55,9 @@ public class DefaultEntryResolverIntegratedDebitsTest {
 
     private final static Currency KES = Currency.getInstance("KES");
 
-    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200,"KES"), "Electronics", "001", LocalDate.of(2018,2,5), "abc01", Money.of(9.5,"KES"));
-    private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600,"KES"), "COMPUTERS", "987",LocalDate.of(2018,2,13), "abc02", Money.of(13.42,"KES"));
-    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156,"KES"), "FURNITURE & FITTINGS", "010",LocalDate.of(2018,1,13),"abc03", Money.of(19.24,"KES"));
+    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "Electronics", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
+    private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600, "KES"), "COMPUTERS", "987", LocalDate.of(2018, 2, 13), "abc02", Money.of(13.42, "KES"));
+    private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156, "KES"), "FURNITURE & FITTINGS", "010", LocalDate.of(2018, 1, 13), "abc03", Money.of(19.24, "KES"));
 
     private static List<FixedAsset> fixedAssets = ImmutableList.of(radio, lenovo, chair);
     private static List<AccountingEntry> entries;
@@ -78,7 +77,7 @@ public class DefaultEntryResolverIntegratedDebitsTest {
 
         entries = batchAcquisitionEntryResolver.resolveEntries(fixedAssets);
 
-        assetAcquisition = AccountingTransaction.create("Test posting entry resolver",on(2018,2,21),Currency.getInstance("KES"));
+        assetAcquisition = AccountingTransaction.create("Test posting entry resolver", on(2018, 2, 21), Currency.getInstance("KES"));
 
         entries.forEach(entry -> {
             try {
@@ -90,40 +89,18 @@ public class DefaultEntryResolverIntegratedDebitsTest {
 
         assetAcquisition.post();
 
-        List<Account> accountsFromEntries =
-            IntStream.range(0, fixedAssets.size() * 2).mapToObj(i -> entries.get(i).getAccount()).collect(ImmutableListCollector.toImmutableList());
+        List<Account> accountsFromEntries = IntStream.range(0, fixedAssets.size() * 2).mapToObj(i -> entries.get(i).getAccount()).collect(ImmutableListCollector.toImmutableList());
 
-        accountNames =
-            accountsFromEntries
-                .parallelStream()
-                .map(Account::getName)
-                .collect(ImmutableListCollector.toImmutableFastList());
+        accountNames = accountsFromEntries.parallelStream().map(Account::getName).collect(ImmutableListCollector.toImmutableFastList());
 
-        accountBalances =
-            accountsFromEntries
-                .parallelStream()
-                .collect(
-                    Collectors
-                        .toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentSkipListMap::new));
+        accountBalances = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentSkipListMap::new));
 
-        accountNumbers =
-            accountsFromEntries
-            .parallelStream()
-            .collect(
-                Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentSkipListMap::new));
+        accountNumbers = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentSkipListMap::new));
 
-        sundryCreditorBalances =
-            accountsFromEntries
-                .parallelStream()
-                .filter(i -> i.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
-                .map(account -> account.balance(on(2018,2,26)))
-                .collect(ImmutableListCollector.toImmutableFastList());
+        sundryCreditorBalances = accountsFromEntries.parallelStream().filter(i -> i.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT")).map(account -> account.balance(on(2018, 2, 26)))
+            .collect(ImmutableListCollector.toImmutableFastList());
 
-        sundryCreditorNumbers =
-            accountsFromEntries
-            .parallelStream()
-            .filter(account -> account.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
-            .map(Account::getNumber)
+        sundryCreditorNumbers = accountsFromEntries.parallelStream().filter(account -> account.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT")).map(Account::getNumber)
             .collect(ImmutableListCollector.toImmutableFastList());
     }
 
@@ -167,6 +144,6 @@ public class DefaultEntryResolverIntegratedDebitsTest {
         assertEquals(newBalance(shilling(200), DEBIT), accountBalances.get("ELECTRONICS"));
         assertEquals(newBalance(shilling(156), DEBIT), accountBalances.get("FURNITURE & FITTINGS"));
         assertEquals(newBalance(shilling(5600), DEBIT), accountBalances.get("COMPUTERS"));
-        assertEquals(newBalance(shilling(5956),CREDIT), nil(KES,CREDIT).add(sundryCreditorBalances));
+        assertEquals(newBalance(shilling(5956), CREDIT), nil(KES, CREDIT).add(sundryCreditorBalances));
     }
 }

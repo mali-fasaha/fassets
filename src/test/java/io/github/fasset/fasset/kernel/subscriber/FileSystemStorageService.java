@@ -40,13 +40,13 @@ class FileSystemStorageService extends SimpleSubscription implements Subscriptio
     }
 
     @SuppressWarnings("all")
-    void store(String fileName){
+    void store(String fileName) {
 
         subscriber.addSubscription(this);
         persistenceSubscriber.addSubscription(this);
         registerSubscriber(subscriber);
         registerSubscriber(persistenceSubscriber);
 
-        postUpdate(() -> new FileUploadNotification(fileName,"Mar 2018", LocalDateTime.now().toString()));
+        postUpdate(() -> new FileUploadNotification(fileName, "Mar 2018", LocalDateTime.now().toString()));
     }
 }

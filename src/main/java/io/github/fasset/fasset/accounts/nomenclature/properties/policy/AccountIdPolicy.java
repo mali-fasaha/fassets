@@ -44,7 +44,6 @@ import io.github.fasset.fasset.book.keeper.balance.AccountSide;
  * and yet this is without guarantees of actually not blowing the whole damn foot in the process. One such scenario would be in
  * a distributed environment ... oh! Here's another one, micro-services architecture. If you would think to implement mutating
  * configurations in these two you are destined to experience pain the heights of which you have not experienced before.
- *
  */
 public interface AccountIdPolicy {
 
@@ -63,8 +62,8 @@ public interface AccountIdPolicy {
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param accountSide The direction which we are posting. This could be DEBIT or CREDIT
-     * @param category of the asset for which we need a category code
+     * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
+     * @param category        of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
     String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, String category);
@@ -75,17 +74,16 @@ public interface AccountIdPolicy {
      * account number sequence
      *
      * @param transactionType The type of fixed asset transaction
-     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
-     * @param category of the Asset for which we need a placeholder
+     * @param accountSide     Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param category        of the Asset for which we need a placeholder
      * @return String GL Id to be used for credit transactions
      */
     String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, String category);
 
     /**
-     *
      * @param transactionType Type of transaction Enum
-     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
-     * @param category of the asset for which we seek transaction account name
+     * @param accountSide     Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param category        of the asset for which we seek transaction account name
      * @return Name of the account
      */
     String accountName(TransactionType transactionType, AccountSide accountSide, String category);
@@ -101,7 +99,7 @@ public interface AccountIdPolicy {
      *
      * @param transaction Type of asset transaction  we are carrying out.
      * @param accountSide The account side to which we are posting the transaction for this part of the entry
-     * @param category of the fixed asset being transacted
+     * @param category    of the fixed asset being transacted
      * @return The appendable prefix name to be added to the account name
      */
     Appendable accountNamePrefix(TransactionType transaction, AccountSide accountSide, String category);
@@ -111,6 +109,7 @@ public interface AccountIdPolicy {
      * where one might be required at an application wide level. For instance the contra account for
      * computers account might be called "Accumulated Depreciation - Computers", where the hyphen is
      * supplied by this method. Using the configuration you have whatever constructs the user has desired
+     *
      * @param transaction Type of asset transaction  we are carrying out.
      * @param accountSide The account side to which we are posting the transaction for this part of the entry
      * @return The character to be used while appending account names to prefix or suffix

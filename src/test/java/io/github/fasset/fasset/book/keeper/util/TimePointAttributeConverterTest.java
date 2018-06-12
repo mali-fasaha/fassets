@@ -21,7 +21,7 @@ import io.github.ghacupha.time.point.SimpleDate;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TimePointAttributeConverterTest {
 
@@ -36,12 +36,12 @@ public class TimePointAttributeConverterTest {
     @Test
     public void convertToDatabaseColumn() {
 
-        assertEquals("04/05/2013", timePointAttributeConverter.convertToDatabaseColumn(SimpleDate.on(2013,5,4)));
+        assertEquals("04/05/2013", timePointAttributeConverter.convertToDatabaseColumn(SimpleDate.on(2013, 5, 4)));
     }
 
     @Test
     public void convertToEntityAttribute() {
 
-        assertEquals(SimpleDate.on(2016,11,3), timePointAttributeConverter.convertToEntityAttribute("03/11/2016"));
+        assertEquals(SimpleDate.on(2016, 11, 3), timePointAttributeConverter.convertToEntityAttribute("03/11/2016"));
     }
 }

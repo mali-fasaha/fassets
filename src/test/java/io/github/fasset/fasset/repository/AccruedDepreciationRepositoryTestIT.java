@@ -18,25 +18,20 @@
 package io.github.fasset.fasset.repository;
 
 import io.github.fasset.fasset.model.AccruedDepreciation;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.YearMonth;
-import java.time.temporal.ChronoUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class AccruedDepreciationRepositoryTestIT {
-
 
 
     @Autowired
@@ -45,7 +40,7 @@ public class AccruedDepreciationRepositoryTestIT {
 
 
     @Test
-    public void accruedDepreciationRepoIsWorking() throws Exception{
+    public void accruedDepreciationRepoIsWorking() throws Exception {
 
         AccruedDepreciation accruedDepreciation = accruedDepreciationRepository.save(new AccruedDepreciation());
 
@@ -56,8 +51,7 @@ public class AccruedDepreciationRepositoryTestIT {
     public void findByFixedAssetIdAndMonthBeforeIsWorking() throws Exception {
 
         AccruedDepreciation accruedDepreciation = new AccruedDepreciation();
-        accruedDepreciation.setMonth(YearMonth.of(2018,02))
-                .setFixedAssetId(4465);
+        accruedDepreciation.setMonth(YearMonth.of(2018, 02)).setFixedAssetId(4465);
 
         assertNotNull(accruedDepreciationRepository.save(accruedDepreciation));
 

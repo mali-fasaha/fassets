@@ -44,8 +44,8 @@ public interface AccountIdService {
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param accountSide The direction which we are posting. This could be DEBIT or CREDIT
-     * @param fixedAsset From which we inquire the category of the asset for which we need a category code
+     * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
+     * @param fixedAsset      From which we inquire the category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
     String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
@@ -55,17 +55,17 @@ public interface AccountIdService {
      * category. This is the code segment that typically follows the general ledger code in the
      * account number sequence.
      *
-     * @param fixedAsset for which seek an account placeHolder
-     * @param accountSide Whether we are posting on the debit side or the credit side
+     * @param fixedAsset      for which seek an account placeHolder
+     * @param accountSide     Whether we are posting on the debit side or the credit side
      * @param transactionType The type of transaction for the fixed asset
      * @return String GL Id to be used for credit transactions
      */
     String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
 
     /**
-     * @param accountSide The side of the ledger to which we are posting the amount
+     * @param accountSide     The side of the ledger to which we are posting the amount
      * @param transactionType Type of transaction Enum
-     * @param fixedAsset Asset for which we seek transaction account name
+     * @param fixedAsset      Asset for which we seek transaction account name
      * @return Name of the account
      */
     String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
@@ -76,8 +76,8 @@ public interface AccountIdService {
      *
      * @param transaction The type of transaction associated with the initialization of a contra account
      * @param accountSide To which we are posting the transaction during initialization of a contra account
-     * @param fixedAsset Fixed asset which we are tracking by means of the accounting system
+     * @param fixedAsset  Fixed asset which we are tracking by means of the accounting system
      * @return name of the contra account
      */
-    String resolveContraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset);
+    String contraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset);
 }

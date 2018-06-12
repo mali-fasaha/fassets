@@ -59,8 +59,8 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param accountSide The direction which we are posting. This could be DEBIT or CREDIT
-     * @param fixedAsset From which we inquire the category of the asset for which we need a category code
+     * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
+     * @param fixedAsset      From which we inquire the category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
     @Override
@@ -72,8 +72,8 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
-     * @param fixedAsset for which seek an account placeHolder
-     * @param accountSide Whether we are posting on the debit side or the credit side
+     * @param fixedAsset      for which seek an account placeHolder
+     * @param accountSide     Whether we are posting on the debit side or the credit side
      * @param transactionType The type of transaction for the fixed asset
      * @return String GL Id to be used for credit transactions
      */
@@ -86,7 +86,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
-     * @param accountSide This enum denotes whether or not we are posting on the CREDIT or on the DEBIT side
+     * @param accountSide     This enum denotes whether or not we are posting on the CREDIT or on the DEBIT side
      * @param transactionType Type of transaction Enum
      * @param fixedAsset      Asset for which we seek transaction account name
      * @return Name of the account
@@ -109,13 +109,12 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
      * @return name of the contra account
      */
     @Override
-    public String resolveContraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset) {
+    public String contraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset) {
 
         String contraAccount = "";
 
         try {
-            contraAccount = String.valueOf(accountIdPolicy.accountNamePrefix(transaction, accountSide, fixedAsset.getCategory())
-                .append(accountIdPolicy.appendant(transaction, accountSide))
+            contraAccount = String.valueOf(accountIdPolicy.accountNamePrefix(transaction, accountSide, fixedAsset.getCategory()).append(accountIdPolicy.appendant(transaction, accountSide))
                 .append(accountIdPolicy.accountName(transaction, accountSide, fixedAsset.getCategory())));
         } catch (IOException e) {
             e.printStackTrace();

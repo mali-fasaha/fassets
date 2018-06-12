@@ -79,6 +79,6 @@ public class PropertiesUtils {
      */
     public static Properties fetchConfigProperties(String fileName) {
 
-        return fetchProperties(String.format("config/%s",fileName));
+        return fetchProperties(String.format("config/%s", fileName));
     }
 }
