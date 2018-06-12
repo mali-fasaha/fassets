@@ -20,6 +20,8 @@ package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 
+import java.awt.Stroke;
+
 /**
  * This interface acts as building blocks to how assets are identified in front-facing systems using simple structure
  * which is data that has to be extracted from the asset attributes themselves.
@@ -115,4 +117,15 @@ public interface AccountIdPolicy {
      * @return The character to be used while appending account names to prefix or suffix
      */
     CharSequence appendant(TransactionType transaction, AccountSide accountSide);
+
+    /**
+     * This methods combines the account segments combining them into an account number sequence which is used
+     * application wide.
+     * <br> The existence of this method makes it possible for the application to be configured to create
+     * different forms of identifications for an account number for different purposes.
+     *
+     * @param accountSegments Parameters containing the various segments that form an account number
+     * @return account number sequence
+     */
+    String accountNumberMotif(String... accountSegments);
 }
