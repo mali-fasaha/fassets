@@ -122,7 +122,11 @@ public class AcquisitionDebitAccountIdResolverTest {
     public void resolveGeneralLedgerName() {
 
         assertEquals("ELECTRONICS", accountIdResolver.generalLedgerName(radio));
-        assertEquals("FURNITURE", accountIdResolver.generalLedgerName(chair));
         assertEquals("COMPUTERS", accountIdResolver.generalLedgerName(lenovo));
+        assertEquals("FURNITURE", accountIdResolver.generalLedgerName(chair));
+        assertEquals("COMPUTER SOFTWARE", accountIdResolver.generalLedgerName(zemana));
+        assertEquals("MOTOR VEHICLES", accountIdResolver.generalLedgerName(kca));
+        assertEquals("OFFICE RENOVATION", accountIdResolver.generalLedgerName(officePartitioning));
+
     }
 }
