@@ -50,37 +50,30 @@ public class AcquisitionCreditAccountIDResolverTest {
 
         AccountIdService accountIdService = Mockito.mock(AccountIdService.class);
         
-        when(accountIdService.accountName(ACQUISITION, CREDIT, radio)).thenReturn("ELECTRONICS");
-        when(accountIdService.accountName(ACQUISITION, CREDIT, lenovo)).thenReturn("COMPUTERS");
-        when(accountIdService.accountName(ACQUISITION, CREDIT, chair)).thenReturn("FURNITURE");
-        when(accountIdService.accountName(ACQUISITION, CREDIT, zemana)).thenReturn("COMPUTER SOFTWARE");
-        when(accountIdService.accountName(ACQUISITION, CREDIT, kca)).thenReturn("MOTOR VEHICLES");
-        when(accountIdService.accountName(ACQUISITION, CREDIT, officePartitioning)).thenReturn("OFFICE RENOVATION");
+        when(accountIdService.accountName(ACQUISITION, CREDIT, radio)).thenReturn("SUNDRY CREDITORS");
+        when(accountIdService.accountName(ACQUISITION, CREDIT, lenovo)).thenReturn("SUNDRY CREDITORS");
+        when(accountIdService.accountName(ACQUISITION, CREDIT, chair)).thenReturn("SUNDRY CREDITORS");
+        when(accountIdService.accountName(ACQUISITION, CREDIT, zemana)).thenReturn("SUNDRY CREDITORS");
+        when(accountIdService.accountName(ACQUISITION, CREDIT, kca)).thenReturn("SUNDRY CREDITORS");
+        when(accountIdService.accountName(ACQUISITION, CREDIT, officePartitioning)).thenReturn("SUNDRY CREDITORS");
 
-        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, radio)).thenReturn("010");
-        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, lenovo)).thenReturn("011");
-        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair)).thenReturn("012");
-        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, zemana)).thenReturn("013");
-        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, kca)).thenReturn("014");
-        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, officePartitioning)).thenReturn("015");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, radio)).thenReturn("001");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, lenovo)).thenReturn("001");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair)).thenReturn("001");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, zemana)).thenReturn("001");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, kca)).thenReturn("001");
+        when(accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, officePartitioning)).thenReturn("001");
 
-        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio)).thenReturn("00156");
-        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo)).thenReturn("00152");
-        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair)).thenReturn("00153");
-        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana)).thenReturn("00155");
-        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca)).thenReturn("00151");
-        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning)).thenReturn("00154");
-
-        when(accountIdService.contraAccountName(ACQUISITION, CREDIT, radio)).thenReturn("ACCUMULATED DEPRECIATION - ELECTRONIC EQUIPMENT");
-        when(accountIdService.contraAccountName(ACQUISITION, CREDIT, lenovo)).thenReturn("ACCUMULATED DEPRECIATION - COMPUTERS");
-        when(accountIdService.contraAccountName(ACQUISITION, CREDIT, chair)).thenReturn("ACCUMULATED DEPRECIATION - FURNITURE AND FITTINGS");
-        when(accountIdService.contraAccountName(ACQUISITION, CREDIT, zemana)).thenReturn("ACCUMULATED DEPRECIATION - COMPUTER SOFTWARE");
-        when(accountIdService.contraAccountName(ACQUISITION, CREDIT, kca)).thenReturn("ACCUMULATED DEPRECIATION - MOTOR VEHICLES");
-        when(accountIdService.contraAccountName(ACQUISITION, CREDIT, officePartitioning)).thenReturn("ACCUMULATED DEPRECIATION - OFFICE RENOVATION");
+        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio)).thenReturn("10051");
+        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo)).thenReturn("10051");
+        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair)).thenReturn("10051");
+        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana)).thenReturn("10051");
+        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca)).thenReturn("10051");
+        when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning)).thenReturn("10051");
 
         when(accountIdService.currencyCode("KES")).thenReturn("00");
 
-        accountIdResolver = new AcquisitionCreditAccountIdResolver(new FileAccountIdService(new AccountIdPolicyVersion1("account-id")));
+        accountIdResolver = new AcquisitionCreditAccountIdResolver(accountIdService);
     }
 
     @Test
@@ -89,6 +82,9 @@ public class AcquisitionCreditAccountIDResolverTest {
         assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(radio));
         assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(lenovo));
         assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(chair));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(zemana));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(kca));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(officePartitioning));
     }
 
     @Test
@@ -97,6 +93,9 @@ public class AcquisitionCreditAccountIDResolverTest {
         assertEquals("0010010051001", accountIdResolver.accountNumber(radio));
         assertEquals("9870010051001", accountIdResolver.accountNumber(lenovo));
         assertEquals("0100010051001", accountIdResolver.accountNumber(chair));
+        assertEquals("9860010051001", accountIdResolver.accountNumber(zemana));
+        assertEquals("9960010051001", accountIdResolver.accountNumber(kca));
+        assertEquals("9780010051001", accountIdResolver.accountNumber(officePartitioning));
     }
 
     @Test

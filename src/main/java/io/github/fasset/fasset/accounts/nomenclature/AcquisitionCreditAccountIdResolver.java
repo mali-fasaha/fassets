@@ -61,24 +61,27 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
 
         log.debug("Resolving the account number for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
-        //TODO Abstract account number resolution
-        //return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode() + glId();
-        return null;
+        //TODO Abstract account number motif
+        return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode(fixedAsset) + placeHolder(fixedAsset);
     }
 
-    /*private String glCode() {
+    private String currencyCode(FixedAsset fixedAsset) {
+
+        return accountIdService.currencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
+    }
+
+    private String glCode(FixedAsset fixedAsset) {
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
-        return accountIdService.generalLedgerCode();
-    }*/
+        return accountIdService.generalLedgerCode(ACQUISITION, CREDIT, fixedAsset);
+    }
 
-    private String glId() {
+    private String placeHolder(FixedAsset fixedAsset) {
 
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
-        //TODO move this variables to params
-        return accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, new FixedAsset());
+        return accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, fixedAsset);
     }
 
     /**
