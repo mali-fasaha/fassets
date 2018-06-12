@@ -4,6 +4,191 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Added tests for the resolution of general ledger name**
+
+
+[b4cf479a86c002b](https://github.com/ghacupha/fassets/commit/b4cf479a86c002b) Edwin Njeru *2018-06-12 06:19:31*
+
+**Refactored the generalLedgerName in the accounIdResolver interface to use the accountIdService**
+
+
+[6b33355d0715368](https://github.com/ghacupha/fassets/commit/6b33355d0715368) Edwin Njeru *2018-06-12 06:10:07*
+
+**Implemented unimplemented methods in the AcquisitionDebitAccountIdResolver**
+
+
+[377a23508d69859](https://github.com/ghacupha/fassets/commit/377a23508d69859) Edwin Njeru *2018-06-12 06:01:57*
+
+**Set up to refactor mocks for the AcquisitionDebitAccountIdResolverTest. Complete implementation would be great but that would mean that the test is coupled with implementation of its dependencies. What we wanna know is if the dependencies are working will the object work?**
+
+
+[04333c6744f3563](https://github.com/ghacupha/fassets/commit/04333c6744f3563) Edwin Njeru *2018-06-12 05:34:06*
+
+**Implemented tests for the accountIdService interface**
+
+
+[a2d5142b56e45ec](https://github.com/ghacupha/fassets/commit/a2d5142b56e45ec) Edwin Njeru *2018-06-12 05:23:51*
+
+**Refactored the tests to work with the new API**
+
+
+[73087e3f1673c2e](https://github.com/ghacupha/fassets/commit/73087e3f1673c2e) Edwin Njeru *2018-06-12 05:11:51*
+
+**Refactored accountId infrastructure to use AccountSide enum**
+
+
+[846b8f9eaeec4e8](https://github.com/ghacupha/fassets/commit/846b8f9eaeec4e8) Edwin Njeru *2018-06-12 05:09:15*
+
+**Removed Posting enum as it does the same thing that the acccountSide enum is doing**
+
+
+[f985b6c4a0aab52](https://github.com/ghacupha/fassets/commit/f985b6c4a0aab52) Edwin Njeru *2018-06-12 04:56:55*
+
+**Renamed dependency for AcquisitionAccountResolver as debitAccountIdResolver**
+
+
+[22970a9eccc44fb](https://github.com/ghacupha/fassets/commit/22970a9eccc44fb) Edwin Njeru *2018-06-12 04:53:20*
+
+**Transferred the KeyFormatter utility to the policy package and made it package private**
+
+
+[59409d1c497e33e](https://github.com/ghacupha/fassets/commit/59409d1c497e33e) Edwin Njeru *2018-06-11 15:35:05*
+
+**Added missing #accountName method to the FileAccountIdServiceTest for office renovations category**
+
+
+[fdcbb20878a525d](https://github.com/ghacupha/fassets/commit/fdcbb20878a525d) Edwin Njeru *2018-06-11 14:23:37*
+
+**Final clean up for the FileAccountIdServiceTestmethods adding a test for office renovations**
+
+
+[8d12298e6be89de](https://github.com/ghacupha/fassets/commit/8d12298e6be89de) Edwin Njeru *2018-06-11 14:21:29*
+
+**Final clean up for the AccountIdPolicyVersion1**
+
+
+[87eead679b37cdc](https://github.com/ghacupha/fassets/commit/87eead679b37cdc) Edwin Njeru *2018-06-11 13:42:29*
+
+**Restated the accountPlaceHolder test to adhere to new semantics in the properties file**
+
+
+[df054fcbcff7ecc](https://github.com/ghacupha/fassets/commit/df054fcbcff7ecc) Edwin Njeru *2018-06-11 13:21:16*
+
+**Changed semantics in the property files from electronics to electronic equipment**
+
+
+[cf96be5e7f90f14](https://github.com/ghacupha/fassets/commit/cf96be5e7f90f14) Edwin Njeru *2018-06-11 13:06:00*
+
+**Reconfigured tests to adopt the new constructor parameters for the FileAccountIdService class**
+
+
+[d26ab71bb19a30a](https://github.com/ghacupha/fassets/commit/d26ab71bb19a30a) Edwin Njeru *2018-06-11 12:44:30*
+
+**Created version1 method as a static initializer in accountIdPolicyVersion1**
+
+
+[4511b487be90042](https://github.com/ghacupha/fassets/commit/4511b487be90042) Edwin Njeru *2018-06-11 12:31:32*
+
+**Combined the properties files to remove the need for mutliple args when creating accountIdPoliVersion1**
+
+
+[3985ccf35ccb775](https://github.com/ghacupha/fassets/commit/3985ccf35ccb775) Edwin Njeru *2018-06-11 12:27:19*
+
+**Implemented remaining methods of the accountIdPolicyVersion1**
+
+
+[b686fac0acf6961](https://github.com/ghacupha/fassets/commit/b686fac0acf6961) Edwin Njeru *2018-06-11 12:22:26*
+
+**Moved the policy package to properties inorder to more efficiently hide some properties, and also becasue the policy interface currently under implementation uses files**
+
+
+[7ab5288c2a78f78](https://github.com/ghacupha/fassets/commit/7ab5288c2a78f78) Edwin Njeru *2018-06-11 12:18:00*
+
+**Implented account placeholder method**
+
+
+[1818c71d0539479](https://github.com/ghacupha/fassets/commit/1818c71d0539479) Edwin Njeru *2018-06-11 12:13:30*
+
+**Implented test for placeHolder method in the accountIdPolicyVersion1**
+
+
+[24e81f67670aefc](https://github.com/ghacupha/fassets/commit/24e81f67670aefc) Edwin Njeru *2018-06-11 11:56:15*
+
+**Implemented currencyCode method in the accountIdPolicyVersion1**
+
+
+[060454d8164c786](https://github.com/ghacupha/fassets/commit/060454d8164c786) Edwin Njeru *2018-06-11 11:53:30*
+
+**Created test shell for AccountIdPolicyVersion1**
+
+
+[a4271531f974605](https://github.com/ghacupha/fassets/commit/a4271531f974605) ghacupha *2018-06-10 12:16:03*
+
+**Implemented version 1 of the AccountIdPolicy**
+
+
+[6cddc635b0288ab](https://github.com/ghacupha/fassets/commit/6cddc635b0288ab) ghacupha *2018-06-10 12:06:11*
+
+**Added additional methods to the AccountIdPolicy**
+
+
+[7ad2789a45c768a](https://github.com/ghacupha/fassets/commit/7ad2789a45c768a) ghacupha *2018-06-10 11:46:16*
+
+**Completion of the AccountIdPolicy shell**
+
+
+[75aa5abc378b6aa](https://github.com/ghacupha/fassets/commit/75aa5abc378b6aa) ghacupha *2018-06-10 11:41:43*
+
+**Created policy package under nomenclature package as a single folder to house nomenclature policy interfaces and implementations**
+
+
+[44648708970eef9](https://github.com/ghacupha/fassets/commit/44648708970eef9) ghacupha *2018-06-10 10:41:14*
+
+**Created AccountIdPolicy interface shell**
+
+
+[71054a4021abbbe](https://github.com/ghacupha/fassets/commit/71054a4021abbbe) ghacupha *2018-06-10 10:39:34*
+
+**Created tests for AccountIdService#currencyCode method**
+
+
+[5294e08625c322a](https://github.com/ghacupha/fassets/commit/5294e08625c322a) ghacupha *2018-06-10 10:27:51*
+
+**Implemented additional tests to the AccountIdService#placeholder and AccountIdService#generalLedgerCode covering both debit and credit side transactions**
+
+
+[3ea8e4625392195](https://github.com/ghacupha/fassets/commit/3ea8e4625392195) ghacupha *2018-06-10 10:11:46*
+
+**Changed the name of electronics accounts to ELECTRONIC EQUIPMENT**
+
+
+[06d31968879c730](https://github.com/ghacupha/fassets/commit/06d31968879c730) ghacupha *2018-06-10 10:01:54*
+
+**Added additional tests to the AccountIdService#accountName method to represent debit trnsactions**
+
+
+[1ec65ac613afc0e](https://github.com/ghacupha/fassets/commit/1ec65ac613afc0e) ghacupha *2018-06-10 09:58:49*
+
+**Added TODO list to track changes required for the AccountIdService implementations**
+
+
+[a244e69395072bb](https://github.com/ghacupha/fassets/commit/a244e69395072bb) ghacupha *2018-06-10 09:22:48*
+
+**Specified the FileAccountIdServiceTest to be a unit test**
+
+
+[0e78487b1050622](https://github.com/ghacupha/fassets/commit/0e78487b1050622) ghacupha *2018-06-10 08:29:11*
+
+**Renamed AcquisitionAccountIdService to FileAccountIdService, this being because the service can be used for various types of transactions and also because the properties are read from a properties file at application startup**
+
+
+[7282ca40b945224](https://github.com/ghacupha/fassets/commit/7282ca40b945224) ghacupha *2018-06-10 08:24:47*
+
+**Recorded new changes in the CHANGELOG**
+
+
+[33165ca3b09199b](https://github.com/ghacupha/fassets/commit/33165ca3b09199b) ghacupha *2018-06-10 08:12:49*
+
 **Ammended format key which was returning the category of the asset in proper case instead of lower case**
 
 
@@ -29,7 +214,7 @@ Changelog for fassets implementation by ghacupha
 
 [36631bb25a818e2](https://github.com/ghacupha/fassets/commit/36631bb25a818e2) Edwin Njeru *2018-06-08 06:04:57*
 
-**Enhanced FileAccountIdService tests to computers and furniture and fittings**
+**Enhanced AcquisitionAccountIdService tests to computers and furniture and fittings**
 
 
 [87b3fb3d0d62b1d](https://github.com/ghacupha/fassets/commit/87b3fb3d0d62b1d) Edwin Njeru *2018-06-08 05:48:55*
@@ -64,7 +249,7 @@ Changelog for fassets implementation by ghacupha
 
 [84d56858caa29ee](https://github.com/ghacupha/fassets/commit/84d56858caa29ee) Edwin Njeru *2018-06-08 05:11:09*
 
-**Implemented account naming in FileAccountIdService**
+**Implemented account naming in AcquisitionAccountIdService**
 
 
 [e5bd425ad5f6e20](https://github.com/ghacupha/fassets/commit/e5bd425ad5f6e20) Edwin Njeru *2018-06-07 15:44:28*
@@ -104,7 +289,7 @@ Changelog for fassets implementation by ghacupha
 
 [eb943c526262e10](https://github.com/ghacupha/fassets/commit/eb943c526262e10) Edwin Njeru *2018-06-07 06:06:08*
 
-**Created AbstractAccountIdService to share common methods and made the FileAccountIdService final**
+**Created AbstractAccountIdService to share common methods and made the AcquisitionAccountIdService final**
 
 
 [acdc4969611f827](https://github.com/ghacupha/fassets/commit/acdc4969611f827) Edwin Njeru *2018-06-07 05:55:13*

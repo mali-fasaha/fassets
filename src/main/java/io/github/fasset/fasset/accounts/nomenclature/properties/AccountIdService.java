@@ -69,4 +69,15 @@ public interface AccountIdService {
      * @return Name of the account
      */
     String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
+
+    /**
+     * Resolves the name of the account to be used as a contra account in case the actual account  is
+     * required to retain the original valuation for reporting purposes
+     *
+     * @param transaction The type of transaction associated with the initialization of a contra account
+     * @param accountSide To which we are posting the transaction during initialization of a contra account
+     * @param fixedAsset Fixed asset which we are tracking by means of the accounting system
+     * @return name of the contra account
+     */
+    String resolveContraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset);
 }

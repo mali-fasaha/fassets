@@ -137,6 +137,8 @@ public class AcquisitionDebitAccountIdResolver implements AccountIdResolver {
 
         checkNotNull(fixedAsset.getCategory(), "Sorry mate, but REALLY need that category specified");
 
-        return String.format("Accumulated Depreciation on %s", fixedAsset.getCategory()).toUpperCase();
+        //return String.format("Accumulated Depreciation on %s", fixedAsset.getCategory()).toUpperCase();
+
+        return accountIdService.resolveContraAccountName(ACQUISITION, DEBIT, fixedAsset);
     }
 }

@@ -33,7 +33,7 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class AcquisitionDebitAccountIdResolverTest {
+public class    AcquisitionDebitAccountIdResolverTest {
 
     private AccountIdResolver accountIdResolver;
 
