@@ -18,7 +18,7 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.definition.TransactionType;
-import io.github.fasset.fasset.accounts.definition.Posting;
+import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.model.FixedAsset;
 
 /**
@@ -44,11 +44,11 @@ public interface AccountIdService {
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param posting The direction which we are posting. This could be DEBIT or CREDIT
+     * @param accountSide The direction which we are posting. This could be DEBIT or CREDIT
      * @param fixedAsset From which we inquire the category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
-    String generalLedgerCode(TransactionType transactionType, Posting posting, FixedAsset fixedAsset);
+    String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
 
     /**
      * Using the provided category of an asset this method returns a specific nomenclature code for the
@@ -56,17 +56,17 @@ public interface AccountIdService {
      * account number sequence.
      *
      * @param fixedAsset for which seek an account placeHolder
-     * @param posting Whether we are posting on the debit side or the credit side
+     * @param accountSide Whether we are posting on the debit side or the credit side
      * @param transactionType The type of transaction for the fixed asset
      * @return String GL Id to be used for credit transactions
      */
-    String accountPlaceHolder(TransactionType transactionType, Posting posting, FixedAsset fixedAsset);
+    String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
 
     /**
-     *
+     * @param accountSide The side of the ledger to which we are posting the amount
      * @param transactionType Type of transaction Enum
      * @param fixedAsset Asset for which we seek transaction account name
      * @return Name of the account
      */
-    String accountName(TransactionType transactionType, Posting posting, FixedAsset fixedAsset);
+    String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
 }

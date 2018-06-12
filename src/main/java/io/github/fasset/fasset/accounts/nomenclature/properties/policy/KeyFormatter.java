@@ -18,8 +18,8 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
 import io.github.fasset.fasset.accounts.definition.AccountNumberSegment;
-import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
+import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 
 /**
  * Utility methods for formatting the keys before search into the properties object
@@ -35,16 +35,16 @@ class KeyFormatter {
         return toClean.replace(" ", "-").replace("&", "and");
     }
 
-    static String formatKey(String category, TransactionType transactionType, Posting posting) {
+    static String formatKey(String category, TransactionType transactionType, AccountSide accountSide) {
 
-        return cleanString(String.format("%s.%s.%s",category.toLowerCase(), transactionType, posting)); // e.g. computers.acquisition.posting
+        return cleanString(String.format("%s.%s.%s",category.toLowerCase(), transactionType, accountSide)); // e.g. computers.acquisition.posting
     }
 
-    static String formatKey(String category, TransactionType transactionType, Posting posting, AccountNumberSegment segment) {
+    static String formatKey(String category, TransactionType transactionType, AccountSide accountSide, AccountNumberSegment segment) {
 
         String formattedCategory = cleanString(category.toLowerCase());
 
-        return cleanString(String.format("%s.%S.%s.", formattedCategory, transactionType.toString(), posting.toString()).toLowerCase()) + segment;
+        return cleanString(String.format("%s.%S.%s.", formattedCategory, transactionType.toString(), accountSide.toString()).toLowerCase()) + segment;
     }
 
     static String formatKey(String propertyKey) {

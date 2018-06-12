@@ -18,8 +18,8 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.definition.TransactionType;
-import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
+import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
@@ -57,44 +57,44 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param posting The direction which we are posting. This could be DEBIT or CREDIT
+     * @param accountSide The direction which we are posting. This could be DEBIT or CREDIT
      * @param fixedAsset From which we inquire the category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
     @Override
-    public String generalLedgerCode(TransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
+    public String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
-        log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset, posting);
+        log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset, accountSide);
 
-        return accountIdPolicy.generalLedgerCode(transactionType, posting, fixedAsset.getCategory());
+        return accountIdPolicy.generalLedgerCode(transactionType, accountSide, fixedAsset.getCategory());
     }
 
     /**
      * @param fixedAsset for which seek an account placeHolder
-     * @param posting Whether we are posting on the debit side or the credit side
+     * @param accountSide Whether we are posting on the debit side or the credit side
      * @param transactionType The type of transaction for the fixed asset
      * @return String GL Id to be used for credit transactions
      */
     @Override
-    public String accountPlaceHolder(TransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
+    public String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
-        return accountIdPolicy.accountPlaceHolder(transactionType, posting, fixedAsset.getCategory());
+        return accountIdPolicy.accountPlaceHolder(transactionType, accountSide, fixedAsset.getCategory());
     }
 
     /**
-     * @param posting This enum denotes whether or not we are posting on the CREDIT or on the DEBIT side
+     * @param accountSide This enum denotes whether or not we are posting on the CREDIT or on the DEBIT side
      * @param transactionType Type of transaction Enum
      * @param fixedAsset      Asset for which we seek transaction account name
      * @return Name of the account
      */
     @Override
-    public String accountName(TransactionType transactionType, Posting posting, FixedAsset fixedAsset) {
+    public String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
 
-        return accountIdPolicy.accountName(transactionType, posting, fixedAsset.getCategory());
+        return accountIdPolicy.accountName(transactionType, accountSide, fixedAsset.getCategory());
     }
 
 }

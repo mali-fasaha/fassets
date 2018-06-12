@@ -17,8 +17,8 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
-import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
+import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 
 /**
  * This interface acts as building blocks to how assets are identified in front-facing systems using simple structure
@@ -63,11 +63,11 @@ public interface AccountIdPolicy {
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param posting The direction which we are posting. This could be DEBIT or CREDIT
+     * @param accountSide The direction which we are posting. This could be DEBIT or CREDIT
      * @param category of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
-    String generalLedgerCode(TransactionType transactionType, Posting posting, String category);
+    String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, String category);
 
     /**
      * Using the provided category of an asset this method returns a specific nomenclature code for the
@@ -75,18 +75,18 @@ public interface AccountIdPolicy {
      * account number sequence
      *
      * @param transactionType The type of fixed asset transaction
-     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
      * @param category of the Asset for which we need a placeholder
      * @return String GL Id to be used for credit transactions
      */
-    String accountPlaceHolder(TransactionType transactionType, Posting posting, String category);
+    String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, String category);
 
     /**
      *
      * @param transactionType Type of transaction Enum
-     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
      * @param category of the asset for which we seek transaction account name
      * @return Name of the account
      */
-    String accountName(TransactionType transactionType, Posting posting, String category);
+    String accountName(TransactionType transactionType, AccountSide accountSide, String category);
 }

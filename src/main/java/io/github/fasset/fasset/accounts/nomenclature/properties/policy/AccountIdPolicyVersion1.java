@@ -17,8 +17,8 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
-import io.github.fasset.fasset.accounts.definition.Posting;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
+import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.kernel.util.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +39,6 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     private static final Logger log = LoggerFactory.getLogger(AccountIdPolicyVersion1.class);
 
     private final Properties accountConfigProperties;
-
-    public static AccountIdPolicyVersion1 idPolicy(){
-        return new AccountIdPolicyVersion1("account-id");
-    }
 
     public AccountIdPolicyVersion1(String accountIdProperties) {
         String accountProperties = accountIdProperties == null ? "account-id" : accountIdProperties;
@@ -74,22 +70,22 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      * code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param posting         The direction which we are posting. This could be DEBIT or CREDIT
+     * @param accountSide         The direction which we are posting. This could be DEBIT or CREDIT
      * @param category        of the asset for which we need a category code
      * @return The category code to be added to the account number sequence after the currency code
      */
     @Override
-    public String generalLedgerCode(TransactionType transactionType, Posting posting, String category) {
+    public String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, String category) {
 
-        log.debug("Fetching account ledger code transaction: {}, of the category {}, posting on the {} side", transactionType, category, posting);
+        log.debug("Fetching account ledger code transaction: {}, of the category {}, posting on the {} side", transactionType, category, accountSide);
 
-        String key = formatKey(category, transactionType, posting, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.general-ledger-code"
+        String key = formatKey(category, transactionType, accountSide, GENERAL_LEDGER_CODE); // e.g "sundry.acquisition. credit.general-ledger-code"
 
         log.debug("Fetching generalLedgerCode for an account whose key is encoded as {}", key);
 
         String glcode = accountConfigProperties.getProperty(key);
 
-        log.debug("GL code for posting {} for the category {} on the {} side, resolved as {}", transactionType, category, posting, glcode);
+        log.debug("GL code for posting {} for the category {} on the {} side, resolved as {}", transactionType, category, accountSide, glcode);
 
         return glcode;
     }
@@ -100,16 +96,16 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      * account number sequence
      *
      * @param transactionType The type of fixed asset transaction
-     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
      * @param category of the Asset for which we need a placeholder
      * @return String GL Id to be used for credit transactions
      */
     @Override
-    public String accountPlaceHolder(TransactionType transactionType, Posting posting, String category) {
+    public String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, String category) {
 
-        log.debug("Resolving account placeHolder for {} transaction, posting on the {} side for {} category", transactionType, posting, category);
+        log.debug("Resolving account placeHolder for {} transaction, posting on the {} side for {} category", transactionType, accountSide, category);
 
-        String key = KeyFormatter.formatKey(category, transactionType, posting, PLACE_HOLDER);
+        String key = KeyFormatter.formatKey(category, transactionType, accountSide, PLACE_HOLDER);
 
         log.debug("Resolving placeHolder for the key, {}", key);
 
@@ -119,16 +115,16 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     /**
      *
      * @param transactionType Type of transaction Enum
-     * @param posting Enum shows whether we are posting on the CREDIT side or the DEBIT side
+     * @param accountSide Enum shows whether we are posting on the CREDIT side or the DEBIT side
      * @param category of the asset for which we seek transaction account name
      * @return Name of the account
      */
     @Override
-    public String accountName(TransactionType transactionType, Posting posting, String category) {
+    public String accountName(TransactionType transactionType, AccountSide accountSide, String category) {
 
         log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, category);
 
-        String key = KeyFormatter.formatKey(category, transactionType, posting);
+        String key = KeyFormatter.formatKey(category, transactionType, accountSide);
 
         log.debug("Fetching account label for the key: {}", key);
 
