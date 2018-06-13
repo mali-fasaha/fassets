@@ -60,7 +60,9 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
         checkNotNull(fixedAsset.getCategory(), String.format("The category for the fixed asset : %s is null", fixedAsset.getAssetDescription()));
         checkNotNull(fixedAsset.getPurchaseCost(), String.format("The Cost for the fixed asset : %s is null", fixedAsset.getAssetDescription()));
 
-        return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode(fixedAsset) + glId(fixedAsset);
+        // TODO use accountIdService for this
+        //return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode(fixedAsset) + placeHolder(fixedAsset);
+        return accountIdService.accountNumber(fixedAsset.getSolId(), currencyCode(fixedAsset), glCode(fixedAsset), placeHolder(fixedAsset));
     }
 
     private String currencyCode(FixedAsset fixedAsset) {
@@ -93,7 +95,7 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
         return this.accountName(fixedAsset);
     }
 
-    private String glId(FixedAsset fixedAsset) {
+    private String placeHolder(FixedAsset fixedAsset) {
 
         log.debug("Resolving general ledger nomenclature for fixedAsset : {}", fixedAsset.getAssetDescription());
 
