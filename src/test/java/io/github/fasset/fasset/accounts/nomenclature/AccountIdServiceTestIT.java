@@ -32,7 +32,7 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 
-public class AccountIdServiceTest {
+public class AccountIdServiceTestIT {
 
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "ELECTRONIC EQUIPMENT", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
@@ -94,6 +94,12 @@ public class AccountIdServiceTest {
         Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, kca));
         Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, officePartitioning));
         Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, officePartitioning));
+    }
+
+    @Test
+    public void accountNumber() {
+
+        assertEquals("0010010051001", accountIdService.accountNumber("001","00","10051","001"));
     }
 
     @Test
