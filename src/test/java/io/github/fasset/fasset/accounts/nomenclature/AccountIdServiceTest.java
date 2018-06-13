@@ -63,6 +63,20 @@ public class AccountIdServiceTest {
         when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("10051");
         when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("10051");
 
+        // placeHolders
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTERS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "FURNITURE & FITTINGS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTER SOFTWARE")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "MOTOR VEHICLES")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTERS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "FURNITURE & FITTINGS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTER SOFTWARE")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("001");
+
         accountIdService = new FileAccountIdService(accountIdPolicy);
     }
 
