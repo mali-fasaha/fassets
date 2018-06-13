@@ -43,8 +43,8 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
     private static final Logger log = getLogger(AcquisitionCreditAccountIdResolver.class);
 
     @Autowired
-    public AcquisitionCreditAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService idConfigurationService) {
-        super(idConfigurationService);
+    public AcquisitionCreditAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService accountIdService) {
+        super(accountIdService);
     }
 
     @Override
@@ -82,20 +82,6 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
         log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset ");
 
         return accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, fixedAsset);
-    }
-
-    /**
-     * Resolve the name of a Contra account for a main account used for tracking the asset
-     *
-     * @param fixedAsset The asset for which we seek an account to track financially
-     * @return The name of the contra account
-     */
-    @Override
-    public String resolveContraAccountId(FixedAsset fixedAsset) {
-
-        log.debug("Resolving the account GL Code for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
-
-        return accountName(fixedAsset);
     }
 
     /**

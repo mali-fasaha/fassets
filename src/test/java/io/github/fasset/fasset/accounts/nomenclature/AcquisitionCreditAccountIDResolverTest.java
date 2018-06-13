@@ -30,7 +30,6 @@ import java.time.LocalDate;
 
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -112,13 +111,19 @@ public class AcquisitionCreditAccountIDResolverTest {
         assertEquals("SUNDRY CREDITORS", accountIdResolver.generalLedgerName(radio));
         assertEquals("SUNDRY CREDITORS", accountIdResolver.generalLedgerName(chair));
         assertEquals("SUNDRY CREDITORS", accountIdResolver.generalLedgerName(lenovo));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.generalLedgerName(zemana));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.generalLedgerName(kca));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.generalLedgerName(officePartitioning));
     }
 
     @Test
     public void resolveCategoryId() {
 
-        assertEquals("ELECTRONICS", accountIdResolver.resolveCategoryId(radio));
+        assertEquals("ELECTRONIC EQUIPMENT", accountIdResolver.resolveCategoryId(radio));
         assertEquals("FURNITURE & FITTINGS", accountIdResolver.resolveCategoryId(chair));
         assertEquals("COMPUTERS", accountIdResolver.resolveCategoryId(lenovo));
+        assertEquals("COMPUTER SOFTWARE", accountIdResolver.resolveCategoryId(zemana));
+        assertEquals("MOTOR VEHICLES", accountIdResolver.resolveCategoryId(kca));
+        assertEquals("OFFICE RENOVATION", accountIdResolver.resolveCategoryId(officePartitioning));
     }
 }

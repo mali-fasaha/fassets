@@ -4,6 +4,31 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Implemented account number motif method**
+
+
+[84a2d98dfa70479](https://github.com/ghacupha/fassets/commit/84a2d98dfa70479) Edwin Njeru *2018-06-12 15:56:51*
+
+**Created the accountNumberMotif method to configure account number sequence.**
+
+
+[cfb07d0c362b4c1](https://github.com/ghacupha/fassets/commit/cfb07d0c362b4c1) Edwin Njeru *2018-06-12 15:44:52*
+
+**Implemented missing methods in the AcquisitionCreditAccountIDResolver**
+
+
+[a87ecf37ca2f7d8](https://github.com/ghacupha/fassets/commit/a87ecf37ca2f7d8) Edwin Njeru *2018-06-12 15:37:01*
+
+**Created shell for the AcquisitionCreditAccountIdResolverTest with all necessary but yet-to-edited mocks**
+
+
+[62bbb6b7bc61d9f](https://github.com/ghacupha/fassets/commit/62bbb6b7bc61d9f) Edwin Njeru *2018-06-12 14:10:44*
+
+**Completed tests for the AcquisitionDebitAccountIdResolver, with the contra account method covered with acquisition mocks**
+
+
+[c46bfe63d6d6f39](https://github.com/ghacupha/fassets/commit/c46bfe63d6d6f39) Edwin Njeru *2018-06-12 14:07:26*
+
 **Added accountPrefix and appendant methods to the accountIdPolicy**
 
 

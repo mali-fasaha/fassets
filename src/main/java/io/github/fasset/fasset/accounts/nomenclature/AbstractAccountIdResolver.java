@@ -29,6 +29,9 @@ import org.slf4j.LoggerFactory;
  * <br> This class provides common understanding for instance on implementation and meaning of currency
  * code inclusion into the account number id sequence. That does not need to go into so many types of
  * implementation.
+ * <br> It also provides a way to block methods not needed in the subclass, for instance we do not
+ * need a contra-account for credit account, so we simply implement it here and throw an unsupported operation
+ * exception
  */
 public abstract class AbstractAccountIdResolver implements AccountIdResolver {
 
@@ -55,4 +58,18 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
     }
 
     public abstract String accountName(FixedAsset fixedAsset);
+
+    /**
+     * Resolve the name of a Contra account for a main account used for tracking the asset
+     *
+     * @param fixedAsset The asset for which we seek an account to track financially
+     * @return The name of the contra account
+     * @Deprecated relevance
+     */
+    @Override
+    public String resolveContraAccountId(FixedAsset fixedAsset) {
+
+        throw new UnsupportedOperationException("This entry does not need a contra account");
+
+    }
 }
