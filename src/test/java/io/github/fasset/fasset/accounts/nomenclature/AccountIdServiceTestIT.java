@@ -32,6 +32,9 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 
+/**
+ * When you run this tests you have to make sure everything even the configuration dependencies are okay. So do that :)
+ */
 public class AccountIdServiceTestIT {
 
 
