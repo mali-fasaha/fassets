@@ -82,6 +82,15 @@ public class AccountIdServiceTest {
         when(accountIdPolicy.accountNumberMotif("978","00","00153","010")).thenReturn("9780000153010");
         when(accountIdPolicy.accountNumberMotif("978","01","00153","010")).thenReturn("9780100153010");
 
+        when(accountIdPolicy.currencyCode("KES")).thenReturn("00");
+        when(accountIdPolicy.currencyCode("USD")).thenReturn("01");
+        when(accountIdPolicy.currencyCode("GBP")).thenReturn("02");
+        when(accountIdPolicy.currencyCode("EUR")).thenReturn("03");
+        when(accountIdPolicy.currencyCode("INR")).thenReturn("04");
+        when(accountIdPolicy.currencyCode("CAD")).thenReturn("05");
+        when(accountIdPolicy.currencyCode("CHF")).thenReturn("06");
+        when(accountIdPolicy.currencyCode("ZAR")).thenReturn("07");
+
         accountIdService = new FileAccountIdService(accountIdPolicy);
     }
 

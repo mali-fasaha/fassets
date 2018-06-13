@@ -18,12 +18,16 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * Implements common methods of the AccountIdService interface
  */
 public abstract class AbstractAccountIdService implements AccountIdService {
+
+    private static final Logger log = LoggerFactory.getLogger(AbstractAccountIdService.class);
 
     // Using external configuration
     final AccountIdPolicy accountIdPolicy;
@@ -42,6 +46,8 @@ public abstract class AbstractAccountIdService implements AccountIdService {
      */
     @Override
     public String currencyCode(String currencyCode) {
+
+        log.debug("Fetching currency code effective for the ISO4217 code : {}", currencyCode);
 
         return accountIdPolicy.currencyCode(currencyCode);
     }
