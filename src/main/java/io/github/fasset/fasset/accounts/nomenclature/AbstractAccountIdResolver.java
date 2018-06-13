@@ -60,7 +60,7 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
     public abstract String accountName(FixedAsset fixedAsset);
 
     /**
-     * Resolve the name of a Contra account for a main account used for tracking the asset
+     * Resolve the name of a Contra account for a main account used for tracking the asset.
      *
      * @param fixedAsset The asset for which we seek an account to track financially
      * @return The name of the contra account

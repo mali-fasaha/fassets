@@ -33,15 +33,13 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Resolves names of the accounts for posting acquisitions
  */
 @Component("debitAccountIDResolver")
-public class AcquisitionDebitAccountIdResolver implements AccountIdResolver {
+public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
 
     private static final Logger log = getLogger(AcquisitionDebitAccountIdResolver.class);
 
-    private final AccountIdService accountIdService;
-
     @Autowired
     public AcquisitionDebitAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService accountIdService) {
-        this.accountIdService = accountIdService;
+        super(accountIdService);
     }
 
     /**

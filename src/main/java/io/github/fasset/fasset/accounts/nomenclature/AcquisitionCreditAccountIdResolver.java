@@ -96,6 +96,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
     @Override
     public String generalLedgerName(FixedAsset fixedAsset) {
 
+        // TODO expose this to the accountIdService
         return "SUNDRY CREDITORS";
     }
 
@@ -116,6 +117,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
 
         log.debug("Category id for fixed asset : {} resolved as {}", fixedAsset, categoryId);
 
+        // TODO expose this to the accountIdService
         return categoryId;
     }
 }
