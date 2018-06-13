@@ -16,6 +16,7 @@ import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUIS
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 public class AccountIdServiceTest {
 
@@ -34,7 +35,18 @@ public class AccountIdServiceTest {
 
         AccountIdPolicy accountIdPolicy = Mockito.mock(AccountIdPolicy.class);
 
-        
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("ELECTRONIC EQUIPMENT");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "COMPUTERS")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "COMPUTERS")).thenReturn("COMPUTERS");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "FURNITURE & FITTINGS")).thenReturn("FURNITURE AND FITTINGS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "FURNITURE & FITTINGS")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "COMPUTER SOFTWARE")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "COMPUTER SOFTWARE")).thenReturn("COMPUTER SOFTWARE");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "MOTOR VEHICLES")).thenReturn("MOTOR VEHICLES");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn("OFFICE RENOVATION");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("SUNDRY CREDITORS");
 
         accountIdService = new FileAccountIdService(accountIdPolicy);
     }
