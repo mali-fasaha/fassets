@@ -2,11 +2,13 @@ package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
 import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
-import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
+import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
@@ -25,7 +27,17 @@ public class AccountIdServiceTest {
     private final static FixedAsset officePartitioning =
         new FixedAsset("Office Partitioning Works", Money.of(1500, "KES"), "OFFICE RENOVATION", "978", LocalDate.of(2018, 1, 12), "abc56", Money.of(50.13, "KES"));
 
-    private AccountIdService accountIdService = new FileAccountIdService(new AccountIdPolicyVersion1("account-id"));
+    private AccountIdService accountIdService;
+
+    @BeforeEach
+    void setUp() {
+
+        AccountIdPolicy accountIdPolicy = Mockito.mock(AccountIdPolicy.class);
+
+        
+
+        accountIdService = new FileAccountIdService(accountIdPolicy);
+    }
 
     @Test
     public void accountName() {
