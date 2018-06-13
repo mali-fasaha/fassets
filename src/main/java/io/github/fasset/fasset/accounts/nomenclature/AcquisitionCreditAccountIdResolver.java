@@ -95,8 +95,8 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
     @Override
     public String generalLedgerName(FixedAsset fixedAsset) {
 
-        // TODO expose this to the accountIdService
-        return "SUNDRY CREDITORS";
+        //TODO return "SUNDRY CREDITORS from accountIdService
+        return accountIdService.accountName(ACQUISITION, CREDIT, fixedAsset);
     }
 
     /**

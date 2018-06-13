@@ -4,6 +4,21 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Added accountNumberMotif to the accountIdService interface**
+
+
+[f50e2a198635ddf](https://github.com/ghacupha/fassets/commit/f50e2a198635ddf) Edwin Njeru *2018-06-13 06:12:23*
+
+**Made the AbstractAccountIdResolver a common abstraction for AcquisitionDebitAccountIdResolver and AcquisitionCreditAccountIdResolver**
+
+
+[add19ca181493f2](https://github.com/ghacupha/fassets/commit/add19ca181493f2) Edwin Njeru *2018-06-13 05:56:58*
+
+**Implemented the contraAccountId method in the abstraction above the AcquisitionCreditAccountIdResolver which throws an unsupported operation since we don't need a contra account for credit entry during an acquisition**
+
+
+[735ea028bbdd573](https://github.com/ghacupha/fassets/commit/735ea028bbdd573) Edwin Njeru *2018-06-13 05:52:24*
+
 **Implemented account number motif method**
 
 
