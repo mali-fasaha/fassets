@@ -77,6 +77,11 @@ public class AccountIdServiceTest {
         when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("001");
         when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("001");
 
+        // account number
+        when(accountIdPolicy.accountNumberMotif("001","00","10051","001")).thenReturn("0010010051001");
+        when(accountIdPolicy.accountNumberMotif("978","00","00153","010")).thenReturn("9780000153010");
+        when(accountIdPolicy.accountNumberMotif("978","01","00153","010")).thenReturn("9780100153010");
+
         accountIdService = new FileAccountIdService(accountIdPolicy);
     }
 
@@ -135,6 +140,8 @@ public class AccountIdServiceTest {
     public void accountNumber() {
 
         assertEquals("0010010051001", accountIdService.accountNumber("001","00","10051","001"));
+        assertEquals("9780000153010", accountIdService.accountNumber("978","00","00153","010"));
+        assertEquals("9780100153010", accountIdService.accountNumber("978","01","00153","010"));
     }
 
     @Test
