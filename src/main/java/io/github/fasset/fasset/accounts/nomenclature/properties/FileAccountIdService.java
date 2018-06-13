@@ -122,4 +122,19 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
         return contraAccount;
     }
+
+    /**
+     * This methods combines the account segments combining them into an account number sequence which is used
+     * application wide.
+     * <br> The existence of this method makes it possible for the application to be configured to create
+     * different forms of identifications for an account number for different purposes.
+     *
+     * @param accountNumberSegments Parameters containing the various segments that form an account number
+     * @return account number sequence
+     */
+    @Override
+    public String accountNumber(String... accountNumberSegments) {
+
+        return accountIdPolicy.accountNumberMotif(accountNumberSegments);
+    }
 }

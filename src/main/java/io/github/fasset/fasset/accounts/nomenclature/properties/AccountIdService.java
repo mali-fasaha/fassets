@@ -80,4 +80,15 @@ public interface AccountIdService {
      * @return name of the contra account
      */
     String contraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset);
+
+    /**
+     * This methods combines the account segments combining them into an account number sequence which is used
+     * application wide.
+     * <br> The existence of this method makes it possible for the application to be configured to create
+     * different forms of identifications for an account number for different purposes.
+     *
+     * @param  accountNumberSegments Parameters containing the various segments that form an account number
+     * @return account number sequence
+     */
+    String accountNumber(String... accountNumberSegments);
 }

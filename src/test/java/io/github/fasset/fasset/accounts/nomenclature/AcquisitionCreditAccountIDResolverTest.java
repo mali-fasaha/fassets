@@ -70,13 +70,15 @@ public class AcquisitionCreditAccountIDResolverTest {
         when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca)).thenReturn("10051");
         when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning)).thenReturn("10051");
 
+        when(accountIdService.accountNumber("001","00","10051","001")).thenReturn("0010010051001");
+
         when(accountIdService.currencyCode("KES")).thenReturn("00");
 
         accountIdResolver = new AcquisitionCreditAccountIdResolver(accountIdService);
     }
 
     @Test
-    public void resolveName() {
+    public void accountName() {
 
         assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(radio));
         assertEquals("SUNDRY CREDITORS", accountIdResolver.accountName(lenovo));
@@ -97,12 +99,15 @@ public class AcquisitionCreditAccountIDResolverTest {
         assertEquals("9780010051001", accountIdResolver.accountNumber(officePartitioning));
     }
 
-    @Test
+    @Test( expected = UnsupportedOperationException.class)
     public void resolveContraAccountId() {
 
         assertEquals("SUNDRY CREDITORS", accountIdResolver.resolveContraAccountId(radio));
         assertEquals("SUNDRY CREDITORS", accountIdResolver.resolveContraAccountId(chair));
         assertEquals("SUNDRY CREDITORS", accountIdResolver.resolveContraAccountId(lenovo));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.resolveContraAccountId(zemana));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.resolveContraAccountId(kca));
+        assertEquals("SUNDRY CREDITORS", accountIdResolver.resolveContraAccountId(officePartitioning));
     }
 
     @Test

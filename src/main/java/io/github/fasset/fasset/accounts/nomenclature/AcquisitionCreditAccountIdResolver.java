@@ -52,7 +52,6 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
 
         log.debug("Resolving the account name for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
-        //return "SUNDRY CREDITORS ACCOUNT";
         return accountIdService.accountName(ACQUISITION, CREDIT, fixedAsset);
     }
 
@@ -62,7 +61,7 @@ public class AcquisitionCreditAccountIdResolver extends AbstractAccountIdResolve
         log.debug("Resolving the account number for the account to be credited in the acquisition of asset : {}", fixedAsset.getAssetDescription());
 
         //TODO Abstract account number motif
-        return fixedAsset.getSolId() + currencyCode(fixedAsset) + glCode(fixedAsset) + placeHolder(fixedAsset);
+        return accountIdService.accountNumber(fixedAsset.getSolId(), currencyCode(fixedAsset), glCode(fixedAsset), placeHolder(fixedAsset));
     }
 
     private String currencyCode(FixedAsset fixedAsset) {
