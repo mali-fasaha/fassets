@@ -66,7 +66,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     @Override
     public String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
-        log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset, accountSide);
+        log.debug("Fetching account ledger code transaction: {}, of asset {}, posting on the {} side", transactionType, fixedAsset.getAssetDescription(), accountSide);
 
         return accountIdPolicy.generalLedgerCode(transactionType, accountSide, fixedAsset.getCategory());
     }
@@ -80,7 +80,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     @Override
     public String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
-        log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
+        log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset.getAssetDescription());
 
         return accountIdPolicy.accountPlaceHolder(transactionType, accountSide, fixedAsset.getCategory());
     }
@@ -94,7 +94,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     @Override
     public String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
-        log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset);
+        log.debug("Resolving credit posting account for transaction type {}, for asset : {}", transactionType, fixedAsset.getAssetDescription());
 
         return accountIdPolicy.accountName(transactionType, accountSide, fixedAsset.getCategory());
     }

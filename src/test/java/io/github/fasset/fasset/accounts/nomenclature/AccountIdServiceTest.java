@@ -35,6 +35,7 @@ public class AccountIdServiceTest {
 
         AccountIdPolicy accountIdPolicy = Mockito.mock(AccountIdPolicy.class);
 
+        // Account name
         when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("ELECTRONIC EQUIPMENT");
         when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("SUNDRY CREDITORS");
         when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "COMPUTERS")).thenReturn("SUNDRY CREDITORS");
@@ -47,6 +48,20 @@ public class AccountIdServiceTest {
         when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("SUNDRY CREDITORS");
         when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn("OFFICE RENOVATION");
         when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("SUNDRY CREDITORS");
+        
+        // General ledger code
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("00156");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "COMPUTERS")).thenReturn("00152");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "FURNITURE & FITTINGS")).thenReturn("00153");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "COMPUTER SOFTWARE")).thenReturn("00155");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "MOTOR VEHICLES")).thenReturn("00151");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn("00154");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "COMPUTERS")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "FURNITURE & FITTINGS")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "COMPUTER SOFTWARE")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("10051");
 
         accountIdService = new FileAccountIdService(accountIdPolicy);
     }
@@ -54,52 +69,52 @@ public class AccountIdServiceTest {
     @Test
     public void accountName() {
 
-        Assertions.assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, radio));
-        Assertions.assertEquals("ELECTRONIC EQUIPMENT", accountIdService.accountName(ACQUISITION, DEBIT, radio));
-        Assertions.assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, lenovo));
-        Assertions.assertEquals("COMPUTERS", accountIdService.accountName(ACQUISITION, DEBIT, lenovo));
-        Assertions.assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, chair));
-        Assertions.assertEquals("FURNITURE AND FITTINGS", accountIdService.accountName(ACQUISITION, DEBIT, chair));
-        Assertions.assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, zemana));
-        Assertions.assertEquals("COMPUTER SOFTWARE", accountIdService.accountName(ACQUISITION, DEBIT, zemana));
-        Assertions.assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, kca));
-        Assertions.assertEquals("MOTOR VEHICLES", accountIdService.accountName(ACQUISITION, DEBIT, kca));
-        Assertions.assertEquals("OFFICE RENOVATION", accountIdService.accountName(ACQUISITION, DEBIT, officePartitioning));
-        Assertions.assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, officePartitioning));
+        assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, radio));
+        assertEquals("ELECTRONIC EQUIPMENT", accountIdService.accountName(ACQUISITION, DEBIT, radio));
+        assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, lenovo));
+        assertEquals("COMPUTERS", accountIdService.accountName(ACQUISITION, DEBIT, lenovo));
+        assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, chair));
+        assertEquals("FURNITURE AND FITTINGS", accountIdService.accountName(ACQUISITION, DEBIT, chair));
+        assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, zemana));
+        assertEquals("COMPUTER SOFTWARE", accountIdService.accountName(ACQUISITION, DEBIT, zemana));
+        assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, kca));
+        assertEquals("MOTOR VEHICLES", accountIdService.accountName(ACQUISITION, DEBIT, kca));
+        assertEquals("OFFICE RENOVATION", accountIdService.accountName(ACQUISITION, DEBIT, officePartitioning));
+        assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, officePartitioning));
     }
 
     @Test
     public void generalLegerCode() {
 
-        Assertions.assertEquals("00153", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
-        Assertions.assertEquals("00152", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
-        Assertions.assertEquals("00156", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
-        Assertions.assertEquals("00155", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, zemana));
-        Assertions.assertEquals("00151", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca));
-        Assertions.assertEquals("00154", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, officePartitioning));
-        Assertions.assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair));
-        Assertions.assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo));
-        Assertions.assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio));
-        Assertions.assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana));
-        Assertions.assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca));
-        Assertions.assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning));
+        assertEquals("00153", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
+        assertEquals("00152", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
+        assertEquals("00156", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
+        assertEquals("00155", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, zemana));
+        assertEquals("00151", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca));
+        assertEquals("00154", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, officePartitioning));
+        assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair));
+        assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo));
+        assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio));
+        assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana));
+        assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca));
+        assertEquals("10051", accountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning));
     }
 
     @Test
     public void accountPlaceHolder() throws Exception {
 
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, lenovo));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, lenovo));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, radio));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, radio));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, zemana));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, zemana));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, kca));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, kca));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, officePartitioning));
-        Assertions.assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, officePartitioning));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, lenovo));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, lenovo));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, radio));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, radio));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, zemana));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, zemana));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, kca));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, kca));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, officePartitioning));
+        assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, officePartitioning));
     }
 
     @Test
