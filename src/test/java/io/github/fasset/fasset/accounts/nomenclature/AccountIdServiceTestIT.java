@@ -22,6 +22,7 @@ import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdSer
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -46,7 +47,22 @@ public class AccountIdServiceTestIT {
     private final static FixedAsset officePartitioning =
         new FixedAsset("Office Partitioning Works", Money.of(1500, "KES"), "OFFICE RENOVATION", "978", LocalDate.of(2018, 1, 12), "abc56", Money.of(50.13, "KES"));
 
-    private AccountIdService accountIdService = new FileAccountIdService(new AccountIdPolicyVersion1("account-id"));
+    private AccountIdService accountIdService;
+
+    @Before
+    public void setUp() throws Exception {
+        accountIdService = new FileAccountIdService(new AccountIdPolicyVersion1("account-id"));
+    }
+
+    @Test
+    public void contraAccountName() {
+        assertEquals("ACCUMULATED DEPRECIATION - ELECTRONIC EQUIPMENT", accountIdService.contraAccountName(ACQUISITION, DEBIT, radio));
+        assertEquals("ACCUMULATED DEPRECIATION - COMPUTERS", accountIdService.contraAccountName(ACQUISITION, DEBIT, lenovo));
+        assertEquals("ACCUMULATED DEPRECIATION - FURNITURE AND FITTINGS", accountIdService.contraAccountName(ACQUISITION, DEBIT, chair));
+        assertEquals("ACCUMULATED DEPRECIATION - COMPUTER SOFTWARE", accountIdService.contraAccountName(ACQUISITION, DEBIT, zemana));
+        assertEquals("ACCUMULATED DEPRECIATION - MOTOR VEHICLES", accountIdService.contraAccountName(ACQUISITION, DEBIT, kca));
+        assertEquals("ACCUMULATED DEPRECIATION - OFFICE RENOVATION", accountIdService.contraAccountName(ACQUISITION, DEBIT, officePartitioning));
+    }
 
     @Test
     public void accountName() {

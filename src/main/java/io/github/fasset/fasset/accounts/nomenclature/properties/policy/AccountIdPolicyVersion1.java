@@ -27,6 +27,7 @@ import java.util.Properties;
 
 import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.GENERAL_LEDGER_CODE;
 import static io.github.fasset.fasset.accounts.definition.AccountNumberSegment.PLACE_HOLDER;
+import static io.github.fasset.fasset.accounts.nomenclature.properties.policy.KeyFormatter.formatAppendantKey;
 import static io.github.fasset.fasset.accounts.nomenclature.properties.policy.KeyFormatter.formatKey;
 
 /**
@@ -129,7 +130,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
         String accountLabel = accountConfigProperties.getProperty(key);//e.g computers.acquisition.credit
 
-        log.debug("Credit posting account label for {} of the category {} resolved to be {}, using the key: {}", transactionType, category, accountLabel, key);
+        log.debug("Account label for {} of the category {} resolved to be {}, using the key: {}", transactionType, category, accountLabel, key);
 
         return accountLabel;
     }
@@ -150,7 +151,18 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      */
     @Override
     public Appendable accountNamePrefix(TransactionType transaction, AccountSide accountSide, String category) {
-        return null;
+
+        log.debug("Fetching account name prefix for {} transaction posted on the {} for {} category", transaction, accountSide, category);
+
+        String key = formatKey(category, transaction, accountSide) + ".prefix";
+
+        log.debug("Fetching account prefix for the key: {}", key);
+
+        String prefix = accountConfigProperties.getProperty(key);
+
+        log.debug("Account prefix for {} on the {} side for {} category resolved as {}", transaction, accountSide, category, prefix);
+
+        return new StringBuilder().append(prefix);
     }
 
     /**
@@ -165,7 +177,18 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      */
     @Override
     public CharSequence appendant(TransactionType transaction, AccountSide accountSide) {
-        return null;
+
+        log.debug("Fetching account name appendant for {} transaction posted on the {}", transaction, accountSide);
+
+        String key = formatAppendantKey(transaction, accountSide);
+
+        log.debug("Fetching account name appendant for the key: {}", key);
+
+        String appendant = accountConfigProperties.getProperty(key);
+
+        log.debug("Account name appendant for {} on the {} resolved as {}", transaction, accountSide, appendant);
+
+        return new StringBuilder().append(appendant);
     }
 
     /**

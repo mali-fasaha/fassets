@@ -54,4 +54,9 @@ class KeyFormatter {
     static String formatKey(String propertyKey, String element) {
         return formatKey(propertyKey, "acquisition", element);
     }
+
+    static String formatAppendantKey(TransactionType transaction, AccountSide accountSide){
+
+        return cleanString(String.format("%s.%s.appendant", transaction, accountSide));
+    }
 }
