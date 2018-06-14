@@ -20,8 +20,6 @@ package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
 import io.github.fasset.fasset.book.keeper.balance.AccountSide;
 
-import java.awt.Stroke;
-
 /**
  * This interface acts as building blocks to how assets are identified in front-facing systems using simple structure
  * which is data that has to be extracted from the asset attributes themselves.

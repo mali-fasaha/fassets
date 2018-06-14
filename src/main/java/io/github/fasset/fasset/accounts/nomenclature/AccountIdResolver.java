@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.model.FixedAsset;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * Generates the name of an existing account, if one exists, or the name of one to be created.
@@ -49,8 +50,8 @@ public interface AccountIdResolver {
      *
      * @param fixedAsset The asset for which we seek an account to track financially
      * @return The name of the contra account
-     * @Deprecated relevance
      */
+    @Deprecated
     String resolveContraAccountId(FixedAsset fixedAsset);
 
     /**
@@ -60,7 +61,7 @@ public interface AccountIdResolver {
      *
      * @param fixedAsset For which we need category nomenclature
      * @return The nomenclature of the category
-     * @Deprecated redundancy
      */
+    @Deprecated
     String resolveCategoryId(FixedAsset fixedAsset);
 }

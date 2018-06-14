@@ -64,7 +64,6 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
      *
      * @param fixedAsset The asset for which we seek an account to track financially
      * @return The name of the contra account
-     * @Deprecated relevance
      */
     @Override
     public String resolveContraAccountId(FixedAsset fixedAsset) {

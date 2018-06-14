@@ -128,7 +128,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
         log.debug("Fetching account label for the key: {}", key);
 
-        String accountLabel = accountConfigProperties.getProperty(key);//e.g computers.acquisition.credit
+        String accountLabel = accountConfigProperties.getProperty(key); //e.g computers.acquisition.credit
 
         log.debug("Account label for {} of the category {} resolved to be {}, using the key: {}", transactionType, category, accountLabel, key);
 
@@ -197,10 +197,10 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
      * <br> The existence of this method makes it possible for the application to be configured to create
      * different forms of identifications for an account number for different purposes.
      * <br> We assume the following args are passed in the following order for this policy version
-     *         <br>i.  sol id
-     *         <br>ii. currency code
-     *         <br>iii.general ledger
-     *         <br>iv. placeholder
+     * <br>i.  sol id
+     * <br>ii. currency code
+     * <br>iii.general ledger
+     * <br>iv. placeholder
      *
      * @param accountSegments Parameters containing the various segments that form an account number
      * @return account number sequence
@@ -209,11 +209,7 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     public String accountNumberMotif(String... accountSegments) {
 
         // TODO make this appendages more dynamic
-        StringBuilder sb = new StringBuilder()
-            .append(accountSegments[0])
-            .append(accountSegments[1])
-            .append(accountSegments[2])
-            .append(accountSegments[3]);
+        StringBuilder sb = new StringBuilder().append(accountSegments[0]).append(accountSegments[1]).append(accountSegments[2]).append(accountSegments[3]);
 
         return sb.toString();
     }

@@ -87,7 +87,7 @@ public interface AccountIdService {
      * <br> The existence of this method makes it possible for the application to be configured to create
      * different forms of identifications for an account number for different purposes.
      *
-     * @param  accountNumberSegments Parameters containing the various segments that form an account number
+     * @param accountNumberSegments Parameters containing the various segments that form an account number
      * @return account number sequence
      */
     String accountNumber(String... accountNumberSegments);

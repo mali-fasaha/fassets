@@ -4,6 +4,21 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Added configuration for appendant using unicode in the properties file**
+
+
+[9897f45865a485b](https://github.com/ghacupha/fassets/commit/9897f45865a485b) Edwin Njeru *2018-06-14 06:46:22*
+
+**Implemented appendant method and added to config**
+
+
+[e93a8ee356082d9](https://github.com/ghacupha/fassets/commit/e93a8ee356082d9) Edwin Njeru *2018-06-14 06:32:59*
+
+**Completed unit test for the AccountIdService contraAccountName method and added padding around the appendants**
+
+
+[f640c8f6e930964](https://github.com/ghacupha/fassets/commit/f640c8f6e930964) Edwin Njeru *2018-06-14 05:51:49*
+
 **Inclusion of license info in the AccountIdServiceTest**
 
 

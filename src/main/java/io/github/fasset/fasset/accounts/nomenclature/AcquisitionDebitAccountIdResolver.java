@@ -87,7 +87,6 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
      *
      * @param fixedAsset For which we need category nomenclature
      * @return The nomenclature of the category
-     * @Deprecated redundancy
      */
     @Override
     public String resolveCategoryId(FixedAsset fixedAsset) {
