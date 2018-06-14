@@ -51,7 +51,7 @@ import static io.github.ghacupha.time.point.SimpleDate.on;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class DefaultEntryResolverIntegratedDebitsTest {
+public class DefaultEntryResolverIT {
 
     private final static Currency KES = Currency.getInstance("KES");
 
