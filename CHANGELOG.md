@@ -4,6 +4,66 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Inclusion of license info in the AccountIdServiceTest**
+
+
+[e84a0740aa2c91e](https://github.com/ghacupha/fassets/commit/e84a0740aa2c91e) Edwin Njeru *2018-06-13 16:02:20*
+
+**Completed mocks and test for the currencyCode method**
+
+
+[ce6a971303f2446](https://github.com/ghacupha/fassets/commit/ce6a971303f2446) Edwin Njeru *2018-06-13 15:51:58*
+
+**Completed mocks for accountNumberMotif method in the accountIdPolicy**
+
+
+[af95f6e65253e28](https://github.com/ghacupha/fassets/commit/af95f6e65253e28) Edwin Njeru *2018-06-13 15:42:39*
+
+**Completed mocks for the accountPlaceHolder method**
+
+
+[40a278e0b1ad181](https://github.com/ghacupha/fassets/commit/40a278e0b1ad181) Edwin Njeru *2018-06-13 15:38:35*
+
+**Completed mocks for the accountLedgerCode method**
+
+
+[eee6009e77706a0](https://github.com/ghacupha/fassets/commit/eee6009e77706a0) Edwin Njeru *2018-06-13 15:33:08*
+
+**Implemented and mocked out the accountName method in the accountIdPolicy for the test**
+
+
+[87b024d04760794](https://github.com/ghacupha/fassets/commit/87b024d04760794) Edwin Njeru *2018-06-13 15:24:30*
+
+**Created shell for the AccountIdService unit test**
+
+
+[285c5db96bbdc82](https://github.com/ghacupha/fassets/commit/285c5db96bbdc82) Edwin Njeru *2018-06-13 15:15:51*
+
+**Made the AccountIdServiceTest an integrated test to isolate actual configs from the tests**
+
+
+[2597986189bb54d](https://github.com/ghacupha/fassets/commit/2597986189bb54d) Edwin Njeru *2018-06-13 15:09:55*
+
+**Created accountNumber test in the accountIdServiceTest**
+
+
+[78e0f0d370d0e38](https://github.com/ghacupha/fassets/commit/78e0f0d370d0e38) Edwin Njeru *2018-06-13 15:07:50*
+
+**Completed tests for the account number method of the AcquisitionDebitAccountIdResolver object**
+
+
+[a0beff40f6cd6fd](https://github.com/ghacupha/fassets/commit/a0beff40f6cd6fd) Edwin Njeru *2018-06-13 13:39:57*
+
+**Added resolution of account number in AcquisitionDebitAccountIdResolver using accountIdService motif from policy**
+
+
+[b0f11d26f1b9eee](https://github.com/ghacupha/fassets/commit/b0f11d26f1b9eee) Edwin Njeru *2018-06-13 06:50:52*
+
+**Added account number test to the AcquisitionCreditAccountIdTest**
+
+
+[3098dd75548dcfa](https://github.com/ghacupha/fassets/commit/3098dd75548dcfa) Edwin Njeru *2018-06-13 06:45:57*
+
 **Added accountNumberMotif to the accountIdService interface**
 
 

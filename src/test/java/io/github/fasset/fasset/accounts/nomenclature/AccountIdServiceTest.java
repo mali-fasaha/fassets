@@ -52,6 +52,16 @@ public class AccountIdServiceTest {
 
         AccountIdPolicy accountIdPolicy = Mockito.mock(AccountIdPolicy.class);
 
+        // currency code
+        when(accountIdPolicy.currencyCode("KES")).thenReturn("00");
+        when(accountIdPolicy.currencyCode("USD")).thenReturn("01");
+        when(accountIdPolicy.currencyCode("GBP")).thenReturn("02");
+        when(accountIdPolicy.currencyCode("EUR")).thenReturn("03");
+        when(accountIdPolicy.currencyCode("INR")).thenReturn("04");
+        when(accountIdPolicy.currencyCode("CAD")).thenReturn("05");
+        when(accountIdPolicy.currencyCode("CHF")).thenReturn("06");
+        when(accountIdPolicy.currencyCode("ZAR")).thenReturn("07");
+
         // Account name
         when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("ELECTRONIC EQUIPMENT");
         when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("SUNDRY CREDITORS");
@@ -99,20 +109,29 @@ public class AccountIdServiceTest {
         when(accountIdPolicy.accountNumberMotif("978","00","00153","010")).thenReturn("9780000153010");
         when(accountIdPolicy.accountNumberMotif("978","01","00153","010")).thenReturn("9780100153010");
 
-        when(accountIdPolicy.currencyCode("KES")).thenReturn("00");
-        when(accountIdPolicy.currencyCode("USD")).thenReturn("01");
-        when(accountIdPolicy.currencyCode("GBP")).thenReturn("02");
-        when(accountIdPolicy.currencyCode("EUR")).thenReturn("03");
-        when(accountIdPolicy.currencyCode("INR")).thenReturn("04");
-        when(accountIdPolicy.currencyCode("CAD")).thenReturn("05");
-        when(accountIdPolicy.currencyCode("CHF")).thenReturn("06");
-        when(accountIdPolicy.currencyCode("ZAR")).thenReturn("07");
+        when(accountIdPolicy.accountNamePrefix(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn(new StringBuilder().append("ACCUMULATED DEPRECIATION"));
+        when(accountIdPolicy.accountNamePrefix(ACQUISITION, DEBIT, "COMPUTERS")).thenReturn(new StringBuilder().append("ACCUMULATED DEPRECIATION"));
+        when(accountIdPolicy.accountNamePrefix(ACQUISITION, DEBIT, "FURNITURE & FITTINGS")).thenReturn(new StringBuilder().append("ACCUMULATED DEPRECIATION"));
+        when(accountIdPolicy.accountNamePrefix(ACQUISITION, DEBIT, "COMPUTER SOFTWARE")).thenReturn(new StringBuilder().append("ACCUMULATED DEPRECIATION"));
+        when(accountIdPolicy.accountNamePrefix(ACQUISITION, DEBIT, "MOTOR VEHICLES")).thenReturn(new StringBuilder().append("ACCUMULATED DEPRECIATION"));
+        when(accountIdPolicy.accountNamePrefix(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn(new StringBuilder().append("ACCUMULATED DEPRECIATION"));
+
+        when(accountIdPolicy.appendant(ACQUISITION, DEBIT)).thenReturn("-");
 
         accountIdService = new FileAccountIdService(accountIdPolicy);
     }
 
+    @Test void contraAccountName() {
+        assertEquals("ACCUMULATED DEPRECIATION - ELECTRONIC EQUIPMENT", accountIdService.contraAccountName(ACQUISITION, DEBIT, radio));
+        assertEquals("ACCUMULATED DEPRECIATION - COMPUTERS", accountIdService.contraAccountName(ACQUISITION, DEBIT, lenovo));
+        assertEquals("ACCUMULATED DEPRECIATION - FURNITURE AND FITTINGS", accountIdService.contraAccountName(ACQUISITION, DEBIT, chair));
+        assertEquals("ACCUMULATED DEPRECIATION - COMPUTER SOFTWARE", accountIdService.contraAccountName(ACQUISITION, DEBIT, zemana));
+        assertEquals("ACCUMULATED DEPRECIATION - MOTOR VEHICLES", accountIdService.contraAccountName(ACQUISITION, DEBIT, kca));
+        assertEquals("ACCUMULATED DEPRECIATION - OFFICE RENOVATION", accountIdService.contraAccountName(ACQUISITION, DEBIT, officePartitioning));
+    }
+
     @Test
-    public void accountName() {
+    void accountName() {
 
         assertEquals("SUNDRY CREDITORS", accountIdService.accountName(ACQUISITION, CREDIT, radio));
         assertEquals("ELECTRONIC EQUIPMENT", accountIdService.accountName(ACQUISITION, DEBIT, radio));
@@ -129,7 +148,7 @@ public class AccountIdServiceTest {
     }
 
     @Test
-    public void generalLegerCode() {
+    void generalLegerCode() {
 
         assertEquals("00153", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
         assertEquals("00152", accountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
@@ -146,7 +165,7 @@ public class AccountIdServiceTest {
     }
 
     @Test
-    public void accountPlaceHolder() throws Exception {
+    void accountPlaceHolder() throws Exception {
 
         assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
         assertEquals("001", accountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair));
@@ -163,7 +182,7 @@ public class AccountIdServiceTest {
     }
 
     @Test
-    public void accountNumber() {
+    void accountNumber() {
 
         assertEquals("0010010051001", accountIdService.accountNumber("001","00","10051","001"));
         assertEquals("9780000153010", accountIdService.accountNumber("978","00","00153","010"));
@@ -171,7 +190,7 @@ public class AccountIdServiceTest {
     }
 
     @Test
-    public void getCurrencyCode() {
+    void getCurrencyCode() {
 
         assertEquals("00", accountIdService.currencyCode("KES"));
         assertEquals("01", accountIdService.currencyCode("USD"));

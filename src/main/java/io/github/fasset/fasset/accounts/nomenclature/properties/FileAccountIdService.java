@@ -114,7 +114,10 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
         String contraAccount = "";
 
         try {
-            contraAccount = String.valueOf(accountIdPolicy.accountNamePrefix(transaction, accountSide, fixedAsset.getCategory()).append(accountIdPolicy.appendant(transaction, accountSide))
+            contraAccount = String.valueOf(accountIdPolicy.accountNamePrefix(transaction, accountSide, fixedAsset.getCategory())
+                .append(" ")
+                .append(accountIdPolicy.appendant(transaction, accountSide))
+                .append(" ")
                 .append(accountIdPolicy.accountName(transaction, accountSide, fixedAsset.getCategory())));
         } catch (IOException e) {
             e.printStackTrace();
