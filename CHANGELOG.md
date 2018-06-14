@@ -4,6 +4,16 @@ Changelog for fassets implementation by ghacupha
 ## Unreleased
 ### No issue
 
+**Created todo for unit and integrated tests to implement next**
+
+
+[7d3d4e26e8ae366](https://github.com/ghacupha/fassets/commit/7d3d4e26e8ae366) Edwin Njeru *2018-06-14 11:30:44*
+
+**Fixed a few javadoc and styling issues and added a cmd script for checking style quality**
+
+
+[646ae222ab3b7bc](https://github.com/ghacupha/fassets/commit/646ae222ab3b7bc) Edwin Njeru *2018-06-14 07:21:07*
+
 **Added configuration for appendant using unicode in the properties file**
 
 
