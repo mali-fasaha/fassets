@@ -32,7 +32,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 /**
  * Resolves names of the accounts for posting acquisitions
  */
-@Component("debitAccountIDResolver")
+@Component("debitAccountIdResolver")
 public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
 
     private static final Logger log = getLogger(AcquisitionDebitAccountIdResolver.class);
