@@ -374,6 +374,7 @@
             <artifactId>time-point</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!-- //https://github.com/ghacupha/observer -->
         <dependency>
             <groupId>io.github.ghacupha</groupId>
             <artifactId>subscriber</artifactId>
