@@ -19,8 +19,6 @@ package io.github.fasset.fasset.kernel.storage;
 
 import io.github.fasset.fasset.config.StorageProperties;
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
-import io.github.fasset.fasset.kernel.subscriptions.SimpleSubscription;
-import io.github.fasset.fasset.kernel.subscriptions.SubscriptionService;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.model.files.FileUpload;
