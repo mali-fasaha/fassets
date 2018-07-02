@@ -18,10 +18,10 @@
 package io.github.fasset.fasset.kernel.batch;
 
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
-import io.github.fasset.fasset.kernel.subscriptions.AbstractSubscriber;
-import io.github.fasset.fasset.kernel.subscriptions.Subscriber;
-import io.github.fasset.fasset.kernel.subscriptions.Update;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
+import io.github.ghacupha.subscriber.AbstractSubscriber;
+import io.github.ghacupha.subscriber.Subscriber;
+import io.github.ghacupha.subscriber.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;

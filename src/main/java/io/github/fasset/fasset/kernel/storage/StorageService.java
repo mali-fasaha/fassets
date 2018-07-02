@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.kernel.storage;
 
-import io.github.fasset.fasset.kernel.subscriptions.SubscriptionService;
+import io.github.ghacupha.subscriber.SubscriptionService;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -23,6 +23,8 @@ import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.service.FileUploadService;
+import io.github.ghacupha.subscriber.SimpleSubscription;
+import io.github.ghacupha.subscriber.SubscriptionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ import java.util.stream.Stream;
 
 /**
  * Implements storageService interface while at the same time implementing the subscriptionService. The later allows
- * a {@link io.github.fasset.fasset.kernel.subscriptions.Subscriber} implementation to observe changes and act
+ * a {@code Subscriber} implementation to observe changes and act
  * accordingly, and this this case upload data stored in the the file recently uploaded in the file system
  */
 @Service("fileSystemStorageService")
