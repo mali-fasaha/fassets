@@ -21,6 +21,8 @@ import io.github.fasset.fasset.config.StorageProperties;
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
+import io.github.fasset.fasset.kernel.util.queue.FileUploadsQueue;
+import io.github.fasset.fasset.kernel.util.queue.MessageQueue;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.service.FileUploadService;
 import io.github.ghacupha.subscriber.SimpleSubscription;
@@ -75,11 +77,15 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
     private final FileUploadService fileUploadService;
 
+    private MessageQueue fileUploadsQueue;
+
 
     @Autowired
     public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadService") FileUploadService fileUploadService) {
         rootLocation = Paths.get(storageProperties.getLocation());
+        //Todo remove this from this class
         this.fileUploadService = fileUploadService;
+        fileUploadsQueue = new FileUploadsQueue(fileUploadService);
     }
 
     /**
@@ -121,7 +127,10 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
                     // Replace with subscriber for database and another for the batch
                     fileUploadService.recordFileUpload(fileUpload);
 
-                    // TODO fileUploads.postUpdate();
+                    fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()),
+                        () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));
+
+                    //TODO do away with this synchronized approach
                     postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
                 }
             }
