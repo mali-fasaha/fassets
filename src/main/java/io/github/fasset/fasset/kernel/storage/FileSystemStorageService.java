@@ -107,6 +107,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
             FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017, 12));
 
+            // Todo Add duplicate upload checks in the File uploads queue
             if (fileUploadService.theFileIsAlreadyUploaded(fileUpload)) {
 
                 log.info("The file : {} has already been uploaded", fileUpload.getFileName());
@@ -124,9 +125,9 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
                         throw new StorageException("Failed to store file " + fileName, e);
                     }
 
-                    // Replace with subscriber for database and another for the batch
-                    fileUploadService.recordFileUpload(fileUpload);
+                    // TODO fileUploadService.recordFileUpload(fileUpload); // this is being done in the queue
 
+                    // Todo check need for additional lifecycle methods to add functionality to this queue
                     fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()),
                         () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));
 
