@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.model.files;
 
 import io.github.fasset.fasset.DomainModel;
+import io.github.fasset.fasset.kernel.util.Jsonable;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
@@ -31,9 +32,9 @@ import java.util.Objects;
  */
 @Entity(name = "FileUpload")
 @Audited
-public class FileUpload extends DomainModel<String> implements Serializable {
+public class FileUpload extends DomainModel<String> implements Serializable, Jsonable {
 
-    private static final long serialVersionUID = 2657188181025701641L;
+    private static final long serialVersionUID = -593481318028396924L;
 
     /* the name and location of file*/
     private String fileName;
@@ -44,6 +45,8 @@ public class FileUpload extends DomainModel<String> implements Serializable {
     /* time of upload */
     private LocalDateTime timeUploaded;
 
+    private boolean deserialized;
+
     public FileUpload() {
     }
 
@@ -51,6 +54,14 @@ public class FileUpload extends DomainModel<String> implements Serializable {
         this.fileName = fileName;
         this.month = month;
         this.timeUploaded = timeUploaded;
+    }
+
+    public boolean isDeserialized() {
+        return deserialized;
+    }
+
+    public void setDeserialized(boolean deserialized) {
+        this.deserialized = deserialized;
     }
 
     public String getFileName() {
@@ -80,6 +91,19 @@ public class FileUpload extends DomainModel<String> implements Serializable {
         return this;
     }
 
+    /**
+     * @return String representing the object notation of the client
+     */
+    @Override
+    public String toJson() {
+
+        return "{\n" +
+            "\"fileName\":\""+ fileName + "\",\n"+
+            "\"month\":\""+ month.toString() + "\",\n"+
+            "\"timeUploaded\":\""+ timeUploaded.toString() + "\",\n"+
+            "\"deserialized\":\""+ deserialized + "\"\n}";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,13 +112,32 @@ public class FileUpload extends DomainModel<String> implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+        if (!super.equals(o)) {
+            return false;
+        }
+
         FileUpload that = (FileUpload) o;
-        return Objects.equals(fileName, that.fileName) && Objects.equals(month, that.month) && Objects.equals(timeUploaded, that.timeUploaded);
+
+        if (deserialized != that.deserialized) {
+            return false;
+        }
+        if (!fileName.equals(that.fileName)) {
+            return false;
+        }
+        if (!month.equals(that.month)) {
+            return false;
+        }
+        return timeUploaded.equals(that.timeUploaded);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fileName, month, timeUploaded);
+        int result = super.hashCode();
+        result = 31 * result + fileName.hashCode();
+        result = 31 * result + month.hashCode();
+        result = 31 * result + timeUploaded.hashCode();
+        result = 31 * result + (deserialized ? 1 : 0);
+        return result;
     }
 
     @Override

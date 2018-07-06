@@ -50,7 +50,20 @@ import java.util.stream.Stream;
 /**
  * Implements storageService interface while at the same time implementing the subscriptionService. The later allows
  * a {@code Subscriber} implementation to observe changes and act
- * accordingly, and this this case upload data stored in the the file recently uploaded in the file system
+ * accordingly, and this this case upload data stored in the the file recently uploaded in the file system.
+ *
+ * <br />Usage :
+ * <br> This class will enable clients to
+ * <br /> - List uploaded files:
+ * <br />  storageService.loadAll()
+ * <br />
+ * <br /> - Store uploaded files in root location:
+ * <br />  storageService.store(file);
+ * <br />
+ * <br /> - Generate API containing uploaded files
+ * <br />  storageService.loadAsResource(fileName);
+ * <br />
+ *
  */
 @Service("fileSystemStorageService")
 public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService, StorageService {
@@ -108,6 +121,7 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
                     // Replace with subscriber for database and another for the batch
                     fileUploadService.recordFileUpload(fileUpload);
 
+                    // TODO fileUploads.postUpdate();
                     postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
                 }
             }
