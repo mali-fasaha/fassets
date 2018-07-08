@@ -119,7 +119,8 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
                 throw new StorageException("Failed to store file " + fileName, e);
             }
 
-            fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()), () -> {
+            // TODO review the need for the FileUploadNotification DTO
+            fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()), (e) -> {
                 //TODO check if this try again method is shooting the hypothetical foot
                 store(file);
             }, () -> {

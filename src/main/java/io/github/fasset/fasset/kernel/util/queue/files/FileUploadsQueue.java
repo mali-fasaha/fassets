@@ -1,8 +1,8 @@
 package io.github.fasset.fasset.kernel.util.queue.files;
 
 import io.github.fasset.fasset.kernel.util.queue.AbstractMessageQueue;
-import io.github.fasset.fasset.kernel.util.queue.MCompletion;
-import io.github.fasset.fasset.kernel.util.queue.MQError;
+import io.github.fasset.fasset.kernel.util.queue.util.MCompletion;
+import io.github.fasset.fasset.kernel.util.queue.util.MQError;
 import io.github.fasset.fasset.kernel.util.queue.QueueMessage;
 import io.github.fasset.fasset.model.files.FileUpload;
 

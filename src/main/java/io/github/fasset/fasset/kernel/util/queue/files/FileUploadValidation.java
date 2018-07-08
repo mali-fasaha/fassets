@@ -2,6 +2,11 @@ package io.github.fasset.fasset.kernel.util.queue.files;
 
 import io.github.fasset.fasset.model.files.FileUpload;
 
+/**
+ * Provides validate method in which we can include re-usable file validation methods.
+ * <br> Any of the checks the {@link FileValidationService#validate(FileUpload)} will throw
+ * an {@link InvalidFileException}.
+ */
 public class FileUploadValidation implements FileValidationService<FileUpload> {
 
     private final FileUploadService fileUploadService;

@@ -8,6 +8,7 @@ public class MQException extends RuntimeException{
      * initialized by a call to {@link #initCause}.
      */
     public MQException() {
+        super();
     }
 
     /**

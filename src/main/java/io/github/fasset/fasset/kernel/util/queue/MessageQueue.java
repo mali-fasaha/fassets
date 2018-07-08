@@ -1,5 +1,8 @@
 package io.github.fasset.fasset.kernel.util.queue;
 
+import io.github.fasset.fasset.kernel.util.queue.util.MCompletion;
+import io.github.fasset.fasset.kernel.util.queue.util.MQError;
+
 /**
  * This interface represents a way for sending messages in the application.
  * <br> Please note it is expected that the queue is expected to operate through use

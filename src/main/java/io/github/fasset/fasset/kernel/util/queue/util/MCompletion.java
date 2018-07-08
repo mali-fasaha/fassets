@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel.util.queue;
+package io.github.fasset.fasset.kernel.util.queue.util;
 
 /**
  * Interface allows clients to carry out an action after a message is completed when

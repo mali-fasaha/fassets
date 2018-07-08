@@ -1,5 +1,8 @@
 package io.github.fasset.fasset.kernel.util.queue;
 
+import io.github.fasset.fasset.kernel.util.queue.util.MCompletion;
+import io.github.fasset.fasset.kernel.util.queue.util.MQError;
+
 /**
  * This class provides a common framework for how the completion and handle error methods should be seen.
  * <br> The client being a MessageQueue 'producer' needs not bother with who to 'arrange' handling errors
