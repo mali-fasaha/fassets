@@ -5,7 +5,6 @@ public interface MQError {
 
     /**
      * This is a lifecycle method called when enqueueing a message produces an error
-     * @param mQException
      */
-    void handleError(MQException mQException);
+    void handleError();
 }

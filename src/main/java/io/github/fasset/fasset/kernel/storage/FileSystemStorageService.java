@@ -113,13 +113,19 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
             FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017, 12));
 
             try {
+                // copy file to the file system
                 Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 throw new StorageException("Failed to store file " + fileName, e);
             }
 
-            fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()),
-                () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));
+            fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()), () -> {
+                //TODO check if this try again method is shooting the hypothetical foot
+                store(file);
+            }, () -> {
+                fileUpload.setTimeUploaded(LocalDateTime.now());
+                log.debug("The file {} has been uploaded", fileUpload.getFileName());
+            });
 
             //TODO do away with this synchronized approach
             postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
