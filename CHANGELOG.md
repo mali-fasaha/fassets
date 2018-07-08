@@ -1079,7 +1079,7 @@ Changelog for fassets implementation by ghacupha
 
 [5336ac971d5f80f](https://github.com/ghacupha/fassets/commit/5336ac971d5f80f) Edwin Njeru *2018-03-07 11:31:42*
 
-**subscriber pattern complete with minor adjustments expected**
+**subscriber pattern handleCompletion with minor adjustments expected**
 
 
 [48a97b6fc369044](https://github.com/ghacupha/fassets/commit/48a97b6fc369044) Edwin Njeru *2018-03-07 07:15:04*

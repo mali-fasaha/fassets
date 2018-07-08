@@ -14,7 +14,7 @@ package io.github.fasset.fasset.kernel.util.queue;
  *
  * <br>
  * <br> Should the client need to carry out an action to show completion lifecycle method,
- * the client could call the {@link MCompletion#complete()} method as shown:
+ * the client could call the {@link MCompletion#handleCompletion()} method as shown:
  * <br>
  * <br> {code fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName()),
  *     () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));}
@@ -29,9 +29,26 @@ public interface MessageQueue<T> {
     void push(QueueMessage<T> queueMessage);
 
     /**
-     * Adds a message to the queue
+     * Adds a message to the queue, and provides a method to allow the producer to handle error
      *
      * @param queueMessage Item to be added to the queue
      */
+    void push(QueueMessage<T> queueMessage, MQError mqError);
+
+    /**
+     * Adds a message to the queue and provides a method to allow the producer to handle 'task completion acts'
+     *
+     * @param queueMessage Item to be added to the queue
+     * @param mCompletion This is a functional interface for handling task completion tasks
+     */
     void push(QueueMessage<T> queueMessage, MCompletion mCompletion);
+
+    /**
+     * Adds a message to the queue, and provides a method to allow the producer to handle error
+     *
+     * @param queueMessage Item to be added to the queue
+     * @param mqError This is a functional interface for handling errors when they occur
+     * @param mCompletion This is a functional interface for handling task completion tasks
+     */
+    void push(QueueMessage<T> queueMessage, MQError mqError, MCompletion mCompletion);
 }
