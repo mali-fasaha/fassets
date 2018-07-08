@@ -1,5 +1,6 @@
-package io.github.fasset.fasset.kernel.util.queue;
+package io.github.fasset.fasset.kernel.util.queue.files;
 
+import io.github.fasset.fasset.kernel.util.queue.InvalidFileException;
 import io.github.fasset.fasset.model.files.FileUpload;
 
 /**

@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.kernel.util.queue;
 
+import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
+
 /**
  * Message item being added to the queue. The architecture of this queueing framework assumes the message enqueued
  * is dumb as to whether or not it has been processed. The client has to form its own way of 'knowing' whether or
