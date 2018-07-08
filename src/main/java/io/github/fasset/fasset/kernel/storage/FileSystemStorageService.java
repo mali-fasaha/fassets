@@ -22,6 +22,7 @@ import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.util.queue.FileUploadsQueue;
+import io.github.fasset.fasset.kernel.util.queue.FileValidationService;
 import io.github.fasset.fasset.kernel.util.queue.MessageQueue;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.kernel.util.queue.FileUploadService;
@@ -81,11 +82,11 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
 
     @Autowired
-    public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadService") FileUploadService fileUploadService) {
+    public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadService") FileUploadService fileUploadService, FileValidationService<FileUpload> fileValidationService) {
         rootLocation = Paths.get(storageProperties.getLocation());
         //Todo remove this from this class
         this.fileUploadService = fileUploadService;
-        fileUploadsQueue = new FileUploadsQueue(fileUploadService);
+        fileUploadsQueue = new FileUploadsQueue(fileUploadService, fileValidationService);
     }
 
     /**

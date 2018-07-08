@@ -18,11 +18,13 @@ import io.github.fasset.fasset.model.files.FileUpload;
  */
 public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
 
-    private FileUploadService fileUploadService;
+    private final FileUploadService fileUploadService;
+    private final FileValidationService<FileUpload> fileValidationService;
 
-    public FileUploadsQueue(FileUploadService fileUploadService) {
+    public FileUploadsQueue(FileUploadService fileUploadService, FileValidationService<FileUpload> fileValidationService) {
 
         this.fileUploadService = fileUploadService;
+        this.fileValidationService = fileValidationService;
     }
 
     /**
@@ -33,7 +35,7 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     @Override
     public void push(QueueMessage<FileUpload> queueMessage) {
 
-        fileUploadService.recordFileUpload(queueMessage.message());
+        fileUploadService.recordFileUpload(fileValidationService.validate(queueMessage.message()));
     }
 
 }
