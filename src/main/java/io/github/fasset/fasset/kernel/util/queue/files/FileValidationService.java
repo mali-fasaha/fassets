@@ -1,6 +1,5 @@
 package io.github.fasset.fasset.kernel.util.queue.files;
 
-import io.github.fasset.fasset.kernel.util.queue.InvalidFileException;
 import io.github.fasset.fasset.model.files.FileUpload;
 
 /**
@@ -11,5 +10,5 @@ import io.github.fasset.fasset.model.files.FileUpload;
  */
 public interface FileValidationService<T> {
 
-    T validate(FileUpload message) throws InvalidFileException;
+    T validate(FileUpload fileUpload) throws InvalidFileException;
 }

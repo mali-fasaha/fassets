@@ -25,10 +25,10 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     private final FileUploadService fileUploadService;
     private final FileValidationService<FileUpload> fileValidationService;
 
-    public FileUploadsQueue(FileUploadService fileUploadService, FileValidationService<FileUpload> fileValidationService) {
+    public FileUploadsQueue(FileUploadService fileUploadService) {
 
         this.fileUploadService = fileUploadService;
-        this.fileValidationService = fileValidationService;
+        this.fileValidationService = new FileUploadValidation(fileUploadService);
     }
 
     /**

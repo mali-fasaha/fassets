@@ -1,4 +1,4 @@
-package io.github.fasset.fasset.kernel.util.queue;
+package io.github.fasset.fasset.kernel.util.queue.files;
 
 public class InvalidFileException extends RuntimeException {
 
