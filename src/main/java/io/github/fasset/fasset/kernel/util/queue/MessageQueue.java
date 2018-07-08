@@ -21,6 +21,8 @@ import io.github.fasset.fasset.kernel.util.queue.util.MQError;
  * <br>
  * <br> {code fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName()),
  *     () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));}
+ *
+ *     TODO : implement consumers for this Queue
  */
 public interface MessageQueue<T> {
 
