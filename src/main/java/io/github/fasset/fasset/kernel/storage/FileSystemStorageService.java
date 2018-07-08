@@ -19,6 +19,7 @@ package io.github.fasset.fasset.kernel.storage;
 
 import io.github.fasset.fasset.config.StorageProperties;
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
+import io.github.fasset.fasset.kernel.util.FileSecurityChecks;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue;
@@ -49,6 +50,8 @@ import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Objects;
 import java.util.stream.Stream;
+
+import static io.github.fasset.fasset.kernel.util.FileSecurityChecks.relativePathCheck;
 
 /**
  * Implements storageService interface while at the same time implementing the subscriptionService. The later allows
@@ -105,28 +108,21 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
         } else {
 
+            relativePathCheck(fileName);
+
             FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017, 12));
 
-            if (fileName.contains("..")) {
-                // This is a security check
-                throw new StorageException("Cannot store file with relative path outside current directory " + fileName);
-            } else {
-
-                try {
-                    Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException e) {
-                    throw new StorageException("Failed to store file " + fileName, e);
-                }
-
-                // TODO fileUploadService.recordFileUpload(fileUpload); // this is being done in the queue
-
-                // Todo check need for additional lifecycle methods to add functionality to this queue
-                fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()),
-                    () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));
-
-                //TODO do away with this synchronized approach
-                postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
+            try {
+                Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                throw new StorageException("Failed to store file " + fileName, e);
             }
+
+            fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()),
+                () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));
+
+            //TODO do away with this synchronized approach
+            postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
         }
 
     }
