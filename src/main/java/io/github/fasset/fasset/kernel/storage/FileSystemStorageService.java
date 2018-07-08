@@ -24,7 +24,7 @@ import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.util.queue.FileUploadsQueue;
 import io.github.fasset.fasset.kernel.util.queue.MessageQueue;
 import io.github.fasset.fasset.model.files.FileUpload;
-import io.github.fasset.fasset.service.FileUploadService;
+import io.github.fasset.fasset.kernel.util.queue.FileUploadService;
 import io.github.ghacupha.subscriber.SimpleSubscription;
 import io.github.ghacupha.subscriber.SubscriptionService;
 import org.slf4j.Logger;

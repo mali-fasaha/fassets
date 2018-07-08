@@ -1,7 +1,6 @@
 package io.github.fasset.fasset.kernel.util.queue;
 
 import io.github.fasset.fasset.model.files.FileUpload;
-import io.github.fasset.fasset.service.FileUploadService;
 
 /**
  * Implementation of the MessageQueue interface that allows queueing of messages related
