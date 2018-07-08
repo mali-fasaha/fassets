@@ -54,7 +54,7 @@ import java.util.stream.Stream;
  * Implements storageService interface while at the same time implementing the subscriptionService. The later allows
  * a {@code Subscriber} implementation to observe changes and act
  * accordingly, and this this case upload data stored in the the file recently uploaded in the file system.
- *
+ * <p>
  * <br />Usage :
  * <br> This class will enable clients to
  * <br /> - List uploaded files:
@@ -66,7 +66,6 @@ import java.util.stream.Stream;
  * <br /> - Generate API containing uploaded files
  * <br />  storageService.loadAsResource(fileName);
  * <br />
- *
  */
 @Service("fileSystemStorageService")
 public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService, StorageService {
@@ -108,33 +107,25 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
             FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017, 12));
 
-            // Todo Add duplicate upload checks in the File uploads queue
-            if (fileUploadService.theFileIsAlreadyUploaded(fileUpload)) {
-
-                log.info("The file : {} has already been uploaded", fileUpload.getFileName());
-
+            if (fileName.contains("..")) {
+                // This is a security check
+                throw new StorageException("Cannot store file with relative path outside current directory " + fileName);
             } else {
 
-                if (fileName.contains("..")) {
-                    // This is a security check
-                    throw new StorageException("Cannot store file with relative path outside current directory " + fileName);
-                } else {
-
-                    try {
-                        Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        throw new StorageException("Failed to store file " + fileName, e);
-                    }
-
-                    // TODO fileUploadService.recordFileUpload(fileUpload); // this is being done in the queue
-
-                    // Todo check need for additional lifecycle methods to add functionality to this queue
-                    fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()),
-                        () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));
-
-                    //TODO do away with this synchronized approach
-                    postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
+                try {
+                    Files.copy(file.getInputStream(), this.rootLocation.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    throw new StorageException("Failed to store file " + fileName, e);
                 }
+
+                // TODO fileUploadService.recordFileUpload(fileUpload); // this is being done in the queue
+
+                // Todo check need for additional lifecycle methods to add functionality to this queue
+                fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()),
+                    () -> log.debug("The file {} has been uploaded", fileUpload.getFileName()));
+
+                //TODO do away with this synchronized approach
+                postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
             }
         }
 

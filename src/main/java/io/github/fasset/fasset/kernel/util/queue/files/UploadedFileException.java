@@ -10,6 +10,6 @@ public class UploadedFileException extends InvalidFileException {
     public UploadedFileException(FileUpload fileUpload) {
 
         super(String.format("The file named : %s has already been uploaded and has therefore failed duplicity" +
-            "checks. See manual for further details", fileUpload));
+            "checks. See manual for further details", fileUpload.getFileName()));
     }
 }
