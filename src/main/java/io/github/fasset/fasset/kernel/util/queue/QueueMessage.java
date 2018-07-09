@@ -8,7 +8,7 @@ import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
  * not a message has been consumed. SO we take the dumb-framework-clever-consumers approach.
  * <br> The specifics of what's in the message are expected to be set up by 'producers' through functional implementation
  * such as shown below:
- * <br> {@code fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName())}
+ * <br> <pre>{@code fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName())}</pre>
  * <br>
  * <br> In the above example the {@code FIleUploadQueue} is an implementation of the {@code MessageQueue<FileUpload>}
  * interface that is supposed to enqueue messages about an uploaded file. The message here is therefore of the type
@@ -17,7 +17,7 @@ import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
  * <br> The 'consumer' on the other hand has only to call the {@link QueueMessage#message()} method to obtain the message
  * sent by the producer.
  * <br> The consumer for the {@link FileUploadService} consumption of the message might look as follows:
- * <br> {@code fileUploadService.recordFileUpload(queueMessage.message());}
+ * <br> <pre>{@code fileUploadService.recordFileUpload(queueMessage.message());}</pre>
  *
  */
 @FunctionalInterface

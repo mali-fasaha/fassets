@@ -14,12 +14,15 @@ import io.github.fasset.fasset.kernel.util.queue.util.MQError;
  * simply by extending this class. Should the client desire a different approach for the lifecycle methods, nothing's wrong
  * with it skipping this class and implementing the whole interface by itself.
  * <br>
- * <br> {@code @Override
+ * <br> <pre>
+ *     {@code
+ *     @Override
  *     public void push(QueueMessage<FileUpload> queueMessage) {
  *
  *         fileUploadService.recordFileUpload(queueMessage.message());
  *     }
  *     }
+ *    </pre>
  *
  * <br> Note:
  * <br> The client above simply implements the queue method push by recording the message to the {@code FileUploadService}
