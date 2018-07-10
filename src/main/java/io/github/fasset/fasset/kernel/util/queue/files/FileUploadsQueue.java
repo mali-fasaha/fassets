@@ -5,6 +5,8 @@ import io.github.fasset.fasset.kernel.util.queue.util.MCompletion;
 import io.github.fasset.fasset.kernel.util.queue.util.MQError;
 import io.github.fasset.fasset.kernel.util.queue.QueueMessage;
 import io.github.fasset.fasset.model.files.FileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * Implementation of the MessageQueue interface that allows queueing of messages related
@@ -25,7 +27,8 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     private final FileUploadService fileUploadService;
     private final FileValidationService<FileUpload> fileValidationService;
 
-    public FileUploadsQueue(FileUploadService fileUploadService) {
+    @Autowired
+    public FileUploadsQueue(@Qualifier("fileUploadService") FileUploadService fileUploadService) {
         super();
         this.fileUploadService = fileUploadService;
         this.fileValidationService = new FileUploadValidation(fileUploadService);

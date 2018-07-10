@@ -44,20 +44,26 @@ public class DepreciationAgentImpl implements DepreciationAgent {
 
     private final Logger log = LoggerFactory.getLogger(DepreciationAgentImpl.class);
 
-    private CategoryConfigurationRegistry categoryConfigurationRegistry;
-    private DepreciationPreprocessor preprocessor;
+    private final CategoryConfigurationRegistry categoryConfigurationRegistry;
+    private final DepreciationPreprocessor preprocessor;
 
     @Autowired
-    public DepreciationAgentImpl setCategoryConfigurationRegistry(CategoryConfigurationRegistry categoryConfigurationRegistry) {
+    public DepreciationAgentImpl(CategoryConfigurationRegistry categoryConfigurationRegistry, DepreciationPreprocessor preprocessor) {
         this.categoryConfigurationRegistry = categoryConfigurationRegistry;
-        return this;
+        this.preprocessor = preprocessor;
     }
 
-    @Autowired
-    public DepreciationAgentImpl setPreprocessor(DepreciationPreprocessor preprocessor) {
-        this.preprocessor = preprocessor;
-        return this;
-    }
+//    @Autowired
+//    public DepreciationAgentImpl setCategoryConfigurationRegistry(CategoryConfigurationRegistry categoryConfigurationRegistry) {
+//        this.categoryConfigurationRegistry = categoryConfigurationRegistry;
+//        return this;
+//    }
+//
+//    @Autowired
+//    public DepreciationAgentImpl setPreprocessor(DepreciationPreprocessor preprocessor) {
+//        this.preprocessor = preprocessor;
+//        return this;
+//    }
 
     @Cacheable("depreciationCalculation")
     @Override
