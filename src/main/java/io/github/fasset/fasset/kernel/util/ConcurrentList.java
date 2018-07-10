@@ -8,15 +8,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Spliterator;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
  * This is a list backed by a concurrent hashmap making it effectively concurrent. The list is also substantially
- * logged with 'tracer' methods to effectively log, trace and debug complex operations
+ * logged with 'tracer' methods to effectively log, trace and debug complex operations.
+ * <br> If the list is supposed to remain empty, invoking the list through the {@link ConcurrentList#empty()} method
+ * ensures the {@link ConcurrentList#add(Object)} and the {@link ConcurrentList#add(int, Object)} methods do not
+ * throw an excetion when called
  *
  * @param <T> Type of elements to be stored in  the list
  */
@@ -27,6 +33,9 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     private final Map<Integer, T> mapList = new ConcurrentHashMap<>();
 
     private int index;
+
+    // means the list is supposed to remain empty
+    private static boolean shouldRemainEmpty = false;
 
     public ConcurrentList() {
 
@@ -46,6 +55,8 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     public static<T> List<T> empty(){
+
+        shouldRemainEmpty = true;
 
         return new ConcurrentList<>();
     }
@@ -192,7 +203,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     @Override
     protected List<T> delegate() {
-        return this;
+        return new CopyOnWriteArrayList<>();
     }
 
     /**
@@ -283,17 +294,29 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean removeAll(Collection<?> collection) {
 
+        if(shouldRemainEmpty){
+            return false;
+        }
+
         return collection.stream().allMatch(this::remove);
     }
 
     @Override
     public boolean addAll(Collection<? extends T> collection) {
 
+        if(shouldRemainEmpty){
+            throw new AdditionToEmptyImmutableListException(index, collection.stream().findFirst().get());
+        }
+
         return collection.stream().allMatch(this::add);
     }
 
     @Override
     public boolean contains(Object object) {
+
+        if(shouldRemainEmpty){
+            return false;
+        }
 
         T val = (T) object;
 
@@ -304,6 +327,10 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     @Override
     public T set(int index, T element){
+
+        if(shouldRemainEmpty){
+            throw new AdditionToEmptyImmutableListException(index, element);
+        }
 
         log.trace("Adding element {} @ index {}", element, index);
 
@@ -327,13 +354,17 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public int indexOf(Object element) {
 
+        if (shouldRemainEmpty){
+            throw new ElementNotFoundException(element);
+        }
+
         log.trace("Checking the index of the element {}", element);
 
         int index = 0;
 
         if (!mapList.containsValue(element)) {
             log.trace("The list does not contain the element {}", element);
-            return 0;
+            throw new ElementNotFoundException(element);
         }
 
         for (int i = 0; i < mapList.size(); i++) {
@@ -344,7 +375,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
             }
         }
 
-        log.trace("");
+        log.trace("Element {} found at index {}", element, index);
 
         return index;
     }
@@ -358,7 +389,17 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     @Override
+    public boolean isEmpty() {
+
+        return mapList.isEmpty();
+    }
+
+    @Override
     public void add(int index, T element) {
+
+        if (shouldRemainEmpty){
+            throw new AdditionToEmptyImmutableListException(index, element);
+        }
 
         log.trace("Adding the element {} to index position {}", element, index);
 
@@ -367,6 +408,10 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     @Override
     public boolean remove(Object object) {
+
+        if (shouldRemainEmpty){
+            throw new ElementNotFoundException((T)object);
+        }
 
         if(!mapList.containsValue((T)object)){
             return false;
@@ -387,6 +432,10 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public T remove(int index) {
 
+        if (shouldRemainEmpty){
+            throw new ElementNotFoundException(index);
+        }
+
         T removable = mapList.remove(index);
 
         log.trace("Element {} has been removed from index {}", removable, index);
@@ -396,6 +445,10 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     @Override
     public T get(int index) {
+
+        if (shouldRemainEmpty){
+            throw new ElementNotFoundException(index);
+        }
 
         T atIndex = mapList.get(index);
 
@@ -407,6 +460,10 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean add(T element) {
 
+        if(shouldRemainEmpty){
+            throw new AdditionToEmptyImmutableListException(index, element);
+        }
+
         try {
             mapList.put(index++, element);
         } catch (RuntimeException e) {
@@ -416,5 +473,74 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         log.trace("The element {} has been added at index {}", element, index);
 
         return mapList.size() >= index;
+    }
+
+    /**
+     * Removes all of the elements of this collection that satisfy the given
+     * predicate.  Errors or runtime exceptions thrown during iteration or by
+     * the predicate are relayed to the caller.
+     *
+     * @param filter a predicate which returns {@code true} for elements to be
+     *               removed
+     * @return {@code true} if any elements were removed
+     * @throws NullPointerException          if the specified filter is null
+     * @throws UnsupportedOperationException if elements cannot be removed
+     *                                       from this collection.  Implementations may throw this exception if a
+     *                                       matching element cannot be removed or if, in general, removal is not
+     *                                       supported.
+     * @implSpec The default implementation traverses all elements of the collection using
+     * its {@link #iterator}.  Each matching element is removed using
+     * {@link Iterator#remove()}.  If the collection's iterator does not
+     * support removal then an {@code UnsupportedOperationException} will be
+     * thrown on the first matching element.
+     * @since 1.8
+     */
+    @Override
+    public boolean removeIf(Predicate<? super T> filter) {
+
+        return this.mapList.values().removeIf(filter);
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> elements) {
+
+        if (index > this.index) {
+            throw new IndexBeyondBoundsException(index, this.index, elements.stream().findFirst().get());
+        }
+
+        log.trace("Adding {} elements from index {}", elements.size(), index);
+
+        return elements.stream().allMatch(element -> this.add0(index, element));
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+
+        final List<T> subList = ConcurrentList.newList();
+
+        int sublistSize = toIndex - fromIndex + 1;
+
+        for (int i = 0; i < sublistSize; i++) {
+
+            subList.add(mapList.get(fromIndex++));
+        }
+
+        return subList;
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+
+        return new CopyOnWriteArrayList<T>(this.mapList.values()).listIterator();
+    }
+
+    private boolean add0(int index, T element) {
+        try {
+            add(index, element);
+        } catch (Exception e){
+            return false;
+        }
+
+        return true;
     }
 }
