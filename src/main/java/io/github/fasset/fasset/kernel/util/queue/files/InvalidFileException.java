@@ -1,6 +1,11 @@
 package io.github.fasset.fasset.kernel.util.queue.files;
 
-public class InvalidFileException extends RuntimeException {
+import io.github.fasset.fasset.kernel.util.queue.MQException;
+
+/**
+ * This is exception when the file uploaded are invalid
+ */
+public class InvalidFileException extends MQException {
 
     /**
      * Constructs a new runtime exception with {@code null} as its
@@ -57,21 +62,4 @@ public class InvalidFileException extends RuntimeException {
         super(cause);
     }
 
-    /**
-     * Constructs a new runtime exception with the specified detail
-     * message, cause, suppression enabled or disabled, and writable
-     * stack trace enabled or disabled.
-     *
-     * @param message            the detail message.
-     * @param cause              the cause.  (A {@code null} value is permitted,
-     *                           and indicates that the cause is nonexistent or unknown.)
-     * @param enableSuppression  whether or not suppression is enabled
-     *                           or disabled
-     * @param writableStackTrace whether or not the stack trace should
-     *                           be writable
-     * @since 1.7
-     */
-    public InvalidFileException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
 }

@@ -24,7 +24,17 @@ import io.github.fasset.fasset.model.files.FileUpload;
  */
 public interface FileUploadService {
 
+    /**
+     *
+     * @param fileUpload This is the file we are about to upload
+     * @return True if the file is already uploaded
+     */
     boolean theFileIsAlreadyUploaded(FileUpload fileUpload);
 
+    /**
+     * This method records the file-upload event
+     *
+     * @param fileUpload This is the file about to be uploaded
+     */
     void recordFileUpload(FileUpload fileUpload);
 }

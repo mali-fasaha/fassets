@@ -26,7 +26,7 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     private final FileValidationService<FileUpload> fileValidationService;
 
     public FileUploadsQueue(FileUploadService fileUploadService) {
-
+        super();
         this.fileUploadService = fileUploadService;
         this.fileValidationService = new FileUploadValidation(fileUploadService);
     }
