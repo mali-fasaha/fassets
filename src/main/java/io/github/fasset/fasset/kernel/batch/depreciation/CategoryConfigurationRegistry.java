@@ -33,7 +33,23 @@ import java.util.Map;
  * Using spring frameworks IOC container, this bean has a map into which the
  * categoryConfigurations are added as they are in the database. The bean also
  * exposes logic for programmatically adding more configurations or editing
- * existing ones
+ * existing ones.
+ * <br>In practixe once invoked and constructed the configuration registry can be read
+ * as shown in the following example
+ * <pre>
+ *     {@code
+ *     log.trace("Calculating depreciation for fixedAsset {}", asset);
+ *
+ *     String categoryName = asset.getCategory();
+ *
+ *     log.trace("Fetching categoryConfiguration instance from repository for designation : {}", categoryName);
+ *
+ *     CategoryConfiguration configuration = categoryConfigurationRegistry.getCategoryConfiguration(categoryName);
+ *     }
+ * </pre>
+ *
+ * <br> Once the configuration has been obtained the program can continue to run using the specific parameters
+ * designed for a given category
  *
  * @author edwin.njeru
  */
@@ -42,7 +58,7 @@ public class CategoryConfigurationRegistry {
 
     private static final Logger log = LoggerFactory.getLogger(CategoryConfigurationRegistry.class);
     private final CategoryConfigurationService categoryConfigurationService;
-    private Map<String, CategoryConfiguration> categoryConfigurationMap = new ConcurrentHashMap<>();
+    private final Map<String, CategoryConfiguration> categoryConfigurationMap = new ConcurrentHashMap<>();
 
     @Autowired
     public CategoryConfigurationRegistry(CategoryConfigurationService categoryConfigurationService) {
@@ -87,7 +103,9 @@ public class CategoryConfigurationRegistry {
 
             log.trace("Refreshing the category configuration mapping...");
 
-            categoryConfigurationService.getAllCategoryConfigurations().stream().map(CategoryConfiguration::getDesignation).forEach(categoryName -> {
+            categoryConfigurationService.getAllCategoryConfigurations()
+                .stream()
+                .map(CategoryConfiguration::getDesignation).forEach(categoryName -> {
                 log.trace("Registering category : {}", categoryName);
                 categoryConfigurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
             });

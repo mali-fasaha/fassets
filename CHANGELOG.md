@@ -4,6 +4,21 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Replaced setter injection in the DepreciationAgentImpl with constructor injection**
+
+
+[b86f019a713319a](https://github.com/mali-fasaha/fassets/commit/b86f019a713319a) Edwin Njeru *2018-07-10 05:31:50*
+
+**Realigned exception inheritance**
+
+
+[23074ffb60821ff](https://github.com/mali-fasaha/fassets/commit/23074ffb60821ff) Edwin Njeru *2018-07-10 05:17:05*
+
+**Minor javadoc amendments**
+
+
+[74a2474ab8259dd](https://github.com/mali-fasaha/fassets/commit/74a2474ab8259dd) Edwin Njeru *2018-07-09 15:48:29*
+
 **Added FileUploadQueuTest**
 
 

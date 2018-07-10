@@ -17,6 +17,7 @@
  */
 package io.github.fasset.fasset.service.impl;
 
+import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.model.CategoryConfiguration;
 import io.github.fasset.fasset.repository.CategoryConfigurationRepository;
 import io.github.fasset.fasset.service.CategoryBriefService;
@@ -53,7 +54,17 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     @Override
     public List<CategoryConfiguration> getAllCategoryConfigurations() {
 
-        return categoryConfigurationRepository.findAll();
+        log.trace("Fetching a list of all categories");
+
+        List<CategoryConfiguration> categoryConfigurations = ConcurrentList.newList();
+
+        categoryConfigurationRepository.findAll()
+            .forEach(c -> {
+                log.trace("Adding category {} to category list", c);
+                categoryConfigurations.add(c);
+            });
+
+        return categoryConfigurations;
     }
 
     /**
