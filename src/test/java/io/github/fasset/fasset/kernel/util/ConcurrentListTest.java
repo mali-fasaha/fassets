@@ -4,10 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -328,4 +331,23 @@ public class ConcurrentListTest {
 
     }
 
+    @Test
+    public void sort() throws Exception {
+
+        List<Integer> intList = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13);
+
+        intList.sort(Comparator.comparing(Integer::intValue));
+
+        List<Integer> expected = new LinkedList<>();
+
+        expected.add(1);
+        expected.add(8);
+        expected.add(12);
+        expected.add(13);
+        expected.add(17);
+        expected.add(23);
+        expected.add(28);
+
+        assertEquals(expected, intList);
+    }
 }

@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -529,9 +531,127 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     @Override
+    public int hashCode() {
+
+        final int[] hashcode = {0};
+
+        mapList.values().forEach(i -> hashcode[0] =+ i.hashCode() * 31);
+
+        return hashcode[0];
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (!(object instanceof List)){
+            return false;
+        }
+
+        List<T> equiv;
+
+        try {
+            equiv = (List<T>) object;
+        } catch (Exception e) {
+            return false;
+        }
+
+        return equiv.containsAll(this.mapList.values());
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> collection) {
+
+        return collection.stream().allMatch(this::contains);
+    }
+
+    @Override
+    public void clear() {
+
+        if(shouldRemainEmpty) {
+
+            return;
+        }
+
+        this.index = 0;
+
+        this.mapList.clear();
+    }
+
+    @Override
     public ListIterator<T> listIterator() {
 
         return new CopyOnWriteArrayList<T>(this.mapList.values()).listIterator();
+    }
+
+    /**
+     * Sorts this list according to the order induced by the specified
+     * {@link Comparator}.
+     * <p>
+     * <p>All elements in this list must be <i>mutually comparable</i> using the
+     * specified comparator (that is, {@code c.compare(e1, e2)} must not throw
+     * a {@code ClassCastException} for any elements {@code e1} and {@code e2}
+     * in the list).
+     * <p>
+     * <p>If the specified comparator is {@code null} then all elements in this
+     * list must implement the {@link Comparable} interface and the elements'
+     * {@linkplain Comparable natural ordering} should be used.
+     * <p>
+     * <p>This list must be modifiable, but need not be resizable.
+     *
+     * @param c the {@code Comparator} used to compare list elements.
+     *          A {@code null} value indicates that the elements'
+     *          {@linkplain Comparable natural ordering} should be used
+     * @throws ClassCastException            if the list contains elements that are not
+     *                                       <i>mutually comparable</i> using the specified comparator
+     * @throws UnsupportedOperationException if the list's list-iterator does
+     *                                       not support the {@code set} operation
+     * @throws IllegalArgumentException      (<a href="Collection.html#optional-restrictions">optional</a>)
+     *                                       if the comparator is found to violate the {@link Comparator}
+     *                                       contract
+     * @implSpec The default implementation obtains an array containing all elements in
+     * this list, sorts the array, and iterates over this list resetting each
+     * element from the corresponding position in the array. (This avoids the
+     * n<sup>2</sup> log(n) performance that would result from attempting
+     * to sort a linked list in place.)
+     * @implNote This implementation is a stable, adaptive, iterative mergesort that
+     * requires far fewer than n lg(n) comparisons when the input array is
+     * partially sorted, while offering the performance of a traditional
+     * mergesort when the input array is randomly ordered.  If the input array
+     * is nearly sorted, the implementation requires approximately n
+     * comparisons.  Temporary storage requirements vary from a small constant
+     * for nearly sorted input arrays to n/2 object references for randomly
+     * ordered input arrays.
+     * <p>
+     * <p>The implementation takes equal advantage of ascending and
+     * descending order in its input array, and can take advantage of
+     * ascending and descending order in different parts of the same
+     * input array.  It is well-suited to merging two or more sorted arrays:
+     * simply concatenate the arrays and sort the resulting array.
+     * <p>
+     * <p>The implementation was adapted from Tim Peters's list sort for Python
+     * (<a href="http://svn.python.org/projects/python/trunk/Objects/listsort.txt">
+     * TimSort</a>).  It uses techniques from Peter McIlroy's "Optimistic
+     * Sorting and Information Theoretic Complexity", in Proceedings of the
+     * Fourth Annual ACM-SIAM Symposium on Discrete Algorithms, pp 467-474,
+     * January 1993.
+     * @since 1.8
+     */
+    @Override
+    public void sort(Comparator<? super T> c) {
+
+        List<T> originalValues = new CopyOnWriteArrayList<>(this.mapList.values());
+
+        originalValues.sort(c);
+
+        this.clear();
+
+        this.addAll(originalValues);
+    }
+
+    @Override
+    public Object[] toArray() {
+
+        return this.mapList.values().toArray();
     }
 
     private boolean add0(int index, T element) {
