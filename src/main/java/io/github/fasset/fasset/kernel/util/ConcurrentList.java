@@ -567,6 +567,8 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public void clear() {
 
+        log.trace("Clearing up the list...");
+
         if(shouldRemainEmpty) {
 
             return;
@@ -577,6 +579,10 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         this.mapList.clear();
     }
 
+    /**
+     *
+     * @return {@link ListIterator<T>} backed by {@link CopyOnWriteArrayList<T>}
+     */
     @Override
     public ListIterator<T> listIterator() {
 

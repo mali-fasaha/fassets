@@ -336,7 +336,13 @@ public class ConcurrentListTest {
 
         List<Integer> intList = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13);
 
+        System.out.println("Original order\n=======");
+        intList.forEach(System.out::println);
+
         intList.sort(Comparator.comparing(Integer::intValue));
+
+        System.out.println("Sorted order\n=======");
+        intList.forEach(System.out::println);
 
         List<Integer> expected = new LinkedList<>();
 
