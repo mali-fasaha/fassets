@@ -78,16 +78,12 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
 
     private final Path rootLocation;
 
-    private final FileUploadService fileUploadService;
-
     private MessageQueue fileUploadsQueue;
-
 
     @Autowired
     public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadService") FileUploadService fileUploadService) {
         rootLocation = Paths.get(storageProperties.getLocation());
         //Todo remove this from this class
-        this.fileUploadService = fileUploadService;
         fileUploadsQueue = new FileUploadsQueue(fileUploadService);
     }
 
