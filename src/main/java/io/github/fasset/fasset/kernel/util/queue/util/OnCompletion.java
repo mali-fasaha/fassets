@@ -5,7 +5,7 @@ package io.github.fasset.fasset.kernel.util.queue.util;
  * the handleCompletion method is called
  */
 @FunctionalInterface
-public interface MCompletion {
+public interface OnCompletion {
 
     /**
      * This is simply a lifecycle method called when the message has been queued successfully

@@ -1,6 +1,7 @@
 package io.github.fasset.fasset.kernel.util;
 
 import com.google.common.collect.ForwardingList;
+import io.github.fasset.fasset.model.files.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,6 +62,15 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         shouldRemainEmpty = true;
 
         return new ConcurrentList<>();
+    }
+
+    public static <T> List<T> of(List<T> listItems) {
+
+        List<T> newList = ConcurrentList.newList();
+
+        newList.addAll(listItems);
+
+        return newList;
     }
 
     public static<T> List<T> of(T t1){
@@ -669,4 +679,5 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
         return true;
     }
+
 }

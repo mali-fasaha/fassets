@@ -1,8 +1,8 @@
 package io.github.fasset.fasset.kernel.util.queue.files;
 
 import io.github.fasset.fasset.kernel.util.queue.AbstractMessageQueue;
-import io.github.fasset.fasset.kernel.util.queue.util.MCompletion;
-import io.github.fasset.fasset.kernel.util.queue.util.MQError;
+import io.github.fasset.fasset.kernel.util.queue.util.OnCompletion;
+import io.github.fasset.fasset.kernel.util.queue.util.OnError;
 import io.github.fasset.fasset.kernel.util.queue.QueueMessage;
 import io.github.fasset.fasset.model.files.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * <br> The implementation uses the {@link FileUploadService} in the push method to record
  * a file in the database.
  * <br> The lifecycle method is also called when the file is uploaded successfully but it is
- * only when the client calls the method {@link this#push(QueueMessage, MCompletion)}
- * <br> The client could also call the method {@link this#push(QueueMessage, MQError, MCompletion)} which will handle
+ * only when the client calls the method {@link this#push(QueueMessage, OnCompletion)}
+ * <br> The client could also call the method {@link this#push(QueueMessage, OnError, OnCompletion)} which will handle
  * both completion and an unexpected messageQueue runtime exception
  *
  * TODO: add validation methods here or create file validation service for the same in another

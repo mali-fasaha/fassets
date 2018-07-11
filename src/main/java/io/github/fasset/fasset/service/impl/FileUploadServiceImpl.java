@@ -17,6 +17,7 @@
  */
 package io.github.fasset.fasset.service.impl;
 
+import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.repository.FileUploadRepository;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
@@ -27,6 +28,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * {@link FileUploadService} implementation
@@ -82,5 +85,14 @@ public class FileUploadServiceImpl implements FileUploadService {
 
             log.info("The file : {} is already uploaded and will not be duplicated", fileUpload.getFileName());
         }
+    }
+
+    /**
+     * @return List<FileUpload> from the repository
+     */
+    @Override
+    public List<FileUpload> uploadedFiles() {
+
+        return ConcurrentList.of(fileUploadRepository.findAll());
     }
 }

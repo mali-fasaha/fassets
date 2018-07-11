@@ -19,6 +19,8 @@ package io.github.fasset.fasset.kernel.util.queue.files;
 
 import io.github.fasset.fasset.model.files.FileUpload;
 
+import java.util.List;
+
 /**
  * Service for data retrieval from database for {@link FileUpload}
  */
@@ -37,4 +39,10 @@ public interface FileUploadService {
      * @param fileUpload This is the file about to be uploaded
      */
     void recordFileUpload(FileUpload fileUpload);
+
+    /**
+     *
+     * @return List<FileUpload> from the repository
+     */
+    List<FileUpload> uploadedFiles();
 }

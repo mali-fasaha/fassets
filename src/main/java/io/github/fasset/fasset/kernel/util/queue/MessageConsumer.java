@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.kernel.util.queue;
 
-import io.github.fasset.fasset.kernel.util.queue.util.MCompletion;
-import io.github.fasset.fasset.kernel.util.queue.util.MQError;
+import io.github.fasset.fasset.kernel.util.queue.util.OnCompletion;
+import io.github.fasset.fasset.kernel.util.queue.util.OnError;
 import io.reactivex.Observable;
 
 import java.util.Optional;
@@ -28,10 +28,10 @@ public interface MessageConsumer<T> {
      *         }
      *     </pre>
      *
-     * @param mqError
+     * @param onError
      * @param completion
      * @return Observable optional queue message. The client will have to subscribe to the
      * item returned to read message from the Queue if any exists
      */
-    Observable<Optional<QueueMessage<T>>> checkMessages(MQError mqError, MCompletion completion);
+    Observable<Optional<QueueMessage<T>>> checkMessages(OnError onError, OnCompletion completion);
 }

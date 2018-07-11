@@ -1,7 +1,7 @@
 package io.github.fasset.fasset.kernel.util.queue;
 
-import io.github.fasset.fasset.kernel.util.queue.util.MCompletion;
-import io.github.fasset.fasset.kernel.util.queue.util.MQError;
+import io.github.fasset.fasset.kernel.util.queue.util.OnCompletion;
+import io.github.fasset.fasset.kernel.util.queue.util.OnError;
 
 /**
  * This interface represents a way for sending messages in the application.
@@ -22,7 +22,7 @@ import io.github.fasset.fasset.kernel.util.queue.util.MQError;
  *
  * <br>
  * <br> Should the client need to carry out an action to show completion lifecycle method,
- * the client could call the {@link MCompletion#handleCompletion()} method as shown:
+ * the client could call the {@link OnCompletion#handleCompletion()} method as shown:
  * <br>
  * <br> <pre>
  *     {@code
@@ -47,22 +47,22 @@ public interface MessageQueue<T> {
      *
      * @param queueMessage Item to be added to the queue
      */
-    void push(QueueMessage<T> queueMessage, MQError mqError);
+    void push(QueueMessage<T> queueMessage, OnError onError);
 
     /**
      * Adds a message to the queue and provides a method to allow the producer to handle 'task completion acts'
      *
      * @param queueMessage Item to be added to the queue
-     * @param mCompletion This is a functional interface for handling task completion tasks
+     * @param onCompletion This is a functional interface for handling task completion tasks
      */
-    void push(QueueMessage<T> queueMessage, MCompletion mCompletion);
+    void push(QueueMessage<T> queueMessage, OnCompletion onCompletion);
 
     /**
      * Adds a message to the queue, and provides a method to allow the producer to handle error
      *
      * @param queueMessage Item to be added to the queue
-     * @param mqError This is a functional interface for handling errors when they occur
-     * @param mCompletion This is a functional interface for handling task completion tasks
+     * @param onError This is a functional interface for handling errors when they occur
+     * @param onCompletion This is a functional interface for handling task completion tasks
      */
-    void push(QueueMessage<T> queueMessage, MQError mqError, MCompletion mCompletion);
+    void push(QueueMessage<T> queueMessage, OnError onError, OnCompletion onCompletion);
 }
