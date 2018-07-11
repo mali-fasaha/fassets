@@ -53,17 +53,17 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         this.preprocessor = preprocessor;
     }
 
-//    @Autowired
-//    public DepreciationAgentImpl setCategoryConfigurationRegistry(CategoryConfigurationRegistry categoryConfigurationRegistry) {
-//        this.categoryConfigurationRegistry = categoryConfigurationRegistry;
-//        return this;
-//    }
-//
-//    @Autowired
-//    public DepreciationAgentImpl setPreprocessor(DepreciationPreprocessor preprocessor) {
-//        this.preprocessor = preprocessor;
-//        return this;
-//    }
+    //    @Autowired
+    //    public DepreciationAgentImpl setCategoryConfigurationRegistry(CategoryConfigurationRegistry categoryConfigurationRegistry) {
+    //        this.categoryConfigurationRegistry = categoryConfigurationRegistry;
+    //        return this;
+    //    }
+    //
+    //    @Autowired
+    //    public DepreciationAgentImpl setPreprocessor(DepreciationPreprocessor preprocessor) {
+    //        this.preprocessor = preprocessor;
+    //        return this;
+    //    }
 
     @Cacheable("depreciationCalculation")
     @Override

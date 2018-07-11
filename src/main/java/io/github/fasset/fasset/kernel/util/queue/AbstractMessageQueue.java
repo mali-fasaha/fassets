@@ -1,3 +1,20 @@
+/*
+ * fassets - Project for light-weight tracking of fixed assets
+ * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package io.github.fasset.fasset.kernel.util.queue;
 
 import io.github.fasset.fasset.kernel.util.queue.util.OnCompletion;
@@ -18,14 +35,15 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  *     {@code
  *     @Override
  *     public void push(QueueMessage<FileUpload> queueMessage) {
- *
+ * <p>
  *         fileUploadService.recordFileUpload(queueMessage.message());
  *     }
  *     }
  *    </pre>
- *
+ * <p>
  * <br> Note:
  * <br> The client above simply implements the queue method push by recording the message to the {@code FileUploadService}
+ *
  * @param <T>
  */
 public abstract class AbstractMessageQueue<T> implements MessageQueue<T> {
@@ -57,8 +75,8 @@ public abstract class AbstractMessageQueue<T> implements MessageQueue<T> {
      * Adds a message to the queue, and provides a method to allow the producer to handle error
      *
      * @param queueMessage Item to be added to the queue
-     * @param onError this is a functional interface design to allow producers to have a custom way
-     *                of handling errors
+     * @param onError      this is a functional interface design to allow producers to have a custom way
+     *                     of handling errors
      */
     @Override
     public void push(QueueMessage<T> queueMessage, OnError onError) {
@@ -78,7 +96,7 @@ public abstract class AbstractMessageQueue<T> implements MessageQueue<T> {
      *
      * @param queueMessage Item to be added to the queue
      * @param onError      This is a functional interface for handling errors when they occur
-     * @param onCompletion  This is a functional interface for handling task completion tasks
+     * @param onCompletion This is a functional interface for handling task completion tasks
      */
     @Override
     public void push(QueueMessage<T> queueMessage, OnError onError, OnCompletion onCompletion) {

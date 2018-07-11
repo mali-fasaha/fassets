@@ -47,7 +47,7 @@ import java.util.Map;
  *     CategoryConfiguration configuration = categoryConfigurationRegistry.getCategoryConfiguration(categoryName);
  *     }
  * </pre>
- *
+ * <p>
  * <br> Once the configuration has been obtained the program can continue to run using the specific parameters
  * designed for a given category
  *
@@ -103,9 +103,7 @@ public class CategoryConfigurationRegistry {
 
             log.trace("Refreshing the category configuration mapping...");
 
-            categoryConfigurationService.getAllCategoryConfigurations()
-                .stream()
-                .map(CategoryConfiguration::getDesignation).forEach(categoryName -> {
+            categoryConfigurationService.getAllCategoryConfigurations().stream().map(CategoryConfiguration::getDesignation).forEach(categoryName -> {
                 log.trace("Registering category : {}", categoryName);
                 categoryConfigurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
             });

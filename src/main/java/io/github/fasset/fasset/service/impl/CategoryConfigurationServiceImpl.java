@@ -58,11 +58,10 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
 
         List<CategoryConfiguration> categoryConfigurations = ConcurrentList.newList();
 
-        categoryConfigurationRepository.findAll()
-            .forEach(c -> {
-                log.trace("Adding category {} to category list", c);
-                categoryConfigurations.add(c);
-            });
+        categoryConfigurationRepository.findAll().forEach(c -> {
+            log.trace("Adding category {} to category list", c);
+            categoryConfigurations.add(c);
+        });
 
         return categoryConfigurations;
     }

@@ -1,3 +1,20 @@
+/*
+ * fassets - Project for light-weight tracking of fixed assets
+ * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package io.github.fasset.fasset.kernel.util;
 
 import com.google.common.collect.ForwardingList;
@@ -30,13 +47,10 @@ import java.util.stream.Stream;
 public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     private static final Logger log = LoggerFactory.getLogger(ConcurrentList.class);
-
-    private final Map<Integer, T> mapList = new ConcurrentHashMap<>();
-
-    private int index;
-
     // means the list is supposed to remain empty
     private static boolean shouldRemainEmpty = false;
+    private final Map<Integer, T> mapList = new ConcurrentHashMap<>();
+    private int index;
 
     public ConcurrentList() {
 
@@ -46,7 +60,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     @SafeVarargs
-    public static<T> List<T> of(T... elements){
+    public static <T> List<T> of(T... elements) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -55,7 +69,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> empty(){
+    public static <T> List<T> empty() {
 
         shouldRemainEmpty = true;
 
@@ -71,7 +85,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1){
+    public static <T> List<T> of(T t1) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -80,7 +94,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2){
+    public static <T> List<T> of(T t1, T t2) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -90,7 +104,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3){
+    public static <T> List<T> of(T t1, T t2, T t3) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -101,7 +115,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3, T t4){
+    public static <T> List<T> of(T t1, T t2, T t3, T t4) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -113,7 +127,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3, T t4, T t5){
+    public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -126,7 +140,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6){
+    public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -140,7 +154,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7){
+    public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -155,7 +169,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8){
+    public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -171,7 +185,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9){
+    public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -188,7 +202,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9, T t10){
+    public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9, T t10) {
 
         final List<T> newList = new ConcurrentList<>();
 
@@ -206,7 +220,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
-    public static<T> List<T> newList(){
+    public static <T> List<T> newList() {
 
         return new ConcurrentList<>();
     }
@@ -304,7 +318,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean removeAll(Collection<?> collection) {
 
-        if(shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             return false;
         }
 
@@ -314,7 +328,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean addAll(Collection<? extends T> collection) {
 
-        if(shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             throw new AdditionToEmptyImmutableListException(index, collection.stream().findFirst().get());
         }
 
@@ -324,7 +338,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean contains(Object object) {
 
-        if(shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             return false;
         }
 
@@ -336,9 +350,9 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     @Override
-    public T set(int index, T element){
+    public T set(int index, T element) {
 
-        if(shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             throw new AdditionToEmptyImmutableListException(index, element);
         }
 
@@ -364,7 +378,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public int indexOf(Object element) {
 
-        if (shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             throw new ElementNotFoundException(element);
         }
 
@@ -407,7 +421,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public void add(int index, T element) {
 
-        if (shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             throw new AdditionToEmptyImmutableListException(index, element);
         }
 
@@ -419,20 +433,17 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean remove(Object object) {
 
-        if (shouldRemainEmpty){
-            throw new ElementNotFoundException((T)object);
+        if (shouldRemainEmpty) {
+            throw new ElementNotFoundException((T) object);
         }
 
-        if(!mapList.containsValue((T)object)){
+        if (!mapList.containsValue((T) object)) {
             return false;
         }
 
-        Integer ok = mapList.keySet()
-            .stream()
-            .filter(k -> {
-                return mapList.get(k) == (T)object;
-            })
-            .findFirst().orElse(0);
+        Integer ok = mapList.keySet().stream().filter(k -> {
+            return mapList.get(k) == (T) object;
+        }).findFirst().orElse(0);
 
         mapList.remove(ok);
 
@@ -442,7 +453,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public T remove(int index) {
 
-        if (shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             throw new ElementNotFoundException(index);
         }
 
@@ -456,7 +467,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public T get(int index) {
 
-        if (shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             throw new ElementNotFoundException(index);
         }
 
@@ -470,7 +481,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean add(T element) {
 
-        if(shouldRemainEmpty){
+        if (shouldRemainEmpty) {
             throw new AdditionToEmptyImmutableListException(index, element);
         }
 
@@ -543,7 +554,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
         final int[] hashcode = {0};
 
-        mapList.values().forEach(i -> hashcode[0] =+ i.hashCode() * 31);
+        mapList.values().forEach(i -> hashcode[0] = +i.hashCode() * 31);
 
         return hashcode[0];
     }
@@ -551,7 +562,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public boolean equals(Object object) {
 
-        if (!(object instanceof List)){
+        if (!(object instanceof List)) {
             return false;
         }
 
@@ -577,7 +588,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
         log.trace("Clearing up the list...");
 
-        if(shouldRemainEmpty) {
+        if (shouldRemainEmpty) {
 
             return;
         }
@@ -588,7 +599,6 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     /**
-     *
      * @return {@link ListIterator<T>} backed by {@link CopyOnWriteArrayList<T>}
      */
     @Override
@@ -671,7 +681,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     private boolean add0(int index, T element) {
         try {
             add(index, element);
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 

@@ -4,6 +4,66 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Removed subscriber framework and completely replaced it with the message queue**
+
+
+[13ccf7f4aa2e11a](https://github.com/mali-fasaha/fassets/commit/13ccf7f4aa2e11a) Edwin Njeru *2018-07-11 14:57:03*
+
+**Removed subscriber framework and completely replaced it with the message queue**
+
+
+[e951011e0524c45](https://github.com/mali-fasaha/fassets/commit/e951011e0524c45) Edwin Njeru *2018-07-11 14:54:48*
+
+**Added spring scheduler and removed the FileUploadsCheckerExecutor**
+
+
+[ffc13d08decb037](https://github.com/mali-fasaha/fassets/commit/ffc13d08decb037) Edwin Njeru *2018-07-11 14:19:41*
+
+**Fixed the nomenclature bug**
+
+
+[1abdeb01b04f088](https://github.com/mali-fasaha/fassets/commit/1abdeb01b04f088) Edwin Njeru *2018-07-11 13:59:42*
+
+**Removed recursive call to store on error in the FileSystemStorageService**
+
+
+[d9ad84b9174b297](https://github.com/mali-fasaha/fassets/commit/d9ad84b9174b297) Edwin Njeru *2018-07-11 13:37:53*
+
+**Converted the fileUploadService in FileStorageService to local variable**
+
+
+[4767a88059b55c5](https://github.com/mali-fasaha/fassets/commit/4767a88059b55c5) Edwin Njeru *2018-07-11 12:11:54*
+
+**Implemented the FileUploadsCheckerExecutorService**
+
+
+[98dcfb5a5a4b015](https://github.com/mali-fasaha/fassets/commit/98dcfb5a5a4b015) Edwin Njeru *2018-07-11 12:10:00*
+
+**Created the FileUploadsConsumer**
+
+
+[7112071ddd62245](https://github.com/mali-fasaha/fassets/commit/7112071ddd62245) Edwin Njeru *2018-07-11 11:02:41*
+
+**Created MessageConsumer interface**
+
+
+[5f8da2429342d60](https://github.com/mali-fasaha/fassets/commit/5f8da2429342d60) Edwin Njeru *2018-07-11 09:29:40*
+
+**Added sort test**
+
+
+[3b6122df5753c59](https://github.com/mali-fasaha/fassets/commit/3b6122df5753c59) Edwin Njeru *2018-07-10 20:57:05*
+
+**Added concurrentListTest**
+
+
+[96058ac6f549e78](https://github.com/mali-fasaha/fassets/commit/96058ac6f549e78) Edwin Njeru *2018-07-10 13:53:40*
+
+**Added the concurrent list utility**
+
+
+[4c6f6998159e53a](https://github.com/mali-fasaha/fassets/commit/4c6f6998159e53a) Edwin Njeru *2018-07-10 08:18:40*
+
 **Replaced setter injection in the DepreciationAgentImpl with constructor injection**
 
 

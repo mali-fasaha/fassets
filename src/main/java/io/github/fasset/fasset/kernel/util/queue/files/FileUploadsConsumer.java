@@ -1,3 +1,20 @@
+/*
+ * fassets - Project for light-weight tracking of fixed assets
+ * Copyright © 2018 Edwin Njeru (mailnjeru@gmail.com)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package io.github.fasset.fasset.kernel.util.queue.files;
 
 import io.github.fasset.fasset.kernel.util.ConcurrentList;
@@ -58,7 +75,7 @@ public class FileUploadsConsumer implements MessageConsumer<List<FileUpload>> {
      *         }
      *     </pre>
      *
-     * @param onError Lifecycle callback in the event of error
+     * @param onError    Lifecycle callback in the event of error
      * @param completion Lifecycle callback in the event of task completion
      * @return Observable optional queue message. The client will have to subscribe to the
      * item returned to read message from the Queue if any exists
@@ -69,11 +86,7 @@ public class FileUploadsConsumer implements MessageConsumer<List<FileUpload>> {
         List<FileUpload> uploads = null;
 
         try {
-            uploads = fileUploadService
-                .uploadedFiles()
-                .stream()
-                .filter(i -> !i.isDeserialized())
-                .collect(ImmutableListCollector.toImmutableFastList());
+            uploads = fileUploadService.uploadedFiles().stream().filter(i -> !i.isDeserialized()).collect(ImmutableListCollector.toImmutableFastList());
         } catch (MQException e) {
 
             // call error event handler

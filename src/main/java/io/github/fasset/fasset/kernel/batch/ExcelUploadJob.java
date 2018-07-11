@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
  * This object bootstraps an excel upload job after the file has been uploaded to the server
  */
 @Component("excelUploadJob")
-public class ExcelUploadJob{
+public class ExcelUploadJob {
 
     private static final Logger log = LoggerFactory.getLogger(ExcelUploadJob.class);
 

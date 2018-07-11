@@ -25,7 +25,6 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
-import java.util.Objects;
 
 /**
  * This object represents a row of record of an Excel file that has been uploaded to the server
@@ -97,11 +96,8 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
     @Override
     public String toJson() {
 
-        return "{\n" +
-            "\"fileName\":\""+ fileName + "\",\n"+
-            "\"month\":\""+ month.toString() + "\",\n"+
-            "\"timeUploaded\":\""+ timeUploaded.toString() + "\",\n"+
-            "\"deserialized\":\""+ deserialized + "\"\n}";
+        return "{\n" + "\"fileName\":\"" + fileName + "\",\n" + "\"month\":\"" + month.toString() + "\",\n" + "\"timeUploaded\":\"" + timeUploaded.toString() + "\",\n" + "\"deserialized\":\"" +
+            deserialized + "\"\n}";
     }
 
     @Override

@@ -18,9 +18,9 @@
 package io.github.fasset.fasset.service.impl;
 
 import io.github.fasset.fasset.kernel.util.ConcurrentList;
+import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
 import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.repository.FileUploadRepository;
-import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -18,7 +18,6 @@
 package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.model.FixedAsset;
-import org.springframework.context.annotation.DependsOn;
 
 /**
  * Generates the name of an existing account, if one exists, or the name of one to be created.
