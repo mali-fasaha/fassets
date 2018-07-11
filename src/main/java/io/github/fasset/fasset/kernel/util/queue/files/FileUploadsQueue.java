@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * both completion and an unexpected messageQueue runtime exception
  *
  * TODO: add validation methods here or create file validation service for the same in another
- * // Todo Add duplicate upload checks service
+ * // Todo Add duplicate upload checks service, with hashing algorithms
  * interface
  */
 public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {

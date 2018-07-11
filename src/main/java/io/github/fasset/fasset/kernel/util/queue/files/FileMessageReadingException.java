@@ -1,6 +1,8 @@
 package io.github.fasset.fasset.kernel.util.queue.files;
 
-import io.github.fasset.fasset.kernel.util.queue.MQException; /**
+import io.github.fasset.fasset.kernel.util.queue.MQException;
+
+/**
  * Exception is thrown while trying to read data from a qeue specifically concerning a FileUpload
  */
 class FileMessageReadingException extends RuntimeException {
@@ -12,7 +14,7 @@ class FileMessageReadingException extends RuntimeException {
      */
     FileMessageReadingException() {
 
-        super(String.format("Sorry, could no read the file from the queue"));
+        super("Sorry, could no read the file from the queue");
     }
 
     FileMessageReadingException(MQException e) {

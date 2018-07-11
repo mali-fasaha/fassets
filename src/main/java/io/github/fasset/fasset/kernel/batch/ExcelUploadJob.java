@@ -19,9 +19,6 @@ package io.github.fasset.fasset.kernel.batch;
 
 import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
-import io.github.ghacupha.subscriber.AbstractSubscriber;
-import io.github.ghacupha.subscriber.Subscriber;
-import io.github.ghacupha.subscriber.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -38,7 +35,7 @@ import java.time.LocalDateTime;
  * This object bootstraps an excel upload job after the file has been uploaded to the server
  */
 @Component("excelUploadJob")
-public class ExcelUploadJob extends AbstractSubscriber implements Subscriber {
+public class ExcelUploadJob{
 
     private static final Logger log = LoggerFactory.getLogger(ExcelUploadJob.class);
 
@@ -48,7 +45,6 @@ public class ExcelUploadJob extends AbstractSubscriber implements Subscriber {
 
     @Autowired
     public ExcelUploadJob(JobLauncher jobLauncher, @Qualifier("importExcelJob") Job importExcelJob) {
-        super(ExcelUploadJob.class.getName());
         this.jobLauncher = jobLauncher;
         this.importExcelJob = importExcelJob;
     }
@@ -58,7 +54,7 @@ public class ExcelUploadJob extends AbstractSubscriber implements Subscriber {
      *
      * @param filePath from which we are reading the business domain connect
      */
-    private void uploadExcelFile(String filePath, String month) throws BatchJobExecutionException {
+    public void uploadExcelFile(String filePath, String month) throws BatchJobExecutionException {
 
         log.info("Uploading excel file on the path : {}", filePath);
 
@@ -97,13 +93,4 @@ public class ExcelUploadJob extends AbstractSubscriber implements Subscriber {
         }
     }
 
-    @Override
-    protected void consumeUpdate(Update update) {
-
-        FileUploadNotification message = (FileUploadNotification) update.getPayload();
-
-        log.debug("File upload : {} has been received by the excelUploadJob for processing", message);
-
-        listenForMessages(message);
-    }
 }

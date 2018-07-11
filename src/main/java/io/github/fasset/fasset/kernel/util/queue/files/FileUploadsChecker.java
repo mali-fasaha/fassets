@@ -1,5 +1,7 @@
 package io.github.fasset.fasset.kernel.util.queue.files;
 
+import io.github.fasset.fasset.kernel.batch.ExcelUploadJob;
+import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.kernel.util.queue.MQException;
@@ -9,6 +11,7 @@ import io.github.fasset.fasset.model.files.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -28,13 +31,15 @@ public class FileUploadsChecker implements Runnable {
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     private final MessageConsumer<List<FileUpload>> fileUploadsConsumer;
+    private final ExcelUploadJob excelUploadJob;
 
 
     //Todo Import and add ExcelUploadJob to execution
 
     @Autowired
-    public FileUploadsChecker(MessageConsumer<List<FileUpload>> fileUploadsConsumer) {
+    public FileUploadsChecker(MessageConsumer<List<FileUpload>> fileUploadsConsumer, @Qualifier("excelUploadJob") ExcelUploadJob excelUploadJob) {
         this.fileUploadsConsumer = fileUploadsConsumer;
+        this.excelUploadJob = excelUploadJob;
     }
 
     private static void handleError(MQException e) {
@@ -64,6 +69,8 @@ public class FileUploadsChecker implements Runnable {
 
         List<FileUpload> fileUploads = ConcurrentList.newList();
 
+        lock.writeLock().lock();
+
         try {
             fileUploadsConsumer.checkMessages(FileUploadsChecker::handleError, FileUploadsChecker::handleCompletion)
                 .subscribe(
@@ -72,7 +79,6 @@ public class FileUploadsChecker implements Runnable {
                             .message()
                             .stream()
                             .peek(fileUpload -> {
-                                lock.writeLock().lock();
                                 fileUpload.setDeserialized(true);
                             })
                             .collect(ImmutableListCollector.toImmutableFastList())
@@ -84,5 +90,14 @@ public class FileUploadsChecker implements Runnable {
 
         }
 
+        fileUploads.forEach(f -> {
+            try {
+                excelUploadJob.uploadExcelFile(f.getFileName(), f.getMonth().toString());
+            } catch (BatchJobExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
+
 }

@@ -374,12 +374,6 @@
             <artifactId>time-point</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <!-- //https://github.com/ghacupha/observer -->
-        <dependency>
-            <groupId>io.github.ghacupha</groupId>
-            <artifactId>subscriber</artifactId>
-            <version>0.0.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
         <dependency>
             <groupId>io.reactivex.rxjava2</groupId>

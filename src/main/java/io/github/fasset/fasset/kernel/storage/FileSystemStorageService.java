@@ -24,8 +24,6 @@ import io.github.fasset.fasset.kernel.util.queue.MessageQueue;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue;
 import io.github.fasset.fasset.model.files.FileUpload;
-import io.github.ghacupha.subscriber.SimpleSubscription;
-import io.github.ghacupha.subscriber.SubscriptionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +66,7 @@ import static io.github.fasset.fasset.kernel.util.FileSecurityChecks.relativePat
  * <br />
  */
 @Service("fileSystemStorageService")
-public class FileSystemStorageService extends SimpleSubscription implements SubscriptionService, StorageService {
+public class FileSystemStorageService implements StorageService {
 
     private static final Logger log = LoggerFactory.getLogger(FileSystemStorageService.class);
 

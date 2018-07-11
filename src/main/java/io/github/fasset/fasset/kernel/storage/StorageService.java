@@ -17,7 +17,6 @@
  */
 package io.github.fasset.fasset.kernel.storage;
 
-import io.github.ghacupha.subscriber.SubscriptionService;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +26,7 @@ import java.util.stream.Stream;
 /**
  * Provides storage service to clients for files uploads
  */
-public interface StorageService extends SubscriptionService {
+public interface StorageService {
 
     /**
      * To initialize storage and create storage directory
