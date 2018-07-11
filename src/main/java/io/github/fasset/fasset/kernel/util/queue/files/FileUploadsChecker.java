@@ -28,6 +28,9 @@ public class FileUploadsChecker implements Runnable {
 
     private final MessageConsumer<List<FileUpload>> fileUploadsConsumer;
 
+
+    //Todo Import and add ExcelUploadJob to execution
+
     @Autowired
     public FileUploadsChecker(MessageConsumer<List<FileUpload>> fileUploadsConsumer) {
         this.fileUploadsConsumer = fileUploadsConsumer;
@@ -38,7 +41,7 @@ public class FileUploadsChecker implements Runnable {
     }
 
     private static void handleCompletion() {
-        log.info("A file has been pulled from the system for deserialization");
+        log.info("A file has been inquired successfully from the system");
     }
 
     /**

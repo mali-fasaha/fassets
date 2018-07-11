@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 @Service("fileUploadsExecutorService")
 public class FileUploadsCheckerExecutorService {
 
-    ExecutorService executorService = Executors.newFixedThreadPool(3);
+    private ExecutorService executorService = Executors.newFixedThreadPool(3);
 
 
     private final FileUploadsChecker fileUploadsChecker;
@@ -27,7 +27,9 @@ public class FileUploadsCheckerExecutorService {
     @PostConstruct
     private void init(){
 
-        executorService.submit(fileUploadsChecker);
+        //executorService.submit(fileUploadsChecker);
+        fileUploadsChecker.run();
+
     }
 
 }

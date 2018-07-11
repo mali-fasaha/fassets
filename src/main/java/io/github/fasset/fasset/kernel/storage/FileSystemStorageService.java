@@ -18,15 +18,12 @@
 package io.github.fasset.fasset.kernel.storage;
 
 import io.github.fasset.fasset.config.StorageProperties;
-import io.github.fasset.fasset.kernel.notifications.FileUploadNotification;
-import io.github.fasset.fasset.kernel.util.FileSecurityChecks;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
-import io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue;
-import io.github.fasset.fasset.kernel.util.queue.files.FileValidationService;
 import io.github.fasset.fasset.kernel.util.queue.MessageQueue;
-import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
+import io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue;
+import io.github.fasset.fasset.model.files.FileUpload;
 import io.github.ghacupha.subscriber.SimpleSubscription;
 import io.github.ghacupha.subscriber.SubscriptionService;
 import org.slf4j.Logger;
@@ -116,16 +113,23 @@ public class FileSystemStorageService extends SimpleSubscription implements Subs
             }
 
             // TODO review the need for the FileUploadNotification DTO
-            fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()), (e) -> {
+            /*fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()), (e) -> {
                 //TODO check if this try again method is shooting the hypothetical foot
                 store(file);
+            }, () -> {
+                fileUpload.setTimeUploaded(LocalDateTime.now());
+                log.debug("The file {} has been uploaded", fileUpload.getFileName());
+            });*/
+
+            fileUploadsQueue.push(() -> fileUpload, (e) -> {
+                throw new FileSystemStorageException(file, fileUpload, e);
             }, () -> {
                 fileUpload.setTimeUploaded(LocalDateTime.now());
                 log.debug("The file {} has been uploaded", fileUpload.getFileName());
             });
 
             //TODO do away with this synchronized approach
-            postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
+            //postUpdate(() -> new FileUploadNotification(fileUpload.getFileName(), fileUpload.getMonth().toString(), fileUpload.getTimeUploaded().toString()));
         }
 
     }
