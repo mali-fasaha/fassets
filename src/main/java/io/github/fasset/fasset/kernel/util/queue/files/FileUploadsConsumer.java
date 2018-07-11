@@ -11,6 +11,7 @@ import io.github.fasset.fasset.model.files.FileUpload;
 import io.reactivex.Observable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ import java.util.Optional;
  * interfaces will have taken back control of the servers and the controllers will have returned a response
  * for the filing request.
  */
+@Component("fileUploadsConsumer")
 public class FileUploadsConsumer implements MessageConsumer<List<FileUpload>> {
 
 

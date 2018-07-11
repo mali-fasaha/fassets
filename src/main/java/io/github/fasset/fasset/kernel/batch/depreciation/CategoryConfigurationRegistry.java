@@ -88,7 +88,7 @@ public class CategoryConfigurationRegistry {
         categoryConfigurationMap.put(categoryName, categoryConfiguration);
     }
 
-    boolean categoryConfigurationRegistryDoesNotContain(String categoryName) {
+    private boolean categoryConfigurationRegistryDoesNotContain(String categoryName) {
         return !categoryConfigurationMap.containsKey(categoryName);
     }
 
@@ -96,7 +96,7 @@ public class CategoryConfigurationRegistry {
         return categoryConfigurationMap.isEmpty();
     }
 
-    @PostConstruct
+    //@PostConstruct // still debugging...
     private void updateConfigurationRegistry() {
 
         if (categoryConfigurationMap.isEmpty()) {
