@@ -9,6 +9,7 @@ import io.github.fasset.fasset.model.files.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class FileUploadsChecker implements Runnable {
     }
 
     private static void handleCompletion() {
-        log.info("A file has been inquired successfully from the system");
+        log.trace("A file has been inquired successfully from the system");
     }
 
     /**
@@ -55,8 +56,11 @@ public class FileUploadsChecker implements Runnable {
      *
      * @see Thread#run()
      */
+    @Scheduled(fixedRate = 5000)
     @Override
     public void run() {
+
+        log.trace("Checking for new files in the system...");
 
         List<FileUpload> fileUploads = ConcurrentList.newList();
 
