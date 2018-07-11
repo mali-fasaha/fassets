@@ -96,7 +96,7 @@ public class CategoryConfigurationRegistry {
         return categoryConfigurationMap.isEmpty();
     }
 
-    //@PostConstruct // still debugging...
+    @PostConstruct // still debugging...
     private void updateConfigurationRegistry() {
 
         if (categoryConfigurationMap.isEmpty()) {

@@ -44,12 +44,12 @@ import java.util.Objects;
 public class DomainModel<U> {
 
 
+    @Column(name = "id", updatable = false, nullable = false)
     @GenericGenerator(name = "sequenceGenerator", strategy = "enhanced-sequence",
         parameters = {@org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo"), @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
             @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @Id
-    @Column(name = "nomenclature", updatable = false, nullable = false)
     private int id;
 
     @Version

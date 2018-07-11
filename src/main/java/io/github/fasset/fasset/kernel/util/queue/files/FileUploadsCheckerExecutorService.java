@@ -27,8 +27,8 @@ public class FileUploadsCheckerExecutorService {
     @PostConstruct
     private void init(){
 
-        //executorService.submit(fileUploadsChecker);
-        fileUploadsChecker.run();
+        executorService.submit(fileUploadsChecker);
+        //fileUploadsChecker.run();
 
     }
 
