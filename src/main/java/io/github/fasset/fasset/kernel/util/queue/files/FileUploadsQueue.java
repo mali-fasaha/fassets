@@ -57,9 +57,19 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
      * @param queueMessage Item to be added to the queue
      */
     @Override
-    public void push(QueueMessage<FileUpload> queueMessage) {
+    public void push(QueueMessage<FileUpload> queueMessage, boolean allowDuplicates) {
 
-        fileUploadService.recordFileUpload(fileValidationService.validate(queueMessage.message()));
+        if (allowDuplicates) {
+
+            fileUploadService.recordFileUpload(fileValidationService.allowDuplicates().validate(queueMessage.message()));
+
+        } else {
+
+            fileUploadService.recordFileUpload(fileValidationService.validate(queueMessage.message()));
+        }
+
+
     }
+
 
 }

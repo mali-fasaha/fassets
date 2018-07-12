@@ -28,12 +28,15 @@ import org.slf4j.LoggerFactory;
  */
 public class FileUploadValidation implements FileValidationService<FileUpload> {
 
+    private boolean allowDuplicates;
+
     private final FileUploadService fileUploadService;
 
     private static final Logger log = LoggerFactory.getLogger(FileUploadValidation.class);
 
     FileUploadValidation(FileUploadService fileUploadService) {
         this.fileUploadService = fileUploadService;
+        this.allowDuplicates = false;
     }
 
     @Override
@@ -45,12 +48,20 @@ public class FileUploadValidation implements FileValidationService<FileUpload> {
             throw new InvalidFileException("Sorry, the file provided for upload into the system is null");
         }
 
-        if (fileUploadService.theFileIsAlreadyUploaded(fileUpload)) {
+        if (fileUploadService.theFileIsAlreadyUploaded(fileUpload) && !allowDuplicates) {
             throw new UploadedFileException(fileUpload);
-        } else if (fileUpload.isDeserialized()) {
+        } else if (fileUpload.isDeserialized() && !allowDuplicates) {
             throw new DeserializedFileException(fileUpload);
         }
 
         return fileUpload;
+    }
+
+    @Override
+    public FileUploadValidation allowDuplicates() {
+
+        this.allowDuplicates = true;
+
+        return this;
     }
 }

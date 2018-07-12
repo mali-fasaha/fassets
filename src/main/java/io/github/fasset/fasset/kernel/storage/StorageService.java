@@ -67,4 +67,12 @@ public interface StorageService {
      * Deletes all files in the storage
      */
     void deleteAll();
+
+    /**
+     * Calling this method in the storage service should allow clients to upload duplicate files which
+     * might be helpful for instance when doing tests
+     *
+     * @return This object after it has been changed
+     */
+    StorageService allowDuplicateUploads();
 }

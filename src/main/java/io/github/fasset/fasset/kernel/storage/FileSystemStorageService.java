@@ -73,6 +73,8 @@ public class FileSystemStorageService implements StorageService {
 
     private final Path rootLocation;
 
+    private boolean allowDuplicates;
+
     private MessageQueue fileUploadsQueue;
 
     @Autowired
@@ -80,6 +82,8 @@ public class FileSystemStorageService implements StorageService {
         rootLocation = Paths.get(storageProperties.getLocation());
         //Todo remove this from this class
         fileUploadsQueue = new FileUploadsQueue(fileUploadService);
+
+        this.allowDuplicates = false;
     }
 
     /**
@@ -119,7 +123,8 @@ public class FileSystemStorageService implements StorageService {
                 log.debug("The file {} has been uploaded", fileUpload.getFileName());
             });*/
 
-            fileUploadsQueue.push(() -> fileUpload, (e) -> {
+            // Add allow duplicates option in property configuration
+            fileUploadsQueue.push(() -> fileUpload, false, (e) -> {
                 throw new FileSystemStorageException(file, fileUpload, e);
             }, () -> {
                 fileUpload.setTimeUploaded(LocalDateTime.now());
@@ -235,5 +240,19 @@ public class FileSystemStorageService implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
+    }
+
+    /**
+     * Calling this method in the storage service should allow clients to upload duplicate files which
+     * might be helpful for instance when doing tests
+     *
+     * @return This object after it has been changed
+     */
+    @Override
+    public StorageService allowDuplicateUploads() {
+
+        this.allowDuplicates = true;
+
+        return this;
     }
 }

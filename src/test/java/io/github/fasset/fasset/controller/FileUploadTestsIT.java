@@ -33,6 +33,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import static org.mockito.BDDMockito.given;
@@ -83,6 +84,8 @@ public class FileUploadTestsIT {
     public void shouldSaveUploadedFile() throws Exception {
         MockMultipartFile multipartFile = new MockMultipartFile("file", "Data1.xlsx", "text/plain", "Spring Framework".getBytes());
         this.mockMvc.perform(multipart("/files").file(multipartFile)).andExpect(status().isFound()).andExpect(header().string("Location", "/files"));
+
+        this.fileSystemStorageService.allowDuplicateUploads();
 
         this.fileSystemStorageService.store(multipartFile);
     }

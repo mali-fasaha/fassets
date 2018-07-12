@@ -56,30 +56,34 @@ public interface MessageQueue<T> {
      * Adds a message to the queue
      *
      * @param queueMessage Item to be added to the queue
+     * @param allowDuplicates whether or not the service should allow duplicate messages
      */
-    void push(QueueMessage<T> queueMessage);
+    public abstract void push(QueueMessage<T> queueMessage, boolean allowDuplicates);
 
     /**
      * Adds a message to the queue, and provides a method to allow the producer to handle error
      *
      * @param queueMessage Item to be added to the queue
+     * @param allowDuplicates whether or not the service should allow duplicate messages
      */
-    void push(QueueMessage<T> queueMessage, OnError onError);
+    void push(QueueMessage<T> queueMessage, boolean allowDuplicates, OnError onError);
 
     /**
      * Adds a message to the queue and provides a method to allow the producer to handle 'task completion acts'
      *
      * @param queueMessage Item to be added to the queue
+     * @param allowDuplicates whether or not the service should allow duplicate messages
      * @param onCompletion This is a functional interface for handling task completion tasks
      */
-    void push(QueueMessage<T> queueMessage, OnCompletion onCompletion);
+    void push(QueueMessage<T> queueMessage, boolean allowDuplicates, OnCompletion onCompletion);
 
     /**
      * Adds a message to the queue, and provides a method to allow the producer to handle error
      *
      * @param queueMessage Item to be added to the queue
+     * @param allowDuplicates whether or not the service should allow duplicate messages
      * @param onError      This is a functional interface for handling errors when they occur
      * @param onCompletion This is a functional interface for handling task completion tasks
      */
-    void push(QueueMessage<T> queueMessage, OnError onError, OnCompletion onCompletion);
+    void push(QueueMessage<T> queueMessage, boolean allowDuplicates, OnError onError, OnCompletion onCompletion);
 }

@@ -27,4 +27,7 @@ import io.github.fasset.fasset.model.files.FileUpload;
 public interface FileValidationService<T> {
 
     T validate(FileUpload fileUpload) throws InvalidFileException;
+
+    FileValidationService<T> allowDuplicates();
+
 }
