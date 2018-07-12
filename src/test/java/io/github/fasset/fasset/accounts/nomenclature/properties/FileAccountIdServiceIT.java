@@ -30,7 +30,7 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 
-class FileAccountIdServiceIT {
+public class FileAccountIdServiceIT {
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "Electronic Equipment", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600, "KES"), "COMPUTERS", "987", LocalDate.of(2018, 2, 13), "abc02", Money.of(13.42, "KES"));

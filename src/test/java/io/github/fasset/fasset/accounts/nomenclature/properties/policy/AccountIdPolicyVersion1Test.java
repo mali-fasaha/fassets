@@ -25,12 +25,12 @@ import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 
-class AccountIdPolicyVersion1Test {
+public class AccountIdPolicyVersion1Test {
 
     private AccountIdPolicy accountIdPolicy;
 
     @Before
-    void setUp() {
+    public void setUp() {
         accountIdPolicy = new AccountIdPolicyVersion1("account-id");
     }
 

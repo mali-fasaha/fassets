@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Fixed some failing IT tests**
+
+
+[db792bb0693f5f5](https://github.com/mali-fasaha/fassets/commit/db792bb0693f5f5) Edwin Njeru *2018-07-12 11:58:17*
+
 **Changelog**
 
 

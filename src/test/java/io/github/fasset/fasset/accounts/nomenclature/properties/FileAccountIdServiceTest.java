@@ -32,13 +32,14 @@ import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUIS
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 /**
  * TODO mock out dependencies
  */
-class FileAccountIdServiceTest {
+public class FileAccountIdServiceTest {
 
-    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "Electronic Equipment", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
+    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "ELECTRONIC EQUIPMENT", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600, "KES"), "COMPUTERS", "987", LocalDate.of(2018, 2, 13), "abc02", Money.of(13.42, "KES"));
     private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156, "KES"), "FURNITURE & FITTINGS", "010", LocalDate.of(2018, 1, 13), "abc03", Money.of(19.24, "KES"));
     private final static FixedAsset zemana = new FixedAsset("Zemana Antilogger", Money.of(180, "KES"), "COMPUTER SOFTWARE", "986", LocalDate.of(2017, 12, 15), "abc48", Money.of(50.32, "KES"));
@@ -51,6 +52,19 @@ class FileAccountIdServiceTest {
     public void setUp() {
 
         AccountIdPolicy accountIdPolicy = Mockito.mock(AccountIdPolicy.class);
+
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("ELECTRONIC EQUIPMENT");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "COMPUTERS")).thenReturn("COMPUTERS");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "FURNITURE & FITTINGS")).thenReturn("FURNITURE AND FITTINGS");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "COMPUTER SOFTWARE")).thenReturn("COMPUTER SOFTWARE");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "MOTOR VEHICLES")).thenReturn("MOTOR VEHICLES");
+        when(accountIdPolicy.accountName(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn("OFFICE RENOVATION");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "COMPUTERS")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "FURNITURE & FITTINGS")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "COMPUTER SOFTWARE")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("SUNDRY CREDITORS");
+        when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("SUNDRY CREDITORS");
 
         fileAccountIdService = new FileAccountIdService(accountIdPolicy);
     }
