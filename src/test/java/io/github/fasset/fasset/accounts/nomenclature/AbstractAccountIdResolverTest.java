@@ -21,12 +21,13 @@ import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdSer
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * We can't instantiate an abstract class but we can use one of it's instances as subclasses to test its methods
@@ -40,7 +41,7 @@ class AbstractAccountIdResolverTest {
     private final static FixedAsset kca = new FixedAsset("KCA 265G", Money.of(950, "KES"), "MOTOR VEHICLES", "996", LocalDate.of(2018, 1, 5), "abc23", Money.of(500.12, "KES"));
     private static FileAccountIdService fileAccountIdService;
 
-    @BeforeAll
+    @Before
     private static void setUp() {
 
         fileAccountIdService = new FileAccountIdService(new AccountIdPolicyVersion1("account-id"));

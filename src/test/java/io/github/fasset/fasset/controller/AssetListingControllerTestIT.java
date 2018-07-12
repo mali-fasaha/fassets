@@ -82,8 +82,8 @@ public class AssetListingControllerTestIT {
 
         int id = persistedAsset.getId();
 
-        this.mockMvc.perform(get("/listing/assets/data/{nomenclature}", id)).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(jsonPath("nomenclature", is(id))).andExpect(jsonPath("solId", is("001"))).andExpect(jsonPath("barcode", is("abc"))).andExpect(jsonPath("assetDescription", is("Cooker")))
+        this.mockMvc.perform(get("/listing/assets/data/{id}", id)).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(jsonPath("id", is(id))).andExpect(jsonPath("solId", is("001"))).andExpect(jsonPath("barcode", is("abc"))).andExpect(jsonPath("assetDescription", is("Cooker")))
             .andExpect(jsonPath("category", is("Electronics"))).andExpect(jsonPath("purchaseCost", is(200.0))).andExpect(jsonPath("netBookValue", is(150.0)))
             .andExpect(jsonPath("purchaseDate[0]", is(purchaseDate.getYear()))).andExpect(jsonPath("purchaseDate[1]", is(purchaseDate.getMonthValue())))
             .andExpect(jsonPath("purchaseDate[2]", is(purchaseDate.getDayOfMonth()))).andDo(print());
@@ -110,11 +110,11 @@ public class AssetListingControllerTestIT {
 
 
         this.mockMvc.perform(get("/listing/assets/data")).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(2)))
-            .andExpect(jsonPath("$[0].nomenclature", is(id))).andExpect(jsonPath("$[0].solId", is("001"))).andExpect(jsonPath("$[0].barcode", is("abc")))
+            .andExpect(jsonPath("$[0].id", is(id))).andExpect(jsonPath("$[0].solId", is("001"))).andExpect(jsonPath("$[0].barcode", is("abc")))
             .andExpect(jsonPath("$[0].assetDescription", is("Cooker"))).andExpect(jsonPath("$[0].purchaseDate[0]", is(purchaseDate.getYear())))
             .andExpect(jsonPath("$[0].purchaseDate[1]", is(purchaseDate.getMonthValue()))).andExpect(jsonPath("$[0].purchaseDate[2]", is(purchaseDate.getDayOfMonth())))
             .andExpect(jsonPath("$[0].category", is("Electronics"))).andExpect(jsonPath("$[0].purchaseCost", is(200.0))).andExpect(jsonPath("$[0].netBookValue", is(150.0)))
-            .andExpect(jsonPath("$[1].nomenclature", is(id2))).andExpect(jsonPath("$[1].solId", is("003"))).andExpect(jsonPath("$[1].barcode", is("nbc")))
+            .andExpect(jsonPath("$[1].id", is(id2))).andExpect(jsonPath("$[1].solId", is("003"))).andExpect(jsonPath("$[1].barcode", is("nbc")))
             .andExpect(jsonPath("$[1].assetDescription", is("Laptop"))).andExpect(jsonPath("$[1].purchaseDate[0]", is(purchaseDate.getYear())))
             .andExpect(jsonPath("$[1].purchaseDate[1]", is(purchaseDate.getMonthValue()))).andExpect(jsonPath("$[1].purchaseDate[2]", is(purchaseDate.getDayOfMonth())))
             .andExpect(jsonPath("$[1].category", is("Computers"))).andExpect(jsonPath("$[1].purchaseCost", is(60000.0))).andExpect(jsonPath("$[1].netBookValue", is(58500.0))).andDo(print());

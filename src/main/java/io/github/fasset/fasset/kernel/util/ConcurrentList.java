@@ -48,13 +48,24 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     private static final Logger log = LoggerFactory.getLogger(ConcurrentList.class);
     // means the list is supposed to remain empty
-    private static boolean shouldRemainEmpty = false;
+    private static boolean shouldRemainEmpty;
     private final Map<Integer, T> mapList = new ConcurrentHashMap<>();
     private int index;
 
     public ConcurrentList() {
 
         index = 0;
+
+        shouldRemainEmpty = false;
+
+        log.trace("New list initialised {}", this);
+    }
+
+    private ConcurrentList(boolean shouldRemainEmpty) {
+
+        index = 0;
+
+        this.shouldRemainEmpty = shouldRemainEmpty;
 
         log.trace("New list initialised {}", this);
     }
@@ -71,9 +82,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     public static <T> List<T> empty() {
 
-        shouldRemainEmpty = true;
-
-        return new ConcurrentList<>();
+        return new ConcurrentList<>(true);
     }
 
     public static <T> List<T> of(List<T> listItems) {
@@ -87,7 +96,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
     public static <T> List<T> of(T t1) {
 
-        final List<T> newList = new ConcurrentList<>();
+        final List<T> newList = ConcurrentList.newList();
 
         newList.add(t1);
 
@@ -221,7 +230,6 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     public static <T> List<T> newList() {
-
         return new ConcurrentList<>();
     }
 
@@ -246,7 +254,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     @Override
     public Stream<T> stream() {
 
-        return this.mapList.values().stream();
+        return new CopyOnWriteArrayList<>(this.mapList.values()).stream();
     }
 
     /**

@@ -20,18 +20,16 @@ package io.github.fasset.fasset.accounts.nomenclature.properties;
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.time.LocalDate;
 
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-@DisplayName("FileAccountIdService unit-test")
 class FileAccountIdServiceIT {
 
     private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "Electronic Equipment", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
@@ -43,14 +41,14 @@ class FileAccountIdServiceIT {
         new FixedAsset("Office Partitioning Works", Money.of(1500, "KES"), "OFFICE RENOVATION", "978", LocalDate.of(2018, 1, 12), "abc56", Money.of(50.13, "KES"));
     private static FileAccountIdService fileAccountIdService;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
 
         fileAccountIdService = new FileAccountIdService(new AccountIdPolicyVersion1("account-id"));
     }
 
     @Test
-    void accountName() {
+    public void accountName() {
 
         assertEquals("SUNDRY CREDITORS", fileAccountIdService.accountName(ACQUISITION, CREDIT, radio));
         assertEquals("ELECTRONIC EQUIPMENT", fileAccountIdService.accountName(ACQUISITION, DEBIT, radio));
@@ -67,7 +65,7 @@ class FileAccountIdServiceIT {
     }
 
     @Test
-    void accountPlaceHolder() throws Exception {
+    public void accountPlaceHolder() throws Exception {
 
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, CREDIT, chair));
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, chair));
@@ -84,7 +82,7 @@ class FileAccountIdServiceIT {
     }
 
     @Test
-    void generalLegerCode() throws Exception {
+    public void generalLegerCode() throws Exception {
 
         assertEquals("00153", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
         assertEquals("00152", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));

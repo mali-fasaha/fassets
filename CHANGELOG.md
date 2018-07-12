@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Changelog**
+
+
+[bb0e9906898053e](https://github.com/mali-fasaha/fassets/commit/bb0e9906898053e) Edwin Njeru *2018-07-12 06:30:06*
+
 **Fixed some checkstyle formatting issues**
 
 

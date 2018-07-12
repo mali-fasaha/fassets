@@ -35,25 +35,35 @@ import static org.junit.Assert.assertTrue;
 
 public class ConcurrentListTest {
 
-    private List<Integer> testList;
-
-    private List<Integer> intList0 = ConcurrentList.of(1);
-    private List<Integer> intList1 = ConcurrentList.of(1, 12);
-    private List<Integer> intList2 = ConcurrentList.of(1, 12, 8);
-    private List<Integer> intList3 = ConcurrentList.of(1, 12, 8, 17);
-    private List<Integer> intList4 = ConcurrentList.of(1, 12, 8, 17, 23);
-    private List<Integer> intList5 = ConcurrentList.of(1, 12, 8, 17, 23, 28);
-    private List<Integer> intList6 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13);
-    private List<Integer> intList7 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16);
-    private List<Integer> intList8 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18);
-    private List<Integer> intList9 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18, 21);
-    private List<Integer> intList10 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18, 21, 14);
-    private List<Integer> intList11 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18, 21, 14, 15);
+    private List<Integer> intList0;
+    private List<Integer> intList1;
+    private List<Integer> intList2;
+    private List<Integer> intList3;
+    private List<Integer> intList4;
+    private List<Integer> intList5;
+    private List<Integer> intList6;
+    private List<Integer> intList7;
+    private List<Integer> intList8;
+    private List<Integer> intList9;
+    private List<Integer> intList10;
+    private List<Integer> intList11;
 
     @Before
     public void setUp() throws Exception {
 
-        testList = ConcurrentList.newList();
+        intList0 = ConcurrentList.of(1);
+        intList1 = ConcurrentList.of(1, 12);
+        intList2 = ConcurrentList.of(1, 12, 8);
+        intList3 = ConcurrentList.of(1, 12, 8, 17);
+        intList4 = ConcurrentList.of(1, 12, 8, 17, 23);
+        intList5 = ConcurrentList.of(1, 12, 8, 17, 23, 28);
+        intList6 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13);
+        intList7 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16);
+        intList8 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18);
+        intList9 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18, 21);
+        intList10 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18, 21, 14);
+        intList11 = ConcurrentList.of(1, 12, 8, 17, 23, 28, 13, 16, 18, 21, 14, 15);
+
     }
 
     @Test

@@ -17,25 +17,25 @@
  */
 package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 class AccountIdPolicyVersion1Test {
 
     private AccountIdPolicy accountIdPolicy;
 
-    @BeforeEach
+    @Before
     void setUp() {
         accountIdPolicy = new AccountIdPolicyVersion1("account-id");
     }
 
     @Test
-    void testCurrencyCode() {
+    public void testCurrencyCode() {
 
         assertEquals("00", accountIdPolicy.currencyCode("KES"));
         assertEquals("01", accountIdPolicy.currencyCode("USD"));
@@ -49,7 +49,7 @@ class AccountIdPolicyVersion1Test {
     }
 
     @Test
-    void generalLedgerCode() {
+    public void generalLedgerCode() {
 
         assertEquals("10051", accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
         assertEquals("00153", accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
@@ -64,7 +64,7 @@ class AccountIdPolicyVersion1Test {
     }
 
     @Test
-    void accountPlaceHolder() {
+    public void accountPlaceHolder() {
 
         assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
         assertEquals("001", accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));
@@ -79,7 +79,7 @@ class AccountIdPolicyVersion1Test {
     }
 
     @Test
-    void accountName() {
+    public void accountName() {
 
         assertEquals("SUNDRY CREDITORS", accountIdPolicy.accountName(ACQUISITION, CREDIT, "FURNITURE & FITTINGS"));
         assertEquals("FURNITURE AND FITTINGS", accountIdPolicy.accountName(ACQUISITION, DEBIT, "FURNITURE & FITTINGS"));

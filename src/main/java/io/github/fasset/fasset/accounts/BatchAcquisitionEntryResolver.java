@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.book.keeper.AccountingEntry;
+import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.cash.HardCash;
 import io.github.ghacupha.time.point.SimpleDate;
@@ -61,7 +62,7 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
         log.debug("Resolving entries for : {} fixed assets", fixedAssets.size());
 
-        List<AccountingEntry> entries = new CopyOnWriteArrayList<>();
+        List<AccountingEntry> entries = ConcurrentList.newList();
 
         fixedAssets.parallelStream().forEach(fixedAsset -> {
             entries.add(getAssetEntry(fixedAsset));

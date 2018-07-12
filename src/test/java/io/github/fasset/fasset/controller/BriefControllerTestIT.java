@@ -89,8 +89,8 @@ public class BriefControllerTestIT {
         CategoryBrief persisted1 = categoryBriefRepository.save(brief1);
         int id = persisted1.getId();
 
-        this.mockMvc.perform(get("/briefs/categories/data/{nomenclature}", id)).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(jsonPath("nomenclature", is(id))).andExpect(jsonPath("poll", is(20))).andExpect(jsonPath("designation", is("Computers"))).andExpect(jsonPath("netBookValue", is(6800.0)))
+        this.mockMvc.perform(get("/briefs/categories/data/{id}", id)).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(jsonPath("id", is(id))).andExpect(jsonPath("poll", is(20))).andExpect(jsonPath("designation", is("Computers"))).andExpect(jsonPath("netBookValue", is(6800.0)))
             .andExpect(jsonPath("purchaseCost", is(7100.0))).andDo(print());
     }
 
@@ -118,9 +118,9 @@ public class BriefControllerTestIT {
         int id2 = persisted2.getId();
 
         this.mockMvc.perform(get("/briefs/categories/data")).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(2)))
-            .andExpect(jsonPath("$[0].nomenclature", is(id))).andExpect(jsonPath("$[0].poll", is(brief1.getPoll()))).andExpect(jsonPath("$[0].designation", is(brief1.getDesignation())))
+            .andExpect(jsonPath("$[0].id", is(id))).andExpect(jsonPath("$[0].poll", is(brief1.getPoll()))).andExpect(jsonPath("$[0].designation", is(brief1.getDesignation())))
             .andExpect(jsonPath("$[0].netBookValue", is(brief1.getNetBookValue().getNumber().doubleValue())))
-            .andExpect(jsonPath("$[0].purchaseCost", is(brief1.getPurchaseCost().getNumber().doubleValue()))).andExpect(jsonPath("$[1].nomenclature", is(id2)))
+            .andExpect(jsonPath("$[0].purchaseCost", is(brief1.getPurchaseCost().getNumber().doubleValue()))).andExpect(jsonPath("$[1].id", is(id2)))
             .andExpect(jsonPath("$[1].poll", is(brief2.getPoll()))).andExpect(jsonPath("$[1].designation", is(brief2.getDesignation())))
             .andExpect(jsonPath("$[1].netBookValue", is(brief2.getNetBookValue().getNumber().doubleValue())))
             .andExpect(jsonPath("$[1].purchaseCost", is(brief2.getPurchaseCost().getNumber().doubleValue()))).andDo(print());
@@ -142,8 +142,8 @@ public class BriefControllerTestIT {
         int id = persistedBrief.getId();
 
 
-        this.mockMvc.perform(get("/briefs/serviceOutlets/data/{nomenclature}", id)).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(jsonPath("nomenclature", is(id))).andExpect(jsonPath("poll", is(solBrief1.getPoll()))).andExpect(jsonPath("designation", is(solBrief1.getDesignation())))
+        this.mockMvc.perform(get("/briefs/serviceOutlets/data/{id}", id)).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(jsonPath("id", is(id))).andExpect(jsonPath("poll", is(solBrief1.getPoll()))).andExpect(jsonPath("designation", is(solBrief1.getDesignation())))
             .andExpect(jsonPath("purchaseCost", is(7000.0))).andExpect(jsonPath("netBookValue", is(6500.0))).andDo(print());
     }
 
@@ -172,9 +172,9 @@ public class BriefControllerTestIT {
 
 
         this.mockMvc.perform(get("/briefs/serviceOutlets/data")).andExpect(status().isOk()).andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8)).andExpect(jsonPath("$", hasSize(2)))
-            .andExpect(jsonPath("$[0].nomenclature", is(id))).andExpect(jsonPath("$[0].poll", is(solBrief1.getPoll()))).andExpect(jsonPath("$[0].designation", is(solBrief1.getDesignation())))
+            .andExpect(jsonPath("$[0].id", is(id))).andExpect(jsonPath("$[0].poll", is(solBrief1.getPoll()))).andExpect(jsonPath("$[0].designation", is(solBrief1.getDesignation())))
             .andExpect(jsonPath("$[0].purchaseCost", is(solBrief1.getPurchaseCost().getNumber().doubleValue())))
-            .andExpect(jsonPath("$[0].netBookValue", is(solBrief1.getNetBookValue().getNumber().doubleValue()))).andExpect(jsonPath("$[1].nomenclature", is(id2)))
+            .andExpect(jsonPath("$[0].netBookValue", is(solBrief1.getNetBookValue().getNumber().doubleValue()))).andExpect(jsonPath("$[1].id", is(id2)))
             .andExpect(jsonPath("$[1].poll", is(solBrief2.getPoll()))).andExpect(jsonPath("$[1].designation", is(solBrief2.getDesignation())))
             .andExpect(jsonPath("$[1].purchaseCost", is(solBrief2.getPurchaseCost().getNumber().doubleValue())))
             .andExpect(jsonPath("$[1].netBookValue", is(solBrief2.getNetBookValue().getNumber().doubleValue()))).andDo(print());

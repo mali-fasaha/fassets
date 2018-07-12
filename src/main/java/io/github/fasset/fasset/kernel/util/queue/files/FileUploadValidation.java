@@ -18,6 +18,8 @@
 package io.github.fasset.fasset.kernel.util.queue.files;
 
 import io.github.fasset.fasset.model.files.FileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides validate method in which we can include re-usable file validation methods.
@@ -28,12 +30,16 @@ public class FileUploadValidation implements FileValidationService<FileUpload> {
 
     private final FileUploadService fileUploadService;
 
+    private static final Logger log = LoggerFactory.getLogger(FileUploadValidation.class);
+
     FileUploadValidation(FileUploadService fileUploadService) {
         this.fileUploadService = fileUploadService;
     }
 
     @Override
     public FileUpload validate(FileUpload fileUpload) throws InvalidFileException {
+
+        log.debug("Validating file uploaded : {}", fileUpload);
 
         if (fileUpload == null) {
             throw new InvalidFileException("Sorry, the file provided for upload into the system is null");

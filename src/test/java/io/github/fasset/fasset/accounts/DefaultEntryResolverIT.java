@@ -30,6 +30,7 @@ import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
@@ -93,9 +94,9 @@ public class DefaultEntryResolverIT {
 
         accountNames = accountsFromEntries.parallelStream().map(Account::getName).collect(ImmutableListCollector.toImmutableFastList());
 
-        accountBalances = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentSkipListMap::new));
+        accountBalances = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentHashMap::new));
 
-        accountNumbers = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentSkipListMap::new));
+        accountNumbers = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentHashMap::new));
 
         sundryCreditorBalances = accountsFromEntries.parallelStream().filter(i -> i.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT")).map(account -> account.balance(on(2018, 2, 26)))
             .collect(ImmutableListCollector.toImmutableFastList());
