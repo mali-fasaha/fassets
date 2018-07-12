@@ -56,7 +56,7 @@ public class FileUploadsQueueTest {
     @Test
     public void push() {
 
-        messageQueue.push(() -> fileUpload, false);
+        messageQueue.push(() -> fileUpload);
 
         assertTrue(uploaded);
     }
@@ -65,7 +65,7 @@ public class FileUploadsQueueTest {
     public void throwMQException() {
 
         messageQueue.push(
-            () -> fileUpload,false, () -> {throw new MQException();}
+            () -> fileUpload, () -> {throw new MQException();}
         );
     }
 
@@ -77,7 +77,6 @@ public class FileUploadsQueueTest {
 
         messageQueue.push(
             () -> fileUpload,
-            false,
             (e) -> System.out.println(String.format("Exception encountered: %s", e)),
             () -> System.out.println(String.format("File upload review process done %s",fileUpload)));
 

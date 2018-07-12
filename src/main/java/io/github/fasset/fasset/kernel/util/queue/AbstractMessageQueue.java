@@ -23,11 +23,11 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
 /**
  * This class provides a common framework for how the completion and handle error methods should be seen.
  * <br> The client being a MessageQueue 'producer' needs not bother with who to 'arrange' handling errors
- * and handling completion. It only needs to provide an implementation of the {@link MessageQueue#push(QueueMessage, boolean)}
+ * and handling completion. It only needs to provide an implementation of the {@link MessageQueue#push(QueueMessage)}
  * method.
  * <br> This example shows how the {@code FileUploadsQueue} 'producers' has implemented the {@link MessageQueue} interface
- * by implementing the {@link MessageQueue#push(QueueMessage, boolean)} method. The {@link MessageQueue#push(QueueMessage, boolean, OnError)} method
- * and the {@link MessageQueue#push(QueueMessage, boolean, OnError, OnCompletion)} method become available to the {@code FileUploadQueue}
+ * by implementing the {@link MessageQueue#push(QueueMessage)} method. The {@link MessageQueue#push(QueueMessage, OnError)} method
+ * and the {@link MessageQueue#push(QueueMessage, OnError, OnCompletion)} method become available to the {@code FileUploadQueue}
  * simply by extending this class. Should the client desire a different approach for the lifecycle methods, nothing's wrong
  * with it skipping this class and implementing the whole interface by itself.
  * <br>
@@ -52,10 +52,9 @@ public abstract class AbstractMessageQueue<T> implements MessageQueue<T> {
      * Adds a message to the queue
      *
      * @param queueMessage Item to be added to the queue
-     * @param allowDuplicates whether or not the service should allow duplicate messages
      */
     @Override
-    public abstract void push(QueueMessage<T> queueMessage, boolean allowDuplicates);
+    public abstract void push(QueueMessage<T> queueMessage);
 
     /**
      * Adds a message to the queue
@@ -64,9 +63,9 @@ public abstract class AbstractMessageQueue<T> implements MessageQueue<T> {
      * @param onCompletion Completion lifecycle action
      */
     @Override
-    public void push(QueueMessage<T> queueMessage, boolean allowDuplicates, OnCompletion onCompletion) {
+    public void push(QueueMessage<T> queueMessage, OnCompletion onCompletion) {
 
-        push(queueMessage, allowDuplicates);
+        push(queueMessage);
 
         // call the lifecycle method
         onCompletion.handleCompletion();
@@ -80,11 +79,11 @@ public abstract class AbstractMessageQueue<T> implements MessageQueue<T> {
      *                     of handling errors
      */
     @Override
-    public void push(QueueMessage<T> queueMessage, boolean allowDuplicates, OnError onError) {
+    public void push(QueueMessage<T> queueMessage, OnError onError) {
 
         try {
 
-            push(queueMessage, allowDuplicates);
+            push(queueMessage);
 
         } catch (MQException e) {
 
@@ -100,11 +99,11 @@ public abstract class AbstractMessageQueue<T> implements MessageQueue<T> {
      * @param onCompletion This is a functional interface for handling task completion tasks
      */
     @Override
-    public void push(QueueMessage<T> queueMessage, boolean allowDuplicates, OnError onError, OnCompletion onCompletion) {
+    public void push(QueueMessage<T> queueMessage, OnError onError, OnCompletion onCompletion) {
 
         try {
 
-            push(queueMessage, allowDuplicates);
+            push(queueMessage);
 
         } catch (MQException e) {
 

@@ -85,8 +85,6 @@ public class FileUploadTestsIT {
         MockMultipartFile multipartFile = new MockMultipartFile("file", "Data1.xlsx", "text/plain", "Spring Framework".getBytes());
         this.mockMvc.perform(multipart("/files").file(multipartFile)).andExpect(status().isFound()).andExpect(header().string("Location", "/files"));
 
-        this.fileSystemStorageService.allowDuplicateUploads();
-
         this.fileSystemStorageService.store(multipartFile);
     }
 

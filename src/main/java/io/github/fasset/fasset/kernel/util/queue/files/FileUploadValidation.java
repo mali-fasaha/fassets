@@ -36,13 +36,13 @@ public class FileUploadValidation implements FileValidationService<FileUpload> {
 
     FileUploadValidation(FileUploadService fileUploadService) {
         this.fileUploadService = fileUploadService;
-        this.allowDuplicates = false;
+        //this.allowDuplicates = false;
     }
 
     @Override
     public FileUpload validate(FileUpload fileUpload) throws InvalidFileException {
 
-        log.debug("Validating file uploaded : {}", fileUpload);
+        log.debug("Validating file uploaded : {}, allowDuplicates set as {}", fileUpload, allowDuplicates);
 
         if (fileUpload == null) {
             throw new InvalidFileException("Sorry, the file provided for upload into the system is null");

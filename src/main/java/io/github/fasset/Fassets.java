@@ -56,7 +56,7 @@ import java.util.concurrent.Executor;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EntityScan(basePackages = {"io.github.fasset.fasset.model", "io.github.fasset.fasset.kernel.batch.depreciation.model", "io.github.fasset.fasset.kernel.book.keeper"})
 @ComponentScan("io.github.fasset.fasset")
-@PropertySource("classpath:batch.properties")
+@PropertySource(value = {"classpath:batch.properties", "classpath:queue.properties"})
 @EnableConfigurationProperties(value = {StorageProperties.class, MoneyProperties.class, DepreciationProperties.class, DateProperties.class})
 public class Fassets {
 

@@ -17,13 +17,21 @@
  */
 package io.github.fasset.fasset.kernel.util.queue.files;
 
+import io.github.fasset.fasset.kernel.util.PropertiesUtils;
 import io.github.fasset.fasset.kernel.util.queue.AbstractMessageQueue;
 import io.github.fasset.fasset.kernel.util.queue.QueueMessage;
 import io.github.fasset.fasset.kernel.util.queue.util.OnCompletion;
 import io.github.fasset.fasset.kernel.util.queue.util.OnError;
 import io.github.fasset.fasset.model.files.FileUpload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.Properties;
 
 /**
  * Implementation of the MessageQueue interface that allows queueing of messages related
@@ -39,7 +47,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * // Todo Add duplicate upload checks service, with hashing algorithms
  * interface
  */
+@Component("fileUploadsQueue")
 public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
+
+    private static final Logger log = LoggerFactory.getLogger(FileUploadsQueue.class);
+
+    private boolean allowDuplicates;
 
     private final FileUploadService fileUploadService;
     private final FileValidationService<FileUpload> fileValidationService;
@@ -51,13 +64,20 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
         this.fileValidationService = new FileUploadValidation(fileUploadService);
     }
 
+    @Value("${allow.duplicate.file.uploads}")
+    public void setAllowDuplicates(boolean allowDuplicates) {
+        this.allowDuplicates = allowDuplicates;
+    }
+
     /**
      * Adds a message to the queue
      *
      * @param queueMessage Item to be added to the queue
      */
     @Override
-    public void push(QueueMessage<FileUpload> queueMessage, boolean allowDuplicates) {
+    public void push(QueueMessage<FileUpload> queueMessage) {
+
+        log.debug("Sending the message {} to the queue, with flag for allowDuplicates set as : {}", queueMessage, allowDuplicates);
 
         if (allowDuplicates) {
 
@@ -66,10 +86,15 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
         } else {
 
             fileUploadService.recordFileUpload(fileValidationService.validate(queueMessage.message()));
+
         }
 
 
     }
 
+    @PostConstruct
+    private void init() {
+        log.info("File uploads queue initialized with allowDuplicates set as : {}", allowDuplicates);
+    }
 
 }

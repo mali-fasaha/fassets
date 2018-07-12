@@ -21,6 +21,7 @@ import io.github.fasset.fasset.config.StorageProperties;
 import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.util.queue.MessageQueue;
+import io.github.fasset.fasset.kernel.util.queue.QueueMessage;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue;
 import io.github.fasset.fasset.model.files.FileUpload;
@@ -28,6 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -70,10 +73,7 @@ public class FileSystemStorageService implements StorageService {
 
     private static final Logger log = LoggerFactory.getLogger(FileSystemStorageService.class);
 
-
     private final Path rootLocation;
-
-    private boolean allowDuplicates;
 
     private MessageQueue fileUploadsQueue;
 
@@ -83,7 +83,6 @@ public class FileSystemStorageService implements StorageService {
         //Todo remove this from this class
         fileUploadsQueue = new FileUploadsQueue(fileUploadService);
 
-        this.allowDuplicates = false;
     }
 
     /**
@@ -124,7 +123,18 @@ public class FileSystemStorageService implements StorageService {
             });*/
 
             // Add allow duplicates option in property configuration
-            fileUploadsQueue.push(() -> fileUpload, false, (e) -> {
+            fileUploadsQueue.push(new QueueMessage() {
+                @Override
+                public Object message() {
+                    return fileUpload;
+                }
+
+                @Override
+                public String toString() {
+                    return fileUpload.toString();
+                }
+
+            }, (e) -> {
                 throw new FileSystemStorageException(file, fileUpload, e);
             }, () -> {
                 fileUpload.setTimeUploaded(LocalDateTime.now());
@@ -212,7 +222,6 @@ public class FileSystemStorageService implements StorageService {
             e.printStackTrace();
         }
 
-
         return resource;
     }
 
@@ -240,19 +249,5 @@ public class FileSystemStorageService implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
-    }
-
-    /**
-     * Calling this method in the storage service should allow clients to upload duplicate files which
-     * might be helpful for instance when doing tests
-     *
-     * @return This object after it has been changed
-     */
-    @Override
-    public StorageService allowDuplicateUploads() {
-
-        this.allowDuplicates = true;
-
-        return this;
     }
 }

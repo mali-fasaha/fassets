@@ -9,5 +9,10 @@
       "name": "date-parsing.date-pattern",
       "type": "java.lang.String",
       "description": "Description for date-parsing.date-pattern."
+    },
+    {
+      "name": "allow.duplicate.file.uploads",
+      "type": "java.lang.String",
+      "description": "Description for allow.duplicate.file.uploads."
     }
   ] }
