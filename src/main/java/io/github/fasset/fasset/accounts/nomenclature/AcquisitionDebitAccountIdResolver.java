@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**

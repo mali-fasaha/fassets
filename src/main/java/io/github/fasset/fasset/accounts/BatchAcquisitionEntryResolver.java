@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.book.keeper.AccountingEntry;
+import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.cash.HardCash;
@@ -29,10 +29,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**

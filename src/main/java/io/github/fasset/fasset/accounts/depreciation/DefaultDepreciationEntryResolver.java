@@ -19,7 +19,7 @@ package io.github.fasset.fasset.accounts.depreciation;
 
 import com.google.common.collect.ImmutableList;
 import io.github.fasset.fasset.accounts.AccountResolver;
-import io.github.fasset.fasset.book.keeper.AccountingEntry;
+import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.cash.Cash;
@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.ghacupha.time.point.SimpleDate.ofLocal;
 import static org.slf4j.LoggerFactory.getLogger;
 

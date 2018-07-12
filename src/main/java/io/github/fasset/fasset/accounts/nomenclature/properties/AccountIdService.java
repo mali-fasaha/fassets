@@ -18,7 +18,7 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.definition.TransactionType;
-import io.github.fasset.fasset.book.keeper.balance.AccountSide;
+import io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide;
 import io.github.fasset.fasset.model.FixedAsset;
 
 /**

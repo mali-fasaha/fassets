@@ -52,9 +52,9 @@ import java.util.concurrent.Executor;
 @EnableTransactionManagement
 @EnableBatchProcessing
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"io.github.fasset.fasset.repository", "io.github.fasset.fasset.kernel.batch.depreciation.model", "io.github.fasset.fasset.book.keeper.repo"})
+@EnableJpaRepositories(basePackages = {"io.github.fasset.fasset.repository", "io.github.fasset.fasset.kernel.batch.depreciation.model", "io.github.fasset.fasset.kernel.book.keeper.repo"})
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-@EntityScan(basePackages = {"io.github.fasset.fasset.model", "io.github.fasset.fasset.kernel.batch.depreciation.model", "io.github.fasset.fasset.book.keeper"})
+@EntityScan(basePackages = {"io.github.fasset.fasset.model", "io.github.fasset.fasset.kernel.batch.depreciation.model", "io.github.fasset.fasset.kernel.book.keeper"})
 @ComponentScan("io.github.fasset.fasset")
 @PropertySource("classpath:batch.properties")
 @EnableConfigurationProperties(value = {StorageProperties.class, MoneyProperties.class, DepreciationProperties.class, DateProperties.class})

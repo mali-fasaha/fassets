@@ -19,7 +19,7 @@ package io.github.fasset.fasset.accounts.nomenclature.properties.policy;
 
 import io.github.fasset.fasset.accounts.definition.AccountNumberSegment;
 import io.github.fasset.fasset.accounts.definition.TransactionType;
-import io.github.fasset.fasset.book.keeper.balance.AccountSide;
+import io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide;
 
 /**
  * Utility methods for formatting the keys before search into the properties object

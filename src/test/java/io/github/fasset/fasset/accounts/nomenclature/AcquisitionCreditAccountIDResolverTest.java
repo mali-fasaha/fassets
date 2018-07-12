@@ -18,8 +18,6 @@
 package io.github.fasset.fasset.accounts.nomenclature;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService;
-import io.github.fasset.fasset.accounts.nomenclature.properties.FileAccountIdService;
-import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
@@ -29,7 +27,7 @@ import org.mockito.Mockito;
 import java.time.LocalDate;
 
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 

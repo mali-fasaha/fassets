@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.book.keeper.AccountingEntry;
+import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.model.FixedAsset;
 
 import java.util.List;

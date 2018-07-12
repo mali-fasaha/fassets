@@ -18,19 +18,17 @@
 package io.github.fasset.fasset.accounts.nomenclature.properties;
 
 import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy;
-import io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicyVersion1;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener;
 
 import java.time.LocalDate;
 
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 

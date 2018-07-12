@@ -18,7 +18,7 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver;
-import io.github.fasset.fasset.book.keeper.Account;
+import io.github.fasset.fasset.kernel.book.keeper.Account;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.time.point.SimpleDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +27,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.Currency;
 
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_SCHEME;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_SUB_TYPE;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_TYPE;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.CATEGORY;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.CONTRA_ACCOUNT;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.GENERAL_LEDGER;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.SERVICE_OUTLET;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.ACCOUNT_SCHEME;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.ACCOUNT_SUB_TYPE;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.ACCOUNT_TYPE;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.CATEGORY;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.CONTRA_ACCOUNT;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.GENERAL_LEDGER;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.SERVICE_OUTLET;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**

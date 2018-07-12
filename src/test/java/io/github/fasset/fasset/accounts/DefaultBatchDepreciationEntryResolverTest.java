@@ -22,9 +22,9 @@ import io.github.fasset.fasset.accounts.depreciation.DefaultDepreciationEntryRes
 import io.github.fasset.fasset.accounts.depreciation.DepreciationAlgorithm;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationEntryResolver;
 import io.github.fasset.fasset.accounts.depreciation.DepreciationPeriod;
-import io.github.fasset.fasset.book.keeper.Account;
-import io.github.fasset.fasset.book.keeper.AccountingEntry;
-import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
+import io.github.fasset.fasset.kernel.book.keeper.Account;
+import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
+import io.github.fasset.fasset.kernel.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.time.point.SimpleDate;
 import org.javamoney.moneta.Money;
@@ -36,8 +36,8 @@ import java.time.LocalDate;
 import java.util.Currency;
 import java.util.List;
 
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;

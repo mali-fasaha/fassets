@@ -18,8 +18,8 @@
 package io.github.fasset.fasset.accounts;
 
 import io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver;
-import io.github.fasset.fasset.book.keeper.Account;
-import io.github.fasset.fasset.book.keeper.util.UnEnteredDetailsException;
+import io.github.fasset.fasset.kernel.book.keeper.Account;
+import io.github.fasset.fasset.kernel.book.keeper.util.UnEnteredDetailsException;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
@@ -28,11 +28,11 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_SCHEME;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_SUB_TYPE;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.ACCOUNT_TYPE;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.CATEGORY;
-import static io.github.fasset.fasset.book.keeper.AccountAttribute.SERVICE_OUTLET;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.ACCOUNT_SCHEME;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.ACCOUNT_SUB_TYPE;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.ACCOUNT_TYPE;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.CATEGORY;
+import static io.github.fasset.fasset.kernel.book.keeper.AccountAttribute.SERVICE_OUTLET;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;

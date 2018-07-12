@@ -17,12 +17,12 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.book.keeper.Account;
-import io.github.fasset.fasset.book.keeper.AccountingEntry;
-import io.github.fasset.fasset.book.keeper.AccountingTransaction;
-import io.github.fasset.fasset.book.keeper.balance.AccountBalance;
-import io.github.fasset.fasset.book.keeper.util.ImmutableEntryException;
-import io.github.fasset.fasset.book.keeper.util.MismatchedCurrencyException;
+import io.github.fasset.fasset.kernel.book.keeper.Account;
+import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
+import io.github.fasset.fasset.kernel.book.keeper.AccountingTransaction;
+import io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance;
+import io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException;
+import io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.time.point.SimpleDate;
 import org.javamoney.moneta.Money;
@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static io.github.ghacupha.cash.HardCash.shilling;
 import static io.github.ghacupha.time.point.SimpleDate.on;
 import static org.junit.Assert.assertEquals;

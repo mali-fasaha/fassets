@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.accounts;
 
-import io.github.fasset.fasset.book.keeper.Account;
+import io.github.fasset.fasset.kernel.book.keeper.Account;
 import io.github.fasset.fasset.model.FixedAsset;
 
 /**

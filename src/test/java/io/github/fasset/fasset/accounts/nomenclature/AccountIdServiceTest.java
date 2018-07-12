@@ -29,8 +29,8 @@ import org.mockito.Mockito;
 import java.time.LocalDate;
 
 import static io.github.fasset.fasset.accounts.definition.TransactionType.ACQUISITION;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.CREDIT;
-import static io.github.fasset.fasset.book.keeper.balance.AccountSide.DEBIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
+import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
