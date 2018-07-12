@@ -20,21 +20,23 @@ package io.github.fasset.fasset.kernel.util.queue.files;
 import io.github.fasset.fasset.model.files.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * Provides validate method in which we can include re-usable file validation methods.
  * <br> Any of the checks the {@link FileValidationService#validate(FileUpload)} will throw
  * an {@link InvalidFileException}.
  */
-public class FileUploadValidation implements FileValidationService<FileUpload> {
+@Service("fileValidationService")
+public class FileUploadValidationService implements FileValidationService<FileUpload> {
 
     private boolean allowDuplicates;
 
     private final FileUploadService fileUploadService;
 
-    private static final Logger log = LoggerFactory.getLogger(FileUploadValidation.class);
+    private static final Logger log = LoggerFactory.getLogger(FileUploadValidationService.class);
 
-    FileUploadValidation(FileUploadService fileUploadService) {
+    FileUploadValidationService(FileUploadService fileUploadService) {
         this.fileUploadService = fileUploadService;
 
         // default value is false
@@ -67,7 +69,7 @@ public class FileUploadValidation implements FileValidationService<FileUpload> {
     }
 
     @Override
-    public FileUploadValidation allowDuplicates() {
+    public FileUploadValidationService allowDuplicates() {
 
         this.allowDuplicates = true;
 

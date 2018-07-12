@@ -25,7 +25,7 @@ import org.mockito.Mockito;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class FileUploadValidationTest {
+public class FileUploadValidationServiceTest {
 
     FileValidationService validationService;
     FileUpload fileUpload = new FileUpload();
@@ -35,7 +35,7 @@ public class FileUploadValidationTest {
 
         FileUploadService fileUploadService = Mockito.mock(FileUploadService.class);
 
-        validationService = new FileUploadValidation(fileUploadService);
+        validationService = new FileUploadValidationService(fileUploadService);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class FileUploadValidationTest {
 
         FileUploadService fileUploadService = Mockito.mock(FileUploadService.class);
         when(fileUploadService.theFileIsAlreadyUploaded(fileUpload)).thenReturn(true);
-        FileValidationService fileValidationService = new FileUploadValidation(fileUploadService);
+        FileValidationService fileValidationService = new FileUploadValidationService(fileUploadService);
 
         assertEquals(fileUpload, fileValidationService.validate(fileUpload));
     }

@@ -50,7 +50,8 @@ public class FileUploadsQueueTest {
 
         Mockito.doAnswer(this::setUploadedTrue).when(fileUploadService).recordFileUpload(fileUpload);
 
-        messageQueue = new FileUploadsQueue(fileUploadService);
+        // TODO mock FileUploadValidationService
+        messageQueue = new FileUploadsQueue(fileUploadService, new FileUploadValidationService(fileUploadService));
     }
 
     @Test

@@ -28,9 +28,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import java.util.Properties;
 
 /**
@@ -52,21 +54,22 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
 
     private static final Logger log = LoggerFactory.getLogger(FileUploadsQueue.class);
 
-    private boolean allowDuplicates;
+    private volatile boolean allowDuplicates;
 
     private final FileUploadService fileUploadService;
     private final FileValidationService<FileUpload> fileValidationService;
 
     @Autowired
-    public FileUploadsQueue(@Qualifier("fileUploadService") FileUploadService fileUploadService) {
+    public FileUploadsQueue(@Qualifier("fileUploadService") FileUploadService fileUploadService,
+                            @Qualifier("fileValidationService") FileValidationService<FileUpload> fileValidationService ) {
         super();
         this.fileUploadService = fileUploadService;
-        this.fileValidationService = new FileUploadValidation(fileUploadService);
+        this.fileValidationService = fileValidationService;
     }
 
     @Value("${allow.duplicate.file.uploads}")
     public void setAllowDuplicates(boolean allowDuplicates) {
-        log.debug("Setting AllowDuplicates flag as {}", allowDuplicates);
+        log.debug("Setting AllowDuplicates flag as {} inside the queue id {}", allowDuplicates, this);
         this.allowDuplicates = allowDuplicates;
     }
 
@@ -78,7 +81,7 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     @Override
     public void push(QueueMessage<FileUpload> queueMessage) {
 
-        log.debug("Sending the message {} to the queue, with flag for allowDuplicates set as : {}", queueMessage, allowDuplicates);
+        log.debug("Sending the message {} to the queue, with flag for allowDuplicates set as : {} from queue id : {}", queueMessage, allowDuplicates, this);
 
         if (allowDuplicates) {
 

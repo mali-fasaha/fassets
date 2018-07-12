@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
@@ -78,10 +79,10 @@ public class FileSystemStorageService implements StorageService {
     private MessageQueue fileUploadsQueue;
 
     @Autowired
-    public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadService") FileUploadService fileUploadService) {
+    public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadsQueue") FileUploadsQueue fileUploadsQueue) {
         rootLocation = Paths.get(storageProperties.getLocation());
         //Todo remove this from this class
-        fileUploadsQueue = new FileUploadsQueue(fileUploadService);
+        this.fileUploadsQueue = fileUploadsQueue;
 
     }
 
