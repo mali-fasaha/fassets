@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Fixed some checkstyle formatting issues**
+
+
+[de4f905c2d6f3c0](https://github.com/mali-fasaha/fassets/commit/de4f905c2d6f3c0) Edwin Njeru *2018-07-11 15:03:31*
+
 **Removed subscriber framework and completely replaced it with the message queue**
 
 
