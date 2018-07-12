@@ -47,7 +47,7 @@ public class DepreciationProceeds {
     }
 
     public DepreciationProceeds setDepreciation(Depreciation depreciation) {
-        log.debug("Proceeds#1 : Setting depreciation as {}", depreciation);
+        log.trace("Proceeds#1 : Setting depreciation as {}", depreciation);
         this.depreciation = depreciation;
         return this;
     }
@@ -57,7 +57,7 @@ public class DepreciationProceeds {
     }
 
     public DepreciationProceeds setNetBookValue(NetBookValue netBookValue) {
-        log.debug("Proceeds#2 : Setting netBookValue as {}", netBookValue);
+        log.trace("Proceeds#2 : Setting netBookValue as {}", netBookValue);
         this.netBookValue = netBookValue;
         return this;
     }
@@ -67,7 +67,7 @@ public class DepreciationProceeds {
     }
 
     public DepreciationProceeds setAccruedDepreciation(AccruedDepreciation accruedDepreciation) {
-        log.debug("Proceeds#3 : Setting accruedDepreciation as {}", accruedDepreciation);
+        log.trace("Proceeds#3 : Setting accruedDepreciation as {}", accruedDepreciation);
         this.accruedDepreciation = accruedDepreciation;
         return this;
     }

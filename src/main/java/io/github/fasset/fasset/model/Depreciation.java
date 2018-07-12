@@ -69,7 +69,7 @@ public class Depreciation extends DomainModel<String> {
     }
 
     public Depreciation setMonth(int month) {
-        log.debug("Setting month for depreciationId : {}, as = {}", getId(), month);
+        log.trace("Setting month for depreciationId : {}, as = {}", getId(), month);
         this.month = month;
         return this;
     }
@@ -79,7 +79,7 @@ public class Depreciation extends DomainModel<String> {
     }
 
     public Depreciation setYear(int year) {
-        log.debug("Setting year for depreciationId : {}, as = {}", getId(), depreciationPeriod);
+        log.trace("Setting year for depreciationId : {}, as = {}", getId(), depreciationPeriod);
         this.year = year;
         return this;
     }
@@ -90,7 +90,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setDepreciationPeriod(YearMonth depreciationPeriod) {
 
-        log.debug("Setting depreciation period for depreciationId : {}, as = {}", getId(), depreciationPeriod);
+        log.trace("Setting depreciation period for depreciationId : {}, as = {}", getId(), depreciationPeriod);
         this.depreciationPeriod = depreciationPeriod;
         return this;
     }
@@ -101,7 +101,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setFixedAssetId(int fixedAssetId) {
 
-        log.debug("Setting fixedAssetId for depreciationId : {}, as = {}", getId(), fixedAssetId);
+        log.trace("Setting fixedAssetId for depreciationId : {}, as = {}", getId(), fixedAssetId);
         this.fixedAssetId = fixedAssetId;
         return this;
     }
@@ -112,7 +112,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setCategory(String category) {
 
-        log.debug("Setting the category for depreciationId : {}, as = {}", getId(), category);
+        log.trace("Setting the category for depreciationId : {}, as = {}", getId(), category);
         this.category = category;
         return this;
     }
@@ -123,7 +123,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setSolId(String solId) {
 
-        log.debug("Setting the sol nomenclature for depreciationId : {}, as ={}", getId(), solId);
+        log.trace("Setting the sol nomenclature for depreciationId : {}, as ={}", getId(), solId);
         this.solId = solId;
         return this;
     }
@@ -134,7 +134,7 @@ public class Depreciation extends DomainModel<String> {
 
     public Depreciation setDepreciation(Money depreciation) {
 
-        log.debug("Setting the depreciation for depreciationId : {}, as = {}", getId(), depreciation);
+        log.trace("Setting the depreciation for depreciationId : {}, as = {}", getId(), depreciation);
         this.depreciation = depreciation;
         return this;
     }

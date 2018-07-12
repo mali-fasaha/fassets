@@ -66,6 +66,7 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
 
     @Value("${allow.duplicate.file.uploads}")
     public void setAllowDuplicates(boolean allowDuplicates) {
+        log.debug("Setting AllowDuplicates flag as {}", allowDuplicates);
         this.allowDuplicates = allowDuplicates;
     }
 

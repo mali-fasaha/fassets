@@ -149,7 +149,7 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
 
     public FixedAsset setPurchaseCost(Money purchaseCost) {
 
-        log.debug("Setting the purchaseCost for fixedAssetId : {} ,as = {}", getId(), purchaseCost);
+        log.trace("Setting the purchaseCost for fixedAssetId : {} ,as = {}", getId(), purchaseCost);
         this.purchaseCost = purchaseCost;
         return this;
     }
@@ -160,7 +160,7 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
 
     public FixedAsset setNetBookValue(Money netBookValue) {
 
-        log.debug("Setting NBV for assetId : {}, as = {}", getId(), netBookValue);
+        log.trace("Setting NBV for assetId : {}, as = {}", getId(), netBookValue);
         this.netBookValue = netBookValue;
         return this;
     }

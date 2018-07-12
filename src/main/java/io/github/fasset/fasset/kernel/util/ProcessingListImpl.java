@@ -57,7 +57,7 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
 
         itemsAdded++;
 
-        log.debug("ProceedsList : adding item : {}", e);
+        log.trace("ProceedsList : adding item : {}", e);
 
         return super.add(e);
     }
@@ -65,7 +65,7 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
     @Override
     public void forEach(Consumer<? super E> consumer) {
 
-        log.debug("Polling from ProceedsList with consumer : {}", consumer);
+        log.trace("Polling from ProceedsList with consumer : {}", consumer);
 
         remainingItems = super.size();
 

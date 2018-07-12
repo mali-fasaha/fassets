@@ -47,7 +47,7 @@ public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearM
 
         YearMonth convertedMonth;
 
-        log.debug("Converting {} to YearMonth", source.toString());
+        log.trace("Converting {} to YearMonth", source.toString());
 
         try {
             checkIfSourceIsNull(source);

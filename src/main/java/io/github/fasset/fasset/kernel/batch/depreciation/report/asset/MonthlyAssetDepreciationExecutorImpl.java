@@ -67,7 +67,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
             if (!tempList.isEmpty()) {
                 temp = tempList.get(0);
             } else {
-                log.debug("Returning nilMonthlyDepreciationDTO as there was no result from the depreciationRepository");
+                log.trace("Returning nilMonthlyDepreciationDTO as there was no result from the depreciationRepository");
                 temp = new NilMonthlyAssetDepreciationDTO(fixedAsset.getId(), year);
             }
 

@@ -36,7 +36,9 @@ public class FileUploadValidation implements FileValidationService<FileUpload> {
 
     FileUploadValidation(FileUploadService fileUploadService) {
         this.fileUploadService = fileUploadService;
-        //this.allowDuplicates = false;
+
+        // default value is false
+        this.allowDuplicates = false;
     }
 
     @Override
@@ -49,8 +51,15 @@ public class FileUploadValidation implements FileValidationService<FileUpload> {
         }
 
         if (fileUploadService.theFileIsAlreadyUploaded(fileUpload) && !allowDuplicates) {
+
+            log.debug("The file : {} is already uploaded", fileUpload);
+
             throw new UploadedFileException(fileUpload);
+
         } else if (fileUpload.isDeserialized() && !allowDuplicates) {
+
+            log.debug("The file : {} is already uploaded and deserialized", fileUpload);
+
             throw new DeserializedFileException(fileUpload);
         }
 
@@ -61,6 +70,8 @@ public class FileUploadValidation implements FileValidationService<FileUpload> {
     public FileUploadValidation allowDuplicates() {
 
         this.allowDuplicates = true;
+
+        log.debug("AllowDuplicates set as {}", true);
 
         return this;
     }

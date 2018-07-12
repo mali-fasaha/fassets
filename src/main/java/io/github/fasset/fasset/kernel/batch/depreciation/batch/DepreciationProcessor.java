@@ -64,7 +64,7 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
 
         depreciationRelay.getMonthlyDepreciationSequence().forEach(i -> {
 
-            log.debug("Calculating depreciation in the month of :{} for asset {}", i, fixedAsset);
+            log.trace("Calculating depreciation in the month of :{} for asset {}", i, fixedAsset);
 
             processingList.add(depreciationExecutor.getDepreciation(fixedAsset, i));
         });

@@ -41,16 +41,16 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
     @Override
     public AccruedDepreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {
 
-        log.debug("Processing accruedDepreciation for asset: {} in the period : {}", asset, month);
+        log.trace("Processing accruedDepreciation for asset: {} in the period : {}", asset, month);
 
         // with fingers crossed : Hope by the time you are here, the fixedAsser netBookValue will have changed
         Money depreciationAcc = asset.getPurchaseCost().subtract(asset.getNetBookValue());
 
-        log.debug("Reporting accruedDepreciation as : {}", depreciationAcc);
+        log.trace("Reporting accruedDepreciation as : {}", depreciationAcc);
 
         AccruedDepreciation accruedDepreciation = createAccruedDepreciation(asset, month, depreciationAcc);
 
-        log.debug("Sending AccruedDepreciation item created : {}", accruedDepreciation);
+        log.trace("Sending AccruedDepreciation item created : {}", accruedDepreciation);
 
         //send(()-> accruedDepreciation);
 

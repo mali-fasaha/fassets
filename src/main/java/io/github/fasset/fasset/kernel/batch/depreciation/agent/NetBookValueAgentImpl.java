@@ -47,11 +47,11 @@ public class NetBookValueAgentImpl implements NetBookValueAgent {
     @Override
     public NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {
 
-        log.debug("Processing NetBookValue item for the asset : {} in the period : {}", asset, month);
+        log.trace("Processing NetBookValue item for the asset : {} in the period : {}", asset, month);
 
         NetBookValue netBookValue = createNetBookValue(asset, month);
 
-        log.debug("Sending netBookValueItem created : {}", netBookValue);
+        log.trace("Sending netBookValueItem created : {}", netBookValue);
 
         //send(()->netBookValue);
 

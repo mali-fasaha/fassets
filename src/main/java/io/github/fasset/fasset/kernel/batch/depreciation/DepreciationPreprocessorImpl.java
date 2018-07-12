@@ -63,7 +63,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      */
     @Override
     public YearMonth getMonth() {
-        log.debug("Returning month : {}", month);
+        log.trace("Returning month : {}", month);
         return month;
     }
 
@@ -72,7 +72,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      */
     @Override
     public FixedAsset getAsset() {
-        log.debug("Returning fixedAsset : {}", asset);
+        log.trace("Returning fixedAsset : {}", asset);
         return asset;
     }
 
@@ -81,7 +81,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      */
     @Override
     public Money getDepreciationAmount() {
-        log.debug("Returning depreciation amount : {}", depreciationAmount);
+        log.trace("Returning depreciation amount : {}", depreciationAmount);
         return depreciationAmount;
     }
 
@@ -92,7 +92,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      */
     @Override
     public DepreciationPreprocessor setAsset(FixedAsset asset) {
-        log.debug("Setting asset as : {}", asset);
+        log.trace("Setting asset as : {}", asset);
         this.asset = asset;
         return this;
     }
@@ -104,7 +104,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      */
     @Override
     public DepreciationPreprocessor setMonth(YearMonth month) {
-        log.debug("Setting month as : {}", month);
+        log.trace("Setting month as : {}", month);
         this.month = month;
         return this;
     }
@@ -116,7 +116,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      */
     @Override
     public DepreciationPreprocessor setDepreciationAmount(Money depreciationAmount) {
-        log.debug("Setting depreciation amount as : {}", depreciationAmount);
+        log.trace("Setting depreciation amount as : {}", depreciationAmount);
         this.depreciationAmount = depreciationAmount;
         return this;
     }
@@ -126,7 +126,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      */
     @Override
     public DepreciationPreprocessor setProperties() {
-        log.debug("Setting depreciation preprocessor properties...");
+        log.trace("Setting depreciation preprocessor properties...");
 
         if (asset == null || month == null) {
             String message = String.format("Exception encountered : Either the FixedAsset " + "instance %s or the month %s instance is null", asset, month);
@@ -140,7 +140,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     private void depreciationAmountRealignment(FixedAsset asset, YearMonth month) {
 
-        log.debug("Calling the depreciation alignment algorithm....");
+        log.trace("Calling the depreciation alignment algorithm....");
 
         depreciationTimingCheck(asset, month);
 
@@ -149,28 +149,28 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     private void depreciationRevaluation(FixedAsset asset) {
 
-        log.debug("Performing re-evaluation of the depreciation amount...");
+        log.trace("Performing re-evaluation of the depreciation amount...");
 
         if (asset.getPurchaseCost().isGreaterThan(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
             if (asset.getNetBookValue().isLessThan(depreciationAmount)) {
 
-                log.debug("The netBookValue of asset : {} is less that the depreciation amount", asset);
+                log.trace("The netBookValue of asset : {} is less that the depreciation amount", asset);
 
                 if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
-                    log.debug("The NetBookValue is zero, setting depreciation to zero....");
+                    log.trace("The NetBookValue is zero, setting depreciation to zero....");
                     // No further processing required
                     this.depreciationAmount = Money.of(0.00, moneyProperties.getDefaultCurrency());
 
-                    log.debug("The depreciation amount is today zero : {}", depreciationAmount);
+                    log.trace("The depreciation amount is today zero : {}", depreciationAmount);
 
                 } else {
 
-                    log.debug("Resetting depreciation amount to the remaining value of the netBookValue");
+                    log.trace("Resetting depreciation amount to the remaining value of the netBookValue");
                     this.depreciationAmount = asset.getNetBookValue();
 
-                    log.debug("Depreciation has been set to : {}", this.depreciationAmount);
+                    log.trace("Depreciation has been set to : {}", this.depreciationAmount);
                 }
             }
 
@@ -184,14 +184,14 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     @SuppressWarnings("all")
     private void depreciationTimingCheck(FixedAsset asset, YearMonth month) {
-        log.debug("Reviewing the depreciation timing for asset : {}, relative to the " + "month: {}", asset, month);
+        log.trace("Reviewing the depreciation timing for asset : {}, relative to the " + "month: {}", asset, month);
         if (localDateToYearMonthConverter.convert(Objects.requireNonNull(asset.getPurchaseDate())).isAfter(month)) {
-            log.debug(
+            log.trace(
                 "The month of purchase of asset: {} comes later than the depreciation period : {}" + "therefore we are resetting the depreciation formally calculated as : {} " + "amount to zero",
                 asset, month, depreciationAmount);
             this.depreciationAmount = Money.of(0.00, moneyProperties.getDefaultCurrency());
-            log.debug("Depreciation amount has been reset to zero : {}", depreciationAmount);
+            log.trace("Depreciation amount has been reset to zero : {}", depreciationAmount);
         }
-        log.debug("The depreciation has passed the timing test and will be retained at : {}", depreciationAmount);
+        log.trace("The depreciation has passed the timing test and will be retained at : {}", depreciationAmount);
     }
 }
