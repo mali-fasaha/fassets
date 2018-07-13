@@ -4,6 +4,41 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Added Hash class to the IOC Container**
+
+
+[7ea0fe78a1d5b7e](https://github.com/mali-fasaha/fassets/commit/7ea0fe78a1d5b7e) Edwin Njeru *2018-07-13 12:47:30*
+
+**Added Hash class a collection of hashing functions**
+
+
+[495f4ad1fd5e7c0](https://github.com/mali-fasaha/fassets/commit/495f4ad1fd5e7c0) Edwin Njeru *2018-07-13 12:01:21*
+
+**Resolved the duplicity bug**
+
+
+[2dc37556a1312be](https://github.com/mali-fasaha/fassets/commit/2dc37556a1312be) Edwin Njeru *2018-07-12 17:01:16*
+
+**Reduced granularity of depreciation engine logs to trace level**
+
+
+[db779324d5a7041](https://github.com/mali-fasaha/fassets/commit/db779324d5a7041) Edwin Njeru *2018-07-12 16:31:18*
+
+**Added configuration for Allowing or Disallowing duplicate uploads inorder to facilitate IT tests**
+
+
+[b9e50753a43deeb](https://github.com/mali-fasaha/fassets/commit/b9e50753a43deeb) Edwin Njeru *2018-07-12 15:45:08*
+
+**Added option for allowing duplicates in the queue3**
+
+
+[1a6fd1941586907](https://github.com/mali-fasaha/fassets/commit/1a6fd1941586907) Edwin Njeru *2018-07-12 13:14:35*
+
+**Moved books package to kernel**
+
+
+[297ade816384547](https://github.com/mali-fasaha/fassets/commit/297ade816384547) Edwin Njeru *2018-07-12 12:35:14*
+
 **Fixed some poorly configured account tests**
 
 
