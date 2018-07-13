@@ -65,7 +65,7 @@ public class FileUploadsController {
 
         storageService.store(file);
 
-        redirectAttributes.addFlashAttribute("message", "You have successfully uploaded " + file.getOriginalFilename() + "!");
+        redirectAttributes.addFlashAttribute("message", "Looking Good! Your Excel File Too: \nYou have successfully uploaded " + file.getOriginalFilename() + "!");
 
         return "redirect:/files";
     }
