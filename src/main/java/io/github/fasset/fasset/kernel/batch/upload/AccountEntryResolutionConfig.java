@@ -48,6 +48,16 @@ public class AccountEntryResolutionConfig {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
+    //todo implement constructor injection here
+    public AccountEntryResolutionConfig(ItemReader<List<FixedAsset>> fixedAssetItemsReader, ItemProcessor<List<FixedAsset>, List<AccountingEntry>> accountEntryResolutionProcessor,
+                                        ItemWriter<List<AccountingEntry>> accountEntryResolutionWriter, JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
+        this.fixedAssetItemsReader = fixedAssetItemsReader;
+        this.accountEntryResolutionProcessor = accountEntryResolutionProcessor;
+        this.accountEntryResolutionWriter = accountEntryResolutionWriter;
+        this.jobBuilderFactory = jobBuilderFactory;
+        this.stepBuilderFactory = stepBuilderFactory;
+    }
+
     @Bean("accountEntryResolutionJob")
     public Job accountEntryResolutionJob(BatchNotifications listener) {
         return jobBuilderFactory.get("accountEntryResolutionJob")
