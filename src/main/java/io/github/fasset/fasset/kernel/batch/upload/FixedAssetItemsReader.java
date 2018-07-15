@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Reads and brings into the batch process lists of items from the data sink in bundles of lists
+ * Reads and brings into the batch process lists of items from the data sink in bundles of lists.
+ *
  */
 @Component("FixedAssetItemsReader")
 public class FixedAssetItemsReader implements ItemReader<List<FixedAsset>> {
