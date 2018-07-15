@@ -2,11 +2,17 @@ package io.github.fasset.fasset.kernel.batch.upload;
 
 import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -25,8 +31,8 @@ import java.util.List;
 public class AccountEntryResolutionConfig {
 
     @Autowired
-    @Qualifier("fixedAssetItemReader")
-    private ItemReader<FixedAsset> fixedAssetItemReader;
+    @Qualifier("fixedAssetItemsReader")
+    private ItemReader<List<FixedAsset>> fixedAssetItemsReader;
 
     @Autowired
     @Qualifier("accountEntryResolutionProcessor")
@@ -35,4 +41,31 @@ public class AccountEntryResolutionConfig {
     @Autowired
     @Qualifier("accountEntryResolutionProcessor")
     private ItemWriter<List<AccountingEntry>> accountEntryResolutionWriter;
+
+    @Autowired
+    private JobBuilderFactory jobBuilderFactory;
+
+    @Autowired
+    private StepBuilderFactory stepBuilderFactory;
+
+    @Bean("accountEntryResolutionJob")
+    public Job accountEntryResolutionJob(BatchNotifications listener) {
+        return jobBuilderFactory.get("accountEntryResolutionJob")
+            .preventRestart()
+            .incrementer(new RunIdIncrementer())
+            .listener(listener)
+            .flow(generateAccountEntriesStep())
+            .end()
+            .build();
+    }
+
+    @Bean("generateAccountEntriesStep")
+    public Step generateAccountEntriesStep(){
+        return stepBuilderFactory.get("generateAccountEntriesStep")
+            .<List<FixedAsset>, List<AccountingEntry>>chunk(10)
+            .reader(fixedAssetItemsReader)
+            .processor(accountEntryResolutionProcessor)
+            .writer(accountEntryResolutionWriter)
+            .build();
+    }
 }

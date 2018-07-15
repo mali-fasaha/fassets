@@ -106,13 +106,21 @@ public class FileUploadBatchConfig {
 
     @Bean("importExcelJob")
     public Job importExcelJob(BatchNotifications listener) {
-        return jobBuilderFactory.get("importExcelJob").preventRestart().incrementer(new RunIdIncrementer()).listener(listener).flow(readExcelFileStep()).on("COMPLETED").to(accrueDepreciationStep())
+        return jobBuilderFactory.get("importExcelJob")
+            .preventRestart()
+            .incrementer(new RunIdIncrementer()).listener(listener)
+            .flow(readExcelFileStep()).on("COMPLETED").to(accrueDepreciationStep())
             .on("COMPLETED").to(netBookValueUpdateStep()).end().build();
     }
 
     @Bean
     public Step readExcelFileStep() {
-        return stepBuilderFactory.get("readExcelFileStep").<FixedAssetDTO, FixedAsset>chunk(100).reader(excelItemReader(filePath)).processor(excelItemProcessor).writer(excelItemWriter).build();
+        return stepBuilderFactory.get("readExcelFileStep")
+            .<FixedAssetDTO, FixedAsset>chunk(100)
+            .reader(excelItemReader(filePath))
+            .processor(excelItemProcessor)
+            .writer(excelItemWriter)
+            .build();
     }
 
     @Bean
