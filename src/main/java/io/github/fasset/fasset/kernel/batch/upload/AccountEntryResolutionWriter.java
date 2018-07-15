@@ -35,6 +35,5 @@ public class AccountEntryResolutionWriter implements ItemWriter<List<AccountingE
             }
         });
 
-
     }
 }
