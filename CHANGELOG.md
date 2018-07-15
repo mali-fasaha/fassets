@@ -4,6 +4,16 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Humanizing the error and upload pages**
+
+
+[a45095e6d612d96](https://github.com/mali-fasaha/fassets/commit/a45095e6d612d96) Edwin Njeru *2018-07-13 14:47:08*
+
+**Added error page with stack trace**
+
+
+[0dff8166d06e183](https://github.com/mali-fasaha/fassets/commit/0dff8166d06e183) Edwin Njeru *2018-07-13 14:33:10*
+
 **Added Hash class to the IOC Container**
 
 

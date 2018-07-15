@@ -41,7 +41,7 @@ import javax.persistence.EntityManagerFactory;
 /**
  * Configuration for fileUpload job
  */
-@Configuration
+@Configuration("fileUploadBatchConfig")
 public class FileUploadBatchConfig {
 
     /*@Value("#{jobParameters['fileName']}")
@@ -144,4 +144,5 @@ public class FileUploadBatchConfig {
 
         return step3;
     }
+
 }
