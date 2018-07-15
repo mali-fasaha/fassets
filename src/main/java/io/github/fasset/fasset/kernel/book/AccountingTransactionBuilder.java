@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * This class primarily creates a transaction for posting a given List of AccountingEntry objects
  */
-@Component("accountingTransactionBUilder")
+@Component("accountingTransactionBuilder")
 public class AccountingTransactionBuilder implements TransactionBuilder {
 
     @Override
