@@ -4,6 +4,66 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Added wraps for chained method calls**
+
+
+[0d8c907339da64f](https://github.com/mali-fasaha/fassets/commit/0d8c907339da64f) Edwin Njeru *2018-07-17 13:17:09*
+
+**Added wraps for chained method calls**
+
+
+[3484c0f4a528849](https://github.com/mali-fasaha/fassets/commit/3484c0f4a528849) Edwin Njeru *2018-07-17 13:12:31*
+
+**Completed mocks for fileAccountIdServiceTest**
+
+
+[5114a2292b63964](https://github.com/mali-fasaha/fassets/commit/5114a2292b63964) Edwin Njeru *2018-07-17 12:27:41*
+
+**Added missing mocks in the accountIdService**
+
+
+[b63a86f0a2ad63e](https://github.com/mali-fasaha/fassets/commit/b63a86f0a2ad63e) Edwin Njeru *2018-07-17 09:07:45*
+
+**Renamed the accountEntryResolutionProcessor to accountEntryResolutionItemProcessor for disambiguation purposes**
+
+
+[3dbc6e7582426c9](https://github.com/mali-fasaha/fassets/commit/3dbc6e7582426c9) Edwin Njeru *2018-07-17 08:23:25*
+
+**Defined the shell for the FixedAssetsItemReader**
+
+
+[ba3c26d82408415](https://github.com/mali-fasaha/fassets/commit/ba3c26d82408415) ghacupha *2018-07-15 12:18:45*
+
+**Implemented the AccountingTransactionBuilder interface**
+
+
+[d8dcf60d3f92381](https://github.com/mali-fasaha/fassets/commit/d8dcf60d3f92381) ghacupha *2018-07-15 09:46:56*
+
+**Implemented the AccountingTransactionBuilder interface**
+
+
+[57145cf284dba99](https://github.com/mali-fasaha/fassets/commit/57145cf284dba99) ghacupha *2018-07-15 09:41:33*
+
+**Implemented the AccountEntryResolutionWriter will the TransactionBuilder interface**
+
+
+[f10c147aa2c30c8](https://github.com/mali-fasaha/fassets/commit/f10c147aa2c30c8) ghacupha *2018-07-15 09:14:44*
+
+**Added definition classes for components of the accountEntryResolutionJob**
+
+
+[be4e51920682de4](https://github.com/mali-fasaha/fassets/commit/be4e51920682de4) ghacupha *2018-07-15 08:40:19*
+
+**Created definitions of major components for the AccountEntryResolutionConfigJob**
+
+
+[3aa437e6767ced6](https://github.com/mali-fasaha/fassets/commit/3aa437e6767ced6) ghacupha *2018-07-15 07:53:42*
+
+**Created a shell for the accountEntryResolutionConfig**
+
+
+[a1027a5e24cf2a6](https://github.com/mali-fasaha/fassets/commit/a1027a5e24cf2a6) ghacupha *2018-07-15 07:10:53*
+
 **Humanizing the error and upload pages**
 
 

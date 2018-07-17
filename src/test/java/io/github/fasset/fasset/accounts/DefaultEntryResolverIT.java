@@ -94,23 +94,23 @@ public class DefaultEntryResolverIT {
                                                                            .getAccount())
                                                      .collect(ImmutableListCollector.toImmutableList());
 
-        accountNames = accountsFromEntries.parallelStream()
+        accountNames = accountsFromEntries.stream()
                                           .map(Account::getName)
                                           .collect(ImmutableListCollector.toImmutableFastList());
 
-        accountBalances = accountsFromEntries.parallelStream()
+        accountBalances = accountsFromEntries.stream()
                                              .collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentHashMap::new));
 
-        accountNumbers = accountsFromEntries.parallelStream()
+        accountNumbers = accountsFromEntries.stream()
                                             .collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentHashMap::new));
 
-        sundryCreditorBalances = accountsFromEntries.parallelStream()
+        sundryCreditorBalances = accountsFromEntries.stream()
                                                     .filter(i -> i.getName()
                                                                   .equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
                                                     .map(account -> account.balance(on(2018, 2, 26)))
                                                     .collect(ImmutableListCollector.toImmutableFastList());
 
-        sundryCreditorNumbers = accountsFromEntries.parallelStream()
+        sundryCreditorNumbers = accountsFromEntries.stream()
                                                    .filter(account -> account.getName()
                                                                              .equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
                                                    .map(Account::getNumber)
