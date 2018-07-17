@@ -35,7 +35,7 @@ public class AccountEntryResolutionConfig {
     private ItemReader<List<FixedAsset>> fixedAssetItemsReader;
 
     @Autowired
-    @Qualifier("accountEntryResolutionProcessor")
+    @Qualifier("accountEntryResolutionItemProcessor")
     private ItemProcessor<List<FixedAsset>, List<AccountingEntry>> accountEntryResolutionProcessor;
 
     @Autowired

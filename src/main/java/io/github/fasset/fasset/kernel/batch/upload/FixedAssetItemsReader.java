@@ -19,7 +19,7 @@ import java.util.List;
  * resources.
  * 
  */
-@Component("FixedAssetItemsReader")
+@Component("fixedAssetItemsReader")
 public class FixedAssetItemsReader implements ItemReader<List<FixedAsset>> {
 
     @Override

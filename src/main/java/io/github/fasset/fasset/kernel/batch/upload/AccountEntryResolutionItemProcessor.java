@@ -13,15 +13,15 @@ import java.util.List;
 /**
  * This processor primarily converts lists of FixedAsset objects into lists of Account domain AccountingEntry objects
  */
-@Component("accountEntryResolutionProcessor")
-public class AccountEntryResolutionProcessor implements ItemProcessor<List<FixedAsset>, List<AccountingEntry>> {
+@Component("accountEntryResolutionItemProcessor")
+public class AccountEntryResolutionItemProcessor implements ItemProcessor<List<FixedAsset>, List<AccountingEntry>> {
 
     //todo log this class
 
     private BatchEntryResolver batchEntryResolver;
 
     @Autowired
-    public AccountEntryResolutionProcessor(@Qualifier("batchEntryResolver") BatchEntryResolver batchEntryResolver) {
+    public AccountEntryResolutionItemProcessor(@Qualifier("batchEntryResolver") BatchEntryResolver batchEntryResolver) {
         this.batchEntryResolver = batchEntryResolver;
     }
 

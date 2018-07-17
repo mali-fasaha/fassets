@@ -63,7 +63,7 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
         List<AccountingEntry> entries = ConcurrentList.newList();
 
-        fixedAssets.parallelStream().forEach(fixedAsset -> {
+        fixedAssets.stream().forEach(fixedAsset -> {
             entries.add(getAssetEntry(fixedAsset));
             entries.add(getSundryCreditorEntry(fixedAsset));
         });
