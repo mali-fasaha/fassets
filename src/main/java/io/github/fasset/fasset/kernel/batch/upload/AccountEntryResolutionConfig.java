@@ -58,6 +58,7 @@ public class AccountEntryResolutionConfig {
         this.stepBuilderFactory = stepBuilderFactory;
     }
 
+    // @formatter:off
     @Bean("accountEntryResolutionJob")
     public Job accountEntryResolutionJob(BatchNotifications listener) {
         return jobBuilderFactory.get("accountEntryResolutionJob")
@@ -68,6 +69,7 @@ public class AccountEntryResolutionConfig {
             .end()
             .build();
     }
+    // @formatter:on
 
     @Bean("generateAccountEntriesStep")
     public Step generateAccountEntriesStep(){

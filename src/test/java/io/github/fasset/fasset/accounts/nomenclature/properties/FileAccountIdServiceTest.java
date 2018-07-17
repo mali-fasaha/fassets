@@ -77,7 +77,37 @@ public class FileAccountIdServiceTest {
         when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("001");
         when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("001");
 
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("00156");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "COMPUTERS")).thenReturn("00152");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "FURNITURE & FITTINGS")).thenReturn("00153");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "COMPUTER SOFTWARE")).thenReturn("00155");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "MOTOR VEHICLES")).thenReturn("00151");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn("00154");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "COMPUTERS")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "FURNITURE & FITTINGS")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "COMPUTER SOFTWARE")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("10051");
+        when(accountIdPolicy.generalLedgerCode(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("10051");
+
         fileAccountIdService = new FileAccountIdService(accountIdPolicy);
+    }
+
+    @Test
+    public void generalLegerCode() throws Exception {
+
+        assertEquals("00153", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
+        assertEquals("00152", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
+        assertEquals("00156", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
+        assertEquals("00155", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, zemana));
+        assertEquals("00151", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca));
+        assertEquals("00154", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, officePartitioning));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca));
+        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning));
     }
 
     @Test
@@ -114,21 +144,4 @@ public class FileAccountIdServiceTest {
         assertEquals("001", fileAccountIdService.accountPlaceHolder(ACQUISITION, DEBIT, officePartitioning));
     }
 
-    @Test
-    public void generalLegerCode() throws Exception {
-
-        // todo mock generalLedgerCode
-        assertEquals("00153", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
-        assertEquals("00152", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
-        assertEquals("00156", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
-        assertEquals("00155", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, zemana));
-        assertEquals("00151", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, kca));
-        assertEquals("00154", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, officePartitioning));
-        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, chair));
-        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, lenovo));
-        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, radio));
-        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, zemana));
-        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca));
-        assertEquals("10051", fileAccountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning));
-    }
 }
