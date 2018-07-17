@@ -64,6 +64,19 @@ public class FileAccountIdServiceTest {
         when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("SUNDRY CREDITORS");
         when(accountIdPolicy.accountName(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("SUNDRY CREDITORS");
 
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "ELECTRONIC EQUIPMENT")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTERS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "FURNITURE & FITTINGS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "COMPUTER SOFTWARE")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "MOTOR VEHICLES")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, DEBIT, "OFFICE RENOVATION")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "ELECTRONIC EQUIPMENT")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTERS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "FURNITURE & FITTINGS")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "COMPUTER SOFTWARE")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "MOTOR VEHICLES")).thenReturn("001");
+        when(accountIdPolicy.accountPlaceHolder(ACQUISITION, CREDIT, "OFFICE RENOVATION")).thenReturn("001");
+
         fileAccountIdService = new FileAccountIdService(accountIdPolicy);
     }
 
@@ -104,6 +117,7 @@ public class FileAccountIdServiceTest {
     @Test
     public void generalLegerCode() throws Exception {
 
+        // todo mock generalLedgerCode
         assertEquals("00153", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, chair));
         assertEquals("00152", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, lenovo));
         assertEquals("00156", fileAccountIdService.generalLedgerCode(ACQUISITION, DEBIT, radio));
