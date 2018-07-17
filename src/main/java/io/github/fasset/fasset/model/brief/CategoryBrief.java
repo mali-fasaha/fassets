@@ -29,8 +29,7 @@ import javax.persistence.Entity;
 import java.util.Comparator;
 
 /**
- * Back-end representation of a record of a category and its summary in terms of total
- * purchase costs, net book value etc etc
+ * Back-end representation of a record of a category and its summary in terms of total purchase costs, net book value etc etc
  *
  * @author edwin.njeru
  */
@@ -151,13 +150,19 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue).add("accruedDepreciation", accruedDepreciation)
-            .add("poll", poll).toString();
+        return MoreObjects.toStringHelper(this)
+                          .add("designation", designation)
+                          .add("purchaseCost", purchaseCost)
+                          .add("netBookValue", netBookValue)
+                          .add("accruedDepreciation", accruedDepreciation)
+                          .add("poll", poll)
+                          .toString();
     }
 
     @Override
     public int compareTo(CategoryBrief o) {
 
-        return Comparator.comparing(CategoryBrief::getDesignation).compare(this, o);
+        return Comparator.comparing(CategoryBrief::getDesignation)
+                         .compare(this, o);
     }
 }

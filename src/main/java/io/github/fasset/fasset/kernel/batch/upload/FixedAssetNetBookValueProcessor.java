@@ -36,13 +36,11 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
     private static final Logger log = LoggerFactory.getLogger(FixedAssetNetBookValueProcessor.class);
 
     /**
-     * Process the provided item, returning a potentially modified or new item for continued
-     * processing.  If the returned result is null, it is assumed that processing of the item
-     * should not continue.
+     * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
+     * continue.
      *
      * @param fixedAsset to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the
-     * provided item should not continue.
+     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
      * @throws Exception thrown if exception occurs during processing.
      */
     @Override
@@ -53,8 +51,11 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
         NetBookValue retVal = new NetBookValue();
 
         try {
-            retVal.setFixedAssetId(fixedAsset.getId()).setCategory(fixedAsset.getCategory()).setSolId(fixedAsset.getSolId()).setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
-                .setNetBookValue(fixedAsset.getNetBookValue());
+            retVal.setFixedAssetId(fixedAsset.getId())
+                  .setCategory(fixedAsset.getCategory())
+                  .setSolId(fixedAsset.getSolId())
+                  .setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
+                  .setNetBookValue(fixedAsset.getNetBookValue());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while processing fixedAsset item : %s", fixedAsset);
             throw new ConverterException(message, e);

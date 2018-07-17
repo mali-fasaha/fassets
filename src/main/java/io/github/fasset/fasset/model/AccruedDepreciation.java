@@ -24,6 +24,7 @@ import org.javamoney.moneta.Money;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.text.MessageFormat;
 import java.time.YearMonth;
 import java.util.Objects;
 
@@ -120,13 +121,7 @@ public class AccruedDepreciation extends DomainModel<String> {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("AccruedDepreciation{");
-        sb.append("fixedAssetId=").append(fixedAssetId);
-        sb.append(", month=").append(month);
-        sb.append(", solId='").append(solId).append('\'');
-        sb.append(", category='").append(category).append('\'');
-        sb.append(", accruedDepreciation=").append(accruedDepreciation);
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format("AccruedDepreciation'{'fixedAssetId={0}, month={1}, solId=''{2}'', category=''{3}'', accruedDepreciation={4}'}'", fixedAssetId, month, solId, category,
+                                    accruedDepreciation);
     }
 }

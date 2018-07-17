@@ -81,7 +81,8 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
         ServiceOutletBrief serviceOutletBrief;
 
         try {
-            serviceOutletBrief = Objects.requireNonNull(serviceOutletBriefRepository.findById(id)).get();
+            serviceOutletBrief = Objects.requireNonNull(serviceOutletBriefRepository.findById(id))
+                                        .get();
         } catch (Throwable e) {
             String message = "Exception encountered while extracting data from the serviceOutletBriefRepository";
             throw new DataRetrievalFromControllerException(message, e);
@@ -93,8 +94,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
     }
 
     /**
-     * Save all ServiceOutletBrief items in the collection. All existing items are updated while new ones
-     * are newly added, to the ends that the designation remains unique
+     * Save all ServiceOutletBrief items in the collection. All existing items are updated while new ones are newly added, to the ends that the designation remains unique
      *
      * @param serviceOutletBriefs to be persisted to the serviceOutletBriefsRepository
      */

@@ -35,10 +35,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.YearMonth;
 
 /**
- * This class represents the main method which is to be abstracted by other layers that would
- * allow for flexibility in application of business rules, the main method is the
- * {@link DepreciationExecutorImpl#getDepreciation(FixedAsset, YearMonth)} which able to extract a
- * {@link Depreciation} as long as you have a {@link FixedAsset} and the {@link YearMonth} month for which the
+ * This class represents the main method which is to be abstracted by other layers that would allow for flexibility in application of business rules, the main method is the {@link
+ * DepreciationExecutorImpl#getDepreciation(FixedAsset, YearMonth)} which able to extract a {@link Depreciation} as long as you have a {@link FixedAsset} and the {@link YearMonth} month for which the
  * depreciation is to be calculated
  *
  * @author edwin.njeru
@@ -74,8 +72,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
     }
 
     /**
-     * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new
-     * net book value and the month of depreciation
+     * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new net book value and the month of depreciation
      *
      * @param asset {@link FixedAsset} to be depreciated
      * @param month the month for which we are calculating depreciation
@@ -89,23 +86,27 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
 
         checkIfNull(asset, month);
 
-        if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
+        if (asset.getNetBookValue()
+                 .isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
             log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " + "depreciation", asset);
 
             depreciation = getNilDepreciation(asset, month);
 
-            depreciationProceeds.setDepreciation(depreciation).setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
-                .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
+            depreciationProceeds.setDepreciation(depreciation)
+                                .setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
+                                .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
 
-        } else if (localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)) {
+        } else if (localDateToYearMonthConverter.convert(asset.getPurchaseDate())
+                                                .isAfter(month)) {
 
             log.trace("The depreciation period : {} is sooner that the assets purchase date {} " + "resorting to nil depreciation", month, asset.getPurchaseDate());
 
             depreciation = getNilDepreciation(asset, month);
 
-            depreciationProceeds.setDepreciation(depreciation).setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
-                .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
+            depreciationProceeds.setDepreciation(depreciation)
+                                .setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
+                                .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
 
         } else {
 
@@ -131,8 +132,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
     }
 
     /**
-     * Creates a depreciation object whose depreciation is Zero relative to the
-     * fixedAsset item given and the depreciation period
+     * Creates a depreciation object whose depreciation is Zero relative to the fixedAsset item given and the depreciation period
      *
      * @param asset              FixedAsset with no depreciation for the period
      * @param depreciationPeriod Depreciation period for which depreciation is nil

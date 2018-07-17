@@ -18,9 +18,8 @@
 package io.github.fasset.fasset.accounts.definition;
 
 /**
- * The account is not just an arbitrary assignment but a representation of its various features. Each
- * part of the account number string is generated in unique process logic and this Enum represents the
- * identity of each part
+ * The account is not just an arbitrary assignment but a representation of its various features. Each part of the account number string is generated in unique process logic and this Enum represents
+ * the identity of each part
  */
 public enum AccountNumberSegment {
 

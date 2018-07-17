@@ -58,14 +58,18 @@ public class ExcelUploadJob {
 
         log.info("Uploading excel file on the path : {}", filePath);
 
-        JobParameters jobParameters = new JobParametersBuilder().addString("fileName", filePath).addString("month", month).addString("time", LocalDateTime.now().toString()).toJobParameters();
+        JobParameters jobParameters = new JobParametersBuilder().addString("fileName", filePath)
+                                                                .addString("month", month)
+                                                                .addString("time", LocalDateTime.now()
+                                                                                                .toString())
+                                                                .toJobParameters();
 
         try {
             jobLauncher.run(importExcelJob, jobParameters);
         } catch (Throwable e) {
 
             String message = String.format("Exception encountered %s caused by %s,while launching job" + "nomenclature %s, reading from excel file : %s at time %s", e.getMessage(), e.getCause(),
-                importExcelJob.getName(), jobParameters.getString("fileName"), jobParameters.getString("time"));
+                                           importExcelJob.getName(), jobParameters.getString("fileName"), jobParameters.getString("time"));
 
             throw new BatchJobExecutionException(message, e);
 

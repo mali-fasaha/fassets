@@ -21,11 +21,11 @@ import io.github.fasset.fasset.DomainModel;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
+import java.text.MessageFormat;
 import java.util.Objects;
 
 /**
- * This object represents a record of a Category's depreciation for all the months of
- * a year
+ * This object represents a record of a Category's depreciation for all the months of a year
  */
 @Entity
 @Audited
@@ -215,22 +215,8 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MonthlyCategoryDepreciation{");
-        sb.append("categoryName='").append(categoryName).append('\'');
-        sb.append(", year=").append(year);
-        sb.append(", jan=").append(jan);
-        sb.append(", feb=").append(feb);
-        sb.append(", mar=").append(mar);
-        sb.append(", apr=").append(apr);
-        sb.append(", may=").append(may);
-        sb.append(", jun=").append(jun);
-        sb.append(", jul=").append(jul);
-        sb.append(", aug=").append(aug);
-        sb.append(", sep=").append(sep);
-        sb.append(", oct=").append(oct);
-        sb.append(", nov=").append(nov);
-        sb.append(", dec=").append(dec);
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format(
+            "MonthlyCategoryDepreciation'{'categoryName=''{0}'', year={1}, jan={2}, feb={3}, mar={4}, apr={5}, may={6}, jun={7}, jul={8}, aug={9}, sep={10}, oct={11}, nov={12}, dec={13}'}'",
+            categoryName, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 }

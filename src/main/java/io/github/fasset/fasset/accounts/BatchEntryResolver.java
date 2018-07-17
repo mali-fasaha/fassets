@@ -23,25 +23,19 @@ import io.github.fasset.fasset.model.FixedAsset;
 import java.util.List;
 
 /**
- * This object will be used to abstract acquisition transactions for an asset, using the Asset account and
- * the Sundry Creditors account. This simplifies the story, of how the asset was acquired and, and how much
- * was paid to a vendor, since such, is subject to withholding tax obligations and sometimes contract-related
- * provisions, as such we are only interest with the financial representation of assets in this application.
- * In accordance to the Account Proliferation policy version 1.0, each asset is represented by an entry to the
- * respective Asset account.
- * Depreciation and acquisition could be done in bulk for sensitive things like disposal and revaluation it has
- * been thought better to post as individual items which will warrant like another interface altogether
+ * This object will be used to abstract acquisition transactions for an asset, using the Asset account and the Sundry Creditors account. This simplifies the story, of how the asset was acquired and,
+ * and how much was paid to a vendor, since such, is subject to withholding tax obligations and sometimes contract-related provisions, as such we are only interest with the financial representation of
+ * assets in this application. In accordance to the Account Proliferation policy version 1.0, each asset is represented by an entry to the respective Asset account. Depreciation and acquisition could
+ * be done in bulk for sensitive things like disposal and revaluation it has been thought better to post as individual items which will warrant like another interface altogether
  *
  * @author edwin.njeru
  */
 public interface BatchEntryResolver {
 
     /**
-     * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args.
-     * The method creates entries for both {@code DEBIT} and {@code CREDIT} side. In this case SundryCreditors
-     * account is credited and an Asset account is DEBITED with the full purchase cost of the asset.
-     * When an account is being depreciated this method creates postings for {@code DEBIT} in the depreciation
-     * account and {@code CREDIT} in the accumulated depreciation account
+     * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args. The method creates entries for both {@code DEBIT} and {@code CREDIT} side. In this case
+     * SundryCreditors account is credited and an Asset account is DEBITED with the full purchase cost of the asset. When an account is being depreciated this method creates postings for {@code DEBIT}
+     * in the depreciation account and {@code CREDIT} in the accumulated depreciation account
      *
      * @param fixedAssets Collection of {@code FixedAsset} items from which we are to generate entries
      * @return List containing Entry bookings for the fixedAssets passed in the parameter

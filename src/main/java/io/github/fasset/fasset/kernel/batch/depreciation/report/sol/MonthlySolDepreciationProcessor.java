@@ -25,8 +25,7 @@ import org.springframework.batch.item.ItemProcessor;
 import java.util.Objects;
 
 /**
- * Takes the year and generates the appropriate monthly by month Service outlet depreciation for
- * a given Service Outlet
+ * Takes the year and generates the appropriate monthly by month Service outlet depreciation for a given Service Outlet
  */
 public class MonthlySolDepreciationProcessor implements ItemProcessor<String, MonthlySolDepreciation> {
 
@@ -41,13 +40,11 @@ public class MonthlySolDepreciationProcessor implements ItemProcessor<String, Mo
     }
 
     /**
-     * Process the provided item, returning a potentially modified or new item for continued
-     * processing.  If the returned result is null, it is assumed that processing of the item
-     * should not continue.
+     * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
+     * continue.
      *
      * @param item to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the
-     * provided item should not continue.
+     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
      * @throws Exception thrown if exception occurs during processing.
      */
     @Override

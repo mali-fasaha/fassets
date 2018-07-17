@@ -94,20 +94,25 @@ public class DepreciationServiceImpl implements DepreciationService {
     }
 
     /**
-     * Saves multiple items using multiple repositories for items encapsulated in the
-     * DepreciationProceeds object
+     * Saves multiple items using multiple repositories for items encapsulated in the DepreciationProceeds object
      *
      * @param list of depreciationProceeds
      */
     @Override
     public void saveAllDepreciationProceeds(List<DepreciationProceeds> list) {
 
-        depreciationRepository.saveAll(list.stream().map(DepreciationProceeds::getDepreciation).collect(ImmutableListCollector.toImmutableList()));
+        depreciationRepository.saveAll(list.stream()
+                                           .map(DepreciationProceeds::getDepreciation)
+                                           .collect(ImmutableListCollector.toImmutableList()));
 
 
-        accruedDepreciationService.saveAllAccruedDepreciationRecords(list.stream().map(DepreciationProceeds::getAccruedDepreciation).collect(ImmutableListCollector.toImmutableList()));
+        accruedDepreciationService.saveAllAccruedDepreciationRecords(list.stream()
+                                                                         .map(DepreciationProceeds::getAccruedDepreciation)
+                                                                         .collect(ImmutableListCollector.toImmutableList()));
 
-        netBookValueService.saveAllNetBookValueItems(list.stream().map(DepreciationProceeds::getNetBookValue).collect(ImmutableListCollector.toImmutableList()));
+        netBookValueService.saveAllNetBookValueItems(list.stream()
+                                                         .map(DepreciationProceeds::getNetBookValue)
+                                                         .collect(ImmutableListCollector.toImmutableList()));
 
     }
 }

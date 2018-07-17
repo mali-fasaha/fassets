@@ -35,8 +35,8 @@ import static io.github.ghacupha.time.point.SimpleDate.ofLocal;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * This resolver generates accounting entries relates to depreciation of a fixed asset where we generally credit the
- * contra account which is the accumulated depreciation account, and credit the respective depreciation account.
+ * This resolver generates accounting entries relates to depreciation of a fixed asset where we generally credit the contra account which is the accumulated depreciation account, and credit the
+ * respective depreciation account.
  *
  * @author edwin.njeru
  */
@@ -57,9 +57,8 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
     }
 
     /**
-     * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter.
-     * The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract from
-     * client the logic of obtaining depreciation rates and values from configurations in the application
+     * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter. The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract
+     * from client the logic of obtaining depreciation rates and values from configurations in the application
      *
      * @param fixedAssets Items to be depreciated
      * @param period      when the depreciation Entries are effective
@@ -69,7 +68,9 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
 
         log.debug("Resolving depreciation entries for {} fixedAssets", fixedAssets.size());
 
-        List<AccountingEntry> entries = fixedAssets.stream().flatMap(asset -> getEntrySet(asset, period).stream()).collect(ImmutableListCollector.toImmutableFastList());
+        List<AccountingEntry> entries = fixedAssets.stream()
+                                                   .flatMap(asset -> getEntrySet(asset, period).stream())
+                                                   .collect(ImmutableListCollector.toImmutableFastList());
 
         log.debug("{} accounting entries generated", entries.size());
 

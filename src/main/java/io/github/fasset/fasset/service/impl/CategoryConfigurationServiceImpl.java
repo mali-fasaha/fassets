@@ -58,10 +58,11 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
 
         List<CategoryConfiguration> categoryConfigurations = ConcurrentList.newList();
 
-        categoryConfigurationRepository.findAll().forEach(c -> {
-            log.trace("Adding category {} to category list", c);
-            categoryConfigurations.add(c);
-        });
+        categoryConfigurationRepository.findAll()
+                                       .forEach(c -> {
+                                           log.trace("Adding category {} to category list", c);
+                                           categoryConfigurations.add(c);
+                                       });
 
         return categoryConfigurations;
     }
@@ -79,7 +80,8 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     @Override
     public CategoryConfiguration getCategoryConfigurationById(int id) {
 
-        return categoryConfigurationRepository.findById(id).get();
+        return categoryConfigurationRepository.findById(id)
+                                              .get();
     }
 
     @Cacheable("categoryConfigurationsByNames")

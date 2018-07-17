@@ -75,9 +75,15 @@ public class FileUploadNotification {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FileUploadNotification{");
-        sb.append("fileName='").append(fileName).append('\'');
-        sb.append(", month='").append(month).append('\'');
-        sb.append(", timeUploaded='").append(timeUploaded).append('\'');
+        sb.append("fileName='")
+          .append(fileName)
+          .append('\'');
+        sb.append(", month='")
+          .append(month)
+          .append('\'');
+        sb.append(", timeUploaded='")
+          .append(timeUploaded)
+          .append('\'');
         sb.append('}');
         return sb.toString();
     }

@@ -23,9 +23,8 @@ import io.github.fasset.fasset.model.FixedAsset;
 import org.springframework.stereotype.Component;
 
 /**
- * This resolver generates the appropriate accounts required to post depreciation {@code DEBIT} and {@code CREDIT} items
- * as would be typical where the fixed asset is maintained at cost. Although this could be configured to maintain the asset
- * in the register at revaluation.
+ * This resolver generates the appropriate accounts required to post depreciation {@code DEBIT} and {@code CREDIT} items as would be typical where the fixed asset is maintained at cost. Although this
+ * could be configured to maintain the asset in the register at revaluation.
  *
  * @author edwin.njeru
  */

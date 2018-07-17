@@ -51,8 +51,13 @@ public class FixedAssetFormDto {
 
     public FixedAsset getFixedAsset() {
 
-        return new FixedAsset().setSolId(solId).setBarcode(barcode).setAssetDescription(assetDescription).setPurchaseDate(purchaseDate).setCategory(category)
-            .setPurchaseCost(doubleToMoneyConverter.convert(purchaseCost)).setNetBookValue(doubleToMoneyConverter.convert(netBookValue));
+        return new FixedAsset().setSolId(solId)
+                               .setBarcode(barcode)
+                               .setAssetDescription(assetDescription)
+                               .setPurchaseDate(purchaseDate)
+                               .setCategory(category)
+                               .setPurchaseCost(doubleToMoneyConverter.convert(purchaseCost))
+                               .setNetBookValue(doubleToMoneyConverter.convert(netBookValue));
 
     }
 
@@ -140,7 +145,14 @@ public class FixedAssetFormDto {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("solId", solId).add("barcode", barcode).add("assetDescription", assetDescription).add("purchaseDate", purchaseDate).add("category", category)
-            .add("purchaseCost", purchaseCost).add("netBookValue", netBookValue).toString();
+        return MoreObjects.toStringHelper(this)
+                          .add("solId", solId)
+                          .add("barcode", barcode)
+                          .add("assetDescription", assetDescription)
+                          .add("purchaseDate", purchaseDate)
+                          .add("category", category)
+                          .add("purchaseCost", purchaseCost)
+                          .add("netBookValue", netBookValue)
+                          .toString();
     }
 }

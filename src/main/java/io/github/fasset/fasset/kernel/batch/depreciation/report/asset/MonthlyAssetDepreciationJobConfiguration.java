@@ -100,8 +100,14 @@ public class MonthlyAssetDepreciationJobConfiguration {
     @Bean("monthlyAssetDepreciationJob")
     @DependsOn("monthlyAssetDepreciationJobListener")
     public Job monthlyAssetDepreciationJob() {
-        return jobBuilderFactory.get("monthlyAssetDepreciationJob").preventRestart().incrementer(new RunIdIncrementer()).listener(monthlyAssetDepreciationJobListener()).preventRestart()
-            .flow(updateMonthlyAssetDepreciation()).end().build();
+        return jobBuilderFactory.get("monthlyAssetDepreciationJob")
+                                .preventRestart()
+                                .incrementer(new RunIdIncrementer())
+                                .listener(monthlyAssetDepreciationJobListener())
+                                .preventRestart()
+                                .flow(updateMonthlyAssetDepreciation())
+                                .end()
+                                .build();
     }
 
     @Bean
@@ -122,7 +128,10 @@ public class MonthlyAssetDepreciationJobConfiguration {
         Step updateMonthlyAssetDepreciation = null;
         try {
             updateMonthlyAssetDepreciation = stepBuilderFactory.get("updateMonthlyAssetDepreciation").<FixedAsset, MonthlyAssetDepreciation>chunk(100).reader(fixedAssetItemReader)
-                .processor(monthlyAssetDepreciationProcessor(year)).writer(monthlyAssetDepreciationWriter()).build();
+                                                                                                                                                      .processor(
+                                                                                                                                                          monthlyAssetDepreciationProcessor(year))
+                                                                                                                                                      .writer(monthlyAssetDepreciationWriter())
+                                                                                                                                                      .build();
         } catch (Exception e) {
             e.printStackTrace();
         }

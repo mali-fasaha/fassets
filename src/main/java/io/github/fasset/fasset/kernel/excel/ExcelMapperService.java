@@ -22,10 +22,8 @@ import io.github.fasset.fasset.model.FixedAssetDTO;
 import java.util.List;
 
 /**
- * This interface generates collection of data from an excel file given the fileName.
- * <br> The implementation is typed and the query will need to include such a class, therefore
- * the implementation will inevitably be required to be specific as to the type of data expected from
- * the underlying library
+ * This interface generates collection of data from an excel file given the fileName. <br> The implementation is typed and the query will need to include such a class, therefore the implementation
+ * will inevitably be required to be specific as to the type of data expected from the underlying library
  */
 public interface ExcelMapperService {
 

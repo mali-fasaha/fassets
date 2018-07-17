@@ -73,8 +73,14 @@ public class MonthlySolDepreciationJobConfiguration {
 
     @Bean("monthlySolDepreciationJob")
     public Job monthlySolDepreciationJob() {
-        return jobBuilderFactory.get("monthlySolDepreciationJob").preventRestart().incrementer(new RunIdIncrementer()).listener(monthlySolDepreciationJobListener).preventRestart()
-            .flow(createMonthlySolDepreciationItems()).end().build();
+        return jobBuilderFactory.get("monthlySolDepreciationJob")
+                                .preventRestart()
+                                .incrementer(new RunIdIncrementer())
+                                .listener(monthlySolDepreciationJobListener)
+                                .preventRestart()
+                                .flow(createMonthlySolDepreciationItems())
+                                .end()
+                                .build();
     }
 
     @Bean
@@ -117,9 +123,10 @@ public class MonthlySolDepreciationJobConfiguration {
         Step createMonthlySolDepreciationItems = null;
 
         try {
-            createMonthlySolDepreciationItems =
-                stepBuilderFactory.get("createMonthlySolDepreciationItems").<String, MonthlySolDepreciation>chunk(5).reader(monthlySolDepreciationReader()).writer(monthlySolDepreciationWriter())
-                    .processor(monthlySolDepreciationProcessor(year)).build();
+            createMonthlySolDepreciationItems = stepBuilderFactory.get("createMonthlySolDepreciationItems").<String, MonthlySolDepreciation>chunk(5).reader(monthlySolDepreciationReader())
+                                                                                                                                                    .writer(monthlySolDepreciationWriter())
+                                                                                                                                                    .processor(monthlySolDepreciationProcessor(year))
+                                                                                                                                                    .build();
         } catch (Exception e) {
             e.printStackTrace();
         }

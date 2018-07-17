@@ -41,14 +41,12 @@ public interface Transaction {
      * @param narration       {@link AccountingEntry} specifications of the {@link AccountingEntry}
      * @param entryAttributes Map containing additional info about the entry
      * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
-     *                                     do not match
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
      */
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already
-     * been posted
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      *
      * @param accountSide     to which the entry is being posted
      * @param amount          {@link Cash} amount being posted to the journal
@@ -57,15 +55,13 @@ public interface Transaction {
      * @param entryAttributes Map containing additional details about the entry being entered
      * @param date            posting date of the entry
      * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
-     *                                     do not match
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
      */
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes, TimePoint date)
         throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already
-     * been posted
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      *
      * @param accountSide to which the entry is being posted
      * @param amount      {@link Cash} amount being posted to the journal
@@ -73,8 +69,7 @@ public interface Transaction {
      * @param narration   a brief narration of the entry
      * @param date        posting date of the entry
      * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
-     *                                     do not match
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
      */
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date) throws ImmutableEntryException, MismatchedCurrencyException;
 
@@ -88,10 +83,8 @@ public interface Transaction {
     void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException;
 
     /**
-     * Same method as {code Transaction.addEntry()} but with an empty map as description of the
-     * entry. The {@code AccountingEntry} can therefore only be distinguished by its narration.
-     * The add method adds entries to the transaction provided the transaction has not already
-     * been posted
+     * Same method as {code Transaction.addEntry()} but with an empty map as description of the entry. The {@code AccountingEntry} can therefore only be distinguished by its narration. The add method
+     * adds entries to the transaction provided the transaction has not already been posted
      *
      * @param accountSide to which the entry is being posted
      * @param amount      {@link Cash} amount being posted to the journal
@@ -103,8 +96,7 @@ public interface Transaction {
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
-     * Adds the {@link AccountingEntry} items into the accounts involved in this {@link Transaction}.
-     * This method will not run if it is already posted
+     * Adds the {@link AccountingEntry} items into the accounts involved in this {@link Transaction}. This method will not run if it is already posted
      *
      * @throws UnableToPostException   when the transaction could not be posted because the amount is not balanced
      * @throws ImmutableEntryException when an AccountingEntry is added to a posted transaction

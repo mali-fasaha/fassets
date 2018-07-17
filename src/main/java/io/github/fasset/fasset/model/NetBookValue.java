@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.text.MessageFormat;
 import java.time.YearMonth;
 import java.util.Objects;
 
@@ -144,13 +145,6 @@ public class NetBookValue extends DomainModel<String> {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("NetBookValue{");
-        sb.append("fixedAssetId=").append(fixedAssetId);
-        sb.append(", month=").append(month);
-        sb.append(", netBookValue=").append(netBookValue);
-        sb.append(", solId='").append(solId).append('\'');
-        sb.append(", category='").append(category).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format("NetBookValue'{'fixedAssetId={0}, month={1}, netBookValue={2}, solId=''{3}'', category=''{4}'''}'", fixedAssetId, month, netBookValue, solId, category);
     }
 }

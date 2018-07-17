@@ -35,8 +35,7 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 /**
- * Another Agent in the DepreciationChain that specifically calculates and generates a depreciation
- * object
+ * Another Agent in the DepreciationChain that specifically calculates and generates a depreciation object
  */
 @DependsOn("depreciationExecutor")
 @Component("depreciationAgent")
@@ -88,9 +87,13 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         log.trace("Using deprecant : {}, and depreciation rate : {} for calculating depreciation", deprecant, depreciationRate);
         Money depreciationAmount = calculate(deprecant, depreciationRate);
 
-        depreciation = getDepreciation(preprocessor.setAsset(asset).setMonth(month).setDepreciationAmount(depreciationAmount).setProperties());
+        depreciation = getDepreciation(preprocessor.setAsset(asset)
+                                                   .setMonth(month)
+                                                   .setDepreciationAmount(depreciationAmount)
+                                                   .setProperties());
 
-        Money nbv = asset.getNetBookValue().subtract(depreciation.getDepreciation());
+        Money nbv = asset.getNetBookValue()
+                         .subtract(depreciation.getDepreciation());
 
         //send changes to queue for flushing through entityManager
         //send(() -> depreciation);
@@ -104,8 +107,7 @@ public class DepreciationAgentImpl implements DepreciationAgent {
     }
 
     /**
-     * This method determines the amount to be used as deprecant relative to the CategoryConfiguration
-     * item passed
+     * This method determines the amount to be used as deprecant relative to the CategoryConfiguration item passed
      *
      * @param asset         FixedAsset item being depereciated
      * @param configuration CategoryConfiguration relevant to the asset being depreciated
@@ -118,13 +120,15 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         Money deprecant = null;
 
         try {
-            if (configuration.getDeprecant().equalsIgnoreCase("purchaseCost")) {
+            if (configuration.getDeprecant()
+                             .equalsIgnoreCase("purchaseCost")) {
 
                 deprecant = asset.getPurchaseCost();
 
                 log.trace("Using purchase cost as deprecant : {}", deprecant);
 
-            } else if (configuration.getDeprecant().equalsIgnoreCase("netBookValue")) {
+            } else if (configuration.getDeprecant()
+                                    .equalsIgnoreCase("netBookValue")) {
 
                 deprecant = asset.getNetBookValue();
 
@@ -175,9 +179,18 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         log.trace("Creating depreciation instance relative to the fixedAsset item : {} for the month : {}", preprocessor.getAsset(), preprocessor.getMonth());
         Depreciation depreciation = new Depreciation();
         try {
-            depreciation.setDepreciationPeriod(preprocessor.getMonth()).setFixedAssetId(preprocessor.getAsset().getId()).setCategory(preprocessor.getAsset().getCategory())
-                .setSolId(preprocessor.getAsset().getSolId()).setYear(preprocessor.getMonth().getYear()).setMonth(preprocessor.getMonth().getMonthValue())
-                .setDepreciation(preprocessor.getDepreciationAmount());
+            depreciation.setDepreciationPeriod(preprocessor.getMonth())
+                        .setFixedAssetId(preprocessor.getAsset()
+                                                     .getId())
+                        .setCategory(preprocessor.getAsset()
+                                                 .getCategory())
+                        .setSolId(preprocessor.getAsset()
+                                              .getSolId())
+                        .setYear(preprocessor.getMonth()
+                                             .getYear())
+                        .setMonth(preprocessor.getMonth()
+                                              .getMonthValue())
+                        .setDepreciation(preprocessor.getDepreciationAmount());
         } catch (Throwable e) {
             String message =
                 String.format("Exception encountered while creating depreciation instance relative to" + " asset : %s, for the period : %s", preprocessor.getAsset(), preprocessor.getMonth());

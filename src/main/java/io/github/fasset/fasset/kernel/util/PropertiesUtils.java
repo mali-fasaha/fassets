@@ -27,13 +27,10 @@ import java.util.Properties;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Reads properties data from a properties file at start up for any preconfigured client. For instance a client could
- * get instantiated with an argument that provides a location for the properties file to the {@code #fetchProperties}
- * method, in the constructor or spring's container {@code @PostConstruct} initialization method,
- * which will in turn instantiate a private properties file in the same class.
- * <br> The quiet convention here is that to fetch properties in in a subfolder under resources, the appropriate
- * method name will have the name of the folder betwixt, right after the word fetch. For instance to fetch properties
- * from the config subfolder we call the method {@code #fetchConfigProperties}.
+ * Reads properties data from a properties file at start up for any preconfigured client. For instance a client could get instantiated with an argument that provides a location for the properties file
+ * to the {@code #fetchProperties} method, in the constructor or spring's container {@code @PostConstruct} initialization method, which will in turn instantiate a private properties file in the same
+ * class. <br> The quiet convention here is that to fetch properties in in a subfolder under resources, the appropriate method name will have the name of the folder betwixt, right after the word
+ * fetch. For instance to fetch properties from the config subfolder we call the method {@code #fetchConfigProperties}.
  *
  * @author edwin_njeru
  */
@@ -42,10 +39,8 @@ public class PropertiesUtils {
     private static final org.slf4j.Logger log = getLogger(PropertiesUtils.class);
 
     /**
-     * Will return Properties from any file on the classpath, if is defined with the relative
-     * path from the resources folder.
-     * For instance the "application.properties" in the resources folder will look like this: "application".
-     * Yes, leave out the ".properties" bit
+     * Will return Properties from any file on the classpath, if is defined with the relative path from the resources folder. For instance the "application.properties" in the resources folder will
+     * look like this: "application". Yes, leave out the ".properties" bit
      *
      * @param fileName Filename containing property definitions
      * @return Properties read from the properties file

@@ -49,12 +49,14 @@ public class AccountDebitState implements AccountState {
     public AccountBalance getAccountBalance(Cash debits, Cash credits) {
 
         if (debits.isMoreThan(credits)) {
-            return new AccountBalance(debits.minus(credits).abs(), account.getAccountSide());
+            return new AccountBalance(debits.minus(credits)
+                                            .abs(), account.getAccountSide());
         }
 
         account.setAccountSide(CREDIT);
 
-        return new AccountBalance(credits.minus(debits).abs(), CREDIT);
+        return new AccountBalance(credits.minus(debits)
+                                         .abs(), CREDIT);
     }
 
     @Override

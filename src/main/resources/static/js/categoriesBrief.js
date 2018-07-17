@@ -11,16 +11,16 @@ $(document).ready(function () {
      */
     var table = $('#categoryBriefs').DataTable({
 
-        "sAjaxSource":"/briefs/categories/data",
-        "sAjaxDataProp":"",
-        "order":[[0,"asc"]],
-        "aoColumns":[
-            {"mData":"id"},
-            {"mData":"designation"},
-            {"mData":"purchaseCost"},
-            {"mData":"netBookValue"},
-            {"mData":"accruedDepreciation"},
-            {"mData":"poll"}
+        "sAjaxSource": "/briefs/categories/data",
+        "sAjaxDataProp": "",
+        "order": [[0, "asc"]],
+        "aoColumns": [
+            {"mData": "id"},
+            {"mData": "designation"},
+            {"mData": "purchaseCost"},
+            {"mData": "netBookValue"},
+            {"mData": "accruedDepreciation"},
+            {"mData": "poll"}
         ],
 
         /* really, really hope this works man! */

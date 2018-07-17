@@ -21,12 +21,12 @@ import com.poiji.annotation.ExcelCell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.Objects;
 
 /**
- * This model represents a row of data in the excel file that is soon to be deserialized
- * and persisted into the repository
+ * This model represents a row of data in the excel file that is soon to be deserialized and persisted into the repository
  */
 public class FixedAssetDTO {
 
@@ -150,15 +150,7 @@ public class FixedAssetDTO {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FixedAssetDTO{");
-        sb.append("solId='").append(solId).append('\'');
-        sb.append(", barcode='").append(barcode).append('\'');
-        sb.append(", assetDescription='").append(assetDescription).append('\'');
-        sb.append(", purchaseDate=").append(purchaseDate);
-        sb.append(", category='").append(category).append('\'');
-        sb.append(", purchaseCost='").append(purchaseCost).append('\'');
-        sb.append(", netBookValue='").append(netBookValue).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format("FixedAssetDTO'{'solId=''{0}'', barcode=''{1}'', assetDescription=''{2}'', purchaseDate={3}, category=''{4}'', purchaseCost=''{5}'', netBookValue=''{6}'''}'",
+                                    solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 }

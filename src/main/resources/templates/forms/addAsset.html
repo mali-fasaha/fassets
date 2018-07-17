@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <div th:replace="fragments/header :: header-css"/>
 
@@ -25,7 +25,7 @@
         <div class="panel-body">
             <!--/*@thymesVar nomenclature="fixedAsset" type="io.github.fasset.fasset.model.FixedAsset"*/-->
             <form class="form-inline" role="form" action="#" th:action="@{/add/asset}" th:object="${fixedAsset}">
-                <br />
+                <br/>
                 <div class="row align-centre">
                     <div class="form-group col-lg-4 col-md-4 col-sm-4">
                         <label for="solId">Sol Id:</label>

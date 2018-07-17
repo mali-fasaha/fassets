@@ -49,18 +49,30 @@ public class MonthlyCategoryDepreciationDTO {
                                           MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.categoryName = categoryName;
         this.year = year;
-        this.jan = jan.getNumber().doubleValue();
-        this.feb = feb.getNumber().doubleValue();
-        this.mar = mar.getNumber().doubleValue();
-        this.apr = apr.getNumber().doubleValue();
-        this.may = may.getNumber().doubleValue();
-        this.jun = jun.getNumber().doubleValue();
-        this.jul = jul.getNumber().doubleValue();
-        this.aug = aug.getNumber().doubleValue();
-        this.sep = sep.getNumber().doubleValue();
-        this.oct = oct.getNumber().doubleValue();
-        this.nov = nov.getNumber().doubleValue();
-        this.dec = dec.getNumber().doubleValue();
+        this.jan = jan.getNumber()
+                      .doubleValue();
+        this.feb = feb.getNumber()
+                      .doubleValue();
+        this.mar = mar.getNumber()
+                      .doubleValue();
+        this.apr = apr.getNumber()
+                      .doubleValue();
+        this.may = may.getNumber()
+                      .doubleValue();
+        this.jun = jun.getNumber()
+                      .doubleValue();
+        this.jul = jul.getNumber()
+                      .doubleValue();
+        this.aug = aug.getNumber()
+                      .doubleValue();
+        this.sep = sep.getNumber()
+                      .doubleValue();
+        this.oct = oct.getNumber()
+                      .doubleValue();
+        this.nov = nov.getNumber()
+                      .doubleValue();
+        this.dec = dec.getNumber()
+                      .doubleValue();
     }
 
     public String getCategoryName() {
@@ -241,7 +253,21 @@ public class MonthlyCategoryDepreciationDTO {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("categoryName", categoryName).add("year", year).add("jan", jan).add("feb", feb).add("mar", mar).add("apr", apr).add("may", may).add("jun", jun)
-            .add("jul", jul).add("aug", aug).add("sep", sep).add("oct", oct).add("nov", nov).add("dec", dec).toString();
+        return MoreObjects.toStringHelper(this)
+                          .add("categoryName", categoryName)
+                          .add("year", year)
+                          .add("jan", jan)
+                          .add("feb", feb)
+                          .add("mar", mar)
+                          .add("apr", apr)
+                          .add("may", may)
+                          .add("jun", jun)
+                          .add("jul", jul)
+                          .add("aug", aug)
+                          .add("sep", sep)
+                          .add("oct", oct)
+                          .add("nov", nov)
+                          .add("dec", dec)
+                          .toString();
     }
 }

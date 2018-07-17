@@ -25,8 +25,7 @@ import java.time.YearMonth;
 import java.util.Objects;
 
 /**
- * Model that represents a depreciation unit of work done that can be recorded in the
- * database
+ * Model that represents a depreciation unit of work done that can be recorded in the database
  */
 @Entity(name = "DepreciationJobExecution")
 public class DepreciationJobExecution extends DomainModel<String> {
@@ -113,12 +112,19 @@ public class DepreciationJobExecution extends DomainModel<String> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DepreciaionJobExecution{");
-        sb.append("startTime=").append(startTime);
-        sb.append(", finishTime=").append(finishTime);
-        sb.append(", lastUpdatedTime=").append(lastUpdatedTime);
-        sb.append(", status='").append(status).append('\'');
-        sb.append(", noOfItems=").append(noOfItems);
-        sb.append(", period=").append(period);
+        sb.append("startTime=")
+          .append(startTime);
+        sb.append(", finishTime=")
+          .append(finishTime);
+        sb.append(", lastUpdatedTime=")
+          .append(lastUpdatedTime);
+        sb.append(", status='")
+          .append(status)
+          .append('\'');
+        sb.append(", noOfItems=")
+          .append(noOfItems);
+        sb.append(", period=")
+          .append(period);
         sb.append('}');
         return sb.toString();
     }

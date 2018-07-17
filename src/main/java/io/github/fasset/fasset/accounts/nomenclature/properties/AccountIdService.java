@@ -24,14 +24,14 @@ import io.github.fasset.fasset.model.FixedAsset;
 /**
  * This service reads data from a configuration properties file and maintains a map which is used to provide
  * <p>
- * properties required to implement the account nomenclature and hierarchy policy version 1.0.
- * <br> Th main philosohy here is that we can be able to generate account names if we know which asset we are transacting
+ * properties required to implement the account nomenclature and hierarchy policy version 1.0. <br> Th main philosohy here is that we can be able to generate account names if we know which asset we
+ * are transacting
  */
 public interface AccountIdService {
 
     /**
-     * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
-     * the unique code to be used in the account number sequence after the service outlet code
+     * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates the unique code to be used in the account number sequence after the service
+     * outlet code
      *
      * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
      * @return Account number sequence code to follow the service outlet nomenclature
@@ -39,9 +39,8 @@ public interface AccountIdService {
     String currencyCode(String currencyCode);
 
     /**
-     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
-     * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
-     * code in the account number sequence
+     * Using the category of an asset this method returns the generic nomenclature code for the category, which in accordance to the Account nomenclature and hierarchy policy version 1.0 follows after
+     * the currency code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
      * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
@@ -51,9 +50,8 @@ public interface AccountIdService {
     String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
 
     /**
-     * Using the provided category of an asset this method returns a specific nomenclature code for the
-     * category. This is the code segment that typically follows the general ledger code in the
-     * account number sequence.
+     * Using the provided category of an asset this method returns a specific nomenclature code for the category. This is the code segment that typically follows the general ledger code in the account
+     * number sequence.
      *
      * @param fixedAsset      for which seek an account placeHolder
      * @param accountSide     Whether we are posting on the debit side or the credit side
@@ -71,8 +69,7 @@ public interface AccountIdService {
     String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
 
     /**
-     * Resolves the name of the account to be used as a contra account in case the actual account  is
-     * required to retain the original valuation for reporting purposes
+     * Resolves the name of the account to be used as a contra account in case the actual account  is required to retain the original valuation for reporting purposes
      *
      * @param transaction The type of transaction associated with the initialization of a contra account
      * @param accountSide To which we are posting the transaction during initialization of a contra account
@@ -82,10 +79,8 @@ public interface AccountIdService {
     String contraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset);
 
     /**
-     * This methods combines the account segments combining them into an account number sequence which is used
-     * application wide.
-     * <br> The existence of this method makes it possible for the application to be configured to create
-     * different forms of identifications for an account number for different purposes.
+     * This methods combines the account segments combining them into an account number sequence which is used application wide. <br> The existence of this method makes it possible for the application
+     * to be configured to create different forms of identifications for an account number for different purposes.
      *
      * @param accountNumberSegments Parameters containing the various segments that form an account number
      * @return account number sequence

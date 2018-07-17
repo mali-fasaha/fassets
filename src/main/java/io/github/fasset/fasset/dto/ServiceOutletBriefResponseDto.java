@@ -20,8 +20,7 @@ package io.github.fasset.fasset.dto;
 import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 
 /**
- * This is a DTO for {@link ServiceOutletBrief} items containing simpler data types for viewing on the
- * front end
+ * This is a DTO for {@link ServiceOutletBrief} items containing simpler data types for viewing on the front end
  */
 public class ServiceOutletBriefResponseDto {
 
@@ -46,9 +45,15 @@ public class ServiceOutletBriefResponseDto {
     public ServiceOutletBriefResponseDto(ServiceOutletBrief serviceOutletBrief) {
         this.id = serviceOutletBrief.getId();
         this.designation = serviceOutletBrief.getDesignation();
-        this.purchaseCost = serviceOutletBrief.getPurchaseCost().getNumber().doubleValue();
-        this.netBookValue = serviceOutletBrief.getNetBookValue().getNumber().doubleValue();
-        this.accruedDepreciation = serviceOutletBrief.getAccruedDepreciation().getNumber().doubleValue();
+        this.purchaseCost = serviceOutletBrief.getPurchaseCost()
+                                              .getNumber()
+                                              .doubleValue();
+        this.netBookValue = serviceOutletBrief.getNetBookValue()
+                                              .getNumber()
+                                              .doubleValue();
+        this.accruedDepreciation = serviceOutletBrief.getAccruedDepreciation()
+                                                     .getNumber()
+                                                     .doubleValue();
         this.poll = serviceOutletBrief.getPoll();
     }
 
@@ -155,12 +160,19 @@ public class ServiceOutletBriefResponseDto {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ServiceOutletBriefResponseDto{");
-        sb.append("nomenclature=").append(id);
-        sb.append(", designation='").append(designation).append('\'');
-        sb.append(", purchaseCost=").append(purchaseCost);
-        sb.append(", netBookValue=").append(netBookValue);
-        sb.append(", accruedDepreciation=").append(accruedDepreciation);
-        sb.append(", poll=").append(poll);
+        sb.append("nomenclature=")
+          .append(id);
+        sb.append(", designation='")
+          .append(designation)
+          .append('\'');
+        sb.append(", purchaseCost=")
+          .append(purchaseCost);
+        sb.append(", netBookValue=")
+          .append(netBookValue);
+        sb.append(", accruedDepreciation=")
+          .append(accruedDepreciation);
+        sb.append(", poll=")
+          .append(poll);
         sb.append('}');
         return sb.toString();
     }

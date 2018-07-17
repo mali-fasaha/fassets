@@ -21,13 +21,9 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnCompletion;
 import io.github.fasset.fasset.kernel.util.queue.util.OnError;
 
 /**
- * This interface represents a way for sending messages in the application.
- * <br> Please note it is expected that the queue is expected to operate through use
- * of database persisted strings
- * <br> The class primarily uses the push method to add a typed message. For instance, for the
- * below implementation :
- * <br> {@code public void push(QueueMessage<FileUpload> queueMessage) }
- * <br> A client could add a file upload message as shown:
+ * This interface represents a way for sending messages in the application. <br> Please note it is expected that the queue is expected to operate through use of database persisted strings <br> The
+ * class primarily uses the push method to add a typed message. For instance, for the below implementation : <br> {@code public void push(QueueMessage<FileUpload> queueMessage) } <br> A client could
+ * add a file upload message as shown:
  * <p>
  * <br> <pre>
  *     {@code
@@ -37,10 +33,7 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  *     }
  *     </pre>
  * <p>
- * <br>
- * <br> Should the client need to carry out an action to show completion lifecycle method,
- * the client could call the {@link OnCompletion#handleCompletion()} method as shown:
- * <br>
+ * <br> <br> Should the client need to carry out an action to show completion lifecycle method, the client could call the {@link OnCompletion#handleCompletion()} method as shown: <br>
  * <br> <pre>
  *     {@code
  *     fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName()),

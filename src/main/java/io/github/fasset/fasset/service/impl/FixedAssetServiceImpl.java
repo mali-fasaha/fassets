@@ -52,8 +52,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     }
 
     /**
-     * Saves all {@link FixedAsset} items passed in a list, saving unique items only.
-     * Quietly fails if the asset is already in the database
+     * Saves all {@link FixedAsset} items passed in a list, saving unique items only. Quietly fails if the asset is already in the database
      *
      * @param fixedAssets Collection of fixedAsset entities to be saved in the database
      */
@@ -71,7 +70,10 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     @Override
     public List<FixedAsset> fetchAllExistingAssets() {
 
-        return fixedAssetRepository.findAll().parallelStream().sorted().collect(ImmutableListCollector.toImmutableList());
+        return fixedAssetRepository.findAll()
+                                   .parallelStream()
+                                   .sorted()
+                                   .collect(ImmutableListCollector.toImmutableList());
     }
 
     /**
@@ -84,12 +86,12 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     @Cacheable("fixedAssetsFetchedByIds")
     public FixedAsset fetchAssetGivenId(int id) {
 
-        return fixedAssetRepository.findById(id).get();
+        return fixedAssetRepository.findById(id)
+                                   .get();
     }
 
     /**
-     * By querying the {@link FixedAssetRepository} this method
-     * is able to create a {@link CategoryBrief} for the category given in the parameter
+     * By querying the {@link FixedAssetRepository} this method is able to create a {@link CategoryBrief} for the category given in the parameter
      *
      * @param category for which we are preparing a brief
      * @return {@link CategoryBrief}
@@ -114,7 +116,8 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         log.info("Setting poll as : {}", count);
         brief.setPoll(count);
 
-        Money acc = brief.getPurchaseCost().subtract(brief.getNetBookValue());
+        Money acc = brief.getPurchaseCost()
+                         .subtract(brief.getNetBookValue());
         log.info("Setting accrued depreciation as : {}", acc);
         brief.setAccruedDepreciation(acc);
 
@@ -131,8 +134,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     }
 
     /**
-     * By querying the {@link FixedAssetRepository} this method
-     * is able to create a {@link ServiceOutletBrief} for the SOL queried in the parameter
+     * By querying the {@link FixedAssetRepository} this method is able to create a {@link ServiceOutletBrief} for the SOL queried in the parameter
      *
      * @param solId for which we are preparing a brief
      * @return {@link CategoryBrief}
@@ -148,7 +150,8 @@ public class FixedAssetServiceImpl implements FixedAssetService {
             brief.setDesignation(solId);
             brief.setPurchaseCost(fixedAssetRepository.getTotalSolPurchaseCost(solId));
             brief.setNetBookValue(fixedAssetRepository.getTotalSolNetBookValue(solId));
-            brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
+            brief.setAccruedDepreciation(brief.getPurchaseCost()
+                                              .subtract(brief.getNetBookValue()));
             brief.setPoll(fixedAssetRepository.getTotalSolCount(solId));
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating a serviceOutletBrief for solId : %s", solId);

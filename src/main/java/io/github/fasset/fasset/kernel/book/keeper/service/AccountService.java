@@ -35,8 +35,7 @@ public interface AccountService {
     Account saveAccount(Account persistentAccount);
 
     /**
-     * Saves items in a  {@code Collection} of {@code PersistentAccount} items to the
-     * repository
+     * Saves items in a  {@code Collection} of {@code PersistentAccount} items to the repository
      *
      * @param persistentAccounts {@link Account} items to be saved
      */

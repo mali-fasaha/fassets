@@ -11,25 +11,25 @@ $(document).ready(function () {
      */
     var table = $('#monthlyAssetDepreciationTable').DataTable({
 
-        "sAjaxSource":"/reports/depreciations/assets/data",
-        "sAjaxDataProp":"",
-        "order":[[0,"asc"]],
-        "aoColumns":[
-            {"mData":"id"},
-            {"mData":"assetId"},
-            {"mData":"year"},
-            {"mData":"jan"},
-            {"mData":"feb"},
-            {"mData":"mar"},
-            {"mData":"apr"},
-            {"mData":"may"},
-            {"mData":"jun"},
-            {"mData":"jul"},
-            {"mData":"aug"},
-            {"mData":"sep"},
-            {"mData":"oct"},
-            {"mData":"nov"},
-            {"mData":"dec"}
+        "sAjaxSource": "/reports/depreciations/assets/data",
+        "sAjaxDataProp": "",
+        "order": [[0, "asc"]],
+        "aoColumns": [
+            {"mData": "id"},
+            {"mData": "assetId"},
+            {"mData": "year"},
+            {"mData": "jan"},
+            {"mData": "feb"},
+            {"mData": "mar"},
+            {"mData": "apr"},
+            {"mData": "may"},
+            {"mData": "jun"},
+            {"mData": "jul"},
+            {"mData": "aug"},
+            {"mData": "sep"},
+            {"mData": "oct"},
+            {"mData": "nov"},
+            {"mData": "dec"}
         ],
 
         /* really, really hope this works man! */

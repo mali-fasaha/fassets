@@ -30,8 +30,7 @@ import java.time.YearMonth;
 import java.util.List;
 
 /**
- * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
- * nature of the {@code Entity}
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
  */
 @Repository("depreciationRepository")
 public interface DepreciationRepository extends JpaRepository<Depreciation, Integer> {

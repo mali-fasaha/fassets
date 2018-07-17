@@ -29,9 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This is a delegate for generating a {@link List} of {@code T}
- * Given a filePath and a class it can generate a list of the objects of the class when
- * class and the excel file resonate with each other
+ * This is a delegate for generating a {@link List} of {@code T} Given a filePath and a class it can generate a list of the objects of the class when class and the excel file resonate with each other
  *
  * @param <T> Type of objects in a collection as read from the excel file
  */
@@ -49,8 +47,7 @@ public class ExcelDataProvider<T> {
     }
 
     /**
-     * Generates a {@link List} of the given type when needed from an implementation using only
-     * the known path which is provided at runtime
+     * Generates a {@link List} of the given type when needed from an implementation using only the known path which is provided at runtime
      *
      * @param filePath where the excel file is temporarily stored
      * @param clazz    class into which we map the excel row

@@ -25,8 +25,7 @@ import java.util.Currency;
 import java.util.Map;
 
 /**
- * Clients of this interface are able to run account-related sub-routines such creating accounts
- * and entries
+ * Clients of this interface are able to run account-related sub-routines such creating accounts and entries
  */
 public interface Accountant {
 

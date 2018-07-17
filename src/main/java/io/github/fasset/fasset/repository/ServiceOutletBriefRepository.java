@@ -22,8 +22,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
- * nature of the {@code Entity}
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
  */
 @Repository("serviceOutletBriefRepository")
 public interface ServiceOutletBriefRepository extends JpaRepository<ServiceOutletBrief, Integer> {

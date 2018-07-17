@@ -28,8 +28,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Implements the {@link NetBookValueService} interface saving and retrieving {@link NetBookValue}
- * records into the {@link io.github.fasset.fasset.repository.NetBookValueRepository}
+ * Implements the {@link NetBookValueService} interface saving and retrieving {@link NetBookValue} records into the {@link io.github.fasset.fasset.repository.NetBookValueRepository}
  *
  * @author edwin.njeru
  */
@@ -57,8 +56,7 @@ public class NetBookValueServiceImpl implements NetBookValueService {
     }
 
     /**
-     * Saves a {@link List} collection of all items passed in the parameter to the
-     * {@link NetBookValueRepository}
+     * Saves a {@link List} collection of all items passed in the parameter to the {@link NetBookValueRepository}
      *
      * @param netBookValues {@link List} of {@link NetBookValue} entities to be saved in the repository
      */

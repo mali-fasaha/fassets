@@ -35,7 +35,11 @@ public class UnModifiedNetBookValue {
 
         netBookValue = new NetBookValue();
 
-        netBookValue.setCategory(asset.getCategory()).setNetBookValue(asset.getNetBookValue()).setMonth(month).setSolId(asset.getSolId()).setFixedAssetId(asset.getId());
+        netBookValue.setCategory(asset.getCategory())
+                    .setNetBookValue(asset.getNetBookValue())
+                    .setMonth(month)
+                    .setSolId(asset.getSolId())
+                    .setFixedAssetId(asset.getId());
     }
 
     public NetBookValue getNetBookValue() {
@@ -62,7 +66,8 @@ public class UnModifiedNetBookValue {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("UnModifiedNetBookValue{");
-        sb.append("netBookValue=").append(netBookValue);
+        sb.append("netBookValue=")
+          .append(netBookValue);
         sb.append('}');
         return sb.toString();
     }

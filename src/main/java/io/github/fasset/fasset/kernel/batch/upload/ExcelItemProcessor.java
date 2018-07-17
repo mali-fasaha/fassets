@@ -32,8 +32,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * Creates a persist-ready {@link FixedAsset} object from the {@link FixedAssetDTO} object
- * coming from the ExcelItemReader
+ * Creates a persist-ready {@link FixedAsset} object from the {@link FixedAssetDTO} object coming from the ExcelItemReader
  *
  * @author edwin.njeru
  */
@@ -65,9 +64,13 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
         FixedAsset fixedAsset = new FixedAsset();
 
         try {
-            fixedAsset.setAssetDescription(fixedAssetDTO.getAssetDescription()).setBarcode(fixedAssetDTO.getBarcode()).setCategory(fixedAssetDTO.getCategory())
-                .setNetBookValue(stringToMoneyConverter.convert(fixedAssetDTO.getNetBookValue())).setPurchaseCost(stringToMoneyConverter.convert(fixedAssetDTO.getPurchaseCost()))
-                .setSolId(fixedAssetDTO.getSolId()).setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
+            fixedAsset.setAssetDescription(fixedAssetDTO.getAssetDescription())
+                      .setBarcode(fixedAssetDTO.getBarcode())
+                      .setCategory(fixedAssetDTO.getCategory())
+                      .setNetBookValue(stringToMoneyConverter.convert(fixedAssetDTO.getNetBookValue()))
+                      .setPurchaseCost(stringToMoneyConverter.convert(fixedAssetDTO.getPurchaseCost()))
+                      .setSolId(fixedAssetDTO.getSolId())
+                      .setPurchaseDate(dateToLocalDateConverter.convert(fixedAssetDTO.getPurchaseDate()));
 
         } catch (Throwable e) {
             String message = String.format("%s could not be converted to FixedAsset entity", fixedAssetDTO);

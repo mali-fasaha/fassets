@@ -20,8 +20,7 @@ package io.github.fasset.fasset.model.nil;
 import io.github.fasset.fasset.model.CategoryConfiguration;
 
 /**
- * This object represents data improperly configured CategoryConfiguration through
- * the use of defaults
+ * This object represents data improperly configured CategoryConfiguration through the use of defaults
  */
 public class NilCategoryConfiguration {
 
@@ -33,8 +32,7 @@ public class NilCategoryConfiguration {
     private final String depreciationLogic;
 
     /**
-     * This is the item on which the depreciation rate is applied, as in either the cost
-     * or the net book value
+     * This is the item on which the depreciation rate is applied, as in either the cost or the net book value
      */
     private final String deprecant;
 

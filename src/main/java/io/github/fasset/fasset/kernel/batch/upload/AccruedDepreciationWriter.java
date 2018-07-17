@@ -45,12 +45,10 @@ public class AccruedDepreciationWriter implements ItemWriter<AccruedDepreciation
 
 
     /**
-     * Process the supplied data element. Will not be called with any null items
-     * in normal operation.
+     * Process the supplied data element. Will not be called with any null items in normal operation.
      *
      * @param items items to be written
-     * @throws Exception if there are errors. The framework will catch the
-     *                   exception and convert or rethrow it as appropriate.
+     * @throws Exception if there are errors. The framework will catch the exception and convert or rethrow it as appropriate.
      */
     @Override
     public void write(List<? extends AccruedDepreciation> items) throws Exception {

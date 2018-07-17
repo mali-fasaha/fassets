@@ -28,10 +28,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
- * Implementation for the MonthlySolDepreciationExecutor. This implementation could be improved upon if we
- * reduce the trips to the depreciation repository, and cache all data into a list instead. But that
- * might involve changing the structure of the entire batch. Future performance enhancement might start
- * from implementation of this interface
+ * Implementation for the MonthlySolDepreciationExecutor. This implementation could be improved upon if we reduce the trips to the depreciation repository, and cache all data into a list instead. But
+ * that might involve changing the structure of the entire batch. Future performance enhancement might start from implementation of this interface
  */
 @Service("monthlySolDepreciationExecutor")
 public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciationExecutor {
@@ -46,8 +44,7 @@ public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciatio
     }
 
     /**
-     * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation
-     * and the solId
+     * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation and the solId
      *
      * @param solId The service outlet Id
      * @param year  Year of depreciation
@@ -58,9 +55,10 @@ public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciatio
 
         log.info("Generating monthlySolDepreciation record relative to solId : {} and " + "for the year : {}", solId, year);
 
-        MonthlySolDepreciationDTO dto = depreciationRepository.getMonthlySolDepreciation(solId, year).get(0);
+        MonthlySolDepreciationDTO dto = depreciationRepository.getMonthlySolDepreciation(solId, year)
+                                                              .get(0);
 
         return new MonthlySolDepreciation(dto.getSolId(), dto.getYear(), dto.getJan(), dto.getFeb(), dto.getMar(), dto.getApr(), dto.getMay(), dto.getJun(), dto.getJul(), dto.getAug(), dto.getSep(),
-            dto.getOct(), dto.getNov(), dto.getDec());
+                                          dto.getOct(), dto.getNov(), dto.getDec());
     }
 }

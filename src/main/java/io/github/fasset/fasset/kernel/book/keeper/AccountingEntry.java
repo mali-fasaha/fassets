@@ -42,10 +42,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * This model maps unit of data entered into an account. It contains {@code bookingDate} when the transaction
- * is posted, the {@code account} into which it is posted, the {@code narration}, the {@code amount} and the
- * {@code accountSide} into which we are posting. The rest of attributes are added into the {@code entryAttributes}
- * field.
+ * This model maps unit of data entered into an account. It contains {@code bookingDate} when the transaction is posted, the {@code account} into which it is posted, the {@code narration}, the {@code
+ * amount} and the {@code accountSide} into which we are posting. The rest of attributes are added into the {@code entryAttributes} field.
  */
 @Entity(name = "AccountingEntry")
 @Table(name = "accounting_entry")
@@ -102,8 +100,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
     /**
      * @param entryAttribute identification of the attribute we wish to obtain from the entry
      * @return Object containing the attribute value
-     * @throws UnEnteredDetailsException When an attribute is enquired from the AccountingEntry before it has been added
-     *                                   into the AccountingEntry
+     * @throws UnEnteredDetailsException When an attribute is enquired from the AccountingEntry before it has been added into the AccountingEntry
      */
     public String getAttribute(String entryAttribute) throws UnEnteredDetailsException {
 
@@ -122,8 +119,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
     }
 
     /**
-     * @return {@link AccountSide} to which this AccountingEntry is aggregating the
-     * Account balance
+     * @return {@link AccountSide} to which this AccountingEntry is aggregating the Account balance
      */
     public AccountSide getAccountSide() {
         return accountSide;
@@ -145,8 +141,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
     }
 
     /**
-     * @return The amount being posted into the Account and encapsulated
-     * by the AccountingEntry
+     * @return The amount being posted into the Account and encapsulated by the AccountingEntry
      */
     public Cash getAmount() {
         return amount;
@@ -181,8 +176,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
     }
 
     /**
-     * Assigns this AccountingEntry with a specific account into which it is aggregated as
-     * {@code AccountBalance}
+     * Assigns this AccountingEntry with a specific account into which it is aggregated as {@code AccountBalance}
      */
     public void post() {
 

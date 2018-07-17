@@ -49,8 +49,7 @@ public interface DepreciationService {
     int getDistinctSolIds();
 
     /**
-     * Saves multiple items using multiple repositories for items encapsulated in the
-     * DepreciationProceeds object
+     * Saves multiple items using multiple repositories for items encapsulated in the DepreciationProceeds object
      *
      * @param list of depreciationProceeds
      */

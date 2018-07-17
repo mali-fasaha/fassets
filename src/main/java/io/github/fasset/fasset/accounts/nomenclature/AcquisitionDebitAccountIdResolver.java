@@ -43,10 +43,7 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
     }
 
     /**
-     * <p>Returns the account number with respect to a fixed asset which is formed by concatenating 4 elements together</p>
-     * <p>1. Service Outlet Id</p>
-     * <p>2. Currency</p>
-     * <p>3. General Ledger</p>
+     * <p>Returns the account number with respect to a fixed asset which is formed by concatenating 4 elements together</p> <p>1. Service Outlet Id</p> <p>2. Currency</p> <p>3. General Ledger</p>
      * <p>4. Account's unique ID #</p>
      *
      * @param fixedAsset Item for which we need an account number
@@ -69,7 +66,9 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
 
         log.debug("Resolving currency code # for fixedAsset : {}", fixedAsset.getAssetDescription());
 
-        return accountIdService.currencyCode(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode());
+        return accountIdService.currencyCode(fixedAsset.getPurchaseCost()
+                                                       .getCurrency()
+                                                       .getCurrencyCode());
     }
 
     @Override
@@ -81,9 +80,8 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
     }
 
     /**
-     * The category is of a lower hierarchy than an account yet for the account to be representative
-     * of fixed assets comprehensively this out to be mandated as part of the account nomenclature or at least
-     * as a field in an account that can be tracked
+     * The category is of a lower hierarchy than an account yet for the account to be representative of fixed assets comprehensively this out to be mandated as part of the account nomenclature or at
+     * least as a field in an account that can be tracked
      *
      * @param fixedAsset For which we need category nomenclature
      * @return The nomenclature of the category
@@ -109,10 +107,8 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
     }
 
     /**
-     * Resolves the name of the appropriate general ledger that out to be used in this case for the
-     * fixed assets. The general ledger is taken to be one hierarchy higher than an account. This is
-     * being done by the accountIDResolver as the general-ledger nomenclature has something to do with the nomenclature
-     * of the account itself
+     * Resolves the name of the appropriate general ledger that out to be used in this case for the fixed assets. The general ledger is taken to be one hierarchy higher than an account. This is being
+     * done by the accountIDResolver as the general-ledger nomenclature has something to do with the nomenclature of the account itself
      *
      * @param fixedAsset For which we need a general ledger
      * @return The ID of the general ledger

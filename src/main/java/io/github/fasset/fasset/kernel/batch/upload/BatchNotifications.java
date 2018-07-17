@@ -65,7 +65,8 @@ public class BatchNotifications implements JobExecutionListener {
     public void beforeJob(JobExecution jobExecution) {
 
         // Trying to log the filePath here
-        log.info("reading file from filePath : {} ", jobExecution.getJobParameters().getString("fileName"));
+        log.info("reading file from filePath : {} ", jobExecution.getJobParameters()
+                                                                 .getString("fileName"));
 
         // this will reset the nextItem to Zero
         excelItemReader.resetNextItem();
@@ -74,9 +75,7 @@ public class BatchNotifications implements JobExecutionListener {
     }
 
     /**
-     * Callback after completion of a job. Called after both both successful and
-     * failed executions. To perform logic on a particular status, use
-     * "if (jobExecution.getStatus() == BatchStatus.X)".
+     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      *
      * @param jobExecution the current {@link JobExecution}
      */

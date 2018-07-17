@@ -32,11 +32,9 @@ import java.time.YearMonth;
 import java.util.Objects;
 
 /**
- * This component acts as middleware between calculated depreciation and actual application of calculated
- * depreciation which is supposed to check certain business rules are maintained, for instance the netBookValue
- * is never to go below zero, and also that no asset is to be depreciated prior to its purchase date. In the
- * later the depreciation is simply set to zero while in the former the depreciation is set to be equivalent
- * to the fixedAsset's netBookValue as at the period of depreciation
+ * This component acts as middleware between calculated depreciation and actual application of calculated depreciation which is supposed to check certain business rules are maintained, for instance
+ * the netBookValue is never to go below zero, and also that no asset is to be depreciated prior to its purchase date. In the later the depreciation is simply set to zero while in the former the
+ * depreciation is set to be equivalent to the fixedAsset's netBookValue as at the period of depreciation
  *
  * @author edwin.njeru
  */
@@ -151,13 +149,16 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
         log.trace("Performing re-evaluation of the depreciation amount...");
 
-        if (asset.getPurchaseCost().isGreaterThan(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
+        if (asset.getPurchaseCost()
+                 .isGreaterThan(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
-            if (asset.getNetBookValue().isLessThan(depreciationAmount)) {
+            if (asset.getNetBookValue()
+                     .isLessThan(depreciationAmount)) {
 
                 log.trace("The netBookValue of asset : {} is less that the depreciation amount", asset);
 
-                if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
+                if (asset.getNetBookValue()
+                         .isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
                     log.trace("The NetBookValue is zero, setting depreciation to zero....");
                     // No further processing required
@@ -185,7 +186,8 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     @SuppressWarnings("all")
     private void depreciationTimingCheck(FixedAsset asset, YearMonth month) {
         log.trace("Reviewing the depreciation timing for asset : {}, relative to the " + "month: {}", asset, month);
-        if (localDateToYearMonthConverter.convert(Objects.requireNonNull(asset.getPurchaseDate())).isAfter(month)) {
+        if (localDateToYearMonthConverter.convert(Objects.requireNonNull(asset.getPurchaseDate()))
+                                         .isAfter(month)) {
             log.trace(
                 "The month of purchase of asset: {} comes later than the depreciation period : {}" + "therefore we are resetting the depreciation formally calculated as : {} " + "amount to zero",
                 asset, month, depreciationAmount);

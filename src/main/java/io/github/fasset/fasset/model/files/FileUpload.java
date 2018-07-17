@@ -23,6 +23,7 @@ import org.hibernate.envers.Audited;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 
@@ -138,12 +139,6 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FileUploadNotification{");
-        sb.append("fileName='").append(fileName).append('\'');
-        sb.append(", month='").append(month).append('\'');
-        sb.append(", deserialized='").append(deserialized).append('\'');
-        sb.append(", timeUploaded=").append(timeUploaded);
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format("FileUploadNotification'{'fileName=''{0}'', month=''{1}'', deserialized=''{2}'', timeUploaded={3}'}'", fileName, month, deserialized, timeUploaded);
     }
 }

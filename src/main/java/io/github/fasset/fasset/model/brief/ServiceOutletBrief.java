@@ -28,8 +28,7 @@ import javax.persistence.Entity;
 import java.util.Comparator;
 
 /**
- * Back-end representation of a record of a service outlet and its summary in terms of total
- * purchase costs, net book value etc etc
+ * Back-end representation of a record of a service outlet and its summary in terms of total purchase costs, net book value etc etc
  *
  * @author edwin.njeru
  */
@@ -139,13 +138,19 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue).add("accruedDepreciation", accruedDepreciation)
-            .add("poll", poll).toString();
+        return MoreObjects.toStringHelper(this)
+                          .add("designation", designation)
+                          .add("purchaseCost", purchaseCost)
+                          .add("netBookValue", netBookValue)
+                          .add("accruedDepreciation", accruedDepreciation)
+                          .add("poll", poll)
+                          .toString();
     }
 
     @Override
     public int compareTo(ServiceOutletBrief o) {
 
-        return Comparator.comparing(ServiceOutletBrief::getDesignation).compare(this, o);
+        return Comparator.comparing(ServiceOutletBrief::getDesignation)
+                         .compare(this, o);
     }
 }

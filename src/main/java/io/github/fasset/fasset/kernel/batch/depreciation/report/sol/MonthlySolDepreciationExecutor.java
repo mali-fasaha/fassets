@@ -25,8 +25,7 @@ import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 public interface MonthlySolDepreciationExecutor {
 
     /**
-     * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation
-     * and the solId
+     * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation and the solId
      *
      * @param solId The service outlet Id
      * @param year  Year of depreciation

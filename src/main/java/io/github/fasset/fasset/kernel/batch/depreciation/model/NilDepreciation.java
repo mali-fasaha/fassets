@@ -67,16 +67,20 @@ public class NilDepreciation {
     }
 
     /**
-     * Creates a depreciation object whose depreciation is Zero relative to the
-     * fixedAsset item given and the depreciation period
+     * Creates a depreciation object whose depreciation is Zero relative to the fixedAsset item given and the depreciation period
      *
      * @return Depreciation amount for the object
      */
     public Depreciation getNilDepreciation() {
 
         log.trace("Returning nil depreciation item relative to asset : {} for the" + " depreciation period : {}", fixedAssetId, depreciationPeriod);
-        return new Depreciation().setMonth(month).setYear(year).setDepreciationPeriod(depreciationPeriod).setCategory(category).setSolId(solId).setFixedAssetId(fixedAssetId)
-            .setDepreciation(Money.of(0.00, moneyProperties.getDefaultCurrency()));
+        return new Depreciation().setMonth(month)
+                                 .setYear(year)
+                                 .setDepreciationPeriod(depreciationPeriod)
+                                 .setCategory(category)
+                                 .setSolId(solId)
+                                 .setFixedAssetId(fixedAssetId)
+                                 .setDepreciation(Money.of(0.00, moneyProperties.getDefaultCurrency()));
     }
 
     public int getYear() {
@@ -156,13 +160,22 @@ public class NilDepreciation {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("NilDepreciation{");
-        sb.append("year=").append(year);
-        sb.append(", month=").append(month);
-        sb.append(", depreciationPeriod=").append(depreciationPeriod);
-        sb.append(", fixedAssetId=").append(fixedAssetId);
-        sb.append(", category='").append(category).append('\'');
-        sb.append(", solId='").append(solId).append('\'');
-        sb.append(", depreciation=").append(depreciation);
+        sb.append("year=")
+          .append(year);
+        sb.append(", month=")
+          .append(month);
+        sb.append(", depreciationPeriod=")
+          .append(depreciationPeriod);
+        sb.append(", fixedAssetId=")
+          .append(fixedAssetId);
+        sb.append(", category='")
+          .append(category)
+          .append('\'');
+        sb.append(", solId='")
+          .append(solId)
+          .append('\'');
+        sb.append(", depreciation=")
+          .append(depreciation);
         sb.append('}');
         return sb.toString();
     }

@@ -52,7 +52,10 @@ public class MapperOptions {
 
     public PoijiOptions getPoijiOptions() {
 
-        return PoijiOptionsBuilder.settings().datePattern(datePattern).skip(skipRows).build();
+        return PoijiOptionsBuilder.settings()
+                                  .datePattern(datePattern)
+                                  .skip(skipRows)
+                                  .build();
     }
 
     public String getDatePattern() {
@@ -92,6 +95,9 @@ public class MapperOptions {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("datePattern", datePattern).add("skipRows", skipRows).toString();
+        return MoreObjects.toStringHelper(this)
+                          .add("datePattern", datePattern)
+                          .add("skipRows", skipRows)
+                          .toString();
     }
 }

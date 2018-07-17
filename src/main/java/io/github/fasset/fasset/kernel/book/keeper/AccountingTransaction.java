@@ -44,11 +44,9 @@ import static java.util.Collections.EMPTY_MAP;
 
 
 /**
- * Immutable implementation of the {@link Transaction} interface once created nothing about it can change, except
- * addition of entries. The underlying {@link Collection} cannot be re-assigned once created, and is implemented by
- * {@link List} whose implementation involved a data structure that copies itself for every mutative procedure that
- * is done, in this case involving addition of {@link AccountingEntry} items. There is a boolean that says whether or not the
- * {@link Transaction} has been posted, which is dangerously non final, but is volatile nevertheless.
+ * Immutable implementation of the {@link Transaction} interface once created nothing about it can change, except addition of entries. The underlying {@link Collection} cannot be re-assigned once
+ * created, and is implemented by {@link List} whose implementation involved a data structure that copies itself for every mutative procedure that is done, in this case involving addition of {@link
+ * AccountingEntry} items. There is a boolean that says whether or not the {@link Transaction} has been posted, which is dangerously non final, but is volatile nevertheless.
  *
  * @author edwin.njeru
  */
@@ -77,7 +75,9 @@ public final class AccountingTransaction implements Transaction {
     }
 
     private static Double mapCashToDouble(AccountingEntry accountingEntry) {
-        return accountingEntry.getAmount().getNumber().doubleValue();
+        return accountingEntry.getAmount()
+                              .getNumber()
+                              .doubleValue();
     }
 
     private static boolean predicateCredits(AccountingEntry accountingEntry) {
@@ -97,8 +97,7 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already
-     * been posted
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      *
      * @param accountSide     to which the entry is being posted
      * @param amount          {@link Cash} amount being posted to the journal
@@ -106,8 +105,7 @@ public final class AccountingTransaction implements Transaction {
      * @param narration       a brief narration of the entry
      * @param entryAttributes Map containing additional details about the entry being entered
      * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
-     *                                     do not match
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException {
@@ -116,8 +114,7 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already
-     * been posted
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      *
      * @param accountSide     to which the entry is being posted
      * @param amount          {@link Cash} amount being posted to the journal
@@ -126,8 +123,7 @@ public final class AccountingTransaction implements Transaction {
      * @param entryAttributes Map containing additional details about the entry being entered
      * @param date            posting date of the entry
      * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
-     *                                     do not match
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes, TimePoint date)
@@ -137,7 +133,9 @@ public final class AccountingTransaction implements Transaction {
         // assign currency
         if (wasPosted) {
             throw new ImmutableEntryException("Cannot add entry to a transaction that's already posted");
-        } else if (!account.getCurrency().equals(this.currency) || !amount.getCurrency().equals(this.currency)) {
+        } else if (!account.getCurrency()
+                           .equals(this.currency) || !amount.getCurrency()
+                                                            .equals(this.currency)) {
             throw new MismatchedCurrencyException("Cannot add entry whose getCurrency differs to that of the transaction");
         } else {
             log.debug("Adding entry  : {} into transaction : {}", narration, this);
@@ -155,8 +153,7 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already
-     * been posted
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      *
      * @param accountSide to which the entry is being posted
      * @param amount      {@link Cash} amount being posted to the journal
@@ -164,8 +161,7 @@ public final class AccountingTransaction implements Transaction {
      * @param narration   a brief narration of the entry
      * @param date        posting date of the entry
      * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
-     *                                     do not match
+     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date) throws ImmutableEntryException, MismatchedCurrencyException {
@@ -184,14 +180,12 @@ public final class AccountingTransaction implements Transaction {
         checkNotNull(entry.getAccount(), "Each entry must have an explicitly declared account to which we are posting it");
 
         this.addEntry(entry.getAccountSide(), entry.getAmount(), entry.getAccount(), entry.getNarration(), entry.getEntryAttributes(),
-            entry.getBookingDate() == null ? this.date : entry.getBookingDate());
+                      entry.getBookingDate() == null ? this.date : entry.getBookingDate());
     }
 
     /**
-     * Same method as {code Transaction.addEntry()} but with an empty map as description of the
-     * entry. The {@code AccountingEntry} can therefore only be distinguished by its narration.
-     * The add method adds entries to the transaction provided the transaction has not already
-     * been posted
+     * Same method as {code Transaction.addEntry()} but with an empty map as description of the entry. The {@code AccountingEntry} can therefore only be distinguished by its narration. The add method
+     * adds entries to the transaction provided the transaction has not already been posted
      *
      * @param accountSide to which the entry is being posted
      * @param amount      {@link Cash} amount being posted to the journal
@@ -208,8 +202,8 @@ public final class AccountingTransaction implements Transaction {
     /**
      * Posts the transactions into respective {@link Account} items
      *
-     * @throws UnableToPostException   {@link UnableToPostException} thrown when the transaction is not balanced
-     *                                 That is if the items posted on the debit are more than those posted on the credit or vice versa.
+     * @throws UnableToPostException   {@link UnableToPostException} thrown when the transaction is not balanced That is if the items posted on the debit are more than those posted on the credit or
+     *                                 vice versa.
      * @throws ImmutableEntryException when an AccountingEntry is added to a posted transaction
      */
     @Override
@@ -234,7 +228,8 @@ public final class AccountingTransaction implements Transaction {
 
             log.debug("Posting : {} entries ...", entries.size());
 
-            entries.parallelStream().forEach(AccountingEntry::post);
+            entries.parallelStream()
+                   .forEach(AccountingEntry::post);
 
             wasPosted = true;
         }
@@ -242,9 +237,15 @@ public final class AccountingTransaction implements Transaction {
 
     private double balanced() {
 
-        double debits = entries.parallelStream().filter(AccountingTransaction::predicateDebits).map(AccountingTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
+        double debits = entries.parallelStream()
+                               .filter(AccountingTransaction::predicateDebits)
+                               .map(AccountingTransaction::mapCashToDouble)
+                               .reduce(0.00, (acc, val) -> acc + val);
 
-        return debits - entries.parallelStream().filter(AccountingTransaction::predicateCredits).map(AccountingTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
+        return debits - entries.parallelStream()
+                               .filter(AccountingTransaction::predicateCredits)
+                               .map(AccountingTransaction::mapCashToDouble)
+                               .reduce(0.00, (acc, val) -> acc + val);
     }
 
     @Override
@@ -273,10 +274,15 @@ public final class AccountingTransaction implements Transaction {
 
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
-        sb.append('\'').append(label).append('\'');
-        sb.append(", date=").append(date);
-        sb.append(", currency=").append(currency);
-        sb.append(", entries=").append(entries);
+        sb.append('\'')
+          .append(label)
+          .append('\'');
+        sb.append(", date=")
+          .append(date);
+        sb.append(", currency=")
+          .append(currency);
+        sb.append(", entries=")
+          .append(entries);
         sb.append('}');
         return sb.toString();
     }

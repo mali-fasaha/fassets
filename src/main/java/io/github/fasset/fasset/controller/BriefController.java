@@ -35,8 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * This controller serves up to the view data containing{@link CategoryBrief}
- * and {@link ServiceOutletBrief} items from the data sink
+ * This controller serves up to the view data containing{@link CategoryBrief} and {@link ServiceOutletBrief} items from the data sink
  */
 @Controller
 public class BriefController {
@@ -71,7 +70,10 @@ public class BriefController {
     public List<ServiceOutletBriefResponseDto> getServiceOutletBriefs(Model model) {
 
         //TODO update other brief controllers
-        return serviceOutletBriefService.fetchAllServiceOutletBriefs().parallelStream().map(ServiceOutletBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
+        return serviceOutletBriefService.fetchAllServiceOutletBriefs()
+                                        .parallelStream()
+                                        .map(ServiceOutletBriefResponseDto::new)
+                                        .collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/briefs/serviceOutlets/data/{nomenclature}")
@@ -85,7 +87,10 @@ public class BriefController {
     @ResponseBody
     public List<CategoryBriefResponseDto> getCategoryBriefs(Model model) {
 
-        return categoryBriefService.fetchAllCategoryBriefs().parallelStream().map(CategoryBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
+        return categoryBriefService.fetchAllCategoryBriefs()
+                                   .parallelStream()
+                                   .map(CategoryBriefResponseDto::new)
+                                   .collect(ImmutableListCollector.toImmutableList());
     }
 
     @GetMapping("/briefs/categories/data/{nomenclature}")

@@ -29,8 +29,7 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 /**
- * This object calculates the AccruedDepreciation given the Asset, the Month in which the Accrual
- * is effective and the DepreciationProceeds where we store the depreciation values
+ * This object calculates the AccruedDepreciation given the Asset, the Month in which the Accrual is effective and the DepreciationProceeds where we store the depreciation values
  */
 @Component("accruedDepreciationAgent")
 public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
@@ -44,7 +43,8 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
         log.trace("Processing accruedDepreciation for asset: {} in the period : {}", asset, month);
 
         // with fingers crossed : Hope by the time you are here, the fixedAsser netBookValue will have changed
-        Money depreciationAcc = asset.getPurchaseCost().subtract(asset.getNetBookValue());
+        Money depreciationAcc = asset.getPurchaseCost()
+                                     .subtract(asset.getNetBookValue());
 
         log.trace("Reporting accruedDepreciation as : {}", depreciationAcc);
 
@@ -74,8 +74,12 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
 
         try {
             //double accrual = accruedDepreciationService.getAccruedDepreciationForAsset(asset,month) + depreciationAmount;
-            accruedDepreciation.setMonth(month).setCategory(asset.getCategory()).setFixedAssetId(asset.getId()).setCategory(asset.getCategory()).setSolId(asset.getSolId())
-                .setAccruedDepreciation(accrual);
+            accruedDepreciation.setMonth(month)
+                               .setCategory(asset.getCategory())
+                               .setFixedAssetId(asset.getId())
+                               .setCategory(asset.getCategory())
+                               .setSolId(asset.getSolId())
+                               .setAccruedDepreciation(accrual);
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating accruedDepreciation instance relative" + " to the asset : %s for the month : %s", asset, month);
             throw new DepreciationExecutionException(message, e);

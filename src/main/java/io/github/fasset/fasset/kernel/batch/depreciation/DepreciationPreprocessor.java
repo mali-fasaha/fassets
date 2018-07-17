@@ -23,10 +23,8 @@ import org.javamoney.moneta.Money;
 import java.time.YearMonth;
 
 /**
- * Please note that no actual processing is done here. The interface reviews the asset
- * against the current depreciation amount and the date of purchase compared with the
- * month of depreciation.
- * After that is reviewed we return only the items that make sense in the business domain
+ * Please note that no actual processing is done here. The interface reviews the asset against the current depreciation amount and the date of purchase compared with the month of depreciation. After
+ * that is reviewed we return only the items that make sense in the business domain
  *
  * @author edwin.njeru
  */

@@ -19,7 +19,8 @@ public class AccountingTransactionBuilder implements TransactionBuilder {
     @Override
     public Transaction createTransaction(List<AccountingEntry> entries) {
 
-        Currency currency = entries.get(0).getCurrency();
+        Currency currency = entries.get(0)
+                                   .getCurrency();
 
         AccountingTransaction entryTransaction = AccountingTransaction.create("Tran01", SimpleDate.today(), currency);
 

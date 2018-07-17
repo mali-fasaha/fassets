@@ -18,14 +18,14 @@
 package io.github.fasset.fasset.model.depreciation;
 
 
-import io.github.fasset.fasset.DomainModel;
-import org.hibernate.envers.Audited;
+    import io.github.fasset.fasset.DomainModel;
+    import org.hibernate.envers.Audited;
 
-import javax.persistence.Entity;
+    import javax.persistence.Entity;
+    import java.text.MessageFormat;
 
 /**
- * This object represents a record of an SOL's depreciation for all the months of
- * a year
+ * This object represents a record of an SOL's depreciation for all the months of a year
  */
 @Audited
 @Entity
@@ -217,24 +217,8 @@ public class MonthlySolDepreciation extends DomainModel<String> {
     }
 
     @Override
-    @SuppressWarnings("all")
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MonthlySolDepreciation{");
-        sb.append("solId=").append(solId);
-        sb.append(", year=").append(year);
-        sb.append(", jan=").append(jan);
-        sb.append(", feb=").append(feb);
-        sb.append(", mar=").append(mar);
-        sb.append(", apr=").append(apr);
-        sb.append(", may=").append(may);
-        sb.append(", jun=").append(jun);
-        sb.append(", jul=").append(jul);
-        sb.append(", aug=").append(aug);
-        sb.append(", sep=").append(sep);
-        sb.append(", oct=").append(oct);
-        sb.append(", nov=").append(nov);
-        sb.append(", dec=").append(dec);
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format("MonthlySolDepreciation'{'solId={0}, year={1}, jan={2}, feb={3}, mar={4}, apr={5}, may={6}, jun={7}, jul={8}, aug={9}, sep={10}, oct={11}, nov={12}, dec={13}'}'",
+                                    solId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 }

@@ -27,8 +27,7 @@ import java.util.List;
 public interface MonthlyAssetDepreciationService {
 
     /**
-     * Return an ordered list of all monthly depreciation from the
-     * monthlyAssetDepreciationRepository
+     * Return an ordered list of all monthly depreciation from the monthlyAssetDepreciationRepository
      *
      * @return Collection of MonthlyAssetDepreciation entities from the database
      */

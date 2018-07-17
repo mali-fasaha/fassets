@@ -72,7 +72,8 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DepreciationJobInstance{");
-        sb.append("month=").append(month);
+        sb.append("month=")
+          .append(month);
         sb.append('}');
         return sb.toString();
     }
@@ -80,6 +81,7 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
 
     @Override
     public int compareTo(DepreciationJobInstance o) {
-        return Comparator.comparing(DepreciationJobInstance::getMonth).compare(this, o);
+        return Comparator.comparing(DepreciationJobInstance::getMonth)
+                         .compare(this, o);
     }
 }

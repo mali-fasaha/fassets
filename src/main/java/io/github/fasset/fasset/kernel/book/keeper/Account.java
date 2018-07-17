@@ -57,19 +57,15 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CRE
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 
 /**
- * Implements the {@link Account} interface and maintains states for {@link Currency}, name, number, openingDate and
- * {@link AccountSide}. The AccountSide remains volatile, inorder to represent the changing nature of the account as the
- * {@link AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe
- * default {@link AccountSide} of the {@link Account}.
+ * Implements the {@link Account} interface and maintains states for {@link Currency}, name, number, openingDate and {@link AccountSide}. The AccountSide remains volatile, inorder to represent the
+ * changing nature of the account as the {@link AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe default {@link AccountSide} of the {@link
+ * Account}.
  * <p>
- * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not
- * be obviously evident by the usual use of words like "synchronized" et al. In fact synchronization would probably just
- * slow us down. Instead what has been done is that the {@link Collection} of {@link AccountingEntry} items, which is the whole
- * concept of this Account pattern, has been implemented using a {@link List} interface implementation that creates a new
- * copy of itself every time time a mutative process is carried out. It's iterator as a result is guaranteed never to throw
- * {@code ConcurrentModificationException} and it does not reflect additions, removals or changes to the list, once they
- * have been created. The rest of the getters return new instances of values of similar equivalence or copies of themselves
- * this objects attributes will largely therefore remain unchanged.
+ * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not be obviously evident by the usual use of words like "synchronized"
+ * et al. In fact synchronization would probably just slow us down. Instead what has been done is that the {@link Collection} of {@link AccountingEntry} items, which is the whole concept of this
+ * Account pattern, has been implemented using a {@link List} interface implementation that creates a new copy of itself every time time a mutative process is carried out. It's iterator as a result is
+ * guaranteed never to throw {@code ConcurrentModificationException} and it does not reflect additions, removals or changes to the list, once they have been created. The rest of the getters return new
+ * instances of values of similar equivalence or copies of themselves this objects attributes will largely therefore remain unchanged.
  *
  * @author edwin.njeru
  */
@@ -115,15 +111,14 @@ public class Account extends AccountDomainModel<String> {
     private volatile List<AccountingEntry> entries = new CopyOnWriteArrayList<>();
 
     /**
-     * This constructor will one day allow someone to implement the {@link List} interface with anything,
-     * including a database and assign the same to this {@link Account} making this object persistent.
+     * This constructor will one day allow someone to implement the {@link List} interface with anything, including a database and assign the same to this {@link Account} making this object
+     * persistent.
      *
      * @param accountSide    {@link AccountSide} to which this account belongs by default
      * @param currency       {@link Currency} to be used for all {@link AccountingEntry} items to be added to this account
      * @param accountDetails {@code AccountDetails} describes the basic nature of this account from business domain's perspective
-     * @param entries        {@link List< AccountingEntry >} collection allowing assignment of a Collection interface for this account. One day this
-     *                       parameter will allow a dev to something like implement the list interface with a back end
-     *                       like a database or some Restful service making changes in this account persistent.
+     * @param entries        {@link List< AccountingEntry >} collection allowing assignment of a Collection interface for this account. One day this parameter will allow a dev to something like
+     *                       implement the list interface with a back end like a database or some Restful service making changes in this account persistent.
      */
     @SuppressWarnings("unused")
     Account(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, String> accountDetails,
@@ -183,15 +178,17 @@ public class Account extends AccountDomainModel<String> {
 
         log.debug("Adding accountingEntry {} to account : {}", accountingEntry, this);
 
-        if (accountingEntry.getBookingDate().before(this.openingDate)) {
+        if (accountingEntry.getBookingDate()
+                           .before(this.openingDate)) {
 
             String message = String.format("Opening date : %s . The accountingEntry date was %s", this.openingDate, accountingEntry.getBookingDate());
             throw new UntimelyBookingDateException("The booking date cannot be earlier than the account opening date : " + message);
 
-        } else if (!this.currency.equals(accountingEntry.getAmount().getCurrency())) {
+        } else if (!this.currency.equals(accountingEntry.getAmount()
+                                                        .getCurrency())) {
 
-            String message =
-                String.format("Currencies mismatched :Expected getCurrency : %s but found accountingEntry denominated in %s", this.currency.toString(), accountingEntry.getAmount().getCurrency());
+            String message = String.format("Currencies mismatched :Expected getCurrency : %s but found accountingEntry denominated in %s", this.currency.toString(), accountingEntry.getAmount()
+                                                                                                                                                                                    .getCurrency());
             throw new MismatchedCurrencyException(message);
 
         } else {
@@ -220,14 +217,9 @@ public class Account extends AccountDomainModel<String> {
     }
 
     /**
-     * Similar to the balance query for a given date except the date is provided through a
-     * simple {@code VarArgs} int argument
+     * Similar to the balance query for a given date except the date is provided through a simple {@code VarArgs} int argument
      *
-     * @param asAt <p>The date as at when the {@link AccountBalance} we want is effective given
-     *             in the following order:</p>
-     *             <p>i) Year</p>
-     *             <p>ii) Month</p>
-     *             <p>iii) Date</p>
+     * @param asAt <p>The date as at when the {@link AccountBalance} we want is effective given in the following order:</p> <p>i) Year</p> <p>ii) Month</p> <p>iii) Date</p>
      * @return {@link AccountBalance} effective the date specified by the varargs
      */
     public AccountBalance balance(int... asAt) {
@@ -252,7 +244,8 @@ public class Account extends AccountDomainModel<String> {
 
     public List<AccountingEntry> getEntries() {
 
-        return new CopyOnWriteArrayList<>(entries.parallelStream().collect(ImmutableListCollector.toImmutableList()));
+        return new CopyOnWriteArrayList<>(entries.parallelStream()
+                                                 .collect(ImmutableListCollector.toImmutableList()));
     }
 
     public void setEntries(List<AccountingEntry> entries) {
@@ -273,13 +266,10 @@ public class Account extends AccountDomainModel<String> {
     }
 
     /**
-     * @return Shows the side of the balance sheet to which this belongs which could be either
-     * {@link AccountSide#DEBIT} or {@link AccountSide#CREDIT}
-     * Implementation Note : As per implementation notes this is for use only by the {@link AccountAppraisalDelegate}
-     * allowing inexpensive evaluation of the {@link AccountBalance} without causing circular reference. Otherwise anyone else who needs
-     * to know the {@code AccountSide} of this needs to query the {@link AccountBalance} first, and from it acquire the {@link AccountSide}.
-     * Also note that the object's {@link AccountSide} is never really exposed since this implementation is returning a value based on its
-     * current status.
+     * @return Shows the side of the balance sheet to which this belongs which could be either {@link AccountSide#DEBIT} or {@link AccountSide#CREDIT} Implementation Note : As per implementation notes
+     * this is for use only by the {@link AccountAppraisalDelegate} allowing inexpensive evaluation of the {@link AccountBalance} without causing circular reference. Otherwise anyone else who needs to
+     * know the {@code AccountSide} of this needs to query the {@link AccountBalance} first, and from it acquire the {@link AccountSide}. Also note that the object's {@link AccountSide} is never
+     * really exposed since this implementation is returning a value based on its current status.
      */
     public AccountSide getAccountSide() {
 

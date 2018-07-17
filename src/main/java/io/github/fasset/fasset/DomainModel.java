@@ -115,12 +115,18 @@ public class DomainModel<U> {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DomainModel{");
-        sb.append("nomenclature=").append(id);
-        sb.append(", version=").append(version);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", modifiedAt=").append(modifiedAt);
-        sb.append(", createdBy=").append(createdBy);
-        sb.append(", lastModifiedBy=").append(lastModifiedBy);
+        sb.append("nomenclature=")
+          .append(id);
+        sb.append(", version=")
+          .append(version);
+        sb.append(", createdAt=")
+          .append(createdAt);
+        sb.append(", modifiedAt=")
+          .append(modifiedAt);
+        sb.append(", createdBy=")
+          .append(createdBy);
+        sb.append(", lastModifiedBy=")
+          .append(lastModifiedBy);
         sb.append('}');
         return sb.toString();
     }

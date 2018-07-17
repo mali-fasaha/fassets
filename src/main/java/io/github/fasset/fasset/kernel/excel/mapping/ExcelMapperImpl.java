@@ -31,8 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Thread-safe implementation of the {@link ExcelMapper}
- * The client must specify the parameter type
+ * Thread-safe implementation of the {@link ExcelMapper} The client must specify the parameter type
  *
  * @author edwin.njeru
  */

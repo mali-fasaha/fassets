@@ -81,7 +81,8 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
         CategoryBrief categoryBrief = null;
 
         try {
-            categoryBrief = categoryBriefRepository.findById(id).get();
+            categoryBrief = categoryBriefRepository.findById(id)
+                                                   .get();
         } catch (Throwable e) {
             String message = "Error fetching categoryBriefs from repository";
             throw new DataRetrievalFromControllerException(message, e);
@@ -93,8 +94,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
     }
 
     /**
-     * All existing items are updated while new ones are newly added to the repository...
-     * To the ends that the designation remains unique
+     * All existing items are updated while new ones are newly added to the repository... To the ends that the designation remains unique
      *
      * @param categoryBriefs items to be saved to repository
      */

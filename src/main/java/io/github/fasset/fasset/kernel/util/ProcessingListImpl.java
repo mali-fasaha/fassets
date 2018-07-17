@@ -25,8 +25,7 @@ import java.util.Collection;
 import java.util.function.Consumer;
 
 /**
- * Simple data-structure that allows additional Fassets-specific functionality like logs
- * and polling of items processed
+ * Simple data-structure that allows additional Fassets-specific functionality like logs and polling of items processed
  *
  * @param <E> Type of item contained by this data structure
  * @author edwin.njeru

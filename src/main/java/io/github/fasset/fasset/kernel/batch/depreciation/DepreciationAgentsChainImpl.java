@@ -31,8 +31,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Object encapsulates a chain of Agents through which a depreciation item is processed as a FixedAsset
- * is passed through
+ * Object encapsulates a chain of Agents through which a depreciation item is processed as a FixedAsset is passed through
  */
 @Component("depreciationAgentsChain")
 public class DepreciationAgentsChainImpl {

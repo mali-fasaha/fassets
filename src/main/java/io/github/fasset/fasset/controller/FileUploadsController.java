@@ -54,9 +54,12 @@ public class FileUploadsController {
     @GetMapping("/files")
     public String listUploadedFiles(Model model) throws IOException {
 
-        model.addAttribute("files",
-            storageService.loadAll().map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadsController.class, "serveFile", path.getFileName().toString()).build().toString())
-                .collect(Collectors.toList()));
+        model.addAttribute("files", storageService.loadAll()
+                                                  .map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadsController.class, "serveFile", path.getFileName()
+                                                                                                                                                    .toString())
+                                                                                      .build()
+                                                                                      .toString())
+                                                  .collect(Collectors.toList()));
         return "uploads/uploadForm";
     }
 
@@ -76,12 +79,15 @@ public class FileUploadsController {
 
         Resource file = storageService.loadAsResource(fileName);
 
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + file.getFilename() + "\"").body(file);
+        return ResponseEntity.ok()
+                             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + file.getFilename() + "\"")
+                             .body(file);
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound()
+                             .build();
     }
 }

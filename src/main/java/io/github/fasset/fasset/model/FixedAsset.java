@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
@@ -189,22 +190,18 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FixedAsset{");
-        sb.append("solId='").append(solId).append('\'');
-        sb.append(", barcode='").append(barcode).append('\'');
-        sb.append(", assetDescription='").append(assetDescription).append('\'');
-        sb.append(", purchaseDate=").append(purchaseDate);
-        sb.append(", category='").append(category).append('\'');
-        sb.append(", purchaseCost=").append(purchaseCost);
-        sb.append(", netBookValue=").append(netBookValue);
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format("FixedAsset'{'solId=''{0}'', barcode=''{1}'', assetDescription=''{2}'', purchaseDate={3}, category=''{4}'', purchaseCost={5}, netBookValue={6}'}'", solId, barcode,
+                                    assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
     @Override
     public int compareTo(FixedAsset o) {
 
-        return Comparator.comparing(FixedAsset::getSolId).thenComparing(FixedAsset::getCategory).thenComparing(FixedAsset::getPurchaseDate).thenComparing(FixedAsset::getPurchaseCost).compare(this, o);
+        return Comparator.comparing(FixedAsset::getSolId)
+                         .thenComparing(FixedAsset::getCategory)
+                         .thenComparing(FixedAsset::getPurchaseDate)
+                         .thenComparing(FixedAsset::getPurchaseCost)
+                         .compare(this, o);
     }
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <div th:replace="fragments/header :: header-css"/>
 
@@ -35,12 +35,14 @@
                         <span th:if="${#fields.hasErrors('designation')}" class="help-block" th:errors="*{designation}"></span>
                     </div>
                     <div th:classappend="${#fields.hasErrors('depreciationRate')} ? 'input-icon right' : ''" class="form-group col-lg-3 col-md-3 col-sm-3">
-                        <i th:if="${#fields.hasErrors('depreciationRate')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid depreciation rate per annum" data-container="body"></i>
+                        <i th:if="${#fields.hasErrors('depreciationRate')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid depreciation rate per annum"
+                           data-container="body"></i>
                         <label for="depreciationRate">Depreciation Rate:</label>
                         <div class="input-group">
                             <!--/*@thymesVar nomenclature="editCategory" type="io.github.fasset.fasset.model.CategoryConfiguration"*/-->
                             <!--/*@thymesVar nomenclature="category" type="io.github.fasset.fasset.model.CategoryConfiguration"*/-->
-                            <input type="number" step="any" th:field="*{depreciationRate}" class="form-control text-right" name="depreciationRate" id="depreciationRate" aria-label="Rate (as percentage)">
+                            <input type="number" step="any" th:field="*{depreciationRate}" class="form-control text-right" name="depreciationRate" id="depreciationRate"
+                                   aria-label="Rate (as percentage)">
                             <span class="input-group-addon">%</span>
                         </div>
                         <span th:if="${#fields.hasErrors('depreciationRate')}" class="help-block" th:errors="*{depreciationRate}"></span>
@@ -75,19 +77,23 @@
                     <div th:classappend="${#fields.hasErrors('categoryLedgerId')} ? 'input-icon right' : ''" class="align-left form-group col-lg-3 col-md-3 col-sm-3">
                         <i th:if="${#fields.hasErrors('categoryLedgerId')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid category ledger Id" data-container="body"></i>
                         <p><label for="categoryLedgerId">Ledger Id:</label></p>
-                        <p><div class="input-group">
+                        <p>
+                        <div class="input-group">
                             <!--/*@thymesVar nomenclature="editCategory" type="io.github.fasset.fasset.model.CategoryConfiguration"*/-->
                             <!--/*@thymesVar nomenclature="category" type="io.github.fasset.fasset.model.CategoryConfiguration"*/-->
                             <input type="number" th:field="*{categoryLedgerId}" name="categoryLedgerId" id="categoryLedgerId" class="form-control text-right" aria-label="Rate (as percentage)">
-                        </div></p>
+                        </div>
+                        </p>
                         <span th:if="${#fields.hasErrors('categoryLedgerId')}" class="help-block" th:errors="*{categoryLedgerId}"></span>
                     </div>
 
                     <div class="align-right align-bottom form-group col-lg-3 col-md-3 col-sm-3">
-                        <br />
+                        <br/>
                         <p></p>
                         <p></p>
-                        <p><button type="submit" class="btn btn-default ">Submit</button></p>
+                        <p>
+                            <button type="submit" class="btn btn-default ">Submit</button>
+                        </p>
                     </div>
 
                 </div>
@@ -103,22 +109,22 @@
             <!-- Table -->
             <table class="table table-hover table-responsive">
                 <thead class="blue-grey lighten-4">
-                    <tr>
-                        <th>Designation</th>
-                        <th>Ledger Id</th>
-                        <th>Logic</th>
-                        <th>Depreciation Rate</th>
-                    </tr>
+                <tr>
+                    <th>Designation</th>
+                    <th>Ledger Id</th>
+                    <th>Logic</th>
+                    <th>Depreciation Rate</th>
+                </tr>
                 </thead>
                 <tbody>
                 <!--/*@thymesVar nomenclature="categories" type="java.util.List"*/-->
                 <!--/*@thymesVar nomenclature="category" type="io.github.fasset.fasset.model.CategoryConfiguration"*/-->
-                    <tr  th:each="category : ${categories}" style="cursor: pointer">
-                        <td th:text="${category.designation}" />
-                        <td th:text="${category.categoryLedgerId}" />
-                        <td th:text="${category.depreciationLogic}" />
-                        <td th:text="${category.depreciationRate}" />
-                    </tr>
+                <tr th:each="category : ${categories}" style="cursor: pointer">
+                    <td th:text="${category.designation}"/>
+                    <td th:text="${category.categoryLedgerId}"/>
+                    <td th:text="${category.depreciationLogic}"/>
+                    <td th:text="${category.depreciationRate}"/>
+                </tr>
                 </tbody>
             </table>
         </div>

@@ -39,14 +39,11 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEB
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * This object can dictate appropriate account for tracking a given {@code FixedAsset} item. This is obtained from a manually configured
- * properties file. While the account must be appropriate to the circumstances of the transaction (i.e. whether acquisition, transfer,disposal)
- * the account must match the fixedAsset's currency amount, the service outlet, and the fixedAsset's category. Ideally the account names
- * are pre-stated in a properties file.
- * <br> But that is to be implemented another time, since implementing that today messes up the
- * container configuration which recognizes this object as a singleton called "chartOfAccounts".
- * The Object must lookup whether the account exists before generating a new Account for the fixedAsset. Which bring a new problem,
- * the resolution of the opening date. Will it be pegged to the purchase date of the asset?
+ * This object can dictate appropriate account for tracking a given {@code FixedAsset} item. This is obtained from a manually configured properties file. While the account must be appropriate to the
+ * circumstances of the transaction (i.e. whether acquisition, transfer,disposal) the account must match the fixedAsset's currency amount, the service outlet, and the fixedAsset's category. Ideally
+ * the account names are pre-stated in a properties file. <br> But that is to be implemented another time, since implementing that today messes up the container configuration which recognizes this
+ * object as a singleton called "chartOfAccounts". The Object must lookup whether the account exists before generating a new Account for the fixedAsset. Which bring a new problem, the resolution of
+ * the opening date. Will it be pegged to the purchase date of the asset?
  */
 @Component("acquisitionAccountResolver")
 public class AcquisitionAccountResolver implements AccountResolver {
@@ -66,15 +63,16 @@ public class AcquisitionAccountResolver implements AccountResolver {
      * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
      *
      * @param fixedAsset for which we seek an appropriate Account
-     * @return Account appropriate for the recording of transaction for the parameter
-     * fixedAsset
+     * @return Account appropriate for the recording of transaction for the parameter fixedAsset
      */
     public Account resolveDebitAccount(FixedAsset fixedAsset) {
 
         log.debug("Getting acquisition debit account for asset : {}", fixedAsset.getAssetDescription());
 
-        Account debitAccount = new Account(debitAccountIdResolver.accountName(fixedAsset), debitAccountIdResolver.accountNumber(fixedAsset), DEBIT,
-            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
+        Account debitAccount = new Account(debitAccountIdResolver.accountName(fixedAsset), debitAccountIdResolver.accountNumber(fixedAsset), DEBIT, Currency.getInstance(fixedAsset.getPurchaseCost()
+                                                                                                                                                                                   .getCurrency()
+                                                                                                                                                                                   .getCurrencyCode()),
+                                           SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
 
         debitAccount.addAttribute(CONTRA_ACCOUNT, debitAccountIdResolver.resolveContraAccountId(fixedAsset));
         debitAccount.addAttribute(GENERAL_LEDGER, debitAccountIdResolver.generalLedgerName(fixedAsset));
@@ -91,15 +89,16 @@ public class AcquisitionAccountResolver implements AccountResolver {
      * Generates appropriate credit Account for the asset passed in the parameter, when we are posting Acquisition
      *
      * @param fixedAsset for which we seek an appropriate Account
-     * @return Account appropriate for the recording of transaction for the parameter
-     * fixedAsset
+     * @return Account appropriate for the recording of transaction for the parameter fixedAsset
      */
     public Account resolveCreditAccount(FixedAsset fixedAsset) {
 
         log.debug("Getting acquisition credit account for asset : {}", fixedAsset.getAssetDescription());
 
-        Account creditAccount = new Account(creditAccountIDResolver.accountName(fixedAsset), creditAccountIDResolver.accountNumber(fixedAsset), CREDIT,
-            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
+        Account creditAccount = new Account(creditAccountIDResolver.accountName(fixedAsset), creditAccountIDResolver.accountNumber(fixedAsset), CREDIT, Currency.getInstance(
+            fixedAsset.getPurchaseCost()
+                      .getCurrency()
+                      .getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
 
         creditAccount.addAttribute(GENERAL_LEDGER, creditAccountIDResolver.generalLedgerName(fixedAsset));
         creditAccount.addAttribute(ACCOUNT_TYPE, "Liability"); //TBD on this

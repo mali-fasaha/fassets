@@ -22,15 +22,13 @@ package io.github.fasset.fasset.service;
  */
 public interface BriefingService {
     /**
-     * Updates the summary for ServiceOutlets using data queried from the fixed assets
-     * repository
+     * Updates the summary for ServiceOutlets using data queried from the fixed assets repository
      */
     void updateServiceOutletBriefs();
 
 
     /**
-     * Updates the summary for CategoryBriefs using data queried from the fixed assets
-     * repository
+     * Updates the summary for CategoryBriefs using data queried from the fixed assets repository
      */
     void updateCategoryBriefs();
 }

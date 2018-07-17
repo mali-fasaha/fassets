@@ -48,8 +48,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
     }
 
     /**
-     * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation
-     * item
+     * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation item
      *
      * @param fixedAsset {@link FixedAsset} for which we require the monthly Depreciation for a given year
      * @param year       for which we are getting monthly depreciation
@@ -78,6 +77,6 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
 
         assert dto != null;
         return new MonthlyAssetDepreciation(dto.getAssetId(), dto.getYear(), dto.getJan(), dto.getFeb(), dto.getMar(), dto.getApr(), dto.getMay(), dto.getJun(), dto.getJul(), dto.getAug(),
-            dto.getSep(), dto.getOct(), dto.getNov(), dto.getDec());
+                                            dto.getSep(), dto.getOct(), dto.getNov(), dto.getDec());
     }
 }

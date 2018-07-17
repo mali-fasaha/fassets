@@ -20,8 +20,7 @@ package io.github.fasset.fasset.model.brief;
 import org.javamoney.moneta.Money;
 
 /**
- * Represents common functionality in objects that summarise the fixed assets in the
- * data frame
+ * Represents common functionality in objects that summarise the fixed assets in the data frame
  *
  * @author edwin.njeru
  */
@@ -63,8 +62,7 @@ public interface Brief {
     void setNetBookValue(Money netBookValue);
 
     /**
-     * @return Total AccruedDepreciation of items in the
-     * brief
+     * @return Total AccruedDepreciation of items in the brief
      */
     Money getAccruedDepreciation();
 

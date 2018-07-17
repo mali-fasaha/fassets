@@ -29,19 +29,12 @@ import java.io.IOException;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements the {@code AccountIdService} using pre stated values in a properties which are managed in
- * an internal map
- * <br> This implementation provides identities for accounts various types of transactions, for instance:
- * <br> i. acquisition transactions,
- * <br>in this transaction it is expected that the debit account would be the asset account tracking its category,
- * and the credit account would be the sundry creditor's account. This being because tracking who exactly is paid
- * for this asset is beyond the scope of this application.
- * <br> One peculiar aspect of this implementation is that pre-configured properties are read from a properties
- * file. This is peculiar because this implementation will have siblings in future that could be reading configuration
- * properties from a json api over http, from a database which is configured at runtime or even from an excel file.
- * <br> Even though this is the case the underlying policy can be changed at compile time, should another be desired,
- * you just have to initialize this object with anything that implements the {@link AccountIdPolicy} interface in the
- * constructor.
+ * Implements the {@code AccountIdService} using pre stated values in a properties which are managed in an internal map <br> This implementation provides identities for accounts various types of
+ * transactions, for instance: <br> i. acquisition transactions, <br>in this transaction it is expected that the debit account would be the asset account tracking its category, and the credit account
+ * would be the sundry creditor's account. This being because tracking who exactly is paid for this asset is beyond the scope of this application. <br> One peculiar aspect of this implementation is
+ * that pre-configured properties are read from a properties file. This is peculiar because this implementation will have siblings in future that could be reading configuration properties from a json
+ * api over http, from a database which is configured at runtime or even from an excel file. <br> Even though this is the case the underlying policy can be changed at compile time, should another be
+ * desired, you just have to initialize this object with anything that implements the {@link AccountIdPolicy} interface in the constructor.
  */
 @Component("accountIdConfigurationPropertiesService")
 public final class FileAccountIdService extends AbstractAccountIdService implements AccountIdService {
@@ -54,9 +47,8 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
-     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
-     * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
-     * code in the account number sequence
+     * Using the category of an asset this method returns the generic nomenclature code for the category, which in accordance to the Account nomenclature and hierarchy policy version 1.0 follows after
+     * the currency code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
      * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
@@ -100,8 +92,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
-     * Resolves the name of the account to be used as a contra account in case the actual account  is
-     * required to retain the original valuation for reporting purposes
+     * Resolves the name of the account to be used as a contra account in case the actual account  is required to retain the original valuation for reporting purposes
      *
      * @param transaction The type of transaction associated with the initialization of a contra account
      * @param accountSide To which we are posting the transaction during initialization of a contra account
@@ -114,9 +105,11 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
         String contraAccount = "";
 
         try {
-            contraAccount = String.valueOf(
-                accountIdPolicy.accountNamePrefix(transaction, accountSide, fixedAsset.getCategory()).append(" ").append(accountIdPolicy.appendant(transaction, accountSide)).append(" ")
-                    .append(accountIdPolicy.accountName(transaction, accountSide, fixedAsset.getCategory())));
+            contraAccount = String.valueOf(accountIdPolicy.accountNamePrefix(transaction, accountSide, fixedAsset.getCategory())
+                                                          .append(" ")
+                                                          .append(accountIdPolicy.appendant(transaction, accountSide))
+                                                          .append(" ")
+                                                          .append(accountIdPolicy.accountName(transaction, accountSide, fixedAsset.getCategory())));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,10 +118,8 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
-     * This methods combines the account segments combining them into an account number sequence which is used
-     * application wide.
-     * <br> The existence of this method makes it possible for the application to be configured to create
-     * different forms of identifications for an account number for different purposes.
+     * This methods combines the account segments combining them into an account number sequence which is used application wide. <br> The existence of this method makes it possible for the application
+     * to be configured to create different forms of identifications for an account number for different purposes.
      *
      * @param accountNumberSegments Parameters containing the various segments that form an account number
      * @return account number sequence

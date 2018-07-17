@@ -27,8 +27,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
- * nature of the {@code Entity}
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
  */
 @Repository("fixedAssetRepository")
 public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer> {

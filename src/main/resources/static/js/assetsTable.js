@@ -11,18 +11,18 @@ $(document).ready(function () {
      */
     var table = $('#assetlist').DataTable({
 
-        "sAjaxSource":"/listing/assets/data",
-        "sAjaxDataProp":"",
-        "order":[[0,"asc"]],
-        "aoColumns":[
-            {"mData":"id"},
-            {"mData":"solId"},
-            {"mData":"barcode"},
-            {"mData":"assetDescription"},
-            {"mData":"purchaseDate"},
-            {"mData":"category"},
-            {"mData":"purchaseCost"},
-            {"mData":"netBookValue"}
+        "sAjaxSource": "/listing/assets/data",
+        "sAjaxDataProp": "",
+        "order": [[0, "asc"]],
+        "aoColumns": [
+            {"mData": "id"},
+            {"mData": "solId"},
+            {"mData": "barcode"},
+            {"mData": "assetDescription"},
+            {"mData": "purchaseDate"},
+            {"mData": "category"},
+            {"mData": "purchaseCost"},
+            {"mData": "netBookValue"}
         ],
 
         /* really, really hope this works man! */

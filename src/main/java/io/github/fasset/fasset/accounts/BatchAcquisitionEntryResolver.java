@@ -35,8 +35,7 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEB
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements {@link BatchEntryResolver} interface whose job really is to generate entries based on a list of actual
- * {@code FixedAsset} items passed through the parameter in the main method.
+ * Implements {@link BatchEntryResolver} interface whose job really is to generate entries based on a list of actual {@code FixedAsset} items passed through the parameter in the main method.
  */
 @Component("batchEntryResolver")
 public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
@@ -63,10 +62,11 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
         List<AccountingEntry> entries = ConcurrentList.newList();
 
-        fixedAssets.stream().forEach(fixedAsset -> {
-            entries.add(getAssetEntry(fixedAsset));
-            entries.add(getSundryCreditorEntry(fixedAsset));
-        });
+        fixedAssets.stream()
+                   .forEach(fixedAsset -> {
+                       entries.add(getAssetEntry(fixedAsset));
+                       entries.add(getSundryCreditorEntry(fixedAsset));
+                   });
 
         return entries;
     }
@@ -82,7 +82,7 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
         log.debug("Resolving credit account for acquisition of asset: {}", fixedAsset.getAssetDescription());
 
         AccountingEntry sundryEntry = new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.resolveCreditAccount(fixedAsset), fixedAsset.getAssetDescription(), CREDIT,
-            HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
+                                                          HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         sundryEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));
 
@@ -102,7 +102,7 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
         AccountingEntry fixedAssetEntry =
             new AccountingEntry(SimpleDate.ofLocal(fixedAsset.getPurchaseDate()), accountResolver.resolveDebitAccount(fixedAsset), fixedAsset.getAssetDescription(), DEBIT,
-                HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
+                                HardCash.fromMoneta(fixedAsset.getPurchaseCost()));
 
         fixedAssetEntry.setEntryAttributes(getFixedAssetsAttributes(fixedAsset));
 
@@ -115,7 +115,8 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
         fixedAssetsAttributes.put("Barcode", fixedAsset.getBarcode());
         fixedAssetsAttributes.put("SolId", fixedAsset.getSolId());
         fixedAssetsAttributes.put("Category", fixedAsset.getCategory());
-        fixedAssetsAttributes.put("NetBookValue", fixedAsset.getNetBookValue().toString());
+        fixedAssetsAttributes.put("NetBookValue", fixedAsset.getNetBookValue()
+                                                            .toString());
 
         return fixedAssetsAttributes;
     }

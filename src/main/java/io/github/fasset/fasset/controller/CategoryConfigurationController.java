@@ -34,9 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 /**
- * This Controller provides a template in which a dataTable implementatation will require
- * a response containing a collection of {@link CategoryConfiguration} items from a persistent
- * sink
+ * This Controller provides a template in which a dataTable implementatation will require a response containing a collection of {@link CategoryConfiguration} items from a persistent sink
  */
 @Controller
 public class CategoryConfigurationController {

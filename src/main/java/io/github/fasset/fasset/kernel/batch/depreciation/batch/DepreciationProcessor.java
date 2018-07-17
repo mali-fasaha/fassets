@@ -28,8 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * Calculates the depreciation in  a given month for a given Asset. A list is generated and sent to
- * the writer for persistence
+ * Calculates the depreciation in  a given month for a given Asset. A list is generated and sent to the writer for persistence
  */
 public class DepreciationProcessor implements ItemProcessor<FixedAsset, ProcessingList<DepreciationProceeds>> {
 
@@ -48,13 +47,11 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
     }
 
     /**
-     * Process the provided item, returning a potentially modified or new item for continued
-     * processing.  If the returned result is null, it is assumed that processing of the item
-     * should not continue.
+     * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
+     * continue.
      *
      * @param fixedAsset to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the
-     * provided item should not continue.
+     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
      * @throws Exception thrown if exception occurs during processing.
      */
     @Override
@@ -62,12 +59,13 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
 
         //ProcessingList<DepreciationProceeds> depreciationProceeds = new ProcessingListImpl<>();
 
-        depreciationRelay.getMonthlyDepreciationSequence().forEach(i -> {
+        depreciationRelay.getMonthlyDepreciationSequence()
+                         .forEach(i -> {
 
-            log.trace("Calculating depreciation in the month of :{} for asset {}", i, fixedAsset);
+                             log.trace("Calculating depreciation in the month of :{} for asset {}", i, fixedAsset);
 
-            processingList.add(depreciationExecutor.getDepreciation(fixedAsset, i));
-        });
+                             processingList.add(depreciationExecutor.getDepreciation(fixedAsset, i));
+                         });
 
 
         return processingList;

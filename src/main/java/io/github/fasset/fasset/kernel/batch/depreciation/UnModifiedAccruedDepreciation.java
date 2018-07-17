@@ -32,9 +32,12 @@ public class UnModifiedAccruedDepreciation {
 
     public UnModifiedAccruedDepreciation(FixedAsset asset, YearMonth month) {
 
-        accruedDepreciation =
-            new AccruedDepreciation().setAccruedDepreciation(asset.getPurchaseCost().subtract(asset.getNetBookValue())).setCategory(asset.getCategory()).setFixedAssetId(asset.getId()).setMonth(month)
-                .setSolId(asset.getSolId());
+        accruedDepreciation = new AccruedDepreciation().setAccruedDepreciation(asset.getPurchaseCost()
+                                                                                    .subtract(asset.getNetBookValue()))
+                                                       .setCategory(asset.getCategory())
+                                                       .setFixedAssetId(asset.getId())
+                                                       .setMonth(month)
+                                                       .setSolId(asset.getSolId());
     }
 
     public AccruedDepreciation getAccruedDepreciation() {
@@ -61,7 +64,8 @@ public class UnModifiedAccruedDepreciation {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("UnModifiedAccruedDepreciation{");
-        sb.append("accruedDepreciation=").append(accruedDepreciation);
+        sb.append("accruedDepreciation=")
+          .append(accruedDepreciation);
         sb.append('}');
         return sb.toString();
     }

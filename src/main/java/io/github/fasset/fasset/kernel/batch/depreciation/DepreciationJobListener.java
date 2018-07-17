@@ -24,8 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Listens for the start and completion for start and end of the depreciation batch after which it
- * calls the appropriate job which is next in line
+ * Listens for the start and completion for start and end of the depreciation batch after which it calls the appropriate job which is next in line
  */
 @Component("depreciationJobListener")
 public class DepreciationJobListener implements JobExecutionListener {
@@ -46,9 +45,7 @@ public class DepreciationJobListener implements JobExecutionListener {
     }
 
     /**
-     * Callback after completion of a job. Called after both both successful and
-     * failed executions. To perform logic on a particular status, use
-     * "if (jobExecution.getStatus() == BatchStatus.X)".
+     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      *
      * @param jobExecution the current {@link JobExecution}
      */

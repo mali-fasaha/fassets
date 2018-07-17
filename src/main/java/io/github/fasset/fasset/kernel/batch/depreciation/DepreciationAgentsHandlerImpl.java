@@ -24,8 +24,7 @@ import org.springframework.stereotype.Component;
 import java.time.YearMonth;
 
 /**
- * This object encapsulates the AgentsDepreciationChain and manages the addition of an Agent to
- * the chain and sends a depreciation request to the chain for processing
+ * This object encapsulates the AgentsDepreciationChain and manages the addition of an Agent to the chain and sends a depreciation request to the chain for processing
  */
 @Component("depreciationAgentsHandler")
 public class DepreciationAgentsHandlerImpl implements DepreciationAgentsHandler {

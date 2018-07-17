@@ -23,10 +23,8 @@ package io.github.fasset.fasset.accounts.definition;
 public enum TransactionType {
 
     /**
-     * These be the type of transaction where assets are purchased. It is expected at a minimum that 2 accounts
-     * are involved, named the Fixed Asset's account to be debit, and the sundry creditor's account. If the fixed asset
-     * account is to be maintained at cost, then a contra account is also opened that will track the accrued depreciation
-     * on the same account.
+     * These be the type of transaction where assets are purchased. It is expected at a minimum that 2 accounts are involved, named the Fixed Asset's account to be debit, and the sundry creditor's
+     * account. If the fixed asset account is to be maintained at cost, then a contra account is also opened that will track the accrued depreciation on the same account.
      */
     ACQUISITION {
         /**
@@ -44,25 +42,22 @@ public enum TransactionType {
     },
 
     /**
-     * In this transaction we are simply recognizing existing assets, taking their costs to debit the fixed asset account,
-     * against the sundry creditor's account. The accumulated depreciation should also be posted with difference the between
-     * the asset's cost and the asset's net book value, against the depreciation account
+     * In this transaction we are simply recognizing existing assets, taking their costs to debit the fixed asset account, against the sundry creditor's account. The accumulated depreciation should
+     * also be posted with difference the between the asset's cost and the asset's net book value, against the depreciation account
      */
     RECOGNITION,
 
     /**
-     * The transaction involves the posting of credits in the asset cost accounts (if the asset is maintained at the revalued cost),
-     * or the accumulated depreciation account if the asset is maintained in the register at cost, and the debits are posted in
-     * the depreciation expense account
+     * The transaction involves the posting of credits in the asset cost accounts (if the asset is maintained at the revalued cost), or the accumulated depreciation account if the asset is maintained
+     * in the register at cost, and the debits are posted in the depreciation expense account
      */
     DEPRECIATION,
 
     /**
-     * This involves debits in the accumulated depreciation account (if the asset is maintained in the register at cost) with the
-     * full amount of depreciation, a credit in the asset's account with the full cost (if the asset is maintained at cost), or with
-     * the net book value if the asset is maintained at revalued cost. The amount of proceeds is recognized in the cash account by
-     * a debit with the amount received from the sale proceeds, and then the imbalance in the transaction is posted either a debit in
-     * the loss on disposal, of a credit in the profit on disposal of the category of the asset
+     * This involves debits in the accumulated depreciation account (if the asset is maintained in the register at cost) with the full amount of depreciation, a credit in the asset's account with the
+     * full cost (if the asset is maintained at cost), or with the net book value if the asset is maintained at revalued cost. The amount of proceeds is recognized in the cash account by a debit with
+     * the amount received from the sale proceeds, and then the imbalance in the transaction is posted either a debit in the loss on disposal, of a credit in the profit on disposal of the category of
+     * the asset
      */
     DISPOSAL,
 
@@ -72,18 +67,15 @@ public enum TransactionType {
     REVALUATION,
 
     /**
-     * The developer hopes that the implementation of the REVALUATION mode will be dynamic  enough that this mode will not be
-     * necessary
+     * The developer hopes that the implementation of the REVALUATION mode will be dynamic  enough that this mode will not be necessary
      */
     DEVALUATION,
 
     /**
-     * This is a moving concept as transfer could mean amendment of some wrongly assigned category into the appropriate category, or
-     * transfer from some service outlet to another service outlet. In the later the amounts accumulated in depreciation are simply
-     * reassigned to the appropriate service outlet, while in the former the amounts of computed depreciation have to be revalued afresh
-     * across the timeline of the assets existence. Any amounts of manual revaluation are reassigned without reassessment since it is
-     * assumed that the assessment was correct in the first place. If this condition cannot be guaranteed, the next option might be disposal
-     * and re acquisition of the same asset.
+     * This is a moving concept as transfer could mean amendment of some wrongly assigned category into the appropriate category, or transfer from some service outlet to another service outlet. In the
+     * later the amounts accumulated in depreciation are simply reassigned to the appropriate service outlet, while in the former the amounts of computed depreciation have to be revalued afresh across
+     * the timeline of the assets existence. Any amounts of manual revaluation are reassigned without reassessment since it is assumed that the assessment was correct in the first place. If this
+     * condition cannot be guaranteed, the next option might be disposal and re acquisition of the same asset.
      */
     TRANSFER,
 

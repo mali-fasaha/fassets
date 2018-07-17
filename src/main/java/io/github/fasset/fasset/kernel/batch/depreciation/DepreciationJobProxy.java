@@ -27,8 +27,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
- * Interface for launching the depreciation job. This abstraction enables the launch to be carried out from any
- * object
+ * Interface for launching the depreciation job. This abstraction enables the launch to be carried out from any object
  */
 @Component("depreciationJobProxy")
 public class DepreciationJobProxy {

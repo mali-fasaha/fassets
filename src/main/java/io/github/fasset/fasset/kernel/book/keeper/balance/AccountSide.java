@@ -20,10 +20,8 @@ package io.github.fasset.fasset.kernel.book.keeper.balance;
 import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 
 /**
- * Denotes the side to which a transaction belongs on the balance sheet. Either the debit side or credit side
- * of the SimpleAccount entry. It also show the "default" that an {@link io.github.fasset.fasset.kernel.book.keeper.Account}
- * belongs to before any {@link AccountingEntry}
- * items are posted
+ * Denotes the side to which a transaction belongs on the balance sheet. Either the debit side or credit side of the SimpleAccount entry. It also show the "default" that an {@link
+ * io.github.fasset.fasset.kernel.book.keeper.Account} belongs to before any {@link AccountingEntry} items are posted
  *
  * @author edwin.njeru
  */

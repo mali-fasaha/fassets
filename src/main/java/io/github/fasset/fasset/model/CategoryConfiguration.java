@@ -25,11 +25,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import java.text.MessageFormat;
 import java.util.Objects;
 
 /**
- * This is a representative model of the fixed asset's category for purposes of depreciation, that is its
- * name, its depreciation rate and its depreciation logic
+ * This is a representative model of the fixed asset's category for purposes of depreciation, that is its name, its depreciation rate and its depreciation logic
  */
 @Entity(name = "CategoryConfiguration")
 @Table(name = "category_configuration",
@@ -49,8 +49,7 @@ public class CategoryConfiguration extends DomainModel<String> {
     private String depreciationLogic;
 
     /**
-     * This is the item on which the depreciation rate is applied, as in either the cost
-     * or the net book value
+     * This is the item on which the depreciation rate is applied, as in either the cost or the net book value
      */
     @NotNull(message = "Please provide a valid designation for depreciation deprecant")
     @Column(name = "deprecant")
@@ -142,13 +141,7 @@ public class CategoryConfiguration extends DomainModel<String> {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CategoryConfiguration{");
-        sb.append("designation='").append(designation).append('\'');
-        sb.append(", depreciationLogic='").append(depreciationLogic).append('\'');
-        sb.append(", deprecant='").append(deprecant).append('\'');
-        sb.append(", depreciationRate=").append(depreciationRate);
-        sb.append(", categoryLedgerId='").append(categoryLedgerId).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return MessageFormat.format("CategoryConfiguration'{'designation=''{0}'', depreciationLogic=''{1}'', deprecant=''{2}'', depreciationRate={3}, categoryLedgerId=''{4}'''}'", designation,
+                                depreciationLogic, deprecant, depreciationRate, categoryLedgerId);
     }
 }

@@ -47,9 +47,15 @@ public class CategoryBriefResponseDto {
     public CategoryBriefResponseDto(CategoryBrief categoryBrief) {
         this.id = categoryBrief.getId();
         this.designation = categoryBrief.getDesignation();
-        this.purchaseCost = categoryBrief.getPurchaseCost().getNumber().doubleValue();
-        this.netBookValue = categoryBrief.getNetBookValue().getNumber().doubleValue();
-        this.accruedDepreciation = categoryBrief.getAccruedDepreciation().getNumber().doubleValue();
+        this.purchaseCost = categoryBrief.getPurchaseCost()
+                                         .getNumber()
+                                         .doubleValue();
+        this.netBookValue = categoryBrief.getNetBookValue()
+                                         .getNumber()
+                                         .doubleValue();
+        this.accruedDepreciation = categoryBrief.getAccruedDepreciation()
+                                                .getNumber()
+                                                .doubleValue();
         this.poll = categoryBrief.getPoll();
     }
 
@@ -127,7 +133,13 @@ public class CategoryBriefResponseDto {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("nomenclature", id).add("designation", designation).add("purchaseCost", purchaseCost).add("netBookValue", netBookValue)
-            .add("accruedDepreciation", accruedDepreciation).add("poll", poll).toString();
+        return MoreObjects.toStringHelper(this)
+                          .add("nomenclature", id)
+                          .add("designation", designation)
+                          .add("purchaseCost", purchaseCost)
+                          .add("netBookValue", netBookValue)
+                          .add("accruedDepreciation", accruedDepreciation)
+                          .add("poll", poll)
+                          .toString();
     }
 }

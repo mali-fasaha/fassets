@@ -18,8 +18,7 @@
 package io.github.fasset.fasset.kernel.book.keeper;
 
 /**
- * This enum is used to add additional features to an account which cannot be added
- * through the constructor
+ * This enum is used to add additional features to an account which cannot be added through the constructor
  */
 public enum AccountAttribute {
 
@@ -29,8 +28,7 @@ public enum AccountAttribute {
     CONTRA_ACCOUNT,
 
     /**
-     * The type classification of the account on the balance sheet, which could be either
-     * asset, liability or capital or equity
+     * The type classification of the account on the balance sheet, which could be either asset, liability or capital or equity
      */
     ACCOUNT_TYPE,
 
@@ -45,14 +43,12 @@ public enum AccountAttribute {
     ACCOUNT_SCHEME,
 
     /**
-     * General ledger identification of the account should such a system exist with which
-     * one would like to integrate this system
+     * General ledger identification of the account should such a system exist with which one would like to integrate this system
      */
     GENERAL_LEDGER,
 
     /**
-     * Interest which is associated with this account if the same has such considerations according
-     * to the application business domain
+     * Interest which is associated with this account if the same has such considerations according to the application business domain
      */
     INTEREST_RATE,
 
@@ -72,12 +68,10 @@ public enum AccountAttribute {
     SUB_SERVICE_OUTLET,
 
     /**
-     * If the organization has operations in more than one region, and the operation managers feel like, they should
-     * have accounts that can track financial movements down to the regional level this could be of help, but the word
-     * region could mean many things depending on your english teacher, political inclinations and the list goes on,
-     * therefore the book-keeper here does not dictate what you have to use this hierarchy for. A region could mean
-     * a branch in the next block from head office, or some new operations you want to set up in North Korea, or even
-     * a group of departments on the second floor
+     * If the organization has operations in more than one region, and the operation managers feel like, they should have accounts that can track financial movements down to the regional level this
+     * could be of help, but the word region could mean many things depending on your english teacher, political inclinations and the list goes on, therefore the book-keeper here does not dictate what
+     * you have to use this hierarchy for. A region could mean a branch in the next block from head office, or some new operations you want to set up in North Korea, or even a group of departments on
+     * the second floor
      */
     REGION,
 
@@ -87,11 +81,9 @@ public enum AccountAttribute {
     SUB_REGION,
 
     /**
-     * Ain't gonna tell you what you can do with this, but for instance if you were tracking fixed assets
-     * items with this account, this hierarchy, or nomenclature might come in handy for you. You could have
-     * computers, Electronic Equipment, Real Estate etc. If you were tracking financial assets, you could have
-     * it say, Loans and advances, Treasury Bonds, T - Bills, Deferred taxes (why not?) etc. But if it does not
-     * apply to you business case, the book-keeper will not kill you for leaving this one out
+     * Ain't gonna tell you what you can do with this, but for instance if you were tracking fixed assets items with this account, this hierarchy, or nomenclature might come in handy for you. You
+     * could have computers, Electronic Equipment, Real Estate etc. If you were tracking financial assets, you could have it say, Loans and advances, Treasury Bonds, T - Bills, Deferred taxes (why
+     * not?) etc. But if it does not apply to you business case, the book-keeper will not kill you for leaving this one out
      */
     CATEGORY,
 

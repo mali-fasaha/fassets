@@ -24,7 +24,8 @@ public class NilMonthlyAssetDepreciationDTO extends MonthlyAssetDepreciationDTO 
 
     public NilMonthlyAssetDepreciationDTO(Integer assetId, Integer year) {
         super();
-        super.setAssetId(assetId).setYear(year);
+        super.setAssetId(assetId)
+             .setYear(year);
     }
 
     @Override

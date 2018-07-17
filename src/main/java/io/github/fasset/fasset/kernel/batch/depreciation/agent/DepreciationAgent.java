@@ -31,8 +31,7 @@ import java.time.YearMonth;
 public interface DepreciationAgent extends Agent<Depreciation> {
 
     /**
-     * This method calculates depreciation and updates internal variables from
-     * which the depreciation variables can be drawn
+     * This method calculates depreciation and updates internal variables from which the depreciation variables can be drawn
      *
      * @param asset    {@link FixedAsset} being depreciated
      * @param month    {@link YearMonth} in which this AccruedDepreciation is effective

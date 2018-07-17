@@ -23,10 +23,8 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * Contains configuration which is used to obtain a user's Id. This is further recorded along
- * with every record that the User has created in the database knowingly or unknowingly. This
- * currently defaults to the creator's Id, but on completion the same will be obtained from
- * Spring security implementation
+ * Contains configuration which is used to obtain a user's Id. This is further recorded along with every record that the User has created in the database knowingly or unknowingly. This currently
+ * defaults to the creator's Id, but on completion the same will be obtained from Spring security implementation
  */
 @Component("auditorAware")
 public class AuditorAwareImpl implements AuditorAware<String> {

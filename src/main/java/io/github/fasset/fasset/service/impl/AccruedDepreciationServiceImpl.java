@@ -51,8 +51,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
     }
 
     /**
-     * Returns the accruedDepreciationAmount for a fixed asset  and month given as param.
-     * This will give the accrued depreciation up to the previous month
+     * Returns the accruedDepreciationAmount for a fixed asset  and month given as param. This will give the accrued depreciation up to the previous month
      *
      * @param asset the asset for which we week accrued depreciation
      * @param month the previous of which the depreciation has accrued up to
@@ -65,7 +64,8 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
         log.debug("Fetching the AccruedDepreciation for assetId : {}, for the month : {}", asset.getId(), month);
 
         //FIXME this query is returning nulls
-        return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(), month).getAccruedDepreciation();
+        return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(), month)
+                                            .getAccruedDepreciation();
     }
 
     /**

@@ -50,7 +50,10 @@ public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciation
     @Override
     public List<MonthlySolDepreciation> fetchAllMonthlySolDepreciations() {
 
-        return monthlySolDepreciationRepository.findAll().parallelStream().sorted(Comparator.comparing(MonthlySolDepreciation::getSolId)).collect(ImmutableListCollector.toImmutableList());
+        return monthlySolDepreciationRepository.findAll()
+                                               .parallelStream()
+                                               .sorted(Comparator.comparing(MonthlySolDepreciation::getSolId))
+                                               .collect(ImmutableListCollector.toImmutableList());
     }
 
     /**

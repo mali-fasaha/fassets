@@ -49,8 +49,10 @@ public class FixedAssetsJobsActivator {
 
         int numberOfAssets = fixedAssetService.getPoll();
 
-        bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets)).addString("starting_time", LocalDateTime.now().toString()).toJobParameters(), jobLauncher, job,
-            fixedAssetService, null);
+        bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets))
+                                            .addString("starting_time", LocalDateTime.now()
+                                                                                     .toString())
+                                            .toJobParameters(), jobLauncher, job, fixedAssetService, null);
     }
 
     private void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener)
@@ -68,7 +70,7 @@ public class FixedAssetsJobsActivator {
         } catch (Throwable e) {
 
             String message = String.format("Exception encountered %s caused by %s,while launching job" + "nomenclature %s at time %s", e.getMessage(), e.getCause(), job.getName(),
-                jobParameters.getString("starting_time"));
+                                           jobParameters.getString("starting_time"));
 
             throw new BatchJobExecutionException(message, e);
 
@@ -76,7 +78,8 @@ public class FixedAssetsJobsActivator {
 
         if (progressListener != null) {
             log.debug("Checking is job execution is running...");
-            if (!jobExecution.getStatus().isRunning()) {
+            if (!jobExecution.getStatus()
+                             .isRunning()) {
                 progressListener.isWorkStillInProgress(false);
                 log.debug("Job execution has stopped, updating listener...");
             }

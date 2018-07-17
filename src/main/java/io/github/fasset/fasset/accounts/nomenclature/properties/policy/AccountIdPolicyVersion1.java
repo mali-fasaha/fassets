@@ -31,9 +31,8 @@ import static io.github.fasset.fasset.accounts.nomenclature.properties.policy.Ke
 import static io.github.fasset.fasset.accounts.nomenclature.properties.policy.KeyFormatter.formatKey;
 
 /**
- * Version1 implementation of the {@link AccountIdPolicy}.
- * The most important client for this objects is the {@code FileAccountIdService}, since this class depends on the
- * configurations written down in a properties file knows as the {@code config/account-id.properties}
+ * Version1 implementation of the {@link AccountIdPolicy}. The most important client for this objects is the {@code FileAccountIdService}, since this class depends on the configurations written down
+ * in a properties file knows as the {@code config/account-id.properties}
  */
 public class AccountIdPolicyVersion1 implements AccountIdPolicy {
 
@@ -47,8 +46,8 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
-     * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates
-     * the unique code to be used in the account number sequence after the service outlet code
+     * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates the unique code to be used in the account number sequence after the service
+     * outlet code
      *
      * @param iso4217Code ISO 4217 currency code used to retrieve account number sequence code
      * @return Account number sequence code to follow the service outlet nomenclature
@@ -66,9 +65,8 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
-     * Using the category of an asset this method returns the generic nomenclature code for the category, which in
-     * accordance to the Account nomenclature and hierarchy policy version 1.0 follows after the currency
-     * code in the account number sequence
+     * Using the category of an asset this method returns the generic nomenclature code for the category, which in accordance to the Account nomenclature and hierarchy policy version 1.0 follows after
+     * the currency code in the account number sequence
      *
      * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
      * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
@@ -92,9 +90,8 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
-     * Using the provided category of an asset this method returns a specific nomenclature code for the
-     * category. This is the code segment that typically follows the general ledger code in the
-     * account number sequence
+     * Using the provided category of an asset this method returns a specific nomenclature code for the category. This is the code segment that typically follows the general ledger code in the account
+     * number sequence
      *
      * @param transactionType The type of fixed asset transaction
      * @param accountSide     Enum shows whether we are posting on the CREDIT side or the DEBIT side
@@ -136,13 +133,10 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
-     * This method returns a string of pattern to be prefixed to an account name as  per query. It is
-     * assumed for instance when such a query is called on an asset account during an acquisition, that
-     * we are hoping to find the configure prefix that would go something like "Accumulated Depreciation
-     * on Computers" for instance.
-     * <br> Please note that this method was not created to supplant the account number sequences and
-     * is not even expected to be used so many times. In fact where the asset manager is maintaining the
-     * assets at their amortised value then this method will likely not be used at all.
+     * This method returns a string of pattern to be prefixed to an account name as  per query. It is assumed for instance when such a query is called on an asset account during an acquisition, that
+     * we are hoping to find the configure prefix that would go something like "Accumulated Depreciation on Computers" for instance. <br> Please note that this method was not created to supplant the
+     * account number sequences and is not even expected to be used so many times. In fact where the asset manager is maintaining the assets at their amortised value then this method will likely not
+     * be used at all.
      *
      * @param transaction Type of asset transaction  we are carrying out.
      * @param accountSide The account side to which we are posting the transaction for this part of the entry
@@ -166,10 +160,8 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
-     * This is a character value that can be used as a separator between the appended prefix or suffix
-     * where one might be required at an application wide level. For instance the contra account for
-     * computers account might be called "Accumulated Depreciation - Computers", where the hyphen is
-     * supplied by this method. Using the configuration you have whatever constructs the user has desired
+     * This is a character value that can be used as a separator between the appended prefix or suffix where one might be required at an application wide level. For instance the contra account for
+     * computers account might be called "Accumulated Depreciation - Computers", where the hyphen is supplied by this method. Using the configuration you have whatever constructs the user has desired
      *
      * @param transaction Type of asset transaction  we are carrying out.
      * @param accountSide The account side to which we are posting the transaction for this part of the entry
@@ -192,15 +184,9 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     }
 
     /**
-     * This methods combines the account segments combining them into an account number sequence which is used
-     * application wide.
-     * <br> The existence of this method makes it possible for the application to be configured to create
-     * different forms of identifications for an account number for different purposes.
-     * <br> We assume the following args are passed in the following order for this policy version
-     * <br>i.  sol id
-     * <br>ii. currency code
-     * <br>iii.general ledger
-     * <br>iv. placeholder
+     * This methods combines the account segments combining them into an account number sequence which is used application wide. <br> The existence of this method makes it possible for the application
+     * to be configured to create different forms of identifications for an account number for different purposes. <br> We assume the following args are passed in the following order for this policy
+     * version <br>i.  sol id <br>ii. currency code <br>iii.general ledger <br>iv. placeholder
      *
      * @param accountSegments Parameters containing the various segments that form an account number
      * @return account number sequence
@@ -209,7 +195,10 @@ public class AccountIdPolicyVersion1 implements AccountIdPolicy {
     public String accountNumberMotif(String... accountSegments) {
 
         // TODO make this appendages more dynamic
-        StringBuilder sb = new StringBuilder().append(accountSegments[0]).append(accountSegments[1]).append(accountSegments[2]).append(accountSegments[3]);
+        StringBuilder sb = new StringBuilder().append(accountSegments[0])
+                                              .append(accountSegments[1])
+                                              .append(accountSegments[2])
+                                              .append(accountSegments[3]);
 
         return sb.toString();
     }

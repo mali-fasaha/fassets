@@ -27,8 +27,7 @@ import java.util.Collection;
 import java.util.Currency;
 
 /**
- * Represents the amount and sign of the amount you could find in an account. Using this
- * you could say an account has 20 dollars on Credit side.
+ * Represents the amount and sign of the amount you could find in an account. Using this you could say an account has 20 dollars on Credit side.
  *
  * @author edwin.njeru
  */
@@ -83,14 +82,17 @@ public class AccountBalance {
 
             } else {
 
-                if (arg.getAmount().isLessThan(this.amount)) {
+                if (arg.getAmount()
+                       .isLessThan(this.amount)) {
 
                     return newBalance(this.amount.minus(arg.getAmount()), this.accountSide);
                 }
 
-                if (arg.getAmount().isMoreThan(this.amount)) {
+                if (arg.getAmount()
+                       .isMoreThan(this.amount)) {
 
-                    return newBalance(arg.getAmount().minus(this.amount), arg.getAccountSide());
+                    return newBalance(arg.getAmount()
+                                         .minus(this.amount), arg.getAccountSide());
                 }
             }
         }
@@ -100,9 +102,13 @@ public class AccountBalance {
 
     private void checkCurrency(AccountBalance arg) throws MismatchedCurrencyException {
 
-        if (!arg.getAmount().getCurrency().equals(this.amount.getCurrency())) {
-            String message = String.format("Cannot add balance containing mismatched currency. Expected : %s but found : %s", this.amount.getCurrency().getCurrencyCode(),
-                arg.getAmount().getCurrency().getCurrencyCode());
+        if (!arg.getAmount()
+                .getCurrency()
+                .equals(this.amount.getCurrency())) {
+            String message = String.format("Cannot add balance containing mismatched currency. Expected : %s but found : %s", this.amount.getCurrency()
+                                                                                                                                         .getCurrencyCode(), arg.getAmount()
+                                                                                                                                                                .getCurrency()
+                                                                                                                                                                .getCurrencyCode());
 
             throw new MismatchedCurrencyException(message);
         }
@@ -142,6 +148,7 @@ public class AccountBalance {
 
     @Override
     public String toString() {
-        return amount.getNumber().doubleValue() + " " + accountSide;
+        return amount.getNumber()
+                     .doubleValue() + " " + accountSide;
     }
 }

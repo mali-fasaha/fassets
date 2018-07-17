@@ -25,11 +25,9 @@ import org.slf4j.LoggerFactory;
 import javax.money.MonetaryAmount;
 
 /**
- * DTO to carry the depreciation for each month of a year for each asset. Okay, a possible
- * performance issue is that there is a lot of boxing and un boxing going on, but this is
- * something that we will suffer because the database may not contain certain  months leading
- * to null items as opposed to zeroes. The only way to refactor this is to put tests on all batches
- * end to end, then see if they will still run without the auto boxing.
+ * DTO to carry the depreciation for each month of a year for each asset. Okay, a possible performance issue is that there is a lot of boxing and un boxing going on, but this is something that we will
+ * suffer because the database may not contain certain  months leading to null items as opposed to zeroes. The only way to refactor this is to put tests on all batches end to end, then see if they
+ * will still run without the auto boxing.
  * <p>
  * //TODO remove auto boxing
  */
@@ -59,18 +57,30 @@ public class MonthlyAssetDepreciationDTO {
                                        MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.assetId = assetId;
         this.year = year;
-        this.jan = jan.getNumber().doubleValue();
-        this.feb = feb.getNumber().doubleValue();
-        this.mar = mar.getNumber().doubleValue();
-        this.apr = apr.getNumber().doubleValue();
-        this.may = may.getNumber().doubleValue();
-        this.jun = jun.getNumber().doubleValue();
-        this.jul = jul.getNumber().doubleValue();
-        this.aug = aug.getNumber().doubleValue();
-        this.sep = sep.getNumber().doubleValue();
-        this.oct = oct.getNumber().doubleValue();
-        this.nov = nov.getNumber().doubleValue();
-        this.dec = dec.getNumber().doubleValue();
+        this.jan = jan.getNumber()
+                      .doubleValue();
+        this.feb = feb.getNumber()
+                      .doubleValue();
+        this.mar = mar.getNumber()
+                      .doubleValue();
+        this.apr = apr.getNumber()
+                      .doubleValue();
+        this.may = may.getNumber()
+                      .doubleValue();
+        this.jun = jun.getNumber()
+                      .doubleValue();
+        this.jul = jul.getNumber()
+                      .doubleValue();
+        this.aug = aug.getNumber()
+                      .doubleValue();
+        this.sep = sep.getNumber()
+                      .doubleValue();
+        this.oct = oct.getNumber()
+                      .doubleValue();
+        this.nov = nov.getNumber()
+                      .doubleValue();
+        this.dec = dec.getNumber()
+                      .doubleValue();
     }
 
     public Integer getAssetId() {
@@ -236,7 +246,21 @@ public class MonthlyAssetDepreciationDTO {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("assetId", assetId).add("year", year).add("jan", jan).add("feb", feb).add("mar", mar).add("apr", apr).add("may", may).add("jun", jun)
-            .add("jul", jul).add("aug", aug).add("sep", sep).add("oct", oct).add("nov", nov).add("dec", dec).toString();
+        return MoreObjects.toStringHelper(this)
+                          .add("assetId", assetId)
+                          .add("year", year)
+                          .add("jan", jan)
+                          .add("feb", feb)
+                          .add("mar", mar)
+                          .add("apr", apr)
+                          .add("may", may)
+                          .add("jun", jun)
+                          .add("jul", jul)
+                          .add("aug", aug)
+                          .add("sep", sep)
+                          .add("oct", oct)
+                          .add("nov", nov)
+                          .add("dec", dec)
+                          .toString();
     }
 }

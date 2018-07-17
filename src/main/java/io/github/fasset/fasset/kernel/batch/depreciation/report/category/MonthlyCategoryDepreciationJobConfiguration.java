@@ -74,8 +74,14 @@ public class MonthlyCategoryDepreciationJobConfiguration {
 
     @Bean("monthlyCategoryDepreciationJob")
     public Job monthlyCategoryDepreciationJob() {
-        return jobBuilderFactory.get("monthlyCategoryDepreciationJob").preventRestart().incrementer(new RunIdIncrementer()).listener(monthyCategoryDepreciationJobListener).preventRestart()
-            .flow(createMonthlyCategoryDepreciationItems()).end().build();
+        return jobBuilderFactory.get("monthlyCategoryDepreciationJob")
+                                .preventRestart()
+                                .incrementer(new RunIdIncrementer())
+                                .listener(monthyCategoryDepreciationJobListener)
+                                .preventRestart()
+                                .flow(createMonthlyCategoryDepreciationItems())
+                                .end()
+                                .build();
     }
 
     @Bean
@@ -86,7 +92,9 @@ public class MonthlyCategoryDepreciationJobConfiguration {
         try {
             createMonthlyCategoryDepreciationItems =
                 stepBuilderFactory.get("createMonthlyCategoryDepreciationItems").<String, MonthlyCategoryDepreciation>chunk(5).reader(monthlyCategoryDepreciationReader())
-                    .writer(monthlyCategoryDepreciationWriter()).processor(monthlyCategoryDepreciationProcessor(year)).build();
+                                                                                                                              .writer(monthlyCategoryDepreciationWriter())
+                                                                                                                              .processor(monthlyCategoryDepreciationProcessor(year))
+                                                                                                                              .build();
         } catch (Exception e) {
             e.printStackTrace();
         }

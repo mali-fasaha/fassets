@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component("hash")
 public class Hash {
 
-    public long RSHash(String str) {
+    public long rSHash(String str) {
         int b = 378551;
         int a = 63689;
         long hash = 0;
@@ -23,7 +23,7 @@ public class Hash {
    /* End Of RS Hash Function */
 
 
-    public long JSHash(String str) {
+    public long jSHash(String str) {
         long hash = 1315423911;
 
         for (int i = 0; i < str.length(); i++) {
@@ -35,7 +35,7 @@ public class Hash {
    /* End Of JS Hash Function */
 
 
-    public long PJWHash(String str) {
+    public long pJWHash(String str) {
         long BitsInUnsignedInt = (long) (4 * 8);
         long ThreeQuarters = (long) ((BitsInUnsignedInt * 3) / 4);
         long OneEighth = (long) (BitsInUnsignedInt / 8);
@@ -56,7 +56,7 @@ public class Hash {
    /* End Of  P. J. Weinberger Hash Function */
 
 
-    public long ELFHash(String str) {
+    public long eLFHash(String str) {
         long hash = 0;
         long x = 0;
 
@@ -74,7 +74,7 @@ public class Hash {
    /* End Of ELF Hash Function */
 
 
-    public long BKDRHash(String str) {
+    public long bKDRHash(String str) {
         long seed = 131; // 31 131 1313 13131 131313 etc..
         long hash = 0;
 
@@ -87,7 +87,7 @@ public class Hash {
    /* End Of BKDR Hash Function */
 
 
-    public long SDBMHash(String str) {
+    public long sDBMHash(String str) {
         long hash = 0;
 
         for (int i = 0; i < str.length(); i++) {
@@ -99,7 +99,7 @@ public class Hash {
    /* End Of SDBM Hash Function */
 
 
-    public long DJBHash(String str) {
+    public long dJBHash(String str) {
         long hash = 5381;
 
         for (int i = 0; i < str.length(); i++) {
@@ -111,7 +111,7 @@ public class Hash {
    /* End Of DJB Hash Function */
 
 
-    public long DEKHash(String str) {
+    public long dEKHash(String str) {
         long hash = str.length();
 
         for (int i = 0; i < str.length(); i++) {
@@ -123,7 +123,7 @@ public class Hash {
    /* End Of DEK Hash Function */
 
 
-    public long BPHash(String str) {
+    public long dPHash(String str) {
         long hash = 0;
 
         for (int i = 0; i < str.length(); i++) {
@@ -135,7 +135,7 @@ public class Hash {
    /* End Of BP Hash Function */
 
 
-    public long FNVHash(String str) {
+    public long fNVHash(String str) {
         long fnv_prime = 0x811C9DC5;
         long hash = 0;
 
@@ -149,7 +149,7 @@ public class Hash {
    /* End Of FNV Hash Function */
 
 
-    public long APHash(String str) {
+    public long aPHash(String str) {
         long hash = 0xAAAAAAAA;
 
         for (int i = 0; i < str.length(); i++) {

@@ -32,8 +32,7 @@ import java.util.List;
 import java.util.stream.LongStream;
 
 /**
- * Object generates months in  an increasing order in which depreciation is supposed to be
- * pre-calculated
+ * Object generates months in  an increasing order in which depreciation is supposed to be pre-calculated
  */
 @Component("depreciationRelay")
 public class DepreciationRelay {
@@ -71,10 +70,12 @@ public class DepreciationRelay {
 
         log.debug("Creating a monthly depreciation sequence for : {} months", noOfMonths + 1);
 
-        LongStream.range(0, noOfMonths).mapToObj(i -> monthlyIncrementer.getNext(from.plusMonths(i))).forEachOrdered(monthSeq -> {
-            log.trace("Adding the month : {} to the sequence", monthSeq);
-            monthlySequence.add(monthSeq);
-        });
+        LongStream.range(0, noOfMonths)
+                  .mapToObj(i -> monthlyIncrementer.getNext(from.plusMonths(i)))
+                  .forEachOrdered(monthSeq -> {
+                      log.trace("Adding the month : {} to the sequence", monthSeq);
+                      monthlySequence.add(monthSeq);
+                  });
 
         return monthlySequence;
     }

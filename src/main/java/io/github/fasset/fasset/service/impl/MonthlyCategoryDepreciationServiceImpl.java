@@ -46,13 +46,15 @@ public class MonthlyCategoryDepreciationServiceImpl implements MonthlyCategoryDe
 
 
     /**
-     * @return A List of all monthlyCategoryDepreciation items currently in the
-     * repository
+     * @return A List of all monthlyCategoryDepreciation items currently in the repository
      */
     @Override
     public List<MonthlyCategoryDepreciation> fetchAllMonthlyCategoryDepreciations() {
 
-        return depreciationReposiory.findAll().parallelStream().sorted(Comparator.comparing(MonthlyCategoryDepreciation::getCategoryName)).collect(ImmutableListCollector.toImmutableList());
+        return depreciationReposiory.findAll()
+                                    .parallelStream()
+                                    .sorted(Comparator.comparing(MonthlyCategoryDepreciation::getCategoryName))
+                                    .collect(ImmutableListCollector.toImmutableList());
     }
 
     /**

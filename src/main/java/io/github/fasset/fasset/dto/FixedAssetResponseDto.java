@@ -24,8 +24,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * This is a DTO used to list assets from the persistent sink into simpler data types suitable for
- * viewing over the Restful template
+ * This is a DTO used to list assets from the persistent sink into simpler data types suitable for viewing over the Restful template
  */
 public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> {
 
@@ -53,8 +52,12 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
         this.assetDescription = fixedAsset.getAssetDescription();
         this.purchaseDate = fixedAsset.getPurchaseDate();
         this.category = fixedAsset.getCategory();
-        this.purchaseCost = fixedAsset.getPurchaseCost().getNumber().doubleValue();
-        this.netBookValue = fixedAsset.getNetBookValue().getNumber().doubleValue();
+        this.purchaseCost = fixedAsset.getPurchaseCost()
+                                      .getNumber()
+                                      .doubleValue();
+        this.netBookValue = fixedAsset.getNetBookValue()
+                                      .getNumber()
+                                      .doubleValue();
     }
 
     public FixedAssetResponseDto(int id, String solId, String barcode, String assetDescription, LocalDate purchaseDate, String category, double purchaseCost, double netBookValue) {
@@ -171,8 +174,14 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
     @Override
     public int compareTo(FixedAssetResponseDto o) {
 
-        return Comparator.comparing(FixedAssetResponseDto::getId).thenComparing(FixedAssetResponseDto::getSolId).thenComparing(FixedAssetResponseDto::getBarcode)
-            .thenComparing(FixedAssetResponseDto::getAssetDescription).thenComparing(FixedAssetResponseDto::getPurchaseDate).thenComparing(FixedAssetResponseDto::getCategory)
-            .thenComparing(FixedAssetResponseDto::getPurchaseCost).thenComparing(FixedAssetResponseDto::getNetBookValue).compare(this, o);
+        return Comparator.comparing(FixedAssetResponseDto::getId)
+                         .thenComparing(FixedAssetResponseDto::getSolId)
+                         .thenComparing(FixedAssetResponseDto::getBarcode)
+                         .thenComparing(FixedAssetResponseDto::getAssetDescription)
+                         .thenComparing(FixedAssetResponseDto::getPurchaseDate)
+                         .thenComparing(FixedAssetResponseDto::getCategory)
+                         .thenComparing(FixedAssetResponseDto::getPurchaseCost)
+                         .thenComparing(FixedAssetResponseDto::getNetBookValue)
+                         .compare(this, o);
     }
 }

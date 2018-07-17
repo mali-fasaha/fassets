@@ -18,14 +18,10 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 /**
- * This class proposes to configure a process by which fixed assets are recognozed as actual accounting
- * entry which enables the system to trace time-changing nature of accounts which we use to trace assets
- * for depreciation, acquisition and disposal purposes.
- * <br> We obtain fixed assets using a JPA pointer using the battle-tested fixedAssetItemReader
- * from the fileUploadBatchConfig bean.
- * <br> The reader will read assets from the database and the batch processor will then pass them to the
- * {@code AccountEntryResolutionProcessor} which will emit Lists of {@code AccountingEntry} which will then
- * be persisted into the data sink by the {@code AccountEntryResolutionWriter}
+ * This class proposes to configure a process by which fixed assets are recognozed as actual accounting entry which enables the system to trace time-changing nature of accounts which we use to trace
+ * assets for depreciation, acquisition and disposal purposes. <br> We obtain fixed assets using a JPA pointer using the battle-tested fixedAssetItemReader from the fileUploadBatchConfig bean. <br>
+ * The reader will read assets from the database and the batch processor will then pass them to the {@code AccountEntryResolutionProcessor} which will emit Lists of {@code AccountingEntry} which will
+ * then be persisted into the data sink by the {@code AccountEntryResolutionWriter}
  */
 @Configuration("accountEntryResolution")
 public class AccountEntryResolutionConfig {
@@ -58,26 +54,22 @@ public class AccountEntryResolutionConfig {
         this.stepBuilderFactory = stepBuilderFactory;
     }
 
-    // @formatter:off
     @Bean("accountEntryResolutionJob")
     public Job accountEntryResolutionJob(BatchNotifications listener) {
         return jobBuilderFactory.get("accountEntryResolutionJob")
-            .preventRestart()
-            .incrementer(new RunIdIncrementer())
-            .listener(listener)
-            .flow(generateAccountEntriesStep())
-            .end()
-            .build();
+                                .preventRestart()
+                                .incrementer(new RunIdIncrementer())
+                                .listener(listener)
+                                .flow(generateAccountEntriesStep())
+                                .end()
+                                .build();
     }
-    // @formatter:on
 
     @Bean("generateAccountEntriesStep")
-    public Step generateAccountEntriesStep(){
-        return stepBuilderFactory.get("generateAccountEntriesStep")
-            .<List<FixedAsset>, List<AccountingEntry>>chunk(10)
-            .reader(fixedAssetItemsReader)
-            .processor(accountEntryResolutionProcessor)
-            .writer(accountEntryResolutionWriter)
-            .build();
+    public Step generateAccountEntriesStep() {
+        return stepBuilderFactory.get("generateAccountEntriesStep").<List<FixedAsset>, List<AccountingEntry>>chunk(10).reader(fixedAssetItemsReader)
+                                                                                                                      .processor(accountEntryResolutionProcessor)
+                                                                                                                      .writer(accountEntryResolutionWriter)
+                                                                                                                      .build();
     }
 }

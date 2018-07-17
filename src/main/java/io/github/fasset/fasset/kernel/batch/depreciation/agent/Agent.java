@@ -23,8 +23,7 @@ import io.github.fasset.fasset.model.FixedAsset;
 import java.time.YearMonth;
 
 /**
- * General representation of an object that given the {@link FixedAsset} and the {@link YearMonth} will
- * return the desired object to the caller
+ * General representation of an object that given the {@link FixedAsset} and the {@link YearMonth} will return the desired object to the caller
  *
  * @param <T> Type of object to be calculated at invocation
  */

@@ -24,8 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * This object contains fields for an improperly setup fixedAsset items with their default
- * values, and is used whenever a NullPointerSituation is likely to occur
+ * This object contains fields for an improperly setup fixedAsset items with their default values, and is used whenever a NullPointerSituation is likely to occur
  */
 public class NilFixedAsset extends FixedAsset {
 

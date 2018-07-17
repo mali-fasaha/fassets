@@ -73,7 +73,7 @@ public class DefaultEntryResolverIT {
 
         BatchAcquisitionEntryResolver batchAcquisitionEntryResolver = new BatchAcquisitionEntryResolver(
             new AcquisitionAccountResolver(new AcquisitionDebitAccountIdResolver(new FileAccountIdService(new AccountIdPolicyVersion1("account-id"))),
-                new AcquisitionCreditAccountIdResolver(new FileAccountIdService(new AccountIdPolicyVersion1("account-id")))));
+                                           new AcquisitionCreditAccountIdResolver(new FileAccountIdService(new AccountIdPolicyVersion1("account-id")))));
 
         entries = batchAcquisitionEntryResolver.resolveEntries(fixedAssets);
 
@@ -89,19 +89,32 @@ public class DefaultEntryResolverIT {
 
         assetAcquisition.post();
 
-        List<Account> accountsFromEntries = IntStream.range(0, fixedAssets.size() * 2).mapToObj(i -> entries.get(i).getAccount()).collect(ImmutableListCollector.toImmutableList());
+        List<Account> accountsFromEntries = IntStream.range(0, fixedAssets.size() * 2)
+                                                     .mapToObj(i -> entries.get(i)
+                                                                           .getAccount())
+                                                     .collect(ImmutableListCollector.toImmutableList());
 
-        accountNames = accountsFromEntries.parallelStream().map(Account::getName).collect(ImmutableListCollector.toImmutableFastList());
+        accountNames = accountsFromEntries.parallelStream()
+                                          .map(Account::getName)
+                                          .collect(ImmutableListCollector.toImmutableFastList());
 
-        accountBalances = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentHashMap::new));
+        accountBalances = accountsFromEntries.parallelStream()
+                                             .collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentHashMap::new));
 
-        accountNumbers = accountsFromEntries.parallelStream().collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentHashMap::new));
+        accountNumbers = accountsFromEntries.parallelStream()
+                                            .collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentHashMap::new));
 
-        sundryCreditorBalances = accountsFromEntries.parallelStream().filter(i -> i.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT")).map(account -> account.balance(on(2018, 2, 26)))
-            .collect(ImmutableListCollector.toImmutableFastList());
+        sundryCreditorBalances = accountsFromEntries.parallelStream()
+                                                    .filter(i -> i.getName()
+                                                                  .equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
+                                                    .map(account -> account.balance(on(2018, 2, 26)))
+                                                    .collect(ImmutableListCollector.toImmutableFastList());
 
-        sundryCreditorNumbers = accountsFromEntries.parallelStream().filter(account -> account.getName().equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT")).map(Account::getNumber)
-            .collect(ImmutableListCollector.toImmutableFastList());
+        sundryCreditorNumbers = accountsFromEntries.parallelStream()
+                                                   .filter(account -> account.getName()
+                                                                             .equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
+                                                   .map(Account::getNumber)
+                                                   .collect(ImmutableListCollector.toImmutableFastList());
     }
 
     @Test

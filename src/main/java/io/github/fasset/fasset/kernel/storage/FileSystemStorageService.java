@@ -22,18 +22,14 @@ import io.github.fasset.fasset.kernel.util.StorageException;
 import io.github.fasset.fasset.kernel.util.StorageFileNotFoundException;
 import io.github.fasset.fasset.kernel.util.queue.MessageQueue;
 import io.github.fasset.fasset.kernel.util.queue.QueueMessage;
-import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
 import io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue;
 import io.github.fasset.fasset.model.files.FileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
@@ -53,21 +49,11 @@ import java.util.stream.Stream;
 import static io.github.fasset.fasset.kernel.util.FileSecurityChecks.relativePathCheck;
 
 /**
- * Implements storageService interface while at the same time implementing the subscriptionService. The later allows
- * a {@code Subscriber} implementation to observe changes and act
- * accordingly, and this this case upload data stored in the the file recently uploaded in the file system.
+ * Implements storageService interface while at the same time implementing the subscriptionService. The later allows a {@code Subscriber} implementation to observe changes and act accordingly, and
+ * this this case upload data stored in the the file recently uploaded in the file system.
  * <p>
- * <br />Usage :
- * <br> This class will enable clients to
- * <br /> - List uploaded files:
- * <br />  storageService.loadAll()
- * <br />
- * <br /> - Store uploaded files in root location:
- * <br />  storageService.store(file);
- * <br />
- * <br /> - Generate API containing uploaded files
- * <br />  storageService.loadAsResource(fileName);
- * <br />
+ * <br />Usage : <br> This class will enable clients to <br /> - List uploaded files: <br />  storageService.loadAll() <br /> <br /> - Store uploaded files in root location: <br />
+ * storageService.store(file); <br /> <br /> - Generate API containing uploaded files <br />  storageService.loadAsResource(fileName); <br />
  */
 @Service("fileSystemStorageService")
 public class FileSystemStorageService implements StorageService {
@@ -105,7 +91,8 @@ public class FileSystemStorageService implements StorageService {
 
             relativePathCheck(fileName);
 
-            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017, 12));
+            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName)
+                                                                                   .toString(), YearMonth.of(2017, 12));
 
             try {
                 // copy file to the file system
@@ -171,7 +158,9 @@ public class FileSystemStorageService implements StorageService {
         Stream<Path> filePathStream;
 
         try {
-            filePathStream = Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation)).map(this.rootLocation::relativize);
+            filePathStream = Files.walk(this.rootLocation, 1)
+                                  .filter(path -> !path.equals(this.rootLocation))
+                                  .map(this.rootLocation::relativize);
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }

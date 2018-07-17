@@ -44,9 +44,7 @@ public class MonthlyAssetDepreciationJobListener implements JobExecutionListener
     }
 
     /**
-     * Callback after completion of a job. Called after both both successful and
-     * failed executions. To perform logic on a particular status, use
-     * "if (jobExecution.getStatus() == BatchStatus.X)".
+     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      *
      * @param jobExecution the current {@link JobExecution}
      */

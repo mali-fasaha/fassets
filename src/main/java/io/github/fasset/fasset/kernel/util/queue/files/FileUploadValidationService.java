@@ -23,18 +23,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Provides validate method in which we can include re-usable file validation methods.
- * <br> Any of the checks the {@link FileValidationService#validate(FileUpload)} will throw
- * an {@link InvalidFileException}.
+ * Provides validate method in which we can include re-usable file validation methods. <br> Any of the checks the {@link FileValidationService#validate(FileUpload)} will throw an {@link
+ * InvalidFileException}.
  */
 @Service("fileValidationService")
 public class FileUploadValidationService implements FileValidationService<FileUpload> {
 
-    private boolean allowDuplicates;
-
-    private final FileUploadService fileUploadService;
-
     private static final Logger log = LoggerFactory.getLogger(FileUploadValidationService.class);
+    private final FileUploadService fileUploadService;
+    private boolean allowDuplicates;
 
     FileUploadValidationService(FileUploadService fileUploadService) {
         this.fileUploadService = fileUploadService;

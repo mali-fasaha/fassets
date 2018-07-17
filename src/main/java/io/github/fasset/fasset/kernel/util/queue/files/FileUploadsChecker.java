@@ -37,8 +37,7 @@ import java.util.Optional;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * This is a utility for checking if files have been uploaded, and if so, trigger actions
- * using the appropriate file uploads batch configuration
+ * This is a utility for checking if files have been uploaded, and if so, trigger actions using the appropriate file uploads batch configuration
  */
 @Component("fileUploadsChecker")
 public class FileUploadsChecker implements Runnable {
@@ -68,13 +67,10 @@ public class FileUploadsChecker implements Runnable {
     }
 
     /**
-     * When an object implementing interface <code>Runnable</code> is used
-     * to create a thread, starting the thread causes the object's
-     * <code>run</code> method to be called in that separately executing
+     * When an object implementing interface <code>Runnable</code> is used to create a thread, starting the thread causes the object's <code>run</code> method to be called in that separately executing
      * thread.
      * <p>
-     * The general contract of the method <code>run</code> is that it may
-     * take any action whatsoever.
+     * The general contract of the method <code>run</code> is that it may take any action whatsoever.
      *
      * @see Thread#run()
      */
@@ -86,24 +82,31 @@ public class FileUploadsChecker implements Runnable {
 
         List<FileUpload> fileUploads = ConcurrentList.newList();
 
-        lock.writeLock().lock();
+        lock.writeLock()
+            .lock();
 
         try {
             fileUploadsConsumer.checkMessages(FileUploadsChecker::handleError, FileUploadsChecker::handleCompletion)
-                .subscribe((Optional<QueueMessage<List<FileUpload>>> f) -> fileUploads.addAll(f.get().message().stream().peek(fileUpload -> {
-                        fileUpload.setDeserialized(true);
-                    }).collect(ImmutableListCollector.toImmutableFastList())
+                               .subscribe((Optional<QueueMessage<List<FileUpload>>> f) -> fileUploads.addAll(f.get()
+                                                                                                              .message()
+                                                                                                              .stream()
+                                                                                                              .peek(fileUpload -> {
+                                                                                                                  fileUpload.setDeserialized(true);
+                                                                                                              })
+                                                                                                              .collect(ImmutableListCollector.toImmutableFastList())
 
-                ));
+                                                                                                            ));
         } finally {
 
-            lock.writeLock().unlock();
+            lock.writeLock()
+                .unlock();
 
         }
 
         fileUploads.forEach(f -> {
             try {
-                excelUploadJob.uploadExcelFile(f.getFileName(), f.getMonth().toString());
+                excelUploadJob.uploadExcelFile(f.getFileName(), f.getMonth()
+                                                                 .toString());
             } catch (BatchJobExecutionException e) {
                 e.printStackTrace();
             }

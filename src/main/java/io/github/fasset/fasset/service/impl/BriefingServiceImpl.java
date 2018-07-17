@@ -80,7 +80,8 @@ public class BriefingServiceImpl implements BriefingService {
         brief.setDesignation(serviceOutlet);
         brief.setPurchaseCost(fixedAssetRepository.getTotalSolPurchaseCost(serviceOutlet));
         brief.setNetBookValue(fixedAssetRepository.getTotalSolNetBookValue(serviceOutlet));
-        brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
+        brief.setAccruedDepreciation(brief.getPurchaseCost()
+                                          .subtract(brief.getNetBookValue()));
         brief.setPoll(fixedAssetRepository.getTotalSolCount(serviceOutlet));
 
         return brief;
@@ -91,22 +92,24 @@ public class BriefingServiceImpl implements BriefingService {
         brief.setDesignation(category);
         brief.setPurchaseCost(fixedAssetRepository.getTotalCategoryPurchaseCost(category));
         brief.setNetBookValue(fixedAssetRepository.getTotalCategoryNetBookValue(category));
-        brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
+        brief.setAccruedDepreciation(brief.getPurchaseCost()
+                                          .subtract(brief.getNetBookValue()));
         brief.setPoll(fixedAssetRepository.getTotalCategoryCount(category));
 
         return brief;
     }
 
     /**
-     * Updates the summary for ServiceOutlets using data queried from the fixed assets
-     * repository
+     * Updates the summary for ServiceOutlets using data queried from the fixed assets repository
      */
     @Override
     public void updateServiceOutletBriefs() {
 
         List<ServiceOutletBrief> briefs = new ArrayList<>();
 
-        getAllSolIds().stream().map(this::createServiceOutletBrief).forEach(briefs::add);
+        getAllSolIds().stream()
+                      .map(this::createServiceOutletBrief)
+                      .forEach(briefs::add);
 
         log.info("Adding a list of : {} serviceOutletBrief items into repo", briefs.size());
 
@@ -118,7 +121,9 @@ public class BriefingServiceImpl implements BriefingService {
     public void updateCategoryBriefs() {
         List<CategoryBrief> briefs = new ArrayList<>();
 
-        getAllCategoriesInRepo().stream().map(this::createCategoryBrief).forEach(briefs::add);
+        getAllCategoriesInRepo().stream()
+                                .map(this::createCategoryBrief)
+                                .forEach(briefs::add);
 
         log.info("Adding a list of : {} categoryBrief items into repo", briefs.size());
 

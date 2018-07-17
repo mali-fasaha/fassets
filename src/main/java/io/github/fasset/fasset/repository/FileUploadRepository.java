@@ -21,8 +21,7 @@ import io.github.fasset.fasset.model.files.FileUpload;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * This Repository extends the Spring JPA Template and has runtime-implentation depending on the
- * nature of the {@code Entity}
+ * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
  */
 public interface FileUploadRepository extends JpaRepository<FileUpload, Integer> {
 

@@ -34,8 +34,7 @@ public interface NetBookValueService {
     void saveNetBookValue(NetBookValue netBookValue);
 
     /**
-     * Saves a {@link List} collection of all items passed in the parameter to the
-     * {@link io.github.fasset.fasset.repository.NetBookValueRepository}
+     * Saves a {@link List} collection of all items passed in the parameter to the {@link io.github.fasset.fasset.repository.NetBookValueRepository}
      *
      * @param netBookValues Collection of netBookValue entities to be saved in the repository
      */
