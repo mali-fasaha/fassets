@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Tried to fix test errors in the DefaultEntryResolverIt test**
+
+
+[f7fd5fa98f445c0](https://github.com/mali-fasaha/fassets/commit/f7fd5fa98f445c0) Edwin Njeru *2018-07-17 17:39:42*
+
 **Added wraps for chained method calls**
 
 
