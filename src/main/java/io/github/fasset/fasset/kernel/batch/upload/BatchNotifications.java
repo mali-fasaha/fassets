@@ -95,9 +95,9 @@ public class BatchNotifications implements JobExecutionListener {
 
         //fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
 
-        briefingService.updateCategoryBriefs();
+        //briefingService.updateCategoryBriefs();
 
-        briefingService.updateServiceOutletBriefs();
+        //briefingService.updateServiceOutletBriefs();
 
         //TODO trigger depreciation with message
 

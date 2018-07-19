@@ -75,7 +75,7 @@ public class Fassets {
         };
     }
 
-    @Bean
+    @Bean("asynchExecutor")
     public Executor asynchExecutor() {
 
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
