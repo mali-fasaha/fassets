@@ -26,27 +26,22 @@ import java.util.List;
 @Configuration("accountEntryResolution")
 public class AccountEntryResolutionConfig {
 
-    @Autowired
-    @Qualifier("fixedAssetItemsReader")
     private ItemReader<List<FixedAsset>> fixedAssetItemsReader;
 
-    @Autowired
-    @Qualifier("accountEntryResolutionItemProcessor")
     private ItemProcessor<List<FixedAsset>, List<AccountingEntry>> accountEntryResolutionProcessor;
 
-    @Autowired
-    @Qualifier("accountEntryResolutionProcessor")
     private ItemWriter<List<AccountingEntry>> accountEntryResolutionWriter;
 
-    @Autowired
     private JobBuilderFactory jobBuilderFactory;
 
-    @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
-    //todo implement constructor injection here
-    public AccountEntryResolutionConfig(ItemReader<List<FixedAsset>> fixedAssetItemsReader, ItemProcessor<List<FixedAsset>, List<AccountingEntry>> accountEntryResolutionProcessor,
-                                        ItemWriter<List<AccountingEntry>> accountEntryResolutionWriter, JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory) {
+    @Autowired
+    public AccountEntryResolutionConfig(@Qualifier("fixedAssetItemsReader") ItemReader<List<FixedAsset>> fixedAssetItemsReader,
+                                        @Qualifier("accountEntryResolutionItemProcessor") ItemProcessor<List<FixedAsset>, List<AccountingEntry>> accountEntryResolutionProcessor,
+                                        @Qualifier("accountEntryResolutionProcessor") ItemWriter<List<AccountingEntry>> accountEntryResolutionWriter,
+                                        JobBuilderFactory jobBuilderFactory,
+                                        StepBuilderFactory stepBuilderFactory) {
         this.fixedAssetItemsReader = fixedAssetItemsReader;
         this.accountEntryResolutionProcessor = accountEntryResolutionProcessor;
         this.accountEntryResolutionWriter = accountEntryResolutionWriter;

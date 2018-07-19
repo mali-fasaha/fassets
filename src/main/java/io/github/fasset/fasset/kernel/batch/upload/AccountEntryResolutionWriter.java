@@ -5,6 +5,7 @@ import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.kernel.book.keeper.util.UnableToPostException;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class AccountEntryResolutionWriter implements ItemWriter<List<AccountingE
 
     private final TransactionBuilder transactionBuilder;
 
-    public AccountEntryResolutionWriter(TransactionBuilder transactionBuilder) {
+    @Autowired
+    AccountEntryResolutionWriter(TransactionBuilder transactionBuilder) {
         this.transactionBuilder = transactionBuilder;
     }
 
