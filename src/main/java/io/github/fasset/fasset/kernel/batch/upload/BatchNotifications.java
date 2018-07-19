@@ -102,6 +102,7 @@ public class BatchNotifications implements JobExecutionListener {
         //TODO trigger depreciation with message
 
         // todo confirm this actually works
+        // todo this execution failed spectalularly, please remove
         asynchExecutor.execute(depreciationJobProxy);
         asynchExecutor.execute(accountEntryResolutionJobProxy);
 

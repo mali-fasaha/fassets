@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Currency;
 import java.util.List;
 
-import static java.text.MessageFormat.format;
+import static java.lang.String.format;
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -33,7 +33,7 @@ public class AccountingTransactionBuilder implements TransactionBuilder {
                                    .getCurrency();
 
         // todo create sequential naming for transactions
-        AccountingTransaction entryTransaction = AccountingTransaction.create(format("Tran{}", ++counter), SimpleDate.today(), currency);
+        AccountingTransaction entryTransaction = AccountingTransaction.create(format("Tran%s", ++counter), SimpleDate.today(), currency);
 
         entries.forEach(entry -> {
             try {
