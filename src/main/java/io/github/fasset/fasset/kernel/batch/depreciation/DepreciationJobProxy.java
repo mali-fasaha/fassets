@@ -18,6 +18,7 @@
 package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator;
+import io.github.fasset.fasset.kernel.batch.JobProxy;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.FixedAssetService;
 import org.springframework.batch.core.Job;
@@ -30,7 +31,7 @@ import org.springframework.stereotype.Component;
  * Interface for launching the depreciation job. This abstraction enables the launch to be carried out from any object
  */
 @Component("depreciationJobProxy")
-public class DepreciationJobProxy {
+public class DepreciationJobProxy implements JobProxy {
 
     private final JobLauncher jobLauncher;
 
@@ -50,7 +51,8 @@ public class DepreciationJobProxy {
     }
 
 
-    public void initializeDepreciationRun() throws BatchJobExecutionException {
+    @Override
+    public void initializeJobRun() throws BatchJobExecutionException {
 
         fixedAssetsJobsActivator.bootstrap(jobLauncher, depreciationRun, fixedAssetService);
     }

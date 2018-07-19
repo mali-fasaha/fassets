@@ -17,7 +17,7 @@
  */
 package io.github.fasset.fasset.kernel.batch.upload;
 
-import io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobProxy;
+import io.github.fasset.fasset.kernel.batch.JobProxy;
 import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 import io.github.fasset.fasset.service.BriefingService;
 import io.github.fasset.fasset.service.FixedAssetService;
@@ -41,18 +41,22 @@ public class BatchNotifications implements JobExecutionListener {
 
     private final FixedAssetService fixedAssetService;
 
-    private DepreciationJobProxy depreciationJobProxy;
+    private JobProxy depreciationJobProxy;
+
+    private JobProxy accountEntryResolutionJobProxy;
 
 
     private BriefingService briefingService;
 
     @Autowired
     public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
-                              @Qualifier("briefingService") BriefingService briefingService, @Qualifier("depreciationJobProxy") DepreciationJobProxy depreciationJobProxy) {
+                              @Qualifier("briefingService") BriefingService briefingService, @Qualifier("depreciationJobProxy") JobProxy depreciationJobProxy,
+                              @Qualifier("accountEntryResolutionJobProxy") JobProxy accountEntryResolutionJobProxy) {
         this.excelItemReader = excelItemReader;
         this.fixedAssetService = fixedAssetService;
         this.briefingService = briefingService;
         this.depreciationJobProxy = depreciationJobProxy;
+        this.accountEntryResolutionJobProxy = accountEntryResolutionJobProxy;
     }
 
 
@@ -92,7 +96,10 @@ public class BatchNotifications implements JobExecutionListener {
 
         //TODO trigger depreciation with message
         try {
-            depreciationJobProxy.initializeDepreciationRun();
+            // disabling depreciation for now
+            //depreciationJobProxy.initializeJobRun();
+            accountEntryResolutionJobProxy.initializeJobRun();
+
         } catch (BatchJobExecutionException e) {
             e.printStackTrace();
         }

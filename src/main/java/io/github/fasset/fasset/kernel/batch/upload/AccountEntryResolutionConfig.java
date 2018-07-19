@@ -50,7 +50,7 @@ public class AccountEntryResolutionConfig {
     }
 
     @Bean("accountEntryResolutionJob")
-    public Job accountEntryResolutionJob(BatchNotifications listener) {
+    public Job accountEntryResolutionJob(@Qualifier("accountEntryResolutionExecutionListener") AccountEntryResolutionExecutionListener listener) {
         return jobBuilderFactory.get("accountEntryResolutionJob")
                                 .preventRestart()
                                 .incrementer(new RunIdIncrementer())

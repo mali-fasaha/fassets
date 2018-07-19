@@ -49,6 +49,8 @@ public class FixedAssetsJobsActivator {
 
         int numberOfAssets = fixedAssetService.getPoll();
 
+        log.info("Another fixedAssets job initiated running for {} individual assets", numberOfAssets);
+
         bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets))
                                             .addString("starting_time", LocalDateTime.now()
                                                                                      .toString())
