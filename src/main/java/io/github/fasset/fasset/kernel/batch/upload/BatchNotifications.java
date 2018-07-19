@@ -29,6 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.Executor;
+
 /**
  * Raises notifications during start and end of a batch or to interface between two batches
  */
@@ -45,18 +47,21 @@ public class BatchNotifications implements JobExecutionListener {
 
     private JobProxy accountEntryResolutionJobProxy;
 
+    private final Executor asynchExecutor;
+
 
     private BriefingService briefingService;
 
     @Autowired
     public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
                               @Qualifier("briefingService") BriefingService briefingService, @Qualifier("depreciationJobProxy") JobProxy depreciationJobProxy,
-                              @Qualifier("accountEntryResolutionJobProxy") JobProxy accountEntryResolutionJobProxy) {
+                              @Qualifier("accountEntryResolutionJobProxy") JobProxy accountEntryResolutionJobProxy, @Qualifier("asynchExecutor") final Executor asynchExecutor) {
         this.excelItemReader = excelItemReader;
         this.fixedAssetService = fixedAssetService;
         this.briefingService = briefingService;
         this.depreciationJobProxy = depreciationJobProxy;
         this.accountEntryResolutionJobProxy = accountEntryResolutionJobProxy;
+        this.asynchExecutor = asynchExecutor;
     }
 
 
@@ -95,14 +100,14 @@ public class BatchNotifications implements JobExecutionListener {
         briefingService.updateServiceOutletBriefs();
 
         //TODO trigger depreciation with message
-        try {
-            // disabling depreciation for now
-            //depreciationJobProxy.initializeJobRun();
-            accountEntryResolutionJobProxy.initializeJobRun();
 
-        } catch (BatchJobExecutionException e) {
-            e.printStackTrace();
-        }
+        // todo confirm this actually works
+        asynchExecutor.execute(depreciationJobProxy);
+        asynchExecutor.execute(accountEntryResolutionJobProxy);
+
+        // disabling depreciation for now
+        //depreciationJobProxy.initializeJobRun();
+        //accountEntryResolutionJobProxy.initializeJobRun();
 
     }
 
