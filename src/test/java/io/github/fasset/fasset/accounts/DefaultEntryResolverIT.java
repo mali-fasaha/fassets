@@ -96,6 +96,7 @@ public class DefaultEntryResolverIT {
 
         accountNames = accountsFromEntries.stream()
                                           .map(Account::getName)
+                                          .distinct()
                                           .collect(ImmutableListCollector.toImmutableFastList());
 
         accountBalances = accountsFromEntries.stream()
@@ -127,6 +128,7 @@ public class DefaultEntryResolverIT {
     @Test
     public void namesOfAccountsGeneratedByEntryResolution() {
 
+        assertEquals(4, accountNames.size());
         assertTrue(accountNames.contains("ELECTRONIC EQUIPMENT"));
         assertTrue(accountNames.contains("FURNITURE AND FITTINGS"));
         assertTrue(accountNames.contains("COMPUTERS"));
