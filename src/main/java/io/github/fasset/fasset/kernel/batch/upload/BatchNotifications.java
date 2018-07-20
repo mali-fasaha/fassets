@@ -95,16 +95,17 @@ public class BatchNotifications implements JobExecutionListener {
 
         //fixedAssetService.fetchAllExistingAssets().forEach(System.out::println);
 
-        //briefingService.updateCategoryBriefs();
+        briefingService.updateCategoryBriefs();
 
-        //briefingService.updateServiceOutletBriefs();
+        briefingService.updateServiceOutletBriefs();
 
         //TODO trigger depreciation with message
 
         // todo confirm this actually works
         // todo this execution failed spectalularly, please remove
-        asynchExecutor.execute(depreciationJobProxy);
         asynchExecutor.execute(accountEntryResolutionJobProxy);
+        asynchExecutor.execute(depreciationJobProxy);
+
 
         // disabling depreciation for now
         //depreciationJobProxy.initializeJobRun();
