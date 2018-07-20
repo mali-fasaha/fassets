@@ -55,7 +55,7 @@ public class DefaultEntryResolverIT {
 
     private final static Currency KES = Currency.getInstance("KES");
 
-    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "Electronics", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
+    private final static FixedAsset radio = new FixedAsset("Radio", Money.of(200, "KES"), "ELECTRONIC EQUIPMENT", "001", LocalDate.of(2018, 2, 5), "abc01", Money.of(9.5, "KES"));
     private final static FixedAsset lenovo = new FixedAsset("Lenovo IDP110", Money.of(5600, "KES"), "COMPUTERS", "987", LocalDate.of(2018, 2, 13), "abc02", Money.of(13.42, "KES"));
     private final static FixedAsset chair = new FixedAsset("Chair", Money.of(156, "KES"), "FURNITURE & FITTINGS", "010", LocalDate.of(2018, 1, 13), "abc03", Money.of(19.24, "KES"));
 
@@ -106,13 +106,13 @@ public class DefaultEntryResolverIT {
 
         sundryCreditorBalances = accountsFromEntries.stream()
                                                     .filter(i -> i.getName()
-                                                                  .equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
+                                                                  .equalsIgnoreCase("SUNDRY CREDITORS"))
                                                     .map(account -> account.balance(on(2018, 2, 26)))
                                                     .collect(ImmutableListCollector.toImmutableFastList());
 
         sundryCreditorNumbers = accountsFromEntries.stream()
                                                    .filter(account -> account.getName()
-                                                                             .equalsIgnoreCase("SUNDRY CREDITORS ACCOUNT"))
+                                                                             .equalsIgnoreCase("SUNDRY CREDITORS"))
                                                    .map(Account::getNumber)
                                                    .collect(ImmutableListCollector.toImmutableFastList());
     }
@@ -127,19 +127,19 @@ public class DefaultEntryResolverIT {
     @Test
     public void namesOfAccountsGeneratedByEntryResolution() {
 
-        assertTrue(accountNames.contains("ELECTRONICS"));
-        assertTrue(accountNames.contains("FURNITURE & FITTINGS"));
+        assertTrue(accountNames.contains("ELECTRONIC EQUIPMENT"));
+        assertTrue(accountNames.contains("FURNITURE AND FITTINGS"));
         assertTrue(accountNames.contains("COMPUTERS"));
-        assertTrue(accountNames.contains("SUNDRY CREDITORS ACCOUNT"));
+        assertTrue(accountNames.contains("SUNDRY CREDITORS"));
     }
 
     @Test
     public void accountNumbersOfAccountsGeneratedByEntryResolution() {
 
         // Can't check "Sundry Creditors Account" since it has the same for different accounts
-        assertEquals("9870000150013", accountNumbers.get("COMPUTERS"));
-        assertEquals("0100000153015", accountNumbers.get("FURNITURE & FITTINGS"));
-        assertEquals("0010000151014", accountNumbers.get("ELECTRONICS"));
+        assertEquals("9870000152001", accountNumbers.get("COMPUTERS"));
+        assertEquals("0100000153001", accountNumbers.get("FURNITURE AND FITTINGS"));
+        assertEquals("0010000156001", accountNumbers.get("ELECTRONIC EQUIPMENT"));
     }
 
     @Test
@@ -154,8 +154,8 @@ public class DefaultEntryResolverIT {
     @Test
     public void balancesOfAccountsGeneratedByEntryResolution() {
 
-        assertEquals(newBalance(shilling(200), DEBIT), accountBalances.get("ELECTRONICS"));
-        assertEquals(newBalance(shilling(156), DEBIT), accountBalances.get("FURNITURE & FITTINGS"));
+        assertEquals(newBalance(shilling(200), DEBIT), accountBalances.get("ELECTRONIC EQUIPMENT"));
+        assertEquals(newBalance(shilling(156), DEBIT), accountBalances.get("FURNITURE AND FITTINGS"));
         assertEquals(newBalance(shilling(5600), DEBIT), accountBalances.get("COMPUTERS"));
         assertEquals(newBalance(shilling(5956), CREDIT), nil(KES, CREDIT).add(sundryCreditorBalances));
     }

@@ -37,15 +37,16 @@ public class FixedAssetItemsReader implements ItemReader<List<FixedAsset>> {
     // list of already processed assets
     private List<Integer> processedAssetsIndices = ConcurrentList.newList();
 
-    @Value("${reader.fixed.assets.list.size}")
-    public void setMaximumPageSize(int maximumPageSize) {
-        log.trace("Setting reader page size as {} items per call", maximumPageSize);
-        this.maximumPageSize = maximumPageSize;
-    }
+//    @Value("${reader.fixed.assets.list.size}")
+//    public void setMaximumPageSize(int maximumPageSize) {
+//        log.trace("Setting reader page size as {} items per call", maximumPageSize);
+//        this.maximumPageSize = maximumPageSize;
+//    }
 
     @Autowired
-    FixedAssetItemsReader(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService) {
+    FixedAssetItemsReader(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Value("${reader.fixed.assets.list.size}") int maximumPageSize) {
         this.fixedAssetService = fixedAssetService;
+        this.maximumPageSize = maximumPageSize;
     }
 
     /**
