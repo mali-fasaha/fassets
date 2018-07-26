@@ -4,6 +4,56 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Adjusted config for job launches**
+
+
+[6aee189bf50306b](https://github.com/mali-fasaha/fassets/commit/6aee189bf50306b) ghacupha *2018-07-20 09:35:28*
+
+**Added license headers missing in new files**
+
+
+[5c475967b644802](https://github.com/mali-fasaha/fassets/commit/5c475967b644802) ghacupha *2018-07-20 08:55:19*
+
+**changed defaultEntryResolverIT test for account names to pick only distinct items from the stream**
+
+
+[68a77543433440f](https://github.com/mali-fasaha/fassets/commit/68a77543433440f) ghacupha *2018-07-20 08:20:25*
+
+**Fixed failing tests in the DefaultEntryResolverIT test caused by change of semantics due to use of accountNomenclaturePolicyVersion1**
+
+
+[0cb92bcf08a7ac1](https://github.com/mali-fasaha/fassets/commit/0cb92bcf08a7ac1) ghacupha *2018-07-20 08:14:45*
+
+**Including additional executor runs in the batchNotificationsListener**
+
+
+[91b8f09528bbe52](https://github.com/mali-fasaha/fassets/commit/91b8f09528bbe52) ghacupha *2018-07-19 09:36:24*
+
+**Debugging account generation failure**
+
+
+[3f24bfd386a90ec](https://github.com/mali-fasaha/fassets/commit/3f24bfd386a90ec) ghacupha *2018-07-19 09:18:11*
+
+**Included asynchronous execution of both depreciation and accountEntryResolution**
+
+
+[29b259d763ec275](https://github.com/mali-fasaha/fassets/commit/29b259d763ec275) ghacupha *2018-07-19 08:53:07*
+
+**Completed wiring to launch accountEntryResolutionJob**
+
+
+[9eddf725fda8032](https://github.com/mali-fasaha/fassets/commit/9eddf725fda8032) ghacupha *2018-07-19 08:38:02*
+
+**Minor cleanups for the AccountEntryResolutionJob**
+
+
+[d41d3ef896916bb](https://github.com/mali-fasaha/fassets/commit/d41d3ef896916bb) ghacupha *2018-07-19 08:14:24*
+
+**Completed definition of the FixedAssetsItemsReader**
+
+
+[3861774d9cd36e0](https://github.com/mali-fasaha/fassets/commit/3861774d9cd36e0) ghacupha *2018-07-18 13:30:23*
+
 **Tried to fix test errors in the DefaultEntryResolverIt test**
 
 
