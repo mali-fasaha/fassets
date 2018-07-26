@@ -19,9 +19,17 @@ package io.github.fasset.fasset.kernel.util;
 
 /**
  * General utility methods for checking whether uploaded files have known risks
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class FileSecurityChecks {
 
+    /**
+     * <p>relativePathCheck.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     */
     public static void relativePathCheck(String fileName) {
 
         if (fileName.contains("..")) {

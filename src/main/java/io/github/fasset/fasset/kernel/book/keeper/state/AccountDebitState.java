@@ -29,21 +29,25 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CRE
  * Represents the Account state when it is DEBIT state
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class AccountDebitState implements AccountState {
 
     private Account account;
 
+    /**
+     * <p>Constructor for AccountDebitState.</p>
+     *
+     * @param account a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     */
     public AccountDebitState(Account account) {
         this.account = account;
     }
 
     /**
-     * Get AccountBalance given the sum of debits and sum of credits
+     * {@inheritDoc}
      *
-     * @param debits  Amount of {@link Cash} debits in the account
-     * @param credits Amount of {@link Cash} credits in the account
-     * @return {@link AccountBalance} of the {@link Account}
+     * Get AccountBalance given the sum of debits and sum of credits
      */
     @Override
     public AccountBalance getAccountBalance(Cash debits, Cash credits) {
@@ -59,17 +63,24 @@ public class AccountDebitState implements AccountState {
                                          .abs(), CREDIT);
     }
 
+    /** {@inheritDoc} */
     @Override
     public AccountSide getAccountSide() {
         return account.getAccountSide();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
 
         return "Debit state";
     }
 
+    /**
+     * <p>Getter for the field <code>account</code>.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     */
     public Account getAccount() {
         return account;
     }

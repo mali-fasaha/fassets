@@ -22,11 +22,16 @@ import io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link MonthlyCategoryDepreciation}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MonthlyCategoryDepreciationService {
 
     /**
+     * <p>fetchAllMonthlyCategoryDepreciations.</p>
+     *
      * @return A List of all monthlyCategoryDepreciation items currently in the repository
      */
     List<MonthlyCategoryDepreciation> fetchAllMonthlyCategoryDepreciations();

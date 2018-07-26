@@ -33,6 +33,9 @@ import java.time.LocalDateTime;
 
 /**
  * This object bootstraps an excel upload job after the file has been uploaded to the server
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("excelUploadJob")
 public class ExcelUploadJob {
@@ -43,6 +46,12 @@ public class ExcelUploadJob {
 
     private final Job importExcelJob;
 
+    /**
+     * <p>Constructor for ExcelUploadJob.</p>
+     *
+     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param importExcelJob a {@link org.springframework.batch.core.Job} object.
+     */
     @Autowired
     public ExcelUploadJob(JobLauncher jobLauncher, @Qualifier("importExcelJob") Job importExcelJob) {
         this.jobLauncher = jobLauncher;
@@ -53,6 +62,8 @@ public class ExcelUploadJob {
      * Systematically processes connect that can be extracted from an excel file provided as argument
      *
      * @param filePath from which we are reading the business domain connect
+     * @param month a {@link java.lang.String} object.
+     * @throws io.github.fasset.fasset.kernel.util.BatchJobExecutionException if any.
      */
     public void uploadExcelFile(String filePath, String month) throws BatchJobExecutionException {
 
@@ -82,6 +93,9 @@ public class ExcelUploadJob {
      *
      * @param message Containing parameters of the file just uploaded
      */
+    //@JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
+    //@JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
+    //@JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
     //@JmsListener(destination = "fileUploads", containerFactory = "messageFactory")
     private void listenForMessages(FileUploadNotification message) {
 

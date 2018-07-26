@@ -35,7 +35,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * This controller serves up to the view data containing{@link CategoryBrief} and {@link ServiceOutletBrief} items from the data sink
+ * This controller serves up to the view data containing{@link io.github.fasset.fasset.model.brief.CategoryBrief} and {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} items from the data sink
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Controller
 public class BriefController {
@@ -47,24 +50,48 @@ public class BriefController {
     private final ServiceOutletBriefService serviceOutletBriefService;
 
 
+    /**
+     * <p>Constructor for BriefController.</p>
+     *
+     * @param categoryBriefService a {@link io.github.fasset.fasset.service.CategoryBriefService} object.
+     * @param serviceOutletBriefService a {@link io.github.fasset.fasset.service.ServiceOutletBriefService} object.
+     */
     @Autowired
     public BriefController(@Qualifier("categoryBriefService") CategoryBriefService categoryBriefService, @Qualifier("serviceOutletBriefService") ServiceOutletBriefService serviceOutletBriefService) {
         this.categoryBriefService = categoryBriefService;
         this.serviceOutletBriefService = serviceOutletBriefService;
     }
 
+    /**
+     * <p>getCategoryBriefsTemplate.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/briefs/categories")
     public String getCategoryBriefsTemplate(Model model) {
 
         return "briefs/categoryBriefs";
     }
 
+    /**
+     * <p>getServiceOutletBriefsTemplate.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/briefs/serviceOutlets")
     public String getServiceOutletBriefsTemplate(Model model) {
 
         return "briefs/serviceOutletBriefs";
     }
 
+    /**
+     * <p>getServiceOutletBriefs.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.util.List} object.
+     */
     @GetMapping("/briefs/serviceOutlets/data")
     @ResponseBody
     public List<ServiceOutletBriefResponseDto> getServiceOutletBriefs(Model model) {
@@ -76,6 +103,12 @@ public class BriefController {
                                         .collect(ImmutableListCollector.toImmutableList());
     }
 
+    /**
+     * <p>getServiceOutletBriefGivenId.</p>
+     *
+     * @param id a int.
+     * @return a {@link io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto} object.
+     */
     @GetMapping("/briefs/serviceOutlets/data/{nomenclature}")
     @ResponseBody
     public ServiceOutletBriefResponseDto getServiceOutletBriefGivenId(@PathVariable("nomenclature") int id) {
@@ -83,6 +116,12 @@ public class BriefController {
         return new ServiceOutletBriefResponseDto(serviceOutletBriefService.fetchServiceOutletBriefGivenId(id));
     }
 
+    /**
+     * <p>getCategoryBriefs.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.util.List} object.
+     */
     @GetMapping("/briefs/categories/data")
     @ResponseBody
     public List<CategoryBriefResponseDto> getCategoryBriefs(Model model) {
@@ -93,6 +132,12 @@ public class BriefController {
                                    .collect(ImmutableListCollector.toImmutableList());
     }
 
+    /**
+     * <p>getCategoryGivenId.</p>
+     *
+     * @param id a int.
+     * @return a {@link io.github.fasset.fasset.dto.CategoryBriefResponseDto} object.
+     */
     @GetMapping("/briefs/categories/data/{nomenclature}")
     @ResponseBody
     public CategoryBriefResponseDto getCategoryGivenId(@PathVariable("nomenclature") int id) {

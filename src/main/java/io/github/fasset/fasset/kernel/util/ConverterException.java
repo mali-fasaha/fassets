@@ -18,9 +18,10 @@
 package io.github.fasset.fasset.kernel.util;
 
 /**
- * {@link RuntimeException} thrown while converting type from one to another
+ * {@link java.lang.RuntimeException} thrown while converting type from one to another
  *
  * @author edwin_njeru
+ * @version $Id: $Id
  */
 public class ConverterException extends RuntimeException {
 

@@ -29,6 +29,7 @@ import java.util.function.Consumer;
  *
  * @param <E> Type of item contained by this data structure
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList<E> {
 
@@ -38,6 +39,9 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
     private int itemsProcessed;
     private int remainingItems;
 
+    /**
+     * <p>Constructor for ProcessingListImpl.</p>
+     */
     public ProcessingListImpl() {
         this.itemsAdded = 0;
         this.itemsProcessed = 0;
@@ -45,11 +49,10 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Appends the specified element to the end of this list.
      * <p>
-     *
-     * @param e element to be appended to this list
-     * @return {@code true} (as specified by {@link Collection#add})
      */
     @Override
     public boolean add(E e) {
@@ -61,6 +64,7 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
         return super.add(e);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void forEach(Consumer<? super E> consumer) {
 
@@ -75,21 +79,25 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
         });
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getItemsAdded() {
         return itemsAdded;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getItemsProcessed() {
         return itemsProcessed;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getRemainingItems() {
         return remainingItems;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -107,6 +115,7 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
         return itemsAdded == that.itemsAdded && itemsProcessed == that.itemsProcessed && remainingItems == that.remainingItems;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result = super.hashCode();

@@ -27,16 +27,14 @@ import java.time.YearMonth;
  * Executes the actual depreciation upon invocation by the DepreciationExecutor
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface DepreciationAgent extends Agent<Depreciation> {
 
     /**
-     * This method calculates depreciation and updates internal variables from which the depreciation variables can be drawn
+     * {@inheritDoc}
      *
-     * @param asset    {@link FixedAsset} being depreciated
-     * @param month    {@link YearMonth} in which this AccruedDepreciation is effective
-     * @param proceeds {@link DepreciationProceeds} items to hold the values calculated from depreciation
-     * @return Depreciation
+     * This method calculates depreciation and updates internal variables from which the depreciation variables can be drawn
      */
     Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

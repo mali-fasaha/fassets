@@ -26,6 +26,9 @@ import java.time.LocalDate;
 
 /**
  * This is a DTO used by the Additions workflow to transfer user input from the front end
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class FixedAssetFormDto {
 
@@ -45,10 +48,20 @@ public class FixedAssetFormDto {
 
     private double netBookValue;
 
+    /**
+     * <p>Constructor for FixedAssetFormDto.</p>
+     *
+     * @param doubleToMoneyConverter a {@link io.github.fasset.fasset.kernel.util.convert.DoubleToMoneyConverter} object.
+     */
     public FixedAssetFormDto(DoubleToMoneyConverter doubleToMoneyConverter) {
         this.doubleToMoneyConverter = doubleToMoneyConverter;
     }
 
+    /**
+     * <p>getFixedAsset.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset getFixedAsset() {
 
         return new FixedAsset().setSolId(solId)
@@ -61,69 +74,147 @@ public class FixedAssetFormDto {
 
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     */
     public FixedAssetFormDto setSolId(String solId) {
         this.solId = solId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>barcode</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getBarcode() {
         return barcode;
     }
 
+    /**
+     * <p>Setter for the field <code>barcode</code>.</p>
+     *
+     * @param barcode a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     */
     public FixedAssetFormDto setBarcode(String barcode) {
         this.barcode = barcode;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>assetDescription</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getAssetDescription() {
         return assetDescription;
     }
 
+    /**
+     * <p>Setter for the field <code>assetDescription</code>.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     */
     public FixedAssetFormDto setAssetDescription(String assetDescription) {
         this.assetDescription = assetDescription;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>purchaseDate</code>.</p>
+     *
+     * @return a {@link java.time.LocalDate} object.
+     */
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
+    /**
+     * <p>Setter for the field <code>purchaseDate</code>.</p>
+     *
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     */
     public FixedAssetFormDto setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>category</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * <p>Setter for the field <code>category</code>.</p>
+     *
+     * @param category a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     */
     public FixedAssetFormDto setCategory(String category) {
         this.category = category;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>purchaseCost</code>.</p>
+     *
+     * @return a double.
+     */
     public double getPurchaseCost() {
         return purchaseCost;
     }
 
+    /**
+     * <p>Setter for the field <code>purchaseCost</code>.</p>
+     *
+     * @param purchaseCost a double.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     */
     public FixedAssetFormDto setPurchaseCost(double purchaseCost) {
         this.purchaseCost = purchaseCost;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>netBookValue</code>.</p>
+     *
+     * @return a double.
+     */
     public double getNetBookValue() {
         return netBookValue;
     }
 
+    /**
+     * <p>Setter for the field <code>netBookValue</code>.</p>
+     *
+     * @param netBookValue a double.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     */
     public FixedAssetFormDto setNetBookValue(double netBookValue) {
         this.netBookValue = netBookValue;
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -138,11 +229,13 @@ public class FixedAssetFormDto {
             Objects.equal(category, that.category);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hashCode(doubleToMoneyConverter, solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

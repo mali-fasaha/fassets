@@ -35,7 +35,10 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEB
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements {@link BatchEntryResolver} interface whose job really is to generate entries based on a list of actual {@code FixedAsset} items passed through the parameter in the main method.
+ * Implements {@link io.github.fasset.fasset.accounts.BatchEntryResolver} interface whose job really is to generate entries based on a list of actual {@code FixedAsset} items passed through the parameter in the main method.
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("batchEntryResolver")
 public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
@@ -44,16 +47,20 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
     private AccountResolver accountResolver;
 
+    /**
+     * <p>Constructor for BatchAcquisitionEntryResolver.</p>
+     *
+     * @param accountResolver a {@link io.github.fasset.fasset.accounts.AccountResolver} object.
+     */
     @Autowired
     public BatchAcquisitionEntryResolver(@Qualifier("acquisitionAccountResolver") AccountResolver accountResolver) {
         this.accountResolver = accountResolver;
     }
 
     /**
-     * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args
+     * {@inheritDoc}
      *
-     * @param fixedAssets Collection of {@code FixedAsset} items from which we are to generate entries
-     * @return List containing Entry bookings for the fixedAssets passed in the parameter
+     * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args
      */
     @Override
     public List<AccountingEntry> resolveEntries(List<FixedAsset> fixedAssets) {

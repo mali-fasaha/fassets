@@ -24,17 +24,25 @@ import java.time.YearMonth;
 
 /**
  * This interface manages the excecution of Depreciation for a given Asset in a given month
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface DepreciationExecutor {
 
     /**
      * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new net book value and the month of depreciation
      *
-     * @param asset {@link FixedAsset} to be depreciated
+     * @param asset {@link io.github.fasset.fasset.model.FixedAsset} to be depreciated
      * @param month the month for which we are calculating depreciation
-     * @return {@link Depreciation} object
+     * @return {@link io.github.fasset.fasset.model.Depreciation} object
      */
     DepreciationProceeds getDepreciation(FixedAsset asset, YearMonth month);
 
+    /**
+     * <p>setDepreciation.</p>
+     *
+     * @param depreciation a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     void setDepreciation(Depreciation depreciation);
 }

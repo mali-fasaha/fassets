@@ -28,6 +28,9 @@ import java.util.Objects;
 
 /**
  * Processes data for a given year generating a MonthlyCategoryDepreciation for the same year
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<String, MonthlyCategoryDepreciation> {
 
@@ -35,6 +38,12 @@ public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<Strin
     private final MonthlyCategoryDepreciationExecutor executor;
     private String year;
 
+    /**
+     * <p>Constructor for MonthlyCategoryDepreciationProcessor.</p>
+     *
+     * @param executor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.category.MonthlyCategoryDepreciationExecutor} object.
+     * @param year a {@link java.lang.String} object.
+     */
     @Autowired// Check if dependencies are autowired correctly
     public MonthlyCategoryDepreciationProcessor(@Qualifier("monthlyCategoryDepreciationExecutor") MonthlyCategoryDepreciationExecutor executor, String year) {
         this.executor = executor;
@@ -42,12 +51,10 @@ public class MonthlyCategoryDepreciationProcessor implements ItemProcessor<Strin
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
-     *
-     * @param item to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
-     * @throws Exception thrown if exception occurs during processing.
      */
     @Override
     public MonthlyCategoryDepreciation process(String item) throws Exception {

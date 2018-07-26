@@ -33,12 +33,13 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CRE
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 
 /**
- * Okay so then we had to expose the {@link AccountSide} against better advise since calling the {@link Account#balance} method is going to be an expensive method, which could most likely trigger a
+ * Okay so then we had to expose the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} against better advise since calling the {@link io.github.fasset.fasset.kernel.book.keeper.Account#balance} method is going to be an expensive method, which could most likely trigger a
  * circular dependency loop. There needs to be a method for getting the current {@code AccountSide} without gritting your teeth. So uncle Bob please forgive me for I have sinned, but there is just no
- * practical inexpensive way of doing this stuff, and still be able to use this delegate for any {@link Account} implementation. This delegate is designed to serve up a balance for any {@link Account}
+ * practical inexpensive way of doing this stuff, and still be able to use this delegate for any {@link io.github.fasset.fasset.kernel.book.keeper.Account} implementation. This delegate is designed to serve up a balance for any {@link io.github.fasset.fasset.kernel.book.keeper.Account}
  * implementation
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class AccountAppraisalDelegate {
 
@@ -54,6 +55,12 @@ public class AccountAppraisalDelegate {
         this.accountSideState = account.getAccountSide() == DEBIT ? debitAccountState : creditAccountState;
     }
 
+    /**
+     * <p>balance.</p>
+     *
+     * @param dateRange a {@link io.github.ghacupha.time.point.DateRange} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
+     */
     public AccountBalance balance(DateRange dateRange) {
 
         Cash debits = getDebits(dateRange, account.getEntries());

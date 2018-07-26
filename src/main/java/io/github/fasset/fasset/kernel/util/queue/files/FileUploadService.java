@@ -22,11 +22,16 @@ import io.github.fasset.fasset.model.files.FileUpload;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link FileUpload}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.files.FileUpload}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface FileUploadService {
 
     /**
+     * <p>theFileIsAlreadyUploaded.</p>
+     *
      * @param fileUpload This is the file we are about to upload
      * @return True if the file is already uploaded
      */
@@ -40,6 +45,8 @@ public interface FileUploadService {
     void recordFileUpload(FileUpload fileUpload);
 
     /**
+     * <p>uploadedFiles.</p>
+     *
      * @return List<FileUpload> from the repository
      */
     List<FileUpload> uploadedFiles();

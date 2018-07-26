@@ -30,7 +30,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * {@link MonthlyAssetDepreciationService} implementation
+ * {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("monthlyAssetDepreciationService")
 public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDepreciationService {
@@ -38,15 +41,20 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
 
     private final MonthlyAssetDepreciationRepository monthlyAssetDepreciationRepository;
 
+    /**
+     * <p>Constructor for MonthlyAssetDepreciationServiceImpl.</p>
+     *
+     * @param monthlyAssetDepreciationRepository a {@link io.github.fasset.fasset.repository.MonthlyAssetDepreciationRepository} object.
+     */
     @Autowired
     public MonthlyAssetDepreciationServiceImpl(@Qualifier("monthlyAssetDepreciationRepository") MonthlyAssetDepreciationRepository monthlyAssetDepreciationRepository) {
         this.monthlyAssetDepreciationRepository = monthlyAssetDepreciationRepository;
     }
 
     /**
-     * Return an ordered list of all monthly depreciation from the monthlyAssetDepreciationRepository
+     * {@inheritDoc}
      *
-     * @return {@link List} of {@link MonthlyAssetDepreciation} entities from the repository
+     * Return an ordered list of all monthly depreciation from the monthlyAssetDepreciationRepository
      */
     @Override
     public List<MonthlyAssetDepreciation> fetchAllMonthlyDepreciations() {
@@ -57,11 +65,9 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
     }
 
     /**
-     * Returns the MonthlyAssetDepreciation for a given assetId and Year
+     * {@inheritDoc}
      *
-     * @param fixedAssetId Id of the asset whose month on month depreciation we require
-     * @param year         Year of depreciation for the asset
-     * @return this
+     * Returns the MonthlyAssetDepreciation for a given assetId and Year
      */
     @Override
     @Cacheable("monthlyAssetDepreciationByIdAnYears")
@@ -71,9 +77,9 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
     }
 
     /**
-     * Saves all new monthly depreciation items and updates exiting ones
+     * {@inheritDoc}
      *
-     * @param items Entities to be persisted into the repository
+     * Saves all new monthly depreciation items and updates exiting ones
      */
     @Override
     public void saveAllMonthlyDepreciationItems(List<? extends MonthlyAssetDepreciation> items) {

@@ -27,6 +27,7 @@ import java.util.List;
  * created to represent Effectivity of depreciation
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface DepreciationEntryResolver {
 

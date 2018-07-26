@@ -31,6 +31,7 @@ import java.util.Comparator;
  * Back-end representation of a record of a service outlet and its summary in terms of total purchase costs, net book value etc etc
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "ServiceOutletBrief")
 @Audited
@@ -58,6 +59,8 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
     private int poll;
 
     /**
+     * {@inheritDoc}
+     *
      * Adds the number of items in the brief
      */
     @Override
@@ -65,56 +68,67 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
         ++poll;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getDesignation() {
         return designation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setDesignation(String designation) {
         this.designation = designation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getPurchaseCost() {
         return purchaseCost;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setPurchaseCost(Money purchaseCost) {
         this.purchaseCost = purchaseCost;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getNetBookValue() {
         return netBookValue;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setNetBookValue(Money netBookValue) {
         this.netBookValue = netBookValue;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setAccruedDepreciation(Money accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getPoll() {
         return poll;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setPoll(int poll) {
         this.poll = poll;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -131,11 +145,13 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
             com.google.common.base.Objects.equal(netBookValue, that.netBookValue) && com.google.common.base.Objects.equal(accruedDepreciation, that.accruedDepreciation);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return com.google.common.base.Objects.hashCode(super.hashCode(), designation, purchaseCost, netBookValue, accruedDepreciation, poll);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -147,6 +163,7 @@ public class ServiceOutletBrief extends DomainModel<String> implements Comparabl
                           .toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public int compareTo(ServiceOutletBrief o) {
 

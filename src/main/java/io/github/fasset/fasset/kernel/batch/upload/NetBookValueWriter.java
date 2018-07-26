@@ -30,6 +30,9 @@ import java.util.List;
 
 /**
  * Writes {@code NetBookValue} items to the database
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("netBookValueWriter")
 public class NetBookValueWriter implements ItemWriter<NetBookValue> {
@@ -42,10 +45,9 @@ public class NetBookValueWriter implements ItemWriter<NetBookValue> {
     private NetBookValueService netBookValueService;
 
     /**
-     * Process the supplied data element. Will not be called with any null items in normal operation.
+     * {@inheritDoc}
      *
-     * @param netBookValues to be written
-     * @throws Exception if there are errors. The framework will catch the exception and convert or rethrow it as appropriate.
+     * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override
     public void write(List<? extends NetBookValue> netBookValues) throws Exception {

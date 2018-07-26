@@ -28,6 +28,9 @@ import java.util.Objects;
 
 /**
  * Processor for MonthlyAssetDepreciation creates a MonthlyAssetDepreciation object from a FixedAsset object
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAsset, MonthlyAssetDepreciation> {
 
@@ -35,18 +38,22 @@ public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAss
     private final MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor;
     private String year;
 
+    /**
+     * <p>Constructor for MonthlyAssetDepreciationProcessor.</p>
+     *
+     * @param monthlyAssetDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationExecutor} object.
+     * @param year a {@link java.lang.String} object.
+     */
     public MonthlyAssetDepreciationProcessor(@Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor, String year) {
         this.year = year;
         this.monthlyAssetDepreciationExecutor = monthlyAssetDepreciationExecutor;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
-     *
-     * @param fixedAsset to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
-     * @throws Exception thrown if exception occurs during processing.
      */
     @Override
     public MonthlyAssetDepreciation process(FixedAsset fixedAsset) throws Exception {

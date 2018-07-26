@@ -32,6 +32,9 @@ import java.util.Objects;
 
 /**
  * Converts string argument into money
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("stringToMoneyConverter")
 public class StringToMoneyConverter implements Converter<String, Money> {
@@ -43,12 +46,19 @@ public class StringToMoneyConverter implements Converter<String, Money> {
     private final StringToDoubleConverter stringToDoubleConverter;
 
 
+    /**
+     * <p>Constructor for StringToMoneyConverter.</p>
+     *
+     * @param monetaryProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     * @param stringToDoubleConverter a {@link io.github.fasset.fasset.kernel.util.convert.StringToDoubleConverter} object.
+     */
     @Autowired
     public StringToMoneyConverter(MoneyProperties monetaryProperties, @Qualifier("stringToDoubleConverter") StringToDoubleConverter stringToDoubleConverter) {
         this.monetaryProperties = monetaryProperties;
         this.stringToDoubleConverter = stringToDoubleConverter;
     }
 
+    /** {@inheritDoc} */
     @Nullable
     @Override
     public Money convert(@Nullable final String stringMoney) {

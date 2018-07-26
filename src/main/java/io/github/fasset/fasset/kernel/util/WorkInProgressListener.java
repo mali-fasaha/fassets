@@ -19,10 +19,15 @@ package io.github.fasset.fasset.kernel.util;
 
 /**
  * Callback interface for notifying when a process is done
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface WorkInProgressListener {
 
     /**
+     * <p>isWorkStillInProgress.</p>
+     *
      * @param b Set false if work is done
      */
     void isWorkStillInProgress(boolean b);

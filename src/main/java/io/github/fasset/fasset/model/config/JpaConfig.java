@@ -19,6 +19,9 @@ package io.github.fasset.fasset.model.config;
 
 /**
  * Contains general configurations for JPA
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 //@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 //@Configuration

@@ -26,6 +26,9 @@ import java.util.Objects;
 
 /**
  * Takes the year and generates the appropriate monthly by month Service outlet depreciation for a given Service Outlet
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlySolDepreciationProcessor implements ItemProcessor<String, MonthlySolDepreciation> {
 
@@ -34,18 +37,22 @@ public class MonthlySolDepreciationProcessor implements ItemProcessor<String, Mo
     private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
     private String year;
 
+    /**
+     * <p>Constructor for MonthlySolDepreciationProcessor.</p>
+     *
+     * @param monthlySolDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor} object.
+     * @param year a {@link java.lang.String} object.
+     */
     public MonthlySolDepreciationProcessor(MonthlySolDepreciationExecutor monthlySolDepreciationExecutor, String year) {
         this.year = year;
         this.monthlySolDepreciationExecutor = monthlySolDepreciationExecutor;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
-     *
-     * @param item to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
-     * @throws Exception thrown if exception occurs during processing.
      */
     @Override
     public MonthlySolDepreciation process(String item) throws Exception {

@@ -21,13 +21,18 @@ import io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation;
 
 /**
  * Executes summary of Categories' depreciation on a month by month basis
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MonthlyCategoryDepreciationExecutor {
 
     /**
+     * <p>getMonthlyDepreciation.</p>
+     *
      * @param categoryName Name of the category we wish to summarise
      * @param year         Year of the depreciation
-     * @return {@link MonthlyCategoryDepreciation } item relevant to the categoryName given and the year
+     * @return {@link io.github.fasset.fasset.model.depreciation.MonthlyCategoryDepreciation} item relevant to the categoryName given and the year
      */
     MonthlyCategoryDepreciation getMonthlyDepreciation(String categoryName, Integer year);
 }

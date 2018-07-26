@@ -23,14 +23,17 @@ import org.springframework.stereotype.Component;
 
 /**
  * Listener for the MonthlyCategoryDepreciation batch job
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("monthlyCategoryDepreciationJobListener")
 public class MonthyCategoryDepreciationJobListener implements JobExecutionListener {
 
     /**
-     * Callback before a job executes.
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback before a job executes.
      */
     @Override
     public void beforeJob(JobExecution jobExecution) {
@@ -38,9 +41,9 @@ public class MonthyCategoryDepreciationJobListener implements JobExecutionListen
     }
 
     /**
-     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      */
     @Override
     public void afterJob(JobExecution jobExecution) {

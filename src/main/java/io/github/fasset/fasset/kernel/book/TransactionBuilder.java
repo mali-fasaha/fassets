@@ -23,8 +23,17 @@ import java.util.List;
 
 /**
  * Creates Transaction from a Collection of accounting Entries
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface TransactionBuilder {
 
+    /**
+     * <p>createTransaction.</p>
+     *
+     * @param entries a {@link java.util.List} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.Transaction} object.
+     */
     Transaction createTransaction(List<AccountingEntry> entries);
 }

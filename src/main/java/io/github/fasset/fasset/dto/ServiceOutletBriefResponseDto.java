@@ -20,7 +20,10 @@ package io.github.fasset.fasset.dto;
 import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 
 /**
- * This is a DTO for {@link ServiceOutletBrief} items containing simpler data types for viewing on the front end
+ * This is a DTO for {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} items containing simpler data types for viewing on the front end
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class ServiceOutletBriefResponseDto {
 
@@ -42,6 +45,11 @@ public class ServiceOutletBriefResponseDto {
     private int poll;
 
 
+    /**
+     * <p>Constructor for ServiceOutletBriefResponseDto.</p>
+     *
+     * @param serviceOutletBrief a {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} object.
+     */
     public ServiceOutletBriefResponseDto(ServiceOutletBrief serviceOutletBrief) {
         this.id = serviceOutletBrief.getId();
         this.designation = serviceOutletBrief.getDesignation();
@@ -57,61 +65,128 @@ public class ServiceOutletBriefResponseDto {
         this.poll = serviceOutletBrief.getPoll();
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     * @return a {@link io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto} object.
+     */
     public ServiceOutletBriefResponseDto setId(int id) {
         this.id = id;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>designation</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDesignation() {
         return designation;
     }
 
+    /**
+     * <p>Setter for the field <code>designation</code>.</p>
+     *
+     * @param designation a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto} object.
+     */
     public ServiceOutletBriefResponseDto setDesignation(String designation) {
         this.designation = designation;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>purchaseCost</code>.</p>
+     *
+     * @return a double.
+     */
     public double getPurchaseCost() {
         return purchaseCost;
     }
 
+    /**
+     * <p>Setter for the field <code>purchaseCost</code>.</p>
+     *
+     * @param purchaseCost a double.
+     * @return a {@link io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto} object.
+     */
     public ServiceOutletBriefResponseDto setPurchaseCost(double purchaseCost) {
         this.purchaseCost = purchaseCost;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>netBookValue</code>.</p>
+     *
+     * @return a double.
+     */
     public double getNetBookValue() {
         return netBookValue;
     }
 
+    /**
+     * <p>Setter for the field <code>netBookValue</code>.</p>
+     *
+     * @param netBookValue a double.
+     * @return a {@link io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto} object.
+     */
     public ServiceOutletBriefResponseDto setNetBookValue(double netBookValue) {
         this.netBookValue = netBookValue;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>accruedDepreciation</code>.</p>
+     *
+     * @return a double.
+     */
     public double getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
+    /**
+     * <p>Setter for the field <code>accruedDepreciation</code>.</p>
+     *
+     * @param accruedDepreciation a double.
+     * @return a {@link io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto} object.
+     */
     public ServiceOutletBriefResponseDto setAccruedDepreciation(double accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>poll</code>.</p>
+     *
+     * @return a int.
+     */
     public int getPoll() {
         return poll;
     }
 
+    /**
+     * <p>Setter for the field <code>poll</code>.</p>
+     *
+     * @param poll a int.
+     * @return a {@link io.github.fasset.fasset.dto.ServiceOutletBriefResponseDto} object.
+     */
     public ServiceOutletBriefResponseDto setPoll(int poll) {
         this.poll = poll;
         return this;
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -141,6 +216,7 @@ public class ServiceOutletBriefResponseDto {
         return designation != null ? designation.equals(that.designation) : that.designation == null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result;
@@ -157,6 +233,7 @@ public class ServiceOutletBriefResponseDto {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ServiceOutletBriefResponseDto{");

@@ -31,6 +31,7 @@ import java.util.Objects;
  * Object represents the concept of when no depreciation has occurred
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class NilDepreciation {
 
@@ -52,6 +53,13 @@ public class NilDepreciation {
 
     private MoneyProperties moneyProperties;
 
+    /**
+     * <p>Constructor for NilDepreciation.</p>
+     *
+     * @param moneyProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     * @param asset a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     * @param depreciationPeriod a {@link java.time.YearMonth} object.
+     */
     public NilDepreciation(MoneyProperties moneyProperties, FixedAsset asset, YearMonth depreciationPeriod) {
         this.moneyProperties = moneyProperties;
         this.month = depreciationPeriod.getMonthValue();
@@ -63,6 +71,9 @@ public class NilDepreciation {
         this.depreciation = 0.00;
     }
 
+    /**
+     * <p>Constructor for NilDepreciation.</p>
+     */
     public NilDepreciation() {
     }
 
@@ -83,62 +94,133 @@ public class NilDepreciation {
                                  .setDepreciation(Money.of(0.00, moneyProperties.getDefaultCurrency()));
     }
 
+    /**
+     * <p>Getter for the field <code>year</code>.</p>
+     *
+     * @return a int.
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * <p>Setter for the field <code>year</code>.</p>
+     *
+     * @param year a int.
+     */
     public void setYear(int year) {
         this.year = year;
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a int.
+     */
     public int getMonth() {
         return month;
     }
 
+    /**
+     * <p>Setter for the field <code>month</code>.</p>
+     *
+     * @param month a int.
+     */
     public void setMonth(int month) {
         this.month = month;
     }
 
+    /**
+     * <p>Getter for the field <code>depreciationPeriod</code>.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getDepreciationPeriod() {
         return depreciationPeriod;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciationPeriod</code>.</p>
+     *
+     * @param depreciationPeriod a {@link java.time.YearMonth} object.
+     */
     public void setDepreciationPeriod(YearMonth depreciationPeriod) {
         this.depreciationPeriod = depreciationPeriod;
     }
 
+    /**
+     * <p>Getter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @return a int.
+     */
     public int getFixedAssetId() {
         return fixedAssetId;
     }
 
+    /**
+     * <p>Setter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @param fixedAssetId a int.
+     */
     public void setFixedAssetId(int fixedAssetId) {
         this.fixedAssetId = fixedAssetId;
     }
 
+    /**
+     * <p>Getter for the field <code>category</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * <p>Setter for the field <code>category</code>.</p>
+     *
+     * @param category a {@link java.lang.String} object.
+     */
     public void setCategory(String category) {
         this.category = category;
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     */
     public void setSolId(String solId) {
         this.solId = solId;
     }
 
+    /**
+     * <p>Getter for the field <code>depreciation</code>.</p>
+     *
+     * @return a double.
+     */
     public double getDepreciation() {
         return depreciation;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciation</code>.</p>
+     *
+     * @param depreciation a double.
+     */
     public void setDepreciation(double depreciation) {
         this.depreciation = depreciation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -152,11 +234,13 @@ public class NilDepreciation {
             Objects.equals(depreciationPeriod, that.depreciationPeriod) && Objects.equals(category, that.category) && Objects.equals(solId, that.solId);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(year, month, depreciationPeriod, fixedAssetId, category, solId, depreciation);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("NilDepreciation{");

@@ -22,22 +22,31 @@ import io.github.fasset.fasset.model.brief.CategoryBrief;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link CategoryBrief}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.brief.CategoryBrief}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface CategoryBriefService {
 
     /**
-     * @return {@link List} of {@link CategoryBrief} items fetched from the repository
+     * <p>fetchAllCategoryBriefs.</p>
+     *
+     * @return {@link java.util.List} of {@link io.github.fasset.fasset.model.brief.CategoryBrief} items fetched from the repository
      */
     List<CategoryBrief> fetchAllCategoryBriefs();
 
     /**
+     * <p>fetchCategoryBriefGivenId.</p>
+     *
      * @param id of the CategoryBrief
-     * @return {@link CategoryBrief} of the nomenclature given as param
+     * @return {@link io.github.fasset.fasset.model.brief.CategoryBrief} of the nomenclature given as param
      */
     CategoryBrief fetchCategoryBriefGivenId(int id);
 
     /**
+     * <p>saveAllCategoryBriefItems.</p>
+     *
      * @param categoryBriefs items to be saved to repository
      */
     void saveAllCategoryBriefItems(List<? extends CategoryBrief> categoryBriefs);

@@ -30,6 +30,9 @@ import javax.money.MonetaryAmount;
  * will still run without the auto boxing.
  * <p>
  * //TODO remove auto boxing
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlyAssetDepreciationDTO {
 
@@ -50,9 +53,30 @@ public class MonthlyAssetDepreciationDTO {
     private Double nov;
     private Double dec;
 
+    /**
+     * <p>Constructor for MonthlyAssetDepreciationDTO.</p>
+     */
     public MonthlyAssetDepreciationDTO() {
     }
 
+    /**
+     * <p>Constructor for MonthlyAssetDepreciationDTO.</p>
+     *
+     * @param assetId a {@link java.lang.Integer} object.
+     * @param year a {@link java.lang.Integer} object.
+     * @param jan a {@link javax.money.MonetaryAmount} object.
+     * @param feb a {@link javax.money.MonetaryAmount} object.
+     * @param mar a {@link javax.money.MonetaryAmount} object.
+     * @param apr a {@link javax.money.MonetaryAmount} object.
+     * @param may a {@link javax.money.MonetaryAmount} object.
+     * @param jun a {@link javax.money.MonetaryAmount} object.
+     * @param jul a {@link javax.money.MonetaryAmount} object.
+     * @param aug a {@link javax.money.MonetaryAmount} object.
+     * @param sep a {@link javax.money.MonetaryAmount} object.
+     * @param oct a {@link javax.money.MonetaryAmount} object.
+     * @param nov a {@link javax.money.MonetaryAmount} object.
+     * @param dec a {@link javax.money.MonetaryAmount} object.
+     */
     public MonthlyAssetDepreciationDTO(Integer assetId, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun,
                                        MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.assetId = assetId;
@@ -83,148 +107,303 @@ public class MonthlyAssetDepreciationDTO {
                       .doubleValue();
     }
 
+    /**
+     * <p>Getter for the field <code>assetId</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getAssetId() {
         return assetId;
     }
 
+    /**
+     * <p>Setter for the field <code>assetId</code>.</p>
+     *
+     * @param assetId a {@link java.lang.Integer} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setAssetId(Integer assetId) {
         this.assetId = assetId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>year</code>.</p>
+     *
+     * @return a {@link java.lang.Integer} object.
+     */
     public Integer getYear() {
 
         log.trace("Returning year : {}", year);
         return year == null ? 0 : year;
     }
 
+    /**
+     * <p>Setter for the field <code>year</code>.</p>
+     *
+     * @param year a {@link java.lang.Integer} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setYear(Integer year) {
         this.year = year;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jan</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getJan() {
         log.trace("Returning jan : {}", jan);
         return jan == null ? 0.00 : jan;
     }
 
+    /**
+     * <p>Setter for the field <code>jan</code>.</p>
+     *
+     * @param jan a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setJan(Double jan) {
         this.jan = jan;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>feb</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getFeb() {
         log.trace("Returning feb : {}", feb);
         return feb == null ? 0.00 : feb;
     }
 
+    /**
+     * <p>Setter for the field <code>feb</code>.</p>
+     *
+     * @param feb a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setFeb(Double feb) {
         this.feb = feb;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>mar</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getMar() {
         log.trace("Returning mar : {}", mar);
         return mar == null ? 0.00 : mar;
     }
 
+    /**
+     * <p>Setter for the field <code>mar</code>.</p>
+     *
+     * @param mar a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setMar(Double mar) {
         this.mar = mar;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>apr</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getApr() {
         log.trace("Returning apr : {}", apr);
         return apr == null ? 0.00 : apr;
     }
 
+    /**
+     * <p>Setter for the field <code>apr</code>.</p>
+     *
+     * @param apr a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setApr(Double apr) {
         this.apr = apr;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>may</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getMay() {
         log.trace("Returning may : {}", may);
         return may == null ? 0.00 : may;
     }
 
+    /**
+     * <p>Setter for the field <code>may</code>.</p>
+     *
+     * @param may a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setMay(Double may) {
         this.may = may;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jun</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getJun() {
 
         log.trace("Returning jun : {}", jun);
         return jun == null ? 0.00 : jun;
     }
 
+    /**
+     * <p>Setter for the field <code>jun</code>.</p>
+     *
+     * @param jun a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setJun(Double jun) {
         this.jun = jun;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jul</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getJul() {
         log.trace("Returning jul : {}", jul);
         return jul == null ? 0.00 : jul;
     }
 
+    /**
+     * <p>Setter for the field <code>jul</code>.</p>
+     *
+     * @param jul a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setJul(Double jul) {
         this.jul = jul;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>aug</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getAug() {
         log.trace("Returning aug : {}", aug);
         return aug == null ? 0.00 : aug;
     }
 
+    /**
+     * <p>Setter for the field <code>aug</code>.</p>
+     *
+     * @param aug a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setAug(Double aug) {
         this.aug = aug;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>sep</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getSep() {
         log.trace("Returning sep : {}", sep);
         return sep == null ? 0.00 : sep;
     }
 
+    /**
+     * <p>Setter for the field <code>sep</code>.</p>
+     *
+     * @param sep a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setSep(Double sep) {
         this.sep = sep;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>oct</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getOct() {
 
         log.trace("Returning oct : {}", oct);
         return oct == null ? 0.00 : oct;
     }
 
+    /**
+     * <p>Setter for the field <code>oct</code>.</p>
+     *
+     * @param oct a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setOct(Double oct) {
         this.oct = oct;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>nov</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getNov() {
         log.trace("Returning nov : {}", nov);
         return nov == null ? 0.00 : nov;
     }
 
+    /**
+     * <p>Setter for the field <code>nov</code>.</p>
+     *
+     * @param nov a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setNov(Double nov) {
         this.nov = nov;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>dec</code>.</p>
+     *
+     * @return a {@link java.lang.Double} object.
+     */
     public Double getDec() {
         log.trace("Returning dec : {}", dec);
         return dec == null ? 0.00 : dec;
     }
 
+    /**
+     * <p>Setter for the field <code>dec</code>.</p>
+     *
+     * @param dec a {@link java.lang.Double} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO} object.
+     */
     public MonthlyAssetDepreciationDTO setDec(Double dec) {
         this.dec = dec;
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -239,11 +418,13 @@ public class MonthlyAssetDepreciationDTO {
             Objects.equal(sep, that.sep) && Objects.equal(oct, that.oct) && Objects.equal(nov, that.nov) && Objects.equal(dec, that.dec);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hashCode(assetId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

@@ -37,6 +37,9 @@ import java.util.stream.Collectors;
 
 /**
  * Used to launch the monthly depreciation job
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("monthlyDepreciationJobProxy")
 public class MonthlyDepreciationJobProxy {
@@ -54,6 +57,17 @@ public class MonthlyDepreciationJobProxy {
     private final DepreciationRelay depreciationRelay;
 
 
+    /**
+     * <p>Constructor for MonthlyDepreciationJobProxy.</p>
+     *
+     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param monthlyAssetDepreciationJob a {@link org.springframework.batch.core.Job} object.
+     * @param monthlyCategoryDepreciationJob a {@link org.springframework.batch.core.Job} object.
+     * @param monthlySolDepreciationJob a {@link org.springframework.batch.core.Job} object.
+     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     * @param fixedAssetsJobsActivator a {@link io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator} object.
+     * @param depreciationRelay a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationRelay} object.
+     */
     @Autowired
     public MonthlyDepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("monthlyAssetDepreciationJob") Job monthlyAssetDepreciationJob,
                                        @Qualifier("monthlyCategoryDepreciationJob") Job monthlyCategoryDepreciationJob, @Qualifier("monthlySolDepreciationJob") Job monthlySolDepreciationJob,
@@ -81,6 +95,9 @@ public class MonthlyDepreciationJobProxy {
                            .asList();
     }
 
+    /**
+     * <p>initializeMonthlyDepreciationReporting.</p>
+     */
     public void initializeMonthlyDepreciationReporting() {
 
         int numberOfAssets = fixedAssetService.getPoll();

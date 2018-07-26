@@ -31,23 +31,30 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Resolves names of the accounts for posting acquisitions
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("debitAccountIdResolver")
 public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver implements AccountIdResolver {
 
     private static final Logger log = getLogger(AcquisitionDebitAccountIdResolver.class);
 
+    /**
+     * <p>Constructor for AcquisitionDebitAccountIdResolver.</p>
+     *
+     * @param accountIdService a {@link io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService} object.
+     */
     @Autowired
     public AcquisitionDebitAccountIdResolver(@Qualifier("accountIdConfigurationPropertiesService") AccountIdService accountIdService) {
         super(accountIdService);
     }
 
     /**
+     * {@inheritDoc}
+     *
      * <p>Returns the account number with respect to a fixed asset which is formed by concatenating 4 elements together</p> <p>1. Service Outlet Id</p> <p>2. Currency</p> <p>3. General Ledger</p>
      * <p>4. Account's unique ID #</p>
-     *
-     * @param fixedAsset Item for which we need an account number
-     * @return The account number to track the fixed asset as String
      */
     @Override
     public String accountNumber(FixedAsset fixedAsset) {
@@ -71,6 +78,7 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
                                                        .getCurrencyCode());
     }
 
+    /** {@inheritDoc} */
     @Override
     public String accountName(FixedAsset fixedAsset) {
 
@@ -80,11 +88,10 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
     }
 
     /**
+     * {@inheritDoc}
+     *
      * The category is of a lower hierarchy than an account yet for the account to be representative of fixed assets comprehensively this out to be mandated as part of the account nomenclature or at
      * least as a field in an account that can be tracked
-     *
-     * @param fixedAsset For which we need category nomenclature
-     * @return The nomenclature of the category
      */
     @Override
     public String resolveCategoryId(FixedAsset fixedAsset) {
@@ -107,11 +114,10 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Resolves the name of the appropriate general ledger that out to be used in this case for the fixed assets. The general ledger is taken to be one hierarchy higher than an account. This is being
      * done by the accountIDResolver as the general-ledger nomenclature has something to do with the nomenclature of the account itself
-     *
-     * @param fixedAsset For which we need a general ledger
-     * @return The ID of the general ledger
      */
     @Override
     public String generalLedgerName(FixedAsset fixedAsset) {
@@ -122,10 +128,9 @@ public class AcquisitionDebitAccountIdResolver extends AbstractAccountIdResolver
     }
 
     /**
-     * Resolve the name of a Contra account for a main account used for tracking the asset
+     * {@inheritDoc}
      *
-     * @param fixedAsset The asset for which we seek an account to track financially
-     * @return The name of the contra account
+     * Resolve the name of a Contra account for a main account used for tracking the asset
      */
     @Override
     public String resolveContraAccountId(FixedAsset fixedAsset) {

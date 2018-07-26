@@ -29,6 +29,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * Calculates the depreciation in  a given month for a given Asset. A list is generated and sent to the writer for persistence
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class DepreciationProcessor implements ItemProcessor<FixedAsset, ProcessingList<DepreciationProceeds>> {
 
@@ -42,17 +45,20 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
 
     private ProcessingList<DepreciationProceeds> processingList;
 
+    /**
+     * <p>Constructor for DepreciationProcessor.</p>
+     *
+     * @param processingList a {@link io.github.fasset.fasset.kernel.util.ProcessingList} object.
+     */
     public DepreciationProcessor(ProcessingList<DepreciationProceeds> processingList) {
         this.processingList = processingList;
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
-     *
-     * @param fixedAsset to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
-     * @throws Exception thrown if exception occurs during processing.
      */
     @Override
     public ProcessingList<DepreciationProceeds> process(FixedAsset fixedAsset) throws Exception {
@@ -72,6 +78,12 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
     }
 
 
+    /**
+     * <p>Setter for the field <code>depreciationRelay</code>.</p>
+     *
+     * @param depreciationRelay a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationRelay} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationProcessor} object.
+     */
     @Autowired
     @Qualifier("depreciationRelay")
     public DepreciationProcessor setDepreciationRelay(DepreciationRelay depreciationRelay) {
@@ -79,6 +91,12 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
         return this;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciationExecutor</code>.</p>
+     *
+     * @param depreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutor} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationProcessor} object.
+     */
     @Autowired
     @Qualifier("depreciationExecutor")
     public DepreciationProcessor setDepreciationExecutor(DepreciationExecutor depreciationExecutor) {

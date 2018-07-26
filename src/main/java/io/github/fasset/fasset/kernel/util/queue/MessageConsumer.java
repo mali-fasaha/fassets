@@ -26,12 +26,15 @@ import java.util.Optional;
 
 /**
  * This interface gives the client the ability, to read a message from the Queue
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MessageConsumer<T> {
 
 
     /**
-     * This method checks for messages from the queue once it has been subscribed to as shown: <br>
+     * This method checks for messages from the queue once it has been subscribed to as shown:
      * <pre>
      *         {@code
      *         T message = checkMessages(
@@ -41,8 +44,10 @@ public interface MessageConsumer<T> {
      *                  .getOrElse(new T) // retrieve QueueMessage from Optional
      *                  .message(); // retrieve message
      *         }
-     *     </pre>
+     * </pre>
      *
+     * @param onError Callback to execute when there is an exceptional event
+     * @param completion Callback to execute when the method has completed completion
      * @return Observable optional queue message. The client will have to subscribe to the item returned to read message from the Queue if any exists
      */
     Observable<Optional<QueueMessage<T>>> checkMessages(OnError onError, OnCompletion completion);

@@ -21,10 +21,19 @@ import org.springframework.stereotype.Component;
 
 /**
  * Provides general hashing algorithms we might need
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("hash")
 public class Hash {
 
+    /**
+     * <p>rSHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long rSHash(String str) {
         int b = 378551;
         int a = 63689;
@@ -40,6 +49,12 @@ public class Hash {
    /* End Of RS Hash Function */
 
 
+    /**
+     * <p>jSHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long jSHash(String str) {
         long hash = 1315423911;
 
@@ -52,6 +67,12 @@ public class Hash {
    /* End Of JS Hash Function */
 
 
+    /**
+     * <p>pJWHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long pJWHash(String str) {
         long BitsInUnsignedInt = (long) (4 * 8);
         long ThreeQuarters = (long) ((BitsInUnsignedInt * 3) / 4);
@@ -73,6 +94,12 @@ public class Hash {
    /* End Of  P. J. Weinberger Hash Function */
 
 
+    /**
+     * <p>eLFHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long eLFHash(String str) {
         long hash = 0;
         long x = 0;
@@ -91,6 +118,12 @@ public class Hash {
    /* End Of ELF Hash Function */
 
 
+    /**
+     * <p>bKDRHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long bKDRHash(String str) {
         long seed = 131; // 31 131 1313 13131 131313 etc..
         long hash = 0;
@@ -104,6 +137,12 @@ public class Hash {
    /* End Of BKDR Hash Function */
 
 
+    /**
+     * <p>sDBMHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long sDBMHash(String str) {
         long hash = 0;
 
@@ -116,6 +155,12 @@ public class Hash {
    /* End Of SDBM Hash Function */
 
 
+    /**
+     * <p>dJBHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long dJBHash(String str) {
         long hash = 5381;
 
@@ -128,6 +173,12 @@ public class Hash {
    /* End Of DJB Hash Function */
 
 
+    /**
+     * <p>dEKHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long dEKHash(String str) {
         long hash = str.length();
 
@@ -140,6 +191,12 @@ public class Hash {
    /* End Of DEK Hash Function */
 
 
+    /**
+     * <p>dPHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long dPHash(String str) {
         long hash = 0;
 
@@ -152,6 +209,12 @@ public class Hash {
    /* End Of BP Hash Function */
 
 
+    /**
+     * <p>fNVHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long fNVHash(String str) {
         long fnv_prime = 0x811C9DC5;
         long hash = 0;
@@ -166,6 +229,12 @@ public class Hash {
    /* End Of FNV Hash Function */
 
 
+    /**
+     * <p>aPHash.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a long.
+     */
     public long aPHash(String str) {
         long hash = 0xAAAAAAAA;
 

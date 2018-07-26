@@ -24,6 +24,9 @@ import org.springframework.batch.core.JobExecutionListener;
 
 /**
  * Configuration for MonthlyAssetDepreciation job
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlyAssetDepreciationJobListener implements JobExecutionListener {
 
@@ -34,9 +37,9 @@ public class MonthlyAssetDepreciationJobListener implements JobExecutionListener
     private MonthlyDepreciationJobProxy monthlyDepreciationJobProxy;*/
 
     /**
-     * Callback before a job executes.
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback before a job executes.
      */
     @Override
     public void beforeJob(JobExecution jobExecution) {
@@ -44,9 +47,9 @@ public class MonthlyAssetDepreciationJobListener implements JobExecutionListener
     }
 
     /**
-     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      */
     @Override
     public void afterJob(JobExecution jobExecution) {

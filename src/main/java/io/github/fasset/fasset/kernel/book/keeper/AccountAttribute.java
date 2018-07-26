@@ -19,6 +19,9 @@ package io.github.fasset.fasset.kernel.book.keeper;
 
 /**
  * This enum is used to add additional features to an account which cannot be added through the constructor
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public enum AccountAttribute {
 

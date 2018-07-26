@@ -19,8 +19,17 @@ package io.github.fasset.fasset.kernel.util;
 
 /**
  * Exception thrown while retrieving data from backend
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class DataRetrievalFromServiceException extends RuntimeException {
+    /**
+     * <p>Constructor for DataRetrievalFromServiceException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param e a {@link java.lang.Throwable} object.
+     */
     public DataRetrievalFromServiceException(String message, Throwable e) {
         super(message, e);
     }

@@ -25,11 +25,20 @@ import java.util.Objects;
 
 /**
  * Default AccruedDepreciation for an asset if depreciation does not occur in a given month
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class UnModifiedAccruedDepreciation {
 
     private AccruedDepreciation accruedDepreciation;
 
+    /**
+     * <p>Constructor for UnModifiedAccruedDepreciation.</p>
+     *
+     * @param asset a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     * @param month a {@link java.time.YearMonth} object.
+     */
     public UnModifiedAccruedDepreciation(FixedAsset asset, YearMonth month) {
 
         accruedDepreciation = new AccruedDepreciation().setAccruedDepreciation(asset.getPurchaseCost()
@@ -40,10 +49,16 @@ public class UnModifiedAccruedDepreciation {
                                                        .setSolId(asset.getSolId());
     }
 
+    /**
+     * <p>Getter for the field <code>accruedDepreciation</code>.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.model.AccruedDepreciation} object.
+     */
     public AccruedDepreciation getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -56,11 +71,13 @@ public class UnModifiedAccruedDepreciation {
         return Objects.equals(accruedDepreciation, that.accruedDepreciation);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(accruedDepreciation);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("UnModifiedAccruedDepreciation{");

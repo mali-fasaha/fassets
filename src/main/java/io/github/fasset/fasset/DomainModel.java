@@ -38,6 +38,8 @@ import java.util.Objects;
  * Main fields for models used in this business doamin
  *
  * @param <U> Data type used for user identification
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -67,33 +69,67 @@ public class DomainModel<U> {
     @LastModifiedBy
     private U lastModifiedBy;
 
+    /**
+     * <p>Constructor for DomainModel.</p>
+     */
     public DomainModel() {
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Getter for the field <code>version</code>.</p>
+     *
+     * @return a int.
+     */
     public int getVersion() {
         return version;
     }
 
+    /**
+     * <p>Getter for the field <code>createdAt</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * <p>Getter for the field <code>modifiedAt</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
+    /**
+     * <p>Getter for the field <code>createdBy</code>.</p>
+     *
+     * @return a U object.
+     */
     public U getCreatedBy() {
         return createdBy;
     }
 
+    /**
+     * <p>Getter for the field <code>lastModifiedBy</code>.</p>
+     *
+     * @return a U object.
+     */
     public U getLastModifiedBy() {
         return lastModifiedBy;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -107,11 +143,13 @@ public class DomainModel<U> {
             Objects.equals(lastModifiedBy, that.lastModifiedBy);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(id, version, createdAt, modifiedAt, createdBy, lastModifiedBy);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DomainModel{");

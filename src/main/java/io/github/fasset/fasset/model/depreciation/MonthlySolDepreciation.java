@@ -26,6 +26,9 @@ package io.github.fasset.fasset.model.depreciation;
 
 /**
  * This object represents a record of an SOL's depreciation for all the months of a year
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Audited
 @Entity
@@ -46,9 +49,30 @@ public class MonthlySolDepreciation extends DomainModel<String> {
     private double nov;
     private double dec;
 
+    /**
+     * <p>Constructor for MonthlySolDepreciation.</p>
+     */
     public MonthlySolDepreciation() {
     }
 
+    /**
+     * <p>Constructor for MonthlySolDepreciation.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @param year a int.
+     * @param jan a double.
+     * @param feb a double.
+     * @param mar a double.
+     * @param apr a double.
+     * @param may a double.
+     * @param jun a double.
+     * @param jul a double.
+     * @param aug a double.
+     * @param sep a double.
+     * @param oct a double.
+     * @param nov a double.
+     * @param dec a double.
+     */
     public MonthlySolDepreciation(String solId, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct, double nov,
                                   double dec) {
         this.solId = solId;
@@ -67,132 +91,287 @@ public class MonthlySolDepreciation extends DomainModel<String> {
         this.dec = dec;
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setSolId(String solId) {
         this.solId = solId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>year</code>.</p>
+     *
+     * @return a int.
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * <p>Setter for the field <code>year</code>.</p>
+     *
+     * @param year a int.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setYear(int year) {
         this.year = year;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jan</code>.</p>
+     *
+     * @return a double.
+     */
     public double getJan() {
         return jan;
     }
 
+    /**
+     * <p>Setter for the field <code>jan</code>.</p>
+     *
+     * @param jan a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setJan(double jan) {
         this.jan = jan;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>feb</code>.</p>
+     *
+     * @return a double.
+     */
     public double getFeb() {
         return feb;
     }
 
+    /**
+     * <p>Setter for the field <code>feb</code>.</p>
+     *
+     * @param feb a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setFeb(double feb) {
         this.feb = feb;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>mar</code>.</p>
+     *
+     * @return a double.
+     */
     public double getMar() {
         return mar;
     }
 
+    /**
+     * <p>Setter for the field <code>mar</code>.</p>
+     *
+     * @param mar a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setMar(double mar) {
         this.mar = mar;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>apr</code>.</p>
+     *
+     * @return a double.
+     */
     public double getApr() {
         return apr;
     }
 
+    /**
+     * <p>Setter for the field <code>apr</code>.</p>
+     *
+     * @param apr a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setApr(double apr) {
         this.apr = apr;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>may</code>.</p>
+     *
+     * @return a double.
+     */
     public double getMay() {
         return may;
     }
 
+    /**
+     * <p>Setter for the field <code>may</code>.</p>
+     *
+     * @param may a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setMay(double may) {
         this.may = may;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jun</code>.</p>
+     *
+     * @return a double.
+     */
     public double getJun() {
         return jun;
     }
 
+    /**
+     * <p>Setter for the field <code>jun</code>.</p>
+     *
+     * @param jun a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setJun(double jun) {
         this.jun = jun;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>jul</code>.</p>
+     *
+     * @return a double.
+     */
     public double getJul() {
         return jul;
     }
 
+    /**
+     * <p>Setter for the field <code>jul</code>.</p>
+     *
+     * @param jul a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setJul(double jul) {
         this.jul = jul;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>aug</code>.</p>
+     *
+     * @return a double.
+     */
     public double getAug() {
         return aug;
     }
 
+    /**
+     * <p>Setter for the field <code>aug</code>.</p>
+     *
+     * @param aug a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setAug(double aug) {
         this.aug = aug;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>sep</code>.</p>
+     *
+     * @return a double.
+     */
     public double getSep() {
         return sep;
     }
 
+    /**
+     * <p>Setter for the field <code>sep</code>.</p>
+     *
+     * @param sep a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setSep(double sep) {
         this.sep = sep;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>oct</code>.</p>
+     *
+     * @return a double.
+     */
     public double getOct() {
         return oct;
     }
 
+    /**
+     * <p>Setter for the field <code>oct</code>.</p>
+     *
+     * @param oct a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setOct(double oct) {
         this.oct = oct;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>nov</code>.</p>
+     *
+     * @return a double.
+     */
     public double getNov() {
         return nov;
     }
 
+    /**
+     * <p>Setter for the field <code>nov</code>.</p>
+     *
+     * @param nov a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setNov(double nov) {
         this.nov = nov;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>dec</code>.</p>
+     *
+     * @return a double.
+     */
     public double getDec() {
         return dec;
     }
 
+    /**
+     * <p>Setter for the field <code>dec</code>.</p>
+     *
+     * @param dec a double.
+     * @return a {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} object.
+     */
     public MonthlySolDepreciation setDec(double dec) {
         this.dec = dec;
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -211,11 +390,13 @@ public class MonthlySolDepreciation extends DomainModel<String> {
             com.google.common.base.Objects.equal(solId, that.solId);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return com.google.common.base.Objects.hashCode(super.hashCode(), solId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MessageFormat.format("MonthlySolDepreciation'{'solId={0}, year={1}, jan={2}, feb={3}, mar={4}, apr={5}, may={6}, jun={7}, jul={8}, aug={9}, sep={10}, oct={11}, nov={12}, dec={13}'}'",

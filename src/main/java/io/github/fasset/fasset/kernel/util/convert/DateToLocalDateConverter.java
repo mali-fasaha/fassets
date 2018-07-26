@@ -29,12 +29,16 @@ import java.util.Date;
 
 /**
  * Converts java.util.Date to java.time.LocalDate
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("dateToLocalDateConverter")
 public class DateToLocalDateConverter implements Converter<Date, LocalDate> {
 
     private static final Logger log = LoggerFactory.getLogger(DateToLocalDateConverter.class);
 
+    /** {@inheritDoc} */
     @Override
     public LocalDate convert(Date date) {
 

@@ -27,12 +27,16 @@ import org.springframework.stereotype.Component;
 
 /**
  * Converts Money object to Doublw
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("moneyToDoubleConverter")
 public class MoneyToDoubleConverter implements Converter<Money, Double> {
 
     private static final Logger log = LoggerFactory.getLogger(MoneyToDoubleConverter.class);
 
+    /** {@inheritDoc} */
     @Nullable
     @Override
     public Double convert(Money money) {

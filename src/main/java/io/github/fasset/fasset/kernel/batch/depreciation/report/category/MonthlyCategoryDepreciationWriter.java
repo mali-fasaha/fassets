@@ -27,21 +27,28 @@ import java.util.List;
 
 /**
  * Writes to repository Monthly depreciation by category
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlyCategoryDepreciationWriter implements ItemWriter<MonthlyCategoryDepreciation> {
 
     private static final Logger log = LoggerFactory.getLogger(MonthlyCategoryDepreciationWriter.class);
     private final MonthlyCategoryDepreciationService monthlyCategoryDepreciationService;
 
+    /**
+     * <p>Constructor for MonthlyCategoryDepreciationWriter.</p>
+     *
+     * @param monthlyCategoryDepreciationService a {@link io.github.fasset.fasset.service.MonthlyCategoryDepreciationService} object.
+     */
     public MonthlyCategoryDepreciationWriter(MonthlyCategoryDepreciationService monthlyCategoryDepreciationService) {
         this.monthlyCategoryDepreciationService = monthlyCategoryDepreciationService;
     }
 
     /**
-     * Process the supplied data element. Will not be called with any null items in normal operation.
+     * {@inheritDoc}
      *
-     * @param items items to be written
-     * @throws Exception if there are errors. The framework will catch the exception and convert or rethrow it as appropriate.
+     * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override
     public void write(List<? extends MonthlyCategoryDepreciation> items) throws Exception {

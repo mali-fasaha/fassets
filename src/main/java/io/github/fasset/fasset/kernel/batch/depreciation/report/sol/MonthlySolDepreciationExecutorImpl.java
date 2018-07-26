@@ -30,6 +30,9 @@ import org.springframework.stereotype.Service;
 /**
  * Implementation for the MonthlySolDepreciationExecutor. This implementation could be improved upon if we reduce the trips to the depreciation repository, and cache all data into a list instead. But
  * that might involve changing the structure of the entire batch. Future performance enhancement might start from implementation of this interface
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("monthlySolDepreciationExecutor")
 public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciationExecutor {
@@ -38,17 +41,20 @@ public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciatio
 
     private final DepreciationRepository depreciationRepository;
 
+    /**
+     * <p>Constructor for MonthlySolDepreciationExecutorImpl.</p>
+     *
+     * @param depreciationRepository a {@link io.github.fasset.fasset.repository.DepreciationRepository} object.
+     */
     @Autowired
     public MonthlySolDepreciationExecutorImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository) {
         this.depreciationRepository = depreciationRepository;
     }
 
     /**
-     * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation and the solId
+     * {@inheritDoc}
      *
-     * @param solId The service outlet Id
-     * @param year  Year of depreciation
-     * @return MonthlySolDepreciation
+     * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation and the solId
      */
     @Override
     public MonthlySolDepreciation getMonthlyDepreciation(String solId, Integer year) {

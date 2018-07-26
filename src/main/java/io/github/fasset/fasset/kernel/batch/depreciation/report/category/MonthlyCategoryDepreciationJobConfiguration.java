@@ -38,6 +38,9 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  * Configuration for MonthlyCategoryDepreciation job
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Configuration
 public class MonthlyCategoryDepreciationJobConfiguration {
@@ -59,6 +62,16 @@ public class MonthlyCategoryDepreciationJobConfiguration {
     private final MonthlyCategoryDepreciationExecutor monthlyCategoryDepreciationExecutor;
 
 
+    /**
+     * <p>Constructor for MonthlyCategoryDepreciationJobConfiguration.</p>
+     *
+     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param monthlyCategoryDepreciationService a {@link io.github.fasset.fasset.service.MonthlyCategoryDepreciationService} object.
+     * @param monthyCategoryDepreciationJobListener a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.category.MonthyCategoryDepreciationJobListener} object.
+     * @param entityManagerFactory a {@link javax.persistence.EntityManagerFactory} object.
+     * @param monthlyCategoryDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.category.MonthlyCategoryDepreciationExecutor} object.
+     */
     @Autowired
     public MonthlyCategoryDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
                                                        MonthlyCategoryDepreciationService monthlyCategoryDepreciationService,
@@ -72,6 +85,11 @@ public class MonthlyCategoryDepreciationJobConfiguration {
         this.monthlyCategoryDepreciationExecutor = monthlyCategoryDepreciationExecutor;
     }
 
+    /**
+     * <p>monthlyCategoryDepreciationJob.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Job} object.
+     */
     @Bean("monthlyCategoryDepreciationJob")
     public Job monthlyCategoryDepreciationJob() {
         return jobBuilderFactory.get("monthlyCategoryDepreciationJob")
@@ -84,6 +102,11 @@ public class MonthlyCategoryDepreciationJobConfiguration {
                                 .build();
     }
 
+    /**
+     * <p>createMonthlyCategoryDepreciationItems.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean
     public Step createMonthlyCategoryDepreciationItems() {
 
@@ -102,6 +125,12 @@ public class MonthlyCategoryDepreciationJobConfiguration {
         return createMonthlyCategoryDepreciationItems;
     }
 
+    /**
+     * <p>monthlyCategoryDepreciationProcessor.</p>
+     *
+     * @param year a {@link java.lang.String} object.
+     * @return a {@link org.springframework.batch.item.ItemProcessor} object.
+     */
     @Bean
     @JobScope
     public ItemProcessor<String, MonthlyCategoryDepreciation> monthlyCategoryDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
@@ -109,11 +138,21 @@ public class MonthlyCategoryDepreciationJobConfiguration {
         return new MonthlyCategoryDepreciationProcessor(monthlyCategoryDepreciationExecutor, year);
     }
 
+    /**
+     * <p>monthlyCategoryDepreciationWriter.</p>
+     *
+     * @return a {@link org.springframework.batch.item.ItemWriter} object.
+     */
     @Bean
     public ItemWriter<? super MonthlyCategoryDepreciation> monthlyCategoryDepreciationWriter() {
         return new MonthlyCategoryDepreciationWriter(monthlyCategoryDepreciationService);
     }
 
+    /**
+     * <p>monthlyCategoryDepreciationReader.</p>
+     *
+     * @return a {@link org.springframework.batch.item.ItemReader} object.
+     */
     @Bean
     public ItemReader<? extends String> monthlyCategoryDepreciationReader() {
 

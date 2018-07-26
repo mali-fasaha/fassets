@@ -25,6 +25,9 @@ import java.util.Objects;
 
 /**
  * This is a DTO used to list assets from the persistent sink into simpler data types suitable for viewing over the Restful template
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> {
 
@@ -44,6 +47,11 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
 
     private double netBookValue;
 
+    /**
+     * <p>Constructor for FixedAssetResponseDto.</p>
+     *
+     * @param fixedAsset a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAssetResponseDto(FixedAsset fixedAsset) {
 
         this.id = fixedAsset.getId();
@@ -60,6 +68,18 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
                                       .doubleValue();
     }
 
+    /**
+     * <p>Constructor for FixedAssetResponseDto.</p>
+     *
+     * @param id a int.
+     * @param solId a {@link java.lang.String} object.
+     * @param barcode a {@link java.lang.String} object.
+     * @param assetDescription a {@link java.lang.String} object.
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @param category a {@link java.lang.String} object.
+     * @param purchaseCost a double.
+     * @param netBookValue a double.
+     */
     public FixedAssetResponseDto(int id, String solId, String barcode, String assetDescription, LocalDate purchaseDate, String category, double purchaseCost, double netBookValue) {
         this.id = id;
         this.solId = solId;
@@ -71,81 +91,173 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
         this.netBookValue = netBookValue;
     }
 
+    /**
+     * <p>Constructor for FixedAssetResponseDto.</p>
+     */
     public FixedAssetResponseDto() {
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Setter for the field <code>id</code>.</p>
+     *
+     * @param id a int.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setId(int id) {
         this.id = id;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setSolId(String solId) {
         this.solId = solId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>barcode</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getBarcode() {
         return barcode;
     }
 
+    /**
+     * <p>Setter for the field <code>barcode</code>.</p>
+     *
+     * @param barcode a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setBarcode(String barcode) {
         this.barcode = barcode;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>assetDescription</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getAssetDescription() {
         return assetDescription;
     }
 
+    /**
+     * <p>Setter for the field <code>assetDescription</code>.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setAssetDescription(String assetDescription) {
         this.assetDescription = assetDescription;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>purchaseDate</code>.</p>
+     *
+     * @return a {@link java.time.LocalDate} object.
+     */
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
+    /**
+     * <p>Setter for the field <code>purchaseDate</code>.</p>
+     *
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>category</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * <p>Setter for the field <code>category</code>.</p>
+     *
+     * @param category a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setCategory(String category) {
         this.category = category;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>purchaseCost</code>.</p>
+     *
+     * @return a double.
+     */
     public double getPurchaseCost() {
         return purchaseCost;
     }
 
+    /**
+     * <p>Setter for the field <code>purchaseCost</code>.</p>
+     *
+     * @param purchaseCost a double.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setPurchaseCost(double purchaseCost) {
         this.purchaseCost = purchaseCost;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>netBookValue</code>.</p>
+     *
+     * @return a double.
+     */
     public double getNetBookValue() {
         return netBookValue;
     }
 
+    /**
+     * <p>Setter for the field <code>netBookValue</code>.</p>
+     *
+     * @param netBookValue a double.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     public FixedAssetResponseDto setNetBookValue(double netBookValue) {
         this.netBookValue = netBookValue;
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -160,17 +272,20 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
             Objects.equals(category, that.category);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(id, solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "FixedAssetResponseDto{" + "nomenclature=" + id + ", solId='" + solId + '\'' + ", barcode='" + barcode + '\'' + ", assetDescription='" + assetDescription + '\'' + ", purchaseDate=" +
             purchaseDate + ", category='" + category + '\'' + ", purchaseCost=" + purchaseCost + ", netBookValue=" + netBookValue + '}';
     }
 
+    /** {@inheritDoc} */
     @Override
     public int compareTo(FixedAssetResponseDto o) {
 

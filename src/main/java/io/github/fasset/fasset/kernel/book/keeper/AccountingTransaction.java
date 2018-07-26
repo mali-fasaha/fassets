@@ -44,11 +44,12 @@ import static java.util.Collections.EMPTY_MAP;
 
 
 /**
- * Immutable implementation of the {@link Transaction} interface once created nothing about it can change, except addition of entries. The underlying {@link Collection} cannot be re-assigned once
- * created, and is implemented by {@link List} whose implementation involved a data structure that copies itself for every mutative procedure that is done, in this case involving addition of {@link
- * AccountingEntry} items. There is a boolean that says whether or not the {@link Transaction} has been posted, which is dangerously non final, but is volatile nevertheless.
+ * Immutable implementation of the {@link io.github.fasset.fasset.kernel.book.Transaction} interface once created nothing about it can change, except addition of entries. The underlying {@link java.util.Collection} cannot be re-assigned once
+ * created, and is implemented by {@link java.util.List} whose implementation involved a data structure that copies itself for every mutative procedure that is done, in this case involving addition of {@link
+ * AccountingEntry} items. There is a boolean that says whether or not the {@link io.github.fasset.fasset.kernel.book.Transaction} has been posted, which is dangerously non final, but is volatile nevertheless.
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public final class AccountingTransaction implements Transaction {
 
@@ -70,6 +71,14 @@ public final class AccountingTransaction implements Transaction {
         log.info("AccountingTransaction created {}", this);
     }
 
+    /**
+     * <p>create.</p>
+     *
+     * @param label a {@link java.lang.String} object.
+     * @param date a {@link io.github.ghacupha.time.point.TimePoint} object.
+     * @param currency a {@link java.util.Currency} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.AccountingTransaction} object.
+     */
     public static AccountingTransaction create(String label, TimePoint date, Currency currency) {
         return new AccountingTransaction(label, date, currency);
     }
@@ -97,15 +106,9 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already been posted
+     * {@inheritDoc}
      *
-     * @param accountSide     to which the entry is being posted
-     * @param amount          {@link Cash} amount being posted to the journal
-     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
-     * @param narration       a brief narration of the entry
-     * @param entryAttributes Map containing additional details about the entry being entered
-     * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException {
@@ -114,16 +117,9 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already been posted
+     * {@inheritDoc}
      *
-     * @param accountSide     to which the entry is being posted
-     * @param amount          {@link Cash} amount being posted to the journal
-     * @param account         {@link Account} into which the {@link AccountingEntry} is being added
-     * @param narration       a brief narration of the entry
-     * @param entryAttributes Map containing additional details about the entry being entered
-     * @param date            posting date of the entry
-     * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes, TimePoint date)
@@ -153,15 +149,9 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * The add method adds entries to the transaction provided the transaction has not already been posted
+     * {@inheritDoc}
      *
-     * @param accountSide to which the entry is being posted
-     * @param amount      {@link Cash} amount being posted to the journal
-     * @param account     {@link Account} into which the {@link AccountingEntry} is being added
-     * @param narration   a brief narration of the entry
-     * @param date        posting date of the entry
-     * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies do not match
+     * The add method adds entries to the transaction provided the transaction has not already been posted
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date) throws ImmutableEntryException, MismatchedCurrencyException {
@@ -170,9 +160,9 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * Experimental method for adding a fully formed {@code AccountingEntry}
+     * {@inheritDoc}
      *
-     * @param entry Fully formed Entry for addition to this
+     * Experimental method for adding a fully formed {@code AccountingEntry}
      */
     @Override
     public void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException {
@@ -184,15 +174,10 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Same method as {code Transaction.addEntry()} but with an empty map as description of the entry. The {@code AccountingEntry} can therefore only be distinguished by its narration. The add method
      * adds entries to the transaction provided the transaction has not already been posted
-     *
-     * @param accountSide to which the entry is being posted
-     * @param amount      {@link Cash} amount being posted to the journal
-     * @param account     {@link Account} into which the {@link AccountingEntry} is being added
-     * @param narration   a brief narration of the entry
-     * @throws ImmutableEntryException     when you addEntry to a posted transaction
-     * @throws MismatchedCurrencyException when the {@code Account}, {@code AccountingEntry} or {@code Transaction} currencies
      */
     @Override
     public void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException {
@@ -200,11 +185,9 @@ public final class AccountingTransaction implements Transaction {
     }
 
     /**
-     * Posts the transactions into respective {@link Account} items
+     * {@inheritDoc}
      *
-     * @throws UnableToPostException   {@link UnableToPostException} thrown when the transaction is not balanced That is if the items posted on the debit are more than those posted on the credit or
-     *                                 vice versa.
-     * @throws ImmutableEntryException when an AccountingEntry is added to a posted transaction
+     * Posts the transactions into respective {@link Account} items
      */
     @Override
     public void post() throws UnableToPostException, ImmutableEntryException {
@@ -248,12 +231,14 @@ public final class AccountingTransaction implements Transaction {
                                .reduce(0.00, (acc, val) -> acc + val);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Set<AccountingEntry> getEntries() {
 
         return Collections.unmodifiableSet(new CopyOnWriteArraySet<>(entries));
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -266,12 +251,18 @@ public final class AccountingTransaction implements Transaction {
         return wasPosted == that.wasPosted && Objects.equals(label, that.label) && Objects.equals(date, that.date) && Objects.equals(currency, that.currency) && Objects.equals(entries, that.entries);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
 
         return Objects.hash(label, date, wasPosted, currency, entries);
     }
 
+    /**
+     * <p>toString.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
         sb.append('\'')

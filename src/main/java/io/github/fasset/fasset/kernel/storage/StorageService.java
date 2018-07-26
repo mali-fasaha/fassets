@@ -25,6 +25,9 @@ import java.util.stream.Stream;
 
 /**
  * Provides storage service to clients for files uploads
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface StorageService {
 
@@ -56,7 +59,7 @@ public interface StorageService {
     Path load(String fileName);
 
     /**
-     * Loads the file given as a {@link Resource} object
+     * Loads the file given as a {@link org.springframework.core.io.Resource} object
      *
      * @param fileName of the file being loaded as resource
      * @return Path of the file after being loaded as resource

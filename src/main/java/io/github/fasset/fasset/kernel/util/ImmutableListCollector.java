@@ -26,9 +26,18 @@ import java.util.stream.Collector;
 
 /**
  * This utility is used in a Collector operation in a lambda to generate an immutable collection
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class ImmutableListCollector {
 
+    /**
+     * <p>toImmutableList.</p>
+     *
+     * @param <t> a t object.
+     * @return a {@link java.util.stream.Collector} object.
+     */
     public static <t> Collector<t, List<t>, List<t>> toImmutableList() {
         return Collector.of(ArrayList::new, List::add, (left, right) -> {
             left.addAll(right);
@@ -36,6 +45,12 @@ public class ImmutableListCollector {
         }, Collections::unmodifiableList, Collector.Characteristics.CONCURRENT);
     }
 
+    /**
+     * <p>toImmutableFastList.</p>
+     *
+     * @param <t> a t object.
+     * @return a {@link java.util.stream.Collector} object.
+     */
     public static <t> Collector<t, List<t>, List<t>> toImmutableFastList() {
         return Collector.of(FastList::new, List::add, (left, right) -> {
             left.addAll(right);

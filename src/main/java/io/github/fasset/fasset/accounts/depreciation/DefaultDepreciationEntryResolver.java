@@ -39,6 +39,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * respective depreciation account.
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("batchDepreciationEntryResolver")
 public class DefaultDepreciationEntryResolver implements DepreciationEntryResolver {
@@ -49,6 +50,12 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
 
     private DepreciationAlgorithm depreciationAlgorithm;
 
+    /**
+     * <p>Constructor for DefaultDepreciationEntryResolver.</p>
+     *
+     * @param accountResolver a {@link io.github.fasset.fasset.accounts.AccountResolver} object.
+     * @param depreciationAlgorithm a {@link io.github.fasset.fasset.accounts.depreciation.DepreciationAlgorithm} object.
+     */
     @Autowired
     public DefaultDepreciationEntryResolver(@Qualifier("depreciationAccountResolver") AccountResolver accountResolver,
                                             @Qualifier("defaultDepreciationAlgorithm") DepreciationAlgorithm depreciationAlgorithm) {
@@ -57,12 +64,10 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter. The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract
      * from client the logic of obtaining depreciation rates and values from configurations in the application
-     *
-     * @param fixedAssets Items to be depreciated
-     * @param period      when the depreciation Entries are effective
-     * @return {@code AccountingEntries} to post depreciation
      */
     public List<AccountingEntry> resolveEntries(List<FixedAsset> fixedAssets, DepreciationPeriod period) {
 

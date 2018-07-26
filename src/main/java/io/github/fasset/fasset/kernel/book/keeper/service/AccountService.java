@@ -23,6 +23,9 @@ import java.util.Collection;
 
 /**
  * Provides api for saving, deleting and updating {@code PersistentAccount} objects
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccountService {
 
@@ -37,7 +40,7 @@ public interface AccountService {
     /**
      * Saves items in a  {@code Collection} of {@code PersistentAccount} items to the repository
      *
-     * @param persistentAccounts {@link Account} items to be saved
+     * @param persistentAccounts {@link io.github.fasset.fasset.kernel.book.keeper.Account} items to be saved
      */
     void saveAccounts(Collection<Account> persistentAccounts);
 

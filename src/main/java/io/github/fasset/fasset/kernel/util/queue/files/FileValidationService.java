@@ -23,11 +23,26 @@ import io.github.fasset.fasset.model.files.FileUpload;
  * This validation service will check for common errors like duplicity, wrong extension types and so on and so forth
  *
  * @param <T> Type used to represent a file
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface FileValidationService<T> {
 
+    /**
+     * <p>validate.</p>
+     *
+     * @param fileUpload a {@link io.github.fasset.fasset.model.files.FileUpload} object.
+     * @return a T object.
+     * @throws io.github.fasset.fasset.kernel.util.queue.files.InvalidFileException if any.
+     * @throws io.github.fasset.fasset.kernel.util.queue.files.InvalidFileException if any.
+     */
     T validate(FileUpload fileUpload) throws InvalidFileException;
 
+    /**
+     * <p>allowDuplicates.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.util.queue.files.FileValidationService} object.
+     */
     FileValidationService<T> allowDuplicates();
 
 }

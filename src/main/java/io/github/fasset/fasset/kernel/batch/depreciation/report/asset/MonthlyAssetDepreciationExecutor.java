@@ -25,13 +25,14 @@ import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
  * io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation} item. Which is then updated using the depreciation data passed to the object
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MonthlyAssetDepreciationExecutor {
 
     /**
-     * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation item
+     * Returns {@link io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation} item that is updated with data from the depreciation item
      *
-     * @param fixedAsset {@link FixedAsset} being depreciated
+     * @param fixedAsset {@link io.github.fasset.fasset.model.FixedAsset} being depreciated
      * @param year       in which the depreciation is taking place
      * @return MonthlyAssetDepreciation
      */

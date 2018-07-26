@@ -27,10 +27,18 @@ import org.springframework.context.annotation.DependsOn;
 
 /**
  * Configuration beans used for configuration of resolver objects
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Configuration
 public class AccountsConfig {
 
+    /**
+     * <p>accountIdConfigurationPropertiesService.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.accounts.nomenclature.properties.AccountIdService} object.
+     */
     @Bean("accountIdConfigurationPropertiesService")
     @DependsOn("accountIdPolicyVersion1")
     public AccountIdService accountIdConfigurationPropertiesService() {
@@ -38,6 +46,11 @@ public class AccountsConfig {
         return new FileAccountIdService(accountIdPolicyVersion1());
     }
 
+    /**
+     * <p>accountIdPolicyVersion1.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy} object.
+     */
     @Bean("accountIdPolicyVersion1")
     public AccountIdPolicy accountIdPolicyVersion1() {
 

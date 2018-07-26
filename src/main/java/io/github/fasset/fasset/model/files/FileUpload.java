@@ -29,6 +29,9 @@ import java.time.YearMonth;
 
 /**
  * This object represents a row of record of an Excel file that has been uploaded to the server
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "FileUpload")
 @Audited
@@ -47,53 +50,104 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
 
     private boolean deserialized;
 
+    /**
+     * <p>Constructor for FileUpload.</p>
+     */
     public FileUpload() {
     }
 
+    /**
+     * <p>Constructor for FileUpload.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     * @param month a {@link java.time.YearMonth} object.
+     * @param timeUploaded a {@link java.time.LocalDateTime} object.
+     */
     public FileUpload(String fileName, YearMonth month, LocalDateTime timeUploaded) {
         this.fileName = fileName;
         this.month = month;
         this.timeUploaded = timeUploaded;
     }
 
+    /**
+     * <p>isDeserialized.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isDeserialized() {
         return deserialized;
     }
 
+    /**
+     * <p>Setter for the field <code>deserialized</code>.</p>
+     *
+     * @param deserialized a boolean.
+     */
     public void setDeserialized(boolean deserialized) {
         this.deserialized = deserialized;
     }
 
+    /**
+     * <p>Getter for the field <code>fileName</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFileName() {
         return fileName;
     }
 
+    /**
+     * <p>Setter for the field <code>fileName</code>.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.files.FileUpload} object.
+     */
     public FileUpload setFileName(String fileName) {
         this.fileName = fileName;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getMonth() {
         return month;
     }
 
+    /**
+     * <p>Setter for the field <code>month</code>.</p>
+     *
+     * @param month a {@link java.time.YearMonth} object.
+     * @return a {@link io.github.fasset.fasset.model.files.FileUpload} object.
+     */
     public FileUpload setMonth(YearMonth month) {
         this.month = month;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>timeUploaded</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getTimeUploaded() {
         return timeUploaded;
     }
 
+    /**
+     * <p>Setter for the field <code>timeUploaded</code>.</p>
+     *
+     * @param timeUploaded a {@link java.time.LocalDateTime} object.
+     * @return a {@link io.github.fasset.fasset.model.files.FileUpload} object.
+     */
     public FileUpload setTimeUploaded(LocalDateTime timeUploaded) {
         this.timeUploaded = timeUploaded;
         return this;
     }
 
-    /**
-     * @return String representing the object notation of the client
-     */
+    /** {@inheritDoc} */
     @Override
     public String toJson() {
 
@@ -101,6 +155,7 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
             deserialized + "\"\n}";
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -127,6 +182,7 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
         return timeUploaded.equals(that.timeUploaded);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result = super.hashCode();
@@ -137,6 +193,7 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MessageFormat.format("FileUploadNotification'{'fileName=''{0}'', month=''{1}'', deserialized=''{2}'', timeUploaded={3}'}'", fileName, month, deserialized, timeUploaded);

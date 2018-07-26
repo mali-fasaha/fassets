@@ -38,6 +38,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * This is a utility for checking if files have been uploaded, and if so, trigger actions using the appropriate file uploads batch configuration
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("fileUploadsChecker")
 public class FileUploadsChecker implements Runnable {
@@ -52,6 +55,12 @@ public class FileUploadsChecker implements Runnable {
 
     //Todo Import and add ExcelUploadJob to execution
 
+    /**
+     * <p>Constructor for FileUploadsChecker.</p>
+     *
+     * @param fileUploadsConsumer a {@link io.github.fasset.fasset.kernel.util.queue.MessageConsumer} object.
+     * @param excelUploadJob a {@link io.github.fasset.fasset.kernel.batch.ExcelUploadJob} object.
+     */
     @Autowired
     public FileUploadsChecker(MessageConsumer<List<FileUpload>> fileUploadsConsumer, @Qualifier("excelUploadJob") ExcelUploadJob excelUploadJob) {
         this.fileUploadsConsumer = fileUploadsConsumer;
@@ -67,11 +76,12 @@ public class FileUploadsChecker implements Runnable {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * When an object implementing interface <code>Runnable</code> is used to create a thread, starting the thread causes the object's <code>run</code> method to be called in that separately executing
      * thread.
      * <p>
      * The general contract of the method <code>run</code> is that it may take any action whatsoever.
-     *
      * @see Thread#run()
      */
     @Scheduled(fixedRate = 5000)

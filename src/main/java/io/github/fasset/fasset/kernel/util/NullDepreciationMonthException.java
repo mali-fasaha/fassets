@@ -19,9 +19,17 @@ package io.github.fasset.fasset.kernel.util;
 
 /**
  * Exception is thrown when the month of depreciation for an asset evaluates to null
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class NullDepreciationMonthException extends RuntimeException {
 
+    /**
+     * <p>Constructor for NullDepreciationMonthException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public NullDepreciationMonthException(String message) {
         super(message);
     }

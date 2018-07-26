@@ -34,7 +34,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 /**
- * This Controller provides a template in which a dataTable implementatation will require a response containing a collection of {@link CategoryConfiguration} items from a persistent sink
+ * This Controller provides a template in which a dataTable implementatation will require a response containing a collection of {@link io.github.fasset.fasset.model.CategoryConfiguration} items from a persistent sink
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Controller
 public class CategoryConfigurationController {
@@ -45,6 +48,12 @@ public class CategoryConfigurationController {
     @Qualifier("categoryConfigurationService")
     private CategoryConfigurationService categoryConfigurationService;
 
+    /**
+     * <p>categories.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/categories")
     public String categories(Model model) {
 
@@ -55,6 +64,13 @@ public class CategoryConfigurationController {
         return "forms/category";
     }
 
+    /**
+     * <p>newCategory.</p>
+     *
+     * @param category a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
+     * @param bindingResult a {@link org.springframework.validation.BindingResult} object.
+     * @return a {@link java.lang.String} object.
+     */
     @PostMapping(value = "/categories")
     public String newCategory(@Valid @ModelAttribute CategoryConfiguration category, BindingResult bindingResult) {
 
@@ -70,6 +86,13 @@ public class CategoryConfigurationController {
         return "redirect:/categories";
     }
 
+    /**
+     * <p>handleEditGet.</p>
+     *
+     * @param id a int.
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping(value = "/categories/{nomenclature}/edit")
     public String handleEditGet(@PathVariable int id, Model model) {
 

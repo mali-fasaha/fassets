@@ -37,6 +37,8 @@ import java.time.LocalDateTime;
  * Main fields for models used to represent {@code persistentAccount} and {@code persistentEntry} items
  *
  * @param <U> Data type used for user identification
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -65,33 +67,67 @@ public class AccountDomainModel<U> {
     @LastModifiedBy
     private U lastModifiedBy;
 
+    /**
+     * <p>Constructor for AccountDomainModel.</p>
+     */
     public AccountDomainModel() {
     }
 
+    /**
+     * <p>Getter for the field <code>id</code>.</p>
+     *
+     * @return a int.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * <p>Getter for the field <code>version</code>.</p>
+     *
+     * @return a int.
+     */
     public int getVersion() {
         return version;
     }
 
+    /**
+     * <p>Getter for the field <code>createdAt</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * <p>Getter for the field <code>modifiedAt</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
+    /**
+     * <p>Getter for the field <code>createdBy</code>.</p>
+     *
+     * @return a U object.
+     */
     public U getCreatedBy() {
         return createdBy;
     }
 
+    /**
+     * <p>Getter for the field <code>lastModifiedBy</code>.</p>
+     *
+     * @return a U object.
+     */
     public U getLastModifiedBy() {
         return lastModifiedBy;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -121,6 +157,7 @@ public class AccountDomainModel<U> {
         return lastModifiedBy != null ? lastModifiedBy.equals(that.lastModifiedBy) : that.lastModifiedBy == null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result = id;
@@ -132,6 +169,7 @@ public class AccountDomainModel<U> {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return String.valueOf(id);

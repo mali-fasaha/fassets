@@ -29,6 +29,7 @@ import java.util.List;
  * be done in bulk for sensitive things like disposal and revaluation it has been thought better to post as individual items which will warrant like another interface altogether
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface BatchEntryResolver {
 

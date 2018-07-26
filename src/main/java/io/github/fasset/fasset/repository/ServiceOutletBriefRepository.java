@@ -23,9 +23,18 @@ import org.springframework.stereotype.Repository;
 
 /**
  * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Repository("serviceOutletBriefRepository")
 public interface ServiceOutletBriefRepository extends JpaRepository<ServiceOutletBrief, Integer> {
 
+    /**
+     * <p>findDistinctByDesignation.</p>
+     *
+     * @param designation a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} object.
+     */
     ServiceOutletBrief findDistinctByDesignation(String designation);
 }

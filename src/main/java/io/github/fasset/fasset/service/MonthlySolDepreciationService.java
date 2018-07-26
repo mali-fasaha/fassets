@@ -22,11 +22,16 @@ import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link MonthlySolDepreciation}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MonthlySolDepreciationService {
 
     /**
+     * <p>fetchAllMonthlySolDepreciations.</p>
+     *
      * @return A list of all items in the MonthlySolDepreciationRepository
      */
     List<MonthlySolDepreciation> fetchAllMonthlySolDepreciations();

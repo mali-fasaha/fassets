@@ -21,6 +21,9 @@ import io.github.fasset.fasset.model.CategoryConfiguration;
 
 /**
  * This object represents data improperly configured CategoryConfiguration through the use of defaults
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class NilCategoryConfiguration {
 
@@ -40,6 +43,9 @@ public class NilCategoryConfiguration {
 
     private final String categoryLedgerId;
 
+    /**
+     * <p>Constructor for NilCategoryConfiguration.</p>
+     */
     public NilCategoryConfiguration() {
         this.designation = "Category";
         this.depreciationLogic = "DECLININGBALANCE";
@@ -48,6 +54,11 @@ public class NilCategoryConfiguration {
         this.categoryLedgerId = "0000000000";
     }
 
+    /**
+     * <p>getCategoryConfiguration.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
+     */
     public CategoryConfiguration getCategoryConfiguration() {
         return new CategoryConfiguration(designation, depreciationLogic, deprecant, depreciationRate, categoryLedgerId);
     }

@@ -34,6 +34,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controller for FixedAssets additions work flows
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Controller
 public class FixedAssetsAdditionsController {
@@ -48,6 +51,12 @@ public class FixedAssetsAdditionsController {
     @Qualifier("doubleToMoneyConverter")
     private DoubleToMoneyConverter doubleToMoneyConverter;
 
+    /**
+     * <p>assetAdditionForm.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/add/asset")
     public String assetAdditionForm(Model model) {
 
@@ -56,6 +65,13 @@ public class FixedAssetsAdditionsController {
         return "forms/addAsset";
     }
 
+    /**
+     * <p>saveFixedAssetFromForm.</p>
+     *
+     * @param fixedAssetDto a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     * @param redirectAttributes a {@link org.springframework.web.servlet.mvc.support.RedirectAttributes} object.
+     * @return a {@link java.lang.String} object.
+     */
     @PostMapping("/add/asset")
     public String saveFixedAssetFromForm(@ModelAttribute FixedAssetFormDto fixedAssetDto, RedirectAttributes redirectAttributes) {
 

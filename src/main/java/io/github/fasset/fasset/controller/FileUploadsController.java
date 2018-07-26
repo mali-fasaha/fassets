@@ -40,17 +40,32 @@ import java.util.stream.Collectors;
 
 /**
  * Controller for file uploads workflows
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Controller
 public class FileUploadsController {
 
     private final StorageService storageService;
 
+    /**
+     * <p>Constructor for FileUploadsController.</p>
+     *
+     * @param storageService a {@link io.github.fasset.fasset.kernel.storage.StorageService} object.
+     */
     @Autowired
     public FileUploadsController(StorageService storageService) {
         this.storageService = storageService;
     }
 
+    /**
+     * <p>listUploadedFiles.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.lang.String} object.
+     * @throws java.io.IOException if any.
+     */
     @GetMapping("/files")
     public String listUploadedFiles(Model model) throws IOException {
 
@@ -63,6 +78,13 @@ public class FileUploadsController {
         return "uploads/uploadForm";
     }
 
+    /**
+     * <p>handleFileUpload.</p>
+     *
+     * @param file a {@link org.springframework.web.multipart.MultipartFile} object.
+     * @param redirectAttributes a {@link org.springframework.web.servlet.mvc.support.RedirectAttributes} object.
+     * @return a {@link java.lang.String} object.
+     */
     @PostMapping("/files")
     public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
@@ -73,6 +95,12 @@ public class FileUploadsController {
         return "redirect:/files";
     }
 
+    /**
+     * <p>serveFile.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     * @return a {@link org.springframework.http.ResponseEntity} object.
+     */
     @GetMapping("files/{fileName:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String fileName) {
@@ -84,6 +112,12 @@ public class FileUploadsController {
                              .body(file);
     }
 
+    /**
+     * <p>handleStorageFileNotFound.</p>
+     *
+     * @param exc a {@link io.github.fasset.fasset.kernel.util.StorageFileNotFoundException} object.
+     * @return a {@link org.springframework.http.ResponseEntity} object.
+     */
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 

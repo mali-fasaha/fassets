@@ -32,6 +32,9 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * This processor primarily converts lists of FixedAsset objects into lists of Account domain AccountingEntry objects
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("accountEntryResolutionItemProcessor")
 public class AccountEntryResolutionItemProcessor implements ItemProcessor<List<FixedAsset>, List<AccountingEntry>> {
@@ -40,11 +43,17 @@ public class AccountEntryResolutionItemProcessor implements ItemProcessor<List<F
 
     private BatchEntryResolver batchEntryResolver;
 
+    /**
+     * <p>Constructor for AccountEntryResolutionItemProcessor.</p>
+     *
+     * @param batchEntryResolver a {@link io.github.fasset.fasset.accounts.BatchEntryResolver} object.
+     */
     @Autowired
     public AccountEntryResolutionItemProcessor(@Qualifier("batchEntryResolver") BatchEntryResolver batchEntryResolver) {
         this.batchEntryResolver = batchEntryResolver;
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<AccountingEntry> process(List<FixedAsset> fixedAssets) throws Exception {
 

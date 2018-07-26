@@ -34,26 +34,31 @@ import static org.slf4j.LoggerFactory.getLogger;
  * would be the sundry creditor's account. This being because tracking who exactly is paid for this asset is beyond the scope of this application. <br> One peculiar aspect of this implementation is
  * that pre-configured properties are read from a properties file. This is peculiar because this implementation will have siblings in future that could be reading configuration properties from a json
  * api over http, from a database which is configured at runtime or even from an excel file. <br> Even though this is the case the underlying policy can be changed at compile time, should another be
- * desired, you just have to initialize this object with anything that implements the {@link AccountIdPolicy} interface in the constructor.
+ * desired, you just have to initialize this object with anything that implements the {@link io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy} interface in the constructor.
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("accountIdConfigurationPropertiesService")
 public final class FileAccountIdService extends AbstractAccountIdService implements AccountIdService {
 
     private static final Logger log = getLogger(FileAccountIdService.class);
 
+    /**
+     * <p>Constructor for FileAccountIdService.</p>
+     *
+     * @param accountIdPolicy a {@link io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy} object.
+     */
     public FileAccountIdService(AccountIdPolicy accountIdPolicy) {
 
         super(accountIdPolicy);
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Using the category of an asset this method returns the generic nomenclature code for the category, which in accordance to the Account nomenclature and hierarchy policy version 1.0 follows after
      * the currency code in the account number sequence
-     *
-     * @param transactionType This is the type of fixed asset transaction and could ACQUISITION, DEPRECIATION among others
-     * @param accountSide     The direction which we are posting. This could be DEBIT or CREDIT
-     * @param fixedAsset      From which we inquire the category of the asset for which we need a category code
-     * @return The category code to be added to the account number sequence after the currency code
      */
     @Override
     public String generalLedgerCode(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
@@ -63,12 +68,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
         return accountIdPolicy.generalLedgerCode(transactionType, accountSide, fixedAsset.getCategory());
     }
 
-    /**
-     * @param fixedAsset      for which seek an account placeHolder
-     * @param accountSide     Whether we are posting on the debit side or the credit side
-     * @param transactionType The type of transaction for the fixed asset
-     * @return String GL Id to be used for credit transactions
-     */
+    /** {@inheritDoc} */
     @Override
     public String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
@@ -77,12 +77,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
         return accountIdPolicy.accountPlaceHolder(transactionType, accountSide, fixedAsset.getCategory());
     }
 
-    /**
-     * @param accountSide     This enum denotes whether or not we are posting on the CREDIT or on the DEBIT side
-     * @param transactionType Type of transaction Enum
-     * @param fixedAsset      Asset for which we seek transaction account name
-     * @return Name of the account
-     */
+    /** {@inheritDoc} */
     @Override
     public String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
@@ -92,12 +87,9 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
-     * Resolves the name of the account to be used as a contra account in case the actual account  is required to retain the original valuation for reporting purposes
+     * {@inheritDoc}
      *
-     * @param transaction The type of transaction associated with the initialization of a contra account
-     * @param accountSide To which we are posting the transaction during initialization of a contra account
-     * @param fixedAsset  Fixed asset which we are tracking by means of the accounting system
-     * @return name of the contra account
+     * Resolves the name of the account to be used as a contra account in case the actual account  is required to retain the original valuation for reporting purposes
      */
     @Override
     public String contraAccountName(TransactionType transaction, AccountSide accountSide, FixedAsset fixedAsset) {
@@ -118,11 +110,10 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
     }
 
     /**
+     * {@inheritDoc}
+     *
      * This methods combines the account segments combining them into an account number sequence which is used application wide. <br> The existence of this method makes it possible for the application
      * to be configured to create different forms of identifications for an account number for different purposes.
-     *
-     * @param accountNumberSegments Parameters containing the various segments that form an account number
-     * @return account number sequence
      */
     @Override
     public String accountNumber(String... accountNumberSegments) {

@@ -25,11 +25,14 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Provides static utilities for ease of implementations of the TimePoint and ReadableTime interfaces
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class TimePointUtils {
 
     /**
-     * Reads dateString and return equivalent {@link TimePoint} object
+     * Reads dateString and return equivalent {@link io.github.ghacupha.time.point.TimePoint} object
      *
      * @param dateString  String from which we are extracting the date
      * @param datePattern Date pattern to be used in parsing the date string argument

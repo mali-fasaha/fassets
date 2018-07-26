@@ -47,6 +47,7 @@ import java.util.Map;
  * <br> Once the configuration has been obtained the program can continue to run using the specific parameters designed for a given category
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("categoryConfigurationRegistry")
 public class CategoryConfigurationRegistry {
@@ -55,12 +56,23 @@ public class CategoryConfigurationRegistry {
     private final CategoryConfigurationService categoryConfigurationService;
     private final Map<String, CategoryConfiguration> categoryConfigurationMap = new ConcurrentHashMap<>();
 
+    /**
+     * <p>Constructor for CategoryConfigurationRegistry.</p>
+     *
+     * @param categoryConfigurationService a {@link io.github.fasset.fasset.service.CategoryConfigurationService} object.
+     */
     @Autowired
     public CategoryConfigurationRegistry(CategoryConfigurationService categoryConfigurationService) {
         this.categoryConfigurationService = categoryConfigurationService;
     }
 
 
+    /**
+     * <p>getCategoryConfiguration.</p>
+     *
+     * @param categoryName a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
+     */
     public CategoryConfiguration getCategoryConfiguration(String categoryName) {
 
         CategoryConfiguration categoryConfiguration;

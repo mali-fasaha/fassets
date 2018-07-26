@@ -25,21 +25,28 @@ import java.util.List;
 
 /**
  * Writes the MonthlyAssetDepreciation from the processor to persistent repository
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlyAssetDepreciationWriter implements ItemWriter<MonthlyAssetDepreciation> {
 
 
     private final MonthlyAssetDepreciationService monthlyAssetDepreciationService;
 
+    /**
+     * <p>Constructor for MonthlyAssetDepreciationWriter.</p>
+     *
+     * @param monthlyAssetDepreciationService a {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} object.
+     */
     public MonthlyAssetDepreciationWriter(MonthlyAssetDepreciationService monthlyAssetDepreciationService) {
         this.monthlyAssetDepreciationService = monthlyAssetDepreciationService;
     }
 
     /**
-     * Process the supplied data element. Will not be called with any null items in normal operation.
+     * {@inheritDoc}
      *
-     * @param items items to be written
-     * @throws Exception if there are errors. The framework will catch the exception and convert or rethrow it as appropriate.
+     * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override
     public void write(List<? extends MonthlyAssetDepreciation> items) throws Exception {

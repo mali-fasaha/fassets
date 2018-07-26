@@ -33,7 +33,7 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  *     }
  *     </pre>
  * <p>
- * <br> <br> Should the client need to carry out an action to show completion lifecycle method, the client could call the {@link OnCompletion#handleCompletion()} method as shown: <br>
+ * <br> <br> Should the client need to carry out an action to show completion lifecycle method, the client could call the {@link io.github.fasset.fasset.kernel.util.queue.util.OnCompletion#handleCompletion()} method as shown: <br>
  * <br> <pre>
  *     {@code
  *     fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName()),
@@ -42,6 +42,9 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  *     </pre>
  * <p>
  * TODO : implement consumers for this Queue
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MessageQueue<T> {
 
@@ -56,6 +59,7 @@ public interface MessageQueue<T> {
      * Adds a message to the queue, and provides a method to allow the producer to handle error
      *
      * @param queueMessage Item to be added to the queue
+     * @param onError a {@link io.github.fasset.fasset.kernel.util.queue.util.OnError} object.
      */
     void push(QueueMessage<T> queueMessage, OnError onError);
 

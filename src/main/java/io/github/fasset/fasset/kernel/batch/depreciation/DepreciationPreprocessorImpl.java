@@ -37,6 +37,7 @@ import java.util.Objects;
  * depreciation is set to be equivalent to the fixedAsset's netBookValue as at the period of depreciation
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("depreciationPreprocessor")
 public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
@@ -49,6 +50,12 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     private Money depreciationAmount;
 
 
+    /**
+     * <p>Constructor for DepreciationPreprocessorImpl.</p>
+     *
+     * @param localDateToYearMonthConverter a {@link io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter} object.
+     * @param moneyProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     */
     @Autowired
     public DepreciationPreprocessorImpl(@Qualifier("localDateToYearMonthConverter") LocalDateToYearMonthConverter localDateToYearMonthConverter, MoneyProperties moneyProperties) {
         this.localDateToYearMonthConverter = localDateToYearMonthConverter;
@@ -56,27 +63,21 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     }
 
 
-    /**
-     * @return Depreciation period as month
-     */
+    /** {@inheritDoc} */
     @Override
     public YearMonth getMonth() {
         log.trace("Returning month : {}", month);
         return month;
     }
 
-    /**
-     * @return FixedAsset item being depreciated
-     */
+    /** {@inheritDoc} */
     @Override
     public FixedAsset getAsset() {
         log.trace("Returning fixedAsset : {}", asset);
         return asset;
     }
 
-    /**
-     * @return amount of depreciation
-     */
+    /** {@inheritDoc} */
     @Override
     public Money getDepreciationAmount() {
         log.trace("Returning depreciation amount : {}", depreciationAmount);
@@ -84,9 +85,9 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     }
 
     /**
-     * Sets the asset to be reviewed for depreciation
+     * {@inheritDoc}
      *
-     * @param asset which is being depreciated
+     * Sets the asset to be reviewed for depreciation
      */
     @Override
     public DepreciationPreprocessor setAsset(FixedAsset asset) {
@@ -96,9 +97,9 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     }
 
     /**
-     * Sets depreciation period in months
+     * {@inheritDoc}
      *
-     * @param month in which depreciation occurs
+     * Sets depreciation period in months
      */
     @Override
     public DepreciationPreprocessor setMonth(YearMonth month) {
@@ -108,9 +109,9 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     }
 
     /**
-     * Sets the amount of depreciation for review
+     * {@inheritDoc}
      *
-     * @param depreciationAmount This is the amount by which we are to depreciate the asset
+     * Sets the amount of depreciation for review
      */
     @Override
     public DepreciationPreprocessor setDepreciationAmount(Money depreciationAmount) {
@@ -120,6 +121,8 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * This method ensures all properties are set and evaluated
      */
     @Override

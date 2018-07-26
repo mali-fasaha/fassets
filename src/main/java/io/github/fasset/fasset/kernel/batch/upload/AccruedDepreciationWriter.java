@@ -30,6 +30,9 @@ import java.util.List;
 
 /**
  * Writes AccruedDepreciation items to the database
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("accruedDepreciationWriter")
 public class AccruedDepreciationWriter implements ItemWriter<AccruedDepreciation> {
@@ -38,6 +41,11 @@ public class AccruedDepreciationWriter implements ItemWriter<AccruedDepreciation
 
     private final AccruedDepreciationService accruedDepreciationService;
 
+    /**
+     * <p>Constructor for AccruedDepreciationWriter.</p>
+     *
+     * @param accruedDepreciationService a {@link io.github.fasset.fasset.service.AccruedDepreciationService} object.
+     */
     @Autowired
     public AccruedDepreciationWriter(@Qualifier("accruedDepreciationService") AccruedDepreciationService accruedDepreciationService) {
         this.accruedDepreciationService = accruedDepreciationService;
@@ -45,10 +53,9 @@ public class AccruedDepreciationWriter implements ItemWriter<AccruedDepreciation
 
 
     /**
-     * Process the supplied data element. Will not be called with any null items in normal operation.
+     * {@inheritDoc}
      *
-     * @param items items to be written
-     * @throws Exception if there are errors. The framework will catch the exception and convert or rethrow it as appropriate.
+     * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override
     public void write(List<? extends AccruedDepreciation> items) throws Exception {

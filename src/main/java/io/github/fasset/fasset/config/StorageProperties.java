@@ -21,16 +21,30 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * This is a configuration for storage location for uploaded files
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @ConfigurationProperties("storage")
 public class StorageProperties {
 
     private String location = "temp-uploads";
 
+    /**
+     * <p>Getter for the field <code>location</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * <p>Setter for the field <code>location</code>.</p>
+     *
+     * @param location a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.config.StorageProperties} object.
+     */
     public StorageProperties setLocation(String location) {
         this.location = location;
         return this;

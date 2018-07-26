@@ -32,6 +32,7 @@ import java.util.Comparator;
  * Back-end representation of a record of a category and its summary in terms of total purchase costs, net book value etc etc
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "CategoryBrief")
 @Audited
@@ -58,6 +59,15 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     /* total no. of items in this category*/
     private int poll;
 
+    /**
+     * <p>Constructor for CategoryBrief.</p>
+     *
+     * @param designation a {@link java.lang.String} object.
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @param netBookValue a {@link org.javamoney.moneta.Money} object.
+     * @param accruedDepreciation a {@link org.javamoney.moneta.Money} object.
+     * @param poll a int.
+     */
     public CategoryBrief(String designation, Money purchaseCost, Money netBookValue, Money accruedDepreciation, int poll) {
         this.designation = designation;
         this.purchaseCost = purchaseCost;
@@ -66,10 +76,15 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
         this.poll = poll;
     }
 
+    /**
+     * <p>Constructor for CategoryBrief.</p>
+     */
     public CategoryBrief() {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Adds the number of items in the brief
      */
     @Override
@@ -77,56 +92,67 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
         ++poll;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getDesignation() {
         return designation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setDesignation(String designation) {
         this.designation = designation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getPurchaseCost() {
         return purchaseCost;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setPurchaseCost(Money purchaseCost) {
         this.purchaseCost = purchaseCost;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getNetBookValue() {
         return netBookValue;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setNetBookValue(Money netBookValue) {
         this.netBookValue = netBookValue;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setAccruedDepreciation(Money accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getPoll() {
         return poll;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setPoll(int poll) {
         this.poll = poll;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -143,11 +169,13 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
             Objects.equal(accruedDepreciation, that.accruedDepreciation);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hashCode(super.hashCode(), designation, purchaseCost, netBookValue, accruedDepreciation, poll);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -159,6 +187,7 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
                           .toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public int compareTo(CategoryBrief o) {
 

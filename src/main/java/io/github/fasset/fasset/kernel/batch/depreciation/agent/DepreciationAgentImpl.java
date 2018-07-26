@@ -36,6 +36,9 @@ import java.time.YearMonth;
 
 /**
  * Another Agent in the DepreciationChain that specifically calculates and generates a depreciation object
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @DependsOn("depreciationExecutor")
 @Component("depreciationAgent")
@@ -46,6 +49,12 @@ public class DepreciationAgentImpl implements DepreciationAgent {
     private final CategoryConfigurationRegistry categoryConfigurationRegistry;
     private final DepreciationPreprocessor preprocessor;
 
+    /**
+     * <p>Constructor for DepreciationAgentImpl.</p>
+     *
+     * @param categoryConfigurationRegistry a {@link io.github.fasset.fasset.kernel.batch.depreciation.CategoryConfigurationRegistry} object.
+     * @param preprocessor a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationPreprocessor} object.
+     */
     @Autowired
     public DepreciationAgentImpl(CategoryConfigurationRegistry categoryConfigurationRegistry, DepreciationPreprocessor preprocessor) {
         this.categoryConfigurationRegistry = categoryConfigurationRegistry;
@@ -64,6 +73,7 @@ public class DepreciationAgentImpl implements DepreciationAgent {
     //        return this;
     //    }
 
+    /** {@inheritDoc} */
     @Cacheable("depreciationCalculation")
     @Override
     public Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {

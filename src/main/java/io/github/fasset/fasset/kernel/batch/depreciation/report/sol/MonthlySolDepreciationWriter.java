@@ -28,7 +28,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import java.util.List;
 
 /**
- * Writes {@link MonthlySolDepreciation} to the database
+ * Writes {@link io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation} to the database
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MonthlySolDepreciationWriter implements ItemWriter<MonthlySolDepreciation> {
 
@@ -36,16 +39,20 @@ public class MonthlySolDepreciationWriter implements ItemWriter<MonthlySolDeprec
 
     private final MonthlySolDepreciationService monthlySolDepreciationService;
 
+    /**
+     * <p>Constructor for MonthlySolDepreciationWriter.</p>
+     *
+     * @param monthlySolDepreciationService a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
+     */
     @Autowired
     public MonthlySolDepreciationWriter(@Qualifier("monthlySolDepreciationService") MonthlySolDepreciationService monthlySolDepreciationService) {
         this.monthlySolDepreciationService = monthlySolDepreciationService;
     }
 
     /**
-     * Process the supplied data element. Will not be called with any null items in normal operation.
+     * {@inheritDoc}
      *
-     * @param items items to be written
-     * @throws Exception if there are errors. The framework will catch the exception and convert or rethrow it as appropriate.
+     * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override
     public void write(List<? extends MonthlySolDepreciation> items) throws Exception {

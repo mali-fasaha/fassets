@@ -21,6 +21,9 @@ import java.util.Objects;
 
 /**
  * Notification object containing properties of a file recently uploaded into the back end
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class FileUploadNotification {
 
@@ -34,27 +37,53 @@ public class FileUploadNotification {
     private String timeUploaded;
 
 
+    /**
+     * <p>Constructor for FileUploadNotification.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     * @param month a {@link java.lang.String} object.
+     * @param timeUploaded a {@link java.lang.String} object.
+     */
     public FileUploadNotification(String fileName, String month, String timeUploaded) {
         this.fileName = fileName;
         this.month = month;
         this.timeUploaded = timeUploaded;
     }
 
+    /**
+     * <p>Constructor for FileUploadNotification.</p>
+     */
     public FileUploadNotification() {
     }
 
+    /**
+     * <p>Getter for the field <code>fileName</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFileName() {
         return fileName;
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getMonth() {
         return month;
     }
 
+    /**
+     * <p>Getter for the field <code>timeUploaded</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTimeUploaded() {
         return timeUploaded;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -67,11 +96,13 @@ public class FileUploadNotification {
         return Objects.equals(fileName, that.fileName) && Objects.equals(month, that.month) && Objects.equals(timeUploaded, that.timeUploaded);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(fileName, month, timeUploaded);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FileUploadNotification{");

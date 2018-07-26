@@ -23,24 +23,42 @@ import java.util.Objects;
 
 /**
  * This object simply configures the default of the program's default currency
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @ConfigurationProperties(prefix = "money")
 public class MoneyProperties {
 
     private String defaultCurrency = "KES";
 
+    /**
+     * <p>Constructor for MoneyProperties.</p>
+     */
     public MoneyProperties() {
     }
 
+    /**
+     * <p>Getter for the field <code>defaultCurrency</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDefaultCurrency() {
         return defaultCurrency;
     }
 
+    /**
+     * <p>Setter for the field <code>defaultCurrency</code>.</p>
+     *
+     * @param defaultCurrency a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     */
     public MoneyProperties setDefaultCurrency(String defaultCurrency) {
         this.defaultCurrency = defaultCurrency;
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -53,11 +71,13 @@ public class MoneyProperties {
         return Objects.equals(defaultCurrency, that.defaultCurrency);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(defaultCurrency);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "MoneyProperties{" + "defaultCurrency='" + defaultCurrency + '\'' + '}';

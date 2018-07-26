@@ -22,8 +22,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface FileUploadRepository extends JpaRepository<FileUpload, Integer> {
 
+    /**
+     * <p>countAllByFileName.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     * @return a int.
+     */
     int countAllByFileName(String fileName);
 }

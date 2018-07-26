@@ -37,6 +37,9 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  * Configuration object for the monthly service outlet depreciation job
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Configuration
 public class MonthlySolDepreciationJobConfiguration {
@@ -57,6 +60,16 @@ public class MonthlySolDepreciationJobConfiguration {
     private final EntityManagerFactory entityManagerFactory;
 
 
+    /**
+     * <p>Constructor for MonthlySolDepreciationJobConfiguration.</p>
+     *
+     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param monthlySolDepreciationJobListener a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationJobListener} object.
+     * @param monthlySolDepreciationService a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
+     * @param monthlySolDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor} object.
+     * @param entityManagerFactory a {@link javax.persistence.EntityManagerFactory} object.
+     */
     @Autowired
     public MonthlySolDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
                                                   @Qualifier("monthlySolDepreciationJobListener") MonthlySolDepreciationJobListener monthlySolDepreciationJobListener,
@@ -71,6 +84,11 @@ public class MonthlySolDepreciationJobConfiguration {
         this.entityManagerFactory = entityManagerFactory;
     }
 
+    /**
+     * <p>monthlySolDepreciationJob.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Job} object.
+     */
     @Bean("monthlySolDepreciationJob")
     public Job monthlySolDepreciationJob() {
         return jobBuilderFactory.get("monthlySolDepreciationJob")
@@ -83,12 +101,23 @@ public class MonthlySolDepreciationJobConfiguration {
                                 .build();
     }
 
+    /**
+     * <p>monthlySolDepreciationWriter.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationWriter} object.
+     */
     @Bean
     public MonthlySolDepreciationWriter monthlySolDepreciationWriter() {
 
         return new MonthlySolDepreciationWriter(monthlySolDepreciationService);
     }
 
+    /**
+     * <p>monthlySolDepreciationProcessor.</p>
+     *
+     * @param year a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationProcessor} object.
+     */
     @Bean
     @JobScope
     public MonthlySolDepreciationProcessor monthlySolDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
@@ -96,6 +125,11 @@ public class MonthlySolDepreciationJobConfiguration {
         return new MonthlySolDepreciationProcessor(monthlySolDepreciationExecutor, year);
     }
 
+    /**
+     * <p>monthlySolDepreciationReader.</p>
+     *
+     * @return a {@link org.springframework.batch.item.ItemReader} object.
+     */
     @Bean
     public ItemReader<String> monthlySolDepreciationReader() {
 
@@ -117,6 +151,11 @@ public class MonthlySolDepreciationJobConfiguration {
         return solIdsReader;
     }
 
+    /**
+     * <p>createMonthlySolDepreciationItems.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean
     public Step createMonthlySolDepreciationItems() {
 

@@ -22,6 +22,9 @@ import io.github.ghacupha.cash.Cash;
 
 /**
  * Implementation of depreciation concept
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface DepreciationAlgorithm {
 
@@ -36,6 +39,8 @@ public interface DepreciationAlgorithm {
     Cash getDepreciation(FixedAsset asset, DepreciationPeriod period);
 
     /**
+     * <p>name.</p>
+     *
      * @return Name of the algorithm
      */
     String name();

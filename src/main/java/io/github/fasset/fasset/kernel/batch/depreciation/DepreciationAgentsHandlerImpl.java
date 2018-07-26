@@ -25,21 +25,35 @@ import java.time.YearMonth;
 
 /**
  * This object encapsulates the AgentsDepreciationChain and manages the addition of an Agent to the chain and sends a depreciation request to the chain for processing
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("depreciationAgentsHandler")
 public class DepreciationAgentsHandlerImpl implements DepreciationAgentsHandler {
 
     private DepreciationAgentsChainImpl depreciationAgentsChain;
 
+    /**
+     * <p>Constructor for DepreciationAgentsHandlerImpl.</p>
+     *
+     * @param depreciationAgentsChain a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationAgentsChainImpl} object.
+     */
     public DepreciationAgentsHandlerImpl(DepreciationAgentsChainImpl depreciationAgentsChain) {
         this.depreciationAgentsChain = depreciationAgentsChain;
     }
 
+    /**
+     * <p>setDepreciationAgent.</p>
+     *
+     * @param agent a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.Agent} object.
+     */
     public void setDepreciationAgent(Agent agent) {
 
         depreciationAgentsChain.addAgent(agent);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void sendRequest(FixedAsset asset, YearMonth month, DepreciationProceeds depreciationProceeds) {
 

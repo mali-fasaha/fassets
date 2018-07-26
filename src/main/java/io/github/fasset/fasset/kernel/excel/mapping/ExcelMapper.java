@@ -25,6 +25,7 @@ import java.util.List;
  * This object reads connect from an excel file and maps the same connect to a list of the parameter DTO
  *
  * @author - Edwin Njeru
+ * @version $Id: $Id
  */
 public interface ExcelMapper {
 
@@ -38,6 +39,8 @@ public interface ExcelMapper {
     List mappedList(Class<?> c, String path);
 
     /**
+     * <p>setMapperOptions.</p>
+     *
      * @param mapperOptions for excel poiji reader
      */
     void setMapperOptions(MapperOptions mapperOptions);

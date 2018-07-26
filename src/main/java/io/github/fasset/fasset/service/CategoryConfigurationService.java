@@ -22,24 +22,49 @@ import io.github.fasset.fasset.model.CategoryConfiguration;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link CategoryConfiguration}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.CategoryConfiguration}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface CategoryConfigurationService {
 
 
     /**
+     * <p>getAllCategoryConfigurations.</p>
+     *
      * @return Return all fixed assets categories
      */
     List<CategoryConfiguration> getAllCategoryConfigurations();
 
     /**
+     * <p>saveCategoryConfiguration.</p>
+     *
      * @param fixedAssetCategory to be saved to fixedAssetCategory repository
      */
     void saveCategoryConfiguration(CategoryConfiguration fixedAssetCategory);
 
+    /**
+     * <p>getCategoryConfigurationById.</p>
+     *
+     * @param id a int.
+     * @return a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
+     */
     CategoryConfiguration getCategoryConfigurationById(int id);
 
+    /**
+     * <p>getCategoryByName.</p>
+     *
+     * @param categoryName a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
+     */
     CategoryConfiguration getCategoryByName(String categoryName);
 
+    /**
+     * <p>getDepreciationRateByCategoryName.</p>
+     *
+     * @param categoryName a {@link java.lang.String} object.
+     * @return a double.
+     */
     double getDepreciationRateByCategoryName(String categoryName);
 }

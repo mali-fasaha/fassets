@@ -31,9 +31,10 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * Takes {@link Date} converting it to {@link YearMonth}
+ * Takes {@link java.util.Date} converting it to {@link java.time.YearMonth}
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("dateToYearMonthConverter")
 public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
@@ -45,10 +46,21 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
     private LocalDateToYearMonthConverter localDateToYearMonthConverter;
 
 
+    /**
+     * <p>Constructor for DateToYearMonthConverter.</p>
+     *
+     * @param dateToLocalDateConverter a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
+     */
     public DateToYearMonthConverter(DateToLocalDateConverter dateToLocalDateConverter) {
         this.dateToLocalDateConverter = dateToLocalDateConverter;
     }
 
+    /**
+     * <p>Constructor for DateToYearMonthConverter.</p>
+     *
+     * @param localDateToYearMonthConverter a {@link io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter} object.
+     * @param dateToLocalDateConverter a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
+     */
     @Autowired
     public DateToYearMonthConverter(@Qualifier("localDateToYearMonthConverter") LocalDateToYearMonthConverter localDateToYearMonthConverter,
                                     @Qualifier("dateToLocalDateConverter") DateToLocalDateConverter dateToLocalDateConverter) {
@@ -57,24 +69,36 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
     }
 
 
+    /**
+     * <p>Constructor for DateToYearMonthConverter.</p>
+     */
     public DateToYearMonthConverter() {
     }
 
+    /**
+     * <p>Getter for the field <code>dateToLocalDateConverter</code>.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
+     */
     public DateToLocalDateConverter getDateToLocalDateConverter() {
         return dateToLocalDateConverter;
     }
 
+    /**
+     * <p>Setter for the field <code>dateToLocalDateConverter</code>.</p>
+     *
+     * @param dateToLocalDateConverter a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
+     * @return a {@link io.github.fasset.fasset.kernel.util.convert.DateToYearMonthConverter} object.
+     */
     public DateToYearMonthConverter setDateToLocalDateConverter(DateToLocalDateConverter dateToLocalDateConverter) {
         this.dateToLocalDateConverter = dateToLocalDateConverter;
         return this;
     }
 
     /**
-     * Convert the source object of type {@code S} to target type {@code T}.
+     * {@inheritDoc}
      *
-     * @param source the source object to convert, which must be an instance of {@code S} (never {@code null})
-     * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
-     * @throws IllegalArgumentException if the source cannot be converted to the desired target type
+     * Convert the source object of type {@code S} to target type {@code T}.
      */
     @Override
     public YearMonth convert(Date source) {

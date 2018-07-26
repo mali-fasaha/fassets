@@ -30,7 +30,10 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * {@link MonthlyCategoryDepreciationService} implementation
+ * {@link io.github.fasset.fasset.service.MonthlyCategoryDepreciationService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("monthlyCategoryDepreciationService")
 @Transactional
@@ -39,15 +42,18 @@ public class MonthlyCategoryDepreciationServiceImpl implements MonthlyCategoryDe
 
     private final MonthlyCategoryDepreciationReposiory depreciationReposiory;
 
+    /**
+     * <p>Constructor for MonthlyCategoryDepreciationServiceImpl.</p>
+     *
+     * @param depreciationReposiory a {@link io.github.fasset.fasset.repository.MonthlyCategoryDepreciationReposiory} object.
+     */
     @Autowired
     public MonthlyCategoryDepreciationServiceImpl(@Qualifier("monthlyCategoryDepreciationRepository") MonthlyCategoryDepreciationReposiory depreciationReposiory) {
         this.depreciationReposiory = depreciationReposiory;
     }
 
 
-    /**
-     * @return A List of all monthlyCategoryDepreciation items currently in the repository
-     */
+    /** {@inheritDoc} */
     @Override
     public List<MonthlyCategoryDepreciation> fetchAllMonthlyCategoryDepreciations() {
 
@@ -58,9 +64,9 @@ public class MonthlyCategoryDepreciationServiceImpl implements MonthlyCategoryDe
     }
 
     /**
-     * Save all items in the parameter to the monthlyCategoryDepreciationRepository
+     * {@inheritDoc}
      *
-     * @param items to be saved in the repository
+     * Save all items in the parameter to the monthlyCategoryDepreciationRepository
      */
     @Override
     public void saveAllMonthlyCategoryDepreciations(List<? extends MonthlyCategoryDepreciation> items) {

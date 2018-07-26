@@ -22,6 +22,9 @@ import io.github.fasset.fasset.model.FixedAsset;
 
 /**
  * Provides Account for posting various scenarios as demanded by clients
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccountResolver {
 

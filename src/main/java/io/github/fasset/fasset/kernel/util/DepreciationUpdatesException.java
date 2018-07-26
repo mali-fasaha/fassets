@@ -21,9 +21,17 @@ package io.github.fasset.fasset.kernel.util;
  * Exception thrown during depreciation process when an item is sent through the mediator(DepreciationUpdateDispatcher)
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class DepreciationUpdatesException extends RuntimeException {
 
+    /**
+     * <p>Constructor for DepreciationUpdatesException.</p>
+     *
+     * @param errorMessage a {@link java.lang.String} object.
+     * @param errorMessage a {@link java.lang.String} object.
+     * @param e a {@link java.lang.Throwable} object.
+     */
     public DepreciationUpdatesException(String errorMessage, Throwable e) {
         super(errorMessage, e);
     }

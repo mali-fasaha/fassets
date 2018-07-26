@@ -39,6 +39,9 @@ import java.util.List;
  * assets for depreciation, acquisition and disposal purposes. <br> We obtain fixed assets using a JPA pointer using the battle-tested fixedAssetItemReader from the fileUploadBatchConfig bean. <br>
  * The reader will read assets from the database and the batch processor will then pass them to the {@code AccountEntryResolutionProcessor} which will emit Lists of {@code AccountingEntry} which will
  * then be persisted into the data sink by the {@code AccountEntryResolutionWriter}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Configuration("accountEntryResolution")
 public class AccountEntryResolutionConfig {
@@ -53,6 +56,15 @@ public class AccountEntryResolutionConfig {
 
     private StepBuilderFactory stepBuilderFactory;
 
+    /**
+     * <p>Constructor for AccountEntryResolutionConfig.</p>
+     *
+     * @param fixedAssetItemsReader a {@link org.springframework.batch.item.ItemReader} object.
+     * @param accountEntryResolutionProcessor a {@link org.springframework.batch.item.ItemProcessor} object.
+     * @param accountEntryResolutionWriter a {@link org.springframework.batch.item.ItemWriter} object.
+     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     */
     @Autowired
     public AccountEntryResolutionConfig(@Qualifier("fixedAssetItemsReader") ItemReader<List<FixedAsset>> fixedAssetItemsReader,
                                         @Qualifier("accountEntryResolutionItemProcessor") ItemProcessor<List<FixedAsset>, List<AccountingEntry>> accountEntryResolutionProcessor,
@@ -66,6 +78,12 @@ public class AccountEntryResolutionConfig {
         this.stepBuilderFactory = stepBuilderFactory;
     }
 
+    /**
+     * <p>accountEntryResolutionJob.</p>
+     *
+     * @param listener a {@link io.github.fasset.fasset.kernel.batch.upload.AccountEntryResolutionExecutionListener} object.
+     * @return a {@link org.springframework.batch.core.Job} object.
+     */
     @Bean("accountEntryResolutionJob")
     public Job accountEntryResolutionJob(@Qualifier("accountEntryResolutionExecutionListener") AccountEntryResolutionExecutionListener listener) {
         return jobBuilderFactory.get("accountEntryResolutionJob")
@@ -77,6 +95,11 @@ public class AccountEntryResolutionConfig {
                                 .build();
     }
 
+    /**
+     * <p>generateAccountEntriesStep.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean("generateAccountEntriesStep")
     public Step generateAccountEntriesStep() {
         return stepBuilderFactory.get("generateAccountEntriesStep").<List<FixedAsset>, List<AccountingEntry>>chunk(10).reader(fixedAssetItemsReader)

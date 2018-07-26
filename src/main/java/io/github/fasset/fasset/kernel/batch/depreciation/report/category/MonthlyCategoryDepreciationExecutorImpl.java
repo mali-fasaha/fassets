@@ -28,6 +28,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * Executes the process of summarising depreciation for categories' depreciation on a month by month basis
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("monthlyCategoryDepreciationExecutor")
 public class MonthlyCategoryDepreciationExecutorImpl implements MonthlyCategoryDepreciationExecutor {
@@ -37,16 +40,17 @@ public class MonthlyCategoryDepreciationExecutorImpl implements MonthlyCategoryD
     private final DepreciationRepository depreciationRepository;
 
 
+    /**
+     * <p>Constructor for MonthlyCategoryDepreciationExecutorImpl.</p>
+     *
+     * @param depreciationRepository a {@link io.github.fasset.fasset.repository.DepreciationRepository} object.
+     */
     @Autowired
     public MonthlyCategoryDepreciationExecutorImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository) {
         this.depreciationRepository = depreciationRepository;
     }
 
-    /**
-     * @param categoryName Name of the category we wish to summarise
-     * @param year         Year of the depreciation
-     * @return {@link MonthlyCategoryDepreciation } item relevant to the categoryName given and the year
-     */
+    /** {@inheritDoc} */
     @Override
     public MonthlyCategoryDepreciation getMonthlyDepreciation(String categoryName, Integer year) {
 

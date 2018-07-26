@@ -35,8 +35,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * This controller generates the template for the asset list and provides Response to the dataTable implementation running in the client, providing with it a collection of all {@link FixedAsset} items
+ * This controller generates the template for the asset list and provides Response to the dataTable implementation running in the client, providing with it a collection of all {@link io.github.fasset.fasset.model.FixedAsset} items
  * in the data sink
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Controller
 public class AssetListingController {
@@ -45,17 +48,33 @@ public class AssetListingController {
 
     private final FixedAssetService fixedAssetService;
 
+    /**
+     * <p>Constructor for AssetListingController.</p>
+     *
+     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     */
     @Autowired
     public AssetListingController(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService) {
         this.fixedAssetService = fixedAssetService;
     }
 
+    /**
+     * <p>showAssetListTemplate.</p>
+     *
+     * @param model a {@link org.springframework.ui.Model} object.
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/assetList")
     public String showAssetListTemplate(Model model) {
 
         return "reports/allAssets";
     }
 
+    /**
+     * <p>fetchAllAssets.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @GetMapping("/listing/assets/data")
     @ResponseBody
     public List<FixedAssetResponseDto> fetchAllAssets() {
@@ -76,6 +95,12 @@ public class AssetListingController {
                           .collect(ImmutableListCollector.toImmutableList());
     }
 
+    /**
+     * <p>getMonthGivenId.</p>
+     *
+     * @param id a int.
+     * @return a {@link io.github.fasset.fasset.dto.FixedAssetResponseDto} object.
+     */
     @GetMapping("/listing/assets/data/{nomenclature}")
     @ResponseBody
     public FixedAssetResponseDto getMonthGivenId(@PathVariable("nomenclature") int id) {

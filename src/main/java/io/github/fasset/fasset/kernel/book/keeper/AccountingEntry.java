@@ -44,6 +44,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * This model maps unit of data entered into an account. It contains {@code bookingDate} when the transaction is posted, the {@code account} into which it is posted, the {@code narration}, the {@code
  * amount} and the {@code accountSide} into which we are posting. The rest of attributes are added into the {@code entryAttributes} field.
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "AccountingEntry")
 @Table(name = "accounting_entry")
@@ -76,9 +79,22 @@ public class AccountingEntry extends AccountDomainModel<String> {
     @CollectionTable(name = "entry_attributes", joinColumns = @JoinColumn(name = "accounting_entry_id"))
     private Map<String, String> entryAttributes = new ConcurrentHashMap<>();
 
+    /**
+     * <p>Constructor for AccountingEntry.</p>
+     */
     public AccountingEntry() {
     }
 
+    /**
+     * <p>Constructor for AccountingEntry.</p>
+     *
+     * @param bookingDate a {@link io.github.ghacupha.time.point.TimePoint} object.
+     * @param account a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     * @param narration a {@link java.lang.String} object.
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     * @param amount a {@link io.github.ghacupha.cash.Cash} object.
+     */
     public AccountingEntry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
         this.bookingDate = bookingDate;
         this.account = account;
@@ -90,7 +106,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
     /**
      * Adds unstructured additional attributes as required into the entry
      *
-     * @param entryAttribute {@link EntryAttribute} identity of the attribute in an entry
+     * @param entryAttribute {@link io.github.fasset.fasset.kernel.book.keeper.EntryAttribute} identity of the attribute in an entry
      * @param attribute      the object content being registered as an attribute
      */
     public void addAttribute(String entryAttribute, String attribute) {
@@ -98,9 +114,11 @@ public class AccountingEntry extends AccountDomainModel<String> {
     }
 
     /**
+     * <p>getAttribute.</p>
+     *
      * @param entryAttribute identification of the attribute we wish to obtain from the entry
      * @return Object containing the attribute value
-     * @throws UnEnteredDetailsException When an attribute is enquired from the AccountingEntry before it has been added into the AccountingEntry
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.UnEnteredDetailsException if any.
      */
     public String getAttribute(String entryAttribute) throws UnEnteredDetailsException {
 
@@ -112,6 +130,8 @@ public class AccountingEntry extends AccountDomainModel<String> {
     }
 
     /**
+     * <p>getCurrency.</p>
+     *
      * @return Currency of the monetary amounts to be save in this
      */
     public Currency getCurrency() {
@@ -119,12 +139,19 @@ public class AccountingEntry extends AccountDomainModel<String> {
     }
 
     /**
-     * @return {@link AccountSide} to which this AccountingEntry is aggregating the Account balance
+     * <p>Getter for the field <code>accountSide</code>.</p>
+     *
+     * @return {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} to which this AccountingEntry is aggregating the Account balance
      */
     public AccountSide getAccountSide() {
         return accountSide;
     }
 
+    /**
+     * <p>Setter for the field <code>accountSide</code>.</p>
+     *
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     */
     public void setAccountSide(AccountSide accountSide) {
         this.accountSide = accountSide;
     }
@@ -136,41 +163,83 @@ public class AccountingEntry extends AccountDomainModel<String> {
         return bookingDate;
     }
 
+    /**
+     * <p>Setter for the field <code>bookingDate</code>.</p>
+     *
+     * @param bookingDate a {@link io.github.ghacupha.time.point.TimePoint} object.
+     */
     public void setBookingDate(TimePoint bookingDate) {
         this.bookingDate = bookingDate;
     }
 
     /**
+     * <p>Getter for the field <code>amount</code>.</p>
+     *
      * @return The amount being posted into the Account and encapsulated by the AccountingEntry
      */
     public Cash getAmount() {
         return amount;
     }
 
+    /**
+     * <p>Setter for the field <code>amount</code>.</p>
+     *
+     * @param amount a {@link io.github.ghacupha.cash.Cash} object.
+     */
     public void setAmount(Cash amount) {
         this.amount = amount;
     }
 
+    /**
+     * <p>Getter for the field <code>account</code>.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     */
     public Account getAccount() {
         return account;
     }
 
+    /**
+     * <p>Setter for the field <code>account</code>.</p>
+     *
+     * @param account a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     */
     public void setAccount(Account account) {
         this.account = account;
     }
 
+    /**
+     * <p>Getter for the field <code>entryAttributes</code>.</p>
+     *
+     * @return a {@link java.util.Map} object.
+     */
     public Map<String, String> getEntryAttributes() {
         return entryAttributes;
     }
 
+    /**
+     * <p>Setter for the field <code>entryAttributes</code>.</p>
+     *
+     * @param entryAttributes a {@link java.util.Map} object.
+     */
     public void setEntryAttributes(Map<String, String> entryAttributes) {
         this.entryAttributes = entryAttributes;
     }
 
+    /**
+     * <p>Getter for the field <code>narration</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNarration() {
         return narration;
     }
 
+    /**
+     * <p>Setter for the field <code>narration</code>.</p>
+     *
+     * @param narration a {@link java.lang.String} object.
+     */
     public void setNarration(String narration) {
         this.narration = narration;
     }
@@ -194,6 +263,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
 
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -226,6 +296,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
         return entryAttributes != null ? entryAttributes.equals(accountingEntry.entryAttributes) : accountingEntry.entryAttributes == null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result = super.hashCode();
@@ -238,6 +309,7 @@ public class AccountingEntry extends AccountDomainModel<String> {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return narration;

@@ -30,6 +30,9 @@ import java.time.YearMonth;
 
 /**
  * Reads data from a collection of fixedAssets and creates accruedDepreciation items out of it
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("fixedAssetAccruedDepreciationProcessor")
 public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<FixedAsset, AccruedDepreciation> {
@@ -37,12 +40,10 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
     private static final Logger log = LoggerFactory.getLogger(FixedAssetAccruedDepreciationProcessor.class);
 
     /**
+     * {@inheritDoc}
+     *
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
-     *
-     * @param fixedAsset to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
-     * @throws Exception thrown if exception occurs during processing.
      */
     @Override
     public AccruedDepreciation process(FixedAsset fixedAsset) throws Exception {

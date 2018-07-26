@@ -28,9 +28,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * Implements the {@link NetBookValueService} interface saving and retrieving {@link NetBookValue} records into the {@link io.github.fasset.fasset.repository.NetBookValueRepository}
+ * Implements the {@link io.github.fasset.fasset.service.NetBookValueService} interface saving and retrieving {@link io.github.fasset.fasset.model.NetBookValue} records into the {@link io.github.fasset.fasset.repository.NetBookValueRepository}
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("netBookValueService")
 @Transactional
@@ -39,15 +40,20 @@ public class NetBookValueServiceImpl implements NetBookValueService {
 
     private final NetBookValueRepository netBookValueRepository;
 
+    /**
+     * <p>Constructor for NetBookValueServiceImpl.</p>
+     *
+     * @param netBookValueRepository a {@link io.github.fasset.fasset.repository.NetBookValueRepository} object.
+     */
     @Autowired
     public NetBookValueServiceImpl(@Qualifier("netBookValueRepository") NetBookValueRepository netBookValueRepository) {
         this.netBookValueRepository = netBookValueRepository;
     }
 
     /**
-     * Saves the {@link NetBookValue} object in the param
+     * {@inheritDoc}
      *
-     * @param netBookValue entity to be saved into the repository
+     * Saves the {@link NetBookValue} object in the param
      */
     @Override
     public void saveNetBookValue(NetBookValue netBookValue) {
@@ -56,9 +62,9 @@ public class NetBookValueServiceImpl implements NetBookValueService {
     }
 
     /**
-     * Saves a {@link List} collection of all items passed in the parameter to the {@link NetBookValueRepository}
+     * {@inheritDoc}
      *
-     * @param netBookValues {@link List} of {@link NetBookValue} entities to be saved in the repository
+     * Saves a {@link List} collection of all items passed in the parameter to the {@link NetBookValueRepository}
      */
     @Override
     public void saveAllNetBookValueItems(List<? extends NetBookValue> netBookValues) {

@@ -22,11 +22,12 @@ import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import java.util.Currency;
 
 /**
- * Thrown when the {@link AccountingEntry} being added to an {@link io.github.fasset.fasset.kernel.book.keeper.Account} has {@link Currency} that differs to that of the {@link
- * io.github.fasset.fasset.kernel.book.keeper.Account}, or when the {@link Currency} of the {@link io.github.fasset.fasset.kernel.book.keeper.Account} and {@link AccountingEntry} being added to a
+ * Thrown when the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} being added to an {@link io.github.fasset.fasset.kernel.book.keeper.Account} has {@link java.util.Currency} that differs to that of the {@link
+ * io.github.fasset.fasset.kernel.book.keeper.Account}, or when the {@link java.util.Currency} of the {@link io.github.fasset.fasset.kernel.book.keeper.Account} and {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} being added to a
  * {@link io.github.fasset.fasset.kernel.book.Transaction} are different
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MismatchedCurrencyException extends Exception {
 

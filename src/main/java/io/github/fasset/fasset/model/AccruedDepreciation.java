@@ -32,6 +32,9 @@ import java.util.Objects;
 
 /**
  * This model represents a unit AccruedDepreciation in the repository
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Audited
 @Entity(name = "AccruedDepreciation")
@@ -53,51 +56,107 @@ public class AccruedDepreciation extends DomainModel<String> {
     @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money accruedDepreciation;
 
+    /**
+     * <p>Getter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @return a int.
+     */
     public int getFixedAssetId() {
         return fixedAssetId;
     }
 
+    /**
+     * <p>Setter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @param fixedAssetId a int.
+     * @return a {@link io.github.fasset.fasset.model.AccruedDepreciation} object.
+     */
     public AccruedDepreciation setFixedAssetId(int fixedAssetId) {
         this.fixedAssetId = fixedAssetId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getMonth() {
         return month;
     }
 
+    /**
+     * <p>Setter for the field <code>month</code>.</p>
+     *
+     * @param month a {@link java.time.YearMonth} object.
+     * @return a {@link io.github.fasset.fasset.model.AccruedDepreciation} object.
+     */
     public AccruedDepreciation setMonth(YearMonth month) {
         this.month = month;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.AccruedDepreciation} object.
+     */
     public AccruedDepreciation setSolId(String solId) {
         this.solId = solId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>category</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * <p>Setter for the field <code>category</code>.</p>
+     *
+     * @param category a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.AccruedDepreciation} object.
+     */
     public AccruedDepreciation setCategory(String category) {
         this.category = category;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>accruedDepreciation</code>.</p>
+     *
+     * @return a {@link org.javamoney.moneta.Money} object.
+     */
     public Money getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
+    /**
+     * <p>Setter for the field <code>accruedDepreciation</code>.</p>
+     *
+     * @param accruedDepreciation a {@link org.javamoney.moneta.Money} object.
+     * @return a {@link io.github.fasset.fasset.model.AccruedDepreciation} object.
+     */
     public AccruedDepreciation setAccruedDepreciation(Money accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -114,11 +173,13 @@ public class AccruedDepreciation extends DomainModel<String> {
             Objects.equals(category, that.category);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), fixedAssetId, month, solId, category, accruedDepreciation);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MessageFormat.format("AccruedDepreciation'{'fixedAssetId={0}, month={1}, solId=''{2}'', category=''{3}'', accruedDepreciation={4}'}'", fixedAssetId, month, solId, category,

@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Added reactive-streams dependencies and removed unnecesary maven phases in travis-ci**
+
+
+[7e006345c2f8339](https://github.com/mali-fasaha/fassets/commit/7e006345c2f8339) Edwin Njeru *2018-07-26 13:38:02*
+
 **Adjusted config for job launches**
 
 

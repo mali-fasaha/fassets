@@ -22,7 +22,10 @@ import io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link MonthlyAssetDepreciation}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.depreciation.MonthlyAssetDepreciation}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MonthlyAssetDepreciationService {
 

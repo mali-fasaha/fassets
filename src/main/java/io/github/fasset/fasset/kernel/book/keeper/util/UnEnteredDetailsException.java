@@ -21,11 +21,17 @@ package io.github.fasset.fasset.kernel.book.keeper.util;
  * Exception thrown when some detail is queried from an account or entry and it does not exist
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class UnEnteredDetailsException extends Exception {
 
     private static final long serialVersionUID = 7464030628723759039L;
 
+    /**
+     * <p>Constructor for UnEnteredDetailsException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public UnEnteredDetailsException(String message) {
         super(message);
     }

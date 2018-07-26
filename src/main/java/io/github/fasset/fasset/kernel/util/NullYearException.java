@@ -19,9 +19,17 @@ package io.github.fasset.fasset.kernel.util;
 
 /**
  * Exception thrown when null year string value is passed to depreciation processors
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class NullYearException extends RuntimeException {
 
+    /**
+     * <p>Constructor for NullYearException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public NullYearException(String message) {
         super(message);
     }

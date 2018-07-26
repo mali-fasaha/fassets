@@ -36,7 +36,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * {@link FixedAssetService} implementation
+ * {@link io.github.fasset.fasset.service.FixedAssetService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("fixedAssetService")
 @Transactional
@@ -46,15 +49,20 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
     private final FixedAssetRepository fixedAssetRepository;
 
+    /**
+     * <p>Constructor for FixedAssetServiceImpl.</p>
+     *
+     * @param fixedAssetRepository a {@link io.github.fasset.fasset.repository.FixedAssetRepository} object.
+     */
     @Autowired
     public FixedAssetServiceImpl(@Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository) {
         this.fixedAssetRepository = fixedAssetRepository;
     }
 
     /**
-     * Saves all {@link FixedAsset} items passed in a list, saving unique items only. Quietly fails if the asset is already in the database
+     * {@inheritDoc}
      *
-     * @param fixedAssets Collection of fixedAsset entities to be saved in the database
+     * Saves all {@link FixedAsset} items passed in a list, saving unique items only. Quietly fails if the asset is already in the database
      */
     @Override
     public void saveAllFixedAssets(List<? extends FixedAsset> fixedAssets) {
@@ -63,9 +71,9 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     }
 
     /**
-     * Fetches a List of all existing items in the {@link FixedAssetRepository}
+     * {@inheritDoc}
      *
-     * @return Collection of fixedAsset entities extracted from the database
+     * Fetches a List of all existing items in the {@link FixedAssetRepository}
      */
     @Override
     public List<FixedAsset> fetchAllExistingAssets() {
@@ -77,10 +85,9 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     }
 
     /**
-     * Extracts the fixed asset when the nomenclature is known
+     * {@inheritDoc}
      *
-     * @param id of fixedAsset entity to be fetched from database
-     * @return FixedAsset entity whose nomenclature was found in the database
+     * Extracts the fixed asset when the nomenclature is known
      */
     @Override
     @Cacheable("fixedAssetsFetchedByIds")
@@ -91,10 +98,9 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     }
 
     /**
-     * By querying the {@link FixedAssetRepository} this method is able to create a {@link CategoryBrief} for the category given in the parameter
+     * {@inheritDoc}
      *
-     * @param category for which we are preparing a brief
-     * @return {@link CategoryBrief}
+     * By querying the {@link FixedAssetRepository} this method is able to create a {@link CategoryBrief} for the category given in the parameter
      */
     @Override
     @Cacheable("categoryBriefsFetchedByCategoryNames")
@@ -134,10 +140,9 @@ public class FixedAssetServiceImpl implements FixedAssetService {
     }
 
     /**
-     * By querying the {@link FixedAssetRepository} this method is able to create a {@link ServiceOutletBrief} for the SOL queried in the parameter
+     * {@inheritDoc}
      *
-     * @param solId for which we are preparing a brief
-     * @return {@link CategoryBrief}
+     * By querying the {@link FixedAssetRepository} this method is able to create a {@link ServiceOutletBrief} for the SOL queried in the parameter
      */
     @Override
     @Cacheable("serviceOutletBriefsFetchedBySolIds")
@@ -163,36 +168,28 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         return brief;
     }
 
-    /**
-     * @return A unique list of all solIds in the database
-     */
+    /** {@inheritDoc} */
     @Override
     public List<String> getAllSolIds() {
 
         return fixedAssetRepository.getDistinctSolIds();
     }
 
-    /**
-     * @return A unique list of all categories in the database
-     */
+    /** {@inheritDoc} */
     @Override
     public List<String> getAllCategories() {
 
         return fixedAssetRepository.getDistinctCategories();
     }
 
-    /**
-     * @param fixedAsset to be saved to fixedAssetRepository
-     */
+    /** {@inheritDoc} */
     @Override
     public FixedAsset saveFixedAsset(FixedAsset fixedAsset) {
 
         return fixedAssetRepository.save(fixedAsset);
     }
 
-    /**
-     * @return # of assets
-     */
+    /** {@inheritDoc} */
     @Override
     public int getPoll() {
 

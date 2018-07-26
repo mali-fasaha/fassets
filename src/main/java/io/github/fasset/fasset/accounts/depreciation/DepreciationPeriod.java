@@ -19,6 +19,9 @@ package io.github.fasset.fasset.accounts.depreciation;
 
 /**
  * Represents the launar period in which a depreciation computation is effective
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class DepreciationPeriod {
 }

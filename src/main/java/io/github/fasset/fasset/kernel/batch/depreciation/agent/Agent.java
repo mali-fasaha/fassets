@@ -23,18 +23,20 @@ import io.github.fasset.fasset.model.FixedAsset;
 import java.time.YearMonth;
 
 /**
- * General representation of an object that given the {@link FixedAsset} and the {@link YearMonth} will return the desired object to the caller
+ * General representation of an object that given the {@link io.github.fasset.fasset.model.FixedAsset} and the {@link java.time.YearMonth} will return the desired object to the caller
  *
  * @param <T> Type of object to be calculated at invocation
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface Agent<T> {
 
     /**
      * This method takes the following parameters and returns desired object to the caller
      *
-     * @param asset    {@link FixedAsset} being depreciated
-     * @param month    {@link YearMonth} in which this AccruedDepreciation is effective
-     * @param proceeds {@link DepreciationProceeds} items to hold the values calculated from depreciation
+     * @param asset    {@link io.github.fasset.fasset.model.FixedAsset} being depreciated
+     * @param month    {@link java.time.YearMonth} in which this AccruedDepreciation is effective
+     * @param proceeds {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds} items to hold the values calculated from depreciation
      * @return Computed item from the above parameters
      */
     T invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);

@@ -30,6 +30,9 @@ import java.util.Objects;
 
 /**
  * This is a representative model of the fixed asset's category for purposes of depreciation, that is its name, its depreciation rate and its depreciation logic
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "CategoryConfiguration")
 @Table(name = "category_configuration",
@@ -63,6 +66,15 @@ public class CategoryConfiguration extends DomainModel<String> {
     @Column(name = "category_ledger_id")
     private String categoryLedgerId;
 
+    /**
+     * <p>Constructor for CategoryConfiguration.</p>
+     *
+     * @param designation a {@link java.lang.String} object.
+     * @param depreciationLogic a {@link java.lang.String} object.
+     * @param deprecant a {@link java.lang.String} object.
+     * @param depreciationRate a double.
+     * @param categoryLedgerId a {@link java.lang.String} object.
+     */
     public CategoryConfiguration(@NotNull(message = "Please provide a valid designation for category") String designation,
                                  @NotNull(message = "Please provide a valid designation for depreciation logic") String depreciationLogic,
                                  @NotNull(message = "Please provide a valid designation for depreciation deprecant") String deprecant,
@@ -75,49 +87,103 @@ public class CategoryConfiguration extends DomainModel<String> {
         this.categoryLedgerId = categoryLedgerId;
     }
 
+    /**
+     * <p>Constructor for CategoryConfiguration.</p>
+     */
     public CategoryConfiguration() {
     }
 
+    /**
+     * <p>Getter for the field <code>designation</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDesignation() {
         return designation;
     }
 
+    /**
+     * <p>Setter for the field <code>designation</code>.</p>
+     *
+     * @param designation a {@link java.lang.String} object.
+     */
     public void setDesignation(String designation) {
         this.designation = designation.toUpperCase();
     }
 
+    /**
+     * <p>Getter for the field <code>depreciationLogic</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDepreciationLogic() {
         return depreciationLogic;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciationLogic</code>.</p>
+     *
+     * @param depreciationLogic a {@link java.lang.String} object.
+     */
     public void setDepreciationLogic(String depreciationLogic) {
         this.depreciationLogic = depreciationLogic.toUpperCase();
     }
 
+    /**
+     * <p>Getter for the field <code>deprecant</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDeprecant() {
         return deprecant;
     }
 
+    /**
+     * <p>Setter for the field <code>deprecant</code>.</p>
+     *
+     * @param deprecant a {@link java.lang.String} object.
+     */
     public void setDeprecant(String deprecant) {
         this.deprecant = deprecant.toUpperCase();
     }
 
+    /**
+     * <p>Getter for the field <code>depreciationRate</code>.</p>
+     *
+     * @return a double.
+     */
     public double getDepreciationRate() {
         return depreciationRate;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciationRate</code>.</p>
+     *
+     * @param depreciationRate a double.
+     */
     public void setDepreciationRate(double depreciationRate) {
         this.depreciationRate = depreciationRate;
     }
 
+    /**
+     * <p>Getter for the field <code>categoryLedgerId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategoryLedgerId() {
         return categoryLedgerId;
     }
 
+    /**
+     * <p>Setter for the field <code>categoryLedgerId</code>.</p>
+     *
+     * @param categoryLedgerId a {@link java.lang.String} object.
+     */
     public void setCategoryLedgerId(String categoryLedgerId) {
         this.categoryLedgerId = categoryLedgerId;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -134,11 +200,13 @@ public class CategoryConfiguration extends DomainModel<String> {
             Objects.equals(deprecant, that.deprecant) && Objects.equals(categoryLedgerId, that.categoryLedgerId);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), designation, depreciationLogic, deprecant, depreciationRate, categoryLedgerId);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MessageFormat.format("CategoryConfiguration'{'designation=''{0}'', depreciationLogic=''{1}'', deprecant=''{2}'', depreciationRate={3}, categoryLedgerId=''{4}'''}'", designation,

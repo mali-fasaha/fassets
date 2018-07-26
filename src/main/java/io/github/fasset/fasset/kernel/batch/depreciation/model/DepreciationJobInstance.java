@@ -27,6 +27,9 @@ import java.util.Objects;
 
 /**
  * A record of a depreciation job that is to be saved in the database
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "DepreciationJobInstance")
 public class DepreciationJobInstance extends DomainModel<String> implements Comparable<DepreciationJobInstance> {
@@ -34,21 +37,40 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
     @Column(name = "month")
     private YearMonth month;
 
+    /**
+     * <p>Constructor for DepreciationJobInstance.</p>
+     */
     public DepreciationJobInstance() {
     }
 
+    /**
+     * <p>Constructor for DepreciationJobInstance.</p>
+     *
+     * @param month a {@link java.time.YearMonth} object.
+     */
     public DepreciationJobInstance(YearMonth month) {
         this.month = month;
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getMonth() {
         return month;
     }
 
+    /**
+     * <p>Setter for the field <code>month</code>.</p>
+     *
+     * @param month a {@link java.time.YearMonth} object.
+     */
     public void setMonth(YearMonth month) {
         this.month = month;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -64,11 +86,13 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
         return Objects.equals(month, that.month);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), month);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DepreciationJobInstance{");
@@ -79,6 +103,7 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public int compareTo(DepreciationJobInstance o) {
         return Comparator.comparing(DepreciationJobInstance::getMonth)

@@ -33,6 +33,9 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * This class primarily creates a transaction for posting a given List of AccountingEntry objects
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("accountingTransactionBuilder")
 public class AccountingTransactionBuilder implements TransactionBuilder {
@@ -41,6 +44,7 @@ public class AccountingTransactionBuilder implements TransactionBuilder {
 
     private int counter = 0;
 
+    /** {@inheritDoc} */
     @Override
     public Transaction createTransaction(List<AccountingEntry> entries) {
 

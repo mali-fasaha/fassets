@@ -17,6 +17,12 @@
  */
 package io.github.fasset.fasset.kernel.util;
 
+/**
+ * <p>AdditionToEmptyImmutableListException class.</p>
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
+ */
 public class AdditionToEmptyImmutableListException extends ConcurrentListException {
 
     <T> AdditionToEmptyImmutableListException(int index, T element) {

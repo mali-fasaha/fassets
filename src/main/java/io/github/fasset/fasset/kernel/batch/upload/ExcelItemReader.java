@@ -39,6 +39,7 @@ import java.util.List;
  * sequentially by this class. <br> Future improvements will include implementation of a row-streaming library, until then keep calm and limit your excel file
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Scope("job")
 public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
@@ -54,24 +55,37 @@ public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
     @Qualifier("excelMapperService")
     private ExcelMapperService excelMapperService;
 
+    /**
+     * <p>Constructor for ExcelItemReader.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     * @param excelMapperService a {@link io.github.fasset.fasset.kernel.excel.ExcelMapperService} object.
+     */
     public ExcelItemReader(String fileName, ExcelMapperService excelMapperService) {
         this.fileName = fileName;
         this.excelMapperService = excelMapperService;
     }
 
     // To be called before and after job
+    /**
+     * <p>resetNextItem.</p>
+     */
     public void resetNextItem() {
         log.debug("The nextItem index = {}, is being reset to 0", nextItem);
 
         nextItem = 0;
     }
 
+    /**
+     * <p>init.</p>
+     */
     @PostConstruct
     public void init() {
         resetNextItem();
         fixedAssetDTOS = excelMapperService.fetchExcelData(fileName);
     }
 
+    /** {@inheritDoc} */
     @Override
     public FixedAssetDTO read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 

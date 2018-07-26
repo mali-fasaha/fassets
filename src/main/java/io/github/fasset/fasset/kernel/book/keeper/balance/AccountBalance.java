@@ -30,6 +30,7 @@ import java.util.Currency;
  * Represents the amount and sign of the amount you could find in an account. Using this you could say an account has 20 dollars on Credit side.
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class AccountBalance {
 
@@ -38,21 +39,47 @@ public class AccountBalance {
     private final Cash amount;
     private final AccountSide accountSide;
 
+    /**
+     * <p>Constructor for AccountBalance.</p>
+     *
+     * @param amount a {@link io.github.ghacupha.cash.Cash} object.
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     */
     public AccountBalance(Cash amount, AccountSide accountSide) {
         this.amount = amount;
         this.accountSide = accountSide;
     }
 
+    /**
+     * <p>nil.</p>
+     *
+     * @param currency a {@link java.util.Currency} object.
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
+     */
     public static AccountBalance nil(Currency currency, AccountSide accountSide) {
 
         return newBalance(HardCash.of(0, currency), accountSide);
     }
 
+    /**
+     * <p>newBalance.</p>
+     *
+     * @param amount a {@link io.github.ghacupha.cash.Cash} object.
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
+     */
     public static AccountBalance newBalance(Cash amount, AccountSide accountSide) {
 
         return new AccountBalance(amount, accountSide);
     }
 
+    /**
+     * <p>add.</p>
+     *
+     * @param args a {@link java.util.Collection} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
+     */
     public AccountBalance add(Collection<AccountBalance> args) {
 
         final AccountBalance[] thisBalance = {newBalance(this.amount, this.accountSide)};
@@ -68,6 +95,13 @@ public class AccountBalance {
         return thisBalance[0];
     }
 
+    /**
+     * <p>add.</p>
+     *
+     * @param arg a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException if any.
+     */
     public AccountBalance add(AccountBalance arg) throws MismatchedCurrencyException {
 
         checkCurrency(arg);
@@ -114,14 +148,25 @@ public class AccountBalance {
         }
     }
 
+    /**
+     * <p>Getter for the field <code>amount</code>.</p>
+     *
+     * @return a {@link io.github.ghacupha.cash.Cash} object.
+     */
     public Cash getAmount() {
         return amount;
     }
 
+    /**
+     * <p>Getter for the field <code>accountSide</code>.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     */
     public AccountSide getAccountSide() {
         return accountSide;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -139,6 +184,7 @@ public class AccountBalance {
         return accountSide == that.accountSide;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result = amount.hashCode();
@@ -146,6 +192,7 @@ public class AccountBalance {
         return result;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return amount.getNumber()

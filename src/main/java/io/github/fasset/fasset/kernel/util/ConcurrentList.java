@@ -37,10 +37,12 @@ import java.util.stream.Stream;
 
 /**
  * This is a list backed by a concurrent hashmap making it effectively concurrent. The list is also substantially logged with 'tracer' methods to effectively log, trace and debug complex operations.
- * <br> If the list is supposed to remain empty, invoking the list through the {@link ConcurrentList#empty()} method ensures the {@link ConcurrentList#add(Object)} and the {@link
+ * <br> If the list is supposed to remain empty, invoking the list through the {@link io.github.fasset.fasset.kernel.util.ConcurrentList#empty()} method ensures the {@link io.github.fasset.fasset.kernel.util.ConcurrentList#add(Object)} and the {@link
  * ConcurrentList#add(int, Object)} methods do not throw an excetion when called
  *
  * @param <T> Type of elements to be stored in  the list
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
 
@@ -50,6 +52,9 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     private final Map<Integer, T> mapList = new ConcurrentHashMap<>();
     private int index;
 
+    /**
+     * <p>Constructor for ConcurrentList.</p>
+     */
     public ConcurrentList() {
 
         index = 0;
@@ -68,6 +73,13 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         log.trace("New list initialised {}", this);
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param elements a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     @SafeVarargs
     public static <T> List<T> of(T... elements) {
 
@@ -78,11 +90,24 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>empty.</p>
+     *
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> empty() {
 
         return new ConcurrentList<>(true);
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param listItems a {@link java.util.List} object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(List<T> listItems) {
 
         List<T> newList = ConcurrentList.newList();
@@ -92,6 +117,13 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1) {
 
         final List<T> newList = ConcurrentList.newList();
@@ -101,6 +133,14 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -111,6 +151,15 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -122,6 +171,16 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param t4 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3, T t4) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -134,6 +193,17 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param t4 a T object.
+     * @param t5 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -147,6 +217,18 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param t4 a T object.
+     * @param t5 a T object.
+     * @param t6 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -161,6 +243,19 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param t4 a T object.
+     * @param t5 a T object.
+     * @param t6 a T object.
+     * @param t7 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -176,6 +271,20 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param t4 a T object.
+     * @param t5 a T object.
+     * @param t6 a T object.
+     * @param t7 a T object.
+     * @param t8 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -192,6 +301,21 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param t4 a T object.
+     * @param t5 a T object.
+     * @param t6 a T object.
+     * @param t7 a T object.
+     * @param t8 a T object.
+     * @param t9 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -209,6 +333,23 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>of.</p>
+     *
+     * @param t1 a T object.
+     * @param t10 a T object.
+     * @param t2 a T object.
+     * @param t3 a T object.
+     * @param t4 a T object.
+     * @param t5 a T object.
+     * @param t6 a T object.
+     * @param t7 a T object.
+     * @param t8 a T object.
+     * @param t9 a T object.
+     * @param t10 a T object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> of(T t1, T t2, T t3, T t4, T t5, T t6, T t7, T t8, T t9, T t10) {
 
         final List<T> newList = new ConcurrentList<>();
@@ -227,22 +368,29 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return newList;
     }
 
+    /**
+     * <p>newList.</p>
+     *
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> newList() {
         return new ConcurrentList<>();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected List<T> delegate() {
         return new CopyOnWriteArrayList<>();
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns a sequential {@code Stream} with this collection as its source.
      * <p>
      * <p>This method should be overridden when the {@link #spliterator()} method cannot return a spliterator that is {@code IMMUTABLE}, {@code CONCURRENT}, or <em>late-binding</em>. (See {@link
      * #spliterator()} for details.)
-     *
-     * @return a sequential {@code Stream} over the elements in this collection
      * @since 1.8
      */
     @Override
@@ -252,12 +400,12 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns a possibly parallel {@code Stream} with this collection as its source.  It is allowable for this method to return a sequential stream.
      * <p>
      * <p>This method should be overridden when the {@link #spliterator()} method cannot return a spliterator that is {@code IMMUTABLE}, {@code CONCURRENT}, or <em>late-binding</em>. (See {@link
      * #spliterator()} for details.)
-     *
-     * @return a possibly parallel {@code Stream} over the elements in this collection
      * @since 1.8
      */
     @Override
@@ -268,11 +416,11 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Creates a {@link Spliterator} over the elements in this list.
      * <p>
      * <p>The {@code Spliterator} reports {@link Spliterator#SIZED} and {@link Spliterator#ORDERED}.  Implementations should document the reporting of additional characteristic values.
-     *
-     * @return a {@code Spliterator} over the elements in this list
      * @since 1.8
      */
     @Override
@@ -283,11 +431,10 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Performs the given action for each element of the {@code Iterable} until all elements have been processed or the action throws an exception.  Unless otherwise specified by the implementing
      * class, actions are performed in the order of iteration (if an iteration order is specified).  Exceptions thrown by the action are relayed to the caller.
-     *
-     * @param action The action to be performed for each element
-     * @throws NullPointerException if the specified action is null
      * @since 1.8
      */
     @Override
@@ -297,6 +444,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
                     .forEach(action);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean removeAll(Collection<?> collection) {
 
@@ -308,6 +456,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
                          .allMatch(this::remove);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean addAll(Collection<? extends T> collection) {
 
@@ -321,6 +470,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
                          .allMatch(this::add);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean contains(Object object) {
 
@@ -335,6 +485,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return mapList.containsValue(val);
     }
 
+    /** {@inheritDoc} */
     @Override
     public T set(int index, T element) {
 
@@ -349,6 +500,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return element;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Iterator<T> iterator() {
 
@@ -356,10 +508,9 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     /**
-     * Returns zero id the element is missing in the list
+     * {@inheritDoc}
      *
-     * @param element for which we inquire from the list
-     * @return index of the element
+     * Returns zero id the element is missing in the list
      */
     @Override
     public int indexOf(Object element) {
@@ -390,6 +541,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return index;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int size() {
 
@@ -398,12 +550,14 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return mapList.size();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() {
 
         return mapList.isEmpty();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void add(int index, T element) {
 
@@ -416,6 +570,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         this.mapList.put(index, element);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean remove(Object object) {
 
@@ -440,6 +595,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public T remove(int index) {
 
@@ -454,6 +610,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return removable;
     }
 
+    /** {@inheritDoc} */
     @Override
     public T get(int index) {
 
@@ -468,6 +625,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return atIndex;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean add(T element) {
 
@@ -487,13 +645,9 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     /**
-     * Removes all of the elements of this collection that satisfy the given predicate.  Errors or runtime exceptions thrown during iteration or by the predicate are relayed to the caller.
+     * {@inheritDoc}
      *
-     * @param filter a predicate which returns {@code true} for elements to be removed
-     * @return {@code true} if any elements were removed
-     * @throws NullPointerException          if the specified filter is null
-     * @throws UnsupportedOperationException if elements cannot be removed from this collection.  Implementations may throw this exception if a matching element cannot be removed or if, in general,
-     *                                       removal is not supported.
+     * Removes all of the elements of this collection that satisfy the given predicate.  Errors or runtime exceptions thrown during iteration or by the predicate are relayed to the caller.
      * @since 1.8
      */
     @Override
@@ -503,6 +657,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
                            .removeIf(filter);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean addAll(int index, Collection<? extends T> elements) {
 
@@ -518,6 +673,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
                        .allMatch(element -> this.add0(index, element));
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
 
@@ -533,6 +689,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return subList;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
 
@@ -544,6 +701,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return hashcode[0];
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object object) {
 
@@ -562,6 +720,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         return equiv.containsAll(this.mapList.values());
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean containsAll(Collection<?> collection) {
 
@@ -569,6 +728,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
                          .allMatch(this::contains);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void clear() {
 
@@ -584,9 +744,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         this.mapList.clear();
     }
 
-    /**
-     * @return {@link ListIterator<T>} backed by {@link CopyOnWriteArrayList<T>}
-     */
+    /** {@inheritDoc} */
     @Override
     public ListIterator<T> listIterator() {
 
@@ -594,6 +752,8 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Sorts this list according to the order induced by the specified {@link Comparator}.
      * <p>
      * <p>All elements in this list must be <i>mutually comparable</i> using the specified comparator (that is, {@code c.compare(e1, e2)} must not throw a {@code ClassCastException} for any elements
@@ -603,11 +763,6 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
      * be used.
      * <p>
      * <p>This list must be modifiable, but need not be resizable.
-     *
-     * @param c the {@code Comparator} used to compare list elements. A {@code null} value indicates that the elements' {@linkplain Comparable natural ordering} should be used
-     * @throws ClassCastException            if the list contains elements that are not <i>mutually comparable</i> using the specified comparator
-     * @throws UnsupportedOperationException if the list's list-iterator does not support the {@code set} operation
-     * @throws IllegalArgumentException      (<a href="Collection.html#optional-restrictions">optional</a>) if the comparator is found to violate the {@link Comparator} contract
      * @since 1.8
      */
     @Override
@@ -622,6 +777,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
         this.addAll(originalValues);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object[] toArray() {
 

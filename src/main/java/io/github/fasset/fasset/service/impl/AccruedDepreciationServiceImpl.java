@@ -34,7 +34,10 @@ import java.time.YearMonth;
 import java.util.List;
 
 /**
- * {@link AccruedDepreciationService} implementation
+ * {@link io.github.fasset.fasset.service.AccruedDepreciationService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("accruedDepreciationService")
 @Transactional
@@ -45,17 +48,20 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
 
     private final AccruedDepreciationRepository accruedDepreciationRepository;
 
+    /**
+     * <p>Constructor for AccruedDepreciationServiceImpl.</p>
+     *
+     * @param accruedDepreciationRepository a {@link io.github.fasset.fasset.repository.AccruedDepreciationRepository} object.
+     */
     @Autowired
     public AccruedDepreciationServiceImpl(@Qualifier("accruedDepreciationRepository") AccruedDepreciationRepository accruedDepreciationRepository) {
         this.accruedDepreciationRepository = accruedDepreciationRepository;
     }
 
     /**
-     * Returns the accruedDepreciationAmount for a fixed asset  and month given as param. This will give the accrued depreciation up to the previous month
+     * {@inheritDoc}
      *
-     * @param asset the asset for which we week accrued depreciation
-     * @param month the previous of which the depreciation has accrued up to
-     * @return amount of accrued depreciation in double precision
+     * Returns the accruedDepreciationAmount for a fixed asset  and month given as param. This will give the accrued depreciation up to the previous month
      */
     @Cacheable("accruedDepreciationForAssets")
     @Override
@@ -69,9 +75,9 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
     }
 
     /**
-     * Saves the {@link AccruedDepreciation} object given in the parameter
+     * {@inheritDoc}
      *
-     * @param accruedDepreciation {@link AccruedDepreciation} object to be saved
+     * Saves the {@link AccruedDepreciation} object given in the parameter
      */
     @Override
     public void saveAccruedDepreciation(AccruedDepreciation accruedDepreciation) {
@@ -83,9 +89,9 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
 
 
     /**
-     * Saves a {@link List} collection of {@link AccruedDepreciation} items
+     * {@inheritDoc}
      *
-     * @param items AccruedDepreciation items to be saved to the repository
+     * Saves a {@link List} collection of {@link AccruedDepreciation} items
      */
     @Override
     public void saveAllAccruedDepreciationRecords(List<? extends AccruedDepreciation> items) {

@@ -23,10 +23,19 @@ import org.springframework.stereotype.Repository;
 
 /**
  * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Repository("categoryConfigurationRepository")
 public interface CategoryConfigurationRepository extends JpaRepository<CategoryConfiguration, Integer> {
 
+    /**
+     * <p>findFirstByDesignation.</p>
+     *
+     * @param designation a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
+     */
     CategoryConfiguration findFirstByDesignation(String designation);
 
 }

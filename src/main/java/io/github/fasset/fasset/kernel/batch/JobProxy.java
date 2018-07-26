@@ -21,13 +21,16 @@ import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
 
 /**
  * This interface may be used to trigger job runs, for instance from within an implementation of a JobExecutionListener
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface JobProxy extends Runnable{
 
     /**
      * Method for triggering a job run
      *
-     * @throws BatchJobExecutionException Thrown when a job fails to initiate
+     * @throws io.github.fasset.fasset.kernel.util.BatchJobExecutionException if any.
      */
     void initializeJobRun() throws BatchJobExecutionException;
 

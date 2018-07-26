@@ -19,6 +19,9 @@ package io.github.fasset.fasset.kernel.book.keeper;
 
 /**
  * Represents, types of Attributes we can expect in an {@code AccountingEntry}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public enum EntryAttribute {
 

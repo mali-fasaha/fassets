@@ -30,7 +30,10 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * {@link MonthlySolDepreciationService} implementation
+ * {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("monthlySolDepreciationService")
 @Transactional
@@ -39,14 +42,17 @@ public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciation
 
     private final MonthlySolDepreciationRepository monthlySolDepreciationRepository;
 
+    /**
+     * <p>Constructor for MonthlySolDepreciationServiceImpl.</p>
+     *
+     * @param monthlySolDepreciationRepository a {@link io.github.fasset.fasset.repository.MonthlySolDepreciationRepository} object.
+     */
     @Autowired
     public MonthlySolDepreciationServiceImpl(@Qualifier("monthlySolDepreciationRepository") MonthlySolDepreciationRepository monthlySolDepreciationRepository) {
         this.monthlySolDepreciationRepository = monthlySolDepreciationRepository;
     }
 
-    /**
-     * @return A list of all items in the MonthlySolDepreciationRepository
-     */
+    /** {@inheritDoc} */
     @Override
     public List<MonthlySolDepreciation> fetchAllMonthlySolDepreciations() {
 
@@ -57,9 +63,9 @@ public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciation
     }
 
     /**
-     * Save all the items in the parameter into the MonthlySolDepreciationRepository
+     * {@inheritDoc}
      *
-     * @param items {@link List} of {@link MonthlySolDepreciation} entities to be saved in the repository
+     * Save all the items in the parameter into the MonthlySolDepreciationRepository
      */
     @Override
     public void saveAllMonthlyDepreciationItems(List<? extends MonthlySolDepreciation> items) {

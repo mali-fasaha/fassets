@@ -29,9 +29,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This is a delegate for generating a {@link List} of {@code T} Given a filePath and a class it can generate a list of the objects of the class when class and the excel file resonate with each other
+ * This is a delegate for generating a {@link java.util.List} of {@code T} Given a filePath and a class it can generate a list of the objects of the class when class and the excel file resonate with each other
  *
  * @param <T> Type of objects in a collection as read from the excel file
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("excelDataProvider")
 public class ExcelDataProvider<T> {
@@ -41,17 +43,22 @@ public class ExcelDataProvider<T> {
     private ExcelMapper excelMapper;
 
 
+    /**
+     * <p>Constructor for ExcelDataProvider.</p>
+     *
+     * @param excelMapper a {@link io.github.fasset.fasset.kernel.excel.mapping.ExcelMapper} object.
+     */
     @Autowired
     public ExcelDataProvider(@Qualifier("excelMapper") ExcelMapper excelMapper) {
         this.excelMapper = excelMapper;
     }
 
     /**
-     * Generates a {@link List} of the given type when needed from an implementation using only the known path which is provided at runtime
+     * Generates a {@link java.util.List} of the given type when needed from an implementation using only the known path which is provided at runtime
      *
      * @param filePath where the excel file is temporarily stored
      * @param clazz    class into which we map the excel row
-     * @return {@link List} of type {@code T}
+     * @return {@link java.util.List} of type {@code T}
      */
     public List<T> generateMappedList(String filePath, Class<T> clazz) {
 

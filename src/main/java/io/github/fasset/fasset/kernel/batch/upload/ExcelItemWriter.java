@@ -29,6 +29,9 @@ import java.util.List;
 
 /**
  * Writes {@code FixedAsset} items to the database
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("excelItemWriter")
 public class ExcelItemWriter implements ItemWriter<FixedAsset> {
@@ -38,6 +41,7 @@ public class ExcelItemWriter implements ItemWriter<FixedAsset> {
     private FixedAssetService fixedAssetService;
 
 
+    /** {@inheritDoc} */
     @Override
     public void write(List<? extends FixedAsset> list) throws Exception {
 

@@ -33,6 +33,9 @@ import java.util.stream.LongStream;
 
 /**
  * Object generates months in  an increasing order in which depreciation is supposed to be pre-calculated
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("depreciationRelay")
 public class DepreciationRelay {
@@ -45,12 +48,23 @@ public class DepreciationRelay {
 
     private List<YearMonth> monthlySequence = new LinkedList<>();
 
+    /**
+     * <p>Constructor for DepreciationRelay.</p>
+     *
+     * @param monthlyIncrementer a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.MonthlyIncrementer} object.
+     * @param depreciationProperties a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties} object.
+     */
     @Autowired
     public DepreciationRelay(@Qualifier("MonthlyIncrementer") MonthlyIncrementer monthlyIncrementer, DepreciationProperties depreciationProperties) {
         this.monthlyIncrementer = monthlyIncrementer;
         this.depreciationProperties = depreciationProperties;
     }
 
+    /**
+     * <p>getMonthlyDepreciationSequence.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<YearMonth> getMonthlyDepreciationSequence() {
 
         return monthlySequence;

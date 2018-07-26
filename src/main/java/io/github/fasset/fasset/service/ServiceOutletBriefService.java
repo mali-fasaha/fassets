@@ -22,18 +22,25 @@ import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link ServiceOutletBrief}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface ServiceOutletBriefService {
 
     /**
-     * @return {@link List} of {@link ServiceOutletBrief} items from repository
+     * <p>fetchAllServiceOutletBriefs.</p>
+     *
+     * @return {@link java.util.List} of {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} items from repository
      */
     List<ServiceOutletBrief> fetchAllServiceOutletBriefs();
 
     /**
+     * <p>fetchServiceOutletBriefGivenId.</p>
+     *
      * @param id of the serviceOutletBrief
-     * @return {@link ServiceOutletBrief} of the nomenclature given as parameter
+     * @return {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} of the nomenclature given as parameter
      */
     ServiceOutletBrief fetchServiceOutletBriefGivenId(int id);
 

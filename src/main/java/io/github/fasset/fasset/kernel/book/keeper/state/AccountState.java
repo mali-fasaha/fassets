@@ -22,9 +22,10 @@ import io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide;
 import io.github.ghacupha.cash.Cash;
 
 /**
- * The Account could either be in {@link AccountSide#CREDIT} or {@link AccountSide#DEBIT} This interface maintains the methods common to all these states to allow reuse
+ * The Account could either be in {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#CREDIT} or {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#DEBIT} This interface maintains the methods common to all these states to allow reuse
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccountState {
 
@@ -38,6 +39,8 @@ public interface AccountState {
     AccountBalance getAccountBalance(Cash debits, Cash credits);
 
     /**
+     * <p>getAccountSide.</p>
+     *
      * @return {@code AccountSide} of the Account
      */
     AccountSide getAccountSide();

@@ -27,10 +27,13 @@ import java.time.YearMonth;
  * that is reviewed we return only the items that make sense in the business domain
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface DepreciationPreprocessor {
 
     /**
+     * <p>getMonth.</p>
+     *
      * @return Depreciation period as month
      */
     YearMonth getMonth();
@@ -44,6 +47,8 @@ public interface DepreciationPreprocessor {
     DepreciationPreprocessor setMonth(YearMonth month);
 
     /**
+     * <p>getAsset.</p>
+     *
      * @return FixedAsset item being depreciated
      */
     FixedAsset getAsset();
@@ -51,12 +56,14 @@ public interface DepreciationPreprocessor {
     /**
      * Sets the asset to be reviewed for depreciation
      *
-     * @param asset {@link FixedAsset} being depreciated
+     * @param asset {@link io.github.fasset.fasset.model.FixedAsset} being depreciated
      * @return this
      */
     DepreciationPreprocessor setAsset(FixedAsset asset);
 
     /**
+     * <p>getDepreciationAmount.</p>
+     *
      * @return amount of depreciation
      */
     Money getDepreciationAmount();
@@ -64,7 +71,7 @@ public interface DepreciationPreprocessor {
     /**
      * Sets the amount of depreciation for review
      *
-     * @param depreciationAmount {@link Money} amount of depreciation
+     * @param depreciationAmount {@link org.javamoney.moneta.Money} amount of depreciation
      * @return this
      */
     DepreciationPreprocessor setDepreciationAmount(Money depreciationAmount);

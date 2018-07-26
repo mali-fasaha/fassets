@@ -19,6 +19,9 @@ package io.github.fasset.fasset.accounts.definition;
 
 /**
  * These  constants the types of transactions possible with fixed assets and their register
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public enum TransactionType {
 

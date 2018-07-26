@@ -27,6 +27,8 @@
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
+
+
     <name>fassets</name>
     <inceptionYear>2018</inceptionYear>
     <description>Project for light-weight tracking of fixed assets</description>
@@ -42,6 +44,7 @@
         <build.profile.id>dev</build.profile.id>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.build.timestamp.format>yyyy-MMM-dd HH:mm z</maven.build.timestamp.format>
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -75,7 +78,7 @@
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
         <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
         <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
-        <maven-javadoc-plugin.version>3.0.0-M1</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
         <maven-pmd-plugin.version>3.9.0</maven-pmd-plugin.version>
@@ -648,6 +651,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <footer>Generated ${maven.build.timestamp}</footer>
+                    <defaultVersion>0.0.1</defaultVersion>
+                    <defaultAuthor>edwin.njeru</defaultAuthor>
+                    <removeUnknownThrows>true</removeUnknownThrows>
+                    <ignoreClirr>false</ignoreClirr>
+                    <version>true</version>
+                    <nosince>false</nosince>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -656,6 +669,70 @@
                             <goal>jar</goal>
                         </goals>
                     </execution>
+                </executions>
+            </plugin>
+            <!--For compatibility comparisons-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <version>2.8</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <id>initialize</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>config/dev.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>write-properties</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>
+                                ${project.build.outputDirectory}/app.properties
+                            </outputFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>write-active-properties</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-active-profile-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>
+                                ${project.build.outputDirectory}/app.properties
+                            </outputFile>
+                        </configuration>
+                    </execution>
+                    <!--<execution>
+                        <id>set-system-properties</id>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <property>
+                                    &lt;!&ndash;todo set properties here&ndash;&gt;
+                                    <name>my.property.name</name>
+                                    <value>my.property.value</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </execution>-->
                 </executions>
             </plugin>
             <!-- Setup source jar -->
@@ -889,6 +966,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <defaultVersion>0.0.1</defaultVersion>
+                    <defaultAuthor>edwin.njeru</defaultAuthor>
+                    <removeUnknownThrows>true</removeUnknownThrows>
+                    <version>true</version>
+                    <nosince>false</nosince>
+                </configuration>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -896,6 +980,11 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <version>2.8</version>
             </plugin>
             <!-- Setup Surefire report -->
             <plugin>

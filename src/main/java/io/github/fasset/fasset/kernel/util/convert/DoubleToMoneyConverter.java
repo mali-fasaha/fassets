@@ -26,6 +26,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * Converts Double object to Money object
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("doubleToMoneyConverter")
 public class DoubleToMoneyConverter implements Converter<Double, Money> {
@@ -33,11 +36,17 @@ public class DoubleToMoneyConverter implements Converter<Double, Money> {
 
     private final MoneyProperties moneyProperties;
 
+    /**
+     * <p>Constructor for DoubleToMoneyConverter.</p>
+     *
+     * @param moneyProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     */
     @Autowired
     public DoubleToMoneyConverter(MoneyProperties moneyProperties) {
         this.moneyProperties = moneyProperties;
     }
 
+    /** {@inheritDoc} */
     @Nullable
     @Override
     public Money convert(Double aDouble) {

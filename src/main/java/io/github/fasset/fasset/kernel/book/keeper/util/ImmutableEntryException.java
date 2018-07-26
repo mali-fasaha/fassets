@@ -22,6 +22,7 @@ package io.github.fasset.fasset.kernel.book.keeper.util;
  * Exception thrown additional data is added after the transaction or the account or entry is set
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class ImmutableEntryException extends Exception {
 

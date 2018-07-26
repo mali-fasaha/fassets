@@ -25,15 +25,13 @@ import java.time.YearMonth;
 
 /**
  * Calculates AccruedDepreciation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccruedDepreciationAgent extends Agent<AccruedDepreciation> {
 
-    /**
-     * @param asset    {@link FixedAsset} being depreciated
-     * @param month    {@link YearMonth} in which this AccruedDepreciation is effective
-     * @param proceeds {@link DepreciationProceeds} items to hold the values calculated from depreciation
-     * @return Computed item for AccruedDepreciation
-     */
+    /** {@inheritDoc} */
     @Override
     AccruedDepreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

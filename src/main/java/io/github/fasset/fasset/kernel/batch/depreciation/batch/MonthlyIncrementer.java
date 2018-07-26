@@ -29,17 +29,30 @@ import java.util.stream.Collectors;
 
 /**
  * This object takes a month and generates the appropriate consequent month while recording the month for which depreciation has already occurred
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("MonthlyIncrementer")
 public class MonthlyIncrementer {
 
     private final DepreciationJobInstanceRepository depreciationJobInstanceRepository;
 
+    /**
+     * <p>Constructor for MonthlyIncrementer.</p>
+     *
+     * @param depreciationJobInstanceRepository a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationJobInstanceRepository} object.
+     */
     @Autowired
     public MonthlyIncrementer(@Qualifier("depreciationJobInstanceRepository") DepreciationJobInstanceRepository depreciationJobInstanceRepository) {
         this.depreciationJobInstanceRepository = depreciationJobInstanceRepository;
     }
 
+    /**
+     * <p>getJobInstanceSequence.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<DepreciationJobInstance> getJobInstanceSequence() {
 
         return depreciationJobInstanceRepository.findAll()
@@ -48,6 +61,11 @@ public class MonthlyIncrementer {
                                                 .collect(Collectors.toList());
     }
 
+    /**
+     * <p>getMonthSequence.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<YearMonth> getMonthSequence() {
 
         return getJobInstanceSequence().stream()
@@ -55,6 +73,11 @@ public class MonthlyIncrementer {
                                        .collect(Collectors.toList());
     }
 
+    /**
+     * <p>getLatest.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getLatest() {
 
         List<DepreciationJobInstance> jobInstanceList = getJobInstanceSequence();
@@ -69,6 +92,12 @@ public class MonthlyIncrementer {
         }
     }
 
+    /**
+     * <p>getNext.</p>
+     *
+     * @param month a {@link java.time.YearMonth} object.
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getNext(YearMonth month) {
 
         /*if(depreciationJobInstanceRepository.findAllByMonthBefore(month)==null){

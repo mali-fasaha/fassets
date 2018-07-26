@@ -45,6 +45,9 @@ import java.util.concurrent.Executor;
 
 /**
  * This is the entry point for the fassets program
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @EnableAsync
 @EnableCaching
@@ -60,6 +63,11 @@ import java.util.concurrent.Executor;
 @EnableConfigurationProperties(value = {StorageProperties.class, MoneyProperties.class, DepreciationProperties.class, DateProperties.class})
 public class Fassets {
 
+    /**
+     * <p>main.</p>
+     *
+     * @param args an array of {@link java.lang.String} objects.
+     */
     public static void main(String[] args) {
         SpringApplication.run(Fassets.class, args);
     }
@@ -75,6 +83,11 @@ public class Fassets {
         };
     }
 
+    /**
+     * <p>asynchExecutor.</p>
+     *
+     * @return a {@link java.util.concurrent.Executor} object.
+     */
     @Bean("asynchExecutor")
     public Executor asynchExecutor() {
 
@@ -86,6 +99,11 @@ public class Fassets {
         return executor;
     }
 
+    /**
+     * <p>cacheManagerCustomizer.</p>
+     *
+     * @return a {@link org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer} object.
+     */
     @Bean
     public CacheManagerCustomizer<CaffeineCacheManager> cacheManagerCustomizer() {
 

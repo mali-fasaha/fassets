@@ -29,11 +29,12 @@ import java.util.Date;
 
 /**
  * This class enables the JPA specification to convert a {@link java.time.YearMonth} variable into database-friendly format that is not persisted as a blob through implementation of JPA 2.1's {@link
- * javax.persistence.AttributeConverter} interface. It is applied automatically to any {@link YearMonth} variable that is being persisted to the database, just before the persistence engines flushes
- * it to the database. Again just before the model is rehydrated with database values, the data is converted back from {@link Date} to {@link YearMonth} object maintaining user accessibility in both
+ * javax.persistence.AttributeConverter} interface. It is applied automatically to any {@link java.time.YearMonth} variable that is being persisted to the database, just before the persistence engines flushes
+ * it to the database. Again just before the model is rehydrated with database values, the data is converted back from {@link java.util.Date} to {@link java.time.YearMonth} object maintaining user accessibility in both
  * the database and the application.
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Converter(autoApply = true)
 public class YearMonthAttributeConverter implements AttributeConverter<YearMonth, Date> {
@@ -41,10 +42,9 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
     private static final Logger log = LoggerFactory.getLogger(YearMonthAttributeConverter.class);
 
     /**
-     * Converts the value stored in the entity attribute into the data representation to be stored in the database.
+     * {@inheritDoc}
      *
-     * @param attribute the entity attribute value to be converted
-     * @return the converted data to be stored in the database column
+     * Converts the value stored in the entity attribute into the data representation to be stored in the database.
      */
     @Override
     public Date convertToDatabaseColumn(YearMonth attribute) {
@@ -71,11 +71,10 @@ public class YearMonthAttributeConverter implements AttributeConverter<YearMonth
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Converts the data stored in the database column into the value to be stored in the entity attribute. Note that it is the responsibility of the converter writer to specify the correct dbData
      * type for the corresponding column for use by the JDBC driver: i.e., persistence providers are not expected to do such type conversion.
-     *
-     * @param dbData the data from the database column to be converted
-     * @return the converted value to be stored in the entity attribute
      */
     @Override
     public YearMonth convertToEntityAttribute(Date dbData) {

@@ -21,6 +21,9 @@ import io.github.fasset.fasset.kernel.util.queue.MQException;
 
 /**
  * This is exception when the file uploaded are invalid
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class InvalidFileException extends MQException {
 

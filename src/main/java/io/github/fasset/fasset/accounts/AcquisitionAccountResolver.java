@@ -44,6 +44,9 @@ import static org.slf4j.LoggerFactory.getLogger;
  * the account names are pre-stated in a properties file. <br> But that is to be implemented another time, since implementing that today messes up the container configuration which recognizes this
  * object as a singleton called "chartOfAccounts". The Object must lookup whether the account exists before generating a new Account for the fixedAsset. Which bring a new problem, the resolution of
  * the opening date. Will it be pegged to the purchase date of the asset?
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("acquisitionAccountResolver")
 public class AcquisitionAccountResolver implements AccountResolver {
@@ -53,6 +56,12 @@ public class AcquisitionAccountResolver implements AccountResolver {
     private AccountIdResolver debitAccountIdResolver;
     private AccountIdResolver creditAccountIDResolver;
 
+    /**
+     * <p>Constructor for AcquisitionAccountResolver.</p>
+     *
+     * @param debitAccountIdResolver a {@link io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver} object.
+     * @param creditAccountIDResolver a {@link io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver} object.
+     */
     @Autowired
     public AcquisitionAccountResolver(@Qualifier("debitAccountIdResolver") AccountIdResolver debitAccountIdResolver, @Qualifier("creditAccountIDResolver") AccountIdResolver creditAccountIDResolver) {
         this.debitAccountIdResolver = debitAccountIdResolver;
@@ -60,10 +69,9 @@ public class AcquisitionAccountResolver implements AccountResolver {
     }
 
     /**
-     * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
+     * {@inheritDoc}
      *
-     * @param fixedAsset for which we seek an appropriate Account
-     * @return Account appropriate for the recording of transaction for the parameter fixedAsset
+     * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
      */
     public Account resolveDebitAccount(FixedAsset fixedAsset) {
 
@@ -86,10 +94,9 @@ public class AcquisitionAccountResolver implements AccountResolver {
     }
 
     /**
-     * Generates appropriate credit Account for the asset passed in the parameter, when we are posting Acquisition
+     * {@inheritDoc}
      *
-     * @param fixedAsset for which we seek an appropriate Account
-     * @return Account appropriate for the recording of transaction for the parameter fixedAsset
+     * Generates appropriate credit Account for the asset passed in the parameter, when we are posting Acquisition
      */
     public Account resolveCreditAccount(FixedAsset fixedAsset) {
 

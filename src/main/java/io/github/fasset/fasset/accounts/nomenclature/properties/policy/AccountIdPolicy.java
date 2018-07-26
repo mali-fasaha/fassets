@@ -35,6 +35,9 @@ import io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide;
  * try and do in this rapid development cycle, without shooting our hypothetical foot and yet this is without guarantees of actually not blowing the whole damn foot in the process. One such scenario
  * would be in a distributed environment ... oh! Here's another one, micro-services architecture. If you would think to implement mutating configurations in these two you are destined to experience
  * pain the heights of which you have not experienced before.
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccountIdPolicy {
 
@@ -70,6 +73,8 @@ public interface AccountIdPolicy {
     String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, String category);
 
     /**
+     * <p>accountName.</p>
+     *
      * @param transactionType Type of transaction Enum
      * @param accountSide     Enum shows whether we are posting on the CREDIT side or the DEBIT side
      * @param category        of the asset for which we seek transaction account name

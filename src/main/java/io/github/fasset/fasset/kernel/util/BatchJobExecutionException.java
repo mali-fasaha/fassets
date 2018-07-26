@@ -21,13 +21,27 @@ import org.springframework.batch.core.JobExecutionException;
 
 /**
  * Exception encountered during execution of any Batch process
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class BatchJobExecutionException extends JobExecutionException {
 
+    /**
+     * <p>Constructor for BatchJobExecutionException.</p>
+     *
+     * @param msg a {@link java.lang.String} object.
+     */
     public BatchJobExecutionException(String msg) {
         super(msg);
     }
 
+    /**
+     * <p>Constructor for BatchJobExecutionException.</p>
+     *
+     * @param msg a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Throwable} object.
+     */
     public BatchJobExecutionException(String msg, Throwable cause) {
         super(msg, cause);
     }

@@ -38,6 +38,9 @@ import org.springframework.context.annotation.DependsOn;
 
 /**
  * Configuration for the MonthlyAssetDepreciationJob
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Configuration
 public class MonthlyAssetDepreciationJobConfiguration {
@@ -63,6 +66,16 @@ public class MonthlyAssetDepreciationJobConfiguration {
 
     //private final MonthlySolDepreciationExecutor monthlySolDepreciationExecutor;
 
+    /**
+     * <p>Constructor for MonthlyAssetDepreciationJobConfiguration.</p>
+     *
+     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param monthlyAssetDepreciationService a {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} object.
+     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param fixedAssetItemReader a {@link org.springframework.batch.item.ItemReader} object.
+     * @param monthlyAssetDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationExecutor} object.
+     * @param monthlySolDepreciationService a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
+     */
     @Autowired
     public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, @Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService,
                                                     StepBuilderFactory stepBuilderFactory, ItemReader<FixedAsset> fixedAssetItemReader,
@@ -79,6 +92,11 @@ public class MonthlyAssetDepreciationJobConfiguration {
     }
 
 
+    /**
+     * <p>monthlyAssetDepreciationJobListener.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationJobListener} object.
+     */
     @Bean("monthlyAssetDepreciationJobListener")
     public MonthlyAssetDepreciationJobListener monthlyAssetDepreciationJobListener() {
 
@@ -97,6 +115,11 @@ public class MonthlyAssetDepreciationJobConfiguration {
                 .build();
     }*/
 
+    /**
+     * <p>monthlyAssetDepreciationJob.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Job} object.
+     */
     @Bean("monthlyAssetDepreciationJob")
     @DependsOn("monthlyAssetDepreciationJobListener")
     public Job monthlyAssetDepreciationJob() {
@@ -110,6 +133,12 @@ public class MonthlyAssetDepreciationJobConfiguration {
                                 .build();
     }
 
+    /**
+     * <p>monthlyAssetDepreciationProcessor.</p>
+     *
+     * @param year a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationProcessor} object.
+     */
     @Bean
     @JobScope
     public MonthlyAssetDepreciationProcessor monthlyAssetDepreciationProcessor(@Value("#{jobParameters['year']}") String year) {
@@ -117,12 +146,22 @@ public class MonthlyAssetDepreciationJobConfiguration {
         return new MonthlyAssetDepreciationProcessor(monthlyAssetDepreciationExecutor, year);
     }
 
+    /**
+     * <p>monthlyAssetDepreciationWriter.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationWriter} object.
+     */
     @Bean
     public MonthlyAssetDepreciationWriter monthlyAssetDepreciationWriter() {
 
         return new MonthlyAssetDepreciationWriter(monthlyAssetDepreciationService);
     }
 
+    /**
+     * <p>updateMonthlyAssetDepreciation.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean
     public Step updateMonthlyAssetDepreciation() {
         Step updateMonthlyAssetDepreciation = null;
@@ -139,6 +178,11 @@ public class MonthlyAssetDepreciationJobConfiguration {
         return updateMonthlyAssetDepreciation;
     }
 
+    /**
+     * <p>monthlySolDepreciationWriter.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationWriter} object.
+     */
     @Bean
     public MonthlySolDepreciationWriter monthlySolDepreciationWriter() {
 

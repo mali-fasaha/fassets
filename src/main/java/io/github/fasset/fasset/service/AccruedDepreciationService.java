@@ -25,7 +25,10 @@ import java.time.YearMonth;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link AccruedDepreciation}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.AccruedDepreciation}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccruedDepreciationService {
 
@@ -39,14 +42,14 @@ public interface AccruedDepreciationService {
     Money getAccruedDepreciationForAsset(FixedAsset asset, YearMonth month);
 
     /**
-     * Saves the {@link AccruedDepreciation} object given in the parameter
+     * Saves the {@link io.github.fasset.fasset.model.AccruedDepreciation} object given in the parameter
      *
      * @param accruedDepreciation Accrued depreciation to be saved
      */
     void saveAccruedDepreciation(AccruedDepreciation accruedDepreciation);
 
     /**
-     * Saves a {@link List} collection of {@link AccruedDepreciation} items
+     * Saves a {@link java.util.List} collection of {@link io.github.fasset.fasset.model.AccruedDepreciation} items
      *
      * @param items Collection of accruedDepreciation objects to be saved
      */

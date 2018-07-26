@@ -28,13 +28,26 @@ import java.util.List;
 
 /**
  * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Repository("fixedAssetRepository")
 public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer> {
 
+    /**
+     * <p>getDistinctCategories.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @Query("SELECT " + "DISTINCT e.category " + "FROM FixedAsset e")
     List<String> getDistinctCategories();
 
+    /**
+     * <p>getDistinctSolIds.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @Query("SELECT " + "DISTINCT e.solId " + "FROM FixedAsset e")
     List<String> getDistinctSolIds();
 
@@ -47,6 +60,12 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
     @Query("Select " + "SUM(e.purchaseCost) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     Money getTotalCategoryPurchaseCost(@Param("category") String category);
 
+    /**
+     * <p>getTotalSolPurchaseCost.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link org.javamoney.moneta.Money} object.
+     */
     @Query("SELECT " + "SUM(e.purchaseCost) " + "FROM FixedAsset e " + "WHERE e.solId = :solId ")
     Money getTotalSolPurchaseCost(@Param("solId") String solId);
 
@@ -59,6 +78,12 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
     @Query("Select " + "SUM(e.netBookValue) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     Money getTotalCategoryNetBookValue(@Param("category") String category);
 
+    /**
+     * <p>getTotalSolNetBookValue.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link org.javamoney.moneta.Money} object.
+     */
     @Query("SELECT " + "SUM(e.netBookValue) " + "FROM FixedAsset e " + "WHERE e.solId = :solId ")
     Money getTotalSolNetBookValue(@Param("solId") String solId);
 
@@ -71,6 +96,12 @@ public interface FixedAssetRepository extends JpaRepository<FixedAsset, Integer>
     @Query("Select " + "COUNT(e.category) " + "FROM FixedAsset e " + "WHERE e.category = :category ")
     int getTotalCategoryCount(@Param("category") String category);
 
+    /**
+     * <p>getTotalSolCount.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a int.
+     */
     @Query("SELECT " + "COUNT(e.solId) " + "FROM FixedAsset e " + "WHERE e.solId = :solId ")
     int getTotalSolCount(@Param("solId") String solId);
 

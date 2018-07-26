@@ -26,23 +26,31 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
+ * <p>AccountServiceImpl class.</p>
+ *
  * @see AccountService interface
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
 
     private AccountRepository repository;
 
+    /**
+     * <p>Constructor for AccountServiceImpl.</p>
+     *
+     * @param repository a {@link io.github.fasset.fasset.kernel.book.keeper.repo.AccountRepository} object.
+     */
     @Autowired
     public AccountServiceImpl(@Qualifier("accountRepository") AccountRepository repository) {
         this.repository = repository;
     }
 
     /**
-     * Saves the item passed to the parameter
+     * {@inheritDoc}
      *
-     * @param persistentAccount Object to be saved in the repository
-     * @return The newly saved item from the repository
+     * Saves the item passed to the parameter
      */
     @Override
     public Account saveAccount(Account persistentAccount) {
@@ -51,9 +59,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * Saves items in a  {@code Collection} of {@code PersistentAccount} items to the repository
+     * {@inheritDoc}
      *
-     * @param persistentAccounts {@link Account} items to be saved
+     * Saves items in a  {@code Collection} of {@code PersistentAccount} items to the repository
      */
     @Override
     public void saveAccounts(Collection<Account> persistentAccounts) {
@@ -62,10 +70,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * Returns the Account instance whose nomenclature is given in the parameter
+     * {@inheritDoc}
      *
-     * @param accountId Of the account whose instance we are fetching from the repo
-     * @return Requested Account instance
+     * Returns the Account instance whose nomenclature is given in the parameter
      */
     @Override
     public Account fetchAccountById(int accountId) {

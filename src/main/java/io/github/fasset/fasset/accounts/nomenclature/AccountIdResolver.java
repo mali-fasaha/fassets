@@ -22,12 +22,23 @@ import io.github.fasset.fasset.model.FixedAsset;
 /**
  * Generates the name of an existing account, if one exists, or the name of one to be created. <br> The main philosophy of this interface is that we would like to generate account names given the
  * asset
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccountIdResolver {
 
+    /**
+     * <p>accountName.</p>
+     *
+     * @param fixedAsset a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     * @return a {@link java.lang.String} object.
+     */
     String accountName(FixedAsset fixedAsset);
 
     /**
+     * <p>accountNumber.</p>
+     *
      * @param fixedAsset For which we need an account number
      * @return Account number for tracking the fixed asset
      */

@@ -25,6 +25,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * Listens for the start and completion for start and end of the depreciation batch after which it calls the appropriate job which is next in line
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("depreciationJobListener")
 public class DepreciationJobListener implements JobExecutionListener {
@@ -34,9 +37,9 @@ public class DepreciationJobListener implements JobExecutionListener {
     private MonthlyDepreciationJobProxy monthlyDepreciationJobProxy;
 
     /**
-     * Callback before a job executes.
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback before a job executes.
      */
     @Override
     public void beforeJob(JobExecution jobExecution) {
@@ -45,9 +48,9 @@ public class DepreciationJobListener implements JobExecutionListener {
     }
 
     /**
-     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      */
     @Override
     public void afterJob(JobExecution jobExecution) {
@@ -57,6 +60,12 @@ public class DepreciationJobListener implements JobExecutionListener {
         monthlyDepreciationJobProxy.initializeMonthlyDepreciationReporting();
     }
 
+    /**
+     * <p>Setter for the field <code>monthlyDepreciationJobProxy</code>.</p>
+     *
+     * @param monthlyDepreciationJobProxy a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.MonthlyDepreciationJobProxy} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobListener} object.
+     */
     public DepreciationJobListener setMonthlyDepreciationJobProxy(MonthlyDepreciationJobProxy monthlyDepreciationJobProxy) {
         this.monthlyDepreciationJobProxy = monthlyDepreciationJobProxy;
         return this;

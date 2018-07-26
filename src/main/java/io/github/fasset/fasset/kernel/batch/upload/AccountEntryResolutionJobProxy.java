@@ -29,6 +29,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * Proxy for launching the accountEntryResolutionJob
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("accountEntryResolutionJobProxy")
 public class AccountEntryResolutionJobProxy implements JobProxy {
@@ -50,6 +53,7 @@ public class AccountEntryResolutionJobProxy implements JobProxy {
         this.fixedAssetsJobsActivator = fixedAssetsJobsActivator;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void initializeJobRun() throws BatchJobExecutionException {
 
@@ -57,12 +61,13 @@ public class AccountEntryResolutionJobProxy implements JobProxy {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * When an object implementing interface <code>Runnable</code> is used to create a thread, starting the thread causes the object's
      * <code>run</code> method to be called in that separately executing
      * thread.
      * <p>
      * The general contract of the method <code>run</code> is that it may take any action whatsoever.
-     *
      * @see Thread#run()
      */
     @Override

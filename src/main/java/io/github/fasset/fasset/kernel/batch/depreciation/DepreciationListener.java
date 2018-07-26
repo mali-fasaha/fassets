@@ -19,9 +19,17 @@ package io.github.fasset.fasset.kernel.batch.depreciation;
 
 /**
  * Listener to update caller on [rogress of Depreciation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @FunctionalInterface
 public interface DepreciationListener {
 
+    /**
+     * <p>receiveProcessUpdate.</p>
+     *
+     * @param depreciationProceeds a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds} object.
+     */
     void receiveProcessUpdate(DepreciationProceeds depreciationProceeds);
 }

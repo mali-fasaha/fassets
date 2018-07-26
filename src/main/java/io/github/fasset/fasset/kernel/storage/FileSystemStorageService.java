@@ -54,6 +54,9 @@ import static io.github.fasset.fasset.kernel.util.FileSecurityChecks.relativePat
  * <p>
  * <br />Usage : <br> This class will enable clients to <br /> - List uploaded files: <br />  storageService.loadAll() <br /> <br /> - Store uploaded files in root location: <br />
  * storageService.store(file); <br /> <br /> - Generate API containing uploaded files <br />  storageService.loadAsResource(fileName); <br />
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("fileSystemStorageService")
 public class FileSystemStorageService implements StorageService {
@@ -64,6 +67,12 @@ public class FileSystemStorageService implements StorageService {
 
     private MessageQueue fileUploadsQueue;
 
+    /**
+     * <p>Constructor for FileSystemStorageService.</p>
+     *
+     * @param storageProperties a {@link io.github.fasset.fasset.config.StorageProperties} object.
+     * @param fileUploadsQueue a {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue} object.
+     */
     @Autowired
     public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadsQueue") FileUploadsQueue fileUploadsQueue) {
         rootLocation = Paths.get(storageProperties.getLocation());
@@ -73,9 +82,9 @@ public class FileSystemStorageService implements StorageService {
     }
 
     /**
-     * To store the file into storage
+     * {@inheritDoc}
      *
-     * @param file Multipart file being uploaded to the file system from the front end
+     * To store the file into storage
      */
     @Override
     public void store(MultipartFile file) {
@@ -146,9 +155,9 @@ public class FileSystemStorageService implements StorageService {
 
 
     /**
-     * Loads all files into storage
+     * {@inheritDoc}
      *
-     * @return Stream containing file names of files currently in the file system
+     * Loads all files into storage
      */
     @Override
     public Stream<Path> loadAll() {
@@ -169,10 +178,9 @@ public class FileSystemStorageService implements StorageService {
     }
 
     /**
-     * Load the fileName given into storage
+     * {@inheritDoc}
      *
-     * @param fileName String name of the file being loaded
-     * @return Path of the file after it has been loaded
+     * Load the fileName given into storage
      */
     @Override
     public Path load(String fileName) {
@@ -183,10 +191,9 @@ public class FileSystemStorageService implements StorageService {
     }
 
     /**
-     * Loads the file given as a {@link Resource} object
+     * {@inheritDoc}
      *
-     * @param fileName String name of the file being loaded as a resource
-     * @return Resource containing the file path
+     * Loads the file given as a {@link Resource} object
      */
     @Override
     public Resource loadAsResource(String fileName) {
@@ -216,6 +223,8 @@ public class FileSystemStorageService implements StorageService {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Deletes all files in the storage
      */
     @Override
@@ -227,6 +236,8 @@ public class FileSystemStorageService implements StorageService {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * To initialize storage and create storage directory
      */
     @Override

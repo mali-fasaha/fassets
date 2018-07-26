@@ -22,7 +22,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Interface to act as repository for the {@link Account} model using the spring template
+ * Interface to act as repository for the {@link io.github.fasset.fasset.kernel.book.keeper.Account} model using the spring template
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Repository("accountRepository")
 public interface AccountRepository extends JpaRepository<Account, Integer> {

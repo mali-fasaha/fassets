@@ -22,10 +22,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Index for the program's landing page
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Controller
 public class LandingPageController {
 
+    /**
+     * <p>index.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/")
     public String index() {
 

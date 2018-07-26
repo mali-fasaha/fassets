@@ -26,11 +26,12 @@ import java.util.List;
  * This objects extracts and saves data into the {@link io.github.fasset.fasset.repository.DepreciationRepository}
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface DepreciationService {
 
     /**
-     * Saves the {@link Depreciation} object given as parameter to the {@link io.github.fasset.fasset.repository.DepreciationRepository}
+     * Saves the {@link io.github.fasset.fasset.model.Depreciation} object given as parameter to the {@link io.github.fasset.fasset.repository.DepreciationRepository}
      *
      * @param depreciation item to be saved
      */
@@ -44,6 +45,8 @@ public interface DepreciationService {
     void saveAllDepreciationItems(List<Depreciation> depreciationList);
 
     /**
+     * <p>getDistinctSolIds.</p>
+     *
      * @return Return the number of distinct sols
      */
     int getDistinctSolIds();

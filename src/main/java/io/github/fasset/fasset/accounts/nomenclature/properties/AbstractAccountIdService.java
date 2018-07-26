@@ -24,6 +24,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Implements common methods of the AccountIdService interface
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public abstract class AbstractAccountIdService implements AccountIdService {
 
@@ -38,11 +41,10 @@ public abstract class AbstractAccountIdService implements AccountIdService {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates the unique code to be used in the account number sequence after the service
      * outlet code
-     *
-     * @param currencyCode ISO 4217 currency code used to retrieve account number sequence code
-     * @return Account number sequence code to follow the service outlet nomenclature
      */
     @Override
     public String currencyCode(String currencyCode) {

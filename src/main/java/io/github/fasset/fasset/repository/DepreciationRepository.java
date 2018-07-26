@@ -31,15 +31,37 @@ import java.util.List;
 
 /**
  * This Repository extends the Spring JPA Template and has runtime-implentation depending on the nature of the {@code Entity}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Repository("depreciationRepository")
 public interface DepreciationRepository extends JpaRepository<Depreciation, Integer> {
 
+    /**
+     * <p>getDistinctDepreciationPeriods.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @Query("SELECT " + "DISTINCT e.depreciationPeriod " + "FROM Depreciation e")
     List<YearMonth> getDistinctDepreciationPeriods();
 
+    /**
+     * <p>getDepreciationByDepreciationPeriodAndFixedAssetId.</p>
+     *
+     * @param depreciationPeriod a {@link java.time.YearMonth} object.
+     * @param fixedAssetId a int.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     Depreciation getDepreciationByDepreciationPeriodAndFixedAssetId(YearMonth depreciationPeriod, int fixedAssetId);
 
+    /**
+     * <p>getMonthlyAssetDepreciation.</p>
+     *
+     * @param assetId a {@link java.lang.Integer} object.
+     * @param year a {@link java.lang.Integer} object.
+     * @return a {@link java.util.List} object.
+     */
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO(" + "e.fixedAssetId,e.year," +
         "(SELECT DISTINCT e.depreciation FROM Depreciation e WHERE e.fixedAssetId =:assetId AND e.year=:year AND e.month=1)," +
         "(SELECT DISTINCT  e.depreciation FROM Depreciation e WHERE e.fixedAssetId =:assetId AND e.year=:year AND e.month=2)," +
@@ -56,6 +78,13 @@ public interface DepreciationRepository extends JpaRepository<Depreciation, Inte
         "WHERE e.fixedAssetId = :assetId AND e.year = :year")
     List<MonthlyAssetDepreciationDTO> getMonthlyAssetDepreciation(@Param("assetId") Integer assetId, @Param("year") Integer year);
 
+    /**
+     * <p>getMonthlySolDepreciation.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @param year a {@link java.lang.Integer} object.
+     * @return a {@link java.util.List} object.
+     */
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlySolDepreciationDTO(" + "e.solId,e.year," +
         "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.solId = :solId AND e.year = :year AND e.month = 1)," +
         "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.solId = :solId AND e.year = :year AND e.month = 2)," +
@@ -71,6 +100,13 @@ public interface DepreciationRepository extends JpaRepository<Depreciation, Inte
         "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.solId = :solId AND e.year = :year AND e.month = 12)" + ")" + "FROM Depreciation e " + "WHERE e.solId = :solId AND e.year = :year")
     List<MonthlySolDepreciationDTO> getMonthlySolDepreciation(@Param("solId") String solId, @Param("year") Integer year);
 
+    /**
+     * <p>getMonthlyCategoryDepreciation.</p>
+     *
+     * @param categoryName a {@link java.lang.String} object.
+     * @param year a {@link java.lang.Integer} object.
+     * @return a {@link java.util.List} object.
+     */
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyCategoryDepreciationDTO(" + "e.category,e.year," +
         "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 1)," +
         "(SELECT SUM(e.depreciation) FROM Depreciation e WHERE e.category = :categoryName AND e.year = :year AND e.month = 2)," +
@@ -88,6 +124,8 @@ public interface DepreciationRepository extends JpaRepository<Depreciation, Inte
     List<MonthlyCategoryDepreciationDTO> getMonthlyCategoryDepreciation(@Param("categoryName") String categoryName, @Param("year") Integer year);
 
     /**
+     * <p>countDistinctSolIds.</p>
+     *
      * @return The number of distinct solIds
      */
     @Query("SELECT  COUNT(DISTINCT e.solId) " + "FROM Depreciation e")

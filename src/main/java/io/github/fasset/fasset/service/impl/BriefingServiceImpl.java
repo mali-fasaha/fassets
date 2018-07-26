@@ -36,6 +36,9 @@ import java.util.List;
 
 /**
  * Used to create summaries if FixedAssets in the backend
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("briefingService")
 public class BriefingServiceImpl implements BriefingService {
@@ -52,6 +55,15 @@ public class BriefingServiceImpl implements BriefingService {
 
     private final MoneyToDoubleConverter moneyToDoubleConverter;
 
+    /**
+     * <p>Constructor for BriefingServiceImpl.</p>
+     *
+     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     * @param fixedAssetRepository a {@link io.github.fasset.fasset.repository.FixedAssetRepository} object.
+     * @param serviceOutletBriefService a {@link io.github.fasset.fasset.service.ServiceOutletBriefService} object.
+     * @param categoryBriefService a {@link io.github.fasset.fasset.service.CategoryBriefService} object.
+     * @param moneyToDoubleConverter a {@link io.github.fasset.fasset.kernel.util.convert.MoneyToDoubleConverter} object.
+     */
     @Autowired
     public BriefingServiceImpl(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository,
                                @Qualifier("serviceOutletBriefService") ServiceOutletBriefService serviceOutletBriefService,
@@ -100,6 +112,8 @@ public class BriefingServiceImpl implements BriefingService {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Updates the summary for ServiceOutlets using data queried from the fixed assets repository
      */
     @Override
@@ -117,6 +131,7 @@ public class BriefingServiceImpl implements BriefingService {
 
     }
 
+    /** {@inheritDoc} */
     @Override
     public void updateCategoryBriefs() {
         List<CategoryBrief> briefs = new ArrayList<>();

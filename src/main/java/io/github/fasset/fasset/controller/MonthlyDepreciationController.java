@@ -33,6 +33,9 @@ import java.util.List;
 
 /**
  * Controller for MonthlyDepreciation views
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Controller
 public class MonthlyDepreciationController {
@@ -42,6 +45,13 @@ public class MonthlyDepreciationController {
     private final MonthlySolDepreciationService monthlySolDepreciationService;
     private final MonthlyCategoryDepreciationService monthlyCategoryDepreciationService;
 
+    /**
+     * <p>Constructor for MonthlyDepreciationController.</p>
+     *
+     * @param monthlyAssetDepreciationService a {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} object.
+     * @param monthlySolDepreciationService a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
+     * @param monthlyCategoryDepreciationService a {@link io.github.fasset.fasset.service.MonthlyCategoryDepreciationService} object.
+     */
     @Autowired
     public MonthlyDepreciationController(@Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService,
                                          @Qualifier("monthlySolDepreciationService") MonthlySolDepreciationService monthlySolDepreciationService,
@@ -52,24 +62,44 @@ public class MonthlyDepreciationController {
     }
 
 
+    /**
+     * <p>goToAssetMonthlyDepreciation.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/reports/depreciations/assets")
     public String goToAssetMonthlyDepreciation() {
 
         return "reports/monthlyAsset";
     }
 
+    /**
+     * <p>goToSolMonthlyDepreciation.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/reports/depreciations/sols")
     public String goToSolMonthlyDepreciation() {
 
         return "reports/monthlySol";
     }
 
+    /**
+     * <p>goToCategoryMonthlyDepreciation.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     @GetMapping("/reports/depreciations/categories")
     public String goToCategoryMonthlyDepreciation() {
 
         return "reports/monthlyCategory";
     }
 
+    /**
+     * <p>monthlyAssetDepreciationData.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @GetMapping("/reports/depreciations/assets/data")
     @ResponseBody
     public List<MonthlyAssetDepreciation> monthlyAssetDepreciationData() {
@@ -77,6 +107,11 @@ public class MonthlyDepreciationController {
         return monthlyAssetDepreciationService.fetchAllMonthlyDepreciations();
     }
 
+    /**
+     * <p>monthlySolDepreciationData.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @GetMapping("/reports/depreciations/sols/data")
     @ResponseBody
     public List<MonthlySolDepreciation> monthlySolDepreciationData() {
@@ -84,6 +119,11 @@ public class MonthlyDepreciationController {
         return monthlySolDepreciationService.fetchAllMonthlySolDepreciations();
     }
 
+    /**
+     * <p>monthylCategoryDepreciationData.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     @GetMapping("/reports/depreciations/category/data")
     @ResponseBody
     public List<MonthlyCategoryDepreciation> monthylCategoryDepreciationData() {

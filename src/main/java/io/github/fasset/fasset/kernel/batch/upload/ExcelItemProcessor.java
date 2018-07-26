@@ -32,9 +32,10 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * Creates a persist-ready {@link FixedAsset} object from the {@link FixedAssetDTO} object coming from the ExcelItemReader
+ * Creates a persist-ready {@link io.github.fasset.fasset.model.FixedAsset} object from the {@link io.github.fasset.fasset.model.FixedAssetDTO} object coming from the ExcelItemReader
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("excelItemProcessor")
 public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAsset> {
@@ -46,6 +47,12 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
 
     private final StringToMoneyConverter stringToMoneyConverter;
 
+    /**
+     * <p>Constructor for ExcelItemProcessor.</p>
+     *
+     * @param dateToLocalDateConverter a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
+     * @param stringToMoneyConverter a {@link io.github.fasset.fasset.kernel.util.convert.StringToMoneyConverter} object.
+     */
     @Autowired
     public ExcelItemProcessor(@Qualifier("dateToLocalDateConverter") DateToLocalDateConverter dateToLocalDateConverter,
                               @Qualifier("stringToMoneyConverter") StringToMoneyConverter stringToMoneyConverter) {
@@ -54,6 +61,7 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public FixedAsset process(FixedAssetDTO fixedAssetDTO) throws Exception {
 

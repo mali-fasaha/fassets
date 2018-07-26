@@ -21,9 +21,17 @@ import io.github.fasset.fasset.model.files.FileUpload;
 
 /**
  * This exception is thrown when the system tries to upload a file which is already uploaded
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class UploadedFileException extends InvalidFileException {
 
+    /**
+     * <p>Constructor for UploadedFileException.</p>
+     *
+     * @param fileUpload a {@link io.github.fasset.fasset.model.files.FileUpload} object.
+     */
     public UploadedFileException(FileUpload fileUpload) {
 
         super(String.format("The file named : %s has already been uploaded and has therefore failed duplicity" + "checks. See manual for further details", fileUpload.getFileName()));

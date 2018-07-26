@@ -32,6 +32,7 @@ import java.util.Objects;
  * This is a record of a depreciation for a given asset for a given month
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 //@Audited Too expensive
 @Entity(name = "Depreciation")
@@ -61,33 +62,69 @@ public class Depreciation extends DomainModel<String> {
     @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money depreciation;
 
+    /**
+     * <p>Constructor for Depreciation.</p>
+     */
     public Depreciation() {
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a int.
+     */
     public int getMonth() {
         return month;
     }
 
+    /**
+     * <p>Setter for the field <code>month</code>.</p>
+     *
+     * @param month a int.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation setMonth(int month) {
         log.trace("Setting month for depreciationId : {}, as = {}", getId(), month);
         this.month = month;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>year</code>.</p>
+     *
+     * @return a int.
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * <p>Setter for the field <code>year</code>.</p>
+     *
+     * @param year a int.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation setYear(int year) {
         log.trace("Setting year for depreciationId : {}, as = {}", getId(), depreciationPeriod);
         this.year = year;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>depreciationPeriod</code>.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getDepreciationPeriod() {
         return depreciationPeriod;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciationPeriod</code>.</p>
+     *
+     * @param depreciationPeriod a {@link java.time.YearMonth} object.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation setDepreciationPeriod(YearMonth depreciationPeriod) {
 
         log.trace("Setting depreciation period for depreciationId : {}, as = {}", getId(), depreciationPeriod);
@@ -95,10 +132,21 @@ public class Depreciation extends DomainModel<String> {
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @return a int.
+     */
     public int getFixedAssetId() {
         return fixedAssetId;
     }
 
+    /**
+     * <p>Setter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @param fixedAssetId a int.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation setFixedAssetId(int fixedAssetId) {
 
         log.trace("Setting fixedAssetId for depreciationId : {}, as = {}", getId(), fixedAssetId);
@@ -106,10 +154,21 @@ public class Depreciation extends DomainModel<String> {
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>category</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * <p>Setter for the field <code>category</code>.</p>
+     *
+     * @param category a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation setCategory(String category) {
 
         log.trace("Setting the category for depreciationId : {}, as = {}", getId(), category);
@@ -117,10 +176,21 @@ public class Depreciation extends DomainModel<String> {
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation setSolId(String solId) {
 
         log.trace("Setting the sol nomenclature for depreciationId : {}, as ={}", getId(), solId);
@@ -128,10 +198,21 @@ public class Depreciation extends DomainModel<String> {
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>depreciation</code>.</p>
+     *
+     * @return a {@link org.javamoney.moneta.Money} object.
+     */
     public Money getDepreciation() {
         return depreciation;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciation</code>.</p>
+     *
+     * @param depreciation a {@link org.javamoney.moneta.Money} object.
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation setDepreciation(Money depreciation) {
 
         log.trace("Setting the depreciation for depreciationId : {}, as = {}", getId(), depreciation);
@@ -139,6 +220,7 @@ public class Depreciation extends DomainModel<String> {
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -155,11 +237,13 @@ public class Depreciation extends DomainModel<String> {
             Objects.equals(category, that.category) && Objects.equals(solId, that.solId);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), depreciationPeriod, fixedAssetId, category, solId, depreciation);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Depreciation{" + "depreciationPeriod=" + depreciationPeriod + ", fixedAssetId=" + fixedAssetId + ", category='" + category + '\'' + ", solId='" + solId + '\'' + ", depreciation=" +

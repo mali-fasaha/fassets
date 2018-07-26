@@ -31,6 +31,9 @@ import java.util.List;
 
 /**
  * Writes depreciation items to the database
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class DepreciationWriter implements ItemWriter<ProcessingList<DepreciationProceeds>> {
 
@@ -41,10 +44,9 @@ public class DepreciationWriter implements ItemWriter<ProcessingList<Depreciatio
     private DepreciationService depreciationService;
 
     /**
-     * Process the supplied data element. Will not be called with any null items in normal operation.
+     * {@inheritDoc}
      *
-     * @param depreciationProceedsLists items to be written
-     * @throws Exception if there are errors. The framework will catch the exception and convert or rethrow it as appropriate.
+     * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override
     public void write(List<? extends ProcessingList<DepreciationProceeds>> depreciationProceedsLists) throws Exception {

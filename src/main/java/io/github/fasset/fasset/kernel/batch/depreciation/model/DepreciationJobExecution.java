@@ -26,6 +26,9 @@ import java.util.Objects;
 
 /**
  * Model that represents a depreciation unit of work done that can be recorded in the database
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "DepreciationJobExecution")
 public class DepreciationJobExecution extends DomainModel<String> {
@@ -37,57 +40,121 @@ public class DepreciationJobExecution extends DomainModel<String> {
     private int noOfItems;
     private YearMonth period;
 
+    /**
+     * <p>Constructor for DepreciationJobExecution.</p>
+     */
     public DepreciationJobExecution() {
     }
 
+    /**
+     * <p>Getter for the field <code>startTime</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getStartTime() {
         return startTime;
     }
 
+    /**
+     * <p>Setter for the field <code>startTime</code>.</p>
+     *
+     * @param startTime a {@link java.time.LocalDateTime} object.
+     */
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
+    /**
+     * <p>Getter for the field <code>finishTime</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getFinishTime() {
         return finishTime;
     }
 
+    /**
+     * <p>Setter for the field <code>finishTime</code>.</p>
+     *
+     * @param finishTime a {@link java.time.LocalDateTime} object.
+     */
     public void setFinishTime(LocalDateTime finishTime) {
         this.finishTime = finishTime;
     }
 
+    /**
+     * <p>Getter for the field <code>lastUpdatedTime</code>.</p>
+     *
+     * @return a {@link java.time.LocalDateTime} object.
+     */
     public LocalDateTime getLastUpdatedTime() {
         return lastUpdatedTime;
     }
 
+    /**
+     * <p>Setter for the field <code>lastUpdatedTime</code>.</p>
+     *
+     * @param lastUpdatedTime a {@link java.time.LocalDateTime} object.
+     */
     public void setLastUpdatedTime(LocalDateTime lastUpdatedTime) {
         this.lastUpdatedTime = lastUpdatedTime;
     }
 
+    /**
+     * <p>Getter for the field <code>status</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * <p>Setter for the field <code>status</code>.</p>
+     *
+     * @param status a {@link java.lang.String} object.
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     * <p>Getter for the field <code>noOfItems</code>.</p>
+     *
+     * @return a int.
+     */
     public int getNoOfItems() {
         return noOfItems;
     }
 
+    /**
+     * <p>Setter for the field <code>noOfItems</code>.</p>
+     *
+     * @param noOfItems a int.
+     */
     public void setNoOfItems(int noOfItems) {
         this.noOfItems = noOfItems;
     }
 
+    /**
+     * <p>Getter for the field <code>period</code>.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getPeriod() {
         return period;
     }
 
+    /**
+     * <p>Setter for the field <code>period</code>.</p>
+     *
+     * @param period a {@link java.time.YearMonth} object.
+     */
     public void setPeriod(YearMonth period) {
         this.period = period;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -104,11 +171,13 @@ public class DepreciationJobExecution extends DomainModel<String> {
             Objects.equals(status, that.status) && Objects.equals(period, that.period);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), startTime, finishTime, lastUpdatedTime, status, noOfItems, period);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DepreciaionJobExecution{");

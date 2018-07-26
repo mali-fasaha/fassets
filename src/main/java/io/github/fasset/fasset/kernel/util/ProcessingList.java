@@ -23,20 +23,28 @@ import java.util.List;
  * This is an extension used to carry data through the depreciation chain from one handler to the next and then to the batch process writer
  *
  * @param <E> Type of element in the collection
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface ProcessingList<E> extends List<E> {
 
     /**
+     * <p>getItemsAdded.</p>
+     *
      * @return # of items added in the list
      */
     int getItemsAdded();
 
     /**
+     * <p>getItemsProcessed.</p>
+     *
      * @return # of items processed
      */
     int getItemsProcessed();
 
     /**
+     * <p>getRemainingItems.</p>
+     *
      * @return # of items remaining to be processed
      */
     int getRemainingItems();

@@ -29,6 +29,9 @@ import java.util.Objects;
 
 /**
  * Converts java.time.LocalDate to java.time.YearMonth
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("localDateToYearMonthConverter")
 public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearMonth> {
@@ -36,11 +39,9 @@ public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearM
     private static final Logger log = LoggerFactory.getLogger(LocalDateToYearMonthConverter.class);
 
     /**
-     * Convert the source object of type {@code S} to target type {@code T}.
+     * {@inheritDoc}
      *
-     * @param source the source object to convert, which must be an instance of {@code S} (never {@code null})
-     * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
-     * @throws IllegalArgumentException if the source cannot be converted to the desired target type
+     * Convert the source object of type {@code S} to target type {@code T}.
      */
     @Override
     public YearMonth convert(LocalDate source) {
@@ -70,7 +71,7 @@ public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearM
      * Convert the source object of type {@code S} to target type {@code T}.
      *
      * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
-     * @throws IllegalArgumentException if the source cannot be converted to the desired target type
+     * @throws java.lang.IllegalArgumentException if the source cannot be converted to the desired target type
      */
     public YearMonth convert() {
         return convert(LocalDate.now());

@@ -26,6 +26,9 @@ import io.github.fasset.fasset.model.FixedAsset;
  * <p>
  * properties required to implement the account nomenclature and hierarchy policy version 1.0. <br> Th main philosohy here is that we can be able to generate account names if we know which asset we
  * are transacting
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface AccountIdService {
 
@@ -61,6 +64,8 @@ public interface AccountIdService {
     String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset);
 
     /**
+     * <p>accountName.</p>
+     *
      * @param accountSide     The side of the ledger to which we are posting the amount
      * @param transactionType Type of transaction Enum
      * @param fixedAsset      Asset for which we seek transaction account name

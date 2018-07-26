@@ -19,6 +19,9 @@ package io.github.fasset.fasset.kernel.util.queue.util;
 
 /**
  * Interface allows clients to carry out an action after a message is completed when the handleCompletion method is called
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @FunctionalInterface
 public interface OnCompletion {

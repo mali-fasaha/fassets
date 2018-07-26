@@ -33,6 +33,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  * fetch. For instance to fetch properties from the config subfolder we call the method {@code #fetchConfigProperties}.
  *
  * @author edwin_njeru
+ * @version $Id: $Id
  */
 public class PropertiesUtils {
 

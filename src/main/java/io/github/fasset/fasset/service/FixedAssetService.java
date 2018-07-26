@@ -24,12 +24,15 @@ import io.github.fasset.fasset.model.brief.ServiceOutletBrief;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link FixedAsset} items
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.FixedAsset} items
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface FixedAssetService {
 
     /**
-     * Saves all {@link FixedAsset} items passed in a list, avoiding duplicate items
+     * Saves all {@link io.github.fasset.fasset.model.FixedAsset} items passed in a list, avoiding duplicate items
      *
      * @param fixedAssets Collection of fixedAsset items to be saved
      */
@@ -51,38 +54,46 @@ public interface FixedAssetService {
     FixedAsset fetchAssetGivenId(int id);
 
     /**
-     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link CategoryBrief} for the category given in the parameter
+     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link io.github.fasset.fasset.model.brief.CategoryBrief} for the category given in the parameter
      *
      * @param category for which we are preparing a brief
-     * @return {@link CategoryBrief}
+     * @return {@link io.github.fasset.fasset.model.brief.CategoryBrief}
      */
     CategoryBrief getCategoryBrief(String category);
 
     /**
-     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link ServiceOutletBrief} for the SOL queried in the parameter
+     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} for the SOL queried in the parameter
      *
      * @param solId for which we are preparing a brief
-     * @return {@link CategoryBrief}
+     * @return {@link io.github.fasset.fasset.model.brief.CategoryBrief}
      */
     ServiceOutletBrief getServiceOutletBrief(String solId);
 
     /**
+     * <p>getAllSolIds.</p>
+     *
      * @return A unique list of all solIds in the database
      */
     List<String> getAllSolIds();
 
     /**
+     * <p>getAllCategories.</p>
+     *
      * @return A unique list of all categories in the database
      */
     List<String> getAllCategories();
 
     /**
+     * <p>saveFixedAsset.</p>
+     *
      * @param fixedAsset to be saved to fixedAssetRepository
      * @return FixedAsset entity saved in the database
      */
     FixedAsset saveFixedAsset(FixedAsset fixedAsset);
 
     /**
+     * <p>getPoll.</p>
+     *
      * @return # of assets
      */
     int getPoll();

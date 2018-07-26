@@ -19,6 +19,9 @@ package io.github.fasset.fasset.kernel.util.queue;
 
 /**
  * Exception thrown by the queue. All queue related exceptions inherit from this one
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class MQException extends RuntimeException {
 

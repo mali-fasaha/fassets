@@ -30,6 +30,9 @@ import java.time.YearMonth;
 
 /**
  * This object calculates the AccruedDepreciation given the Asset, the Month in which the Accrual is effective and the DepreciationProceeds where we store the depreciation values
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("accruedDepreciationAgent")
 public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
@@ -37,6 +40,7 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
     private static final Logger log = LoggerFactory.getLogger(AccruedDepreciationAgentImpl.class);
 
 
+    /** {@inheritDoc} */
     @Override
     public AccruedDepreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {
 

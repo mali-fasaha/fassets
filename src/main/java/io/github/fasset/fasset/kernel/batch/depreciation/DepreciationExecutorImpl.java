@@ -36,10 +36,11 @@ import java.time.YearMonth;
 
 /**
  * This class represents the main method which is to be abstracted by other layers that would allow for flexibility in application of business rules, the main method is the {@link
- * DepreciationExecutorImpl#getDepreciation(FixedAsset, YearMonth)} which able to extract a {@link Depreciation} as long as you have a {@link FixedAsset} and the {@link YearMonth} month for which the
+ * DepreciationExecutorImpl#getDepreciation(FixedAsset, YearMonth)} which able to extract a {@link io.github.fasset.fasset.model.Depreciation} as long as you have a {@link io.github.fasset.fasset.model.FixedAsset} and the {@link java.time.YearMonth} month for which the
  * depreciation is to be calculated
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("depreciationExecutor")
 @Transactional
@@ -53,18 +54,36 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
     private DepreciationProceeds depreciationProceeds;
     private MoneyProperties moneyProperties;
 
+    /**
+     * <p>Setter for the field <code>moneyProperties</code>.</p>
+     *
+     * @param moneyProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutorImpl} object.
+     */
     @Autowired
     public DepreciationExecutorImpl setMoneyProperties(MoneyProperties moneyProperties) {
         this.moneyProperties = moneyProperties;
         return this;
     }
 
+    /**
+     * <p>Setter for the field <code>localDateToYearMonthConverter</code>.</p>
+     *
+     * @param localDateToYearMonthConverter a {@link io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutorImpl} object.
+     */
     @Autowired
     public DepreciationExecutorImpl setLocalDateToYearMonthConverter(LocalDateToYearMonthConverter localDateToYearMonthConverter) {
         this.localDateToYearMonthConverter = localDateToYearMonthConverter;
         return this;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciationAgentsHandler</code>.</p>
+     *
+     * @param depreciationAgentsHandler a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationAgentsHandler} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutorImpl} object.
+     */
     @Autowired
     public DepreciationExecutorImpl setDepreciationAgentsHandler(DepreciationAgentsHandler depreciationAgentsHandler) {
         this.depreciationAgentsHandler = depreciationAgentsHandler;
@@ -72,11 +91,9 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
     }
 
     /**
-     * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new net book value and the month of depreciation
+     * {@inheritDoc}
      *
-     * @param asset {@link FixedAsset} to be depreciated
-     * @param month the month for which we are calculating depreciation
-     * @return {@link DepreciationProceeds} object
+     * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new net book value and the month of depreciation
      */
     @Cacheable("depreciationProceeds")
     @Override
@@ -143,18 +160,35 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
         return new NilDepreciation(moneyProperties, asset, depreciationPeriod).getNilDepreciation();
     }
 
+    /**
+     * <p>Getter for the field <code>depreciation</code>.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
+     */
     public Depreciation getDepreciation() {
         return depreciation;
     }
 
+    /** {@inheritDoc} */
     public void setDepreciation(Depreciation depreciation) {
         this.depreciation = depreciation;
     }
 
+    /**
+     * <p>Getter for the field <code>depreciationProceeds</code>.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds} object.
+     */
     public DepreciationProceeds getDepreciationProceeds() {
         return depreciationProceeds;
     }
 
+    /**
+     * <p>Setter for the field <code>depreciationProceeds</code>.</p>
+     *
+     * @param depreciationProceeds a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationExecutorImpl} object.
+     */
     public DepreciationExecutorImpl setDepreciationProceeds(DepreciationProceeds depreciationProceeds) {
         this.depreciationProceeds = depreciationProceeds;
         return this;

@@ -29,6 +29,9 @@ import java.time.YearMonth;
 
 /**
  * Creates {@code NetBookValue} objects from data obtained from a FixedAsset item
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("fixedAssetNetBookValueProcessor")
 public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset, NetBookValue> {
@@ -36,12 +39,10 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
     private static final Logger log = LoggerFactory.getLogger(FixedAssetNetBookValueProcessor.class);
 
     /**
+     * {@inheritDoc}
+     *
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
-     *
-     * @param fixedAsset to be processed
-     * @return potentially modified or new item for continued processing, null if processing of the provided item should not continue.
-     * @throws Exception thrown if exception occurs during processing.
      */
     @Override
     public NetBookValue process(FixedAsset fixedAsset) throws Exception {

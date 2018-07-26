@@ -33,7 +33,10 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * {@link ServiceOutletBriefService} implementation
+ * {@link io.github.fasset.fasset.service.ServiceOutletBriefService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("serviceOutletBriefService")
 public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService {
@@ -43,14 +46,17 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
 
     private final ServiceOutletBriefRepository serviceOutletBriefRepository;
 
+    /**
+     * <p>Constructor for ServiceOutletBriefServiceImpl.</p>
+     *
+     * @param serviceOutletBriefRepository a {@link io.github.fasset.fasset.repository.ServiceOutletBriefRepository} object.
+     */
     @Autowired
     public ServiceOutletBriefServiceImpl(@Qualifier("serviceOutletBriefRepository") ServiceOutletBriefRepository serviceOutletBriefRepository) {
         this.serviceOutletBriefRepository = serviceOutletBriefRepository;
     }
 
-    /**
-     * @return {@link List} of {@link ServiceOutletBrief} entities from repository
-     */
+    /** {@inheritDoc} */
     @Override
     public List<ServiceOutletBrief> fetchAllServiceOutletBriefs() {
 
@@ -70,10 +76,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
         return serviceOutletBriefs;
     }
 
-    /**
-     * @param id of the serviceOutletBrief
-     * @return {@link ServiceOutletBrief} of the nomenclature given as parameter
-     */
+    /** {@inheritDoc} */
     @Override
     @Cacheable("serviceOutletBriefsByIds")
     public ServiceOutletBrief fetchServiceOutletBriefGivenId(int id) {
@@ -94,9 +97,9 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
     }
 
     /**
-     * Save all ServiceOutletBrief items in the collection. All existing items are updated while new ones are newly added, to the ends that the designation remains unique
+     * {@inheritDoc}
      *
-     * @param serviceOutletBriefs to be persisted to the serviceOutletBriefsRepository
+     * Save all ServiceOutletBrief items in the collection. All existing items are updated while new ones are newly added, to the ends that the designation remains unique
      */
     @Override
     public void saveAllServiceOutletBriefItems(Iterable<ServiceOutletBrief> serviceOutletBriefs) {

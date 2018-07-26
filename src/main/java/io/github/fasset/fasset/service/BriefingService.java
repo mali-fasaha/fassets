@@ -19,6 +19,9 @@ package io.github.fasset.fasset.service;
 
 /**
  * Used to create summaries if FixedAssets in the backend
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface BriefingService {
     /**

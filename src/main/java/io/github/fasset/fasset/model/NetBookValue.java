@@ -36,6 +36,7 @@ import java.util.Objects;
  * Record of the net book value for a gived fixed asset at a given month after previous month's depreciation
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "NetBookValue")
 @Audited
@@ -59,9 +60,21 @@ public class NetBookValue extends DomainModel<String> {
     @Column(name = "category")
     private String category;
 
+    /**
+     * <p>Constructor for NetBookValue.</p>
+     */
     public NetBookValue() {
     }
 
+    /**
+     * <p>Constructor for NetBookValue.</p>
+     *
+     * @param fixedAssetId a int.
+     * @param month a {@link java.time.YearMonth} object.
+     * @param netBookValue a {@link org.javamoney.moneta.Money} object.
+     * @param solId a {@link java.lang.String} object.
+     * @param category a {@link java.lang.String} object.
+     */
     public NetBookValue(int fixedAssetId, YearMonth month, Money netBookValue, String solId, String category) {
         this.fixedAssetId = fixedAssetId;
         this.month = month;
@@ -70,40 +83,84 @@ public class NetBookValue extends DomainModel<String> {
         this.category = category;
     }
 
+    /**
+     * <p>Getter for the field <code>category</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * <p>Setter for the field <code>category</code>.</p>
+     *
+     * @param category a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.NetBookValue} object.
+     */
     public NetBookValue setCategory(String category) {
         log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}", getId(), fixedAssetId);
         this.category = category;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @return a int.
+     */
     public int getFixedAssetId() {
         return fixedAssetId;
     }
 
+    /**
+     * <p>Setter for the field <code>fixedAssetId</code>.</p>
+     *
+     * @param fixedAssetId a int.
+     * @return a {@link io.github.fasset.fasset.model.NetBookValue} object.
+     */
     public NetBookValue setFixedAssetId(int fixedAssetId) {
         log.trace("Setting fixedAssetId for NetBookValueId : {}, as = {}", getId(), fixedAssetId);
         this.fixedAssetId = fixedAssetId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>month</code>.</p>
+     *
+     * @return a {@link java.time.YearMonth} object.
+     */
     public YearMonth getMonth() {
         return month;
     }
 
+    /**
+     * <p>Setter for the field <code>month</code>.</p>
+     *
+     * @param month a {@link java.time.YearMonth} object.
+     * @return a {@link io.github.fasset.fasset.model.NetBookValue} object.
+     */
     public NetBookValue setMonth(YearMonth month) {
         log.trace("Setting month for NetBookValueId : {}, as = {}", getId(), month);
         this.month = month;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>netBookValue</code>.</p>
+     *
+     * @return a {@link org.javamoney.moneta.Money} object.
+     */
     public Money getNetBookValue() {
         return netBookValue;
     }
 
+    /**
+     * <p>Setter for the field <code>netBookValue</code>.</p>
+     *
+     * @param netBookValue a {@link org.javamoney.moneta.Money} object.
+     * @return a {@link io.github.fasset.fasset.model.NetBookValue} object.
+     */
     public NetBookValue setNetBookValue(Money netBookValue) {
 
         log.trace("Setting NetBookValue for NetBookValueId : {} as = {}", getId(), netBookValue);
@@ -111,10 +168,21 @@ public class NetBookValue extends DomainModel<String> {
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.NetBookValue} object.
+     */
     public NetBookValue setSolId(String solId) {
 
         log.trace("Setting SolId for NetBookValueId : {} as = {}", getId(), solId);
@@ -122,6 +190,7 @@ public class NetBookValue extends DomainModel<String> {
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -138,11 +207,13 @@ public class NetBookValue extends DomainModel<String> {
             Objects.equals(category, that.category);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), fixedAssetId, month, netBookValue, solId, category);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MessageFormat.format("NetBookValue'{'fixedAssetId={0}, month={1}, netBookValue={2}, solId=''{3}'', category=''{4}'''}'", fixedAssetId, month, netBookValue, solId, category);

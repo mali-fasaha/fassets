@@ -32,12 +32,21 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
- * Implementation of the MessageQueue interface that allows queueing of messages related to upload of files in the system. <br> The implementation uses the {@link FileUploadService} in the push method
- * to record a file in the database. <br> The lifecycle method is also called when the file is uploaded successfully but it is only when the client calls the method
- * {@link this#push(QueueMessage, * OnCompletion)} <br> The client could also call the method {@link this#push(QueueMessage, OnError, OnCompletion)} which will handle both completion and an
+ * Implementation of the MessageQueue interface that allows queueing of messages related to upload of files in the system.
+ * <br>
+ * The implementation uses the {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadService} in the push method
+ * to record a file in the database.
+ * <br>
+ * lifecycle method is also called when the file is uploaded successfully but it is only when the client calls the method
+ * {@link this#push(QueueMessage, OnCompletion)}
+ * <br>
+ * The client could also call the method {@link this#push(QueueMessage, OnError, OnCompletion)} which will handle both completion and an
  * unexpected messageQueue runtime exception
- * <p>
- * TODO: add validation methods here or create file validation service for the same in another // Todo Add duplicate upload checks service, with hashing algorithms interface
+ * TODO: add validation methods here or create file validation service for the same in another
+ * Todo Add duplicate upload checks service, with hashing algorithms interface
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("fileUploadsQueue")
 public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
@@ -47,6 +56,12 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     private final FileValidationService<FileUpload> fileValidationService;
     private volatile boolean allowDuplicates;
 
+    /**
+     * <p>Constructor for FileUploadsQueue.</p>
+     *
+     * @param fileUploadService a {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadService} object.
+     * @param fileValidationService a {@link io.github.fasset.fasset.kernel.util.queue.files.FileValidationService} object.
+     */
     @Autowired
     public FileUploadsQueue(@Qualifier("fileUploadService") FileUploadService fileUploadService, @Qualifier("fileValidationService") FileValidationService<FileUpload> fileValidationService) {
         super();
@@ -54,6 +69,11 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
         this.fileValidationService = fileValidationService;
     }
 
+    /**
+     * <p>Setter for the field <code>allowDuplicates</code>.</p>
+     *
+     * @param allowDuplicates a boolean.
+     */
     @Value("${allow.duplicate.file.uploads}")
     public void setAllowDuplicates(boolean allowDuplicates) {
         log.debug("Setting AllowDuplicates flag as {} inside the queue id {}", allowDuplicates, this);
@@ -61,9 +81,9 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     }
 
     /**
-     * Adds a message to the queue
+     * {@inheritDoc}
      *
-     * @param queueMessage Item to be added to the queue
+     * Adds a message to the queue
      */
     @Override
     public void push(QueueMessage<FileUpload> queueMessage) {

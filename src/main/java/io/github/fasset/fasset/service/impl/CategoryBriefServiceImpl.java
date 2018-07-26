@@ -33,7 +33,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link CategoryBriefService} implementation
+ * {@link io.github.fasset.fasset.service.CategoryBriefService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("categoryBriefService")
 public class CategoryBriefServiceImpl implements CategoryBriefService {
@@ -43,14 +46,17 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
 
     private final CategoryBriefRepository categoryBriefRepository;
 
+    /**
+     * <p>Constructor for CategoryBriefServiceImpl.</p>
+     *
+     * @param categoryBriefRepository a {@link io.github.fasset.fasset.repository.CategoryBriefRepository} object.
+     */
     @Autowired
     public CategoryBriefServiceImpl(@Qualifier("categoryBriefRepository") CategoryBriefRepository categoryBriefRepository) {
         this.categoryBriefRepository = categoryBriefRepository;
     }
 
-    /**
-     * @return {@link List} of {@link CategoryBrief} items fetched from the repository
-     */
+    /** {@inheritDoc} */
     @Override
     public List<CategoryBrief> fetchAllCategoryBriefs() {
 
@@ -70,10 +76,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
         return categoryBriefs;
     }
 
-    /**
-     * @param id of the CategoryBrief
-     * @return {@link CategoryBrief} of the nomenclature given as param
-     */
+    /** {@inheritDoc} */
     @Cacheable("categoryBriefsFromIds")
     @Override
     public CategoryBrief fetchCategoryBriefGivenId(int id) {
@@ -94,9 +97,9 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
     }
 
     /**
-     * All existing items are updated while new ones are newly added to the repository... To the ends that the designation remains unique
+     * {@inheritDoc}
      *
-     * @param categoryBriefs items to be saved to repository
+     * All existing items are updated while new ones are newly added to the repository... To the ends that the designation remains unique
      */
     @Override
     @Transactional

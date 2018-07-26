@@ -31,9 +31,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Thread-safe implementation of the {@link ExcelMapper} The client must specify the parameter type
+ * Thread-safe implementation of the {@link io.github.fasset.fasset.kernel.excel.mapping.ExcelMapper} The client must specify the parameter type
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("excelMapper")
 public class ExcelMapperImpl implements ExcelMapper {
@@ -43,22 +44,26 @@ public class ExcelMapperImpl implements ExcelMapper {
     private MapperOptions mapperOptions;
 
 
+    /**
+     * <p>Constructor for ExcelMapperImpl.</p>
+     *
+     * @param mapperOptions a {@link io.github.fasset.fasset.config.MapperOptions} object.
+     */
     @Autowired
     public ExcelMapperImpl(@Qualifier("mapperOptions") MapperOptions mapperOptions) {
         this.mapperOptions = mapperOptions;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setMapperOptions(MapperOptions mapperOptions) {
         this.mapperOptions = mapperOptions;
     }
 
     /**
-     * This return a list of all items as they are read from the excel document in the file system.
+     * {@inheritDoc}
      *
-     * @param clazz class defining the mapped object
-     * @param path  path of the excel file
-     * @return list of mapped objects
+     * This return a list of all items as they are read from the excel document in the file system.
      */
     @SuppressWarnings("unchecked")
     @Override

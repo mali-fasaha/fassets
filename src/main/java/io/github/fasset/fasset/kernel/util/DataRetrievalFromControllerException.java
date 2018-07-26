@@ -21,6 +21,7 @@ package io.github.fasset.fasset.kernel.util;
  * Exception encountered when drawing data from database into  a coontroller
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class DataRetrievalFromControllerException extends RuntimeException {
 

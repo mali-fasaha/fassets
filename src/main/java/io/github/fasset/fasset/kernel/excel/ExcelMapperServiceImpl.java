@@ -26,6 +26,9 @@ import java.util.List;
 
 /**
  * Creates a map of the fields in the FixedAssetDto to be read from the excel file
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("excelMapperService")
 public class ExcelMapperServiceImpl implements ExcelMapperService {
@@ -33,15 +36,17 @@ public class ExcelMapperServiceImpl implements ExcelMapperService {
 
     private final ExcelDataProvider excelDataProvider;
 
+    /**
+     * <p>Constructor for ExcelMapperServiceImpl.</p>
+     *
+     * @param excelDataProvider a {@link io.github.fasset.fasset.kernel.excel.mapping.ExcelDataProvider} object.
+     */
     @Autowired
     public ExcelMapperServiceImpl(ExcelDataProvider excelDataProvider) {
         this.excelDataProvider = excelDataProvider;
     }
 
-    /**
-     * @param fileName where the excel file is located
-     * @return {@link List} of {@link FixedAssetDTO} items from the fileName
-     */
+    /** {@inheritDoc} */
     @SuppressWarnings("unchecked")
     @Override
     public List<FixedAssetDTO> fetchExcelData(String fileName) {

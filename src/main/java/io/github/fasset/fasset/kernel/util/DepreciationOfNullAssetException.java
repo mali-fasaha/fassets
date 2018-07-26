@@ -19,9 +19,17 @@ package io.github.fasset.fasset.kernel.util;
 
 /**
  * Exception is thrown when a null asset item is brought for depreciation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class DepreciationOfNullAssetException extends RuntimeException {
 
+    /**
+     * <p>Constructor for DepreciationOfNullAssetException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public DepreciationOfNullAssetException(String message) {
         super(message);
     }

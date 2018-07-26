@@ -25,12 +25,16 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Callback interface for execution of accountEntryResolutionJob
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("accountEntryResolutionExecutionListener")
 public class AccountEntryResolutionExecutionListener implements JobExecutionListener {
 
     private static final Logger log = getLogger(AccountEntryResolutionExecutionListener.class);
 
+    /** {@inheritDoc} */
     @Override
     public void beforeJob(final JobExecution jobExecution) {
 
@@ -38,6 +42,7 @@ public class AccountEntryResolutionExecutionListener implements JobExecutionList
 
     }
 
+    /** {@inheritDoc} */
     @Override
     public void afterJob(final JobExecution jobExecution) {
 

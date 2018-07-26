@@ -23,6 +23,7 @@ import org.javamoney.moneta.Money;
  * Represents common functionality in objects that summarise the fixed assets in the data frame
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface Brief {
 
@@ -32,51 +33,71 @@ public interface Brief {
     void addPoll();
 
     /**
+     * <p>getDesignation.</p>
+     *
      * @return The nomenclature or name of the Brief item
      */
     String getDesignation();
 
     /**
+     * <p>setDesignation.</p>
+     *
      * @param designation name of the brief
      */
     void setDesignation(String designation);
 
     /**
+     * <p>getPurchaseCost.</p>
+     *
      * @return total purchase cost
      */
     Money getPurchaseCost();
 
     /**
+     * <p>setPurchaseCost.</p>
+     *
      * @param purchaseCost of all items in the brief
      */
     void setPurchaseCost(Money purchaseCost);
 
     /**
+     * <p>getNetBookValue.</p>
+     *
      * @return total net book value of items
      */
     Money getNetBookValue();
 
     /**
+     * <p>setNetBookValue.</p>
+     *
      * @param netBookValue of all items in the brief
      */
     void setNetBookValue(Money netBookValue);
 
     /**
+     * <p>getAccruedDepreciation.</p>
+     *
      * @return Total AccruedDepreciation of items in the brief
      */
     Money getAccruedDepreciation();
 
     /**
+     * <p>setAccruedDepreciation.</p>
+     *
      * @param accruedDepreciation of items in the brief
      */
     void setAccruedDepreciation(Money accruedDepreciation);
 
     /**
+     * <p>getPoll.</p>
+     *
      * @return # of items in the brief
      */
     int getPoll();
 
     /**
+     * <p>setPoll.</p>
+     *
      * @param poll # of items in the brief
      */
     void setPoll(int poll);

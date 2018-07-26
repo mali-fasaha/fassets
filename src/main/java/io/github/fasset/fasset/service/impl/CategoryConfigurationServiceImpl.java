@@ -32,7 +32,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * {@link CategoryBriefService} implementation
+ * {@link io.github.fasset.fasset.service.CategoryBriefService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("categoryConfigurationService")
 public class CategoryConfigurationServiceImpl implements CategoryConfigurationService {
@@ -42,15 +45,18 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
 
     private final CategoryConfigurationRepository categoryConfigurationRepository;
 
+    /**
+     * <p>Constructor for CategoryConfigurationServiceImpl.</p>
+     *
+     * @param fixedAssetCategoryRepository a {@link io.github.fasset.fasset.repository.CategoryConfigurationRepository} object.
+     */
     @Autowired
     public CategoryConfigurationServiceImpl(@Qualifier("categoryConfigurationRepository") CategoryConfigurationRepository fixedAssetCategoryRepository) {
         this.categoryConfigurationRepository = fixedAssetCategoryRepository;
     }
 
 
-    /**
-     * @return Return all fixed assets categories
-     */
+    /** {@inheritDoc} */
     @Override
     public List<CategoryConfiguration> getAllCategoryConfigurations() {
 
@@ -67,15 +73,14 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
         return categoryConfigurations;
     }
 
-    /**
-     * @param fixedAssetCategory to be saved to fixedAssetCategory repository
-     */
+    /** {@inheritDoc} */
     @Override
     public void saveCategoryConfiguration(CategoryConfiguration fixedAssetCategory) {
 
         categoryConfigurationRepository.save(fixedAssetCategory);
     }
 
+    /** {@inheritDoc} */
     @Cacheable("categoryConfigurationsById")
     @Override
     public CategoryConfiguration getCategoryConfigurationById(int id) {
@@ -84,6 +89,7 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
                                               .get();
     }
 
+    /** {@inheritDoc} */
     @Cacheable("categoryConfigurationsByNames")
     @Override
     public CategoryConfiguration getCategoryByName(String categoryName) {
@@ -91,6 +97,7 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
         return categoryConfigurationRepository.findFirstByDesignation(categoryName);
     }
 
+    /** {@inheritDoc} */
     @Cacheable("depreciationRatesByCategoryNames")
     @Override
     public double getDepreciationRateByCategoryName(String categoryName) {

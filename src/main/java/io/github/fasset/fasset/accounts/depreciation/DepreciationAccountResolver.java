@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
  * could be configured to maintain the asset in the register at revaluation.
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("depreciationAccountResolver")
 public class DepreciationAccountResolver implements AccountResolver {
@@ -34,6 +35,7 @@ public class DepreciationAccountResolver implements AccountResolver {
     /* (non-Javadoc)
      * @see io.github.fasset.fasset.accounts.AccountResolver#resolveDebitAccount(io.github.fasset.fasset.model.FixedAsset)
      */
+    /** {@inheritDoc} */
     @Override
     public Account resolveDebitAccount(FixedAsset fixedAsset) {
         // TODO Auto-generated method stub
@@ -43,6 +45,7 @@ public class DepreciationAccountResolver implements AccountResolver {
     /* (non-Javadoc)
      * @see io.github.fasset.fasset.accounts.AccountResolver#resolveCreditAccount(io.github.fasset.fasset.model.FixedAsset)
      */
+    /** {@inheritDoc} */
     @Override
     public Account resolveCreditAccount(FixedAsset fixedAsset) {
         // TODO Auto-generated method stub

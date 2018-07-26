@@ -24,12 +24,17 @@ import java.util.List;
 /**
  * This interface generates collection of data from an excel file given the fileName. <br> The implementation is typed and the query will need to include such a class, therefore the implementation
  * will inevitably be required to be specific as to the type of data expected from the underlying library
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface ExcelMapperService {
 
     /**
+     * <p>fetchExcelData.</p>
+     *
      * @param fileName where the excel file is located
-     * @return {@link List} of {@link FixedAssetDTO} items from the fileName
+     * @return {@link java.util.List} of {@link io.github.fasset.fasset.model.FixedAssetDTO} items from the fileName
      */
     List<FixedAssetDTO> fetchExcelData(String fileName);
 }

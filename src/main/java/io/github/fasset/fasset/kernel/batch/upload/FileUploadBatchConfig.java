@@ -40,6 +40,9 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  * Configuration for fileUpload job
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Configuration("fileUploadBatchConfig")
 public class FileUploadBatchConfig {
@@ -61,6 +64,20 @@ public class FileUploadBatchConfig {
     private final NetBookValueWriter netBookValueWriter;
     private final FixedAssetNetBookValueProcessor fixedAssetNetBookValueProcessor;
 
+    /**
+     * <p>Constructor for FileUploadBatchConfig.</p>
+     *
+     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param excelMapperService a {@link io.github.fasset.fasset.kernel.excel.ExcelMapperService} object.
+     * @param excelItemProcessor a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemProcessor} object.
+     * @param excelItemWriter a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemWriter} object.
+     * @param entityManagerFactory a {@link javax.persistence.EntityManagerFactory} object.
+     * @param fixedAssetAccruedDepreciationProcessor a {@link io.github.fasset.fasset.kernel.batch.upload.FixedAssetAccruedDepreciationProcessor} object.
+     * @param accruedDepreciationWriter a {@link io.github.fasset.fasset.kernel.batch.upload.AccruedDepreciationWriter} object.
+     * @param netBookValueWriter a {@link io.github.fasset.fasset.kernel.batch.upload.NetBookValueWriter} object.
+     * @param fixedAssetNetBookValueProcessor a {@link io.github.fasset.fasset.kernel.batch.upload.FixedAssetNetBookValueProcessor} object.
+     */
     @Autowired
     public FileUploadBatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, @Qualifier("excelMapperService") ExcelMapperService excelMapperService,
                                  @Qualifier("excelItemProcessor") ExcelItemProcessor excelItemProcessor, @Qualifier("excelItemWriter") ExcelItemWriter excelItemWriter,
@@ -81,6 +98,12 @@ public class FileUploadBatchConfig {
     }
 
 
+    /**
+     * <p>excelItemReader.</p>
+     *
+     * @param filePath a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemReader} object.
+     */
     @Bean
     @JobScope
     public ExcelItemReader excelItemReader(@Value("#{jobParameters['fileName']}") String filePath) {
@@ -88,6 +111,12 @@ public class FileUploadBatchConfig {
         return new ExcelItemReader(filePath, excelMapperService);
     }
 
+    /**
+     * <p>fixedAssetItemReader.</p>
+     *
+     * @return a {@link org.springframework.batch.item.ItemReader} object.
+     * @throws java.lang.Exception if any.
+     */
     @Bean
     public ItemReader<FixedAsset> fixedAssetItemReader() throws Exception {
 
@@ -104,6 +133,12 @@ public class FileUploadBatchConfig {
         return dataBaseReader;
     }
 
+    /**
+     * <p>importExcelJob.</p>
+     *
+     * @param listener a {@link io.github.fasset.fasset.kernel.batch.upload.BatchNotifications} object.
+     * @return a {@link org.springframework.batch.core.Job} object.
+     */
     @Bean("importExcelJob")
     public Job importExcelJob(BatchNotifications listener) {
         return jobBuilderFactory.get("importExcelJob")
@@ -119,6 +154,11 @@ public class FileUploadBatchConfig {
                                 .build();
     }
 
+    /**
+     * <p>readExcelFileStep.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean
     public Step readExcelFileStep() {
         return stepBuilderFactory.get("readExcelFileStep").<FixedAssetDTO, FixedAsset>chunk(100).reader(excelItemReader(filePath))
@@ -127,6 +167,11 @@ public class FileUploadBatchConfig {
                                                                                                 .build();
     }
 
+    /**
+     * <p>accrueDepreciationStep.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean
     public Step accrueDepreciationStep() {
 
@@ -144,6 +189,11 @@ public class FileUploadBatchConfig {
         return step2;
     }
 
+    /**
+     * <p>netBookValueUpdateStep.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean
     public Step netBookValueUpdateStep() {
 

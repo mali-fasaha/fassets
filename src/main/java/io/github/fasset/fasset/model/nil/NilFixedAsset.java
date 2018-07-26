@@ -25,73 +25,92 @@ import java.time.LocalDateTime;
 
 /**
  * This object contains fields for an improperly setup fixedAsset items with their default values, and is used whenever a NullPointerSituation is likely to occur
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class NilFixedAsset extends FixedAsset {
 
+    /**
+     * <p>Constructor for NilFixedAsset.</p>
+     */
     public NilFixedAsset() {
         super();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getSolId() {
         return "998";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getBarcode() {
         return "ABC000####";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getAssetDescription() {
         return "Nil Asset Item. Please add details";
     }
 
+    /** {@inheritDoc} */
     @Override
     public LocalDate getPurchaseDate() {
         return LocalDate.now();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getCategory() {
         return "";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getPurchaseCost() {
         return Money.of(0.00, "KES");
     }
 
+    /** {@inheritDoc} */
     @Override
     public Money getNetBookValue() {
         return Money.of(0.00, "KES");
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getId() {
         return 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getVersion() {
         return 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     public LocalDateTime getCreatedAt() {
         return LocalDateTime.now();
     }
 
+    /** {@inheritDoc} */
     @Override
     public LocalDateTime getModifiedAt() {
         return LocalDateTime.now();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getCreatedBy() {
         return "developer";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getLastModifiedBy() {
         return "developer";

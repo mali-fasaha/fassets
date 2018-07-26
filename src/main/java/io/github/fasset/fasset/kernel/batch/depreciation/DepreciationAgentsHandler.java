@@ -23,9 +23,19 @@ import java.time.YearMonth;
 
 /**
  * Container for agents through which request is passed
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface DepreciationAgentsHandler {
 
+    /**
+     * <p>sendRequest.</p>
+     *
+     * @param asset a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     * @param month a {@link java.time.YearMonth} object.
+     * @param depreciationProceeds a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds} object.
+     */
     void sendRequest(FixedAsset asset, YearMonth month, DepreciationProceeds depreciationProceeds);
 
 }

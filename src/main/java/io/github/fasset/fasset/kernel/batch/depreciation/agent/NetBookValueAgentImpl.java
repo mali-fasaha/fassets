@@ -29,6 +29,9 @@ import java.time.YearMonth;
 
 /**
  * On invocation calculates the NetBookValue for any given Asset, at a specified Month and records the same into the DepreciationProceeds item provided
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("netBookValueAgent")
 public class NetBookValueAgentImpl implements NetBookValueAgent {
@@ -36,11 +39,9 @@ public class NetBookValueAgentImpl implements NetBookValueAgent {
     private static final Logger log = LoggerFactory.getLogger(NetBookValueAgentImpl.class);
 
     /**
-     * Upon invocation the implementation will return the netBoookValue item for the relevant month in which depreciation has occured
+     * {@inheritDoc}
      *
-     * @param asset FixedAsset item whose Net Book Value we are tracking
-     * @param month YearMonth in which depreciation has occured
-     * @return The relevant NetBookValue item
+     * Upon invocation the implementation will return the netBoookValue item for the relevant month in which depreciation has occured
      */
     @Override
     public NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {

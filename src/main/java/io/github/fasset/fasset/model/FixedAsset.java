@@ -36,6 +36,7 @@ import java.util.Objects;
  * Main representation of a fixed asset in the server
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "FixedAsset")
 @Audited
@@ -66,88 +67,208 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
     @Type(type = "org.jadira.usertype.moneyandcurrency.moneta.PersistentMoneyAmount", parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "KES")})
     private Money netBookValue;
 
+    /**
+     * <p>Constructor for FixedAsset.</p>
+     */
     public FixedAsset() {
     }
 
+    /**
+     * <p>Constructor for FixedAsset.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @param category a {@link java.lang.String} object.
+     * @param solId a {@link java.lang.String} object.
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @param barcode a {@link java.lang.String} object.
+     * @param netBookValue a {@link org.javamoney.moneta.Money} object.
+     */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate, String barcode, Money netBookValue) {
         this(assetDescription, purchaseCost, category, solId, purchaseDate, barcode);
         this.netBookValue = netBookValue;
     }
 
+    /**
+     * <p>Constructor for FixedAsset.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @param category a {@link java.lang.String} object.
+     * @param solId a {@link java.lang.String} object.
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @param barcode a {@link java.lang.String} object.
+     */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate, String barcode) {
         this(assetDescription, purchaseCost, category, solId, purchaseDate);
         this.barcode = barcode;
     }
 
+    /**
+     * <p>Constructor for FixedAsset.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @param category a {@link java.lang.String} object.
+     * @param solId a {@link java.lang.String} object.
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate) {
         this(assetDescription, purchaseCost, category, solId);
         this.purchaseDate = purchaseDate;
     }
 
+    /**
+     * <p>Constructor for FixedAsset.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @param category a {@link java.lang.String} object.
+     * @param solId a {@link java.lang.String} object.
+     */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId) {
         this(assetDescription, purchaseCost, category);
         this.solId = solId;
     }
 
+    /**
+     * <p>Constructor for FixedAsset.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @param category a {@link java.lang.String} object.
+     */
     public FixedAsset(String assetDescription, Money purchaseCost, String category) {
         this(assetDescription, purchaseCost);
         this.category = category;
     }
 
+    /**
+     * <p>Constructor for FixedAsset.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     */
     public FixedAsset(String assetDescription, Money purchaseCost) {
         this.assetDescription = assetDescription;
         this.purchaseCost = purchaseCost;
     }
 
+    /**
+     * <p>Getter for the field <code>solId</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSolId() {
         return solId;
     }
 
+    /**
+     * <p>Setter for the field <code>solId</code>.</p>
+     *
+     * @param solId a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset setSolId(String solId) {
         this.solId = solId;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>barcode</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getBarcode() {
         return barcode;
     }
 
+    /**
+     * <p>Setter for the field <code>barcode</code>.</p>
+     *
+     * @param barcode a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset setBarcode(String barcode) {
         this.barcode = barcode;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>assetDescription</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getAssetDescription() {
         return assetDescription;
     }
 
+    /**
+     * <p>Setter for the field <code>assetDescription</code>.</p>
+     *
+     * @param assetDescription a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset setAssetDescription(String assetDescription) {
         this.assetDescription = assetDescription;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>purchaseDate</code>.</p>
+     *
+     * @return a {@link java.time.LocalDate} object.
+     */
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 
+    /**
+     * <p>Setter for the field <code>purchaseDate</code>.</p>
+     *
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>category</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCategory() {
         return category;
     }
 
+    /**
+     * <p>Setter for the field <code>category</code>.</p>
+     *
+     * @param category a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset setCategory(String category) {
         this.category = category;
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>purchaseCost</code>.</p>
+     *
+     * @return a {@link org.javamoney.moneta.Money} object.
+     */
     public Money getPurchaseCost() {
         return purchaseCost;
     }
 
+    /**
+     * <p>Setter for the field <code>purchaseCost</code>.</p>
+     *
+     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset setPurchaseCost(Money purchaseCost) {
 
         log.trace("Setting the purchaseCost for fixedAssetId : {} ,as = {}", getId(), purchaseCost);
@@ -155,10 +276,21 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
         return this;
     }
 
+    /**
+     * <p>Getter for the field <code>netBookValue</code>.</p>
+     *
+     * @return a {@link org.javamoney.moneta.Money} object.
+     */
     public Money getNetBookValue() {
         return netBookValue;
     }
 
+    /**
+     * <p>Setter for the field <code>netBookValue</code>.</p>
+     *
+     * @param netBookValue a {@link org.javamoney.moneta.Money} object.
+     * @return a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     */
     public FixedAsset setNetBookValue(Money netBookValue) {
 
         log.trace("Setting NBV for assetId : {}, as = {}", getId(), netBookValue);
@@ -166,6 +298,7 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -183,17 +316,20 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
             Objects.equals(netBookValue, that.netBookValue);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return MessageFormat.format("FixedAsset'{'solId=''{0}'', barcode=''{1}'', assetDescription=''{2}'', purchaseDate={3}, category=''{4}'', purchaseCost={5}, netBookValue={6}'}'", solId, barcode,
                                     assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int compareTo(FixedAsset o) {
 

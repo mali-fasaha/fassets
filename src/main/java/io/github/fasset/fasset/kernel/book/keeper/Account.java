@@ -57,17 +57,18 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CRE
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 
 /**
- * Implements the {@link Account} interface and maintains states for {@link Currency}, name, number, openingDate and {@link AccountSide}. The AccountSide remains volatile, inorder to represent the
- * changing nature of the account as the {@link AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe default {@link AccountSide} of the {@link
+ * Implements the {@link io.github.fasset.fasset.kernel.book.keeper.Account} interface and maintains states for {@link java.util.Currency}, name, number, openingDate and {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide}. The AccountSide remains volatile, inorder to represent the
+ * changing nature of the account as the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe default {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} of the {@link
  * Account}.
  * <p>
  * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not be obviously evident by the usual use of words like "synchronized"
- * et al. In fact synchronization would probably just slow us down. Instead what has been done is that the {@link Collection} of {@link AccountingEntry} items, which is the whole concept of this
- * Account pattern, has been implemented using a {@link List} interface implementation that creates a new copy of itself every time time a mutative process is carried out. It's iterator as a result is
+ * et al. In fact synchronization would probably just slow us down. Instead what has been done is that the {@link java.util.Collection} of {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items, which is the whole concept of this
+ * Account pattern, has been implemented using a {@link java.util.List} interface implementation that creates a new copy of itself every time time a mutative process is carried out. It's iterator as a result is
  * guaranteed never to throw {@code ConcurrentModificationException} and it does not reflect additions, removals or changes to the list, once they have been created. The rest of the getters return new
  * instances of values of similar equivalence or copies of themselves this objects attributes will largely therefore remain unchanged.
  *
  * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Entity(name = "Account")
 @Table(name = "account")
@@ -121,6 +122,7 @@ public class Account extends AccountDomainModel<String> {
      *                       implement the list interface with a back end like a database or some Restful service making changes in this account persistent.
      */
     @SuppressWarnings("unused")
+    @SuppressWarnings("unused")
     Account(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, String> accountDetails,
             final List<AccountingEntry> entries) {
         this.currency = currency;
@@ -132,6 +134,15 @@ public class Account extends AccountDomainModel<String> {
         this.openingDate = openingDate;
     }
 
+    /**
+     * <p>Constructor for Account.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param number a {@link java.lang.String} object.
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     * @param currency a {@link java.util.Currency} object.
+     * @param openingDate a {@link io.github.ghacupha.time.point.TimePoint} object.
+     */
     @SuppressWarnings("unused")
     public Account(final String name, final String number, final AccountSide accountSide, final Currency currency, final TimePoint openingDate) {
         this.name = name;
@@ -141,6 +152,9 @@ public class Account extends AccountDomainModel<String> {
         this.openingDate = openingDate;
     }
 
+    /**
+     * <p>Constructor for Account.</p>
+     */
     public Account() {
     }
 
@@ -156,9 +170,11 @@ public class Account extends AccountDomainModel<String> {
     }
 
     /**
+     * <p>getAttribute.</p>
+     *
      * @param accountAttribute Name of attribute being searched for e.g. Owner, Contra a/c, Rereference
      * @return The value of the attribute
-     * @throws UnEnteredDetailsException when the Parameter Attribute is not available in the account
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.UnEnteredDetailsException if any.
      */
     public String getAttribute(AccountAttribute accountAttribute) throws UnEnteredDetailsException {
 
@@ -202,8 +218,8 @@ public class Account extends AccountDomainModel<String> {
     /**
      * Returns the balance of the Account
      *
-     * @param asAt {@link TimePoint} at which is Effective
-     * @return {@link AccountBalance}
+     * @param asAt {@link io.github.ghacupha.time.point.TimePoint} at which is Effective
+     * @return {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance}
      */
     public AccountBalance balance(TimePoint asAt) {
 
@@ -219,8 +235,8 @@ public class Account extends AccountDomainModel<String> {
     /**
      * Similar to the balance query for a given date except the date is provided through a simple {@code VarArgs} int argument
      *
-     * @param asAt <p>The date as at when the {@link AccountBalance} we want is effective given in the following order:</p> <p>i) Year</p> <p>ii) Month</p> <p>iii) Date</p>
-     * @return {@link AccountBalance} effective the date specified by the varargs
+     * @param asAt <p>The date as at when the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} we want is effective given in the following order:</p> <p>i) Year</p> <p>ii) Month</p> <p>iii) Date</p>
+     * @return {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} effective the date specified by the varargs
      */
     public AccountBalance balance(int... asAt) {
 
@@ -232,22 +248,39 @@ public class Account extends AccountDomainModel<String> {
     }
 
     /**
+     * <p>Getter for the field <code>currency</code>.</p>
+     *
      * @return Currency of the account
      */
     public Currency getCurrency() {
         return Currency.getInstance(this.currency.getCurrencyCode());
     }
 
+    /**
+     * <p>Setter for the field <code>currency</code>.</p>
+     *
+     * @param currency a {@link java.util.Currency} object.
+     */
     public void setCurrency(Currency currency) {
         throw new UnsupportedOperationException("The currency for Account can only be set in the constructor");
     }
 
+    /**
+     * <p>Getter for the field <code>entries</code>.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<AccountingEntry> getEntries() {
 
         return new CopyOnWriteArrayList<>(entries.parallelStream()
                                                  .collect(ImmutableListCollector.toImmutableList()));
     }
 
+    /**
+     * <p>Setter for the field <code>entries</code>.</p>
+     *
+     * @param entries a {@link java.util.List} object.
+     */
     public void setEntries(List<AccountingEntry> entries) {
         throw new UnsupportedOperationException("Entries can only be entered through the #addEntry method");
     }
@@ -256,19 +289,27 @@ public class Account extends AccountDomainModel<String> {
         return SimpleDate.newTimePoint(openingDate);
     }
 
+    /**
+     * <p>Setter for the field <code>openingDate</code>.</p>
+     *
+     * @param openingDate a {@link io.github.ghacupha.time.point.TimePoint} object.
+     */
     public void setOpeningDate(TimePoint openingDate) {
         throw new UnsupportedOperationException("Dude! Can you imagine, setting the opening date for an account that's already opened?");
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return this.name + " " + this.number;
     }
 
     /**
-     * @return Shows the side of the balance sheet to which this belongs which could be either {@link AccountSide#DEBIT} or {@link AccountSide#CREDIT} Implementation Note : As per implementation notes
-     * this is for use only by the {@link AccountAppraisalDelegate} allowing inexpensive evaluation of the {@link AccountBalance} without causing circular reference. Otherwise anyone else who needs to
-     * know the {@code AccountSide} of this needs to query the {@link AccountBalance} first, and from it acquire the {@link AccountSide}. Also note that the object's {@link AccountSide} is never
+     * <p>Getter for the field <code>accountSide</code>.</p>
+     *
+     * @return Shows the side of the balance sheet to which this belongs which could be either {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#DEBIT} or {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#CREDIT} Implementation Note : As per implementation notes
+     * this is for use only by the {@link io.github.fasset.fasset.kernel.book.keeper.AccountAppraisalDelegate} allowing inexpensive evaluation of the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} without causing circular reference. Otherwise anyone else who needs to
+     * know the {@code AccountSide} of this needs to query the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} first, and from it acquire the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide}. Also note that the object's {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} is never
      * really exposed since this implementation is returning a value based on its current status.
      */
     public AccountSide getAccountSide() {
@@ -277,6 +318,11 @@ public class Account extends AccountDomainModel<String> {
         return this.accountSide == DEBIT ? DEBIT : CREDIT;
     }
 
+    /**
+     * <p>Setter for the field <code>accountSide</code>.</p>
+     *
+     * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
+     */
     public void setAccountSide(final AccountSide accountSide) {
 
         this.accountSide = accountSide;
@@ -288,26 +334,52 @@ public class Account extends AccountDomainModel<String> {
         return Collections.unmodifiableMap(accountAttributes);
     }
 
+    /**
+     * <p>Setter for the field <code>accountAttributes</code>.</p>
+     *
+     * @param accountAttributes a {@link java.util.Map} object.
+     */
     public void setAccountAttributes(Map<AccountAttribute, String> accountAttributes) {
         throw new UnsupportedOperationException("Kindly use the #addAttribute. This method only exists to make JPA happy :)");
     }
 
+    /**
+     * <p>Getter for the field <code>name</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * <p>Setter for the field <code>name</code>.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     */
     public void setName(String name) {
         throw new UnsupportedOperationException("Setting the name of the account is reserved for the constructor. This method only exists to make JPA happy :)");
     }
 
+    /**
+     * <p>Getter for the field <code>number</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNumber() {
         return number;
     }
 
+    /**
+     * <p>Setter for the field <code>number</code>.</p>
+     *
+     * @param number a {@link java.lang.String} object.
+     */
     public void setNumber(String number) {
         throw new UnsupportedOperationException("Setting the number of the account is reserved for the constructor. This method only exists to make JPA happy :)");
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -349,6 +421,7 @@ public class Account extends AccountDomainModel<String> {
         return entries != null ? entries.equals(account.entries) : account.entries == null;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int result = super.hashCode();

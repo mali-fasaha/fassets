@@ -34,6 +34,9 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Configuration for Depreciation batch process
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Configuration
 public class DepreciationJobConfig {
@@ -44,6 +47,13 @@ public class DepreciationJobConfig {
 
     private final ItemReader<FixedAsset> fixedAssetItemReader;
 
+    /**
+     * <p>Constructor for DepreciationJobConfig.</p>
+     *
+     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param fixedAssetItemReader a {@link org.springframework.batch.item.ItemReader} object.
+     */
     @Autowired
     public DepreciationJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, ItemReader<FixedAsset> fixedAssetItemReader) {
         this.jobBuilderFactory = jobBuilderFactory;
@@ -51,6 +61,12 @@ public class DepreciationJobConfig {
         this.fixedAssetItemReader = fixedAssetItemReader;
     }
 
+    /**
+     * <p>depreciationJob.</p>
+     *
+     * @param depreciationJobListener a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationJobListener} object.
+     * @return a {@link org.springframework.batch.core.Job} object.
+     */
     @Bean("depreciationJob")
     public Job depreciationJob(DepreciationJobListener depreciationJobListener) {
         return jobBuilderFactory.get("depreciationJob")
@@ -62,18 +78,33 @@ public class DepreciationJobConfig {
                                 .build();
     }
 
+    /**
+     * <p>depreciationProcessor.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationProcessor} object.
+     */
     @Bean
     public DepreciationProcessor depreciationProcessor() {
 
         return new DepreciationProcessor(new ProcessingListImpl<>());
     }
 
+    /**
+     * <p>depreciationWriter.</p>
+     *
+     * @return a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationWriter} object.
+     */
     @Bean
     public DepreciationWriter depreciationWriter() {
 
         return new DepreciationWriter();
     }
 
+    /**
+     * <p>depreciationStep1.</p>
+     *
+     * @return a {@link org.springframework.batch.core.Step} object.
+     */
     @Bean
     public Step depreciationStep1() {
         return stepBuilderFactory.get("depreciationStep1").<FixedAsset, ProcessingList<DepreciationProceeds>>chunk(100).reader(fixedAssetItemReader)

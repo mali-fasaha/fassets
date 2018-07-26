@@ -34,7 +34,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * {@link DepreciationService} implementation
+ * {@link io.github.fasset.fasset.service.DepreciationService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Transactional
 @Service("depreciationService")
@@ -49,6 +52,13 @@ public class DepreciationServiceImpl implements DepreciationService {
 
     private final NetBookValueService netBookValueService;
 
+    /**
+     * <p>Constructor for DepreciationServiceImpl.</p>
+     *
+     * @param depreciationRepository a {@link io.github.fasset.fasset.repository.DepreciationRepository} object.
+     * @param accruedDepreciationService a {@link io.github.fasset.fasset.service.AccruedDepreciationService} object.
+     * @param netBookValueService a {@link io.github.fasset.fasset.service.NetBookValueService} object.
+     */
     @Autowired
     public DepreciationServiceImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository, AccruedDepreciationService accruedDepreciationService,
                                    NetBookValueService netBookValueService) {
@@ -59,9 +69,9 @@ public class DepreciationServiceImpl implements DepreciationService {
 
 
     /**
-     * Saves the {@link Depreciation} object given as parameter to the {@link DepreciationRepository}
+     * {@inheritDoc}
      *
-     * @param depreciation entity to be saved in the repository
+     * Saves the {@link Depreciation} object given as parameter to the {@link DepreciationRepository}
      */
     @Override
     public void saveDepreciation(Depreciation depreciation) {
@@ -72,9 +82,9 @@ public class DepreciationServiceImpl implements DepreciationService {
     }
 
     /**
-     * Saves all items in the list
+     * {@inheritDoc}
      *
-     * @param depreciationList to be persisted to the depreciationRepository
+     * Saves all items in the list
      */
     @Override
     public void saveAllDepreciationItems(List<Depreciation> depreciationList) {
@@ -84,9 +94,7 @@ public class DepreciationServiceImpl implements DepreciationService {
         depreciationRepository.saveAll(depreciationList);
     }
 
-    /**
-     * @return Return the number of distinct sols
-     */
+    /** {@inheritDoc} */
     @Override
     public int getDistinctSolIds() {
 
@@ -94,9 +102,9 @@ public class DepreciationServiceImpl implements DepreciationService {
     }
 
     /**
-     * Saves multiple items using multiple repositories for items encapsulated in the DepreciationProceeds object
+     * {@inheritDoc}
      *
-     * @param list of depreciationProceeds
+     * Saves multiple items using multiple repositories for items encapsulated in the DepreciationProceeds object
      */
     @Override
     public void saveAllDepreciationProceeds(List<DepreciationProceeds> list) {

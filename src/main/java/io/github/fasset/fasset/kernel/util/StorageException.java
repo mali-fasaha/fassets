@@ -19,15 +19,29 @@ package io.github.fasset.fasset.kernel.util;
 
 /**
  * Exception thrown during upload of the program's data files
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public class StorageException extends RuntimeException {
 
     private static final long serialVersionUID = 1569324982377679466L;
 
+    /**
+     * <p>Constructor for StorageException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public StorageException(String message) {
         super(message);
     }
 
+    /**
+     * <p>Constructor for StorageException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Throwable} object.
+     */
     public StorageException(String message, Throwable cause) {
         super(message, cause);
     }

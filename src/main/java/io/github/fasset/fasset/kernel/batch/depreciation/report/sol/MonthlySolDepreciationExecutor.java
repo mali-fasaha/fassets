@@ -21,6 +21,9 @@ import io.github.fasset.fasset.model.depreciation.MonthlySolDepreciation;
 
 /**
  * Interface for that carries out execution of depreciation summary by SOL
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface MonthlySolDepreciationExecutor {
 

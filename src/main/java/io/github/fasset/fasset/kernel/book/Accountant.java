@@ -26,12 +26,35 @@ import java.util.Map;
 
 /**
  * Clients of this interface are able to run account-related sub-routines such creating accounts and entries
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface Accountant {
 
+    /**
+     * <p>createAccount.</p>
+     *
+     * @param accountAttributes a {@link java.util.Map} object.
+     * @param currency a {@link java.util.Currency} object.
+     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     */
     Account createAccount(Map<AccountAttribute, String> accountAttributes, Currency currency, LocalDate purchaseDate);
 
+    /**
+     * <p>deleteAccount.</p>
+     *
+     * @param account a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     */
     Account deleteAccount(Account account);
 
+    /**
+     * <p>retrieveAccount.</p>
+     *
+     * @param accountNumber a {@link java.lang.String} object.
+     * @return a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     */
     Account retrieveAccount(String accountNumber);
 }

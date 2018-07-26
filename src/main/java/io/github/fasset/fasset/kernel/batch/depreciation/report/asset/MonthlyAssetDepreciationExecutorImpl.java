@@ -33,6 +33,9 @@ import java.util.List;
 
 /**
  * Executes generation of the MonthlyAssetDepreciation summary items
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Service("monthlyAssetDepreciationExecutor")
 @Transactional
@@ -42,17 +45,20 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
 
     private final DepreciationRepository depreciationRepository;
 
+    /**
+     * <p>Constructor for MonthlyAssetDepreciationExecutorImpl.</p>
+     *
+     * @param depreciationRepository a {@link io.github.fasset.fasset.repository.DepreciationRepository} object.
+     */
     @Autowired
     public MonthlyAssetDepreciationExecutorImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository) {
         this.depreciationRepository = depreciationRepository;
     }
 
     /**
-     * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation item
+     * {@inheritDoc}
      *
-     * @param fixedAsset {@link FixedAsset} for which we require the monthly Depreciation for a given year
-     * @param year       for which we are getting monthly depreciation
-     * @return MonthlyAssetDepreciation
+     * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation item
      */
     @Override
     public MonthlyAssetDepreciation getMonthlyDepreciation(FixedAsset fixedAsset, Integer year) {

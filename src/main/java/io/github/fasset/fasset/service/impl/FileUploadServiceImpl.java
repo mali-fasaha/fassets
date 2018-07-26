@@ -32,7 +32,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * {@link FileUploadService} implementation
+ * {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadService} implementation
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Transactional
 @Service("fileUploadService")
@@ -44,6 +47,12 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     /*private UploadNotificationService notificationService;*/
 
+    /**
+     * <p>Setter for the field <code>fileUploadRepository</code>.</p>
+     *
+     * @param fileUploadRepository a {@link io.github.fasset.fasset.repository.FileUploadRepository} object.
+     * @return a {@link io.github.fasset.fasset.service.impl.FileUploadServiceImpl} object.
+     */
     @Autowired
     @Qualifier("fileUploadRepository")
     public FileUploadServiceImpl setFileUploadRepository(FileUploadRepository fileUploadRepository) {
@@ -58,6 +67,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         return this;
     }*/
 
+    /** {@inheritDoc} */
     @Cacheable("hasFileBeenUploaded")
     @Override
     public boolean theFileIsAlreadyUploaded(FileUpload fileUpload) {
@@ -71,6 +81,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void recordFileUpload(FileUpload fileUpload) {
 
@@ -87,9 +98,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         }
     }
 
-    /**
-     * @return List<FileUpload> from the repository
-     */
+    /** {@inheritDoc} */
     @Override
     public List<FileUpload> uploadedFiles() {
 

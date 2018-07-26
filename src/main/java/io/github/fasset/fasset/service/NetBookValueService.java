@@ -22,19 +22,22 @@ import io.github.fasset.fasset.model.NetBookValue;
 import java.util.List;
 
 /**
- * Service for data retrieval from database for {@link NetBookValue}
+ * Service for data retrieval from database for {@link io.github.fasset.fasset.model.NetBookValue}
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 public interface NetBookValueService {
 
     /**
-     * Saves the {@link NetBookValue} object in the param
+     * Saves the {@link io.github.fasset.fasset.model.NetBookValue} object in the param
      *
      * @param netBookValue entity to be save in the repository
      */
     void saveNetBookValue(NetBookValue netBookValue);
 
     /**
-     * Saves a {@link List} collection of all items passed in the parameter to the {@link io.github.fasset.fasset.repository.NetBookValueRepository}
+     * Saves a {@link java.util.List} collection of all items passed in the parameter to the {@link io.github.fasset.fasset.repository.NetBookValueRepository}
      *
      * @param netBookValues Collection of netBookValue entities to be saved in the repository
      */

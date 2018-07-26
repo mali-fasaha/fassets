@@ -33,6 +33,9 @@ import java.util.concurrent.Executor;
 
 /**
  * Raises notifications during start and end of a batch or to interface between two batches
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component
 public class BatchNotifications implements JobExecutionListener {
@@ -52,6 +55,16 @@ public class BatchNotifications implements JobExecutionListener {
 
     private BriefingService briefingService;
 
+    /**
+     * <p>Constructor for BatchNotifications.</p>
+     *
+     * @param excelItemReader a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemReader} object.
+     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     * @param briefingService a {@link io.github.fasset.fasset.service.BriefingService} object.
+     * @param depreciationJobProxy a {@link io.github.fasset.fasset.kernel.batch.JobProxy} object.
+     * @param accountEntryResolutionJobProxy a {@link io.github.fasset.fasset.kernel.batch.JobProxy} object.
+     * @param asynchExecutor a {@link java.util.concurrent.Executor} object.
+     */
     @Autowired
     public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
                               @Qualifier("briefingService") BriefingService briefingService, @Qualifier("depreciationJobProxy") JobProxy depreciationJobProxy,
@@ -66,9 +79,9 @@ public class BatchNotifications implements JobExecutionListener {
 
 
     /**
-     * Callback before a job executes.
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback before a job executes.
      */
     @Override
     public void beforeJob(JobExecution jobExecution) {
@@ -84,9 +97,9 @@ public class BatchNotifications implements JobExecutionListener {
     }
 
     /**
-     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
+     * {@inheritDoc}
      *
-     * @param jobExecution the current {@link JobExecution}
+     * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      */
     @Override
     public void afterJob(JobExecution jobExecution) {

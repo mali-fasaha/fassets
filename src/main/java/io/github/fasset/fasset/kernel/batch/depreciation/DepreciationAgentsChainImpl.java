@@ -32,6 +32,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Object encapsulates a chain of Agents through which a depreciation item is processed as a FixedAsset is passed through
+ *
+ * @author edwin.njeru
+ * @version $Id: $Id
  */
 @Component("depreciationAgentsChain")
 public class DepreciationAgentsChainImpl {
@@ -41,6 +44,13 @@ public class DepreciationAgentsChainImpl {
     private final NetBookValueAgent netBookValueAgent;
     private final List<Agent> agents = new CopyOnWriteArrayList<>();
 
+    /**
+     * <p>Constructor for DepreciationAgentsChainImpl.</p>
+     *
+     * @param depreciationAgent a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.DepreciationAgent} object.
+     * @param accruedDepreciationAgent a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.AccruedDepreciationAgent} object.
+     * @param netBookValueAgent a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.NetBookValueAgent} object.
+     */
     @Autowired
     public DepreciationAgentsChainImpl(DepreciationAgent depreciationAgent, AccruedDepreciationAgent accruedDepreciationAgent, NetBookValueAgent netBookValueAgent) {
         this.depreciationAgent = depreciationAgent;
@@ -60,6 +70,13 @@ public class DepreciationAgentsChainImpl {
         agents.add(agent);
     }
 
+    /**
+     * <p>execute.</p>
+     *
+     * @param asset a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     * @param month a {@link java.time.YearMonth} object.
+     * @param depreciationProceeds a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds} object.
+     */
     public void execute(FixedAsset asset, YearMonth month, DepreciationProceeds depreciationProceeds) {
 
         // invoke all agents
