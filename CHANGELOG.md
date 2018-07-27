@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**javadoc error fix MessageQueue**
+
+
+[080d7d4c798d496](https://github.com/mali-fasaha/fassets/commit/080d7d4c798d496) Edwin Njeru *2018-07-27 05:26:07*
+
 **javadoc error fix FileSystemStorageService**
 
 

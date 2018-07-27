@@ -388,21 +388,23 @@
             <artifactId>reactive-streams</artifactId>
             <version>${reactive-streams.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
+            &lt;!&ndash;//todo find a way to integrate this with junit instead of testNG&ndash;&gt;
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams-tck</artifactId>
             <version>${reactive-streams.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams-flow-adapters</artifactId>
             <version>${reactive-streams.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
+            &lt;!&ndash;//todo find a way to integrate this with junit instead of testNG&ndash&ndash;&gt;
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams-tck-flow</artifactId>
             <version>${reactive-streams.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams-examples</artifactId>
@@ -446,6 +448,14 @@
                     <target>${maven.compiler.target}</target>
                     <fork>${maven.compiler.fork}</fork>
                 </configuration>
+            </plugin>
+
+            <!--Setup dependency versions updates check, run with versions:display-dependency-updates-->
+            <!--see: https://www.mojohaus.org/versions-maven-plugin/-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.5</version>
             </plugin>
 
             <!--Setup build helper plugin-->
@@ -702,10 +712,11 @@
                         </goals>
                         <configuration>
                             <outputFile>
-                                ${project.build.outputDirectory}/app.properties
+                                config/app.properties
                             </outputFile>
                         </configuration>
                     </execution>
+                    <!--Failed to execute this one-->
                     <execution>
                         <id>write-active-properties</id>
                         <phase>generate-resources</phase>
@@ -714,11 +725,11 @@
                         </goals>
                         <configuration>
                             <outputFile>
-                                ${project.build.outputDirectory}/app.properties
+                                config/active-app.properties
                             </outputFile>
                         </configuration>
                     </execution>
-                    <!--<execution>
+                    <execution>
                         <id>set-system-properties</id>
                         <goals>
                             <goal>set-system-properties</goal>
@@ -726,13 +737,13 @@
                         <configuration>
                             <properties>
                                 <property>
-                                    &lt;!&ndash;todo set properties here&ndash;&gt;
-                                    <name>my.property.name</name>
-                                    <value>my.property.value</value>
+                                    <!--todo set properties here-->
+                                    <name>javadoc.tool.path.windows</name>
+                                    <value>'C:\\Virtual_Machines\\Java\\Oracle\\java10\\jdk\\bin\\javadoc.exe'</value>
                                 </property>
                             </properties>
                         </configuration>
-                    </execution>-->
+                    </execution>
                 </executions>
             </plugin>
             <!-- Setup source jar -->
@@ -1069,6 +1080,11 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>Codehaus Mojo</id>
+            <name>Codehaus Mojo</name>
+            <url>https://nexus.codehaus.org/content/repositories/releases/</url>
         </pluginRepository>
     </pluginRepositories>
 
