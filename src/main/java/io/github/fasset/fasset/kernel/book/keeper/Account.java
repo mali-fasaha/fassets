@@ -115,10 +115,11 @@ public class Account extends AccountDomainModel<String> {
      * This constructor will one day allow someone to implement the {@link List} interface with anything, including a database and assign the same to this {@link Account} making this object
      * persistent.
      *
-     * @param accountSide    {@link AccountSide} to which this account belongs by default
-     * @param currency       {@link Currency} to be used for all {@link AccountingEntry} items to be added to this account
-     * @param accountDetails {@code AccountDetails} describes the basic nature of this account from business domain's perspective
-     * @param entries        {@link List< AccountingEntry >} collection allowing assignment of a Collection interface for this account. One day this parameter will allow a dev to something like
+     * @param name           Name of the account
+     * @param accountSide    AccountSide to which this account belongs by default
+     * @param currency       Currency to be used for all {@link AccountingEntry} items to be added to this account
+     * @param accountDetails AccountDetails describes the basic nature of this account from business domain's perspective
+     * @param entries        List collection of AccountingEntry items allowing assignment of a Collection interface for this account. One day this parameter will allow a dev to something like
      *                       implement the list interface with a back end like a database or some Restful service making changes in this account persistent.
      */
     @SuppressWarnings("unused")

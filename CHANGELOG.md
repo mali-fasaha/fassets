@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Added files to check dependency versions and system environment**
+
+
+[e33f87e5e06fd93](https://github.com/mali-fasaha/fassets/commit/e33f87e5e06fd93) Edwin Njeru *2018-07-27 06:26:46*
+
 **javadoc error fix MessageQueue**
 
 

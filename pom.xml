@@ -70,7 +70,7 @@
         <converalls.repo.token>Aq0A50mRusMNemvnkmtWtUgUpxsgvMWGC</converalls.repo.token>
         <changelog.template.file>${project.basedir}/config/changelog.mustache</changelog.template.file>
         <maven.compiler.fork>true</maven.compiler.fork>
-        <maven.enforcer.required.maven.version>3.5.0</maven.enforcer.required.maven.version>
+        <maven.enforcer.required.maven.version>3.3.9</maven.enforcer.required.maven.version>
 
         <!--Plugin versions-->
         <git-changelog-maven-plugin.version>1.54</git-changelog-maven-plugin.version>
@@ -107,6 +107,15 @@
         <checkstyle.config.includeTestResources>false</checkstyle.config.includeTestResources>
         <checkstyle.config.includeTestSourceDirectory>false</checkstyle.config.includeTestSourceDirectory>
         <linkXRef>false</linkXRef>
+
+        <!--Javadocs Config-->
+        <additionalparam>-Xdoclint:none</additionalparam>
+        <additionalOptions>-Xdoclint:none</additionalOptions>
+        <additionalparam>
+            -inferrel -attributes -types -visibility -inferdep -quiet -hide java.* -collpackages java.util.* -qualify -postfixpackage
+            -nodefontsize 9
+            -nodefontpackagesize 7
+        </additionalparam>
 
         <!--Config for deploy path-->
         <copy-maven-plugin.deploy.location>D:\Workspaces\fassets\lib</copy-maven-plugin.deploy.location>
@@ -670,6 +679,10 @@
                     <ignoreClirr>false</ignoreClirr>
                     <version>true</version>
                     <nosince>false</nosince>
+                    <show>private</show>
+                    --><!-- Apple's JVM sometimes requires more memory -->
+                    <additionalJOption>-J-Xmx1024m</additionalJOption>
+                    <verbose>true</verbose>
                 </configuration>
                 <executions>
                     <execution>
@@ -983,6 +996,7 @@
                     <removeUnknownThrows>true</removeUnknownThrows>
                     <version>true</version>
                     <nosince>false</nosince>
+                    <additionalOptions>-Xdoclint:none</additionalOptions>
                 </configuration>
                 <reportSets>
                     <reportSet>
@@ -1088,11 +1102,31 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <url>https://github.com/kristofa/plantuml-site-example</url>
+    <licenses>
+        <license>
+            <name>GPL version 3</name>
+            <url>https://opensource.org/licenses/GPL-3.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:mali-fasaha/fassets.git</connection>
+        <url>git@github.com:mali-fasaha/fassets.git</url>
+        <developerConnection>scm:git:git@github.com:mali-fasaha/fassets.git</developerConnection>
+    </scm>
     <developers>
         <developer>
             <email>mailnjeru@gmail.com</email>
+            <url>https://github.com/ghacupha</url>
+            <organization>mali-fasaha</organization>
+            <organizationUrl>https://github.com/mali-fasaha</organizationUrl>
             <name>Edwin Njeru</name>
         </developer>
     </developers>
+    <organization>
+        <name>mali-fasaha</name>
+        <url>https://github.com/mali-fasaha</url>
+    </organization>
 
 </project>
