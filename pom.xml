@@ -729,7 +729,7 @@
                             </outputFile>
                         </configuration>
                     </execution>
-                    <!--Failed to execute this one-->
+                    <!--&lt;!&ndash;Failed to execute this one&ndash;&gt;
                     <execution>
                         <id>write-active-properties</id>
                         <phase>generate-resources</phase>
@@ -741,7 +741,7 @@
                                 config/active-app.properties
                             </outputFile>
                         </configuration>
-                    </execution>
+                    </execution>-->
                     <execution>
                         <id>set-system-properties</id>
                         <goals>

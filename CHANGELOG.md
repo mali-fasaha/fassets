@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Fixed javadoc errors**
+
+
+[967315d363c1953](https://github.com/mali-fasaha/fassets/commit/967315d363c1953) Edwin Njeru *2018-07-27 14:38:34*
+
 **Added files to check dependency versions and system environment**
 
 
