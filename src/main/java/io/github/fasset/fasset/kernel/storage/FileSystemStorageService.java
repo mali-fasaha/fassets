@@ -49,14 +49,20 @@ import java.util.stream.Stream;
 import static io.github.fasset.fasset.kernel.util.FileSecurityChecks.relativePathCheck;
 
 /**
- * Implements storageService interface while at the same time implementing the subscriptionService. The later allows a {@code Subscriber} implementation to observe changes and act accordingly, and
- * this this case upload data stored in the the file recently uploaded in the file system.
- * <p>
- * <br />Usage : <br> This class will enable clients to <br /> - List uploaded files: <br />  storageService.loadAll() <br /> <br /> - Store uploaded files in root location: <br />
- * storageService.store(file); <br /> <br /> - Generate API containing uploaded files <br />  storageService.loadAsResource(fileName); <br />
+ * Implements storageService interface while at the same time implementing the pushing messages to the
+ * {@link MessageQueue<FileUpload>} to asynchronously return to the controller once the file has been
+ * verified to be okay. The file is checked for obvious defects such as a substring in the filename that
+ * might affect the relative position of file access in the server. The file will also be checked against
+ * a record of all such files uploaded just in case the same is a duplication. The amount of time it will
+ * take to do that is unsubstantial in the eyes of the user as a notification will be returned by the
+ * controller almost immediately he pressed the upload key. When that fails to be the case, this service
+ * will be scrapped and rewritten again.
+ * <br>Usage : <br> This class will enable clients to <br> - List uploaded files: <br>  storageService.loadAll() <br> - Store uploaded files in root location: <br>
+ * storageService.store(file); <br> - Generate API containing uploaded files <br>  storageService.loadAsResource(fileName); <br>
  *
  * @author edwin.njeru
- * @version $Id: $Id
+ * @since 0.0.1-SNAPSHOT
+ * @version 0.0.1
  */
 @Service("fileSystemStorageService")
 public class FileSystemStorageService implements StorageService {
