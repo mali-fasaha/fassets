@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Javadoc:fix**
+
+
+[f9adb6bb9888d01](https://github.com/mali-fasaha/fassets/commit/f9adb6bb9888d01) Edwin Njeru *2018-07-26 15:58:47*
+
 **Added reactive-streams dependencies and removed unnecesary maven phases in travis-ci**
 
 
