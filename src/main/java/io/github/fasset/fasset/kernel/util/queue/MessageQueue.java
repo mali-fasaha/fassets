@@ -44,7 +44,8 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  * TODO : implement consumers for this Queue
  *
  * @author edwin.njeru
- * @version $Id: $Id
+ * @since 0.0.1
+ * @version 0.0.1
  */
 public interface MessageQueue<T> {
 

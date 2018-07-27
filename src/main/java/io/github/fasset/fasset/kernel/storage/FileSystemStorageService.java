@@ -50,7 +50,7 @@ import static io.github.fasset.fasset.kernel.util.FileSecurityChecks.relativePat
 
 /**
  * Implements storageService interface while at the same time implementing the pushing messages to the
- * {@link MessageQueue<FileUpload>} to asynchronously return to the controller once the file has been
+ * {@link MessageQueue} to asynchronously return to the controller once the file has been
  * verified to be okay. The file is checked for obvious defects such as a substring in the filename that
  * might affect the relative position of file access in the server. The file will also be checked against
  * a record of all such files uploaded just in case the same is a duplication. The amount of time it will
