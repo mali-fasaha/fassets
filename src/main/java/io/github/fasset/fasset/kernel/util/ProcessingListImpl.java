@@ -52,7 +52,6 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
      * {@inheritDoc}
      *
      * Appends the specified element to the end of this list.
-     * <p>
      */
     @Override
     public boolean add(E e) {
