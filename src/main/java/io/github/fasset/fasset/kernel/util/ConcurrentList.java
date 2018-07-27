@@ -388,7 +388,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
      * {@inheritDoc}
      *
      * Returns a sequential {@code Stream} with this collection as its source.
-     * <p>
+     * <p/>
      * <p>This method should be overridden when the {@link #spliterator()} method cannot return a spliterator that is {@code IMMUTABLE}, {@code CONCURRENT}, or <em>late-binding</em>. (See {@link
      * #spliterator()} for details.)
      * @since 1.8
@@ -403,7 +403,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
      * {@inheritDoc}
      *
      * Returns a possibly parallel {@code Stream} with this collection as its source.  It is allowable for this method to return a sequential stream.
-     * <p>
+     * <p/>
      * <p>This method should be overridden when the {@link #spliterator()} method cannot return a spliterator that is {@code IMMUTABLE}, {@code CONCURRENT}, or <em>late-binding</em>. (See {@link
      * #spliterator()} for details.)
      * @since 1.8
@@ -419,7 +419,7 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
      * {@inheritDoc}
      *
      * Creates a {@link Spliterator} over the elements in this list.
-     * <p>
+     * <p/>
      * <p>The {@code Spliterator} reports {@link Spliterator#SIZED} and {@link Spliterator#ORDERED}.  Implementations should document the reporting of additional characteristic values.
      * @since 1.8
      */
@@ -755,13 +755,13 @@ public class ConcurrentList<T> extends ForwardingList<T> implements List<T> {
      * {@inheritDoc}
      *
      * Sorts this list according to the order induced by the specified {@link Comparator}.
-     * <p>
+     * <p/>
      * <p>All elements in this list must be <i>mutually comparable</i> using the specified comparator (that is, {@code c.compare(e1, e2)} must not throw a {@code ClassCastException} for any elements
      * {@code e1} and {@code e2} in the list).
-     * <p>
+     * <p/>
      * <p>If the specified comparator is {@code null} then all elements in this list must implement the {@link Comparable} interface and the elements' {@linkplain Comparable natural ordering} should
      * be used.
-     * <p>
+     * <p/>
      * <p>This list must be modifiable, but need not be resizable.
      * @since 1.8
      */
