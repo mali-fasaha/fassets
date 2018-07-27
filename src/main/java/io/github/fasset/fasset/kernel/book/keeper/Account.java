@@ -122,7 +122,6 @@ public class Account extends AccountDomainModel<String> {
      *                       implement the list interface with a back end like a database or some Restful service making changes in this account persistent.
      */
     @SuppressWarnings("unused")
-    @SuppressWarnings("unused")
     Account(final String name, final String number, AccountSide accountSide, final TimePoint openingDate, final Currency currency, Map<AccountAttribute, String> accountDetails,
             final List<AccountingEntry> entries) {
         this.currency = currency;
