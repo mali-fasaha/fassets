@@ -30,7 +30,7 @@ import java.util.List;
 public interface FileUploadService {
 
     /**
-     * <p>theFileIsAlreadyUploaded.</p>
+     * <p>Checks whether the file is already uploaded.</p>
      *
      * @param fileUpload This is the file we are about to upload
      * @return True if the file is already uploaded
@@ -46,8 +46,7 @@ public interface FileUploadService {
 
     /**
      * <p>uploadedFiles.</p>
-     *
-     * @return List<FileUpload> from the repository
+     * @return List of FileUploads from the repository
      */
     List<FileUpload> uploadedFiles();
 }
