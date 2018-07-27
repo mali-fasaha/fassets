@@ -34,12 +34,11 @@ import javax.annotation.PostConstruct;
 /**
  * Implementation of the MessageQueue interface that allows queueing of messages related to upload of files in the system.
  * <br>
- * The implementation uses the {@link FileUploadService} in the push method
- * to record a file in the database.
+ * The implementation uses the {@link FileUploadService} in the push method to record a file in the records.
  * <br>
- * lifecycle method is also called when the file is uploaded successfully but it is only when the client calls the method {@link this#push(QueueMessage, OnCompletion)}
+ * The {@link OnCompletion} lifecycle method is also called when the file is uploaded successfully but it is only when the client calls the {@link #push(QueueMessage, OnCompletion)}
  * <br>
- * The client could also call the method {@link this#push(QueueMessage, OnCompletion)} which will handle both completion and an
+ * The client could also call the {@link #push(QueueMessage, OnError)} method which will handle both completion and an
  * unexpected messageQueue runtime exception
  * TODO: add validation methods here or create file validation service for the same in another
  * Todo Add duplicate upload checks service, with hashing algorithms interface

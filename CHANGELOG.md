@@ -4,6 +4,36 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**javadoc error fix Account**
+
+
+[67019529b9ba12f](https://github.com/mali-fasaha/fassets/commit/67019529b9ba12f) Edwin Njeru *2018-07-27 05:08:18*
+
+**javadoc error fix FileSystemStorageService**
+
+
+[85f6eaf7f33acac](https://github.com/mali-fasaha/fassets/commit/85f6eaf7f33acac) Edwin Njeru *2018-07-27 05:06:55*
+
+**javadoc error fix ConcurrentList**
+
+
+[4b0de152e96dce0](https://github.com/mali-fasaha/fassets/commit/4b0de152e96dce0) Edwin Njeru *2018-07-27 04:56:00*
+
+**javadoc error fix ProcessingListImpl**
+
+
+[593912106b41c72](https://github.com/mali-fasaha/fassets/commit/593912106b41c72) Edwin Njeru *2018-07-27 04:51:38*
+
+**javadoc error fix FileUploadService**
+
+
+[640368e52b89da6](https://github.com/mali-fasaha/fassets/commit/640368e52b89da6) Edwin Njeru *2018-07-27 04:50:39*
+
+**javadco error fix FileUploadsQueue**
+
+
+[565eca9c849a542](https://github.com/mali-fasaha/fassets/commit/565eca9c849a542) Edwin Njeru *2018-07-27 04:48:19*
+
 **Javadoc:fix**
 
 
