@@ -92,5 +92,6 @@ public class DefaultBatchDepreciationEntryResolverTest {
             }
             return "";
         }).allMatch(att -> att.equalsIgnoreCase("Mock Depreciation Algorithm")));
+
     }
 }

@@ -23,11 +23,13 @@ import io.github.fasset.fasset.kernel.book.keeper.AccountingTransaction;
 import io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance;
 import io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException;
 import io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException;
+import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.model.FixedAsset;
 import io.github.ghacupha.time.point.SimpleDate;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
+import org.mali.fasaha.utils.Throwing.Consumer;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
@@ -40,6 +42,7 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEB
 import static io.github.ghacupha.cash.HardCash.shilling;
 import static io.github.ghacupha.time.point.SimpleDate.on;
 import static org.junit.Assert.assertEquals;
+import static org.mali.fasaha.utils.Errors.rethrow;
 import static org.mockito.Mockito.when;
 
 public class BatchAcquisitionEntryResolverTest {
@@ -54,7 +57,7 @@ public class BatchAcquisitionEntryResolverTest {
     private static final Account furniture = new Account("Furnitures", "103", DEBIT, Currency.getInstance("KES"), SimpleDate.of(2018, 1, 1));
     private static final Account sundryCreditors = new Account("Sundry Creditors", "104", CREDIT, Currency.getInstance("KES"), SimpleDate.of(2018, 1, 1));
     private BatchEntryResolver batchEntryResolver;
-    private List<FixedAsset> fixedAssets = new ArrayList<>();
+    private List<FixedAsset> fixedAssets = ConcurrentList.newList();
 
     @Before
     public void setUp() throws Exception {
@@ -89,15 +92,9 @@ public class BatchAcquisitionEntryResolverTest {
 
         List<AccountingEntry> entries = batchEntryResolver.resolveEntries(fixedAssets);
 
-        AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver", on(2018, 2, 21), Currency.getInstance("KES"));
+        AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver", on(2018, 2, 21), KES);
 
-        entries.forEach(entry -> {
-            try {
-                testPostingAssets.addEntry(entry);
-            } catch (MismatchedCurrencyException | ImmutableEntryException e) {
-                e.printStackTrace();
-            }
-        });
+        entries.forEach(rethrow().wrap((Consumer<AccountingEntry>) testPostingAssets::addEntry));
 
         testPostingAssets.post();
 

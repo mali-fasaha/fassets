@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Added Errors library to the project**
+
+
+[cdac0e3aa08a2b3](https://github.com/mali-fasaha/fassets/commit/cdac0e3aa08a2b3) ghacupha *2018-07-29 13:40:22*
+
 **Removed items in the config folder from vcs**
 
 
