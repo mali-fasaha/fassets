@@ -26,14 +26,13 @@ import io.github.fasset.fasset.kernel.book.keeper.Account;
 import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.kernel.book.keeper.AccountingTransaction;
 import io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance;
-import io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException;
-import io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.model.FixedAsset;
 import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
+import org.mali.fasaha.utils.Errors;
 
 import java.time.LocalDate;
 import java.util.Currency;
@@ -50,6 +49,7 @@ import static io.github.ghacupha.cash.HardCash.shilling;
 import static io.github.ghacupha.time.point.SimpleDate.on;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mali.fasaha.utils.Errors.suppress;
 
 public class DefaultEntryResolverIT {
 
@@ -79,13 +79,7 @@ public class DefaultEntryResolverIT {
 
         assetAcquisition = AccountingTransaction.create("Test posting entry resolver", on(2018, 2, 21), Currency.getInstance("KES"));
 
-        entries.forEach(entry -> {
-            try {
-                assetAcquisition.addEntry(entry);
-            } catch (MismatchedCurrencyException | ImmutableEntryException e) {
-                e.printStackTrace();
-            }
-        });
+        entries.forEach(suppress().wrap(entry -> assetAcquisition.addEntry(entry)));
 
         assetAcquisition.post();
 

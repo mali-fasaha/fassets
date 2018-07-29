@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Removed items in the config folder from vcs**
+
+
+[b2f75fea9d2255a](https://github.com/mali-fasaha/fassets/commit/b2f75fea9d2255a) ghacupha *2018-07-29 08:47:34*
+
 **Cleanup after fixing javadoc issues**
 
 

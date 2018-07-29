@@ -419,6 +419,11 @@
             <artifactId>reactive-streams-examples</artifactId>
             <version>${reactive-streams.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.mali.fasaha</groupId>
+            <artifactId>arka</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -1103,7 +1108,7 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <url>https://github.com/kristofa/plantuml-site-example</url>
+    <url>https://github.com/mali-fasaha/fassets</url>
     <licenses>
         <license>
             <name>GPL version 3</name>
