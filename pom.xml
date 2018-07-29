@@ -680,7 +680,7 @@
                     <version>true</version>
                     <nosince>false</nosince>
                     <show>private</show>
-                    --><!-- Apple's JVM sometimes requires more memory -->
+                    <!-- Apple's JVM sometimes requires more memory -->
                     <additionalJOption>-J-Xmx1024m</additionalJOption>
                     <verbose>true</verbose>
                 </configuration>
@@ -908,6 +908,7 @@
                         <exclude>**/CHANGELOG.md</exclude>
                         <exclude>**/LICENSE</exclude>
                         <exclude>**/logs/**</exclude>
+                        <exclude>**/config/**</exclude>
                         <exclude>**/.idea/**</exclude>
                         <exclude>**/.mvn/**</exclude>
                         <exclude>**/.okhttpcache/**</exclude>
