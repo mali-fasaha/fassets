@@ -35,6 +35,7 @@ import org.mockito.Mockito;
 import java.time.LocalDate;
 import java.util.Currency;
 import java.util.List;
+import java.util.function.Function;
 
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
@@ -81,17 +82,25 @@ public class DefaultBatchDepreciationEntryResolverTest {
 
     }
 
+    // @formatter: off
     @Test
     public void depreciationAlgorithmSignature() throws Exception {
 
-        assertTrue(entries.stream().filter(entry -> entry.getAccountSide() == DEBIT).map(debitEntry -> {
+        Function<AccountingEntry, String> getAttributes = debitEntry -> {
             try {
                 return debitEntry.getAttribute("DEPRECIATION_ALGORITHM");
             } catch (UnEnteredDetailsException e) {
                 e.printStackTrace();
             }
             return "";
-        }).allMatch(att -> att.equalsIgnoreCase("Mock Depreciation Algorithm")));
+        };
+
+        assertTrue(entries.stream()
+                          .filter(entry -> entry.getAccountSide() == DEBIT)
+                          .map(getAttributes)
+                          .allMatch(att -> att.equalsIgnoreCase("Mock Depreciation Algorithm")));
 
     }
+
+    // @formatter: on
 }

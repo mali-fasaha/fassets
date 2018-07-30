@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Applied arka abstractions to the DefaultEntryResolver IT and UNit tests**
+
+
+[0acb04a54592bbb](https://github.com/mali-fasaha/fassets/commit/0acb04a54592bbb) ghacupha *2018-07-29 16:35:47*
+
 **Added Errors library to the project**
 
 

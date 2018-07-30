@@ -32,6 +32,7 @@ import org.eclipse.collections.impl.map.mutable.ConcurrentHashMap;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
+import org.mali.fasaha.utils.Throwing.Consumer;
 
 import java.time.LocalDate;
 import java.util.Currency;
@@ -78,7 +79,7 @@ public class DefaultEntryResolverIT {
 
         assetAcquisition = AccountingTransaction.create("Test posting entry resolver", on(2018, 2, 21), Currency.getInstance("KES"));
 
-        entries.forEach(suppress().wrap(entry -> assetAcquisition.addEntry(entry)));
+        entries.forEach(suppress().wrap( entry -> assetAcquisition.addEntry(entry)));
 
         assetAcquisition.post();
 

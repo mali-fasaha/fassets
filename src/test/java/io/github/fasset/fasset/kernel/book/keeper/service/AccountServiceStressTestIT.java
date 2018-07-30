@@ -29,6 +29,12 @@ import io.github.ghacupha.time.point.TimePoint;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mali.fasaha.utils.Errors;
+import org.mali.fasaha.utils.Throwing;
+import org.mali.fasaha.utils.Throwing.Function;
+import org.mali.fasaha.utils.Throwing.Runnable;
+import org.mali.fasaha.utils.Throwing.Specific.Consumer;
+import org.mali.fasaha.utils.Throwing.Specific.IntConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +43,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Currency;
+import java.util.stream.IntStream;
 
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CREDIT;
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
@@ -101,16 +108,16 @@ public class AccountServiceStressTestIT {
     @Test
     public void entriesRecallAfterAcSideReversal() throws Exception {
 
-        //reQuisitionForChairs();
-
-        log.info("Loading 100000 entries through transaction");
-        for (int i = 0; i < 10000; i++) {
+        Throwing.IntConsumer intConsumer = i -> {
             Transaction temp = AccountingTransaction.create("Purchase Computers", SimpleDate.of(2018, 3, 31), KES);
             temp.addEntry(DEBIT, shilling(350.23), computers, "Invoice100");
             temp.addEntry(CREDIT, shilling(150.23), sundryDebtorsAccount, "Accounting for expense Id 100");
             temp.addEntry(CREDIT, shilling(200), cashAccount, "Cash IFO Computer Suppliers");
             temp.post();
-        }
+        };
+
+        log.info("Loading 10000 entries through transaction");
+        IntStream.range(0, 10000).forEach( Errors.log().wrapIntConsumer(intConsumer));
 
         log.info("Now checking account balances posted....");
         assertEquals(balance(shilling(3502300.00), DEBIT), persistentAccountService.fetchAccountById(computersId).balance(SimpleDate.today()));
