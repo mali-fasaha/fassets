@@ -62,7 +62,8 @@
         <spring.data.envers.version>2.0.2.RELEASE</spring.data.envers.version>
         <jquery.version>3.1.1</jquery.version>
         <bootstrap.version>3.3.7</bootstrap.version>
-        <poiji.version>1.8</poiji.version>
+        <!--<poiji.version>1.8</poiji.version>-->
+        <poiji.version>1.14</poiji.version>
         <reactive-streams.version>1.0.2</reactive-streams.version>
         <hibernate.entitymanager.version>5.2.9.Final</hibernate.entitymanager.version>
         <!--<jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.it.execution.data.file>

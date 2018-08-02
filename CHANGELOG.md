@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Updated maven plugin versions to prepare for update to version**
+
+
+[09707568288f333](https://github.com/mali-fasaha/fassets/commit/09707568288f333) Edwin Njeru *2018-07-30 16:52:15*
+
 **Included amendments created in version 0.0.1 of arka library**
 
 
