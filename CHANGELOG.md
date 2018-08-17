@@ -4,6 +4,16 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Upgraded poiji to version 1.15**
+
+
+[d56a6fd9f39ce6a](https://github.com/mali-fasaha/fassets/commit/d56a6fd9f39ce6a) Edwin Njeru *2018-08-02 16:23:02*
+
+**Added poiji version 1.14 making the project java 10 compatible**
+
+
+[511cc4375d58983](https://github.com/mali-fasaha/fassets/commit/511cc4375d58983) Edwin Njeru *2018-08-02 06:16:18*
+
 **Updated maven plugin versions to prepare for update to version**
 
 
