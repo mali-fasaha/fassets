@@ -149,6 +149,9 @@
         <profile>
             <id>windows</id>
             <!--Somethings are meant to work better in windows-->
+            <activation>
+                <os>windows</os>
+            </activation>
             <build>
               <plugins>
                   <plugin>
