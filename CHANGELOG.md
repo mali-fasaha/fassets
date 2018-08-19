@@ -4,6 +4,16 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Set windows profile to be self activated**
+
+
+[cc54efb14a9e6b1](https://github.com/mali-fasaha/fassets/commit/cc54efb14a9e6b1) ghacupha *2018-08-19 18:06:49*
+
+**Created specific profile for windows-favourable builds**
+
+
+[9697eb01a783dc6](https://github.com/mali-fasaha/fassets/commit/9697eb01a783dc6) ghacupha *2018-08-19 18:04:48*
+
 **Removede unused imports in integrated AccountServiceTest**
 
 

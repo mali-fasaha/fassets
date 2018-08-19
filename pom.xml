@@ -150,7 +150,9 @@
             <id>windows</id>
             <!--Somethings are meant to work better in windows-->
             <activation>
-                <os>windows</os>
+                <os>
+                    <family>windows</family>
+                </os>
             </activation>
             <build>
               <plugins>
@@ -214,6 +216,31 @@
                       </executions>
                   </plugin>
               </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>java9+</id>
+            <!--Automatically activate the profile if running on java9+-->
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <!-- deny illegal access to detect new problems -->
+                            <!--org.springframework.cglib.core.ReflectUtils, #java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+                            method in spring framework version 5.0.7.RELEASE still using internal API-->
+                            <argLine>
+                                --illegal-access=deny
+                                --add-opens java.base/java.lang=ALL-UNNAMED
+                            </argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
     </profiles>
