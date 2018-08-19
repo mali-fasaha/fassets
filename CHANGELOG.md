@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Removede unused imports in integrated AccountServiceTest**
+
+
+[bef4d67be268e83](https://github.com/mali-fasaha/fassets/commit/bef4d67be268e83) ghacupha *2018-08-17 05:05:29*
+
 **Upgraded poiji to version 1.15**
 
 
