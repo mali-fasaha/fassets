@@ -4,6 +4,21 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Removed temporary test-environment command files**
+
+
+[3decc312db0c5ef](https://github.com/mali-fasaha/fassets/commit/3decc312db0c5ef) ghacupha *2018-08-20 06:30:27*
+
+**Completed setup for source profile**
+
+
+[92c3e87fe436394](https://github.com/mali-fasaha/fassets/commit/92c3e87fe436394) ghacupha *2018-08-20 06:23:45*
+
+**Created source profile to deal with source formatting, licensing, javadoc and changelog issues**
+
+
+[67c48c1dacfc986](https://github.com/mali-fasaha/fassets/commit/67c48c1dacfc986) ghacupha *2018-08-20 06:17:26*
+
 **Added self activated java9+ profile to excuse use of illegal reflective access in reflectUtils classLoader in SpringFramework 5.0.7.RELEASE**
 
 

@@ -19,6 +19,7 @@ package io.github.fasset.fasset.kernel.batch.depreciation;
 
 import io.github.fasset.fasset.kernel.batch.depreciation.agent.Agent;
 import io.github.fasset.fasset.model.FixedAsset;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
@@ -34,12 +35,8 @@ public class DepreciationAgentsHandlerImpl implements DepreciationAgentsHandler 
 
     private DepreciationAgentsChainImpl depreciationAgentsChain;
 
-    /**
-     * <p>Constructor for DepreciationAgentsHandlerImpl.</p>
-     *
-     * @param depreciationAgentsChain a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationAgentsChainImpl} object.
-     */
-    public DepreciationAgentsHandlerImpl(DepreciationAgentsChainImpl depreciationAgentsChain) {
+    @Autowired
+    public void setDepreciationAgentsChain(final DepreciationAgentsChainImpl depreciationAgentsChain) {
         this.depreciationAgentsChain = depreciationAgentsChain;
     }
 
