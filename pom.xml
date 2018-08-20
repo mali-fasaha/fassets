@@ -303,6 +303,112 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!-- Print the change log as release notes...-->
+                    <!--Run mvn generate-sources, to use-->
+                    <plugin>
+                        <groupId>se.bjurr.gitchangelog</groupId>
+                        <artifactId>git-changelog-maven-plugin</artifactId>
+                        <version>${git-changelog-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>GenerateGitChangelog</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>git-changelog</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- A file on filesystem //-->
+                                    <file>CHANGELOG.md</file>
+                                    <templateFile>${changelog.template.file}</templateFile>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Setup Checkstyle, excluding module-info -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>${maven-checkstyle-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <!--Could run with mvn clean verify-->
+                                <id>validate</id>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <encoding>UTF-8</encoding>
+                                </configuration>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>run-checkstyle</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>checkstyle</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <excludes>module-info.java</excludes>
+                            <headerLocation>${checkstyle.config.headerLocation}</headerLocation>
+                            <maxAllowedViolations>${checkstyle.config.maxAllowedViolations}</maxAllowedViolations>
+                            <configLocation>${checkstyle.config.location}</configLocation>
+                            <consoleOutput>${checkstyle.config.consoleOutput}</consoleOutput>
+                            <failsOnError>${checkstyle.config.failsOnError}</failsOnError>
+                            <includeResources>${checkstyle.config.includeResources}</includeResources>
+                            <includeTestResources>${checkstyle.config.includeTestResources}</includeTestResources>
+                            <includeTestSourceDirectory>${checkstyle.config.includeTestSourceDirectory}</includeTestSourceDirectory>
+                            <linkXRef>${linkXRef}</linkXRef>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Setup Javadoc jar -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven-javadoc-plugin.version}</version>
+                        <configuration>
+                            <footer>Generated ${maven.build.timestamp}</footer>
+                            <defaultVersion>0.0.1</defaultVersion>
+                            <defaultAuthor>edwin.njeru</defaultAuthor>
+                            <removeUnknownThrows>true</removeUnknownThrows>
+                            <ignoreClirr>false</ignoreClirr>
+                            <version>true</version>
+                            <nosince>false</nosince>
+                            <show>private</show>
+                            <!-- Apple's JVM sometimes requires more memory -->
+                            <additionalJOption>-J-Xmx1024m</additionalJOption>
+                            <verbose>true</verbose>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Setup source jar -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${maven-source-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -754,27 +860,7 @@
                     <repoToken>${converalls.repo.token}</repoToken>
                 </configuration>
             </plugin>
-            <!-- Print the change log as release notes...-->
-            <!--Run mvn generate-sources, to use-->
-            <plugin>
-                <groupId>se.bjurr.gitchangelog</groupId>
-                <artifactId>git-changelog-maven-plugin</artifactId>
-                <version>${git-changelog-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>GenerateGitChangelog</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>git-changelog</goal>
-                        </goals>
-                        <configuration>
-                            <!-- A file on filesystem //-->
-                            <file>CHANGELOG.md</file>
-                            <templateFile>${changelog.template.file}</templateFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
             <!-- Enforce Maven 3.5.0 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -795,72 +881,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Setup Checkstyle, excluding module-info -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <!--Could run with mvn clean verify-->
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <configuration>
-                            <encoding>UTF-8</encoding>
-                        </configuration>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>run-checkstyle</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>checkstyle</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludes>module-info.java</excludes>
-                    <headerLocation>${checkstyle.config.headerLocation}</headerLocation>
-                    <maxAllowedViolations>${checkstyle.config.maxAllowedViolations}</maxAllowedViolations>
-                    <configLocation>${checkstyle.config.location}</configLocation>
-                    <consoleOutput>${checkstyle.config.consoleOutput}</consoleOutput>
-                    <failsOnError>${checkstyle.config.failsOnError}</failsOnError>
-                    <includeResources>${checkstyle.config.includeResources}</includeResources>
-                    <includeTestResources>${checkstyle.config.includeTestResources}</includeTestResources>
-                    <includeTestSourceDirectory>${checkstyle.config.includeTestSourceDirectory}</includeTestSourceDirectory>
-                    <linkXRef>${linkXRef}</linkXRef>
-                </configuration>
-            </plugin>
-            <!-- Setup Javadoc jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <configuration>
-                    <footer>Generated ${maven.build.timestamp}</footer>
-                    <defaultVersion>0.0.1</defaultVersion>
-                    <defaultAuthor>edwin.njeru</defaultAuthor>
-                    <removeUnknownThrows>true</removeUnknownThrows>
-                    <ignoreClirr>false</ignoreClirr>
-                    <version>true</version>
-                    <nosince>false</nosince>
-                    <show>private</show>
-                    <!-- Apple's JVM sometimes requires more memory -->
-                    <additionalJOption>-J-Xmx1024m</additionalJOption>
-                    <verbose>true</verbose>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <!--For compatibility comparisons-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -868,21 +889,7 @@
                 <version>2.8</version>
             </plugin>
 
-            <!-- Setup source jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <!-- Setup spotbugs dependency, would normally only be in reporting section -->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
@@ -998,8 +1005,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
         </plugins>
     </build>
 
