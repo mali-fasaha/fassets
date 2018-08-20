@@ -4,6 +4,11 @@ Changelog for fassets implementation by mali-fasaha
 ## Unreleased
 ### No issue
 
+**Added self activated java9+ profile to excuse use of illegal reflective access in reflectUtils classLoader in SpringFramework 5.0.7.RELEASE**
+
+
+[d3e9304e8fc6d4f](https://github.com/mali-fasaha/fassets/commit/d3e9304e8fc6d4f) ghacupha *2018-08-19 18:53:44*
+
 **Set windows profile to be self activated**
 
 

@@ -70,7 +70,7 @@
         <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.ut.execution.data.file>-->
         <converalls.repo.token>Aq0A50mRusMNemvnkmtWtUgUpxsgvMWGC</converalls.repo.token>
         <changelog.template.file>${project.basedir}/config/changelog.mustache</changelog.template.file>
-        <maven.compiler.fork>true</maven.compiler.fork>
+        <maven.compiler.fork>false</maven.compiler.fork>
         <maven.enforcer.required.maven.version>3.3.9</maven.enforcer.required.maven.version>
 
         <!--Plugin versions-->
@@ -239,6 +239,69 @@
                                 --add-opens java.base/java.lang=ALL-UNNAMED
                             </argLine>
                         </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>source</id>
+
+            <build>
+                <plugins>
+                    <!-- Setup scaffolding mycila license maven plugin-->
+                    <!--Use with mvn "mvn license:check", "mvn license:format" & "mvn license:remove"-->
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <version>${mycila.license.maven.plugin.version}</version>
+                        <configuration>
+                            <header>${license.header.location}</header>
+                            <headerDefinitions>${license.header.definition}</headerDefinitions>
+                            <properties>
+                                <owner>${license.maven.owner}</owner>
+                                <email>${license.maven.email}</email>
+                            </properties>
+                            <excludes>
+                                <exclude>**/README</exclude>
+                                <exclude>**/CHANGELOG.md</exclude>
+                                <exclude>**/LICENSE</exclude>
+                                <exclude>**/logs/**</exclude>
+                                <exclude>**/config/**</exclude>
+                                <exclude>**/.idea/**</exclude>
+                                <exclude>**/.mvn/**</exclude>
+                                <exclude>**/.okhttpcache/**</exclude>
+                                <exclude>**/target/**</exclude>
+                                <exclude>**/client/**</exclude>
+                                <exclude>**/temp-uploads/**</exclude>
+                                <exclude>src/test/resources/**</exclude>
+                                <exclude>src/main/resources/**</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Setup codehaus mojo license management plugin-->
+                    <!-- Invocation by 'mvn package'-->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <version>${codehaus.license.maven.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>download-licenses</id>
+                                <goals>
+                                    <goal>download-licenses</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -936,60 +999,7 @@
                 </executions>
             </plugin>
 
-            <!-- Setup scaffolding mycila license maven plugin-->
-            <!--Use with mvn "mvn license:check", "mvn license:format" & "mvn license:remove"-->
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${mycila.license.maven.plugin.version}</version>
-                <configuration>
-                    <header>${license.header.location}</header>
-                    <headerDefinitions>${license.header.definition}</headerDefinitions>
-                    <properties>
-                        <owner>${license.maven.owner}</owner>
-                        <email>${license.maven.email}</email>
-                    </properties>
-                    <excludes>
-                        <exclude>**/README</exclude>
-                        <exclude>**/CHANGELOG.md</exclude>
-                        <exclude>**/LICENSE</exclude>
-                        <exclude>**/logs/**</exclude>
-                        <exclude>**/config/**</exclude>
-                        <exclude>**/.idea/**</exclude>
-                        <exclude>**/.mvn/**</exclude>
-                        <exclude>**/.okhttpcache/**</exclude>
-                        <exclude>**/target/**</exclude>
-                        <exclude>**/client/**</exclude>
-                        <exclude>**/temp-uploads/**</exclude>
-                        <exclude>src/test/resources/**</exclude>
-                        <exclude>src/main/resources/**</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
-            <!-- Setup codehaus mojo license management plugin-->
-            <!-- Invocation by 'mvn package'-->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${codehaus.license.maven.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>download-licenses</id>
-                        <goals>
-                            <goal>download-licenses</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
