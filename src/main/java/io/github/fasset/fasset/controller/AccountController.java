@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccountController {
 
-    @GetMapping("api/accounts")
+    //TODO create interpretter for accounts
+    //TODO create accounts services
+    //TODO import flux dependencies
+
+    @GetMapping("api/accounts/list")
     public Flux<String> listAccounts(){
 
         return Flux.just();
