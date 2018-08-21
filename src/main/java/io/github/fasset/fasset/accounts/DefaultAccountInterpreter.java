@@ -13,7 +13,6 @@ import org.mali.fasaha.utils.Errors;
 import org.mali.fasaha.utils.Throwing.Consumer;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 
 public class DefaultAccountInterpreter implements AccountInterpreter {
@@ -60,8 +59,7 @@ public class DefaultAccountInterpreter implements AccountInterpreter {
                     .sorted()
                     .collect(ImmutableListCollector.toImmutableFastList()));
 
-        //todo List<FixedAssets> fixedAssets = batchAssetsResolver.resolveAssets(entries);
-        //todo return fixedAssets;
+        //todo return batchAssetsResolver.resolveAssets(entries);
         return null;
     }
 }
