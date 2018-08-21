@@ -449,6 +449,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
@@ -663,7 +667,7 @@
         <dependency>
             <groupId>org.reactivestreams</groupId>
             <artifactId>reactive-streams</artifactId>
-            <version>${reactive-streams.version}</version>
+            <!--<version>${reactive-streams.version}</version>-->
         </dependency>
         <!--<dependency>
             &lt;!&ndash;//todo find a way to integrate this with junit instead of testNG&ndash;&gt;
