@@ -15,12 +15,23 @@ import org.mali.fasaha.utils.Throwing.Consumer;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * This object is to be used to move between Accounts and Assets representations in the back-end making
+ * it easier to
+ */
 public class DefaultAccountInterpreter implements AccountInterpreter {
 
-    private BatchEntryResolver batchEntryResolver;
+    //todo implement thread-safe double-checked locking singleton
 
-    private Transaction transaction;
+    private final BatchEntryResolver batchEntryResolver;
+    private final Transaction transaction;
 
+    private DefaultAccountInterpreter(Transaction transaction, BatchEntryResolver batchEntryResolver) {
+        this.transaction = transaction;
+        this.batchEntryResolver = batchEntryResolver;
+    }
+
+    //@formatter: off
     /**
      * This method generates a List of Accounts from the assets provided.
      *
@@ -40,11 +51,18 @@ public class DefaultAccountInterpreter implements AccountInterpreter {
             throw new AccountInterpreterException(entries, transaction, e);
         }
 
-        return ConcurrentList.of(transaction.getEntries().stream().map(AccountingEntry::getAccount).distinct().collect(ImmutableListCollector.toImmutableFastList()));
+        return ConcurrentList.of(transaction.getEntries()
+                                            .stream()
+                                            .map(AccountingEntry::getAccount)
+                                            .distinct()
+                                            .collect(ImmutableListCollector.toImmutableFastList()));
     }
+    // @formatter: on
 
+    //@formatter: off
     /**
-     * This method generates a list of Assets given a list of accounts
+     * This method generates a list of Assets given a list of accounts. Before it is run, there will be a
+     * need to check for duplication with already existing assets
      *
      * @param accounts List of accounts to be translated into assets
      * @return list of fixed assets
@@ -62,4 +80,5 @@ public class DefaultAccountInterpreter implements AccountInterpreter {
         //todo return batchAssetsResolver.resolveAssets(entries);
         return null;
     }
+    // @formatter: on
 }
