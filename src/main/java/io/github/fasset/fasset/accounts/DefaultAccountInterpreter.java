@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * This object is to be used to move between Accounts and Assets representations in the back-end making
- * it easier to
+ * it easier to reason about assets and acquisition dates.
  */
 public class DefaultAccountInterpreter implements AccountInterpreter {
 
