@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ghacupha/fassets.svg?branch=master)](https://travis-ci.org/ghacupha/fassets)
+[![Build Status](https://travis-ci.org/mali-fasaha/fassets.svg?branch=master)](https://travis-ci.org/mali-fasaha/fassets)
 
 [![Coverage Status](https://coveralls.io/repos/github/ghacupha/fassets/badge.svg?branch=master)](https://coveralls.io/github/ghacupha/fassets?branch=master)
 
