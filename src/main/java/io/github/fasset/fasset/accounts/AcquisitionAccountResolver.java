@@ -59,7 +59,7 @@ public class AcquisitionAccountResolver implements AccountResolver {
     /**
      * <p>Constructor for AcquisitionAccountResolver.</p>
      *
-     * @param debitAccountIdResolver a {@link io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver} object.
+     * @param debitAccountIdResolver  a {@link io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver} object.
      * @param creditAccountIDResolver a {@link io.github.fasset.fasset.accounts.nomenclature.AccountIdResolver} object.
      */
     @Autowired
@@ -70,17 +70,15 @@ public class AcquisitionAccountResolver implements AccountResolver {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Generates appropriate Account for the asset passed in the parameter, when we are posting Acquisition
      */
     public Account resolveDebitAccount(FixedAsset fixedAsset) {
 
         log.debug("Getting acquisition debit account for asset : {}", fixedAsset.getAssetDescription());
 
-        Account debitAccount = new Account(debitAccountIdResolver.accountName(fixedAsset), debitAccountIdResolver.accountNumber(fixedAsset), DEBIT, Currency.getInstance(fixedAsset.getPurchaseCost()
-                                                                                                                                                                                   .getCurrency()
-                                                                                                                                                                                   .getCurrencyCode()),
-                                           SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
+        Account debitAccount = new Account(debitAccountIdResolver.accountName(fixedAsset), debitAccountIdResolver.accountNumber(fixedAsset), DEBIT,
+                                           Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
 
         debitAccount.addAttribute(CONTRA_ACCOUNT, debitAccountIdResolver.resolveContraAccountId(fixedAsset));
         debitAccount.addAttribute(GENERAL_LEDGER, debitAccountIdResolver.generalLedgerName(fixedAsset));
@@ -95,17 +93,15 @@ public class AcquisitionAccountResolver implements AccountResolver {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Generates appropriate credit Account for the asset passed in the parameter, when we are posting Acquisition
      */
     public Account resolveCreditAccount(FixedAsset fixedAsset) {
 
         log.debug("Getting acquisition credit account for asset : {}", fixedAsset.getAssetDescription());
 
-        Account creditAccount = new Account(creditAccountIDResolver.accountName(fixedAsset), creditAccountIDResolver.accountNumber(fixedAsset), CREDIT, Currency.getInstance(
-            fixedAsset.getPurchaseCost()
-                      .getCurrency()
-                      .getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
+        Account creditAccount = new Account(creditAccountIDResolver.accountName(fixedAsset), creditAccountIDResolver.accountNumber(fixedAsset), CREDIT,
+                                            Currency.getInstance(fixedAsset.getPurchaseCost().getCurrency().getCurrencyCode()), SimpleDate.ofLocal(fixedAsset.getPurchaseDate()));
 
         creditAccount.addAttribute(GENERAL_LEDGER, creditAccountIDResolver.generalLedgerName(fixedAsset));
         creditAccount.addAttribute(ACCOUNT_TYPE, "Liability"); //TBD on this

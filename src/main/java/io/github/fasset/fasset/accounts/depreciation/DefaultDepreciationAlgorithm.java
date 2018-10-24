@@ -32,7 +32,7 @@ public class DefaultDepreciationAlgorithm implements DepreciationAlgorithm {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Calculates the {@code Cash} amount of depreciation given the Asset to be depreciated and the DepreciationPeriod. At the very list it is expected that an object will be created that tracks the
      * last time an asset was depreciated amount of depreciation, the date of next depreciation date and the depreciation method
      */
@@ -41,7 +41,9 @@ public class DefaultDepreciationAlgorithm implements DepreciationAlgorithm {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String name() {
         return null;

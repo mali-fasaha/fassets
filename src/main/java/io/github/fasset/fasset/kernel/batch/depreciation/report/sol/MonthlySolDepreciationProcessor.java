@@ -41,7 +41,7 @@ public class MonthlySolDepreciationProcessor implements ItemProcessor<String, Mo
      * <p>Constructor for MonthlySolDepreciationProcessor.</p>
      *
      * @param monthlySolDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor} object.
-     * @param year a {@link java.lang.String} object.
+     * @param year                           a {@link java.lang.String} object.
      */
     public MonthlySolDepreciationProcessor(MonthlySolDepreciationExecutor monthlySolDepreciationExecutor, String year) {
         this.year = year;
@@ -50,7 +50,7 @@ public class MonthlySolDepreciationProcessor implements ItemProcessor<String, Mo
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
      */

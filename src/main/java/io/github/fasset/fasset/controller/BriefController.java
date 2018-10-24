@@ -35,7 +35,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * This controller serves up to the view data containing{@link io.github.fasset.fasset.model.brief.CategoryBrief} and {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} items from the data sink
+ * This controller serves up to the view data containing{@link io.github.fasset.fasset.model.brief.CategoryBrief} and {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} items from the data
+ * sink
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -53,7 +54,7 @@ public class BriefController {
     /**
      * <p>Constructor for BriefController.</p>
      *
-     * @param categoryBriefService a {@link io.github.fasset.fasset.service.CategoryBriefService} object.
+     * @param categoryBriefService      a {@link io.github.fasset.fasset.service.CategoryBriefService} object.
      * @param serviceOutletBriefService a {@link io.github.fasset.fasset.service.ServiceOutletBriefService} object.
      */
     @Autowired
@@ -97,10 +98,7 @@ public class BriefController {
     public List<ServiceOutletBriefResponseDto> getServiceOutletBriefs(Model model) {
 
         //TODO update other brief controllers
-        return serviceOutletBriefService.fetchAllServiceOutletBriefs()
-                                        .parallelStream()
-                                        .map(ServiceOutletBriefResponseDto::new)
-                                        .collect(ImmutableListCollector.toImmutableList());
+        return serviceOutletBriefService.fetchAllServiceOutletBriefs().parallelStream().map(ServiceOutletBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
     /**
@@ -126,10 +124,7 @@ public class BriefController {
     @ResponseBody
     public List<CategoryBriefResponseDto> getCategoryBriefs(Model model) {
 
-        return categoryBriefService.fetchAllCategoryBriefs()
-                                   .parallelStream()
-                                   .map(CategoryBriefResponseDto::new)
-                                   .collect(ImmutableListCollector.toImmutableList());
+        return categoryBriefService.fetchAllCategoryBriefs().parallelStream().map(CategoryBriefResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
     /**

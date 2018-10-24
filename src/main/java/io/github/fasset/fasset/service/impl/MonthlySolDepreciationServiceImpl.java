@@ -52,19 +52,18 @@ public class MonthlySolDepreciationServiceImpl implements MonthlySolDepreciation
         this.monthlySolDepreciationRepository = monthlySolDepreciationRepository;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<MonthlySolDepreciation> fetchAllMonthlySolDepreciations() {
 
-        return monthlySolDepreciationRepository.findAll()
-                                               .parallelStream()
-                                               .sorted(Comparator.comparing(MonthlySolDepreciation::getSolId))
-                                               .collect(ImmutableListCollector.toImmutableList());
+        return monthlySolDepreciationRepository.findAll().parallelStream().sorted(Comparator.comparing(MonthlySolDepreciation::getSolId)).collect(ImmutableListCollector.toImmutableList());
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Save all the items in the parameter into the MonthlySolDepreciationRepository
      */
     @Override

@@ -69,11 +69,11 @@ public class CategoryConfiguration extends DomainModel<String> {
     /**
      * <p>Constructor for CategoryConfiguration.</p>
      *
-     * @param designation a {@link java.lang.String} object.
+     * @param designation       a {@link java.lang.String} object.
      * @param depreciationLogic a {@link java.lang.String} object.
-     * @param deprecant a {@link java.lang.String} object.
-     * @param depreciationRate a double.
-     * @param categoryLedgerId a {@link java.lang.String} object.
+     * @param deprecant         a {@link java.lang.String} object.
+     * @param depreciationRate  a double.
+     * @param categoryLedgerId  a {@link java.lang.String} object.
      */
     public CategoryConfiguration(@NotNull(message = "Please provide a valid designation for category") String designation,
                                  @NotNull(message = "Please provide a valid designation for depreciation logic") String depreciationLogic,
@@ -183,7 +183,9 @@ public class CategoryConfiguration extends DomainModel<String> {
         this.categoryLedgerId = categoryLedgerId;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -200,16 +202,20 @@ public class CategoryConfiguration extends DomainModel<String> {
             Objects.equals(deprecant, that.deprecant) && Objects.equals(categoryLedgerId, that.categoryLedgerId);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), designation, depreciationLogic, deprecant, depreciationRate, categoryLedgerId);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format("CategoryConfiguration'{'designation=''{0}'', depreciationLogic=''{1}'', deprecant=''{2}'', depreciationRate={3}, categoryLedgerId=''{4}'''}'", designation,
-                                depreciationLogic, deprecant, depreciationRate, categoryLedgerId);
+                                    depreciationLogic, deprecant, depreciationRate, categoryLedgerId);
     }
 }

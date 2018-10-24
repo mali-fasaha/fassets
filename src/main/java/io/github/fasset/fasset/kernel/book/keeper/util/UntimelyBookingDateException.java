@@ -20,7 +20,8 @@ package io.github.fasset.fasset.kernel.book.keeper.util;
 import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 
 /**
- * This exception is thrown when the {@code TimePoint} bookingDate of the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} is sooner than the {@code TimePoint} openingDate attribute of the {@code Account}
+ * This exception is thrown when the {@code TimePoint} bookingDate of the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} is sooner than the {@code TimePoint} openingDate attribute
+ * of the {@code Account}
  *
  * @author edwin.njeru
  * @version $Id: $Id

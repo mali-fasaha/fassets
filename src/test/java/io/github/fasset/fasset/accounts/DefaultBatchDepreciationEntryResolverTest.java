@@ -95,10 +95,7 @@ public class DefaultBatchDepreciationEntryResolverTest {
             return "";
         };
 
-        assertTrue(entries.stream()
-                          .filter(entry -> entry.getAccountSide() == DEBIT)
-                          .map(getAttributes)
-                          .allMatch(att -> att.equalsIgnoreCase("Mock Depreciation Algorithm")));
+        assertTrue(entries.stream().filter(entry -> entry.getAccountSide() == DEBIT).map(getAttributes).allMatch(att -> att.equalsIgnoreCase("Mock Depreciation Algorithm")));
 
     }
 

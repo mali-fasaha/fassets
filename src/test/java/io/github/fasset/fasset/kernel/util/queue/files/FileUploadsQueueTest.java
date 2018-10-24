@@ -65,21 +65,19 @@ public class FileUploadsQueueTest {
     @Test(expected = MQException.class)
     public void throwMQException() {
 
-        messageQueue.push(
-            () -> fileUpload, () -> {throw new MQException();}
-        );
+        messageQueue.push(() -> fileUpload, () -> {
+            throw new MQException();
+        });
     }
 
     @Test//(expected = DeserializedFileException.class)
     public void throwDeserializedFileException() {
 
-        FileUpload fileUpload = new FileUpload("Upload File Test",YearMonth.now(), LocalDateTime.now());
+        FileUpload fileUpload = new FileUpload("Upload File Test", YearMonth.now(), LocalDateTime.now());
         fileUpload.setDeserialized(true);
 
-        messageQueue.push(
-            () -> fileUpload,
-            (e) -> System.out.println(String.format("Exception encountered: %s", e)),
-            () -> System.out.println(String.format("File upload review process done %s",fileUpload)));
+        messageQueue.push(() -> fileUpload, (e) -> System.out.println(String.format("Exception encountered: %s", e)),
+                          () -> System.out.println(String.format("File upload review process done %s", fileUpload)));
 
         //assertTrue(fileUpload.isDeserialized());
     }

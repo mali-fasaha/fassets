@@ -105,11 +105,11 @@ public class AccountServiceStressTestIT {
     public void entriesRecallAfterAcSideReversal() throws Exception {
 
         log.info("Loading 10000 entries through transaction");
-        for (int i = 0; i < 10000; i ++) {
+        for (int i = 0; i < 10000; i++) {
             Transaction temp = AccountingTransaction.create("Purchase Computers", SimpleDate.of(2018, 3, 31), KES);
-            temp.addEntry(DEBIT, shilling(350.23), computers, "Invoice # "+ i);
+            temp.addEntry(DEBIT, shilling(350.23), computers, "Invoice # " + i);
             temp.addEntry(CREDIT, shilling(150.23), sundryDebtorsAccount, "Accounting for expense Id # " + i);
-            temp.addEntry(CREDIT, shilling(200), cashAccount, "Cash IFO Computer Supplier # "+ i);
+            temp.addEntry(CREDIT, shilling(200), cashAccount, "Cash IFO Computer Supplier # " + i);
             temp.post();
         }
 

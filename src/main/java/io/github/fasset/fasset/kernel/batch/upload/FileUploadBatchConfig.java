@@ -67,16 +67,16 @@ public class FileUploadBatchConfig {
     /**
      * <p>Constructor for FileUploadBatchConfig.</p>
      *
-     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
-     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
-     * @param excelMapperService a {@link io.github.fasset.fasset.kernel.excel.ExcelMapperService} object.
-     * @param excelItemProcessor a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemProcessor} object.
-     * @param excelItemWriter a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemWriter} object.
-     * @param entityManagerFactory a {@link javax.persistence.EntityManagerFactory} object.
+     * @param jobBuilderFactory                      a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory                     a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param excelMapperService                     a {@link io.github.fasset.fasset.kernel.excel.ExcelMapperService} object.
+     * @param excelItemProcessor                     a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemProcessor} object.
+     * @param excelItemWriter                        a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemWriter} object.
+     * @param entityManagerFactory                   a {@link javax.persistence.EntityManagerFactory} object.
      * @param fixedAssetAccruedDepreciationProcessor a {@link io.github.fasset.fasset.kernel.batch.upload.FixedAssetAccruedDepreciationProcessor} object.
-     * @param accruedDepreciationWriter a {@link io.github.fasset.fasset.kernel.batch.upload.AccruedDepreciationWriter} object.
-     * @param netBookValueWriter a {@link io.github.fasset.fasset.kernel.batch.upload.NetBookValueWriter} object.
-     * @param fixedAssetNetBookValueProcessor a {@link io.github.fasset.fasset.kernel.batch.upload.FixedAssetNetBookValueProcessor} object.
+     * @param accruedDepreciationWriter              a {@link io.github.fasset.fasset.kernel.batch.upload.AccruedDepreciationWriter} object.
+     * @param netBookValueWriter                     a {@link io.github.fasset.fasset.kernel.batch.upload.NetBookValueWriter} object.
+     * @param fixedAssetNetBookValueProcessor        a {@link io.github.fasset.fasset.kernel.batch.upload.FixedAssetNetBookValueProcessor} object.
      */
     @Autowired
     public FileUploadBatchConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, @Qualifier("excelMapperService") ExcelMapperService excelMapperService,
@@ -161,10 +161,7 @@ public class FileUploadBatchConfig {
      */
     @Bean
     public Step readExcelFileStep() {
-        return stepBuilderFactory.get("readExcelFileStep").<FixedAssetDTO, FixedAsset>chunk(100).reader(excelItemReader(filePath))
-                                                                                                .processor(excelItemProcessor)
-                                                                                                .writer(excelItemWriter)
-                                                                                                .build();
+        return stepBuilderFactory.get("readExcelFileStep").<FixedAssetDTO, FixedAsset>chunk(100).reader(excelItemReader(filePath)).processor(excelItemProcessor).writer(excelItemWriter).build();
     }
 
     /**

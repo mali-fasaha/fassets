@@ -32,7 +32,7 @@ public class MonthyCategoryDepreciationJobListener implements JobExecutionListen
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Callback before a job executes.
      */
     @Override
@@ -42,7 +42,7 @@ public class MonthyCategoryDepreciationJobListener implements JobExecutionListen
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      */
     @Override

@@ -47,9 +47,9 @@ public class DepreciationAgentsChainImpl {
     /**
      * <p>Constructor for DepreciationAgentsChainImpl.</p>
      *
-     * @param depreciationAgent a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.DepreciationAgent} object.
+     * @param depreciationAgent        a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.DepreciationAgent} object.
      * @param accruedDepreciationAgent a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.AccruedDepreciationAgent} object.
-     * @param netBookValueAgent a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.NetBookValueAgent} object.
+     * @param netBookValueAgent        a {@link io.github.fasset.fasset.kernel.batch.depreciation.agent.NetBookValueAgent} object.
      */
     @Autowired
     public DepreciationAgentsChainImpl(DepreciationAgent depreciationAgent, AccruedDepreciationAgent accruedDepreciationAgent, NetBookValueAgent netBookValueAgent) {
@@ -73,8 +73,8 @@ public class DepreciationAgentsChainImpl {
     /**
      * <p>execute.</p>
      *
-     * @param asset a {@link io.github.fasset.fasset.model.FixedAsset} object.
-     * @param month a {@link java.time.YearMonth} object.
+     * @param asset                a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     * @param month                a {@link java.time.YearMonth} object.
      * @param depreciationProceeds a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationProceeds} object.
      */
     public void execute(FixedAsset asset, YearMonth month, DepreciationProceeds depreciationProceeds) {

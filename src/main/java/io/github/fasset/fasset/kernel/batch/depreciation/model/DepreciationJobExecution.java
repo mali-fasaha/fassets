@@ -154,7 +154,9 @@ public class DepreciationJobExecution extends DomainModel<String> {
         this.period = period;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -171,29 +173,26 @@ public class DepreciationJobExecution extends DomainModel<String> {
             Objects.equals(status, that.status) && Objects.equals(period, that.period);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), startTime, finishTime, lastUpdatedTime, status, noOfItems, period);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DepreciaionJobExecution{");
-        sb.append("startTime=")
-          .append(startTime);
-        sb.append(", finishTime=")
-          .append(finishTime);
-        sb.append(", lastUpdatedTime=")
-          .append(lastUpdatedTime);
-        sb.append(", status='")
-          .append(status)
-          .append('\'');
-        sb.append(", noOfItems=")
-          .append(noOfItems);
-        sb.append(", period=")
-          .append(period);
+        sb.append("startTime=").append(startTime);
+        sb.append(", finishTime=").append(finishTime);
+        sb.append(", lastUpdatedTime=").append(lastUpdatedTime);
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", noOfItems=").append(noOfItems);
+        sb.append(", period=").append(period);
         sb.append('}');
         return sb.toString();
     }

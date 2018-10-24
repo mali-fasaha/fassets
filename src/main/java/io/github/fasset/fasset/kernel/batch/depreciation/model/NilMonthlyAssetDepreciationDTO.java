@@ -29,93 +29,120 @@ public class NilMonthlyAssetDepreciationDTO extends MonthlyAssetDepreciationDTO 
      * <p>Constructor for NilMonthlyAssetDepreciationDTO.</p>
      *
      * @param assetId a {@link java.lang.Integer} object.
-     * @param year a {@link java.lang.Integer} object.
+     * @param year    a {@link java.lang.Integer} object.
      */
     public NilMonthlyAssetDepreciationDTO(Integer assetId, Integer year) {
         super();
-        super.setAssetId(assetId)
-             .setYear(year);
+        super.setAssetId(assetId).setYear(year);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer getAssetId() {
         return 0;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer getYear() {
         return 0;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getJan() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getFeb() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getMar() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getApr() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getMay() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getJun() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getJul() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getAug() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getSep() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getOct() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getNov() {
         return 0.00;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Double getDec() {
         return 0.00;

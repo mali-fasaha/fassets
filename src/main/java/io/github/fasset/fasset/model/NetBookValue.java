@@ -70,10 +70,10 @@ public class NetBookValue extends DomainModel<String> {
      * <p>Constructor for NetBookValue.</p>
      *
      * @param fixedAssetId a int.
-     * @param month a {@link java.time.YearMonth} object.
+     * @param month        a {@link java.time.YearMonth} object.
      * @param netBookValue a {@link org.javamoney.moneta.Money} object.
-     * @param solId a {@link java.lang.String} object.
-     * @param category a {@link java.lang.String} object.
+     * @param solId        a {@link java.lang.String} object.
+     * @param category     a {@link java.lang.String} object.
      */
     public NetBookValue(int fixedAssetId, YearMonth month, Money netBookValue, String solId, String category) {
         this.fixedAssetId = fixedAssetId;
@@ -190,7 +190,9 @@ public class NetBookValue extends DomainModel<String> {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -207,13 +209,17 @@ public class NetBookValue extends DomainModel<String> {
             Objects.equals(category, that.category);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), fixedAssetId, month, netBookValue, solId, category);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format("NetBookValue'{'fixedAssetId={0}, month={1}, netBookValue={2}, solId=''{3}'', category=''{4}'''}'", fixedAssetId, month, netBookValue, solId, category);

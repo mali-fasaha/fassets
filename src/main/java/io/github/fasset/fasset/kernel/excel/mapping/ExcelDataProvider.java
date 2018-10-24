@@ -29,7 +29,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This is a delegate for generating a {@link java.util.List} of {@code T} Given a filePath and a class it can generate a list of the objects of the class when class and the excel file resonate with each other
+ * This is a delegate for generating a {@link java.util.List} of {@code T} Given a filePath and a class it can generate a list of the objects of the class when class and the excel file resonate with
+ * each other
  *
  * @param <T> Type of objects in a collection as read from the excel file
  * @author edwin.njeru

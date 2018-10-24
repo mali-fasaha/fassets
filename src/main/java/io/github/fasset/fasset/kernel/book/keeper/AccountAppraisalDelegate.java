@@ -33,10 +33,11 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CRE
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 
 /**
- * Okay so then we had to expose the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} against better advise since calling the {@link io.github.fasset.fasset.kernel.book.keeper.Account#balance} method is going to be an expensive method, which could most likely trigger a
- * circular dependency loop. There needs to be a method for getting the current {@code AccountSide} without gritting your teeth. So uncle Bob please forgive me for I have sinned, but there is just no
- * practical inexpensive way of doing this stuff, and still be able to use this delegate for any {@link io.github.fasset.fasset.kernel.book.keeper.Account} implementation. This delegate is designed to serve up a balance for any {@link io.github.fasset.fasset.kernel.book.keeper.Account}
- * implementation
+ * Okay so then we had to expose the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} against better advise since calling the {@link
+ * io.github.fasset.fasset.kernel.book.keeper.Account#balance} method is going to be an expensive method, which could most likely trigger a circular dependency loop. There needs to be a method for
+ * getting the current {@code AccountSide} without gritting your teeth. So uncle Bob please forgive me for I have sinned, but there is just no practical inexpensive way of doing this stuff, and still
+ * be able to use this delegate for any {@link io.github.fasset.fasset.kernel.book.keeper.Account} implementation. This delegate is designed to serve up a balance for any {@link
+ * io.github.fasset.fasset.kernel.book.keeper.Account} implementation
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -85,9 +86,7 @@ public class AccountAppraisalDelegate {
         return HardCash.of(accountEntries.parallelStream()
                                          .filter(entry -> dateRange.includes(entry.getBookingDate()))
                                          .filter(entry -> entry.getAccountSide() == CREDIT)
-                                         .map(entry -> entry.getAmount()
-                                                            .getNumber()
-                                                            .doubleValue())
+                                         .map(entry -> entry.getAmount().getNumber().doubleValue())
                                          .reduce(0.00, (acc, value) -> acc + value), account.getCurrency());
     }
 
@@ -95,9 +94,7 @@ public class AccountAppraisalDelegate {
         return HardCash.of(accountEntries.parallelStream()
                                          .filter(entry -> dateRange.includes(entry.getBookingDate()))
                                          .filter(entry -> entry.getAccountSide() == DEBIT)
-                                         .map(entry -> entry.getAmount()
-                                                            .getNumber()
-                                                            .doubleValue())
+                                         .map(entry -> entry.getAmount().getNumber().doubleValue())
                                          .reduce(0.00, (acc, value) -> acc + value), account.getCurrency());
     }
 }

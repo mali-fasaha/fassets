@@ -50,7 +50,7 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Appends the specified element to the end of this list.
      */
     @Override
@@ -63,7 +63,9 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
         return super.add(e);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void forEach(Consumer<? super E> consumer) {
 
@@ -78,25 +80,33 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
         });
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getItemsAdded() {
         return itemsAdded;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getItemsProcessed() {
         return itemsProcessed;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getRemainingItems() {
         return remainingItems;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -114,7 +124,9 @@ public class ProcessingListImpl<E> extends FastList<E> implements ProcessingList
         return itemsAdded == that.itemsAdded && itemsProcessed == that.itemsProcessed && remainingItems == that.remainingItems;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result = super.hashCode();

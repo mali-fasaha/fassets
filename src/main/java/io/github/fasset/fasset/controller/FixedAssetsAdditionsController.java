@@ -68,7 +68,7 @@ public class FixedAssetsAdditionsController {
     /**
      * <p>saveFixedAssetFromForm.</p>
      *
-     * @param fixedAssetDto a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
+     * @param fixedAssetDto      a {@link io.github.fasset.fasset.dto.FixedAssetFormDto} object.
      * @param redirectAttributes a {@link org.springframework.web.servlet.mvc.support.RedirectAttributes} object.
      * @return a {@link java.lang.String} object.
      */

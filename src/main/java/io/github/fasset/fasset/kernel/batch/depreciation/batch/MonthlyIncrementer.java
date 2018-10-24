@@ -55,10 +55,7 @@ public class MonthlyIncrementer {
      */
     public List<DepreciationJobInstance> getJobInstanceSequence() {
 
-        return depreciationJobInstanceRepository.findAll()
-                                                .parallelStream()
-                                                .sorted()
-                                                .collect(Collectors.toList());
+        return depreciationJobInstanceRepository.findAll().parallelStream().sorted().collect(Collectors.toList());
     }
 
     /**
@@ -68,9 +65,7 @@ public class MonthlyIncrementer {
      */
     public List<YearMonth> getMonthSequence() {
 
-        return getJobInstanceSequence().stream()
-                                       .map(DepreciationJobInstance::getMonth)
-                                       .collect(Collectors.toList());
+        return getJobInstanceSequence().stream().map(DepreciationJobInstance::getMonth).collect(Collectors.toList());
     }
 
     /**
@@ -87,8 +82,7 @@ public class MonthlyIncrementer {
         if (listSize != 0) {
             return null;
         } else {
-            return jobInstanceList.get(listSize - 1)
-                                  .getMonth();
+            return jobInstanceList.get(listSize - 1).getMonth();
         }
     }
 

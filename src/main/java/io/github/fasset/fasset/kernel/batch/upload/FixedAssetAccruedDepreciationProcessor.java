@@ -41,7 +41,7 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
      */
@@ -52,14 +52,10 @@ public class FixedAssetAccruedDepreciationProcessor implements ItemProcessor<Fix
 
         AccruedDepreciation retVal = new AccruedDepreciation();
 
-        Money acc = fixedAsset.getPurchaseCost()
-                              .subtract(fixedAsset.getNetBookValue());
+        Money acc = fixedAsset.getPurchaseCost().subtract(fixedAsset.getNetBookValue());
 
         try {
-            retVal.setCategory(fixedAsset.getCategory())
-                  .setFixedAssetId(fixedAsset.getId())
-                  .setSolId(fixedAsset.getSolId())
-                  .setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
+            retVal.setCategory(fixedAsset.getCategory()).setFixedAssetId(fixedAsset.getId()).setSolId(fixedAsset.getSolId()).setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
                   .setAccruedDepreciation(acc);
         } catch (Throwable e) {
             String message = String.format("Exception encountered while deriving accruedDepreciation from" + "%S", fixedAsset);

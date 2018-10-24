@@ -40,7 +40,7 @@ public class StorageException extends RuntimeException {
      * <p>Constructor for StorageException.</p>
      *
      * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
+     * @param cause   a {@link java.lang.Throwable} object.
      */
     public StorageException(String message, Throwable cause) {
         super(message, cause);

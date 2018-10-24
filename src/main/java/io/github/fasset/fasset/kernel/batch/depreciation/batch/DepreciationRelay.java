@@ -51,7 +51,7 @@ public class DepreciationRelay {
     /**
      * <p>Constructor for DepreciationRelay.</p>
      *
-     * @param monthlyIncrementer a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.MonthlyIncrementer} object.
+     * @param monthlyIncrementer     a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.MonthlyIncrementer} object.
      * @param depreciationProperties a {@link io.github.fasset.fasset.kernel.batch.depreciation.model.DepreciationProperties} object.
      */
     @Autowired
@@ -84,12 +84,10 @@ public class DepreciationRelay {
 
         log.debug("Creating a monthly depreciation sequence for : {} months", noOfMonths + 1);
 
-        LongStream.range(0, noOfMonths)
-                  .mapToObj(i -> monthlyIncrementer.getNext(from.plusMonths(i)))
-                  .forEachOrdered(monthSeq -> {
-                      log.trace("Adding the month : {} to the sequence", monthSeq);
-                      monthlySequence.add(monthSeq);
-                  });
+        LongStream.range(0, noOfMonths).mapToObj(i -> monthlyIncrementer.getNext(from.plusMonths(i))).forEachOrdered(monthSeq -> {
+            log.trace("Adding the month : {} to the sequence", monthSeq);
+            monthlySequence.add(monthSeq);
+        });
 
         return monthlySequence;
     }

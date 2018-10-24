@@ -89,33 +89,21 @@ public class DefaultEntryResolverIT {
 
         assetAcquisition.post();
 
-        List<Account> accountsFromEntries = IntStream.range(0, fixedAssets.size() * 2)
-                                                     .mapToObj(i -> entries.get(i)
-                                                                           .getAccount())
-                                                     .collect(ImmutableListCollector.toImmutableList());
+        List<Account> accountsFromEntries = IntStream.range(0, fixedAssets.size() * 2).mapToObj(i -> entries.get(i).getAccount()).collect(ImmutableListCollector.toImmutableList());
 
-        accountNames = accountsFromEntries.stream()
-                                          .map(Account::getName)
-                                          .distinct()
-                                          .collect(ImmutableListCollector.toImmutableFastList());
+        accountNames = accountsFromEntries.stream().map(Account::getName).distinct().collect(ImmutableListCollector.toImmutableFastList());
 
-        accountBalances = accountsFromEntries.stream()
-                                             .collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentHashMap::new));
+        accountBalances = accountsFromEntries.stream().collect(Collectors.toMap(Account::getName, i -> i.balance(2018, 2, 26), (a, b) -> b, ConcurrentHashMap::new));
 
-        accountNumbers = accountsFromEntries.stream()
-                                            .collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentHashMap::new));
+        accountNumbers = accountsFromEntries.stream().collect(Collectors.toMap(Account::getName, Account::getNumber, (a, b) -> b, ConcurrentHashMap::new));
 
         sundryCreditorBalances = accountsFromEntries.stream()
-                                                    .filter(i -> i.getName()
-                                                                  .equalsIgnoreCase("SUNDRY CREDITORS"))
+                                                    .filter(i -> i.getName().equalsIgnoreCase("SUNDRY CREDITORS"))
                                                     .map(account -> account.balance(on(2018, 2, 26)))
                                                     .collect(ImmutableListCollector.toImmutableFastList());
 
-        sundryCreditorNumbers = accountsFromEntries.stream()
-                                                   .filter(account -> account.getName()
-                                                                             .equalsIgnoreCase("SUNDRY CREDITORS"))
-                                                   .map(Account::getNumber)
-                                                   .collect(ImmutableListCollector.toImmutableFastList());
+        sundryCreditorNumbers =
+            accountsFromEntries.stream().filter(account -> account.getName().equalsIgnoreCase("SUNDRY CREDITORS")).map(Account::getNumber).collect(ImmutableListCollector.toImmutableFastList());
     }
 
     @Test

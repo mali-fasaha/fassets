@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * This controller generates the template for the asset list and provides Response to the dataTable implementation running in the client, providing with it a collection of all {@link io.github.fasset.fasset.model.FixedAsset} items
- * in the data sink
+ * This controller generates the template for the asset list and provides Response to the dataTable implementation running in the client, providing with it a collection of all {@link
+ * io.github.fasset.fasset.model.FixedAsset} items in the data sink
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -90,9 +90,7 @@ public class AssetListingController {
 
         log.info("Returning a list of : {} assets", fixedAssets.size());
 
-        return fixedAssets.parallelStream()
-                          .map(FixedAssetResponseDto::new)
-                          .collect(ImmutableListCollector.toImmutableList());
+        return fixedAssets.parallelStream().map(FixedAssetResponseDto::new).collect(ImmutableListCollector.toImmutableList());
     }
 
     /**

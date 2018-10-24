@@ -56,8 +56,8 @@ public class NilDepreciation {
     /**
      * <p>Constructor for NilDepreciation.</p>
      *
-     * @param moneyProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
-     * @param asset a {@link io.github.fasset.fasset.model.FixedAsset} object.
+     * @param moneyProperties    a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     * @param asset              a {@link io.github.fasset.fasset.model.FixedAsset} object.
      * @param depreciationPeriod a {@link java.time.YearMonth} object.
      */
     public NilDepreciation(MoneyProperties moneyProperties, FixedAsset asset, YearMonth depreciationPeriod) {
@@ -220,7 +220,9 @@ public class NilDepreciation {
         this.depreciation = depreciation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -234,32 +236,27 @@ public class NilDepreciation {
             Objects.equals(depreciationPeriod, that.depreciationPeriod) && Objects.equals(category, that.category) && Objects.equals(solId, that.solId);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(year, month, depreciationPeriod, fixedAssetId, category, solId, depreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("NilDepreciation{");
-        sb.append("year=")
-          .append(year);
-        sb.append(", month=")
-          .append(month);
-        sb.append(", depreciationPeriod=")
-          .append(depreciationPeriod);
-        sb.append(", fixedAssetId=")
-          .append(fixedAssetId);
-        sb.append(", category='")
-          .append(category)
-          .append('\'');
-        sb.append(", solId='")
-          .append(solId)
-          .append('\'');
-        sb.append(", depreciation=")
-          .append(depreciation);
+        sb.append("year=").append(year);
+        sb.append(", month=").append(month);
+        sb.append(", depreciationPeriod=").append(depreciationPeriod);
+        sb.append(", fixedAssetId=").append(fixedAssetId);
+        sb.append(", category='").append(category).append('\'');
+        sb.append(", solId='").append(solId).append('\'');
+        sb.append(", depreciation=").append(depreciation);
         sb.append('}');
         return sb.toString();
     }

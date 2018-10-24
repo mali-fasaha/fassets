@@ -47,7 +47,7 @@ public class MonthlyCategoryDepreciationWriter implements ItemWriter<MonthlyCate
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override

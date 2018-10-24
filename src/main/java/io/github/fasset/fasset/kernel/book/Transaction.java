@@ -50,7 +50,7 @@ public interface Transaction {
      * @param account         {@link io.github.fasset.fasset.kernel.book.keeper.Account} into which the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} is posted
      * @param narration       {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} specifications of the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry}
      * @param entryAttributes Map containing additional info about the entry
-     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException if any.
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException     if any.
      * @throws io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException if any.
      */
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes) throws ImmutableEntryException, MismatchedCurrencyException;
@@ -69,7 +69,7 @@ public interface Transaction {
      * @param narration       a brief narration of the entry
      * @param entryAttributes Map containing additional details about the entry being entered
      * @param date            posting date of the entry
-     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException if any.
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException     if any.
      * @throws io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException if any.
      */
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, Map<String, String> entryAttributes, TimePoint date)
@@ -88,7 +88,7 @@ public interface Transaction {
      * @param account     {@link io.github.fasset.fasset.kernel.book.keeper.Account} into which the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} is being added
      * @param narration   a brief narration of the entry
      * @param date        posting date of the entry
-     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException if any.
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException     if any.
      * @throws io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException if any.
      */
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration, TimePoint date) throws ImmutableEntryException, MismatchedCurrencyException;
@@ -98,7 +98,7 @@ public interface Transaction {
      *
      * @param entry Fully formed Entry for addition to this
      * @throws io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException if any.
-     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException if any.
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException     if any.
      */
     void addEntry(AccountingEntry entry) throws MismatchedCurrencyException, ImmutableEntryException;
 
@@ -115,15 +115,16 @@ public interface Transaction {
      * @param accountSide to which the entry is being posted
      * @param account     {@link io.github.fasset.fasset.kernel.book.keeper.Account} into which the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} is being added
      * @param narration   a brief narration of the entry
-     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException if any.
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException     if any.
      * @throws io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException if any.
      */
     void addEntry(AccountSide accountSide, Cash amount, Account account, String narration) throws ImmutableEntryException, MismatchedCurrencyException;
 
     /**
-     * Adds the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items into the accounts involved in this {@link io.github.fasset.fasset.kernel.book.Transaction}. This method will not run if it is already posted
+     * Adds the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items into the accounts involved in this {@link io.github.fasset.fasset.kernel.book.Transaction}. This method will
+     * not run if it is already posted
      *
-     * @throws io.github.fasset.fasset.kernel.book.keeper.util.UnableToPostException if any.
+     * @throws io.github.fasset.fasset.kernel.book.keeper.util.UnableToPostException   if any.
      * @throws io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException if any.
      */
     void post() throws UnableToPostException, ImmutableEntryException;

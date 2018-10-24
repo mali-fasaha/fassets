@@ -47,7 +47,7 @@ public class MapperOptions {
      * <p>Constructor for MapperOptions.</p>
      *
      * @param datePattern a {@link java.lang.String} object.
-     * @param skipRows a {@link java.lang.Integer} object.
+     * @param skipRows    a {@link java.lang.Integer} object.
      */
     public MapperOptions(String datePattern, Integer skipRows) {
         this.datePattern = datePattern;
@@ -67,10 +67,7 @@ public class MapperOptions {
      */
     public PoijiOptions getPoijiOptions() {
 
-        return PoijiOptionsBuilder.settings()
-                                  .datePattern(datePattern)
-                                  .skip(skipRows)
-                                  .build();
+        return PoijiOptionsBuilder.settings().datePattern(datePattern).skip(skipRows).build();
     }
 
     /**
@@ -113,7 +110,9 @@ public class MapperOptions {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -126,18 +125,19 @@ public class MapperOptions {
         return Objects.equal(datePattern, options.datePattern) && Objects.equal(skipRows, options.skipRows);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(datePattern, skipRows);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                          .add("datePattern", datePattern)
-                          .add("skipRows", skipRows)
-                          .toString();
+        return MoreObjects.toStringHelper(this).add("datePattern", datePattern).add("skipRows", skipRows).toString();
     }
 }

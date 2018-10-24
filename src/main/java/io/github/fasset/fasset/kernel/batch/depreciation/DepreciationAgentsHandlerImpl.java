@@ -37,15 +37,11 @@ public class DepreciationAgentsHandlerImpl implements DepreciationAgentsHandler 
 
     /**
      * <p>setDepreciationAgentsChain</p>
-     * This method exists to assist in setting up the depreciationAgentsChain without using
-     * constructor injection. This is because doing so would lead to circular dependency problems
-     * making for an unstable startup. The spring container tends to create this dependencies and
-     * related dependencies at the startup at the same time. Since this object depends on the
-     * DepreciationChain which depends on the DepreciationExecutor which transitively depends on
-     * the DepreciationChainHandler, it would break the application start up.
+     * This method exists to assist in setting up the depreciationAgentsChain without using constructor injection. This is because doing so would lead to circular dependency problems making for an
+     * unstable startup. The spring container tends to create this dependencies and related dependencies at the startup at the same time. Since this object depends on the DepreciationChain which
+     * depends on the DepreciationExecutor which transitively depends on the DepreciationChainHandler, it would break the application start up.
      *
-     * @param depreciationAgentsChain This is the object containing a chain of executable Agents for
-     *                                the depreciation process
+     * @param depreciationAgentsChain This is the object containing a chain of executable Agents for the depreciation process
      */
     @Autowired
     public void setDepreciationAgentsChain(final DepreciationAgentsChainImpl depreciationAgentsChain) {
@@ -63,7 +59,9 @@ public class DepreciationAgentsHandlerImpl implements DepreciationAgentsHandler 
         depreciationAgentsChain.addAgent(agent);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendRequest(FixedAsset asset, YearMonth month, DepreciationProceeds depreciationProceeds) {
 

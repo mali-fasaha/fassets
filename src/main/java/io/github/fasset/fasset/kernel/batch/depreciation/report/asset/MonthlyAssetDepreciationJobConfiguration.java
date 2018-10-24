@@ -69,12 +69,12 @@ public class MonthlyAssetDepreciationJobConfiguration {
     /**
      * <p>Constructor for MonthlyAssetDepreciationJobConfiguration.</p>
      *
-     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
-     * @param monthlyAssetDepreciationService a {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} object.
-     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
-     * @param fixedAssetItemReader a {@link org.springframework.batch.item.ItemReader} object.
+     * @param jobBuilderFactory                a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param monthlyAssetDepreciationService  a {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} object.
+     * @param stepBuilderFactory               a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param fixedAssetItemReader             a {@link org.springframework.batch.item.ItemReader} object.
      * @param monthlyAssetDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationExecutor} object.
-     * @param monthlySolDepreciationService a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
+     * @param monthlySolDepreciationService    a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
      */
     @Autowired
     public MonthlyAssetDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, @Qualifier("monthlyAssetDepreciationService") MonthlyAssetDepreciationService monthlyAssetDepreciationService,

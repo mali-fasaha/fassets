@@ -46,7 +46,7 @@ public class AcquisitionCreditAccountIDResolverTest {
     public void setUp() throws Exception {
 
         AccountIdService accountIdService = Mockito.mock(AccountIdService.class);
-        
+
         when(accountIdService.accountName(ACQUISITION, CREDIT, radio)).thenReturn("SUNDRY CREDITORS");
         when(accountIdService.accountName(ACQUISITION, CREDIT, lenovo)).thenReturn("SUNDRY CREDITORS");
         when(accountIdService.accountName(ACQUISITION, CREDIT, chair)).thenReturn("SUNDRY CREDITORS");
@@ -68,12 +68,12 @@ public class AcquisitionCreditAccountIDResolverTest {
         when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, kca)).thenReturn("10051");
         when(accountIdService.generalLedgerCode(ACQUISITION, CREDIT, officePartitioning)).thenReturn("10051");
 
-        when(accountIdService.accountNumber("001","00","10051","001")).thenReturn("0010010051001");
-        when(accountIdService.accountNumber("987","00","10051","001")).thenReturn("9870010051001");
-        when(accountIdService.accountNumber("010","00","10051","001")).thenReturn("0100010051001");
-        when(accountIdService.accountNumber("986","00","10051","001")).thenReturn("9860010051001");
-        when(accountIdService.accountNumber("996","00","10051","001")).thenReturn("9960010051001");
-        when(accountIdService.accountNumber("978","00","10051","001")).thenReturn("9780010051001");
+        when(accountIdService.accountNumber("001", "00", "10051", "001")).thenReturn("0010010051001");
+        when(accountIdService.accountNumber("987", "00", "10051", "001")).thenReturn("9870010051001");
+        when(accountIdService.accountNumber("010", "00", "10051", "001")).thenReturn("0100010051001");
+        when(accountIdService.accountNumber("986", "00", "10051", "001")).thenReturn("9860010051001");
+        when(accountIdService.accountNumber("996", "00", "10051", "001")).thenReturn("9960010051001");
+        when(accountIdService.accountNumber("978", "00", "10051", "001")).thenReturn("9780010051001");
 
         when(accountIdService.currencyCode("KES")).thenReturn("00");
 
@@ -102,7 +102,7 @@ public class AcquisitionCreditAccountIDResolverTest {
         assertEquals("9780010051001", accountIdResolver.accountNumber(officePartitioning));
     }
 
-    @Test( expected = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void resolveContraAccountId() {
 
         assertEquals("SUNDRY CREDITORS", accountIdResolver.resolveContraAccountId(radio));

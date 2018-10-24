@@ -10,13 +10,13 @@ import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.kernel.util.exception.AccountInterpreterException;
 import io.github.fasset.fasset.model.FixedAsset;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * This object is to be used to move between Accounts and Assets representations in the back-end making
- * it easier to reason about assets and acquisition dates.
+ * This object is to be used to move between Accounts and Assets representations in the back-end making it easier to reason about assets and acquisition dates.
  */
 public class DefaultAccountInterpreter implements AccountInterpreter {
 
@@ -31,6 +31,7 @@ public class DefaultAccountInterpreter implements AccountInterpreter {
     }
 
     //@formatter: off
+
     /**
      * This method generates a List of Accounts from the assets provided.
      *
@@ -56,18 +57,14 @@ public class DefaultAccountInterpreter implements AccountInterpreter {
             throw new AccountInterpreterException(entries, transaction, e);
         }
 
-        return ConcurrentList.of(transaction.getEntries()
-                                            .stream()
-                                            .map(AccountingEntry::getAccount)
-                                            .distinct()
-                                            .collect(ImmutableListCollector.toImmutableFastList()));
+        return ConcurrentList.of(transaction.getEntries().stream().map(AccountingEntry::getAccount).distinct().collect(ImmutableListCollector.toImmutableFastList()));
     }
     // @formatter: on
 
     //@formatter: off
+
     /**
-     * This method generates a list of Assets given a list of accounts. Before it is run, there will be a
-     * need to check for duplication with already existing assets
+     * This method generates a list of Assets given a list of accounts. Before it is run, there will be a need to check for duplication with already existing assets
      *
      * @param accounts List of accounts to be translated into assets
      * @return list of fixed assets
@@ -75,12 +72,7 @@ public class DefaultAccountInterpreter implements AccountInterpreter {
     @Override
     public List<FixedAsset> interpretAccounts(final List<Account> accounts) {
 
-        List<AccountingEntry> entries = ConcurrentList.of(
-            accounts.stream()
-                    .map(Account::getEntries)
-                    .flatMap(Collection::stream)
-                    .sorted()
-                    .collect(ImmutableListCollector.toImmutableFastList()));
+        List<AccountingEntry> entries = ConcurrentList.of(accounts.stream().map(Account::getEntries).flatMap(Collection::stream).sorted().collect(ImmutableListCollector.toImmutableFastList()));
 
         //todo return batchAssetsResolver.resolveAssets(entries);
         return null;

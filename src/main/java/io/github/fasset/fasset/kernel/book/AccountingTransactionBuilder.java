@@ -44,14 +44,15 @@ public class AccountingTransactionBuilder implements TransactionBuilder {
 
     private int counter = 0;
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Transaction createTransaction(List<AccountingEntry> entries) {
 
         log.debug("The accountingTransactionBuilder is creating transaction for {} entries", entries);
 
-        Currency currency = entries.get(0)
-                                   .getCurrency();
+        Currency currency = entries.get(0).getCurrency();
 
         // todo create sequential naming for transactions
         AccountingTransaction entryTransaction = AccountingTransaction.create(format("Tran%s", ++counter), SimpleDate.today(), currency);

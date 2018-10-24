@@ -54,7 +54,8 @@ public interface FixedAssetService {
     FixedAsset fetchAssetGivenId(int id);
 
     /**
-     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link io.github.fasset.fasset.model.brief.CategoryBrief} for the category given in the parameter
+     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link io.github.fasset.fasset.model.brief.CategoryBrief} for the category given
+     * in the parameter
      *
      * @param category for which we are preparing a brief
      * @return {@link io.github.fasset.fasset.model.brief.CategoryBrief}
@@ -62,7 +63,8 @@ public interface FixedAssetService {
     CategoryBrief getCategoryBrief(String category);
 
     /**
-     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} for the SOL queried in the parameter
+     * By querying the {@link io.github.fasset.fasset.repository.FixedAssetRepository} this method is able to create a {@link io.github.fasset.fasset.model.brief.ServiceOutletBrief} for the SOL
+     * queried in the parameter
      *
      * @param solId for which we are preparing a brief
      * @return {@link io.github.fasset.fasset.model.brief.CategoryBrief}

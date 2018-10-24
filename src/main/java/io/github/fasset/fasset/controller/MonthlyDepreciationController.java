@@ -48,8 +48,8 @@ public class MonthlyDepreciationController {
     /**
      * <p>Constructor for MonthlyDepreciationController.</p>
      *
-     * @param monthlyAssetDepreciationService a {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} object.
-     * @param monthlySolDepreciationService a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
+     * @param monthlyAssetDepreciationService    a {@link io.github.fasset.fasset.service.MonthlyAssetDepreciationService} object.
+     * @param monthlySolDepreciationService      a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
      * @param monthlyCategoryDepreciationService a {@link io.github.fasset.fasset.service.MonthlyCategoryDepreciationService} object.
      */
     @Autowired

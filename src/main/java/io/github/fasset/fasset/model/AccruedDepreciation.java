@@ -156,7 +156,9 @@ public class AccruedDepreciation extends DomainModel<String> {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -173,13 +175,17 @@ public class AccruedDepreciation extends DomainModel<String> {
             Objects.equals(category, that.category);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), fixedAssetId, month, solId, category, accruedDepreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format("AccruedDepreciation'{'fixedAssetId={0}, month={1}, solId=''{2}'', category=''{3}'', accruedDepreciation={4}'}'", fixedAssetId, month, solId, category,

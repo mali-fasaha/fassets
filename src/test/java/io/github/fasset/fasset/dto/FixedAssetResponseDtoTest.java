@@ -36,8 +36,13 @@ public class FixedAssetResponseDtoTest {
 
         purchaseDate = LocalDate.now();
 
-        fixedAsset = new FixedAsset().setSolId("001").setAssetDescription("Desktop").setBarcode("ACB52645").setCategory("Furniture & Fittings").setPurchaseDate(purchaseDate)
-            .setPurchaseCost(Money.of(200000.23, "KES")).setNetBookValue(Money.of(90000.05, "KES"));
+        fixedAsset = new FixedAsset().setSolId("001")
+                                     .setAssetDescription("Desktop")
+                                     .setBarcode("ACB52645")
+                                     .setCategory("Furniture & Fittings")
+                                     .setPurchaseDate(purchaseDate)
+                                     .setPurchaseCost(Money.of(200000.23, "KES"))
+                                     .setNetBookValue(Money.of(90000.05, "KES"));
     }
 
     @Test

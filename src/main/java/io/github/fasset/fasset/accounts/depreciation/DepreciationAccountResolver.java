@@ -35,7 +35,10 @@ public class DepreciationAccountResolver implements AccountResolver {
     /* (non-Javadoc)
      * @see io.github.fasset.fasset.accounts.AccountResolver#resolveDebitAccount(io.github.fasset.fasset.model.FixedAsset)
      */
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Account resolveDebitAccount(FixedAsset fixedAsset) {
         // TODO Auto-generated method stub
@@ -45,7 +48,10 @@ public class DepreciationAccountResolver implements AccountResolver {
     /* (non-Javadoc)
      * @see io.github.fasset.fasset.accounts.AccountResolver#resolveCreditAccount(io.github.fasset.fasset.model.FixedAsset)
      */
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Account resolveCreditAccount(FixedAsset fixedAsset) {
         // TODO Auto-generated method stub

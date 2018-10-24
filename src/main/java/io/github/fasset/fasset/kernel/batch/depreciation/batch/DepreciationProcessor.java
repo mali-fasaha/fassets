@@ -56,7 +56,7 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
      */
@@ -65,13 +65,12 @@ public class DepreciationProcessor implements ItemProcessor<FixedAsset, Processi
 
         //ProcessingList<DepreciationProceeds> depreciationProceeds = new ProcessingListImpl<>();
 
-        depreciationRelay.getMonthlyDepreciationSequence()
-                         .forEach(i -> {
+        depreciationRelay.getMonthlyDepreciationSequence().forEach(i -> {
 
-                             log.trace("Calculating depreciation in the month of :{} for asset {}", i, fixedAsset);
+            log.trace("Calculating depreciation in the month of :{} for asset {}", i, fixedAsset);
 
-                             processingList.add(depreciationExecutor.getDepreciation(fixedAsset, i));
-                         });
+            processingList.add(depreciationExecutor.getDepreciation(fixedAsset, i));
+        });
 
 
         return processingList;

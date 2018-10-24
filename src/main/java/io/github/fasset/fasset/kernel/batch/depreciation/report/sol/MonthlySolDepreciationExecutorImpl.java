@@ -53,7 +53,7 @@ public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciatio
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Returns MonthlySolDepreciation item relative to the parameters of the year of depreciation and the solId
      */
     @Override
@@ -61,8 +61,7 @@ public class MonthlySolDepreciationExecutorImpl implements MonthlySolDepreciatio
 
         log.info("Generating monthlySolDepreciation record relative to solId : {} and " + "for the year : {}", solId, year);
 
-        MonthlySolDepreciationDTO dto = depreciationRepository.getMonthlySolDepreciation(solId, year)
-                                                              .get(0);
+        MonthlySolDepreciationDTO dto = depreciationRepository.getMonthlySolDepreciation(solId, year).get(0);
 
         return new MonthlySolDepreciation(dto.getSolId(), dto.getYear(), dto.getJan(), dto.getFeb(), dto.getMar(), dto.getApr(), dto.getMay(), dto.getJun(), dto.getJul(), dto.getAug(), dto.getSep(),
                                           dto.getOct(), dto.getNov(), dto.getDec());

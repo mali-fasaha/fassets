@@ -35,7 +35,8 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEB
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
- * Implements {@link io.github.fasset.fasset.accounts.BatchEntryResolver} interface whose job really is to generate entries based on a list of actual {@code FixedAsset} items passed through the parameter in the main method.
+ * Implements {@link io.github.fasset.fasset.accounts.BatchEntryResolver} interface whose job really is to generate entries based on a list of actual {@code FixedAsset} items passed through the
+ * parameter in the main method.
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -59,7 +60,7 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Generates {@code AccountingEntry} items based on {@code FixedAsset} items passed in the parameter args
      */
     @Override
@@ -69,11 +70,10 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
 
         List<AccountingEntry> entries = ConcurrentList.newList();
 
-        fixedAssets.stream()
-                   .forEach(fixedAsset -> {
-                       entries.add(getAssetEntry(fixedAsset));
-                       entries.add(getSundryCreditorEntry(fixedAsset));
-                   });
+        fixedAssets.stream().forEach(fixedAsset -> {
+            entries.add(getAssetEntry(fixedAsset));
+            entries.add(getSundryCreditorEntry(fixedAsset));
+        });
 
         return entries;
     }
@@ -122,8 +122,7 @@ public class BatchAcquisitionEntryResolver implements BatchEntryResolver {
         fixedAssetsAttributes.put("Barcode", fixedAsset.getBarcode());
         fixedAssetsAttributes.put("SolId", fixedAsset.getSolId());
         fixedAssetsAttributes.put("Category", fixedAsset.getCategory());
-        fixedAssetsAttributes.put("NetBookValue", fixedAsset.getNetBookValue()
-                                                            .toString());
+        fixedAssetsAttributes.put("NetBookValue", fixedAsset.getNetBookValue().toString());
 
         return fixedAssetsAttributes;
     }

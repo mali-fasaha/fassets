@@ -40,9 +40,9 @@ public class StorageFileNotFoundException extends RuntimeException {
     /**
      * <p>Constructor for StorageFileNotFoundException.</p>
      *
-     * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
-     * @param enableSuppression a boolean.
+     * @param message            a {@link java.lang.String} object.
+     * @param cause              a {@link java.lang.Throwable} object.
+     * @param enableSuppression  a boolean.
      * @param writableStackTrace a boolean.
      */
     public StorageFileNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
@@ -53,7 +53,7 @@ public class StorageFileNotFoundException extends RuntimeException {
      * <p>Constructor for StorageFileNotFoundException.</p>
      *
      * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
+     * @param cause   a {@link java.lang.Throwable} object.
      */
     public StorageFileNotFoundException(String message, Throwable cause) {
         super(message, cause);

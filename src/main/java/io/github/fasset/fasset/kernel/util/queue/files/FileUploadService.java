@@ -46,6 +46,7 @@ public interface FileUploadService {
 
     /**
      * <p>uploadedFiles.</p>
+     *
      * @return List of FileUploads from the repository
      */
     List<FileUpload> uploadedFiles();

@@ -40,7 +40,7 @@ public class LocalDateToYearMonthConverter implements Converter<LocalDate, YearM
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Convert the source object of type {@code S} to target type {@code T}.
      */
     @Override

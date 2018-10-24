@@ -45,25 +45,25 @@ public class AccountCreditState implements AccountState {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Get AccountBalance given the sum of debits and sum of credits
      */
     @Override
     public AccountBalance getAccountBalance(final Cash debits, final Cash credits) {
 
         if (credits.isMoreThan(debits)) {
-            return new AccountBalance(credits.minus(debits)
-                                             .abs(), account.getAccountSide());
+            return new AccountBalance(credits.minus(debits).abs(), account.getAccountSide());
         }
 
         // The journal side of the account changes to DEBIT
         account.setAccountSide(DEBIT);
 
-        return new AccountBalance(credits.minus(debits)
-                                         .abs(), DEBIT);
+        return new AccountBalance(credits.minus(debits).abs(), DEBIT);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AccountSide getAccountSide() {
 

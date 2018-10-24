@@ -42,7 +42,7 @@ public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAss
      * <p>Constructor for MonthlyAssetDepreciationProcessor.</p>
      *
      * @param monthlyAssetDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.asset.MonthlyAssetDepreciationExecutor} object.
-     * @param year a {@link java.lang.String} object.
+     * @param year                             a {@link java.lang.String} object.
      */
     public MonthlyAssetDepreciationProcessor(@Qualifier("monthlyAssetDepreciationExecutor") MonthlyAssetDepreciationExecutor monthlyAssetDepreciationExecutor, String year) {
         this.year = year;
@@ -51,7 +51,7 @@ public class MonthlyAssetDepreciationProcessor implements ItemProcessor<FixedAss
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
      */

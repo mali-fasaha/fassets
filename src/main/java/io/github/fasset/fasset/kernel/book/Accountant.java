@@ -36,8 +36,8 @@ public interface Accountant {
      * <p>createAccount.</p>
      *
      * @param accountAttributes a {@link java.util.Map} object.
-     * @param currency a {@link java.util.Currency} object.
-     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @param currency          a {@link java.util.Currency} object.
+     * @param purchaseDate      a {@link java.time.LocalDate} object.
      * @return a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
      */
     Account createAccount(Map<AccountAttribute, String> accountAttributes, Currency currency, LocalDate purchaseDate);

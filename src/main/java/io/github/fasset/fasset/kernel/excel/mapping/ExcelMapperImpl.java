@@ -54,7 +54,9 @@ public class ExcelMapperImpl implements ExcelMapper {
         this.mapperOptions = mapperOptions;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setMapperOptions(MapperOptions mapperOptions) {
         this.mapperOptions = mapperOptions;
@@ -62,7 +64,7 @@ public class ExcelMapperImpl implements ExcelMapper {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This return a list of all items as they are read from the excel document in the file system.
      */
     @SuppressWarnings("unchecked")

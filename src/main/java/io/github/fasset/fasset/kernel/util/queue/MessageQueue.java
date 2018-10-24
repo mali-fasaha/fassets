@@ -30,7 +30,9 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  *      fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName());
  *     }
  * </pre>
- * <br>Should the client need to carry out an action to show completion lifecycle method, the client could call the {@link io.github.fasset.fasset.kernel.util.queue.util.OnCompletion#handleCompletion()} method as shown: <br>
+ * <br>Should the client need to carry out an action to show completion lifecycle method, the client could call the
+ * {@link io.github.fasset.fasset.kernel.util.queue.util.OnCompletion#handleCompletion()}
+ * method as shown: <br>
  * <pre>
  *     {@code
  *     fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName()),
@@ -40,8 +42,8 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  * TODO : implement consumers for this Queue
  *
  * @author edwin.njeru
- * @since 0.0.1
  * @version 0.0.1
+ * @since 0.0.1
  */
 public interface MessageQueue<T> {
 
@@ -56,7 +58,7 @@ public interface MessageQueue<T> {
      * Adds a message to the queue, and provides a method to allow the producer to handle error
      *
      * @param queueMessage Item to be added to the queue
-     * @param onError a {@link io.github.fasset.fasset.kernel.util.queue.util.OnError} object.
+     * @param onError      a {@link io.github.fasset.fasset.kernel.util.queue.util.OnError} object.
      */
     void push(QueueMessage<T> queueMessage, OnError onError);
 

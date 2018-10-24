@@ -53,19 +53,19 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
      * <p>Constructor for MonthlyCategoryDepreciation.</p>
      *
      * @param categoryName a {@link java.lang.String} object.
-     * @param year a int.
-     * @param jan a double.
-     * @param feb a double.
-     * @param mar a double.
-     * @param apr a double.
-     * @param may a double.
-     * @param jun a double.
-     * @param jul a double.
-     * @param aug a double.
-     * @param sep a double.
-     * @param oct a double.
-     * @param nov a double.
-     * @param dec a double.
+     * @param year         a int.
+     * @param jan          a double.
+     * @param feb          a double.
+     * @param mar          a double.
+     * @param apr          a double.
+     * @param may          a double.
+     * @param jun          a double.
+     * @param jul          a double.
+     * @param aug          a double.
+     * @param sep          a double.
+     * @param oct          a double.
+     * @param nov          a double.
+     * @param dec          a double.
      */
     public MonthlyCategoryDepreciation(String categoryName, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct,
                                        double nov, double dec) {
@@ -371,7 +371,9 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -387,13 +389,17 @@ public class MonthlyCategoryDepreciation extends DomainModel<String> {
             Objects.equals(categoryName, that.categoryName);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(categoryName, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format(

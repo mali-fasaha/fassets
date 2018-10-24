@@ -58,11 +58,11 @@ public class BriefingServiceImpl implements BriefingService {
     /**
      * <p>Constructor for BriefingServiceImpl.</p>
      *
-     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
-     * @param fixedAssetRepository a {@link io.github.fasset.fasset.repository.FixedAssetRepository} object.
+     * @param fixedAssetService         a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     * @param fixedAssetRepository      a {@link io.github.fasset.fasset.repository.FixedAssetRepository} object.
      * @param serviceOutletBriefService a {@link io.github.fasset.fasset.service.ServiceOutletBriefService} object.
-     * @param categoryBriefService a {@link io.github.fasset.fasset.service.CategoryBriefService} object.
-     * @param moneyToDoubleConverter a {@link io.github.fasset.fasset.kernel.util.convert.MoneyToDoubleConverter} object.
+     * @param categoryBriefService      a {@link io.github.fasset.fasset.service.CategoryBriefService} object.
+     * @param moneyToDoubleConverter    a {@link io.github.fasset.fasset.kernel.util.convert.MoneyToDoubleConverter} object.
      */
     @Autowired
     public BriefingServiceImpl(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Qualifier("fixedAssetRepository") FixedAssetRepository fixedAssetRepository,
@@ -92,8 +92,7 @@ public class BriefingServiceImpl implements BriefingService {
         brief.setDesignation(serviceOutlet);
         brief.setPurchaseCost(fixedAssetRepository.getTotalSolPurchaseCost(serviceOutlet));
         brief.setNetBookValue(fixedAssetRepository.getTotalSolNetBookValue(serviceOutlet));
-        brief.setAccruedDepreciation(brief.getPurchaseCost()
-                                          .subtract(brief.getNetBookValue()));
+        brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
         brief.setPoll(fixedAssetRepository.getTotalSolCount(serviceOutlet));
 
         return brief;
@@ -104,8 +103,7 @@ public class BriefingServiceImpl implements BriefingService {
         brief.setDesignation(category);
         brief.setPurchaseCost(fixedAssetRepository.getTotalCategoryPurchaseCost(category));
         brief.setNetBookValue(fixedAssetRepository.getTotalCategoryNetBookValue(category));
-        brief.setAccruedDepreciation(brief.getPurchaseCost()
-                                          .subtract(brief.getNetBookValue()));
+        brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
         brief.setPoll(fixedAssetRepository.getTotalCategoryCount(category));
 
         return brief;
@@ -113,7 +111,7 @@ public class BriefingServiceImpl implements BriefingService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Updates the summary for ServiceOutlets using data queried from the fixed assets repository
      */
     @Override
@@ -121,9 +119,7 @@ public class BriefingServiceImpl implements BriefingService {
 
         List<ServiceOutletBrief> briefs = new ArrayList<>();
 
-        getAllSolIds().stream()
-                      .map(this::createServiceOutletBrief)
-                      .forEach(briefs::add);
+        getAllSolIds().stream().map(this::createServiceOutletBrief).forEach(briefs::add);
 
         log.info("Adding a list of : {} serviceOutletBrief items into repo", briefs.size());
 
@@ -131,14 +127,14 @@ public class BriefingServiceImpl implements BriefingService {
 
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateCategoryBriefs() {
         List<CategoryBrief> briefs = new ArrayList<>();
 
-        getAllCategoriesInRepo().stream()
-                                .map(this::createCategoryBrief)
-                                .forEach(briefs::add);
+        getAllCategoriesInRepo().stream().map(this::createCategoryBrief).forEach(briefs::add);
 
         log.info("Adding a list of : {} categoryBrief items into repo", briefs.size());
 

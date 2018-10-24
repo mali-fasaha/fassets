@@ -49,20 +49,16 @@ import java.util.stream.Stream;
 import static io.github.fasset.fasset.kernel.util.FileSecurityChecks.relativePathCheck;
 
 /**
- * Implements storageService interface while at the same time implementing the pushing messages to the
- * {@link MessageQueue} to asynchronously return to the controller once the file has been
- * verified to be okay. The file is checked for obvious defects such as a substring in the filename that
- * might affect the relative position of file access in the server. The file will also be checked against
- * a record of all such files uploaded just in case the same is a duplication. The amount of time it will
- * take to do that is unsubstantial in the eyes of the user as a notification will be returned by the
- * controller almost immediately he pressed the upload key. When that fails to be the case, this service
- * will be scrapped and rewritten again.
+ * Implements storageService interface while at the same time implementing the pushing messages to the {@link MessageQueue} to asynchronously return to the controller once the file has been verified
+ * to be okay. The file is checked for obvious defects such as a substring in the filename that might affect the relative position of file access in the server. The file will also be checked against a
+ * record of all such files uploaded just in case the same is a duplication. The amount of time it will take to do that is unsubstantial in the eyes of the user as a notification will be returned by
+ * the controller almost immediately he pressed the upload key. When that fails to be the case, this service will be scrapped and rewritten again.
  * <br>Usage : <br> This class will enable clients to <br> - List uploaded files: <br>  storageService.loadAll() <br> - Store uploaded files in root location: <br>
  * storageService.store(file); <br> - Generate API containing uploaded files <br>  storageService.loadAsResource(fileName); <br>
  *
  * @author edwin.njeru
- * @since 0.0.1-SNAPSHOT
  * @version 0.0.1
+ * @since 0.0.1-SNAPSHOT
  */
 @Service("fileSystemStorageService")
 public class FileSystemStorageService implements StorageService {
@@ -77,7 +73,7 @@ public class FileSystemStorageService implements StorageService {
      * <p>Constructor for FileSystemStorageService.</p>
      *
      * @param storageProperties a {@link io.github.fasset.fasset.config.StorageProperties} object.
-     * @param fileUploadsQueue a {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue} object.
+     * @param fileUploadsQueue  a {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadsQueue} object.
      */
     @Autowired
     public FileSystemStorageService(StorageProperties storageProperties, @Qualifier("fileUploadsQueue") FileUploadsQueue fileUploadsQueue) {
@@ -89,7 +85,7 @@ public class FileSystemStorageService implements StorageService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * To store the file into storage
      */
     @Override
@@ -106,8 +102,7 @@ public class FileSystemStorageService implements StorageService {
 
             relativePathCheck(fileName);
 
-            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName)
-                                                                                   .toString(), YearMonth.of(2017, 12));
+            FileUpload fileUpload = configureFileUploadAttributes(this.rootLocation.resolve(fileName).toString(), YearMonth.of(2017, 12));
 
             try {
                 // copy file to the file system
@@ -162,7 +157,7 @@ public class FileSystemStorageService implements StorageService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Loads all files into storage
      */
     @Override
@@ -173,9 +168,7 @@ public class FileSystemStorageService implements StorageService {
         Stream<Path> filePathStream;
 
         try {
-            filePathStream = Files.walk(this.rootLocation, 1)
-                                  .filter(path -> !path.equals(this.rootLocation))
-                                  .map(this.rootLocation::relativize);
+            filePathStream = Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation)).map(this.rootLocation::relativize);
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }
@@ -185,7 +178,7 @@ public class FileSystemStorageService implements StorageService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Load the fileName given into storage
      */
     @Override
@@ -198,7 +191,7 @@ public class FileSystemStorageService implements StorageService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Loads the file given as a {@link Resource} object
      */
     @Override
@@ -230,7 +223,7 @@ public class FileSystemStorageService implements StorageService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Deletes all files in the storage
      */
     @Override
@@ -243,7 +236,7 @@ public class FileSystemStorageService implements StorageService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * To initialize storage and create storage directory
      */
     @Override

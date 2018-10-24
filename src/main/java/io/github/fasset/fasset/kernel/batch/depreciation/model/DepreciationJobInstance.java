@@ -70,7 +70,9 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
         this.month = month;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -86,27 +88,31 @@ public class DepreciationJobInstance extends DomainModel<String> implements Comp
         return Objects.equals(month, that.month);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), month);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DepreciationJobInstance{");
-        sb.append("month=")
-          .append(month);
+        sb.append("month=").append(month);
         sb.append('}');
         return sb.toString();
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(DepreciationJobInstance o) {
-        return Comparator.comparing(DepreciationJobInstance::getMonth)
-                         .compare(this, o);
+        return Comparator.comparing(DepreciationJobInstance::getMonth).compare(this, o);
     }
 }

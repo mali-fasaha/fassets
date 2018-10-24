@@ -40,8 +40,8 @@ public class FileUploadNotification {
     /**
      * <p>Constructor for FileUploadNotification.</p>
      *
-     * @param fileName a {@link java.lang.String} object.
-     * @param month a {@link java.lang.String} object.
+     * @param fileName     a {@link java.lang.String} object.
+     * @param month        a {@link java.lang.String} object.
      * @param timeUploaded a {@link java.lang.String} object.
      */
     public FileUploadNotification(String fileName, String month, String timeUploaded) {
@@ -83,7 +83,9 @@ public class FileUploadNotification {
         return timeUploaded;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -96,25 +98,23 @@ public class FileUploadNotification {
         return Objects.equals(fileName, that.fileName) && Objects.equals(month, that.month) && Objects.equals(timeUploaded, that.timeUploaded);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(fileName, month, timeUploaded);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FileUploadNotification{");
-        sb.append("fileName='")
-          .append(fileName)
-          .append('\'');
-        sb.append(", month='")
-          .append(month)
-          .append('\'');
-        sb.append(", timeUploaded='")
-          .append(timeUploaded)
-          .append('\'');
+        sb.append("fileName='").append(fileName).append('\'');
+        sb.append(", month='").append(month).append('\'');
+        sb.append(", timeUploaded='").append(timeUploaded).append('\'');
         sb.append('}');
         return sb.toString();
     }

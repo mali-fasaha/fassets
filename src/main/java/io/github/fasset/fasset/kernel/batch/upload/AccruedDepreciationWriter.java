@@ -54,7 +54,7 @@ public class AccruedDepreciationWriter implements ItemWriter<AccruedDepreciation
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override

@@ -26,8 +26,8 @@ import io.github.fasset.fasset.kernel.util.queue.files.FileUploadService;
  * <br> <pre>{@code fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName())}</pre>
  * <br> <br> In the above example the {@code FIleUploadQueue} is an implementation of the {@code MessageQueue<FileUpload>} interface that is supposed to enqueue messages about an uploaded file. The
  * message here is therefore of the type {@code FileUploadNotification}, which has details of a file that the system needs to know about. <br> Using the lambda will allow the producer to create and
- * simultaneously enqueue an object of any type. <br> The 'consumer' on the other hand has only to call the {@link io.github.fasset.fasset.kernel.util.queue.QueueMessage#message()} method to obtain the message sent by the producer. <br> The
- * consumer for the {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadService} consumption of the message might look as follows:
+ * simultaneously enqueue an object of any type. <br> The 'consumer' on the other hand has only to call the {@link io.github.fasset.fasset.kernel.util.queue.QueueMessage#message()} method to obtain
+ * the message sent by the producer. <br> The consumer for the {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadService} consumption of the message might look as follows:
  * <br> <pre>{@code fileUploadService.recordFileUpload(queueMessage.message());}</pre>
  *
  * @author edwin.njeru

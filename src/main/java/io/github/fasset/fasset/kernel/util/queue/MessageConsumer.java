@@ -46,7 +46,7 @@ public interface MessageConsumer<T> {
      *         }
      * </pre>
      *
-     * @param onError Callback to execute when there is an exceptional event
+     * @param onError    Callback to execute when there is an exceptional event
      * @param completion Callback to execute when the method has completed completion
      * @return Observable optional queue message. The client will have to subscribe to the item returned to read message from the Queue if any exists
      */

@@ -42,7 +42,7 @@ public class AccountBalance {
     /**
      * <p>Constructor for AccountBalance.</p>
      *
-     * @param amount a {@link io.github.ghacupha.cash.Cash} object.
+     * @param amount      a {@link io.github.ghacupha.cash.Cash} object.
      * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
      */
     public AccountBalance(Cash amount, AccountSide accountSide) {
@@ -53,7 +53,7 @@ public class AccountBalance {
     /**
      * <p>nil.</p>
      *
-     * @param currency a {@link java.util.Currency} object.
+     * @param currency    a {@link java.util.Currency} object.
      * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
      * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
      */
@@ -65,7 +65,7 @@ public class AccountBalance {
     /**
      * <p>newBalance.</p>
      *
-     * @param amount a {@link io.github.ghacupha.cash.Cash} object.
+     * @param amount      a {@link io.github.ghacupha.cash.Cash} object.
      * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
      * @return a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} object.
      */
@@ -116,17 +116,14 @@ public class AccountBalance {
 
             } else {
 
-                if (arg.getAmount()
-                       .isLessThan(this.amount)) {
+                if (arg.getAmount().isLessThan(this.amount)) {
 
                     return newBalance(this.amount.minus(arg.getAmount()), this.accountSide);
                 }
 
-                if (arg.getAmount()
-                       .isMoreThan(this.amount)) {
+                if (arg.getAmount().isMoreThan(this.amount)) {
 
-                    return newBalance(arg.getAmount()
-                                         .minus(this.amount), arg.getAccountSide());
+                    return newBalance(arg.getAmount().minus(this.amount), arg.getAccountSide());
                 }
             }
         }
@@ -136,13 +133,9 @@ public class AccountBalance {
 
     private void checkCurrency(AccountBalance arg) throws MismatchedCurrencyException {
 
-        if (!arg.getAmount()
-                .getCurrency()
-                .equals(this.amount.getCurrency())) {
-            String message = String.format("Cannot add balance containing mismatched currency. Expected : %s but found : %s", this.amount.getCurrency()
-                                                                                                                                         .getCurrencyCode(), arg.getAmount()
-                                                                                                                                                                .getCurrency()
-                                                                                                                                                                .getCurrencyCode());
+        if (!arg.getAmount().getCurrency().equals(this.amount.getCurrency())) {
+            String message = String.format("Cannot add balance containing mismatched currency. Expected : %s but found : %s", this.amount.getCurrency().getCurrencyCode(),
+                                           arg.getAmount().getCurrency().getCurrencyCode());
 
             throw new MismatchedCurrencyException(message);
         }
@@ -166,7 +159,9 @@ public class AccountBalance {
         return accountSide;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -184,7 +179,9 @@ public class AccountBalance {
         return accountSide == that.accountSide;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result = amount.hashCode();
@@ -192,10 +189,11 @@ public class AccountBalance {
         return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return amount.getNumber()
-                     .doubleValue() + " " + accountSide;
+        return amount.getNumber().doubleValue() + " " + accountSide;
     }
 }

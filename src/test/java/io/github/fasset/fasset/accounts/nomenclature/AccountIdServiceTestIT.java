@@ -117,7 +117,7 @@ public class AccountIdServiceTestIT {
     @Test
     public void accountNumber() {
 
-        assertEquals("0010010051001", accountIdService.accountNumber("001","00","10051","001"));
+        assertEquals("0010010051001", accountIdService.accountNumber("001", "00", "10051", "001"));
     }
 
     @Test

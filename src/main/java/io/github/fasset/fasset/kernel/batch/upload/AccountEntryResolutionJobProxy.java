@@ -45,15 +45,17 @@ public class AccountEntryResolutionJobProxy implements JobProxy {
     private final FixedAssetsJobsActivator fixedAssetsJobsActivator;
 
     @Autowired
-    AccountEntryResolutionJobProxy(final JobLauncher jobLauncher, @Qualifier("fixedAssetService") final FixedAssetService fixedAssetService, @Qualifier("accountEntryResolutionJob") final Job accountEntryResolution,
-                                   final FixedAssetsJobsActivator fixedAssetsJobsActivator) {
+    AccountEntryResolutionJobProxy(final JobLauncher jobLauncher, @Qualifier("fixedAssetService") final FixedAssetService fixedAssetService,
+                                   @Qualifier("accountEntryResolutionJob") final Job accountEntryResolution, final FixedAssetsJobsActivator fixedAssetsJobsActivator) {
         this.jobLauncher = jobLauncher;
         this.fixedAssetService = fixedAssetService;
         this.accountEntryResolution = accountEntryResolution;
         this.fixedAssetsJobsActivator = fixedAssetsJobsActivator;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initializeJobRun() throws BatchJobExecutionException {
 
@@ -62,12 +64,13 @@ public class AccountEntryResolutionJobProxy implements JobProxy {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * When an object implementing interface <code>Runnable</code> is used to create a thread, starting the thread causes the object's
      * <code>run</code> method to be called in that separately executing
      * thread.
      * <p>
      * The general contract of the method <code>run</code> is that it may take any action whatsoever.
+     *
      * @see Thread#run()
      */
     @Override

@@ -77,12 +77,12 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
      * <p>Constructor for FixedAsset.</p>
      *
      * @param assetDescription a {@link java.lang.String} object.
-     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
-     * @param category a {@link java.lang.String} object.
-     * @param solId a {@link java.lang.String} object.
-     * @param purchaseDate a {@link java.time.LocalDate} object.
-     * @param barcode a {@link java.lang.String} object.
-     * @param netBookValue a {@link org.javamoney.moneta.Money} object.
+     * @param purchaseCost     a {@link org.javamoney.moneta.Money} object.
+     * @param category         a {@link java.lang.String} object.
+     * @param solId            a {@link java.lang.String} object.
+     * @param purchaseDate     a {@link java.time.LocalDate} object.
+     * @param barcode          a {@link java.lang.String} object.
+     * @param netBookValue     a {@link org.javamoney.moneta.Money} object.
      */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate, String barcode, Money netBookValue) {
         this(assetDescription, purchaseCost, category, solId, purchaseDate, barcode);
@@ -93,11 +93,11 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
      * <p>Constructor for FixedAsset.</p>
      *
      * @param assetDescription a {@link java.lang.String} object.
-     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
-     * @param category a {@link java.lang.String} object.
-     * @param solId a {@link java.lang.String} object.
-     * @param purchaseDate a {@link java.time.LocalDate} object.
-     * @param barcode a {@link java.lang.String} object.
+     * @param purchaseCost     a {@link org.javamoney.moneta.Money} object.
+     * @param category         a {@link java.lang.String} object.
+     * @param solId            a {@link java.lang.String} object.
+     * @param purchaseDate     a {@link java.time.LocalDate} object.
+     * @param barcode          a {@link java.lang.String} object.
      */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate, String barcode) {
         this(assetDescription, purchaseCost, category, solId, purchaseDate);
@@ -108,10 +108,10 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
      * <p>Constructor for FixedAsset.</p>
      *
      * @param assetDescription a {@link java.lang.String} object.
-     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
-     * @param category a {@link java.lang.String} object.
-     * @param solId a {@link java.lang.String} object.
-     * @param purchaseDate a {@link java.time.LocalDate} object.
+     * @param purchaseCost     a {@link org.javamoney.moneta.Money} object.
+     * @param category         a {@link java.lang.String} object.
+     * @param solId            a {@link java.lang.String} object.
+     * @param purchaseDate     a {@link java.time.LocalDate} object.
      */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId, LocalDate purchaseDate) {
         this(assetDescription, purchaseCost, category, solId);
@@ -122,9 +122,9 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
      * <p>Constructor for FixedAsset.</p>
      *
      * @param assetDescription a {@link java.lang.String} object.
-     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
-     * @param category a {@link java.lang.String} object.
-     * @param solId a {@link java.lang.String} object.
+     * @param purchaseCost     a {@link org.javamoney.moneta.Money} object.
+     * @param category         a {@link java.lang.String} object.
+     * @param solId            a {@link java.lang.String} object.
      */
     public FixedAsset(String assetDescription, Money purchaseCost, String category, String solId) {
         this(assetDescription, purchaseCost, category);
@@ -135,8 +135,8 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
      * <p>Constructor for FixedAsset.</p>
      *
      * @param assetDescription a {@link java.lang.String} object.
-     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
-     * @param category a {@link java.lang.String} object.
+     * @param purchaseCost     a {@link org.javamoney.moneta.Money} object.
+     * @param category         a {@link java.lang.String} object.
      */
     public FixedAsset(String assetDescription, Money purchaseCost, String category) {
         this(assetDescription, purchaseCost);
@@ -147,7 +147,7 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
      * <p>Constructor for FixedAsset.</p>
      *
      * @param assetDescription a {@link java.lang.String} object.
-     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
+     * @param purchaseCost     a {@link org.javamoney.moneta.Money} object.
      */
     public FixedAsset(String assetDescription, Money purchaseCost) {
         this.assetDescription = assetDescription;
@@ -298,7 +298,9 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -316,28 +318,30 @@ public class FixedAsset extends DomainModel<String> implements Serializable, Com
             Objects.equals(netBookValue, that.netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format("FixedAsset'{'solId=''{0}'', barcode=''{1}'', assetDescription=''{2}'', purchaseDate={3}, category=''{4}'', purchaseCost={5}, netBookValue={6}'}'", solId, barcode,
                                     assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(FixedAsset o) {
 
-        return Comparator.comparing(FixedAsset::getSolId)
-                         .thenComparing(FixedAsset::getCategory)
-                         .thenComparing(FixedAsset::getPurchaseDate)
-                         .thenComparing(FixedAsset::getPurchaseCost)
-                         .compare(this, o);
+        return Comparator.comparing(FixedAsset::getSolId).thenComparing(FixedAsset::getCategory).thenComparing(FixedAsset::getPurchaseDate).thenComparing(FixedAsset::getPurchaseCost).compare(this, o);
     }
 
 }

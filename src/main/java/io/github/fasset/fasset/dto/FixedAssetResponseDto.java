@@ -60,25 +60,21 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
         this.assetDescription = fixedAsset.getAssetDescription();
         this.purchaseDate = fixedAsset.getPurchaseDate();
         this.category = fixedAsset.getCategory();
-        this.purchaseCost = fixedAsset.getPurchaseCost()
-                                      .getNumber()
-                                      .doubleValue();
-        this.netBookValue = fixedAsset.getNetBookValue()
-                                      .getNumber()
-                                      .doubleValue();
+        this.purchaseCost = fixedAsset.getPurchaseCost().getNumber().doubleValue();
+        this.netBookValue = fixedAsset.getNetBookValue().getNumber().doubleValue();
     }
 
     /**
      * <p>Constructor for FixedAssetResponseDto.</p>
      *
-     * @param id a int.
-     * @param solId a {@link java.lang.String} object.
-     * @param barcode a {@link java.lang.String} object.
+     * @param id               a int.
+     * @param solId            a {@link java.lang.String} object.
+     * @param barcode          a {@link java.lang.String} object.
      * @param assetDescription a {@link java.lang.String} object.
-     * @param purchaseDate a {@link java.time.LocalDate} object.
-     * @param category a {@link java.lang.String} object.
-     * @param purchaseCost a double.
-     * @param netBookValue a double.
+     * @param purchaseDate     a {@link java.time.LocalDate} object.
+     * @param category         a {@link java.lang.String} object.
+     * @param purchaseCost     a double.
+     * @param netBookValue     a double.
      */
     public FixedAssetResponseDto(int id, String solId, String barcode, String assetDescription, LocalDate purchaseDate, String category, double purchaseCost, double netBookValue) {
         this.id = id;
@@ -257,7 +253,9 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -272,20 +270,26 @@ public class FixedAssetResponseDto implements Comparable<FixedAssetResponseDto> 
             Objects.equals(category, that.category);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "FixedAssetResponseDto{" + "nomenclature=" + id + ", solId='" + solId + '\'' + ", barcode='" + barcode + '\'' + ", assetDescription='" + assetDescription + '\'' + ", purchaseDate=" +
             purchaseDate + ", category='" + category + '\'' + ", purchaseCost=" + purchaseCost + ", netBookValue=" + netBookValue + '}';
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(FixedAssetResponseDto o) {
 

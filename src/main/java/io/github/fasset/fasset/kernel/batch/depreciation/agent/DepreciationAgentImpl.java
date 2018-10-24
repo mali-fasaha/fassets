@@ -53,7 +53,7 @@ public class DepreciationAgentImpl implements DepreciationAgent {
      * <p>Constructor for DepreciationAgentImpl.</p>
      *
      * @param categoryConfigurationRegistry a {@link io.github.fasset.fasset.kernel.batch.depreciation.CategoryConfigurationRegistry} object.
-     * @param preprocessor a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationPreprocessor} object.
+     * @param preprocessor                  a {@link io.github.fasset.fasset.kernel.batch.depreciation.DepreciationPreprocessor} object.
      */
     @Autowired
     public DepreciationAgentImpl(CategoryConfigurationRegistry categoryConfigurationRegistry, DepreciationPreprocessor preprocessor) {
@@ -73,7 +73,9 @@ public class DepreciationAgentImpl implements DepreciationAgent {
     //        return this;
     //    }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Cacheable("depreciationCalculation")
     @Override
     public Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {
@@ -97,13 +99,9 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         log.trace("Using deprecant : {}, and depreciation rate : {} for calculating depreciation", deprecant, depreciationRate);
         Money depreciationAmount = calculate(deprecant, depreciationRate);
 
-        depreciation = getDepreciation(preprocessor.setAsset(asset)
-                                                   .setMonth(month)
-                                                   .setDepreciationAmount(depreciationAmount)
-                                                   .setProperties());
+        depreciation = getDepreciation(preprocessor.setAsset(asset).setMonth(month).setDepreciationAmount(depreciationAmount).setProperties());
 
-        Money nbv = asset.getNetBookValue()
-                         .subtract(depreciation.getDepreciation());
+        Money nbv = asset.getNetBookValue().subtract(depreciation.getDepreciation());
 
         //send changes to queue for flushing through entityManager
         //send(() -> depreciation);
@@ -130,15 +128,13 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         Money deprecant = null;
 
         try {
-            if (configuration.getDeprecant()
-                             .equalsIgnoreCase("purchaseCost")) {
+            if (configuration.getDeprecant().equalsIgnoreCase("purchaseCost")) {
 
                 deprecant = asset.getPurchaseCost();
 
                 log.trace("Using purchase cost as deprecant : {}", deprecant);
 
-            } else if (configuration.getDeprecant()
-                                    .equalsIgnoreCase("netBookValue")) {
+            } else if (configuration.getDeprecant().equalsIgnoreCase("netBookValue")) {
 
                 deprecant = asset.getNetBookValue();
 
@@ -190,16 +186,11 @@ public class DepreciationAgentImpl implements DepreciationAgent {
         Depreciation depreciation = new Depreciation();
         try {
             depreciation.setDepreciationPeriod(preprocessor.getMonth())
-                        .setFixedAssetId(preprocessor.getAsset()
-                                                     .getId())
-                        .setCategory(preprocessor.getAsset()
-                                                 .getCategory())
-                        .setSolId(preprocessor.getAsset()
-                                              .getSolId())
-                        .setYear(preprocessor.getMonth()
-                                             .getYear())
-                        .setMonth(preprocessor.getMonth()
-                                              .getMonthValue())
+                        .setFixedAssetId(preprocessor.getAsset().getId())
+                        .setCategory(preprocessor.getAsset().getCategory())
+                        .setSolId(preprocessor.getAsset().getSolId())
+                        .setYear(preprocessor.getMonth().getYear())
+                        .setMonth(preprocessor.getMonth().getMonthValue())
                         .setDepreciation(preprocessor.getDepreciationAmount());
         } catch (Throwable e) {
             String message =

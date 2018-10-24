@@ -59,17 +59,16 @@ public class AccountEntryResolutionConfig {
     /**
      * <p>Constructor for AccountEntryResolutionConfig.</p>
      *
-     * @param fixedAssetItemsReader a {@link org.springframework.batch.item.ItemReader} object.
+     * @param fixedAssetItemsReader           a {@link org.springframework.batch.item.ItemReader} object.
      * @param accountEntryResolutionProcessor a {@link org.springframework.batch.item.ItemProcessor} object.
-     * @param accountEntryResolutionWriter a {@link org.springframework.batch.item.ItemWriter} object.
-     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
-     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param accountEntryResolutionWriter    a {@link org.springframework.batch.item.ItemWriter} object.
+     * @param jobBuilderFactory               a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory              a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
      */
     @Autowired
     public AccountEntryResolutionConfig(@Qualifier("fixedAssetItemsReader") ItemReader<List<FixedAsset>> fixedAssetItemsReader,
                                         @Qualifier("accountEntryResolutionItemProcessor") ItemProcessor<List<FixedAsset>, List<AccountingEntry>> accountEntryResolutionProcessor,
-                                        @Qualifier("accountEntryResolutionProcessor") ItemWriter<List<AccountingEntry>> accountEntryResolutionWriter,
-                                        JobBuilderFactory jobBuilderFactory,
+                                        @Qualifier("accountEntryResolutionProcessor") ItemWriter<List<AccountingEntry>> accountEntryResolutionWriter, JobBuilderFactory jobBuilderFactory,
                                         StepBuilderFactory stepBuilderFactory) {
         this.fixedAssetItemsReader = fixedAssetItemsReader;
         this.accountEntryResolutionProcessor = accountEntryResolutionProcessor;
@@ -86,13 +85,7 @@ public class AccountEntryResolutionConfig {
      */
     @Bean("accountEntryResolutionJob")
     public Job accountEntryResolutionJob(@Qualifier("accountEntryResolutionExecutionListener") AccountEntryResolutionExecutionListener listener) {
-        return jobBuilderFactory.get("accountEntryResolutionJob")
-                                .preventRestart()
-                                .incrementer(new RunIdIncrementer())
-                                .listener(listener)
-                                .flow(generateAccountEntriesStep())
-                                .end()
-                                .build();
+        return jobBuilderFactory.get("accountEntryResolutionJob").preventRestart().incrementer(new RunIdIncrementer()).listener(listener).flow(generateAccountEntriesStep()).end().build();
     }
 
     /**

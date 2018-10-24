@@ -23,8 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Provides validate method in which we can include re-usable file validation methods. <br> Any of the checks the {@link io.github.fasset.fasset.kernel.util.queue.files.FileValidationService#validate(FileUpload)} will throw an {@link
- * InvalidFileException}.
+ * Provides validate method in which we can include re-usable file validation methods. <br> Any of the checks the
+ * {@link io.github.fasset.fasset.kernel.util.queue.files.FileValidationService#validate(FileUpload)}
+ * will throw an {@link InvalidFileException}.
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -43,7 +44,9 @@ public class FileUploadValidationService implements FileValidationService<FileUp
         this.allowDuplicates = false;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FileUpload validate(FileUpload fileUpload) throws InvalidFileException {
 
@@ -69,7 +72,9 @@ public class FileUploadValidationService implements FileValidationService<FileUp
         return fileUpload;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FileUploadValidationService allowDuplicates() {
 

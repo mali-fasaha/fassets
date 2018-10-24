@@ -59,7 +59,7 @@ public class FileUploadsChecker implements Runnable {
      * <p>Constructor for FileUploadsChecker.</p>
      *
      * @param fileUploadsConsumer a {@link io.github.fasset.fasset.kernel.util.queue.MessageConsumer} object.
-     * @param excelUploadJob a {@link io.github.fasset.fasset.kernel.batch.ExcelUploadJob} object.
+     * @param excelUploadJob      a {@link io.github.fasset.fasset.kernel.batch.ExcelUploadJob} object.
      */
     @Autowired
     public FileUploadsChecker(MessageConsumer<List<FileUpload>> fileUploadsConsumer, @Qualifier("excelUploadJob") ExcelUploadJob excelUploadJob) {
@@ -77,11 +77,12 @@ public class FileUploadsChecker implements Runnable {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * When an object implementing interface <code>Runnable</code> is used to create a thread, starting the thread causes the object's <code>run</code> method to be called in that separately executing
      * thread.
      * <p>
      * The general contract of the method <code>run</code> is that it may take any action whatsoever.
+     *
      * @see Thread#run()
      */
     @Scheduled(fixedRate = 5000)
@@ -92,31 +93,24 @@ public class FileUploadsChecker implements Runnable {
 
         List<FileUpload> fileUploads = ConcurrentList.newList();
 
-        lock.writeLock()
-            .lock();
+        lock.writeLock().lock();
 
         try {
             fileUploadsConsumer.checkMessages(FileUploadsChecker::handleError, FileUploadsChecker::handleCompletion)
-                               .subscribe((Optional<QueueMessage<List<FileUpload>>> f) -> fileUploads.addAll(f.get()
-                                                                                                              .message()
-                                                                                                              .stream()
-                                                                                                              .peek(fileUpload -> {
-                                                                                                                  fileUpload.setDeserialized(true);
-                                                                                                              })
-                                                                                                              .collect(ImmutableListCollector.toImmutableFastList())
+                               .subscribe((Optional<QueueMessage<List<FileUpload>>> f) -> fileUploads.addAll(f.get().message().stream().peek(fileUpload -> {
+                                                                                                                 fileUpload.setDeserialized(true);
+                                                                                                             }).collect(ImmutableListCollector.toImmutableFastList())
 
                                                                                                             ));
         } finally {
 
-            lock.writeLock()
-                .unlock();
+            lock.writeLock().unlock();
 
         }
 
         fileUploads.forEach(f -> {
             try {
-                excelUploadJob.uploadExcelFile(f.getFileName(), f.getMonth()
-                                                                 .toString());
+                excelUploadJob.uploadExcelFile(f.getFileName(), f.getMonth().toString());
             } catch (BatchJobExecutionException e) {
                 e.printStackTrace();
             }

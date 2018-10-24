@@ -53,20 +53,17 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Return an ordered list of all monthly depreciation from the monthlyAssetDepreciationRepository
      */
     @Override
     public List<MonthlyAssetDepreciation> fetchAllMonthlyDepreciations() {
-        return monthlyAssetDepreciationRepository.findAll()
-                                                 .parallelStream()
-                                                 .sorted(Comparator.comparing(MonthlyAssetDepreciation::getYear))
-                                                 .collect(Collectors.toList());
+        return monthlyAssetDepreciationRepository.findAll().parallelStream().sorted(Comparator.comparing(MonthlyAssetDepreciation::getYear)).collect(Collectors.toList());
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Returns the MonthlyAssetDepreciation for a given assetId and Year
      */
     @Override
@@ -78,7 +75,7 @@ public class MonthlyAssetDepreciationServiceImpl implements MonthlyAssetDeprecia
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves all new monthly depreciation items and updates exiting ones
      */
     @Override

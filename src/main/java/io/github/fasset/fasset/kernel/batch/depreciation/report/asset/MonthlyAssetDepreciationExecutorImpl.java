@@ -57,7 +57,7 @@ public class MonthlyAssetDepreciationExecutorImpl implements MonthlyAssetDepreci
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Returns {@link MonthlyAssetDepreciation} item that is updated with data from the depreciation item
      */
     @Override

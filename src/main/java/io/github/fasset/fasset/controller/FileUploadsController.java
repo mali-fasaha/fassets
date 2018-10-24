@@ -70,10 +70,7 @@ public class FileUploadsController {
     public String listUploadedFiles(Model model) throws IOException {
 
         model.addAttribute("files", storageService.loadAll()
-                                                  .map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadsController.class, "serveFile", path.getFileName()
-                                                                                                                                                    .toString())
-                                                                                      .build()
-                                                                                      .toString())
+                                                  .map(path -> MvcUriComponentsBuilder.fromMethodName(FileUploadsController.class, "serveFile", path.getFileName().toString()).build().toString())
                                                   .collect(Collectors.toList()));
         return "uploads/uploadForm";
     }
@@ -81,7 +78,7 @@ public class FileUploadsController {
     /**
      * <p>handleFileUpload.</p>
      *
-     * @param file a {@link org.springframework.web.multipart.MultipartFile} object.
+     * @param file               a {@link org.springframework.web.multipart.MultipartFile} object.
      * @param redirectAttributes a {@link org.springframework.web.servlet.mvc.support.RedirectAttributes} object.
      * @return a {@link java.lang.String} object.
      */
@@ -107,9 +104,7 @@ public class FileUploadsController {
 
         Resource file = storageService.loadAsResource(fileName);
 
-        return ResponseEntity.ok()
-                             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + file.getFilename() + "\"")
-                             .body(file);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + file.getFilename() + "\"").body(file);
     }
 
     /**
@@ -121,7 +116,6 @@ public class FileUploadsController {
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
 
-        return ResponseEntity.notFound()
-                             .build();
+        return ResponseEntity.notFound().build();
     }
 }

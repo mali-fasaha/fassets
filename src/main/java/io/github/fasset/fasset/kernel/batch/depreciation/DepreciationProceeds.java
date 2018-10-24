@@ -110,7 +110,9 @@ public class DepreciationProceeds {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -123,22 +125,23 @@ public class DepreciationProceeds {
         return Objects.equals(depreciation, that.depreciation) && Objects.equals(netBookValue, that.netBookValue) && Objects.equals(accruedDepreciation, that.accruedDepreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(depreciation, netBookValue, accruedDepreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("DepreciationProceeds{");
-        sb.append("depreciation=")
-          .append(depreciation);
-        sb.append(", netBookValue=")
-          .append(netBookValue);
-        sb.append(", accruedDepreciation=")
-          .append(accruedDepreciation);
+        sb.append("depreciation=").append(depreciation);
+        sb.append(", netBookValue=").append(netBookValue);
+        sb.append(", accruedDepreciation=").append(accruedDepreciation);
         sb.append('}');
         return sb.toString();
     }

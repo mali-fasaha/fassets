@@ -58,7 +58,9 @@ public class MoneyProperties {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -71,13 +73,17 @@ public class MoneyProperties {
         return Objects.equals(defaultCurrency, that.defaultCurrency);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(defaultCurrency);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "MoneyProperties{" + "defaultCurrency='" + defaultCurrency + '\'' + '}';

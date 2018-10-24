@@ -67,7 +67,9 @@ public class FileUploadServiceImpl implements FileUploadService {
         return this;
     }*/
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Cacheable("hasFileBeenUploaded")
     @Override
     public boolean theFileIsAlreadyUploaded(FileUpload fileUpload) {
@@ -81,7 +83,9 @@ public class FileUploadServiceImpl implements FileUploadService {
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void recordFileUpload(FileUpload fileUpload) {
 
@@ -98,7 +102,9 @@ public class FileUploadServiceImpl implements FileUploadService {
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<FileUpload> uploadedFiles() {
 

@@ -54,7 +54,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
      * <p>Constructor for DepreciationPreprocessorImpl.</p>
      *
      * @param localDateToYearMonthConverter a {@link io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter} object.
-     * @param moneyProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     * @param moneyProperties               a {@link io.github.fasset.fasset.config.MoneyProperties} object.
      */
     @Autowired
     public DepreciationPreprocessorImpl(@Qualifier("localDateToYearMonthConverter") LocalDateToYearMonthConverter localDateToYearMonthConverter, MoneyProperties moneyProperties) {
@@ -63,21 +63,27 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public YearMonth getMonth() {
         log.trace("Returning month : {}", month);
         return month;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FixedAsset getAsset() {
         log.trace("Returning fixedAsset : {}", asset);
         return asset;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Money getDepreciationAmount() {
         log.trace("Returning depreciation amount : {}", depreciationAmount);
@@ -86,7 +92,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Sets the asset to be reviewed for depreciation
      */
     @Override
@@ -98,7 +104,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Sets depreciation period in months
      */
     @Override
@@ -110,7 +116,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Sets the amount of depreciation for review
      */
     @Override
@@ -122,7 +128,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This method ensures all properties are set and evaluated
      */
     @Override
@@ -152,16 +158,13 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
 
         log.trace("Performing re-evaluation of the depreciation amount...");
 
-        if (asset.getPurchaseCost()
-                 .isGreaterThan(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
+        if (asset.getPurchaseCost().isGreaterThan(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
-            if (asset.getNetBookValue()
-                     .isLessThan(depreciationAmount)) {
+            if (asset.getNetBookValue().isLessThan(depreciationAmount)) {
 
                 log.trace("The netBookValue of asset : {} is less that the depreciation amount", asset);
 
-                if (asset.getNetBookValue()
-                         .isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
+                if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
                     log.trace("The NetBookValue is zero, setting depreciation to zero....");
                     // No further processing required
@@ -189,8 +192,7 @@ public class DepreciationPreprocessorImpl implements DepreciationPreprocessor {
     @SuppressWarnings("all")
     private void depreciationTimingCheck(FixedAsset asset, YearMonth month) {
         log.trace("Reviewing the depreciation timing for asset : {}, relative to the " + "month: {}", asset, month);
-        if (localDateToYearMonthConverter.convert(Objects.requireNonNull(asset.getPurchaseDate()))
-                                         .isAfter(month)) {
+        if (localDateToYearMonthConverter.convert(Objects.requireNonNull(asset.getPurchaseDate())).isAfter(month)) {
             log.trace(
                 "The month of purchase of asset: {} comes later than the depreciation period : {}" + "therefore we are resetting the depreciation formally calculated as : {} " + "amount to zero",
                 asset, month, depreciationAmount);

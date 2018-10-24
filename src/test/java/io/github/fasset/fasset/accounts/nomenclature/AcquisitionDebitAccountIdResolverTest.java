@@ -75,12 +75,12 @@ public class AcquisitionDebitAccountIdResolverTest {
         when(accountIdService.contraAccountName(ACQUISITION, DEBIT, kca)).thenReturn("ACCUMULATED DEPRECIATION - MOTOR VEHICLES");
         when(accountIdService.contraAccountName(ACQUISITION, DEBIT, officePartitioning)).thenReturn("ACCUMULATED DEPRECIATION - OFFICE RENOVATION");
 
-        when(accountIdService.accountNumber("001","00","00156","010")).thenReturn("0010000156010");
-        when(accountIdService.accountNumber("987","00","00152","011")).thenReturn("9870000152011");
-        when(accountIdService.accountNumber("010","00","00153","012")).thenReturn("0100000153012");
-        when(accountIdService.accountNumber("986","00","00155","013")).thenReturn("9860000155013");
-        when(accountIdService.accountNumber("996","00","00151","014")).thenReturn("9960000151014");
-        when(accountIdService.accountNumber("978","00","00154","015")).thenReturn("9780000154015");
+        when(accountIdService.accountNumber("001", "00", "00156", "010")).thenReturn("0010000156010");
+        when(accountIdService.accountNumber("987", "00", "00152", "011")).thenReturn("9870000152011");
+        when(accountIdService.accountNumber("010", "00", "00153", "012")).thenReturn("0100000153012");
+        when(accountIdService.accountNumber("986", "00", "00155", "013")).thenReturn("9860000155013");
+        when(accountIdService.accountNumber("996", "00", "00151", "014")).thenReturn("9960000151014");
+        when(accountIdService.accountNumber("978", "00", "00154", "015")).thenReturn("9780000154015");
 
         when(accountIdService.currencyCode("KES")).thenReturn("00");
 

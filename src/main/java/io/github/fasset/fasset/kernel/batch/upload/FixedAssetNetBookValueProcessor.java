@@ -40,7 +40,7 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the provided item, returning a potentially modified or new item for continued processing.  If the returned result is null, it is assumed that processing of the item should not
      * continue.
      */
@@ -52,10 +52,7 @@ public class FixedAssetNetBookValueProcessor implements ItemProcessor<FixedAsset
         NetBookValue retVal = new NetBookValue();
 
         try {
-            retVal.setFixedAssetId(fixedAsset.getId())
-                  .setCategory(fixedAsset.getCategory())
-                  .setSolId(fixedAsset.getSolId())
-                  .setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
+            retVal.setFixedAssetId(fixedAsset.getId()).setCategory(fixedAsset.getCategory()).setSolId(fixedAsset.getSolId()).setMonth(YearMonth.of(2017, 12))//TODO configure to do this from controller
                   .setNetBookValue(fixedAsset.getNetBookValue());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while processing fixedAsset item : %s", fixedAsset);

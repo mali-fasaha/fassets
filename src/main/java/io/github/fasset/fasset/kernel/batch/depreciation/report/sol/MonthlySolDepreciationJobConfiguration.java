@@ -63,12 +63,12 @@ public class MonthlySolDepreciationJobConfiguration {
     /**
      * <p>Constructor for MonthlySolDepreciationJobConfiguration.</p>
      *
-     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
-     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param jobBuilderFactory                 a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory                a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
      * @param monthlySolDepreciationJobListener a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationJobListener} object.
-     * @param monthlySolDepreciationService a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
-     * @param monthlySolDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor} object.
-     * @param entityManagerFactory a {@link javax.persistence.EntityManagerFactory} object.
+     * @param monthlySolDepreciationService     a {@link io.github.fasset.fasset.service.MonthlySolDepreciationService} object.
+     * @param monthlySolDepreciationExecutor    a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.sol.MonthlySolDepreciationExecutor} object.
+     * @param entityManagerFactory              a {@link javax.persistence.EntityManagerFactory} object.
      */
     @Autowired
     public MonthlySolDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,

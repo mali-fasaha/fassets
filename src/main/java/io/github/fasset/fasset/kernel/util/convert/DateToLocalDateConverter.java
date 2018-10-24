@@ -38,7 +38,9 @@ public class DateToLocalDateConverter implements Converter<Date, LocalDate> {
 
     private static final Logger log = LoggerFactory.getLogger(DateToLocalDateConverter.class);
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LocalDate convert(Date date) {
 

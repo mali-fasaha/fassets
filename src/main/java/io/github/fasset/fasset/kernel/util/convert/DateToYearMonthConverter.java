@@ -59,7 +59,7 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
      * <p>Constructor for DateToYearMonthConverter.</p>
      *
      * @param localDateToYearMonthConverter a {@link io.github.fasset.fasset.kernel.util.convert.LocalDateToYearMonthConverter} object.
-     * @param dateToLocalDateConverter a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
+     * @param dateToLocalDateConverter      a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
      */
     @Autowired
     public DateToYearMonthConverter(@Qualifier("localDateToYearMonthConverter") LocalDateToYearMonthConverter localDateToYearMonthConverter,
@@ -97,7 +97,7 @@ public class DateToYearMonthConverter implements Converter<Date, YearMonth> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Convert the source object of type {@code S} to target type {@code T}.
      */
     @Override

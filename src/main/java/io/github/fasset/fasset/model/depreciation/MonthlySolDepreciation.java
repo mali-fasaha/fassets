@@ -18,11 +18,11 @@
 package io.github.fasset.fasset.model.depreciation;
 
 
-    import io.github.fasset.fasset.DomainModel;
-    import org.hibernate.envers.Audited;
+import io.github.fasset.fasset.DomainModel;
+import org.hibernate.envers.Audited;
 
-    import javax.persistence.Entity;
-    import java.text.MessageFormat;
+import javax.persistence.Entity;
+import java.text.MessageFormat;
 
 /**
  * This object represents a record of an SOL's depreciation for all the months of a year
@@ -59,19 +59,19 @@ public class MonthlySolDepreciation extends DomainModel<String> {
      * <p>Constructor for MonthlySolDepreciation.</p>
      *
      * @param solId a {@link java.lang.String} object.
-     * @param year a int.
-     * @param jan a double.
-     * @param feb a double.
-     * @param mar a double.
-     * @param apr a double.
-     * @param may a double.
-     * @param jun a double.
-     * @param jul a double.
-     * @param aug a double.
-     * @param sep a double.
-     * @param oct a double.
-     * @param nov a double.
-     * @param dec a double.
+     * @param year  a int.
+     * @param jan   a double.
+     * @param feb   a double.
+     * @param mar   a double.
+     * @param apr   a double.
+     * @param may   a double.
+     * @param jun   a double.
+     * @param jul   a double.
+     * @param aug   a double.
+     * @param sep   a double.
+     * @param oct   a double.
+     * @param nov   a double.
+     * @param dec   a double.
      */
     public MonthlySolDepreciation(String solId, int year, double jan, double feb, double mar, double apr, double may, double jun, double jul, double aug, double sep, double oct, double nov,
                                   double dec) {
@@ -371,7 +371,9 @@ public class MonthlySolDepreciation extends DomainModel<String> {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -390,13 +392,17 @@ public class MonthlySolDepreciation extends DomainModel<String> {
             com.google.common.base.Objects.equal(solId, that.solId);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return com.google.common.base.Objects.hashCode(super.hashCode(), solId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format("MonthlySolDepreciation'{'solId={0}, year={1}, jan={2}, feb={3}, mar={4}, apr={5}, may={6}, jun={7}, jul={8}, aug={9}, sep={10}, oct={11}, nov={12}, dec={13}'}'",

@@ -46,7 +46,9 @@ public class DoubleToMoneyConverter implements Converter<Double, Money> {
         this.moneyProperties = moneyProperties;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Nullable
     @Override
     public Money convert(Double aDouble) {

@@ -50,8 +50,8 @@ public class DepreciationJobConfig {
     /**
      * <p>Constructor for DepreciationJobConfig.</p>
      *
-     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
-     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param jobBuilderFactory    a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory   a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
      * @param fixedAssetItemReader a {@link org.springframework.batch.item.ItemReader} object.
      */
     @Autowired
@@ -69,13 +69,7 @@ public class DepreciationJobConfig {
      */
     @Bean("depreciationJob")
     public Job depreciationJob(DepreciationJobListener depreciationJobListener) {
-        return jobBuilderFactory.get("depreciationJob")
-                                .preventRestart()
-                                .incrementer(new RunIdIncrementer())
-                                .listener(depreciationJobListener)
-                                .flow(depreciationStep1())
-                                .end()
-                                .build();
+        return jobBuilderFactory.get("depreciationJob").preventRestart().incrementer(new RunIdIncrementer()).listener(depreciationJobListener).flow(depreciationStep1()).end().build();
     }
 
     /**

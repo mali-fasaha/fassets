@@ -59,48 +59,36 @@ public class MonthlySolDepreciationDTO {
      * <p>Constructor for MonthlySolDepreciationDTO.</p>
      *
      * @param solId a {@link java.lang.String} object.
-     * @param year a {@link java.lang.Integer} object.
-     * @param jan a {@link javax.money.MonetaryAmount} object.
-     * @param feb a {@link javax.money.MonetaryAmount} object.
-     * @param mar a {@link javax.money.MonetaryAmount} object.
-     * @param apr a {@link javax.money.MonetaryAmount} object.
-     * @param may a {@link javax.money.MonetaryAmount} object.
-     * @param jun a {@link javax.money.MonetaryAmount} object.
-     * @param jul a {@link javax.money.MonetaryAmount} object.
-     * @param aug a {@link javax.money.MonetaryAmount} object.
-     * @param sep a {@link javax.money.MonetaryAmount} object.
-     * @param oct a {@link javax.money.MonetaryAmount} object.
-     * @param nov a {@link javax.money.MonetaryAmount} object.
-     * @param dec a {@link javax.money.MonetaryAmount} object.
+     * @param year  a {@link java.lang.Integer} object.
+     * @param jan   a {@link javax.money.MonetaryAmount} object.
+     * @param feb   a {@link javax.money.MonetaryAmount} object.
+     * @param mar   a {@link javax.money.MonetaryAmount} object.
+     * @param apr   a {@link javax.money.MonetaryAmount} object.
+     * @param may   a {@link javax.money.MonetaryAmount} object.
+     * @param jun   a {@link javax.money.MonetaryAmount} object.
+     * @param jul   a {@link javax.money.MonetaryAmount} object.
+     * @param aug   a {@link javax.money.MonetaryAmount} object.
+     * @param sep   a {@link javax.money.MonetaryAmount} object.
+     * @param oct   a {@link javax.money.MonetaryAmount} object.
+     * @param nov   a {@link javax.money.MonetaryAmount} object.
+     * @param dec   a {@link javax.money.MonetaryAmount} object.
      */
     public MonthlySolDepreciationDTO(String solId, Integer year, MonetaryAmount jan, MonetaryAmount feb, MonetaryAmount mar, MonetaryAmount apr, MonetaryAmount may, MonetaryAmount jun,
                                      MonetaryAmount jul, MonetaryAmount aug, MonetaryAmount sep, MonetaryAmount oct, MonetaryAmount nov, MonetaryAmount dec) {
         this.solId = solId;
         this.year = year;
-        this.jan = jan.getNumber()
-                      .doubleValue();
-        this.feb = feb.getNumber()
-                      .doubleValue();
-        this.mar = mar.getNumber()
-                      .doubleValue();
-        this.apr = apr.getNumber()
-                      .doubleValue();
-        this.may = may.getNumber()
-                      .doubleValue();
-        this.jun = jun.getNumber()
-                      .doubleValue();
-        this.jul = jul.getNumber()
-                      .doubleValue();
-        this.aug = aug.getNumber()
-                      .doubleValue();
-        this.sep = sep.getNumber()
-                      .doubleValue();
-        this.oct = oct.getNumber()
-                      .doubleValue();
-        this.nov = nov.getNumber()
-                      .doubleValue();
-        this.dec = dec.getNumber()
-                      .doubleValue();
+        this.jan = jan.getNumber().doubleValue();
+        this.feb = feb.getNumber().doubleValue();
+        this.mar = mar.getNumber().doubleValue();
+        this.apr = apr.getNumber().doubleValue();
+        this.may = may.getNumber().doubleValue();
+        this.jun = jun.getNumber().doubleValue();
+        this.jul = jul.getNumber().doubleValue();
+        this.aug = aug.getNumber().doubleValue();
+        this.sep = sep.getNumber().doubleValue();
+        this.oct = oct.getNumber().doubleValue();
+        this.nov = nov.getNumber().doubleValue();
+        this.dec = dec.getNumber().doubleValue();
     }
 
     /**
@@ -414,7 +402,9 @@ public class MonthlySolDepreciationDTO {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -429,13 +419,17 @@ public class MonthlySolDepreciationDTO {
             Objects.equal(sep, that.sep) && Objects.equal(oct, that.oct) && Objects.equal(nov, that.nov) && Objects.equal(dec, that.dec);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(solId, year, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

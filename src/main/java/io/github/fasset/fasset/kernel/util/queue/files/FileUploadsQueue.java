@@ -38,14 +38,12 @@ import javax.annotation.PostConstruct;
  * <br>
  * The {@link OnCompletion} lifecycle method is also called when the file is uploaded successfully but it is only when the client calls the {@link #push(QueueMessage, OnCompletion)}
  * <br>
- * The client could also call the {@link #push(QueueMessage, OnError)} method which will handle both completion and an
- * unexpected messageQueue runtime exception
- * TODO: add validation methods here or create file validation service for the same in another
- * Todo Add duplicate upload checks service, with hashing algorithms interface
+ * The client could also call the {@link #push(QueueMessage, OnError)} method which will handle both completion and an unexpected messageQueue runtime exception TODO: add validation methods here or
+ * create file validation service for the same in another Todo Add duplicate upload checks service, with hashing algorithms interface
  *
  * @author edwin.njeru
- * @since 0.0.1
  * @version 0.0.1
+ * @since 0.0.1
  */
 @Component("fileUploadsQueue")
 public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
@@ -58,7 +56,7 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
     /**
      * <p>Constructor for FileUploadsQueue.</p>
      *
-     * @param fileUploadService a {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadService} object.
+     * @param fileUploadService     a {@link io.github.fasset.fasset.kernel.util.queue.files.FileUploadService} object.
      * @param fileValidationService a {@link io.github.fasset.fasset.kernel.util.queue.files.FileValidationService} object.
      */
     @Autowired
@@ -81,7 +79,7 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Adds a message to the queue
      */
     @Override
@@ -91,8 +89,7 @@ public class FileUploadsQueue extends AbstractMessageQueue<FileUpload> {
 
         if (allowDuplicates) {
 
-            fileUploadService.recordFileUpload(fileValidationService.allowDuplicates()
-                                                                    .validate(queueMessage.message()));
+            fileUploadService.recordFileUpload(fileValidationService.allowDuplicates().validate(queueMessage.message()));
 
         } else {
 

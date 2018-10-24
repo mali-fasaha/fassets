@@ -25,7 +25,7 @@ import io.github.fasset.fasset.kernel.util.BatchJobExecutionException;
  * @author edwin.njeru
  * @version $Id: $Id
  */
-public interface JobProxy extends Runnable{
+public interface JobProxy extends Runnable {
 
     /**
      * Method for triggering a job run

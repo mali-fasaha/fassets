@@ -50,7 +50,7 @@ public interface DepreciationRepository extends JpaRepository<Depreciation, Inte
      * <p>getDepreciationByDepreciationPeriodAndFixedAssetId.</p>
      *
      * @param depreciationPeriod a {@link java.time.YearMonth} object.
-     * @param fixedAssetId a int.
+     * @param fixedAssetId       a int.
      * @return a {@link io.github.fasset.fasset.model.Depreciation} object.
      */
     Depreciation getDepreciationByDepreciationPeriodAndFixedAssetId(YearMonth depreciationPeriod, int fixedAssetId);
@@ -59,7 +59,7 @@ public interface DepreciationRepository extends JpaRepository<Depreciation, Inte
      * <p>getMonthlyAssetDepreciation.</p>
      *
      * @param assetId a {@link java.lang.Integer} object.
-     * @param year a {@link java.lang.Integer} object.
+     * @param year    a {@link java.lang.Integer} object.
      * @return a {@link java.util.List} object.
      */
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyAssetDepreciationDTO(" + "e.fixedAssetId,e.year," +
@@ -82,7 +82,7 @@ public interface DepreciationRepository extends JpaRepository<Depreciation, Inte
      * <p>getMonthlySolDepreciation.</p>
      *
      * @param solId a {@link java.lang.String} object.
-     * @param year a {@link java.lang.Integer} object.
+     * @param year  a {@link java.lang.Integer} object.
      * @return a {@link java.util.List} object.
      */
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlySolDepreciationDTO(" + "e.solId,e.year," +
@@ -104,7 +104,7 @@ public interface DepreciationRepository extends JpaRepository<Depreciation, Inte
      * <p>getMonthlyCategoryDepreciation.</p>
      *
      * @param categoryName a {@link java.lang.String} object.
-     * @param year a {@link java.lang.Integer} object.
+     * @param year         a {@link java.lang.Integer} object.
      * @return a {@link java.util.List} object.
      */
     @Query("SELECT NEW io.github.fasset.fasset.kernel.batch.depreciation.model.MonthlyCategoryDepreciationDTO(" + "e.category,e.year," +

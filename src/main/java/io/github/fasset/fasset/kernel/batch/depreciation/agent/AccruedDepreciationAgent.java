@@ -31,7 +31,9 @@ import java.time.YearMonth;
  */
 public interface AccruedDepreciationAgent extends Agent<AccruedDepreciation> {
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     AccruedDepreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);
 }

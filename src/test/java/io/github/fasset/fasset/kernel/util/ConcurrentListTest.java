@@ -233,7 +233,7 @@ public class ConcurrentListTest {
     @Test
     public void removeAll() throws Exception {
 
-        intList11.removeAll(Arrays.asList(23,28,13,17));
+        intList11.removeAll(Arrays.asList(23, 28, 13, 17));
 
         assertEquals(8, intList11.size());
         assertTrue(!intList11.contains(23));
@@ -245,7 +245,7 @@ public class ConcurrentListTest {
     @Test
     public void addAll() throws Exception {
 
-        intList11.addAll(Arrays.asList(78,27,49,65));
+        intList11.addAll(Arrays.asList(78, 27, 49, 65));
         assertEquals(16, intList11.size());
         assertTrue(intList11.contains(78));
         assertTrue(intList11.contains(27));
@@ -276,8 +276,8 @@ public class ConcurrentListTest {
 
         Iterator intRator = intList8.iterator();
 
-        while(intRator.hasNext()){
-            i ++;
+        while (intRator.hasNext()) {
+            i++;
             intRator.next();
         }
 
@@ -290,15 +290,16 @@ public class ConcurrentListTest {
 
         assertEquals(18, i);
     }
-@Test
+
+    @Test
     public void listIterator() throws Exception {
 
         int i = 0;
 
         ListIterator intRator = intList8.listIterator();
 
-        while(intRator.hasNext()){
-            i ++;
+        while (intRator.hasNext()) {
+            i++;
             intRator.next();
         }
 

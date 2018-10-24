@@ -36,7 +36,9 @@ public class MoneyToDoubleConverter implements Converter<Money, Double> {
 
     private static final Logger log = LoggerFactory.getLogger(MoneyToDoubleConverter.class);
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Nullable
     @Override
     public Double convert(Money money) {
@@ -46,8 +48,7 @@ public class MoneyToDoubleConverter implements Converter<Money, Double> {
         Double doubleAmount = null;
 
         try {
-            doubleAmount = money.getNumber()
-                                .doubleValue();
+            doubleAmount = money.getNumber().doubleValue();
         } catch (Throwable e) {
             String message = String.format("Exception encountered while converting %s to double type", money);
 

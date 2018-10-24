@@ -47,9 +47,9 @@ public class DepreciationJobProxy implements JobProxy {
     /**
      * <p>Constructor for DepreciationJobProxy.</p>
      *
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
-     * @param depreciationRun a {@link org.springframework.batch.core.Job} object.
+     * @param jobLauncher              a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param fixedAssetService        a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     * @param depreciationRun          a {@link org.springframework.batch.core.Job} object.
      * @param fixedAssetsJobsActivator a {@link io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator} object.
      */
     @Autowired
@@ -62,7 +62,9 @@ public class DepreciationJobProxy implements JobProxy {
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void initializeJobRun() throws BatchJobExecutionException {
 
@@ -71,12 +73,13 @@ public class DepreciationJobProxy implements JobProxy {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * When an object implementing interface <code>Runnable</code> is used to create a thread, starting the thread causes the object's
      * <code>run</code> method to be called in that separately executing
      * thread.
      * <p>
      * The general contract of the method <code>run</code> is that it may take any action whatsoever.
+     *
      * @see Thread#run()
      */
     @Override

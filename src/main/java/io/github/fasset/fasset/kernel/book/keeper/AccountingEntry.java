@@ -90,11 +90,11 @@ public class AccountingEntry extends AccountDomainModel<String> implements Compa
      * <p>Constructor for AccountingEntry.</p>
      *
      * @param bookingDate a {@link io.github.ghacupha.time.point.TimePoint} object.
-     * @param account a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
+     * @param account     a {@link io.github.fasset.fasset.kernel.book.keeper.Account} object.
      * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
-     * @param narration a {@link java.lang.String} object.
+     * @param narration   a {@link java.lang.String} object.
      * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
-     * @param amount a {@link io.github.ghacupha.cash.Cash} object.
+     * @param amount      a {@link io.github.ghacupha.cash.Cash} object.
      */
     public AccountingEntry(TimePoint bookingDate, Account account, String narration, AccountSide accountSide, Cash amount) {
         this.bookingDate = bookingDate;
@@ -264,7 +264,9 @@ public class AccountingEntry extends AccountDomainModel<String> implements Compa
 
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -297,7 +299,9 @@ public class AccountingEntry extends AccountDomainModel<String> implements Compa
         return entryAttributes != null ? entryAttributes.equals(accountingEntry.entryAttributes) : accountingEntry.entryAttributes == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result = super.hashCode();
@@ -310,7 +314,9 @@ public class AccountingEntry extends AccountDomainModel<String> implements Compa
         return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return narration;
@@ -347,9 +353,6 @@ public class AccountingEntry extends AccountDomainModel<String> implements Compa
     @Override
     public int compareTo(final AccountingEntry o) {
 
-        return Comparator.comparing(AccountingEntry::getBookingDate)
-            .thenComparing(AccountingEntry::getAccount)
-            .thenComparing(AccountingEntry::getAmount)
-            .compare(this, o);
+        return Comparator.comparing(AccountingEntry::getBookingDate).thenComparing(AccountingEntry::getAccount).thenComparing(AccountingEntry::getAmount).compare(this, o);
     }
 }

@@ -206,7 +206,9 @@ public class FixedAssetDTO {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -221,13 +223,17 @@ public class FixedAssetDTO {
             Objects.equals(netBookValue, that.netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format("FixedAssetDTO'{'solId=''{0}'', barcode=''{1}'', assetDescription=''{2}'', purchaseDate={3}, category=''{4}'', purchaseCost=''{5}'', netBookValue=''{6}'''}'",

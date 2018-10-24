@@ -58,15 +58,17 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.CRE
 import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEBIT;
 
 /**
- * Implements the {@link io.github.fasset.fasset.kernel.book.keeper.Account} interface and maintains states for {@link java.util.Currency}, name, number, openingDate and {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide}. The AccountSide remains volatile, inorder to represent the
- * changing nature of the account as the {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe default {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} of the {@link
- * Account}.
+ * Implements the {@link io.github.fasset.fasset.kernel.book.keeper.Account} interface and maintains states for {@link java.util.Currency}, name, number, openingDate and {@link
+ * io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide}. The AccountSide remains volatile, inorder to represent the changing nature of the account as the {@link
+ * io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items are added. This is also assigned on initialization allowing the client to describe default {@link
+ * io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} of the {@link Account}.
  * <p>
  * Implementation note : Some non-guaranteed care has been taken to make the Implementation as thread-safe as possible. This may not be obviously evident by the usual use of words like "synchronized"
- * et al. In fact synchronization would probably just slow us down. Instead what has been done is that the {@link java.util.Collection} of {@link io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items, which is the whole concept of this
- * Account pattern, has been implemented using a {@link java.util.List} interface implementation that creates a new copy of itself every time time a mutative process is carried out. It's iterator as a result is
- * guaranteed never to throw {@code ConcurrentModificationException} and it does not reflect additions, removals or changes to the list, once they have been created. The rest of the getters return new
- * instances of values of similar equivalence or copies of themselves this objects attributes will largely therefore remain unchanged.
+ * et al. In fact synchronization would probably just slow us down. Instead what has been done is that the {@link java.util.Collection} of {@link
+ * io.github.fasset.fasset.kernel.book.keeper.AccountingEntry} items, which is the whole concept of this Account pattern, has been implemented using a {@link java.util.List} interface implementation
+ * that creates a new copy of itself every time time a mutative process is carried out. It's iterator as a result is guaranteed never to throw {@code ConcurrentModificationException} and it does not
+ * reflect additions, removals or changes to the list, once they have been created. The rest of the getters return new instances of values of similar equivalence or copies of themselves this objects
+ * attributes will largely therefore remain unchanged.
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -138,10 +140,10 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
     /**
      * <p>Constructor for Account.</p>
      *
-     * @param name a {@link java.lang.String} object.
-     * @param number a {@link java.lang.String} object.
+     * @param name        a {@link java.lang.String} object.
+     * @param number      a {@link java.lang.String} object.
      * @param accountSide a {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} object.
-     * @param currency a {@link java.util.Currency} object.
+     * @param currency    a {@link java.util.Currency} object.
      * @param openingDate a {@link io.github.ghacupha.time.point.TimePoint} object.
      */
     @SuppressWarnings("unused")
@@ -195,17 +197,15 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
 
         log.debug("Adding accountingEntry {} to account : {}", accountingEntry, this);
 
-        if (accountingEntry.getBookingDate()
-                           .before(this.openingDate)) {
+        if (accountingEntry.getBookingDate().before(this.openingDate)) {
 
             String message = String.format("Opening date : %s . The accountingEntry date was %s", this.openingDate, accountingEntry.getBookingDate());
             throw new UntimelyBookingDateException("The booking date cannot be earlier than the account opening date : " + message);
 
-        } else if (!this.currency.equals(accountingEntry.getAmount()
-                                                        .getCurrency())) {
+        } else if (!this.currency.equals(accountingEntry.getAmount().getCurrency())) {
 
-            String message = String.format("Currencies mismatched :Expected getCurrency : %s but found accountingEntry denominated in %s", this.currency.toString(), accountingEntry.getAmount()
-                                                                                                                                                                                    .getCurrency());
+            String message =
+                String.format("Currencies mismatched :Expected getCurrency : %s but found accountingEntry denominated in %s", this.currency.toString(), accountingEntry.getAmount().getCurrency());
             throw new MismatchedCurrencyException(message);
 
         } else {
@@ -236,7 +236,8 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
     /**
      * Similar to the balance query for a given date except the date is provided through a simple {@code VarArgs} int argument
      *
-     * @param asAt <p>The date as at when the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} we want is effective given in the following order:</p> <p>i) Year</p> <p>ii) Month</p> <p>iii) Date</p>
+     * @param asAt <p>The date as at when the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} we want is effective given in the following order:</p> <p>i) Year</p> <p>ii)
+     *             Month</p> <p>iii) Date</p>
      * @return {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} effective the date specified by the varargs
      */
     public AccountBalance balance(int... asAt) {
@@ -273,8 +274,7 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
      */
     public List<AccountingEntry> getEntries() {
 
-        return new CopyOnWriteArrayList<>(entries.parallelStream()
-                                                 .collect(ImmutableListCollector.toImmutableList()));
+        return new CopyOnWriteArrayList<>(entries.parallelStream().collect(ImmutableListCollector.toImmutableList()));
     }
 
     /**
@@ -299,7 +299,9 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
         throw new UnsupportedOperationException("Dude! Can you imagine, setting the opening date for an account that's already opened?");
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return this.name + " " + this.number;
@@ -308,10 +310,12 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
     /**
      * <p>Getter for the field <code>accountSide</code>.</p>
      *
-     * @return Shows the side of the balance sheet to which this belongs which could be either {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#DEBIT} or {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#CREDIT} Implementation Note : As per implementation notes
-     * this is for use only by the {@link io.github.fasset.fasset.kernel.book.keeper.AccountAppraisalDelegate} allowing inexpensive evaluation of the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} without causing circular reference. Otherwise anyone else who needs to
-     * know the {@code AccountSide} of this needs to query the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} first, and from it acquire the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide}. Also note that the object's {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} is never
-     * really exposed since this implementation is returning a value based on its current status.
+     * @return Shows the side of the balance sheet to which this belongs which could be either {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#DEBIT} or {@link
+     * io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide#CREDIT} Implementation Note : As per implementation notes this is for use only by the {@link
+     * io.github.fasset.fasset.kernel.book.keeper.AccountAppraisalDelegate} allowing inexpensive evaluation of the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance} without
+     * causing circular reference. Otherwise anyone else who needs to know the {@code AccountSide} of this needs to query the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountBalance}
+     * first, and from it acquire the {@link io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide}. Also note that the object's {@link
+     * io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide} is never really exposed since this implementation is returning a value based on its current status.
      */
     public AccountSide getAccountSide() {
 
@@ -380,7 +384,9 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
         throw new UnsupportedOperationException("Setting the number of the account is reserved for the constructor. This method only exists to make JPA happy :)");
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -422,7 +428,9 @@ public class Account extends AccountDomainModel<String> implements Comparable<Ac
         return entries != null ? entries.equals(account.entries) : account.entries == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result = super.hashCode();

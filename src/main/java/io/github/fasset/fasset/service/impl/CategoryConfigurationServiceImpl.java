@@ -56,7 +56,9 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<CategoryConfiguration> getAllCategoryConfigurations() {
 
@@ -64,32 +66,36 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
 
         List<CategoryConfiguration> categoryConfigurations = ConcurrentList.newList();
 
-        categoryConfigurationRepository.findAll()
-                                       .forEach(c -> {
-                                           log.trace("Adding category {} to category list", c);
-                                           categoryConfigurations.add(c);
-                                       });
+        categoryConfigurationRepository.findAll().forEach(c -> {
+            log.trace("Adding category {} to category list", c);
+            categoryConfigurations.add(c);
+        });
 
         return categoryConfigurations;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveCategoryConfiguration(CategoryConfiguration fixedAssetCategory) {
 
         categoryConfigurationRepository.save(fixedAssetCategory);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Cacheable("categoryConfigurationsById")
     @Override
     public CategoryConfiguration getCategoryConfigurationById(int id) {
 
-        return categoryConfigurationRepository.findById(id)
-                                              .get();
+        return categoryConfigurationRepository.findById(id).get();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Cacheable("categoryConfigurationsByNames")
     @Override
     public CategoryConfiguration getCategoryByName(String categoryName) {
@@ -97,7 +103,9 @@ public class CategoryConfigurationServiceImpl implements CategoryConfigurationSe
         return categoryConfigurationRepository.findFirstByDesignation(categoryName);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Cacheable("depreciationRatesByCategoryNames")
     @Override
     public double getDepreciationRateByCategoryName(String categoryName) {

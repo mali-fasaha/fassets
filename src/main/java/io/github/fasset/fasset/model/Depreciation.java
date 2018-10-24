@@ -220,7 +220,9 @@ public class Depreciation extends DomainModel<String> {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -237,13 +239,17 @@ public class Depreciation extends DomainModel<String> {
             Objects.equals(category, that.category) && Objects.equals(solId, that.solId);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), depreciationPeriod, fixedAssetId, category, solId, depreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "Depreciation{" + "depreciationPeriod=" + depreciationPeriod + ", fixedAssetId=" + fixedAssetId + ", category='" + category + '\'' + ", solId='" + solId + '\'' + ", depreciation=" +

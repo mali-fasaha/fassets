@@ -32,7 +32,9 @@ import java.util.Optional;
 @Component("auditorAware")
 public class AuditorAwareImpl implements AuditorAware<String> {
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<String> getCurrentAuditor() {
 

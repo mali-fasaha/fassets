@@ -55,9 +55,9 @@ public class DepreciationServiceImpl implements DepreciationService {
     /**
      * <p>Constructor for DepreciationServiceImpl.</p>
      *
-     * @param depreciationRepository a {@link io.github.fasset.fasset.repository.DepreciationRepository} object.
+     * @param depreciationRepository     a {@link io.github.fasset.fasset.repository.DepreciationRepository} object.
      * @param accruedDepreciationService a {@link io.github.fasset.fasset.service.AccruedDepreciationService} object.
-     * @param netBookValueService a {@link io.github.fasset.fasset.service.NetBookValueService} object.
+     * @param netBookValueService        a {@link io.github.fasset.fasset.service.NetBookValueService} object.
      */
     @Autowired
     public DepreciationServiceImpl(@Qualifier("depreciationRepository") DepreciationRepository depreciationRepository, AccruedDepreciationService accruedDepreciationService,
@@ -70,7 +70,7 @@ public class DepreciationServiceImpl implements DepreciationService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves the {@link Depreciation} object given as parameter to the {@link DepreciationRepository}
      */
     @Override
@@ -83,7 +83,7 @@ public class DepreciationServiceImpl implements DepreciationService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves all items in the list
      */
     @Override
@@ -94,7 +94,9 @@ public class DepreciationServiceImpl implements DepreciationService {
         depreciationRepository.saveAll(depreciationList);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getDistinctSolIds() {
 
@@ -103,24 +105,18 @@ public class DepreciationServiceImpl implements DepreciationService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves multiple items using multiple repositories for items encapsulated in the DepreciationProceeds object
      */
     @Override
     public void saveAllDepreciationProceeds(List<DepreciationProceeds> list) {
 
-        depreciationRepository.saveAll(list.stream()
-                                           .map(DepreciationProceeds::getDepreciation)
-                                           .collect(ImmutableListCollector.toImmutableList()));
+        depreciationRepository.saveAll(list.stream().map(DepreciationProceeds::getDepreciation).collect(ImmutableListCollector.toImmutableList()));
 
 
-        accruedDepreciationService.saveAllAccruedDepreciationRecords(list.stream()
-                                                                         .map(DepreciationProceeds::getAccruedDepreciation)
-                                                                         .collect(ImmutableListCollector.toImmutableList()));
+        accruedDepreciationService.saveAllAccruedDepreciationRecords(list.stream().map(DepreciationProceeds::getAccruedDepreciation).collect(ImmutableListCollector.toImmutableList()));
 
-        netBookValueService.saveAllNetBookValueItems(list.stream()
-                                                         .map(DepreciationProceeds::getNetBookValue)
-                                                         .collect(ImmutableListCollector.toImmutableList()));
+        netBookValueService.saveAllNetBookValueItems(list.stream().map(DepreciationProceeds::getNetBookValue).collect(ImmutableListCollector.toImmutableList()));
 
     }
 }

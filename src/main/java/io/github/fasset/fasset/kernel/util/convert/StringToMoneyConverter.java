@@ -49,7 +49,7 @@ public class StringToMoneyConverter implements Converter<String, Money> {
     /**
      * <p>Constructor for StringToMoneyConverter.</p>
      *
-     * @param monetaryProperties a {@link io.github.fasset.fasset.config.MoneyProperties} object.
+     * @param monetaryProperties      a {@link io.github.fasset.fasset.config.MoneyProperties} object.
      * @param stringToDoubleConverter a {@link io.github.fasset.fasset.kernel.util.convert.StringToDoubleConverter} object.
      */
     @Autowired
@@ -58,7 +58,9 @@ public class StringToMoneyConverter implements Converter<String, Money> {
         this.stringToDoubleConverter = stringToDoubleConverter;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Nullable
     @Override
     public Money convert(@Nullable final String stringMoney) {

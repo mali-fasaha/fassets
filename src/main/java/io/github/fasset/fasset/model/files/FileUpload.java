@@ -59,8 +59,8 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
     /**
      * <p>Constructor for FileUpload.</p>
      *
-     * @param fileName a {@link java.lang.String} object.
-     * @param month a {@link java.time.YearMonth} object.
+     * @param fileName     a {@link java.lang.String} object.
+     * @param month        a {@link java.time.YearMonth} object.
      * @param timeUploaded a {@link java.time.LocalDateTime} object.
      */
     public FileUpload(String fileName, YearMonth month, LocalDateTime timeUploaded) {
@@ -147,7 +147,9 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toJson() {
 
@@ -155,7 +157,9 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
             deserialized + "\"\n}";
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -182,7 +186,9 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
         return timeUploaded.equals(that.timeUploaded);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result = super.hashCode();
@@ -193,7 +199,9 @@ public class FileUpload extends DomainModel<String> implements Serializable, Jso
         return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MessageFormat.format("FileUploadNotification'{'fileName=''{0}'', month=''{1}'', deserialized=''{2}'', timeUploaded={3}'}'", fileName, month, deserialized, timeUploaded);

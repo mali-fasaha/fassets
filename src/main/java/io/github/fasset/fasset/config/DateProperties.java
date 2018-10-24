@@ -65,7 +65,9 @@ public class DateProperties {
         this.datePattern = datePattern;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "DateProperties{" + "datePattern='" + datePattern + '\'' + '}';

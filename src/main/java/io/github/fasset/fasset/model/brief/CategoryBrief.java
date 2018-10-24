@@ -62,11 +62,11 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
     /**
      * <p>Constructor for CategoryBrief.</p>
      *
-     * @param designation a {@link java.lang.String} object.
-     * @param purchaseCost a {@link org.javamoney.moneta.Money} object.
-     * @param netBookValue a {@link org.javamoney.moneta.Money} object.
+     * @param designation         a {@link java.lang.String} object.
+     * @param purchaseCost        a {@link org.javamoney.moneta.Money} object.
+     * @param netBookValue        a {@link org.javamoney.moneta.Money} object.
      * @param accruedDepreciation a {@link org.javamoney.moneta.Money} object.
-     * @param poll a int.
+     * @param poll                a int.
      */
     public CategoryBrief(String designation, Money purchaseCost, Money netBookValue, Money accruedDepreciation, int poll) {
         this.designation = designation;
@@ -84,7 +84,7 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Adds the number of items in the brief
      */
     @Override
@@ -92,67 +92,89 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
         ++poll;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDesignation() {
         return designation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setDesignation(String designation) {
         this.designation = designation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Money getPurchaseCost() {
         return purchaseCost;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPurchaseCost(Money purchaseCost) {
         this.purchaseCost = purchaseCost;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Money getNetBookValue() {
         return netBookValue;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setNetBookValue(Money netBookValue) {
         this.netBookValue = netBookValue;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Money getAccruedDepreciation() {
         return accruedDepreciation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setAccruedDepreciation(Money accruedDepreciation) {
         this.accruedDepreciation = accruedDepreciation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getPoll() {
         return poll;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPoll(int poll) {
         this.poll = poll;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -169,13 +191,17 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
             Objects.equal(accruedDepreciation, that.accruedDepreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(super.hashCode(), designation, purchaseCost, netBookValue, accruedDepreciation, poll);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -187,11 +213,12 @@ public class CategoryBrief extends DomainModel<String> implements Comparable<Cat
                           .toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(CategoryBrief o) {
 
-        return Comparator.comparing(CategoryBrief::getDesignation)
-                         .compare(this, o);
+        return Comparator.comparing(CategoryBrief::getDesignation).compare(this, o);
     }
 }

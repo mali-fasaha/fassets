@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.stereotype.Component;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 /**
@@ -34,7 +35,9 @@ public class AccountEntryResolutionExecutionListener implements JobExecutionList
 
     private static final Logger log = getLogger(AccountEntryResolutionExecutionListener.class);
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void beforeJob(final JobExecution jobExecution) {
 
@@ -42,7 +45,9 @@ public class AccountEntryResolutionExecutionListener implements JobExecutionList
 
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void afterJob(final JobExecution jobExecution) {
 

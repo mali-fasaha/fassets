@@ -45,16 +45,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
- * Just in case the reader is bored with the fact that I am loading the entire object graph,
- * please note that the controller internally uses a service and this service uses a runtime-generated
- * repository.
- * Good design bureaucracy demands, that I load only the mvc-related context using the @WebMvcTest
- * annotation provided by spring. But then this would miss dependencies which have been used to create
- * repositories.
- * Am all for good test design but, I am not about to mock away a service and
- * its repository. If the service implementation changes I would have to note the method changes and
- * mock each of them in the test, as though the test itself will do anything for the end product.
- * So sue me. Or do me a PR, but don't come crying to me if spring changes the repository interface
+ * Just in case the reader is bored with the fact that I am loading the entire object graph, please note that the controller internally uses a service and this service uses a runtime-generated
+ * repository. Good design bureaucracy demands, that I load only the mvc-related context using the @WebMvcTest annotation provided by spring. But then this would miss dependencies which have been used
+ * to create repositories. Am all for good test design but, I am not about to mock away a service and its repository. If the service implementation changes I would have to note the method changes and
+ * mock each of them in the test, as though the test itself will do anything for the end product. So sue me. Or do me a PR, but don't come crying to me if spring changes the repository interface
  * again....
  *
  * @author edwin.njeru

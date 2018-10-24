@@ -46,7 +46,7 @@ public class NetBookValueWriter implements ItemWriter<NetBookValue> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Process the supplied data element. Will not be called with any null items in normal operation.
      */
     @Override

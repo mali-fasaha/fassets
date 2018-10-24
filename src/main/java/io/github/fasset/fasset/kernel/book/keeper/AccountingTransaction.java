@@ -44,9 +44,10 @@ import static java.util.Collections.EMPTY_MAP;
 
 
 /**
- * Immutable implementation of the {@link io.github.fasset.fasset.kernel.book.Transaction} interface once created nothing about it can change, except addition of entries. The underlying {@link java.util.Collection} cannot be re-assigned once
- * created, and is implemented by {@link java.util.List} whose implementation involved a data structure that copies itself for every mutative procedure that is done, in this case involving addition of {@link
- * AccountingEntry} items. There is a boolean that says whether or not the {@link io.github.fasset.fasset.kernel.book.Transaction} has been posted, which is dangerously non final, but is volatile nevertheless.
+ * Immutable implementation of the {@link io.github.fasset.fasset.kernel.book.Transaction} interface once created nothing about it can change, except addition of entries. The underlying {@link
+ * java.util.Collection} cannot be re-assigned once created, and is implemented by {@link java.util.List} whose implementation involved a data structure that copies itself for every mutative procedure
+ * that is done, in this case involving addition of {@link AccountingEntry} items. There is a boolean that says whether or not the {@link io.github.fasset.fasset.kernel.book.Transaction} has been
+ * posted, which is dangerously non final, but is volatile nevertheless.
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -74,8 +75,8 @@ public final class AccountingTransaction implements Transaction {
     /**
      * <p>create.</p>
      *
-     * @param label a {@link java.lang.String} object.
-     * @param date a {@link io.github.ghacupha.time.point.TimePoint} object.
+     * @param label    a {@link java.lang.String} object.
+     * @param date     a {@link io.github.ghacupha.time.point.TimePoint} object.
      * @param currency a {@link java.util.Currency} object.
      * @return a {@link io.github.fasset.fasset.kernel.book.keeper.AccountingTransaction} object.
      */
@@ -84,9 +85,7 @@ public final class AccountingTransaction implements Transaction {
     }
 
     private static Double mapCashToDouble(AccountingEntry accountingEntry) {
-        return accountingEntry.getAmount()
-                              .getNumber()
-                              .doubleValue();
+        return accountingEntry.getAmount().getNumber().doubleValue();
     }
 
     private static boolean predicateCredits(AccountingEntry accountingEntry) {
@@ -107,7 +106,7 @@ public final class AccountingTransaction implements Transaction {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * The add method adds entries to the transaction provided the transaction has not already been posted
      */
     @Override
@@ -118,7 +117,7 @@ public final class AccountingTransaction implements Transaction {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * The add method adds entries to the transaction provided the transaction has not already been posted
      */
     @Override
@@ -129,9 +128,7 @@ public final class AccountingTransaction implements Transaction {
         // assign currency
         if (wasPosted) {
             throw new ImmutableEntryException("Cannot add entry to a transaction that's already posted");
-        } else if (!account.getCurrency()
-                           .equals(this.currency) || !amount.getCurrency()
-                                                            .equals(this.currency)) {
+        } else if (!account.getCurrency().equals(this.currency) || !amount.getCurrency().equals(this.currency)) {
             throw new MismatchedCurrencyException("Cannot add entry whose getCurrency differs to that of the transaction");
         } else {
             log.debug("Adding entry  : {} into transaction : {}", narration, this);
@@ -150,7 +147,7 @@ public final class AccountingTransaction implements Transaction {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * The add method adds entries to the transaction provided the transaction has not already been posted
      */
     @Override
@@ -161,7 +158,7 @@ public final class AccountingTransaction implements Transaction {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Experimental method for adding a fully formed {@code AccountingEntry}
      */
     @Override
@@ -175,7 +172,7 @@ public final class AccountingTransaction implements Transaction {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Same method as {code Transaction.addEntry()} but with an empty map as description of the entry. The {@code AccountingEntry} can therefore only be distinguished by its narration. The add method
      * adds entries to the transaction provided the transaction has not already been posted
      */
@@ -186,7 +183,7 @@ public final class AccountingTransaction implements Transaction {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Posts the transactions into respective {@link Account} items
      */
     @Override
@@ -211,8 +208,7 @@ public final class AccountingTransaction implements Transaction {
 
             log.debug("Posting : {} entries ...", entries.size());
 
-            entries.parallelStream()
-                   .forEach(AccountingEntry::post);
+            entries.parallelStream().forEach(AccountingEntry::post);
 
             wasPosted = true;
         }
@@ -220,25 +216,23 @@ public final class AccountingTransaction implements Transaction {
 
     private double balanced() {
 
-        double debits = entries.parallelStream()
-                               .filter(AccountingTransaction::predicateDebits)
-                               .map(AccountingTransaction::mapCashToDouble)
-                               .reduce(0.00, (acc, val) -> acc + val);
+        double debits = entries.parallelStream().filter(AccountingTransaction::predicateDebits).map(AccountingTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
 
-        return debits - entries.parallelStream()
-                               .filter(AccountingTransaction::predicateCredits)
-                               .map(AccountingTransaction::mapCashToDouble)
-                               .reduce(0.00, (acc, val) -> acc + val);
+        return debits - entries.parallelStream().filter(AccountingTransaction::predicateCredits).map(AccountingTransaction::mapCashToDouble).reduce(0.00, (acc, val) -> acc + val);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<AccountingEntry> getEntries() {
 
         return Collections.unmodifiableSet(new CopyOnWriteArraySet<>(entries));
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -251,7 +245,9 @@ public final class AccountingTransaction implements Transaction {
         return wasPosted == that.wasPosted && Objects.equals(label, that.label) && Objects.equals(date, that.date) && Objects.equals(currency, that.currency) && Objects.equals(entries, that.entries);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
 
@@ -265,15 +261,10 @@ public final class AccountingTransaction implements Transaction {
      */
     public String toString() {
         final StringBuilder sb = new StringBuilder("{");
-        sb.append('\'')
-          .append(label)
-          .append('\'');
-        sb.append(", date=")
-          .append(date);
-        sb.append(", currency=")
-          .append(currency);
-        sb.append(", entries=")
-          .append(entries);
+        sb.append('\'').append(label).append('\'');
+        sb.append(", date=").append(date);
+        sb.append(", currency=").append(currency);
+        sb.append(", entries=").append(entries);
         sb.append('}');
         return sb.toString();
     }

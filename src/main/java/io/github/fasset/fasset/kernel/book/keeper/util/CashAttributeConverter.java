@@ -36,7 +36,7 @@ public class CashAttributeConverter implements AttributeConverter<Cash, String> 
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Converts the value stored in the entity attribute into the data representation to be stored in the database.
      */
     @Override
@@ -49,7 +49,7 @@ public class CashAttributeConverter implements AttributeConverter<Cash, String> 
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Converts the data stored in the database column into the value to be stored in the entity attribute. Note that it is the responsibility of the converter writer to specify the correct dbData
      * type for the corresponding column for use by the JDBC driver: i.e., persistence providers are not expected to do such type conversion.
      */

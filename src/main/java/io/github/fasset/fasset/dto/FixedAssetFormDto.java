@@ -214,7 +214,9 @@ public class FixedAssetFormDto {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -229,13 +231,17 @@ public class FixedAssetFormDto {
             Objects.equal(category, that.category);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(doubleToMoneyConverter, solId, barcode, assetDescription, purchaseDate, category, purchaseCost, netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

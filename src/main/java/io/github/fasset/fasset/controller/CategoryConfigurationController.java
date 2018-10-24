@@ -34,7 +34,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 
 /**
- * This Controller provides a template in which a dataTable implementatation will require a response containing a collection of {@link io.github.fasset.fasset.model.CategoryConfiguration} items from a persistent sink
+ * This Controller provides a template in which a dataTable implementatation will require a response containing a collection of {@link io.github.fasset.fasset.model.CategoryConfiguration} items from a
+ * persistent sink
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -67,7 +68,7 @@ public class CategoryConfigurationController {
     /**
      * <p>newCategory.</p>
      *
-     * @param category a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
+     * @param category      a {@link io.github.fasset.fasset.model.CategoryConfiguration} object.
      * @param bindingResult a {@link org.springframework.validation.BindingResult} object.
      * @return a {@link java.lang.String} object.
      */
@@ -89,7 +90,7 @@ public class CategoryConfigurationController {
     /**
      * <p>handleEditGet.</p>
      *
-     * @param id a int.
+     * @param id    a int.
      * @param model a {@link org.springframework.ui.Model} object.
      * @return a {@link java.lang.String} object.
      */

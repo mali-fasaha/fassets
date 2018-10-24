@@ -46,7 +46,9 @@ public class ExcelMapperServiceImpl implements ExcelMapperService {
         this.excelDataProvider = excelDataProvider;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<FixedAssetDTO> fetchExcelData(String fileName) {

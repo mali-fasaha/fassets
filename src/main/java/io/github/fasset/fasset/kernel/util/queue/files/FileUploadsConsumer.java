@@ -35,11 +35,12 @@ import java.util.Optional;
 
 /**
  * This is a sample implementation of the {@code MessageConsumer} whose implementation will emit a List of files which have not yet been deserialised. <br> The emitted list contains an 'immutalised'
- * fast list which is wrapped in a {@link io.github.fasset.fasset.kernel.util.ConcurrentList} which is basically a list which is "mostly" backed by a {@link java.util.concurrent.ConcurrentHashMap} whose index is an internally
- * perpetrated integer, also used as the HashMap's key. <br> This message is intended to be used by a scheduler, once set up will continue checking for messages on FileUploads during the entire run of
- * the application. <br> In event of there being a message a batch processing protocol is triggered to consume the messages and the messages (in this case) FileUploads are marked as 'Deserialised',
- * meaning that whatever data was in the file has been uploaded in to the server and all expected batch methods and processes against it have ran. <br> As this particular procedure or chain of
- * procedures could take time it is expected that customer facing interfaces will have taken back control of the servers and the controllers will have returned a response for the filing request.
+ * fast list which is wrapped in a {@link io.github.fasset.fasset.kernel.util.ConcurrentList} which is basically a list which is "mostly" backed by a {@link java.util.concurrent.ConcurrentHashMap}
+ * whose index is an internally perpetrated integer, also used as the HashMap's key. <br> This message is intended to be used by a scheduler, once set up will continue checking for messages on
+ * FileUploads during the entire run of the application. <br> In event of there being a message a batch processing protocol is triggered to consume the messages and the messages (in this case)
+ * FileUploads are marked as 'Deserialised', meaning that whatever data was in the file has been uploaded in to the server and all expected batch methods and processes against it have ran. <br> As
+ * this particular procedure or chain of procedures could take time it is expected that customer facing interfaces will have taken back control of the servers and the controllers will have returned a
+ * response for the filing request.
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -62,7 +63,7 @@ public class FileUploadsConsumer implements MessageConsumer<List<FileUpload>> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This method checks for messages from the queue once it has been subscribed to as shown: <br>
      * <pre>
      *         {@code
@@ -81,10 +82,7 @@ public class FileUploadsConsumer implements MessageConsumer<List<FileUpload>> {
         List<FileUpload> uploads = null;
 
         try {
-            uploads = fileUploadService.uploadedFiles()
-                                       .stream()
-                                       .filter(i -> !i.isDeserialized())
-                                       .collect(ImmutableListCollector.toImmutableFastList());
+            uploads = fileUploadService.uploadedFiles().stream().filter(i -> !i.isDeserialized()).collect(ImmutableListCollector.toImmutableFastList());
         } catch (MQException e) {
 
             // call error event handler

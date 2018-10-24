@@ -39,7 +39,7 @@ public class BatchJobExecutionException extends JobExecutionException {
     /**
      * <p>Constructor for BatchJobExecutionException.</p>
      *
-     * @param msg a {@link java.lang.String} object.
+     * @param msg   a {@link java.lang.String} object.
      * @param cause a {@link java.lang.Throwable} object.
      */
     public BatchJobExecutionException(String msg, Throwable cause) {

@@ -60,7 +60,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Returns the accruedDepreciationAmount for a fixed asset  and month given as param. This will give the accrued depreciation up to the previous month
      */
     @Cacheable("accruedDepreciationForAssets")
@@ -70,13 +70,12 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
         log.debug("Fetching the AccruedDepreciation for assetId : {}, for the month : {}", asset.getId(), month);
 
         //FIXME this query is returning nulls
-        return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(), month)
-                                            .getAccruedDepreciation();
+        return accruedDepreciationRepository.findByFixedAssetIdAndMonthBefore(asset.getId(), month).getAccruedDepreciation();
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves the {@link AccruedDepreciation} object given in the parameter
      */
     @Override
@@ -90,7 +89,7 @@ public class AccruedDepreciationServiceImpl implements AccruedDepreciationServic
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves a {@link List} collection of {@link AccruedDepreciation} items
      */
     @Override

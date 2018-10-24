@@ -34,7 +34,7 @@ public class FileUploadTest {
     public void setUp() throws Exception {
 
         uploadTime = LocalDateTime.now();
-        month  = YearMonth.of(2018,11);
+        month = YearMonth.of(2018, 11);
 
         fileUpload = new FileUpload("testFile", month, uploadTime);
 
@@ -43,8 +43,7 @@ public class FileUploadTest {
     @Test
     public void toJson() {
 
-        assertEquals("{\n\"fileName\":\"testFile\",\n\"month\":\"2018-11\",\n" +
-            "\"timeUploaded\":\""+uploadTime.toString()+"\",\n"+"\"deserialized\":\"false\"\n}", fileUpload.toJson());
+        assertEquals("{\n\"fileName\":\"testFile\",\n\"month\":\"2018-11\",\n" + "\"timeUploaded\":\"" + uploadTime.toString() + "\",\n" + "\"deserialized\":\"false\"\n}", fileUpload.toJson());
     }
 
 }

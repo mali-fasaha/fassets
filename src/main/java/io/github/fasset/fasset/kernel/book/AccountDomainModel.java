@@ -127,7 +127,9 @@ public class AccountDomainModel<U> {
         return lastModifiedBy;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -157,7 +159,9 @@ public class AccountDomainModel<U> {
         return lastModifiedBy != null ? lastModifiedBy.equals(that.lastModifiedBy) : that.lastModifiedBy == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result = id;
@@ -169,7 +173,9 @@ public class AccountDomainModel<U> {
         return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return String.valueOf(id);

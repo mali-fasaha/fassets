@@ -41,7 +41,9 @@ public class ExcelItemWriter implements ItemWriter<FixedAsset> {
     private FixedAssetService fixedAssetService;
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void write(List<? extends FixedAsset> list) throws Exception {
 

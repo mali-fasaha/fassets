@@ -53,19 +53,18 @@ public class MonthlyCategoryDepreciationServiceImpl implements MonthlyCategoryDe
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<MonthlyCategoryDepreciation> fetchAllMonthlyCategoryDepreciations() {
 
-        return depreciationReposiory.findAll()
-                                    .parallelStream()
-                                    .sorted(Comparator.comparing(MonthlyCategoryDepreciation::getCategoryName))
-                                    .collect(ImmutableListCollector.toImmutableList());
+        return depreciationReposiory.findAll().parallelStream().sorted(Comparator.comparing(MonthlyCategoryDepreciation::getCategoryName)).collect(ImmutableListCollector.toImmutableList());
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Save all items in the parameter to the monthlyCategoryDepreciationRepository
      */
     @Override

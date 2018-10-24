@@ -33,7 +33,7 @@ public interface NetBookValueAgent extends Agent<NetBookValue> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Upon invocation the implementation will return the netBoookValue item for the relevant month in which depreciation has occured
      */
     NetBookValue invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);

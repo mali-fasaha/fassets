@@ -30,7 +30,7 @@ public class DepreciationUpdatesException extends RuntimeException {
      *
      * @param errorMessage a {@link java.lang.String} object.
      * @param errorMessage a {@link java.lang.String} object.
-     * @param e a {@link java.lang.Throwable} object.
+     * @param e            a {@link java.lang.Throwable} object.
      */
     public DepreciationUpdatesException(String errorMessage, Throwable e) {
         super(errorMessage, e);

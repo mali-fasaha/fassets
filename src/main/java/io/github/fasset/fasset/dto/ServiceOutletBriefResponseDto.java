@@ -53,15 +53,9 @@ public class ServiceOutletBriefResponseDto {
     public ServiceOutletBriefResponseDto(ServiceOutletBrief serviceOutletBrief) {
         this.id = serviceOutletBrief.getId();
         this.designation = serviceOutletBrief.getDesignation();
-        this.purchaseCost = serviceOutletBrief.getPurchaseCost()
-                                              .getNumber()
-                                              .doubleValue();
-        this.netBookValue = serviceOutletBrief.getNetBookValue()
-                                              .getNumber()
-                                              .doubleValue();
-        this.accruedDepreciation = serviceOutletBrief.getAccruedDepreciation()
-                                                     .getNumber()
-                                                     .doubleValue();
+        this.purchaseCost = serviceOutletBrief.getPurchaseCost().getNumber().doubleValue();
+        this.netBookValue = serviceOutletBrief.getNetBookValue().getNumber().doubleValue();
+        this.accruedDepreciation = serviceOutletBrief.getAccruedDepreciation().getNumber().doubleValue();
         this.poll = serviceOutletBrief.getPoll();
     }
 
@@ -186,7 +180,9 @@ public class ServiceOutletBriefResponseDto {
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -216,7 +212,9 @@ public class ServiceOutletBriefResponseDto {
         return designation != null ? designation.equals(that.designation) : that.designation == null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int result;
@@ -233,23 +231,18 @@ public class ServiceOutletBriefResponseDto {
         return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ServiceOutletBriefResponseDto{");
-        sb.append("nomenclature=")
-          .append(id);
-        sb.append(", designation='")
-          .append(designation)
-          .append('\'');
-        sb.append(", purchaseCost=")
-          .append(purchaseCost);
-        sb.append(", netBookValue=")
-          .append(netBookValue);
-        sb.append(", accruedDepreciation=")
-          .append(accruedDepreciation);
-        sb.append(", poll=")
-          .append(poll);
+        sb.append("nomenclature=").append(id);
+        sb.append(", designation='").append(designation).append('\'');
+        sb.append(", purchaseCost=").append(purchaseCost);
+        sb.append(", netBookValue=").append(netBookValue);
+        sb.append(", accruedDepreciation=").append(accruedDepreciation);
+        sb.append(", poll=").append(poll);
         sb.append('}');
         return sb.toString();
     }

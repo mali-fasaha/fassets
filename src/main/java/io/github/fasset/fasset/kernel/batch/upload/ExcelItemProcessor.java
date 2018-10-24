@@ -51,7 +51,7 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
      * <p>Constructor for ExcelItemProcessor.</p>
      *
      * @param dateToLocalDateConverter a {@link io.github.fasset.fasset.kernel.util.convert.DateToLocalDateConverter} object.
-     * @param stringToMoneyConverter a {@link io.github.fasset.fasset.kernel.util.convert.StringToMoneyConverter} object.
+     * @param stringToMoneyConverter   a {@link io.github.fasset.fasset.kernel.util.convert.StringToMoneyConverter} object.
      */
     @Autowired
     public ExcelItemProcessor(@Qualifier("dateToLocalDateConverter") DateToLocalDateConverter dateToLocalDateConverter,
@@ -61,7 +61,9 @@ public class ExcelItemProcessor implements ItemProcessor<FixedAssetDTO, FixedAss
     }
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FixedAsset process(FixedAssetDTO fixedAssetDTO) throws Exception {
 

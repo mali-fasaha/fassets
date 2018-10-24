@@ -105,7 +105,7 @@ public class AccountTransactionTest {
 
         // Someone screwed up the taxes, we have to reverse
         log.info("\n The internal audit reveals that someone had screwed up our taxes. Our taxes should be on the asset side by at least 13 joys. " +
-            "Time to create some tax reversal transaction as at 2018-04-20, in KES as always");
+                     "Time to create some tax reversal transaction as at 2018-04-20, in KES as always");
         Transaction taxReversal = new AccountingTransaction("Tax reversal", SimpleDate.on(2018, 4, 20), Currency.getInstance("KES"));
 
         log.info("\n Adding entries to the tax reversal. We need to debit VAT by 45 joys and CREDIT advertisement expense by the same amount");

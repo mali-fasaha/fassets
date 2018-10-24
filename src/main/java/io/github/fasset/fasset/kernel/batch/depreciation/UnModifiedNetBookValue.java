@@ -44,11 +44,7 @@ public class UnModifiedNetBookValue {
 
         netBookValue = new NetBookValue();
 
-        netBookValue.setCategory(asset.getCategory())
-                    .setNetBookValue(asset.getNetBookValue())
-                    .setMonth(month)
-                    .setSolId(asset.getSolId())
-                    .setFixedAssetId(asset.getId());
+        netBookValue.setCategory(asset.getCategory()).setNetBookValue(asset.getNetBookValue()).setMonth(month).setSolId(asset.getSolId()).setFixedAssetId(asset.getId());
     }
 
     /**
@@ -60,7 +56,9 @@ public class UnModifiedNetBookValue {
         return netBookValue;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -73,18 +71,21 @@ public class UnModifiedNetBookValue {
         return Objects.equals(netBookValue, that.netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(netBookValue);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("UnModifiedNetBookValue{");
-        sb.append("netBookValue=")
-          .append(netBookValue);
+        sb.append("netBookValue=").append(netBookValue);
         sb.append('}');
         return sb.toString();
     }

@@ -36,8 +36,8 @@ import java.time.YearMonth;
 
 /**
  * This class represents the main method which is to be abstracted by other layers that would allow for flexibility in application of business rules, the main method is the {@link
- * DepreciationExecutorImpl#getDepreciation(FixedAsset, YearMonth)} which able to extract a {@link io.github.fasset.fasset.model.Depreciation} as long as you have a {@link io.github.fasset.fasset.model.FixedAsset} and the {@link java.time.YearMonth} month for which the
- * depreciation is to be calculated
+ * DepreciationExecutorImpl#getDepreciation(FixedAsset, YearMonth)} which able to extract a {@link io.github.fasset.fasset.model.Depreciation} as long as you have a {@link
+ * io.github.fasset.fasset.model.FixedAsset} and the {@link java.time.YearMonth} month for which the depreciation is to be calculated
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -92,7 +92,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Returns a Depreciation object given the fixed asset, and updates the fixed asset with the new net book value and the month of depreciation
      */
     @Cacheable("depreciationProceeds")
@@ -103,8 +103,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
 
         checkIfNull(asset, month);
 
-        if (asset.getNetBookValue()
-                 .isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
+        if (asset.getNetBookValue().isEqualTo(Money.of(0.00, moneyProperties.getDefaultCurrency()))) {
 
             log.trace("The netBookValue for asset : {} is nil, skipping depreciation and resorting to nil " + "depreciation", asset);
 
@@ -114,8 +113,7 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
                                 .setNetBookValue(new UnModifiedNetBookValue(asset, month).getNetBookValue())
                                 .setAccruedDepreciation(new UnModifiedAccruedDepreciation(asset, month).getAccruedDepreciation());
 
-        } else if (localDateToYearMonthConverter.convert(asset.getPurchaseDate())
-                                                .isAfter(month)) {
+        } else if (localDateToYearMonthConverter.convert(asset.getPurchaseDate()).isAfter(month)) {
 
             log.trace("The depreciation period : {} is sooner that the assets purchase date {} " + "resorting to nil depreciation", month, asset.getPurchaseDate());
 
@@ -169,7 +167,9 @@ public class DepreciationExecutorImpl implements DepreciationExecutor {
         return depreciation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public void setDepreciation(Depreciation depreciation) {
         this.depreciation = depreciation;
     }

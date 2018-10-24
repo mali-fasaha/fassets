@@ -46,7 +46,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of RS Hash Function */
+    /* End Of RS Hash Function */
 
 
     /**
@@ -64,7 +64,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of JS Hash Function */
+    /* End Of JS Hash Function */
 
 
     /**
@@ -91,7 +91,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of  P. J. Weinberger Hash Function */
+    /* End Of  P. J. Weinberger Hash Function */
 
 
     /**
@@ -115,7 +115,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of ELF Hash Function */
+    /* End Of ELF Hash Function */
 
 
     /**
@@ -134,7 +134,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of BKDR Hash Function */
+    /* End Of BKDR Hash Function */
 
 
     /**
@@ -152,7 +152,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of SDBM Hash Function */
+    /* End Of SDBM Hash Function */
 
 
     /**
@@ -170,7 +170,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of DJB Hash Function */
+    /* End Of DJB Hash Function */
 
 
     /**
@@ -188,7 +188,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of DEK Hash Function */
+    /* End Of DEK Hash Function */
 
 
     /**
@@ -206,7 +206,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of BP Hash Function */
+    /* End Of BP Hash Function */
 
 
     /**
@@ -226,7 +226,7 @@ public class Hash {
 
         return hash;
     }
-   /* End Of FNV Hash Function */
+    /* End Of FNV Hash Function */
 
 
     /**
@@ -248,5 +248,5 @@ public class Hash {
 
         return hash;
     }
-   /* End Of AP Hash Function */
+    /* End Of AP Hash Function */
 }

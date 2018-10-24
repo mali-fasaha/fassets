@@ -53,7 +53,7 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
     /**
      * <p>Constructor for DefaultDepreciationEntryResolver.</p>
      *
-     * @param accountResolver a {@link io.github.fasset.fasset.accounts.AccountResolver} object.
+     * @param accountResolver       a {@link io.github.fasset.fasset.accounts.AccountResolver} object.
      * @param depreciationAlgorithm a {@link io.github.fasset.fasset.accounts.depreciation.DepreciationAlgorithm} object.
      */
     @Autowired
@@ -65,7 +65,7 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Generates {@code AccountingEntry} items based on {@code FixedAssets} items passed in the parameter. The method will generate both {@code DEBIT} and {@code CREDIT} side entries and will abstract
      * from client the logic of obtaining depreciation rates and values from configurations in the application
      */
@@ -73,9 +73,7 @@ public class DefaultDepreciationEntryResolver implements DepreciationEntryResolv
 
         log.debug("Resolving depreciation entries for {} fixedAssets", fixedAssets.size());
 
-        List<AccountingEntry> entries = fixedAssets.stream()
-                                                   .flatMap(asset -> getEntrySet(asset, period).stream())
-                                                   .collect(ImmutableListCollector.toImmutableFastList());
+        List<AccountingEntry> entries = fixedAssets.stream().flatMap(asset -> getEntrySet(asset, period).stream()).collect(ImmutableListCollector.toImmutableFastList());
 
         log.debug("{} accounting entries generated", entries.size());
 

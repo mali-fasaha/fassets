@@ -129,7 +129,9 @@ public class DomainModel<U> {
         return lastModifiedBy;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -143,28 +145,26 @@ public class DomainModel<U> {
             Objects.equals(lastModifiedBy, that.lastModifiedBy);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, version, createdAt, modifiedAt, createdBy, lastModifiedBy);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("DomainModel{");
-        sb.append("nomenclature=")
-          .append(id);
-        sb.append(", version=")
-          .append(version);
-        sb.append(", createdAt=")
-          .append(createdAt);
-        sb.append(", modifiedAt=")
-          .append(modifiedAt);
-        sb.append(", createdBy=")
-          .append(createdBy);
-        sb.append(", lastModifiedBy=")
-          .append(lastModifiedBy);
+        sb.append("nomenclature=").append(id);
+        sb.append(", version=").append(version);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", modifiedAt=").append(modifiedAt);
+        sb.append(", createdBy=").append(createdBy);
+        sb.append(", lastModifiedBy=").append(lastModifiedBy);
         sb.append('}');
         return sb.toString();
     }

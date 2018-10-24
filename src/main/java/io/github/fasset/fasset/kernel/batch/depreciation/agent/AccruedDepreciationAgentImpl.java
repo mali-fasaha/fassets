@@ -40,15 +40,16 @@ public class AccruedDepreciationAgentImpl implements AccruedDepreciationAgent {
     private static final Logger log = LoggerFactory.getLogger(AccruedDepreciationAgentImpl.class);
 
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AccruedDepreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds) {
 
         log.trace("Processing accruedDepreciation for asset: {} in the period : {}", asset, month);
 
         // with fingers crossed : Hope by the time you are here, the fixedAsser netBookValue will have changed
-        Money depreciationAcc = asset.getPurchaseCost()
-                                     .subtract(asset.getNetBookValue());
+        Money depreciationAcc = asset.getPurchaseCost().subtract(asset.getNetBookValue());
 
         log.trace("Reporting accruedDepreciation as : {}", depreciationAcc);
 

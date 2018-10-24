@@ -61,7 +61,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves all {@link FixedAsset} items passed in a list, saving unique items only. Quietly fails if the asset is already in the database
      */
     @Override
@@ -72,34 +72,30 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Fetches a List of all existing items in the {@link FixedAssetRepository}
      */
     @Override
     public List<FixedAsset> fetchAllExistingAssets() {
 
-        return fixedAssetRepository.findAll()
-                                   .parallelStream()
-                                   .sorted()
-                                   .collect(ImmutableListCollector.toImmutableList());
+        return fixedAssetRepository.findAll().parallelStream().sorted().collect(ImmutableListCollector.toImmutableList());
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Extracts the fixed asset when the nomenclature is known
      */
     @Override
     @Cacheable("fixedAssetsFetchedByIds")
     public FixedAsset fetchAssetGivenId(int id) {
 
-        return fixedAssetRepository.findById(id)
-                                   .get();
+        return fixedAssetRepository.findById(id).get();
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * By querying the {@link FixedAssetRepository} this method is able to create a {@link CategoryBrief} for the category given in the parameter
      */
     @Override
@@ -122,8 +118,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         log.info("Setting poll as : {}", count);
         brief.setPoll(count);
 
-        Money acc = brief.getPurchaseCost()
-                         .subtract(brief.getNetBookValue());
+        Money acc = brief.getPurchaseCost().subtract(brief.getNetBookValue());
         log.info("Setting accrued depreciation as : {}", acc);
         brief.setAccruedDepreciation(acc);
 
@@ -141,7 +136,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * By querying the {@link FixedAssetRepository} this method is able to create a {@link ServiceOutletBrief} for the SOL queried in the parameter
      */
     @Override
@@ -155,8 +150,7 @@ public class FixedAssetServiceImpl implements FixedAssetService {
             brief.setDesignation(solId);
             brief.setPurchaseCost(fixedAssetRepository.getTotalSolPurchaseCost(solId));
             brief.setNetBookValue(fixedAssetRepository.getTotalSolNetBookValue(solId));
-            brief.setAccruedDepreciation(brief.getPurchaseCost()
-                                              .subtract(brief.getNetBookValue()));
+            brief.setAccruedDepreciation(brief.getPurchaseCost().subtract(brief.getNetBookValue()));
             brief.setPoll(fixedAssetRepository.getTotalSolCount(solId));
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating a serviceOutletBrief for solId : %s", solId);
@@ -168,28 +162,36 @@ public class FixedAssetServiceImpl implements FixedAssetService {
         return brief;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAllSolIds() {
 
         return fixedAssetRepository.getDistinctSolIds();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAllCategories() {
 
         return fixedAssetRepository.getDistinctCategories();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FixedAsset saveFixedAsset(FixedAsset fixedAsset) {
 
         return fixedAssetRepository.save(fixedAsset);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getPoll() {
 

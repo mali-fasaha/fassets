@@ -55,15 +55,9 @@ public class CategoryBriefResponseDto {
     public CategoryBriefResponseDto(CategoryBrief categoryBrief) {
         this.id = categoryBrief.getId();
         this.designation = categoryBrief.getDesignation();
-        this.purchaseCost = categoryBrief.getPurchaseCost()
-                                         .getNumber()
-                                         .doubleValue();
-        this.netBookValue = categoryBrief.getNetBookValue()
-                                         .getNumber()
-                                         .doubleValue();
-        this.accruedDepreciation = categoryBrief.getAccruedDepreciation()
-                                                .getNumber()
-                                                .doubleValue();
+        this.purchaseCost = categoryBrief.getPurchaseCost().getNumber().doubleValue();
+        this.netBookValue = categoryBrief.getNetBookValue().getNumber().doubleValue();
+        this.accruedDepreciation = categoryBrief.getAccruedDepreciation().getNumber().doubleValue();
         this.poll = categoryBrief.getPoll();
     }
 
@@ -187,7 +181,9 @@ public class CategoryBriefResponseDto {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -201,13 +197,17 @@ public class CategoryBriefResponseDto {
             Double.compare(that.accruedDepreciation, accruedDepreciation) == 0 && poll == that.poll && Objects.equal(designation, that.designation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(id, designation, purchaseCost, netBookValue, accruedDepreciation, poll);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

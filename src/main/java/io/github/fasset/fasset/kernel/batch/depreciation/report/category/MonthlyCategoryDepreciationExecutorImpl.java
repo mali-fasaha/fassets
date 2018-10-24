@@ -50,14 +50,15 @@ public class MonthlyCategoryDepreciationExecutorImpl implements MonthlyCategoryD
         this.depreciationRepository = depreciationRepository;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MonthlyCategoryDepreciation getMonthlyDepreciation(String categoryName, Integer year) {
 
         log.info("Pooling monthlyCategoryDepreciation in relation to category : {} for the year : {}", categoryName, year);
 
-        MonthlyCategoryDepreciationDTO dto = depreciationRepository.getMonthlyCategoryDepreciation(categoryName, year)
-                                                                   .get(0);
+        MonthlyCategoryDepreciationDTO dto = depreciationRepository.getMonthlyCategoryDepreciation(categoryName, year).get(0);
 
         return new MonthlyCategoryDepreciation(dto.getCategoryName(), dto.getYear(), dto.getJan(), dto.getFeb(), dto.getMar(), dto.getApr(), dto.getMay(), dto.getJun(), dto.getJul(), dto.getAug(),
                                                dto.getSep(), dto.getOct(), dto.getNov(), dto.getDec());

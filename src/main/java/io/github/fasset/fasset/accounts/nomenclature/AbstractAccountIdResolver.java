@@ -44,7 +44,7 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * The category is of a lower hierarchy than an account yet for the account to be representative of fixed assets comprehensively this out to be mandated as part of the account nomenclature or at
      * least as a field in an account that can be tracked
      */
@@ -53,12 +53,14 @@ public abstract class AbstractAccountIdResolver implements AccountIdResolver {
         return accountName(fixedAsset);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     public abstract String accountName(FixedAsset fixedAsset);
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Resolve the name of a Contra account for a main account used for tracking the asset.
      */
     @Override

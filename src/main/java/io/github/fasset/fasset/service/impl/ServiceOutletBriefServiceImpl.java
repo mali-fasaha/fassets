@@ -56,7 +56,9 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
         this.serviceOutletBriefRepository = serviceOutletBriefRepository;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ServiceOutletBrief> fetchAllServiceOutletBriefs() {
 
@@ -76,7 +78,9 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
         return serviceOutletBriefs;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Cacheable("serviceOutletBriefsByIds")
     public ServiceOutletBrief fetchServiceOutletBriefGivenId(int id) {
@@ -84,8 +88,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
         ServiceOutletBrief serviceOutletBrief;
 
         try {
-            serviceOutletBrief = Objects.requireNonNull(serviceOutletBriefRepository.findById(id))
-                                        .get();
+            serviceOutletBrief = Objects.requireNonNull(serviceOutletBriefRepository.findById(id)).get();
         } catch (Throwable e) {
             String message = "Exception encountered while extracting data from the serviceOutletBriefRepository";
             throw new DataRetrievalFromControllerException(message, e);
@@ -98,7 +101,7 @@ public class ServiceOutletBriefServiceImpl implements ServiceOutletBriefService 
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Save all ServiceOutletBrief items in the collection. All existing items are updated while new ones are newly added, to the ends that the designation remains unique
      */
     @Override

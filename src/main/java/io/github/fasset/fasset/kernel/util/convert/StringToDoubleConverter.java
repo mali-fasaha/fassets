@@ -32,7 +32,7 @@ public class StringToDoubleConverter implements Converter<String, Double> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Convert the source object of type {@code S} to target type {@code T}.
      */
     @Nullable

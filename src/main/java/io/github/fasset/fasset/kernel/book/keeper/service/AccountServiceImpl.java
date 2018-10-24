@@ -28,9 +28,9 @@ import java.util.Collection;
 /**
  * <p>AccountServiceImpl class.</p>
  *
- * @see AccountService interface
  * @author edwin.njeru
  * @version $Id: $Id
+ * @see AccountService interface
  */
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves the item passed to the parameter
      */
     @Override
@@ -60,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Saves items in a  {@code Collection} of {@code PersistentAccount} items to the repository
      */
     @Override
@@ -71,7 +71,7 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Returns the Account instance whose nomenclature is given in the parameter
      */
     @Override

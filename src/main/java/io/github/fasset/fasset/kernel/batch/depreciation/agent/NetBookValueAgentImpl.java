@@ -40,7 +40,7 @@ public class NetBookValueAgentImpl implements NetBookValueAgent {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Upon invocation the implementation will return the netBoookValue item for the relevant month in which depreciation has occured
      */
     @Override
@@ -72,11 +72,7 @@ public class NetBookValueAgentImpl implements NetBookValueAgent {
         log.trace("Creating netBookValue instance relative to the asset : {} for the month : {}", asset, month);
 
         try {
-            netBookValue.setCategory(asset.getCategory())
-                        .setFixedAssetId(asset.getId())
-                        .setMonth(month)
-                        .setSolId(asset.getSolId())
-                        .setNetBookValue(asset.getNetBookValue());
+            netBookValue.setCategory(asset.getCategory()).setFixedAssetId(asset.getId()).setMonth(month).setSolId(asset.getSolId()).setNetBookValue(asset.getNetBookValue());
         } catch (Throwable e) {
             String message = String.format("Exception encountered while creating netBookValue instance relative" + "to the asset : %s for the month : %s", asset, month);
             throw new DepreciationExecutionException(message, e);

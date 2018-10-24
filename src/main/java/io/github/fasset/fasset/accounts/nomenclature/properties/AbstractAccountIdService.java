@@ -42,7 +42,7 @@ public abstract class AbstractAccountIdService implements AccountIdService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Using the currency code used in the fixed assets value at cost, the currency's ISO 4217 code, this method generates the unique code to be used in the account number sequence after the service
      * outlet code
      */

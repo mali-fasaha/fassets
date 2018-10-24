@@ -45,11 +45,11 @@ public class FixedAssetsJobsActivator {
     /**
      * <p>bootstrap.</p>
      *
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param job a {@link org.springframework.batch.core.Job} object.
+     * @param jobLauncher       a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param jobLauncher       a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param job               a {@link org.springframework.batch.core.Job} object.
      * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
-     * @param progressListener a {@link io.github.fasset.fasset.kernel.util.WorkInProgressListener} object.
+     * @param progressListener  a {@link io.github.fasset.fasset.kernel.util.WorkInProgressListener} object.
      * @throws io.github.fasset.fasset.kernel.util.BatchJobExecutionException if any.
      */
     public void bootstrap(JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener) throws BatchJobExecutionException {
@@ -61,9 +61,9 @@ public class FixedAssetsJobsActivator {
     /**
      * <p>bootstrap.</p>
      *
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param job a {@link org.springframework.batch.core.Job} object.
+     * @param jobLauncher       a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param jobLauncher       a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param job               a {@link org.springframework.batch.core.Job} object.
      * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
      * @throws io.github.fasset.fasset.kernel.util.BatchJobExecutionException if any.
      */
@@ -73,10 +73,8 @@ public class FixedAssetsJobsActivator {
 
         log.info("Another fixedAssets job initiated running for {} individual assets", numberOfAssets);
 
-        bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets))
-                                            .addString("starting_time", LocalDateTime.now()
-                                                                                     .toString())
-                                            .toJobParameters(), jobLauncher, job, fixedAssetService, null);
+        bootstrap(new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets)).addString("starting_time", LocalDateTime.now().toString()).toJobParameters(), jobLauncher, job,
+                  fixedAssetService, null);
     }
 
     private void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService, WorkInProgressListener progressListener)
@@ -102,8 +100,7 @@ public class FixedAssetsJobsActivator {
 
         if (progressListener != null) {
             log.debug("Checking is job execution is running...");
-            if (!jobExecution.getStatus()
-                             .isRunning()) {
+            if (!jobExecution.getStatus().isRunning()) {
                 progressListener.isWorkStillInProgress(false);
                 log.debug("Job execution has stopped, updating listener...");
             }
@@ -114,11 +111,11 @@ public class FixedAssetsJobsActivator {
     /**
      * <p>bootstrap.</p>
      *
-     * @param jobParameters a {@link org.springframework.batch.core.JobParameters} object.
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param jobParameters a {@link org.springframework.batch.core.JobParameters} object.
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param job a {@link org.springframework.batch.core.Job} object.
+     * @param jobParameters     a {@link org.springframework.batch.core.JobParameters} object.
+     * @param jobLauncher       a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param jobParameters     a {@link org.springframework.batch.core.JobParameters} object.
+     * @param jobLauncher       a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param job               a {@link org.springframework.batch.core.Job} object.
      * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
      */
     public void bootstrap(JobParameters jobParameters, JobLauncher jobLauncher, Job job, FixedAssetService fixedAssetService) {

@@ -58,12 +58,12 @@ public class BatchNotifications implements JobExecutionListener {
     /**
      * <p>Constructor for BatchNotifications.</p>
      *
-     * @param excelItemReader a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemReader} object.
-     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
-     * @param briefingService a {@link io.github.fasset.fasset.service.BriefingService} object.
-     * @param depreciationJobProxy a {@link io.github.fasset.fasset.kernel.batch.JobProxy} object.
+     * @param excelItemReader                a {@link io.github.fasset.fasset.kernel.batch.upload.ExcelItemReader} object.
+     * @param fixedAssetService              a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     * @param briefingService                a {@link io.github.fasset.fasset.service.BriefingService} object.
+     * @param depreciationJobProxy           a {@link io.github.fasset.fasset.kernel.batch.JobProxy} object.
      * @param accountEntryResolutionJobProxy a {@link io.github.fasset.fasset.kernel.batch.JobProxy} object.
-     * @param asynchExecutor a {@link java.util.concurrent.Executor} object.
+     * @param asynchExecutor                 a {@link java.util.concurrent.Executor} object.
      */
     @Autowired
     public BatchNotifications(@Qualifier("excelItemReader") ExcelItemReader excelItemReader, @Qualifier("fixedAssetService") FixedAssetService fixedAssetService,
@@ -80,15 +80,14 @@ public class BatchNotifications implements JobExecutionListener {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Callback before a job executes.
      */
     @Override
     public void beforeJob(JobExecution jobExecution) {
 
         // Trying to log the filePath here
-        log.info("reading file from filePath : {} ", jobExecution.getJobParameters()
-                                                                 .getString("fileName"));
+        log.info("reading file from filePath : {} ", jobExecution.getJobParameters().getString("fileName"));
 
         // this will reset the nextItem to Zero
         excelItemReader.resetNextItem();
@@ -98,7 +97,7 @@ public class BatchNotifications implements JobExecutionListener {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Callback after completion of a job. Called after both both successful and failed executions. To perform logic on a particular status, use "if (jobExecution.getStatus() == BatchStatus.X)".
      */
     @Override

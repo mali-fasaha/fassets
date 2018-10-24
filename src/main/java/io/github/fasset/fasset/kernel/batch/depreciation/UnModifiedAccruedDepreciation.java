@@ -41,8 +41,7 @@ public class UnModifiedAccruedDepreciation {
      */
     public UnModifiedAccruedDepreciation(FixedAsset asset, YearMonth month) {
 
-        accruedDepreciation = new AccruedDepreciation().setAccruedDepreciation(asset.getPurchaseCost()
-                                                                                    .subtract(asset.getNetBookValue()))
+        accruedDepreciation = new AccruedDepreciation().setAccruedDepreciation(asset.getPurchaseCost().subtract(asset.getNetBookValue()))
                                                        .setCategory(asset.getCategory())
                                                        .setFixedAssetId(asset.getId())
                                                        .setMonth(month)
@@ -58,7 +57,9 @@ public class UnModifiedAccruedDepreciation {
         return accruedDepreciation;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -71,18 +72,21 @@ public class UnModifiedAccruedDepreciation {
         return Objects.equals(accruedDepreciation, that.accruedDepreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(accruedDepreciation);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("UnModifiedAccruedDepreciation{");
-        sb.append("accruedDepreciation=")
-          .append(accruedDepreciation);
+        sb.append("accruedDepreciation=").append(accruedDepreciation);
         sb.append('}');
         return sb.toString();
     }

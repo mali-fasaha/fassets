@@ -110,13 +110,10 @@ public class CategoryConfigurationRegistry {
 
             log.trace("Refreshing the category configuration mapping...");
 
-            categoryConfigurationService.getAllCategoryConfigurations()
-                                        .stream()
-                                        .map(CategoryConfiguration::getDesignation)
-                                        .forEach(categoryName -> {
-                                            log.trace("Registering category : {}", categoryName);
-                                            categoryConfigurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
-                                        });
+            categoryConfigurationService.getAllCategoryConfigurations().stream().map(CategoryConfiguration::getDesignation).forEach(categoryName -> {
+                log.trace("Registering category : {}", categoryName);
+                categoryConfigurationMap.put(categoryName, categoryConfigurationService.getCategoryByName(categoryName));
+            });
         }
 
     }

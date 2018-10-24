@@ -43,20 +43,20 @@ public class AccountEntryResolutionWriter implements ItemWriter<List<AccountingE
         this.transactionBuilder = transactionBuilder;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void write(List<? extends List<AccountingEntry>> list) throws Exception {
 
 
-        list.stream()
-            .map(transactionBuilder::createTransaction)
-            .forEach(entryTransaction -> {
-                try {
-                    entryTransaction.post();
-                } catch (UnableToPostException | ImmutableEntryException e) {
-                    e.printStackTrace();
-                }
-            });
+        list.stream().map(transactionBuilder::createTransaction).forEach(entryTransaction -> {
+            try {
+                entryTransaction.post();
+            } catch (UnableToPostException | ImmutableEntryException e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 }

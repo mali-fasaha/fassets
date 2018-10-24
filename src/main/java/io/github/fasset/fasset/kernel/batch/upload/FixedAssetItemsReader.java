@@ -57,11 +57,11 @@ public class FixedAssetItemsReader implements ItemReader<List<FixedAsset>> {
     // list of already processed assets
     private List<Integer> processedAssetsIndices = ConcurrentList.newList();
 
-//    @Value("${reader.fixed.assets.list.size}")
-//    public void setMaximumPageSize(int maximumPageSize) {
-//        log.trace("Setting reader page size as {} items per call", maximumPageSize);
-//        this.maximumPageSize = maximumPageSize;
-//    }
+    //    @Value("${reader.fixed.assets.list.size}")
+    //    public void setMaximumPageSize(int maximumPageSize) {
+    //        log.trace("Setting reader page size as {} items per call", maximumPageSize);
+    //        this.maximumPageSize = maximumPageSize;
+    //    }
 
     @Autowired
     FixedAssetItemsReader(@Qualifier("fixedAssetService") FixedAssetService fixedAssetService, @Value("${reader.fixed.assets.list.size}") int maximumPageSize) {
@@ -71,7 +71,7 @@ public class FixedAssetItemsReader implements ItemReader<List<FixedAsset>> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Every time this method is called, it will return a List of unprocessed fixedAssets the size of which is dictated by the maximumPageSize;
      * <p>
      * Once the list of unprocessed items hits zero, the method call will return null;
@@ -80,16 +80,13 @@ public class FixedAssetItemsReader implements ItemReader<List<FixedAsset>> {
     @Override
     public List<FixedAsset> read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 
-        List<FixedAsset> unProcessedItems = getProcessingPage(fixedAssetService.fetchAllExistingAssets()
-                                                                               .stream()
-                                                                               .filter(asset -> !processedAssetsIndices.contains(asset.getId()))
-                                                                               .collect(ImmutableListCollector.toImmutableFastList()), maximumPageSize);
+        List<FixedAsset> unProcessedItems = getProcessingPage(
+            fixedAssetService.fetchAllExistingAssets().stream().filter(asset -> !processedAssetsIndices.contains(asset.getId())).collect(ImmutableListCollector.toImmutableFastList()),
+            maximumPageSize);
 
         log.trace("Updating processedAssetsIndices list with {} items", unProcessedItems.size());
         // update processedAssetsIndices list
-        unProcessedItems.stream()
-                        .map(FixedAsset::getId)
-                        .forEach(processedAssetsIndices::add);
+        unProcessedItems.stream().map(FixedAsset::getId).forEach(processedAssetsIndices::add);
 
         return unProcessedItems.size() == 0 ? null : unProcessedItems;
     }

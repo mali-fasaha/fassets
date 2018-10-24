@@ -56,7 +56,9 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
         this.categoryBriefRepository = categoryBriefRepository;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<CategoryBrief> fetchAllCategoryBriefs() {
 
@@ -76,7 +78,9 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
         return categoryBriefs;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Cacheable("categoryBriefsFromIds")
     @Override
     public CategoryBrief fetchCategoryBriefGivenId(int id) {
@@ -84,8 +88,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
         CategoryBrief categoryBrief = null;
 
         try {
-            categoryBrief = categoryBriefRepository.findById(id)
-                                                   .get();
+            categoryBrief = categoryBriefRepository.findById(id).get();
         } catch (Throwable e) {
             String message = "Error fetching categoryBriefs from repository";
             throw new DataRetrievalFromControllerException(message, e);
@@ -98,7 +101,7 @@ public class CategoryBriefServiceImpl implements CategoryBriefService {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * All existing items are updated while new ones are newly added to the repository... To the ends that the designation remains unique
      */
     @Override

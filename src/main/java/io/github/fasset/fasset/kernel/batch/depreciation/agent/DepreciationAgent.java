@@ -33,7 +33,7 @@ public interface DepreciationAgent extends Agent<Depreciation> {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This method calculates depreciation and updates internal variables from which the depreciation variables can be drawn
      */
     Depreciation invoke(FixedAsset asset, YearMonth month, DepreciationProceeds proceeds);

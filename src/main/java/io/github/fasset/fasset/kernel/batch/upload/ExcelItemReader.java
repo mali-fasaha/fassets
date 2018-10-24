@@ -58,7 +58,7 @@ public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
     /**
      * <p>Constructor for ExcelItemReader.</p>
      *
-     * @param fileName a {@link java.lang.String} object.
+     * @param fileName           a {@link java.lang.String} object.
      * @param excelMapperService a {@link io.github.fasset.fasset.kernel.excel.ExcelMapperService} object.
      */
     public ExcelItemReader(String fileName, ExcelMapperService excelMapperService) {
@@ -67,6 +67,7 @@ public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
     }
 
     // To be called before and after job
+
     /**
      * <p>resetNextItem.</p>
      */
@@ -85,7 +86,9 @@ public class ExcelItemReader implements ItemReader<FixedAssetDTO> {
         fixedAssetDTOS = excelMapperService.fetchExcelData(fileName);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public FixedAssetDTO read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 

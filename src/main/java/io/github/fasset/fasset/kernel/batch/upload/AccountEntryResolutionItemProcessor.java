@@ -53,7 +53,9 @@ public class AccountEntryResolutionItemProcessor implements ItemProcessor<List<F
         this.batchEntryResolver = batchEntryResolver;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<AccountingEntry> process(List<FixedAsset> fixedAssets) throws Exception {
 

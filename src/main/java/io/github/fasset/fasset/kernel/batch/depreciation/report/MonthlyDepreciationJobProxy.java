@@ -60,13 +60,13 @@ public class MonthlyDepreciationJobProxy {
     /**
      * <p>Constructor for MonthlyDepreciationJobProxy.</p>
      *
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
-     * @param monthlyAssetDepreciationJob a {@link org.springframework.batch.core.Job} object.
+     * @param jobLauncher                    a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param monthlyAssetDepreciationJob    a {@link org.springframework.batch.core.Job} object.
      * @param monthlyCategoryDepreciationJob a {@link org.springframework.batch.core.Job} object.
-     * @param monthlySolDepreciationJob a {@link org.springframework.batch.core.Job} object.
-     * @param fixedAssetService a {@link io.github.fasset.fasset.service.FixedAssetService} object.
-     * @param fixedAssetsJobsActivator a {@link io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator} object.
-     * @param depreciationRelay a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationRelay} object.
+     * @param monthlySolDepreciationJob      a {@link org.springframework.batch.core.Job} object.
+     * @param fixedAssetService              a {@link io.github.fasset.fasset.service.FixedAssetService} object.
+     * @param fixedAssetsJobsActivator       a {@link io.github.fasset.fasset.kernel.batch.FixedAssetsJobsActivator} object.
+     * @param depreciationRelay              a {@link io.github.fasset.fasset.kernel.batch.depreciation.batch.DepreciationRelay} object.
      */
     @Autowired
     public MonthlyDepreciationJobProxy(JobLauncher jobLauncher, @Qualifier("monthlyAssetDepreciationJob") Job monthlyAssetDepreciationJob,
@@ -83,16 +83,10 @@ public class MonthlyDepreciationJobProxy {
 
     private List<Integer> annualRelay() {
 
-        List<Integer> annualList = depreciationRelay.getMonthlyDepreciationSequence()
-                                                    .parallelStream()
-                                                    .map(YearMonth::getYear)
-                                                    .distinct()
-                                                    .sorted()
-                                                    .collect(Collectors.toList());
+        List<Integer> annualList = depreciationRelay.getMonthlyDepreciationSequence().parallelStream().map(YearMonth::getYear).distinct().sorted().collect(Collectors.toList());
 
         //Just to ensure only unique items are returned
-        return ImmutableSet.copyOf(annualList)
-                           .asList();
+        return ImmutableSet.copyOf(annualList).asList();
     }
 
     /**
@@ -105,8 +99,7 @@ public class MonthlyDepreciationJobProxy {
 
         log.info("Depreciation has begun with {} items at time: {}", numberOfAssets, startingTime);
 
-        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets))
-                                                                              .addString("starting_time", startingTime.toString());
+        JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("no_of_assets", String.valueOf(numberOfAssets)).addString("starting_time", startingTime.toString());
 
         log.info("executing MonthlyAssetDepreciation job : {}", monthlyAssetDepreciationJob);
         executeMonthlyJob(jobParametersBuilder, monthlyAssetDepreciationJob);
@@ -126,8 +119,7 @@ public class MonthlyDepreciationJobProxy {
 
             JobParametersBuilder parametersBuilder = jobParametersBuilder.addString("year", year.toString());
 
-            fixedAssetsJobsActivator.bootstrap(parametersBuilder.addLong("year", Long.valueOf(year))
-                                                                .toJobParameters(), jobLauncher, job, fixedAssetService);
+            fixedAssetsJobsActivator.bootstrap(parametersBuilder.addLong("year", Long.valueOf(year)).toJobParameters(), jobLauncher, job, fixedAssetService);
         });
     }
 

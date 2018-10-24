@@ -49,7 +49,7 @@ public class ExcelUploadJob {
     /**
      * <p>Constructor for ExcelUploadJob.</p>
      *
-     * @param jobLauncher a {@link org.springframework.batch.core.launch.JobLauncher} object.
+     * @param jobLauncher    a {@link org.springframework.batch.core.launch.JobLauncher} object.
      * @param importExcelJob a {@link org.springframework.batch.core.Job} object.
      */
     @Autowired
@@ -62,18 +62,14 @@ public class ExcelUploadJob {
      * Systematically processes connect that can be extracted from an excel file provided as argument
      *
      * @param filePath from which we are reading the business domain connect
-     * @param month a {@link java.lang.String} object.
+     * @param month    a {@link java.lang.String} object.
      * @throws io.github.fasset.fasset.kernel.util.BatchJobExecutionException if any.
      */
     public void uploadExcelFile(String filePath, String month) throws BatchJobExecutionException {
 
         log.info("Uploading excel file on the path : {}", filePath);
 
-        JobParameters jobParameters = new JobParametersBuilder().addString("fileName", filePath)
-                                                                .addString("month", month)
-                                                                .addString("time", LocalDateTime.now()
-                                                                                                .toString())
-                                                                .toJobParameters();
+        JobParameters jobParameters = new JobParametersBuilder().addString("fileName", filePath).addString("month", month).addString("time", LocalDateTime.now().toString()).toJobParameters();
 
         try {
             jobLauncher.run(importExcelJob, jobParameters);

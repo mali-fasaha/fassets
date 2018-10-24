@@ -34,7 +34,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  * would be the sundry creditor's account. This being because tracking who exactly is paid for this asset is beyond the scope of this application. <br> One peculiar aspect of this implementation is
  * that pre-configured properties are read from a properties file. This is peculiar because this implementation will have siblings in future that could be reading configuration properties from a json
  * api over http, from a database which is configured at runtime or even from an excel file. <br> Even though this is the case the underlying policy can be changed at compile time, should another be
- * desired, you just have to initialize this object with anything that implements the {@link io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy} interface in the constructor.
+ * desired, you just have to initialize this object with anything that implements the {@link io.github.fasset.fasset.accounts.nomenclature.properties.policy.AccountIdPolicy} interface in the
+ * constructor.
  *
  * @author edwin.njeru
  * @version $Id: $Id
@@ -56,7 +57,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Using the category of an asset this method returns the generic nomenclature code for the category, which in accordance to the Account nomenclature and hierarchy policy version 1.0 follows after
      * the currency code in the account number sequence
      */
@@ -68,7 +69,9 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
         return accountIdPolicy.generalLedgerCode(transactionType, accountSide, fixedAsset.getCategory());
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String accountPlaceHolder(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
@@ -77,7 +80,9 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
         return accountIdPolicy.accountPlaceHolder(transactionType, accountSide, fixedAsset.getCategory());
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String accountName(TransactionType transactionType, AccountSide accountSide, FixedAsset fixedAsset) {
 
@@ -88,7 +93,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Resolves the name of the account to be used as a contra account in case the actual account  is required to retain the original valuation for reporting purposes
      */
     @Override
@@ -111,7 +116,7 @@ public final class FileAccountIdService extends AbstractAccountIdService impleme
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This methods combines the account segments combining them into an account number sequence which is used application wide. <br> The existence of this method makes it possible for the application
      * to be configured to create different forms of identifications for an account number for different purposes.
      */

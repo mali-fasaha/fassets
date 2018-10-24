@@ -65,12 +65,12 @@ public class MonthlyCategoryDepreciationJobConfiguration {
     /**
      * <p>Constructor for MonthlyCategoryDepreciationJobConfiguration.</p>
      *
-     * @param jobBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
-     * @param stepBuilderFactory a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
-     * @param monthlyCategoryDepreciationService a {@link io.github.fasset.fasset.service.MonthlyCategoryDepreciationService} object.
+     * @param jobBuilderFactory                     a {@link org.springframework.batch.core.configuration.annotation.JobBuilderFactory} object.
+     * @param stepBuilderFactory                    a {@link org.springframework.batch.core.configuration.annotation.StepBuilderFactory} object.
+     * @param monthlyCategoryDepreciationService    a {@link io.github.fasset.fasset.service.MonthlyCategoryDepreciationService} object.
      * @param monthyCategoryDepreciationJobListener a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.category.MonthyCategoryDepreciationJobListener} object.
-     * @param entityManagerFactory a {@link javax.persistence.EntityManagerFactory} object.
-     * @param monthlyCategoryDepreciationExecutor a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.category.MonthlyCategoryDepreciationExecutor} object.
+     * @param entityManagerFactory                  a {@link javax.persistence.EntityManagerFactory} object.
+     * @param monthlyCategoryDepreciationExecutor   a {@link io.github.fasset.fasset.kernel.batch.depreciation.report.category.MonthlyCategoryDepreciationExecutor} object.
      */
     @Autowired
     public MonthlyCategoryDepreciationJobConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
