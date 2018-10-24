@@ -29,11 +29,9 @@ import io.github.ghacupha.time.point.SimpleDate;
 import org.javamoney.moneta.Money;
 import org.junit.Before;
 import org.junit.Test;
-import org.mali.fasaha.utils.Throwing.Consumer;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
@@ -42,7 +40,6 @@ import static io.github.fasset.fasset.kernel.book.keeper.balance.AccountSide.DEB
 import static io.github.ghacupha.cash.HardCash.shilling;
 import static io.github.ghacupha.time.point.SimpleDate.on;
 import static org.junit.Assert.assertEquals;
-import static org.mali.fasaha.utils.Errors.rethrow;
 import static org.mockito.Mockito.when;
 
 public class BatchAcquisitionEntryResolverTest {
@@ -94,7 +91,14 @@ public class BatchAcquisitionEntryResolverTest {
 
         AccountingTransaction testPostingAssets = AccountingTransaction.create("Test posting entry resolver", on(2018, 2, 21), KES);
 
-        entries.forEach(rethrow().wrap((Consumer<AccountingEntry>) testPostingAssets::addEntry));
+        entries.forEach(entry -> {
+            try {
+                testPostingAssets.addEntry(entry);
+            } catch (MismatchedCurrencyException | ImmutableEntryException e) {
+                e.printStackTrace();
+            }
+
+        });
 
         testPostingAssets.post();
 

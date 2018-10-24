@@ -20,8 +20,6 @@ package io.github.fasset.fasset.kernel.book.keeper.balance;
 import io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException;
 import io.github.ghacupha.cash.Cash;
 import io.github.ghacupha.cash.HardCash;
-import org.mali.fasaha.utils.Errors;
-import org.mali.fasaha.utils.Throwing.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,7 +84,13 @@ public class AccountBalance {
 
         final AccountBalance[] thisBalance = {newBalance(this.amount, this.accountSide)};
 
-        args.forEach(Errors.log().wrap(arg -> thisBalance[0] = thisBalance[0].add(arg)));
+        args.forEach(arg -> {
+            try {
+                thisBalance[0] = thisBalance[0].add(arg);
+            } catch (MismatchedCurrencyException e) {
+                e.printStackTrace();
+            }
+        });
 
         return thisBalance[0];
     }

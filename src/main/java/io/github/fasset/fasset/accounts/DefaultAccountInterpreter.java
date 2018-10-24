@@ -4,16 +4,15 @@ import io.github.fasset.fasset.kernel.book.Transaction;
 import io.github.fasset.fasset.kernel.book.keeper.Account;
 import io.github.fasset.fasset.kernel.book.keeper.AccountingEntry;
 import io.github.fasset.fasset.kernel.book.keeper.util.ImmutableEntryException;
+import io.github.fasset.fasset.kernel.book.keeper.util.MismatchedCurrencyException;
 import io.github.fasset.fasset.kernel.book.keeper.util.UnableToPostException;
 import io.github.fasset.fasset.kernel.util.ConcurrentList;
 import io.github.fasset.fasset.kernel.util.ImmutableListCollector;
 import io.github.fasset.fasset.kernel.util.exception.AccountInterpreterException;
 import io.github.fasset.fasset.model.FixedAsset;
-import org.mali.fasaha.utils.Errors;
-import org.mali.fasaha.utils.Throwing.Consumer;
-
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * This object is to be used to move between Accounts and Assets representations in the back-end making
@@ -43,7 +42,13 @@ public class DefaultAccountInterpreter implements AccountInterpreter {
 
         List<AccountingEntry> entries = batchEntryResolver.resolveEntries(fixedAssets);
 
-        entries.forEach(Errors.rethrow().wrap((Consumer<AccountingEntry>) transaction::addEntry));
+        entries.forEach(entry -> {
+            try {
+                transaction.addEntry(entry);
+            } catch (MismatchedCurrencyException | ImmutableEntryException e) {
+                e.printStackTrace();
+            }
+        });
 
         try {
             transaction.post();
