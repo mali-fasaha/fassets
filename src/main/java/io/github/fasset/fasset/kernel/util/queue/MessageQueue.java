@@ -31,8 +31,7 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  *     }
  * </pre>
  * <br>Should the client need to carry out an action to show completion lifecycle method, the client could call the
- * {@link io.github.fasset.fasset.kernel.util.queue.util.OnCompletion#handleCompletion()}
- * method as shown: <br>
+ * {@link io.github.fasset.fasset.kernel.util.queue.util.OnCompletion#handleCompletion()} method as shown: <br>
  * <pre>
  *     {@code
  *     fileUploadsQueue.push(() -> new FileUploadNotification(fileUpload.getFileName()),

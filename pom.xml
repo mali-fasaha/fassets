@@ -691,11 +691,6 @@
             <artifactId>reactive-streams-examples</artifactId>
             <version>${reactive-streams.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.mali.fasaha</groupId>
-            <artifactId>arka</artifactId>
-            <version>1.0.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.diffplug.durian/durian -->
         <dependency>
             <groupId>com.diffplug.durian</groupId>

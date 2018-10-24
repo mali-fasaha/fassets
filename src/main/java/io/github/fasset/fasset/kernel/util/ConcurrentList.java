@@ -38,8 +38,7 @@ import java.util.stream.Stream;
 /**
  * This is a list backed by a concurrent hashmap making it effectively concurrent. The list is also substantially logged with 'tracer' methods to effectively log, trace and debug complex operations.
  * <br> If the list is supposed to remain empty, invoking the list through the {@link io.github.fasset.fasset.kernel.util.ConcurrentList#empty()} method ensures the {@link
- * io.github.fasset.fasset.kernel.util.ConcurrentList#add(Object)} and the {@link
- * ConcurrentList#add(int, Object)} methods do not throw an excetion when called
+ * io.github.fasset.fasset.kernel.util.ConcurrentList#add(Object)} and the {@link ConcurrentList#add(int, Object)} methods do not throw an excetion when called
  *
  * @param <T> Type of elements to be stored in  the list
  * @author edwin.njeru

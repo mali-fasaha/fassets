@@ -26,9 +26,8 @@ import io.github.fasset.fasset.kernel.util.queue.util.OnError;
  * The client being a MessageQueue 'producer' needs not bother with who to 'arrange' handling errors and handling completion. It only needs to provide an implementation of the {@link
  * io.github.fasset.fasset.kernel.util.queue.MessageQueue#push(QueueMessage)} method. <br> This example shows how the {@code FileUploadsQueue} 'producers' has implemented the {@link
  * io.github.fasset.fasset.kernel.util.queue.MessageQueue} interface by implementing the {@link io.github.fasset.fasset.kernel.util.queue.MessageQueue#push(QueueMessage)} method. The {@link
- * io.github.fasset.fasset.kernel.util.queue.MessageQueue#push(QueueMessage, OnError)} method and the
- * {@link io.github.fasset.fasset.kernel.util.queue.MessageQueue#push(QueueMessage, OnError, * OnCompletion)} method become available to the {@code FileUploadQueue} simply by extending this class.
- * Should the client desire a different approach for the lifecycle methods, nothing's wrong with
+ * io.github.fasset.fasset.kernel.util.queue.MessageQueue#push(QueueMessage, OnError)} method and the {@link io.github.fasset.fasset.kernel.util.queue.MessageQueue#push(QueueMessage, OnError, *
+ * OnCompletion)} method become available to the {@code FileUploadQueue} simply by extending this class. Should the client desire a different approach for the lifecycle methods, nothing's wrong with
  * it skipping this class and implementing the whole interface by itself. <br>
  * <pre>
  *     {@code
